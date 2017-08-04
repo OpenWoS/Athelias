@@ -1,0 +1,206 @@
+SCENE 110002
+@start
+IF E1152+E1153+E1150+E1151+T3984|E1152+E1153+E1150+E1157+T3984|E1152+E1153+E1150+E1158+T3984|E1152+E1153+E1150+E1159+T3984|E1152+E1153+E1150+E1160+T3984|E1152+E1153+E1156+E1151+T3984|E1152+E1153+E1156+E1157+T3984|E1152+E1153+E1156+E1158+T3984|E1152+E1153+E1156+E1159+T3984|E1152+E1153+E1156+E1160+T3984|E1152+E1153+E1155+E1151+T3984|E1152+E1153+E1155+E1157+T3984|E1152+E1153+E1155+E1158+T3984|E1152+E1153+E1155+E1159+T3984|E1152+E1153+E1155+E1160+T3984|E1152+E1153+E1154+E1151+T3984|E1152+E1153+E1154+E1157+T3984|E1152+E1153+E1154+E1158+T3984|E1152+E1153+E1154+E1159+T3984|E1152+E1153+E1154+E1160+T3984 @antigodsequip
+IF S356 @antigodsequipnexttake
+@antigodsequipnext
+IF E1076+E1132+E1147+E1148 @bonearmorother
+IF S766 @bonearmortake1
+@skills.txtcurssgdsg
+IF E1142 @skills.txtCurseGive
+IF S735 @skills.txtCurseGiveTake
+@skills.txtCurseGiveNext
+IF E1139 @skillz.txtfrenzyGive
+IF S734 @skillz.txtfrenzyTake
+@skillz.txtfrenzyGiveEnd
+IF E1135 @skillz.txt.giveSummonSkeleton
+IF S733 @skillz.txt.giveSummonSkeletonTake
+@nextStapAfterskillz.txt.giveSummonSkeletonTake
+IF E1115 @skillz.txt.givePoisonAll
+IF S732 @skillz.txtS732TAKE
+@nextstepafterskillz.txt.givePoisonAll
+IF C20+ALIVE @puppetskills.txt
+GOTO @nextstepafterskills.txt 
+
+@antigodsequipnexttake
+HOST_TAKE S356
+GOTO @antigodsequipnext
+
+@antigodsequip
+IF S @antigodsequipnext
+HOST_GIVE S356
+GOTO @antigodsequipnext
+
+@bomearmornecro
+IF T2897 @skills.txtcurssgdsg
+HOST_GIVE T2897
+GOTO @skills.txtcurssgdsg
+
+@bonearmorother
+IF S766 @skills.txtcurssgdsg
+HOST_GIVE S766
+GOTO @skills.txtcurssgdsg
+
+@bonearmortake1
+HOST_TAKE T2897
+GOTO @skills.txtcurssgdsg
+
+@bonearmortake2
+HOST_TAKE T2898
+GOTO @skills.txtcurssgdsg
+
+@skills.txtCurseGive
+IF S735 @skills.txtCurseGiveNext
+HOST_GIVE S735
+GOTO @skills.txtCurseGiveNext
+
+@skills.txtCurseGiveTake
+HOST_TAKE S735
+GOTO @skills.txtCurseGiveNext
+
+@skillz.txtS732TAKE
+HOST_TAKE S732
+GOTO @nextstepafterskillz.txt.givePoisonAll
+
+@skillz.txtfrenzyGive
+IF S734 @skillz.txtfrenzyGiveEnd
+HOST_GIVE S734
+GOTO @skillz.txtfrenzyGiveEnd
+
+@skillz.txtfrenzyTake
+HOST_TAKE S734
+GOTO @skillz.txtfrenzyGiveEnd
+
+@skillz.txt.giveSummonSkeleton
+IF S733 @nextStapAfterskillz.txt.giveSummonSkeletonTake
+HOST_GIVE S733
+GOTO @nextStapAfterskillz.txt.giveSummonSkeletonTake
+
+@skillz.txt.giveSummonSkeletonTake
+HOST_TAKE S733
+GOTO @nextStapAfterskillz.txt.giveSummonSkeletonTake
+
+@skillz.txt.givePoisonAll
+IF S732 @nextstepafterskillz.txt.givePoisonAll
+HOST_GIVE S732
+GOTO @nextstepafterskillz.txt.givePoisonAll
+
+@puppetskills.txt
+IF E425 @pup1skills.txt
+IF E426 @pup2skills.txt
+IF E427 @pup3skills.txt
+IF E428 @pup4skills.txt
+IF E429 @pup5skills.txt
+IF E430 @pup6skills.txt
+IF E431 @pup7skills.txt
+IF E432 @pup8skills.txt
+IF E433 @pup9skills.txt
+IF E434 @pup10skills.txt
+IF E435 @pup11skills.txt
+IF E436 @pup12skills.txt
+IF E437 @pup13skills.txt
+IF E438 @pup14skills.txt
+IF E439 @pup15skills.txt
+IF E440 @pup16skills.txt
+IF E441 @pup17skills.txt
+IF E442 @pup18skills.txt
+IF E443 @pup19skills.txt
+IF E444 @pup20skills.txt
+IF E1050 @pup21skills.txt
+IF E1144 @pup22skills.txt
+COMPARE #<scene.id>, 2
+IF> @nextstepafterskills.txt
+IF< @nextstepafterskills.txt
+N: Equip a puppet, dude!
+GOTO @nextstepafterskills.txt
+
+@pup1skills.txt
+FIGHT -264
+GOTO @nextstepafterskills.txt
+
+@pup2skills.txt
+FIGHT -266
+GOTO @nextstepafterskills.txt
+
+@pup3skills.txt
+FIGHT -270
+GOTO @nextstepafterskills.txt
+
+@pup4skills.txt
+FIGHT -272
+GOTO @nextstepafterskills.txt
+
+@pup5skills.txt
+FIGHT -174
+GOTO @nextstepafterskills.txt
+
+@pup6skills.txt
+FIGHT -274
+GOTO @nextstepafterskills.txt
+
+@pup7skills.txt
+FIGHT -295
+GOTO @nextstepafterskills.txt
+
+@pup8skills.txt
+FIGHT -297
+GOTO @nextstepafterskills.txt
+
+@pup9skills.txt
+FIGHT -298
+GOTO @nextstepafterskills.txt
+
+@pup10skills.txt
+FIGHT -301
+GOTO @nextstepafterskills.txt
+
+@pup11skills.txt
+FIGHT -304
+GOTO @nextstepafterskills.txt
+
+@pup12skills.txt
+FIGHT -305
+GOTO @nextstepafterskills.txt
+
+@pup13skills.txt
+FIGHT -307
+GOTO @nextstepafterskills.txt
+
+@pup14skills.txt
+FIGHT -311
+GOTO @nextstepafterskills.txt
+
+@pup15skills.txt
+FIGHT -27
+GOTO @nextstepafterskills.txt
+
+@pup16skills.txt
+FIGHT -312
+GOTO @nextstepafterskills.txt
+
+@pup17skills.txt
+FIGHT -207
+GOTO @nextstepafterskills.txt
+
+@pup18skills.txt
+FIGHT -316
+GOTO @nextstepafterskills.txt
+
+@pup19skills.txt
+FIGHT -321
+GOTO @nextstepafterskills.txt
+
+@pup20skills.txt
+FIGHT -325
+GOTO @nextstepafterskills.txt
+
+@pup21skills.txt
+FIGHT -329
+GOTO @nextstepafterskills.txt
+
+@pup22skills.txt
+FIGHT -323
+GOTO @nextstepafterskills.txt
+
+
+@nextstepafterskills.txt 
+RETURN

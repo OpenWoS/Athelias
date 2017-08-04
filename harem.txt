@@ -1,0 +1,145 @@
+SCENE 12500, serevaninside, SCENE, "To the Palace"
+#include include.txt
+GOTO LINK 124, 7
+;
+;-------------------------------------------------------------------------------------------
+;
+SCENE 12501, serevaninside, SCENE, "Harem"
+#include include.txt
+IF T1104 @pass
+FIGHT 91, 91, 91
+IF WIN @pass
+END
+
+@pass
+GOTO LINK 125, 2
+;
+;-------------------------------------------------------------------------------------------
+;
+SCENE 12502, serevaninside, SCENE, "Harem"
+#include include.txt
+GOTO LINK 125, 1
+;
+;-------------------------------------------------------------------------------------------
+;
+SCENE 12503, serevaninside, SCENE, "Harem"
+#include include.txt
+IF T1104 @pass
+FIGHT 91, 91, 91, 92, 92, 92
+IF WIN @pass
+END
+
+@pass
+GOTO LINK 125, 4
+;
+;-------------------------------------------------------------------------------------------
+;
+SCENE 12504, serevaninside, SCENE, "Harem"
+#include include.txt
+GOTO LINK 125, 3
+;
+;-------------------------------------------------------------------------------------------
+;
+SCENE 12505, aralshek, SCENE, "Rift"
+#include include.txt
+IF T1104 @closed
+N: You discover a rift leading to old galleries.
+WAIT 2
+GOTO LINK 126, 0
+
+@closed
+ACTOR 1, Guard, guard2, 1, 45, 90
+IF T3993 @halloweenActors
+GOTO @nextStepAfterHalloweenActors
+
+@halloweenActors
+ACTOR 1, "Guard", #<spEvent.Name>-guard, 2, 45, 90
+@nextStepAfterHalloweenActors
+1: We closed the access to the galleries, #<g.mylord>.
+1: You cannot pass.
+END
+;
+;-------------------------------------------------------------------------------------------
+;
+SCENE 12506, serevaninside, SCENE, "Harem"
+#include include.txt
+IF -I1069 @notyet
+IF T3985 @bornoldworld
+ACTOR 1, Mehdi, oriental9, 1, 35, 95
+IF T1130 @travelqend
+IF T1124 @hurry3
+IF T1123 @hurry2
+IF T1122 @hurry
+1: Hello again, Sir %1.
+1: I have another favor to ask.
+H: What is it?
+1: The roads to the Old World are still closed.
+1: The desert is still preyed by the creatures that attempted to besiege Tahamanraset.
+1: A caravan must go - I have an important missive to transmit to  the Dukes of Kotor, beyond the desert.
+1: I know their cities had been attacked as well and hoards of beastmen still roam the region. 
+1: It is time for a new alliance among humans.
+1: We must beat off the Chaos all around the Old World; having defeated it in the Desertic Lands is not enough.
+1: This is the only way to prevent a new invasion.
+H: So you want me to escort the caravan?
+1: Yes, %1.
+1: I have nothing to offer but I know you don't only fight for gold.
+1: Please, do me this favor, for the humankind's sake!
+H: I will.
+1: Thanks, %1.
+1: The caravan will be waiting for you by the Western Gate of Tahamanraset.
+HOST_GIVE T1122
+HOST_GIVE T1143
+HOST_GIVE T1144
+HOST_GIVE T1145
+HOST_GIVE T1146
+HOST_GIVE T1147
+HOST_GIVE T1148
+END
+
+@bornoldworld
+ACTOR 1, Mehdi, oriental9, 1, 35, 95
+1: Welcome back, hero.
+END
+
+@travelqend
+COMPARE #<chat.medhiAfterTravelToTheOldWorld>, 1
+IF= @travelqend2
+1: Welcome back, %1.
+1: I heard you succeeded and reached the Duchies of Kotor.
+1: That's wonderful news!
+1: Now we can count on the support of Kotor.
+1: I don't think we will defeat the Chaos, but at least we can now hope to fight it off from the Old World on the Desertic Lands.
+SET chat.medhiAfterTravelToTheOldWorld, 1
+END
+
+@travelqend2
+1: Welcome back, %1.
+1: And thanks again for all what you did for our city!
+END
+
+@hurry2
+1: Ah, %1!
+H: Hello, Sir.
+H: I met the members of the caravan.
+H: We are about to go.
+1: Fine.
+END
+
+@notyet
+N: There is nothing here.
+WAIT 1
+N: Not yet...
+END
+
+@hurry
+1: Hello, %1.
+1: The caravan must go as soon as possible.
+1: You should hurry and go today.
+END
+
+@hurry3
+1: %1, you must return to the desert with the caravan and reach the Old World as soon as possible.
+END
+;
+;-------------------------------------------------------------------------------------
+;

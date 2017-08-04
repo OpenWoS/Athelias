@@ -1,0 +1,81 @@
+SCENE 8700, desert5 , SCENE, "To the Corridor of Talween", 1
+#include include.txt
+IF T3985 @bornoldworld
+IF T2899 @borninathelias
+END
+
+@bornoldworld
+ACTOR 1, Guard, guard5, 1, 25, 95
+IF T1142 @canpassbornold
+1: Hello, traveller.
+1: I am sorry but the passage to the Corridor of Talween has been closed.
+1: You cannot pass.
+END
+
+@canpassbornold
+IF T1143 @passOW2
+1: Hello, adventurer.
+1: May Isindra protect you.
+EJECT T1142
+GOTO LINK 145, 0
+
+@passOW2
+GOTO LINK 96, 1
+
+@borninathelias
+IF T1129-T1130 @nothere
+IF T1130 @guard
+@pass
+GOTO LINK 96, 1
+
+@guard
+ACTOR 1, Guard, guard5, 1, 25, 95
+1: Hello, traveller.
+1: We have cleared the passage to the Corridor of Talween.
+1: You can now pass.
+WAIT 1.4
+GOTO @pass
+
+@nothere
+CALL 110025@start
+1: The Old World!
+1: Finally!
+1: We have succeed, %1.
+1: Lead the way to Kotor.
+END
+;
+;--------------------------------------------------------------------------------------
+;
+SCENE 8702, mountain2, SCENE, "To Kotor"
+#include include.txt
+IF T3998 @illuteleport
+GOTO @nextstepafterilluteleport
+
+@illuteleport
+HOST_GIVE T2915
+@nextstepafterilluteleport
+STRCMP #<kotor2exit>, "south"
+IF= @south
+STRCMP #<kotor2exit>, "east"
+IF= @east
+STRCMP #<kotor2exit>, "west"
+IF= @west
+GOTO LINK 139, 0
+
+@south
+GOTO LINK 139, 2
+
+@east
+GOTO LINK 139, 3
+
+@west
+GOTO LINK 139, 1
+;
+;--------------------------------------------------------------------------------------
+;
+SCENE 8703, mountain2, SCENE, "To The Forest of Saraliandine"
+#include include.txt
+GOTO LINK 117, 0
+;
+;--------------------------------------------------------------------------------------
+;

@@ -1,0 +1,279 @@
+; chapter, id#, firstToken, lastToken, Title, Intro, Footer
+;
+;1-10, used (eq)
+;15-18, used (cl)
+;16-18, used
+19, "You went to the palace of Prina for your order and were attacked by bandits."
+;
+;22-46, used
+;47, said no to Arwen 
+48, "You killed Arwen's husband - he couldn't get it."
+;49, said yes to Arwen
+;50, used
+51, "You cleaned the underground galleries of Athelias and can use the Ancient Gates."
+52, "You accepted the barman of Prina's proposition for him to find contracts for you."
+;53-55, used
+56, "Find Denis in Irkatshk and get back the money he owes the Black Horse Tavern." 
+57, "Denis couldn't pay. You killed him and took the two horses he had."
+58, "You rescued a young boy that got kidnapped by a band of goblins."
+;59, used
+;60, used
+61, "You agreed to try to find a baby dragon wing for a wizard living in Latsha." 
+;62-63, used
+64, "You got a pet Will-o'-the-Wisp from a mage in Latsha."
+;65-66, used
+67, "You were told of an illusionist living in Karsheek Island and his challenge."
+68, "You defeated all the monsters of the trainer of the Flaming Blade Brotherhood."
+;69, used
+70, "You defeated the illusionist of Karsheek Island and got a strange crystal as a reward."
+;71, used
+72, "You killed the undead in the dungeon of Varanas Castle and found a pair of magical shoes."
+;73-89, used
+90, "You met an alchemist in Armenis who can make sap cures for you. Bring him scorpion nippers, white potions, and yellow herbs."
+;91-115, used
+116, "Look for Sir Gerzel and convince him to participate in the tournament."
+117, "Done. You got a horse from the Sword Master of the Brotherhood as well."
+118, "You won a tournament at the Flaming Blade Brotherhood and got a horse as a reward."
+119, "You killed some guards of the palace who wanted to arrest the sword master of the Brotherhood."
+120, "Lead to Athalantis to help defeat the army besieging the city."
+121, "You met Lord Ghamyl and the knights from the Brotherhood. Go to Athalantis Townhall and get rid of the the undead there."
+122, "You defeated the army besieging Athalantis and were rewarded by Lord Ghamyl."
+123, "You killed a beggar in Prina - yeah, we all know that was an accident..."
+124, "Lead the way to Latsha to get some old book on Jeren's Skull at Marlyn's."
+125, "You went to Latsha, but several guards of Prina who wanted it arrived at Marlyn's. You killed them and took one of their horses."
+
+126, "The Regent sent someone to Benadrim to ask for an explanation about what happened in Latsha."
+127, "You were attacked by two guards of Prina at the gate of Benadrim."
+128, "You went to the Barbarians Training Ground and convinced them to help you against the troops of the Regent."
+; 129, has learnt raise strength /all
+130, "You fought against the troops of the Regent at the Gates of Benadrim and successfully defended the city."
+131, "Go to the goblin cave and find Ernst Sharak and his men and tell him to return to Prina to help defend the town."
+132, "You found Ernst Sharak and gave him the message."
+133, "Find and spy the army of the Regent near Latsha."
+134, "You've discovered that the army is leaded by General Bloodtider. They're planning to attack the town from the mountains."
+135, "The army of the Regent has been defeated. A peace treaty has been signed."
+136, "Join the barbarians army and help the paladins defend Benadrim against the army of the Regent."
+137, "You have defeated the army of the Regent during the siege of Benadrim."
+138, "The Regent has forbidden all the tournaments."
+139, "Go to Prina and try to convince the Regent to go back on his decision."
+140, "You went to the palace and killed the guards. You learnt about the resistance movement in Prina."
+141, "You were asked to go to Prina and support the rebellion againt the Regent with the archers of Katadyn."
+142, "The rebellion failed."
+
+; 150, first WW token
+
+
+596, "You were told of a basilic living in the Goblins' Cave."
+597, "You were told of gaming in the Black Horse Tavern."
+598, "An old lady in Thesarian Creek offered you to make a enchanted necklace with magical pearls."
+599, "The blacksmith of Irkatshk offered to make a magical helmet if you can get flying kobold wings."
+600, "You were told of a demon seen in the sewers of Prina."
+601, "You found the demon and killed it."
+602, "You were told of a magical crystal hidden somewhere in Aralian Valley."
+603, "You brought it to an old hermit who forged an enchanted helm for you."
+604, "You met two very kind ents who asked you to get rid of the sorcerer in the Dark Woods"
+605, "You killed her and took possession of her magical broom."
+; 606, used
+607, "An hermit in Athelias cave promised you to weave a magical coat for you if you kill the Dark Queen in the cave."
+608, "You killed the Dark Queen in Athelias cave and got a magical coat from an hermit as promised."
+; 609, used
+; 610, used
+611, "A merchant from Benadrim asked you to help him kill someone but you refused."
+612, "You accepted to help a merchant from Benadrim kill someone."
+; 613, killed Marcus
+; 614, killed Michel
+; 615, killed both of them
+; 616, killed by Marcus
+; 617, used
+618, "You helped ghosts defeat a Chaos Army and got a new trophy bag as a reward."
+; 619, used
+; 620, used
+
+
+668, "You are an absolute dumbass."
+;669, used
+
+
+;717-721, used
+
+;999, used
+
+1001, "Find a wagon in Prina to carry the hardware from the Guild to the Palace for the show."
+1002, "You found a wagon to carry the hardware from the Guild to the Palace for the show."
+1003, "You brought the hardware needed for the show to the Palace and met a guard there."
+1004, "Maitre Oudano asked you to organize the attendance for a show in the palace of Prina."
+1005, "Go with Makel and arrest the highwaymen who use to attack the tax collectors between Benadrim and Prina."
+1006, "You met a tax collector in Benadrim. Follow him at bay to try and arrest the highwaymen of the area."
+1007, "You killed the highwaymen who used to attack the tax collectors around Prina - apparently they were working for the intendant."
+1008, "Makel got arrested after the rebellion in Prina and is imprisoned in the palace. The guard are looking for you as well."
+1009, "You went to the palace of Prina to see Makel who was imprisoned here but you got arrested by the guards as well."
+1010, "You went to the palace of Prina and found Makel who was imprisoned there. You now have to find your way out."
+1011, "Find your way out of the prison."
+1012, "You liberated Makel who got arrested after the rebellion in Prina against the corruption of the regime."
+1013, "Liberate Makel's friend who is imprisoned in the palace as well."
+1014, "You released Makel's friend as well, a tamer from Katadyn forest, who taught you how to domesticate monsters."
+
+
+;1034, be careful with the description : that's the link to Derar and healers get it as well.
+;1035, "Go to the Black Horse Tavern and investigate about the men who attacked you by the palace of Prina." , double use
+1036, "You investigated about the men who attacked you by the palace and discovered they had a house by the coliseum." 
+1037, "You discovered that the mercenaries who attacked you by the palace of Prina were hired by the intendant."
+1038, "You have been arrested by the guards of Prina."
+;1039, 
+;1040,  
+1041, "You were told of someone needing the skills of a healer. Head to Prina and bring some elixirs to Aden."
+1042, "You discovered that Aden's troubles started just after he acquired an ancient relic."
+1043, "You tried to convince Aden to give you the relic but several guards of the palace arrived and ran away with it. Aden died."
+1044, "Lead to Prina and ask for the relic at the palace."
+1045, "You went to the palace and talked to the regent. As expected, he didn't want to listen. You had to kill some guards as well."
+1046, "You killed the necromancer in the palace who had the relic and took it."
+1047, "You buried Jeren's Skull in the palace of Irezar. Everything should be fine now... or not."
+1048, "You met an assassin about to die and promised to bring a relic to the Assassins Castle."
+1049, "You went to the castle and chose to become an assassin."
+1050, "Go to the Necromancy Academy and bring them the relic."
+1051, "You were attacked by Irezar and a bandit took the relic."
+1052, "The Masters of the Castle discovered that Aden, the bandit, had recently acquired a house in Prina."
+1053, "You went to Prina but a healer told you that Aden was dead and that the relic is now the Regent's."
+1054, "You went to the Palace but the Regent refused to give back the relic."
+1055, "Return to Prina and secretly penetrate the palace to steal the relic."
+;1056, used
+1057, "You were killed in the Palace while you was trying to steal the relic."
+1058, "You successfully stole the relic from the palace of the regent and brought it to the Academy."
+1059, "You met a brigade of guards of Prina around the Caste."
+1060, ""
+1061, "Hunt and find them before they go back to Prina."
+1062, "You caught them up and killed them. No doubt the Castle will be in trouble now..."
+
+
+1100, "The priest of Tahamanraset told you Taj Isha's story. Lead to the desert, find his tomb and take possession of his scepter."
+1101, "You went to Taj Isha's sepulchre and succeeded in taking his scepter."
+1102, "Seek Aralshek's tomb in the desert and defeat him."
+1103, "You have completed the quest of Taj Isha."
+1104, "You killed the demons that had invaded the palace of Tahamanraset."
+;1105, "Monsters of the first lvl of Tahman. palace killed"
+
+
+1109, "Find the Tenisan, the grand priest of the old, in the palace of Irezar." 
+; 1110, link to the palace of Irezar
+1111, "You found Tenisan. Go to  Serevan Castle to take an old spell book the nine dark paladins need for a ritual before them."
+1112, "You went to Serevan but Kondilor succeeded in running away with the book you were looking for."
+1113, "Lead to the lost city of Arkhangal to stop the ritual."
+; 1114, "The paladins at the first gate are dead."
+1115, "Tenisan is dead."
+1116, "You defeated the nine dark paladins."
+1117, "You were told of Terendroz siege."
+; 1118-1120 : Terendroz siege
+1121, "You defeated the army besieging Terendroz."
+; Desert trip from Tahamanraset to Kotor
+1122, "You accepted to escort a caravan to the Old World through the desert."
+; 1123, "You've started travelling through the desert with a caravan." 
+; 1124, "You defeated a large band of beastmen around Sadramand."
+; 1125 : used : link to the well in the desert
+; 1126, water elemental killed
+; 1127, giant worm killed
+; 1128 : earth elemental killed
+; 1129 : got out of Talween
+1130, "You reached the Duchies of Kotor and met Lord Pokerar who accepted the alliance with Tahamanraset and the Desertic Lands."
+1131, "You were told the story of the castle of the Templars in the Desert."
+1132, "You defeated the major demon trapped in the dungeon of the castle of the templars."
+1133, "Cross the swamps beyond Thanaris to get the Dead Stone back."
+;1134, used
+;1135, used
+1136, "You've killed the necromancers and got the artifact back."
+1137, "Explore the galleries under Thanaris to find a magical plate."
+1138, "You found the plate... and a demon You had to run away."
+1139, "You learnt from the priest of Obrovac that only the power of the Dead Stone could destroy the demon trapped under Thanaris."
+1140, "You fought the governor of Thanaris and got the Dead Stone back."
+1141, "You defeated the demon and grabbed a magical plate."
+; Desert trip from Kotor to Tahamaraset
+1142, "You've started travelling through the desert with a caravan." 
+; 1143 : corridor of talween cleaned
+; 1144 : out of talween
+; 1145 : giant worm
+; 1146 : malik
+; 1147 : water elemental
+; 1148, "You defeated a large band of beastmen around Sadramand."
+1149, "You reached Tahamanraset and met  who accepted the alliance with Duchies of Kotor and the provinces of the Old World."
+
+1200, "You saw a ghost - eek!"
+1201, "You discovered it was Jeren's ghost, the founder of the Necromancy Academy."
+1202, "You saw the ghost again and he told you something about a warpstone in a crypt in Irezar."
+1203, "You found the warpstone and brought it to the Illusory Magic Academy."
+1204, "Go to Jeren's tomb and reach the chaotic dimension thanks to the warpstone."
+1205, "You travelled through the warp and killed the demonic lord of the dimension."
+1206, "You were present during a zoroastrian burial and were attacked by a band of ravens."
+1207, "You were told of giants found around Armenis."
+1208, "You found the giants and killed an old women who seemed to be their leader."
+1209, "You found a treasure in the tower of an abandoned castle in Armenis."
+
+;
+; 2000 : elven army
+; 2001 : gnome army
+;
+;2500-2600: felty
+
+;2896, Anti Gods
+;2897, bone armor necros
+;2898, bone armor others
+; 2899, born in Athelias
+;2900, teleport. to Prina
+;2901, teleport. to Serevan
+;2902, teleport. to Latsha
+;2903, teleport. to Irezar
+;2904, teleport. to Benadrim
+;2905, teleport. to Terendroz
+;2906, teleport. to Arguazil
+;2907, teleport. to Varanas
+;2908, teleport. to Irkatshk
+;2909, teleport. to Athalantis
+;2910, teleport. to Katadyn
+;2911, teleport. to Mangeas
+;2912, teleport. to Armenis
+;2913, teleport. to Tahamanraset
+;2914, teleport to Sadramand
+;2915, teleport to Kotor
+;2916, teleport to Obrovac
+;2917, teleport to Thanaris
+
+2999, "You learned how to use a second weapon."
+;3000-3015, used (sp)
+;3000-3023, used (eq)
+;3024-3045, used (spec sp)
+;3046, used (cl)
+;3047-3048, used (eq)
+
+; 3456 : used (novices exit)
+
+; 3825 : used for the config of the super nono fight in Thanaris
+; 3826 : link to the newb castle for novices
+; 3827 : used (super novices)
+; 3828 : novices
+; 3829 : 1st xmas quest completed
+; 3830 : 2nd xmas quest completed
+; 3831 : 3rd xmas quest completed
+; 3832 : 4th xmas quest completed
+; 3833 : 5th xmas quest completed
+; 3834 : presents link in the coli of Prina
+
+; 3968 : novice mission to become a Super Novice
+; 3969 : novice pets quest
+; 3970-3984: anti gods missions
+; 3985 : born in the Old World
+
+; 3987 : super nono quest link in Thanaris
+; 3988 : xmas
+; 3989 : werewolf
+; 3990 : ban code check allowed
+; 3991 : reserved
+; 3992 : reserved
+; 3993, "Halloween "
+; 3994 : reserved
+; 3995, used : Pasagardae
+; 3996, used (reserved weap : rat)
+; 3997, used (warpstone for illus)
+; 3998, teleportation token pour illus
+3999, "You fought the army of the Regent and lead your troops to the victory."
+; 4000, reserved
+4001, "You achieved your class training."
+; 4002, chaos classes
+; 4003, reserved

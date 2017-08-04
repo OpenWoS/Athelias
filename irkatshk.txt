@@ -1,0 +1,629 @@
+SCENE 4000, irkatshk1, SCENE, "Northern Gate"
+#include include.txt
+IF T136-T137 @barbq4
+@pass
+SET c2irkatshkexit, north
+GOTO LINK 0, 12
+
+@barbq4
+COMPARE #<barbquest4>, 0
+IF> @pass
+CALL 110022@barbactors barq4
+1: Let's go, %1.
+1: Lead the way to Benadrim.
+1: Everybody is ready.
+WAIT 1.5
+GOTO @pass
+;
+;------------------------------------------------------------------------------------------------------
+;
+SCENE 4001, "houseinside1", SCENE, "Denis'"
+#include include.txt
+IF T56-T57 @go
+N: The house is empty.
+END
+
+@go
+ACTOR 1, "Denis", 209, 1, 50, 75, 3
+IF T3993|T3988 @halloweenActors
+1: Who are you?
+H: A mercenary.
+H: I've been told you had a debt...
+1: Ha-ha!
+1: And i bet you want the money back?!
+H: Exactly.
+1: <bleep> off, %3.
+MOVE 1, -30, 85, 1
+FIGHT 351.50.75
+IF WIN @look
+MOVE 1, 30, 80
+1: Hahaha!
+1: The strong mercenary need a rez!
+1: LMAO!
+END
+
+@look
+N: There is not a penny here but you find 2 horses behind the house and decide to take them.
+HOST_GIVE T57
+END
+;
+;------------------------------------------------------------------------------------------------------
+;
+SCENE 4002, irkatshk1, SCENE, "Southern Gate"
+#include include.txt
+SET c2irkatshkexit, south
+GOTO LINK 0, 12
+;
+;------------------------------------------------------------------------------------------------------
+;
+SCENE 4003, "houseinside1", SCENE, "Eldest Wizard"
+#include include.txt
+ACTOR 1, "Eldest Wizard", human124, 1, 45, 90
+IF T3993|T3988 @halloweenActors
+GOTO @nextStepAfterHalloweenActors
+
+@halloweenActors
+ACTOR 1, "Eldest Wizard", #<spEvent.Name>-humans, 124, 45, 90
+@nextStepAfterHalloweenActors
+IF T87 @back
+1: Hello, young man.
+1: I devoted my whole life to find a way to cure the fading of mana into the warp.
+1: And I found it! Finally!
+1: Unfortunately, I need ent sap to make these potions.
+1: Bring me some trunk so I can extract it and I'll give you my antidote.
+HOST_GIVE T87
+END
+
+@back
+IF Z290 @want
+1: Welcome back, young %C.
+1: Bring me some ent trunks and I'll give you my antidote.
+END
+
+@want
+1: Welcome back, young %C.
+WAIT 1
+SOUND sword1.wav
+MENU "I have some trunks=@sap", "I keep the trunks I have=@keep"
+END
+
+@keep
+SOUND sword1.wav
+END
+
+@set100DSDFDSF
+SET temp.trunknulb, 100
+1: Eh, you bring me so much sap that I could give you more elixirs than what you can carry!
+GOTO @breakover
+
+@sap
+SOUND sword1.wav
+H: I have some ent trunks.
+1: Oh great!
+1: Please, let me offer you a free sample of my antidotes.
+MOVE 1, -25, 90
+WAIT 1
+MOVE 1, 25, 90
+SET temp.trunknulb, #<num.Trophy290>
+COMPARE #<temp.trunknulb>, 100
+IF> @set100DSDFDSF
+@breakover
+HOST_TAKE Z290.#<temp.trunknulb>
+HOST_GIVE I727.#<temp.trunknulb>
+1: Here you go : #<temp.trunknulb> sap cures.
+SOUND FoundItem.wav
+1: Come back with more blood if you need other antidotes.
+1: I'll make you other potions.
+END
+;
+;------------------------------------------------------------------------------------------------------
+;
+SCENE 4004, irkatshk1, SCENE, "Irkatshk Gate"
+#include include.txt
+GOTO LINK 45, 2
+;
+;--------------------------------------------------------------
+;
+SCENE 4005, "weapons", SCENE, "Barbarians Trainer"
+#include include.txt
+ACTOR 1, "Trainer", human22, 1, 25, 90
+SEL 1
+POSE 1, 2
+IF T3993|T3988 @halloweenActors
+GOTO @nextStepAfterHalloweenActors
+
+@halloweenActors
+ACTOR 1, "Trainer", #<spEvent.Name>-humans, 22, 25, 90
+@nextStepAfterHalloweenActors
+IF C11 @hardcore
+1: Hey!
+1: Do you need help with something?
+1: Go outta here!
+END
+
+@hardcore
+IF T63 @cmp
+1: So you want to be a barbarian.
+1: Our life is hard and unthankful.
+1: We have no king nor god, no rule nor low but to fight and die with honor.
+1: I can't help you now : you must train first.
+1: Come back later.
+HOST_GIVE T63
+END
+
+@cmp
+COMPARE #<num.hostLevel>, "74"
+IF> @cmp2
+1: I can't help you now : you must train and work on your skills.
+1: Come back later.
+END
+
+@end
+1: Welcome back.
+1: There's nothing more I can teach you.
+1: You will now have to study and learn alone.
+1: Good luck.
+END
+
+@cmp2
+IF S199 @end
+1: Welcome back.
+1: Congratulations, I see you are well advanced in training.
+1: Show me how you fight!
+FIGHT 118
+IF WIN @spell
+1: I see you still need training.
+1: Come back when you feel stronger.
+END
+
+@spell
+1: Congratulations.
+1: There's a spell I can teach you.
+1: It will make you able to get rid of the mages -coward bastards!
+HOST_GIVE S199
+SOUND bell2.wav
+END
+;
+;---------------------------------------------------------------------------------------------------------
+;
+SCENE 4006, "weapons", SCENE, "Weapons"
+#include include.txt
+ACTOR 1, Duzel, human40, 1, 25, 90
+IF T3993|T3988 @halloweenActors
+GOTO @nextStepAfterHalloweenActors
+
+@halloweenActors
+ACTOR 1, "Duzel", #<spEvent.Name>-humans, 40, 25, 90
+@nextStepAfterHalloweenActors
+1: Welcome, foreigner
+1: Do you need a good weapon?
+OFFER 324, 328, 332, 336, 340
+END
+;
+;---------------------------------------------------------------------------------------------------------
+;
+SCENE 4007, "weapons", SCENE, "Weapons"
+#include include.txt
+ACTOR 1, Tazer, human39, 1, 25, 90
+IF T3993|T3988 @halloweenActors
+GOTO @nextStepAfterHalloweenActors
+
+@halloweenActors
+ACTOR 1, "Tazer", #<spEvent.Name>-humans, 39, 25, 90
+@nextStepAfterHalloweenActors
+1: A good armor for a long life!
+OFFER 250, 254, 258, 262, 266, 635, 639, 643, 647, 651, 200, 209, 213, 217, 221, 565, 569, 573, 578, 582
+END
+;
+;---------------------------------------------------------------------------------------------------------
+;
+SCENE 4008, "houseinside2", SCENE, "Arwen's"
+#include include.txt
+ACTOR 1, "Arwen", wom22, 1, 80, 80
+IF T3993|T3988 @halloweenActors
+GOTO @nextStepAfterHalloweenActors
+
+@halloweenActors
+ACTOR 1, "Arwen", #<spEvent.Name>-wom, 22, 80, 80
+@nextStepAfterHalloweenActors
+IF -V25 @weak
+IF -T48-T47-T49-I666+V25 @ask3
+IF T47-I666 @ask2
+IF T48-I666 @reward
+IF T49-I666 @go
+IF I666 @thxagain
+END
+
+@weak
+1: Go away!
+H: Uh?!
+1: My husband sends you, right?
+H: What are you talking about?
+1: Oh! Never mind.
+END
+
+@ask3
+1: Help me!
+1: My husband wants to kill me!
+1: I don't dare to go out anymore.
+1: Would you do me the favor to go and make him understand to leave me alone, kind %L ?
+1: That wouldn't be long trip... He lives close by here.
+1: His name is Trevis.
+WAIT 2
+1: Will you help me?
+FACE 1, 2
+ASK 90
+IF YES @thx
+IF NO @ask
+END
+
+@thx
+1: Oh! Thank you, hero.
+TAKE T47
+GIVE T49
+END
+
+@ask
+MOVE 1, 90, 90
+1: Oh please...
+1: I can't ask nobody else...
+FACE 1, 2
+1: Wouldn't you help me?
+ASK 90
+IF YES @thx
+IF NO @sad
+END
+
+@sad
+MOVE 1, 95, 95
+FACE 1,2
+1: <cry>
+GIVE T47
+END
+
+@ask2
+1: You're back!
+FACE 1, 2
+1: Did you change your mind?
+1: Will you help me?
+ASK 90
+IF NO @ask
+IF YES @thx
+END
+
+@go
+1: What are you waiting for?
+1: Please go and find my husband...
+END
+
+@reward
+1: You did it?!
+1: You made him understand!
+H: err
+H: Actually, I tried to make him understand...
+WAIT 2
+H: But I can swear he will never bother you again.
+1: Thank you hero.
+1: You can have this lock if you want : I don't need it anymore.
+GIVE I666
+SOUND FoundItem.wav
+1: And now, excuse me but I'm going to prepare the dinner.
+MOVE 1, 125, 100
+END
+
+@thxagain
+1: Thanks again, hero.
+END
+;
+;-----------------------------------------------------------------------------------------
+;
+SCENE 4009, "houseinside1", SCENE, "Trevis's"
+#include include.txt
+IF T48 @end
+IF T49+V25 @fight
+ACTOR 1, "Trevis", 209, 1, 45, 90
+1: Go away!
+1: It is my house, here!
+1: My wife should be back soon!
+END
+
+@end
+N: The house is empty.
+WAIT 1
+N: Do you remember? You killed the dude!
+END
+
+@fight
+ACTOR 1, "Trevis", 209, 1, 45, 90
+1: What are you doing here?
+H: You are Trevis, right?
+1: yeah...
+H: I'm here for Arwen.
+1: Arwen?
+1: Oh little bastard!
+1: I remind you now.
+1: You are her lover.
+1: You're gonna die!
+1: Guys ! Help !
+H: No wait!
+H: Wait!
+WAIT 2
+MOVE 1, -25, 90, 1
+FIGHT 261.45.90, 122, 123, 124
+IF WIN @token
+END
+
+@token
+GIVE T48
+H: Bah
+H: At least, he won't bother her anymore...
+END
+;
+;----------------------------------------------------------------------
+;
+SCENE 4010, "houseinside1", SCENE, "Tamer"
+#include include.txt
+ACTOR 1, "Tamer", human28, 1, 50, 80
+IF T3993|T3988 @halloweenActors
+GOTO @nextStepAfterHalloweenActors
+
+@halloweenActors
+ACTOR 1, "Tamer", #<spEvent.Name>-humans, 28, 50, 80
+@nextStepAfterHalloweenActors
+IF C11 @hardos
+OFFER 748
+1: Looking for an incubator?
+1: I have what you need!
+END
+
+@hardos
+COMPARE #<num.hostLevel>, 19
+IF> @cmp
+GOTO @later
+
+@later
+1: Welcome, %1.
+1: I'm sorry theres nothing to teach you at your skill level.
+1: Return when you're more advanced in training.
+END
+
+@cmp
+IF T53 @cmp2
+1: It's time for you to get a pet.
+1: But first, you need to prove your worth.
+1: Fight!
+FIGHT 275
+IF LOSE @LOSE
+1: Congratulations!
+1: I ma proud of you.
+1: This savage dog is for you.
+HOST_GIVE I1006
+SOUND FoundItem.wav
+HOST_GIVE T53
+END
+
+@LOSE
+1: You failed.
+1: You should come back and try again later.
+END
+
+@cmp2
+IF T54 @cmp3
+COMPARE #<num.hostLevel>, "50"
+IF< @later
+1: It's time for you to get a pet.
+1: But first, you need to prove your worth.
+1: Fight!
+FIGHT 282
+IF LOSE @LOSE
+1: Congratulations!
+1: I ma proud of you.
+1: This tiger is for you.
+HOST_GIVE I1007
+SOUND FoundItem.wav
+HOST_GIVE T54
+END
+
+@cmp3
+IF T55 @alldone
+COMPARE #<num.hostLevel>, 90
+IF< @later
+1: It's time for you to get a pet.
+1: But first, you need to prove your worth.
+1: Fight!
+FIGHT 327
+IF LOSE @LOSE
+1: Congratulations!
+1: I ma proud of you.
+1: This tiger is for you.
+HOST_GIVE I1008
+SOUND FoundItem.wav
+HOST_GIVE T55
+END
+
+@alldone
+@end
+1: I can't nothing more for you.
+1: Go now, and try to stay alive...
+END
+;
+;-----------------------------------------------------------------------------------
+;
+SCENE 4011, weapons2, SCENE, "Smithy"
+#include include.txt
+ACTOR 1, Rodelek, human81, 1, 40, 95
+IF T3993|T3988 @halloweenActors
+GOTO @nextStepAfterHalloweenActors
+
+@halloweenActors
+ACTOR 1, "Rodelek", #<spEvent.Name>-humans, 81, 40, 95
+@nextStepAfterHalloweenActors
+COMPARE #<c5talkedtoblacksmith>, 0
+IF= @firsttimeblacksmith.txt
+IF V60-T599 @quest
+IF T599+Z73-I1072 @reward
+IF T599+I1072 @back
+1: Hello, adventurer.
+1: Toss me the item you want to upgrade.
+OFFER 132, 134, 135
+END
+
+@quest
+1: Welcome, adventurer.
+1: I have a deal for you.
+H: What?
+1: I studied runic magic when I was younger, and I could forge a great magical helmet for you if you bring me a pair of widget kobold wings.
+1: Of course, I wouldn't do that for free : that will be 10,000 tomans.
+H: Sounds interesting.
+H: I'll try to find what you need.
+1: Good.
+1: But attention : their wings are so thin that it is really hard to cut them without destroying them.
+HOST_GIVE T599
+1: Do you want me to upgrade something by the way?
+END
+
+@back
+1: Welcome back, adventurer.
+1: Do you want me to upgrade one of your weapons?
+END
+
+@reward
+IF -G10000 @poor
+SEL 1
+POSE 0
+FACE 1, 0
+H: I have the wings.
+1: Great.
+1: Gimme the cash and I'll forge a great helm for you!
+H: Here you go.
+HOST_TAKE G10000
+SOUND kaching.wav
+1: Alright, lemme forge your helmet.
+MOVE 1, -20, 100
+WAIT 7.5
+SOUND harvestgolem1
+WAIT 1
+SOUND sword2
+WAIT 0.4
+SOUND sword2
+WAIT 0.4
+SOUND sword2
+WAIT 1
+MOVE 1, 40, 95
+WAIT 3
+HOST_GIVE I1072
+HOST_TAKE Z73
+1: Here is your helmet!
+SOUND FoundItem.wav
+H: Wonderful!
+H: Thanks!
+1: You're most welcome.
+END
+
+@poor
+H: Hello, Rodelek.
+H: I have the wings but I am low in cash at the moment.
+H: Couldn't I get a discount?
+1: No way, sorry.
+1: Be back when you will have the money.
+END
+
+#include blacksmith.txt
+;
+;-------------------------------------------------------------------------------
+;
+SCENE 4012, alchemy, SCENE, "Alchemist"
+#include include.txt
+ACTOR 1, Mathild, human100, 1, 25, 90
+IF T3993|T3988 @halloweenActors
+GOTO @nextStepAfterHalloweenActors
+
+@halloweenActors
+ACTOR 1, "Mathild", #<spEvent.Name>-humans, 100, 25, 90
+@nextStepAfterHalloweenActors
+1: Yeah?
+1: What do you need?
+OFFER 1, 3, 4, 7, 13, 29, 30, 31, 32, 33, 36, 38, 39, 12
+END 
+;
+;-------------------------------------------------------------------------------
+;
+SCENE 4013,tavern1 , SCENE, "Tavern"
+#include include.txt
+ACTOR 1, Astames, wom11, 1, 30, 89
+ACTOR 2, Grosbill, human64, 1, 91, 85
+FACE 2, 0
+ACTOR 3, Albrecht, human37, 1, 15, 83
+IF T3993|T3988 @halloweenActors
+GOTO @nextStepAfterHalloweenActors
+
+@halloweenActors
+ACTOR 1, "Astames", #<spEvent.Name>-wom, 11, 30, 89
+ACTOR 2, Grosbill, #<spEvent.Name>-humans, 64, 91, 85
+FACE 2, 0
+ACTOR 3, Albrecht, #<spEvent.Name>-humans, 37, 15, 83
+@nextStepAfterHalloweenActors
+1: Hello.
+1: What do you want to drink?
+OFFER 2, 34
+IF V99 @comparemerc.firsttime
+@normalV99
+END
+
+@comparemerc.firsttime
+COMPARE #<merc.firstTime>, 1
+IF= @normalV99
+GOTO @mercfirstime.txt
+
+#include merc-firsttime.txt
+
+@eventActorClick2
+SOUND sword1.wav
+SET temp.currentMerc, 2915
+#include merc-alreadyHired.txt
+@nextstepaftermercalreadyhired2915
+ACTOR 20, , merc2915, 0, 50, 50
+ACTOR 21, , hire, 0, 40, 75
+ACTOR 22, , cancel, 0, 60, 75
+END
+
+@eventActorClick3
+SOUND sword1.wav
+SET temp.currentMerc, 2909
+#include merc-alreadyHired.txt
+@nextstepaftermercalreadyhired2909
+ACTOR 20, , merc2909, 0, 50, 50
+ACTOR 21, , hire, 0, 40, 75
+ACTOR 22, , cancel, 0, 60, 75
+END
+
+#include merc-hire.txt
+;
+;-------------------------------------------------------------------------------
+;
+SCENE 4014, templeinside10, SCENE,  "Temple"
+#include include.txt
+GIVE L1
+GIVE H5000
+GIVE M5000
+OFFER 37
+ACTOR 1, Farsol, human17, 1, 25, 98
+IF T3993|T3988 @halloweenActors
+GOTO @nextStepAfterHalloweenActors
+
+@halloweenActors
+ACTOR 1, "Farsol", #<spEvent.Name>-humans, 17, 25, 98
+@nextStepAfterHalloweenActors
+1: Welcome to the temple.
+1: You have been healed.
+END
+;
+;-------------------------------------------------------------------------------
+;
+SCENE 4015, irkatshk2, SCENE,  "To the Training Grounds"
+#include include.txt
+GOTO LINK 54, 0
+;
+;-------------------------------------------------------------------------------
+;
+

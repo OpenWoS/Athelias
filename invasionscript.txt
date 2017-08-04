@@ -1,0 +1,261 @@
+SCENE 115000
+@GetInvasionStatus
+COMPARE #<felty.monCookiePopulated>, 0
+IF= @populateMonCookies
+@contGetStatusPostCookiePop
+COMPARE #<arg0>, 1
+IF= @NoInvadeCampOrWell
+COMPARE #<arg0>, 0
+IF= @NoInvadeCampOrWell
+GET_SERVER_VAR felty.InvasionMap, Invasions, InvasionMap#<num.mapNum>
+SET_LEN felty.populate, #<felty.InvasionMap>
+COMPARE #<felty.populate>, 0
+IF= @populateInvasion
+SET_SUBSTR felty.InvasionLink, #<num.closestLink>, 1, #<felty.InvasionMap>
+STRCMP #<felty.InvasionLink>, +
+IF= @Invaded
+;Otherwise return to scene
+@NoInvadeCampOrWell
+RETURN
+
+@populateInvasion
+SET_SERVER_VAR Invasions, InvasionMap#<num.mapNum>, --------------------------------------------------
+RETURN
+
+@Invaded
+N: The invading Chaos armies attack!
+SET felty.mon1, 0
+SET felty.mon2, 0
+SET felty.mon3, 0
+SET felty.mon4, 0
+SET felty.mon5, 0
+SET felty.mon6, 0
+SET felty.mon7, 0
+SET felty.mon8, 0
+SET felty.mon9, 0
+SET felty.mon10, 0
+SET felty.randMon,%R90
+SET felty.monTemp,felty.monCookie#<felty.randMon>
+SET felty.mon1,*#<felty.monTemp>
+SET felty.randMon,%R90
+SET felty.monTemp,felty.monCookie#<felty.randMon>
+SET felty.mon2,*#<felty.monTemp>
+SET felty.randMon,%R90
+SET felty.monTemp,felty.monCookie#<felty.randMon>
+SET felty.mon3,*#<felty.monTemp>
+SET felty.randMon,%R90
+SET felty.monTemp,felty.monCookie#<felty.randMon>
+SET felty.mon4,*#<felty.monTemp>
+SET felty.randMon,%R90
+SET felty.monTemp,felty.monCookie#<felty.randMon>
+SET felty.mon5,*#<felty.monTemp>
+COMPARE #<num.peopleInScene>, 1
+IF= @invasion
+SET felty.randMon,%R90
+SET felty.monTemp,felty.monCookie#<felty.randMon>
+SET felty.mon6,*#<felty.monTemp>
+COMPARE #<num.peopleInScene>, 2
+IF= @invasion
+SET felty.randMon,%R90
+SET felty.monTemp,felty.monCookie#<felty.randMon>
+SET felty.mon7,*#<felty.monTemp>
+COMPARE #<num.peopleInScene>, 3
+IF= @invasion
+SET felty.randMon,%R90
+SET felty.monTemp,felty.monCookie#<felty.randMon>
+SET felty.mon8,*#<felty.monTemp>
+COMPARE #<num.peopleInScene>, 4
+IF= @invasion
+SET felty.randMon,%R90
+SET felty.monTemp,felty.monCookie#<felty.randMon>
+SET felty.mon9,*#<felty.monTemp>
+COMPARE #<num.peopleInScene>, 5
+IF= @invasion
+SET felty.randMon,%R90
+SET felty.monTemp,felty.monCookie#<felty.randMon>
+SET felty.mon10,*#<felty.monTemp>
+
+
+@invasion
+FIGHT 0
+IF LOSE, @AlreadyDeadInv
+FIGHT #<felty.mon1>, #<felty.mon2>, #<felty.mon3>, #<felty.mon4>, #<felty.mon5>, #<felty.mon6>, #<felty.mon7>, #<felty.mon8>, #<felty.mon9>, #<felty.mon10>
+IF WON, @InvasionWin
+IF LOSE, @InvasionLost
+RETURN
+
+@AlreadyDeadInv
+Return
+
+@InvasionLost
+N: You have been defeated by the invading Chaos creatures!
+TAKE G40000
+N: The Chaos creatures have taken 40,000 Tomans from you.
+RETURN
+
+@InvasionWin
+GET_SERVER_VAR felty.InvasionMap, Invasions, InvasionMap#<num.mapNum>
+SET_LEN felty.mapInvadeNum, #<felty.InvasionMap>
+SET felty.preNum, #<felty.mapInvadeNum>
+SUB felty.preNum, #<num.closestLink>
+SET felty.postNum, #<felty.preNum>
+ADD felty.postNum, 1
+SET felty.post2End, #<felty.mapInvadeNum>
+SUB felty.post2End, #<felty.postNum>
+SET_SUBSTR felty.preStr, 0, #<felty.preNum>, #<felty.InvasionMap>
+SET_SUBSTR felty.postStr, #<felty.postNum>, #<felty.post2End>, #<felty.InvasionMap>
+SET felty.InvasionMap, #<felty.preStr>-#<felty.postStr>
+SET_SERVER_VAR Invasions, InvasionMap#<num.mapNum>, #<felty.InvasionMap>
+N: You have defeated the invading Chaos creatures!
+GIVE G35000
+;Give a random item sometime in the future, unique to invasions
+GOTO @randomItemGenerate
+
+@randomItemGenerate
+N: You took 35,000 Tomans and a %I#<invasion.itemGenned> from the Chaos creatures.
+RETURN
+
+@populateMonCookies
+;Last number used: 90
+;Freed numbers:
+---------------------------------------
+;Black Orcs, lvl 100
+SET felty.monCookie1, 19
+SET felty.monCookie2, 19
+SET felty.monCookie3, 19
+SET felty.monCookie4, 19
+SET felty.monCookie5, 19
+;--------------------------------------
+;Orc Hero, lvl 96
+SET felty.monCookie6, 17
+SET felty.monCookie7, 17
+SET felty.monCookie8, 17
+SET felty.monCookie9, 17
+SET felty.monCookie10, 17
+;--------------------------------------
+;Catapulter, lvl 75
+SET felty.monCookie11, 12
+SET felty.monCookie12, 12
+SET felty.monCookie13, 12
+SET felty.monCookie14, 12
+;--------------------------------------
+;Orc Lord of War, lvl 130
+SET felty.monCookie15, 20
+SET felty.monCookie16, 20
+SET felty.monCookie17, 20
+SET felty.monCookie18, 20
+;--------------------------------------
+;Black Orc Hero, lvl 145
+SET felty.monCookie19, 21
+SET felty.monCookie20, 21
+SET felty.monCookie21, 21
+;--------------------------------------
+;Black Orc Knight, lvl 155
+SET felty.monCookie22, 22
+SET felty.monCookie23, 22
+SET felty.monCookie24, 22
+;---------------------------------------
+;Troll, lvl 170
+SET felty.monCookie25, 23
+SET felty.monCookie26, 23
+;--------------------------------------
+;Demonic Summoner, lvl 100
+SET felty.monCookie27, 91
+SET felty.monCookie28, 91
+SET felty.monCookie29, 91
+SET felty.monCookie30, 91
+;---------------------------------------
+;Minor Demon, lvl 100
+SET felty.monCookie31, 92
+SET felty.monCookie32, 92
+SET felty.monCookie33, 92
+SET felty.monCookie34, 92
+SET felty.monCookie35, 92
+;---------------------------------------
+;Major Demonic Summoner, lvl 180
+SET felty.monCookie36, 96
+SET felty.monCookie37, 96
+;---------------------------------------
+;Demon, lvl 100
+SET felty.monCookie38, 98
+SET felty.monCookie39, 98
+SET felty.monCookie40, 98
+SET felty.monCookie41, 98
+SET felty.monCookie42, 98
+;--------------------------------------
+;Black Knight, lvl 150
+SET felty.monCookie43, 121
+SET felty.monCookie44, 121
+SET felty.monCookie45, 121
+;---------------------------------------
+;Demon, lvl 100
+SET felty.monCookie46, 337
+SET felty.monCookie47, 337
+SET felty.monCookie48, 337
+SET felty.monCookie49, 337
+SET felty.monCookie50, 337
+;----------------------------------------
+;Major Demon, lvl 150
+SET felty.monCookie51,339
+SET felty.monCookie52,339
+SET felty.monCookie53,339
+;----------------------------------------
+;Beastman Champion, lvl 115
+SET felty.monCookie54,368
+SET felty.monCookie55,368
+SET felty.monCookie56,368
+SET felty.monCookie57,368
+;----------------------------------------
+;Beastman Lord, lvl 125
+SET felty.monCookie58,369
+SET felty.monCookie59,369
+SET felty.monCookie60,369
+SET felty.monCookie61,369
+;----------------------------------------
+;Beastman Shaman, lvl 105
+SET felty.monCookie62,382
+SET felty.monCookie63,382
+SET felty.monCookie64,382
+SET felty.monCookie65,382
+SET felty.monCookie66,382
+;----------------------------------------
+;Beastman Warrior, lvl 105
+SET felty.monCookie67,576
+SET felty.monCookie68,576
+SET felty.monCookie69,576
+SET felty.monCookie70,576
+SET felty.monCookie71,576
+;----------------------------------------
+;Chaos Horseman, lvl 110
+SET felty.monCookie72,379
+SET felty.monCookie73,379
+SET felty.monCookie74,379
+SET felty.monCookie75,379
+SET felty.monCookie76,379
+;----------------------------------------
+;Chaos Champion, lvl 130
+SET felty.monCookie77,380
+SET felty.monCookie78,380
+SET felty.monCookie79,380
+SET felty.monCookie80,380
+;----------------------------------------
+;Chaos Knight, lvl 80
+SET felty.monCookie81,632
+SET felty.monCookie82,632
+SET felty.monCookie83,632
+SET felty.monCookie84,632
+;----------------------------------------
+;Psychotic, lvl 100
+SET felty.monCookie85,371
+SET felty.monCookie86,371
+SET felty.monCookie87,371
+;----------------------------------------
+;Life Pod, lvl 110
+SET felty.monCookie88,370
+SET felty.monCookie89,370
+SET felty.monCookie90,370
+SET felty.monCookiePopulated, 1
+GOTO @contGetStatusPostCookiePop
+
+END
+;

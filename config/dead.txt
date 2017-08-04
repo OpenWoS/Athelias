@@ -1,0 +1,68 @@
+;>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+;>>>>>>>>>>>>>>>>>>>>>>>          Dead           <<<<<<<<<<<<<<<<<<<<<<<<
+;<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+;
+@qdqddeadveuxturetournerenevillemoneporte
+IF #999|#998|#1|#2|#3|#4|#5|#6|#7|#8|#9|#10|#11|#12|#13|#14|#16|#18|#19|#20|#35|#36|#38|#40|#41|#42|#44|#48|#49|#51|#54|#64|#65|#66|#68|#79|#80|#88|#124|#125|#126|#127|#128|#129|#130|#131|#132|#139|#79|#64|#65|#66|#113|#112 @nextsteppyaftertedeadguyssfsfs
+COMPARE, #<dontasktotravelwhendeadssd>, 1
+IF= @nextsteppyaftertedeadguyssfsfs
+ACTOR 1, Gatekeeper, misc1, 0, 25, 90
+1: Hello, dead soul.
+COMPARE #<chat.deadguyteleporting>, 1
+IF= @qdqddeadveuxturetournerenevillemoneporte44
+1: I am the gatekeeper of the dreamlands.
+1: You cannot enter the Hall of the Dead so soon.
+1: You still have many things to do for this world, many quests to accomplish, and also many ordeals to suffer.
+1: I can help you find someone who will bring you back to life.
+SET chat.deadguyteleporting, 1
+@qdqddeadveuxturetournerenevillemoneporte44
+1: Do you want to be teleported to the last town visited? 
+WAIT 1
+N: (YES / NO / DON'T ASK THIS ANYMORE)
+ASK 30
+IF YES @labelteleoprttowndeadguyyes
+IF NO @labelteleoprttowndeadguyno
+IF QDon't^ask^this^anymore @labelteleoprttowndeadguydont
+N: The gatekeeper cannot decipher your horrible spelling.
+WAIT 1
+1: Fine. 
+1: Then you stay here, dead one.
+GOTO @qdqddeadveuxturetournerenevillemoneporte2
+
+@labelteleoprttowndeadguyyes
+WAIT 1 
+STRCMP #<hfghfghsssssdgdgdeathfsfaaaaa1>, ""
+IF> @labelteleoprttowndeadguyyes22
+COMPARE #<hfghfghsssssdgdgdeathfsfaaaaa>, 4100
+IF= @gotolink4100deadtravelfsdf
+COMPARE #<hfghfghsssssdgdgdeathfsfaaaaa>, 4200
+IF= @gotolink4200deadtravelfsdf
+COMPARE #<hfghfghsssssdgdgdeathfsfaaaaa>, 6800
+IF= @gotoscene6800deadtravelfsdf
+N: There is apparently a problem with this script.
+WAIT 2
+N: Please, report it on athelias.com BBs so it can be fixed.
+END
+
+@labelteleoprttowndeadguyyes22
+GOTO LINK #<hfghfghsssssdgdgdeathfsfaaaaa1>, #<hfghfghsssssdgdgdeathfsfaaaaa2>
+
+@gotoscene6800deadtravelfsdf
+GOTO LINK 68, 0
+
+@gotolink4100deadtravelfsdf
+GOTO LINK 41, 0
+
+@gotolink4200deadtravelfsdf
+GOTO LINK 42, 0
+
+@labelteleoprttowndeadguyno
+1: You choose.
+GOTO @qdqddeadveuxturetournerenevillemoneporte2
+
+@labelteleoprttowndeadguydont
+1: Alright.
+SET dontasktotravelwhendeadssd, 1
+GOTO @qdqddeadveuxturetournerenevillemoneporte2
+
+@nextsteppyaftertedeadguyssfsfs

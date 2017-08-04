@@ -1,0 +1,34 @@
+COMPARE #<illuq2>, 1
+IF= @illuq2
+GOTO @nextafterilluq2
+
+@illuq2
+IF T1202 @nextafterilluq2
+IF R30 @illuq2ghost
+1: Ah ! 
+1! What's that!
+WAIT 1
+MOVE 1, 120, 90, 2
+FIGHT 322
+H: It's getting worse...
+END
+
+@illuq2ghost
+ACTOR 27, Jeren, human138, 1, 0, 95
+SEL 27
+POSE 1, 1, 4
+MOVE 27, 30, 95
+SEL 27
+' ...Grave opened...
+' ...must go to Irezar...
+' ...must find the stone... open the vortex... close the gate...
+' ...the Crypt... somewhere... the Warp Stone...
+MOVE 27, -20, 90
+HOST_GIVE T1202
+1: Oh my God!
+1: What was that?!
+H: A ghost... Just a ghost.
+END
+
+@nextafterilluq2
+

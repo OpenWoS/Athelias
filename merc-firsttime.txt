@@ -1,0 +1,18 @@
+@mercfirstime.txt
+1: Or maybe you want to hire a mercenary?
+H: What?
+1: Well, you seem to be now experienced enough to be willing to hire one.
+1: Mercenaries are allies who will fight with you and help you face the dangers of this world.
+1: You can have up to five different mercenaries hired, but all your mercenaries will not fight with you all the time.
+1: You can choose how many mercenaries will fights in putting some asleep.
+1: If you do so, the mercenary selected will not fight untill you choose to awake him.
+1: The number of mercenaries fighting also depends on the number of players in the team.
+1: Whenever a player join you, a mercenary is automatically put to sleep.
+1: Thus, if there are two other players in your team for exemple, only up to three mercenaries will show up.
+1: The game will pick the last mercenary(ies) when it have to put one to sleep, so you should reorganize your mercenaries from time to time, and choose which ones will be your prime mercenaries.
+1: You can do this in your camps.
+1: You can hire mercenaries in the taverns of Gaia : right-click on an actor to view his profile, and select "Hire" to take him on. 
+1: It will cost you 200,000 Tomans per mercenary, so you should hurry and find some cash to try it!
+1: Of course, you can keep going to the taverns to have a booze!
+SET merc.firstTime, 1
+END

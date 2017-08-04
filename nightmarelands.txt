@@ -1,0 +1,143 @@
+SCENE 99900, chaos1, SCENE, "Hell Gate"
+STRCMP #<str.soul>, "SOUL 2006" 
+IF= @mads
+STRCMP #<str.soul>, "SOUL 3171" 
+IF= @mads
+STRCMP #<str.soul>, "SOUL 2465"
+IF= @felty
+GOTO LINK 999, 0
+
+@felty
+IF #999 @night
+GOTO LINK 999, 0
+
+@mads
+IF #999 @night
+GOTO LINK 999, 0
+
+@night
+GOTO LINK 0, 0
+;
+;-----------------------------------------------------------------------------------
+;
+SCENE 99901, chaos1, SCENE, "Hell Gate"
+IF -T3990 @end
+@check
+SET temp.cookie, #<xyws>#<gdfgd>#<rat>#<musicthingy>
+GOTO @bancode*#<temp.cookie>
+N: Unregistered code.
+END
+
+@bancode1
+N: SOUL ID banned
+GOTO @bancodeover
+
+@bancode2
+N: Guild banned
+GOTO @bancodeover
+
+@bancode3
+N: More HP than the class limit
+GOTO @bancodeover
+
+@bancode4
+N: Low level immortal king or T668
+GOTO @bancodeover
+
+@bancode5
+N: Modder or cheater
+GOTO @bancodeover
+
+@bancode6
+N: Born before the release of the game
+GOTO @bancodeover
+
+@bancode7
+N: I5 or I6
+GOTO @bancodeover
+
+@bancode8
+N: Cheese, reserved spells, or immortal cat's equip
+GOTO @bancodeover
+
+@bancode9
+N: Pet level above 99
+GOTO @bancodeover
+
+@bancode10
+N: Idiot in the wild
+GOTO @bancodeover
+
+@bancode11
+N: Special spells on the wrong class
+GOTO @bancodeover
+
+@bancode12
+N: Class reserved equip
+GOTO @bancodeover
+
+@bancode13
+N: Second weapon without the quest
+GOTO @bancodeover
+
+@bancode14
+N: Hacked number of deaths
+GOTO @bancodeover
+
+@bancode15
+N: Hacked age 
+GOTO @bancodeover
+
+@bancode16
+N: Hacked PPs 
+GOTO @bancodeover
+
+@bancode17
+N: Hacked XP 
+GOTO @bancodeover
+
+@bancode18
+N: More than 2K hours on the char.
+GOTO @bancodeover
+
+@bancode19
+N: Level 101+ or 0- 
+GOTO @bancodeover
+
+@bancode20
+N: Super novice equipment
+GOTO @bancodeover
+
+@bancode21
+N: Forbidden name.
+GOTO @bancodeover
+
+@bancode22
+N: Banned by Mad's will.
+GOTO @bancodeover
+
+@bancode1000
+N: Not defined (banned before 1.29)
+GOTO @bancodeover
+
+@bancode
+N: Innocent character.
+GOTO @bancodeover
+
+@bancodeover
+SET #<temp.cookie>, ""
+COMPARE #<arg0>, AHScheck
+IF= @return
+@end
+END
+
+@return
+RETURN
+END
+;
+;-----------------------------------------------------------------------------------
+;
+SCENE 99902, chaos1, SCENE, "Hell Gate"
+SET monsters56, 22
+GOTO LINK 999, 0
+

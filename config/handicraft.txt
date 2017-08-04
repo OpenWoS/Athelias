@@ -1,0 +1,1007 @@
+SCENE 110014
+@start
+COMPARE #<chat.handicraftFirstTime>, 1
+IF< @handicraftfirsttime
+1: What trophy do you want me to upgrade?
+@hadicraftask
+ASK 300
+IF QHobgoblin^Armor @Hobgoblin^Armor 
+IF QHobgoblin^Fists @Hobgoblin^Fists
+IF QHobgoblin^Bow @Hobgoblin^Bow
+IF QHobgoblin^Axe @Hobgoblin^Axe
+IF QSnotling's^Knife @Snotling's^Knife 
+IF QGoblin^Bow @Goblin^Bow
+;IF QGoblin^Spear @Goblin^Spear 
+IF QGoblin^Axe @Goblin^Axe
+IF QGoblin^Fists @Goblin^Fists
+IF QOrc^Fists @Orc^Fists
+IF QOrc^Axe @Orc^Axe 
+IF QGoblin^Great^Axe @Goblin^Great^Axe 
+IF QHobgoblin^Knuckles @Hobgoblin^Knuckles 
+IF QOrc^Knuckles @Orc^Knuckles 
+IF QGoblin^Shield @Goblin^Shield 
+IF QGoblin^Armor @Goblin^Armor 
+IF QOrc^Shield @Orc^Shield 
+IF QBlack^Orc^Axe @Black^Orc^Axe 
+IF QOrc^Armor @Orc^Armor 
+IF QBlack^Orc^Helm @Black^Orc^Helm 
+IF QBlack^Orc^Greaves @Black^Orc^Greaves 
+IF QSavage^Orc^Knuckles @Savage^Orc^Knuckles 
+IF QWood^Goblin^Shield @Wood^Goblin^Shield
+IF QVampire^Coat @Vampire^Coat 
+IF QSpectre^Wand @Spectre^Wand 
+IF QLich^Bone^Wand @Lich^Bone^Wand 
+IF QSpell^Book @Spell^Book 
+IF QBeastman^Scythe @Beastman^Scythe 
+IF QKnight^Shortsword @Knight^Shortsword
+IF QKnight^Sword @Knight^Sword 
+IF QKnight^Boots @Knight^Boots 
+IF QKnight^Greaves @Knight^Greaves 
+IF QKnight^Helmet @Knight^Helmet 
+IF QKnight^Helm @Knight^Helm 
+IF QKnight^Armor @Knight^Armor 
+IF QKnight^Full^Plate @Knight^Full^Plate
+IF QDark^Blade @Dark^Blade 
+IF QSpiked^Fists @Spiked^Fists 
+IF QStraw^Hat @Straw^Hat 
+IF QSilk^Cape @Silk^Cape 
+IF QButcher^Axe @Butcher^Axe 
+IF QDark^Steel^Helmet @Dark^Steel^Helmet 
+IF QPirat^Hat @Pirat^Hat 
+IF QSteel^Knuckles @Steel^Knuckles 
+IF QSoldier^Boots @Soldier^Boots 
+IF QIllusionist^Hat @Illusionist^Hat 
+IF QSword^Master^Blade @Sword^Master^Blade
+IF QPriest^Rosary @Priest^Rosary 
+IF QGrand^Priest^Holy^Book @Grand^Priest^Holy^Book 
+IF QBuccaneer^Hat @Buccaneer^Hat 
+IF QFreebooter^Coat @Freebooter^Coat 
+IF QMurderer^Axe @Murderer^Axe
+IF QElven^Flowers^Crown @Elven^Flowers^Crown 
+IF QMinor's^Safety^Helmet @Minor's^Safety^Helmet 
+IF QElven^Headband @Elven^Headband 
+IF QElven^Shoes @Elven^Shoes 
+IF QElven^Leather^Boots @Elven^Leather^Boots 
+IF QElven^Diadem @Elven^Diadem 
+IF QFlowers^Crown @Flowers^Crown 
+IF QElven^Crown @Elven^Crown 
+IF QBeastmaster^Crown @Beastmaster^Crown 
+IF QDeath^Dancer^Headband @Death^Dancer^Headband 
+IF QDeath^Dancer^Crown @Death^Dancer^Crown 
+IF QDwarven^Hammer @Dwarven^Hammer 
+IF QDwarven^Greaves @Dwarven^Greaves 
+;IF QDwarven^Belt @Dwarven^Belt 
+IF QDwarven^Full^Plate @Dwarven^Full^Plate 
+IF QDwarven^Cape @Dwarven^Cape 
+IF QDwarven^Jacket @Dwarven^Jacket 
+IF QGnomish^Hat @Gnomish^Hat 
+IF QGnomish^Helmet @Gnomish^Helmet 
+IF QGnomish^Sword @Gnomish^Sword 
+IF QGnomish^Armor @Gnomish^Armor 
+IF QNoble's^Coat @Noble's^Coat 
+IF QLeather^Long^Coat @Leather^Long^Coat 
+IF QSoft^Coton^Jacket @Soft^Coton^Jacket 
+IF QLeather^Buskins @Leather^Buskins
+IF QWalking^Leather^Boots @Walking^Leather^Boots
+IF QLarge^Cape @Large^Cape 
+IF QSilk^Jacket @Silk^Jacket 
+IF QLeather^Bracelet @Leather^Bracelet 
+IF QLight^Coton^Jacket @Light^Coton^Jacket 
+IF QLong^Coat @Long^Coat 
+IF QForest^Boots @Forest^Boots 
+IF QMerchant^Coat @Merchant^Coat 
+IF QGnomish^Blade @Gnomish^Blade 
+IF QGnomish^Crown @Gnomish^Crown 
+IF QGhostly^Blade @Ghostly^Blade 
+IF QBeastman^Grand^Scythe @Beastman^Grand^Scythe 
+IF QChaos^Warrior^Helm @Chaos^Warrior^Helm
+IF QBlack^Elf^Boots @Black^Elf^Boots 
+IF QChaos^Knights^Greaves @Chaos^Knights^Greaves
+IF QChaos^Knight^Shield @Chaos^Knight^Shield
+IF QElven^Sorcerer^Spell^Book @Elven^Sorcerer^Spell^Book
+IF QProtection^Helmet @Protection^Helmet 
+IF QFrenetic's^Scythe @Frenetic's^Scythe 
+IF QPlunderer^Jacket @Plunderer^Jacket 
+IF QHighwayman^Fist @Highwayman^Fist
+IF QHighwayman^Sword @Highwayman^Sword 
+IF QHighwayman^Axe @Highwayman^Axe
+IF QMarauder^Fang @Marauder^Fang 
+IF QCap @Cap
+IF QHemp^Bandeau @Hemp^Bandeau
+IF QLeather^Plastron @Leather^Plastron 
+IF QSatin^Cape @Satin^Cape
+IF QMercenary^Fists @Mercenary^Fists
+IF QLeather^Jacket @Leather^Jacket
+IF QElven^Coat @Elven^Coat
+IF QColorful^Tunic @Colorful^Tunic
+IF QLight^Jacket @Light^Jacket 
+IF QHeavy^Leather^Boots @Heavy^Leather^Boots
+IF QAssassin^Katar @Assassin^Katar
+IF QLeather^Shoes @Leather^Shoes 
+IF QCoat @Coat 
+IF QLong^Leather^Tunic @Long^Leather^Tunic 
+IF QDouble^Stitched^Jacket @Double^Stitched^Jacket 
+IF QHeavy^Coat @Heavy^Coat 
+IF QSmall^Cap @Small^Cap
+IF QAssassin's^Dagger @Assassin's^Dagger 
+IF QRough^Leather^Shoes @Rough^Leather^Shoes
+IF QMercenary^Cap @Mercenary^Cap
+IF QLight^Coat @Light^Coat 
+IF QWizard^Stick @Wizard^Stick
+IF QMercenary^Dagger @Mercenary^Dagger 
+IF QLeather^Gloves @Leather^Gloves
+IF QCoton^Bandeau @Coton^Bandeau
+IF QInfantryman^Boots @Infantryman^Boots
+IF QOriental^Fang @Oriental^Fang
+IF QChaos^Scythe @Chaos^Scythe
+IF QNecromancer^Staff @Necromancer^Staff 
+1: Hmm... those trophies are not on my list.
+1: Check for typos please.
+1: Or maybe that trophy just can't be upgraded.
+1: Is there any other trophy you'd like me to upgrade?
+@hadicraftask2
+ASK 60
+IF YES @hadicraftask3
+IF NO @hadicraftask4
+1: Pardon?
+GOTO @hadicraftask2
+
+@hadicraftask3
+1: Which one?
+GOTO @hadicraftask
+
+@hadicraftask4
+1: Feel free to come back.
+SET temp.currenttrophy, ""
+SET temp.currzntTrophyNumber, ""
+SET temp.currentItem, ""
+END
+
+@Snotling's^Knife 
+SET temp.currenttrophy, 1
+SET temp.currzntTrophyNumber, 10
+SET temp.currentItem, 365
+GOTO @handicraftmake
+
+@Goblin^Bow 
+SET temp.currenttrophy, 2
+SET temp.currzntTrophyNumber, 10
+SET temp.currentItem, 390
+GOTO @handicraftmake
+
+@Goblin^Spear 
+SET temp.currenttrophy, 3
+SET temp.currzntTrophyNumber, 10
+SET temp.currentItem, 
+GOTO @handicraftmake
+
+@Goblin^Axe 
+SET temp.currenttrophy, 4
+SET temp.currzntTrophyNumber, 10
+SET temp.currentItem, 410
+GOTO @handicraftmake
+
+@Hobgoblin^Fists 
+SET temp.currenttrophy, 5
+SET temp.currzntTrophyNumber, 10
+SET temp.currentItem, 330
+GOTO @handicraftmake
+
+@Hobgoblin^Bow 
+SET temp.currenttrophy, 6
+SET temp.currzntTrophyNumber, 10
+SET temp.currentItem, 392
+GOTO @handicraftmake
+
+@Hobgoblin^Axe 
+SET temp.currenttrophy, 7
+SET temp.currzntTrophyNumber, 10
+SET temp.currentItem, 414
+GOTO @handicraftmake
+
+@Goblin^Fists 
+SET temp.currenttrophy, 8
+SET temp.currzntTrophyNumber, 10
+SET temp.currentItem, 333
+GOTO @handicraftmake
+
+@Orc^Fists 
+SET temp.currenttrophy, 9
+SET temp.currzntTrophyNumber, 10
+SET temp.currentItem, 335
+GOTO @handicraftmake
+
+@Orc^Axe 
+SET temp.currenttrophy, 10
+SET temp.currzntTrophyNumber, 10
+SET temp.currentItem, 416
+GOTO @handicraftmake
+
+@Goblin^Great^Axe 
+SET temp.currenttrophy, 11
+SET temp.currzntTrophyNumber, 10
+SET temp.currentItem, 418
+GOTO @handicraftmake
+
+@Hobgoblin^Knuckles 
+SET temp.currenttrophy, 13
+SET temp.currzntTrophyNumber, 10
+SET temp.currentItem, 339
+GOTO @handicraftmake
+
+@Orc^Knuckles 
+SET temp.currenttrophy, 14
+SET temp.currzntTrophyNumber, 10
+SET temp.currentItem, 340
+GOTO @handicraftmake
+
+@Goblin^Shield 
+SET temp.currenttrophy, 15
+SET temp.currzntTrophyNumber, 10
+SET temp.currentItem, 652
+GOTO @handicraftmake
+
+@Goblin^Armor 
+SET temp.currenttrophy, 16
+SET temp.currzntTrophyNumber, 10
+SET temp.currentItem, 268
+GOTO @handicraftmake
+
+@Orc^Shield 
+SET temp.currenttrophy, 17
+SET temp.currzntTrophyNumber, 10
+SET temp.currentItem, 654
+GOTO @handicraftmake
+
+@Hobgoblin^Armor 
+SET temp.currenttrophy, 18
+SET temp.currzntTrophyNumber, 10
+SET temp.currentItem, 269
+GOTO @handicraftmake
+
+@Black^Orc^Axe 
+SET temp.currenttrophy, 19
+SET temp.currzntTrophyNumber, 10
+SET temp.currentItem, 424
+GOTO @handicraftmake
+
+@Orc^Armor 
+SET temp.currenttrophy, 20
+SET temp.currzntTrophyNumber, 10
+SET temp.currentItem, 269
+GOTO @handicraftmake
+
+@Black^Orc^Helm 
+SET temp.currenttrophy, 21
+SET temp.currzntTrophyNumber, 10
+SET temp.currentItem, 224
+GOTO @handicraftmake
+
+@Black^Orc^Greaves 
+SET temp.currenttrophy, 22
+SET temp.currzntTrophyNumber, 10
+SET temp.currentItem, 585
+GOTO @handicraftmake
+
+@Savage^Orc^Knuckles 
+SET temp.currenttrophy, 25
+SET temp.currzntTrophyNumber, 10
+SET temp.currentItem, 336
+GOTO @handicraftmake
+
+@Wood^Goblin^Shield 
+SET temp.currenttrophy, 26
+SET temp.currzntTrophyNumber, 10
+SET temp.currentItem, 643
+GOTO @handicraftmake
+
+@Vampire^Coat 
+SET temp.currenttrophy, 54
+SET temp.currzntTrophyNumber, 10
+SET temp.currentItem, 279
+GOTO @handicraftmake
+
+@Spectre^Wand 
+SET temp.currenttrophy, 55
+SET temp.currzntTrophyNumber, 10
+SET temp.currentItem, 361
+GOTO @handicraftmake
+
+@Lich^Bone^Wand 
+SET temp.currenttrophy, 57
+SET temp.currzntTrophyNumber, 10
+SET temp.currentItem, 363
+GOTO @handicraftmake
+
+@Spell^Book 
+SET temp.currenttrophy, 95
+SET temp.currzntTrophyNumber, 10
+SET temp.currentItem, 463
+GOTO @handicraftmake
+
+@Beastman^Scythe 
+SET temp.currenttrophy, 97
+SET temp.currzntTrophyNumber, 10
+SET temp.currentItem, 81
+GOTO @handicraftmake
+
+@Knight^Shortsword 
+SET temp.currenttrophy, 113
+SET temp.currzntTrophyNumber, 10
+SET temp.currentItem, 308
+GOTO @handicraftmake
+
+@Knight^Sword 
+SET temp.currenttrophy, 114
+SET temp.currzntTrophyNumber, 10
+SET temp.currentItem, 310
+GOTO @handicraftmake
+
+@Knight^Boots 
+SET temp.currenttrophy, 115
+SET temp.currzntTrophyNumber, 10
+SET temp.currentItem, 575
+GOTO @handicraftmake
+
+@Knight^Greaves 
+SET temp.currenttrophy, 116
+SET temp.currzntTrophyNumber, 10
+SET temp.currentItem, 582
+GOTO @handicraftmake
+
+@Knight^Helmet 
+SET temp.currenttrophy, 117
+SET temp.currzntTrophyNumber, 10
+SET temp.currentItem, 224
+GOTO @handicraftmake
+
+@Knight^Helm 
+SET temp.currenttrophy, 118
+SET temp.currzntTrophyNumber, 10
+SET temp.currentItem, 224
+GOTO @handicraftmake
+
+@Knight^Armor 
+SET temp.currenttrophy, 119
+SET temp.currzntTrophyNumber, 10
+SET temp.currentItem, 269
+GOTO @handicraftmake
+
+@Knight^Full^Plate 
+SET temp.currenttrophy, 120
+SET temp.currzntTrophyNumber, 10
+SET temp.currentItem, 269
+GOTO @handicraftmake
+
+@Dark^Blade 
+SET temp.currenttrophy, 121
+SET temp.currzntTrophyNumber, 10
+SET temp.currentItem, 504
+GOTO @handicraftmake
+
+@Spiked^Fists 
+SET temp.currenttrophy, 122
+SET temp.currzntTrophyNumber, 10
+SET temp.currentItem, 328
+GOTO @handicraftmake
+
+@Straw^Hat 
+SET temp.currenttrophy, 124
+SET temp.currzntTrophyNumber, 10
+SET temp.currentItem, 209
+GOTO @handicraftmake
+
+@Silk^Cape 
+SET temp.currenttrophy, 125
+SET temp.currzntTrophyNumber, 10
+SET temp.currentItem, 273
+GOTO @handicraftmake
+
+@Butcher^Axe 
+SET temp.currenttrophy, 127
+SET temp.currzntTrophyNumber, 10
+SET temp.currentItem, 411
+GOTO @handicraftmake
+
+@Dark^Steel^Helmet 
+SET temp.currenttrophy, 128
+SET temp.currzntTrophyNumber, 10
+SET temp.currentItem, 213
+GOTO @handicraftmake
+
+@Pirat^Hat 
+SET temp.currenttrophy, 129
+SET temp.currzntTrophyNumber, 10
+SET temp.currentItem, 92
+GOTO @handicraftmake
+
+@Steel^Knuckles 
+SET temp.currenttrophy, 130
+SET temp.currzntTrophyNumber, 10
+SET temp.currentItem, 336
+GOTO @handicraftmake
+
+@Soldier^Boots 
+SET temp.currenttrophy, 131
+SET temp.currzntTrophyNumber, 10
+SET temp.currentItem, 578
+GOTO @handicraftmake
+
+@Illusionist^Hat 
+SET temp.currenttrophy, 132
+SET temp.currzntTrophyNumber, 10
+SET temp.currentItem, 96
+GOTO @handicraftmake
+
+@Sword^Master^Blade 
+SET temp.currenttrophy, 138
+SET temp.currzntTrophyNumber, 10
+SET temp.currentItem, 499
+GOTO @handicraftmake
+
+@Priest^Rosary 
+SET temp.currenttrophy, 141
+SET temp.currzntTrophyNumber, 10
+SET temp.currentItem, 544
+GOTO @handicraftmake
+
+@Grand^Priest^Holy^Book 
+SET temp.currenttrophy, 142
+SET temp.currzntTrophyNumber, 10
+SET temp.currentItem, 463
+GOTO @handicraftmake
+
+@Buccaneer^Hat 
+SET temp.currenttrophy, 150
+SET temp.currzntTrophyNumber, 10
+SET temp.currentItem, 97
+GOTO @handicraftmake
+
+@Freebooter^Coat 
+SET temp.currenttrophy, 151
+SET temp.currzntTrophyNumber, 10
+SET temp.currentItem, 278
+GOTO @handicraftmake
+
+@Murderer^Axe 
+SET temp.currenttrophy, 153
+SET temp.currzntTrophyNumber, 10
+SET temp.currentItem, 421
+GOTO @handicraftmake
+
+@Elven^Flowers^Crown 
+SET temp.currenttrophy, 154
+SET temp.currzntTrophyNumber, 10
+SET temp.currentItem, 98
+GOTO @handicraftmake
+
+@Minor's^Safety^Helmet 
+SET temp.currenttrophy, 155
+SET temp.currzntTrophyNumber, 10
+SET temp.currentItem, 99
+GOTO @handicraftmake
+
+@Elven^Headband 
+SET temp.currenttrophy, 156
+SET temp.currzntTrophyNumber, 10
+SET temp.currentItem, 100
+GOTO @handicraftmake
+
+@Elven^Shoes 
+SET temp.currenttrophy, 157
+SET temp.currzntTrophyNumber, 10
+SET temp.currentItem, 580
+GOTO @handicraftmake
+
+@Elven^Leather^Boots 
+SET temp.currenttrophy, 159
+SET temp.currzntTrophyNumber, 10
+SET temp.currentItem, 582
+GOTO @handicraftmake
+
+@Elven^Diadem 
+SET temp.currenttrophy, 160
+SET temp.currzntTrophyNumber, 10
+SET temp.currentItem, 101
+GOTO @handicraftmake
+
+@Flowers^Crown 
+SET temp.currenttrophy, 161
+SET temp.currzntTrophyNumber, 10
+SET temp.currentItem, 98
+GOTO @handicraftmake
+
+@Elven^Crown 
+SET temp.currenttrophy, 162
+SET temp.currzntTrophyNumber, 10
+SET temp.currentItem, 103
+GOTO @handicraftmake
+
+@Beastmaster^Crown 
+SET temp.currenttrophy, 163
+SET temp.currzntTrophyNumber, 10
+SET temp.currentItem, 103
+GOTO @handicraftmake
+
+@Death^Dancer^Headband 
+SET temp.currenttrophy, 164
+SET temp.currzntTrophyNumber, 10
+SET temp.currentItem, 100
+GOTO @handicraftmake
+
+@Death^Dancer^Crown 
+SET temp.currenttrophy, 165
+SET temp.currzntTrophyNumber, 10
+SET temp.currentItem, 104
+GOTO @handicraftmake
+
+@Dwarven^Hammer 
+SET temp.currenttrophy, 166
+SET temp.currzntTrophyNumber, 10
+SET temp.currentItem, 148
+GOTO @handicraftmake
+
+@Dwarven^Greaves 
+SET temp.currenttrophy, 168
+SET temp.currzntTrophyNumber, 10
+SET temp.currentItem, 579
+GOTO @handicraftmake
+
+;@Dwarven^Belt 
+;SET temp.currenttrophy, 169
+;SET temp.currzntTrophyNumber, 10
+;SET temp.currentItem, 
+;GOTO @handicraftmake
+
+@Dwarven^Full^Plate 
+SET temp.currenttrophy, 170
+SET temp.currzntTrophyNumber, 10
+SET temp.currentItem, 269
+GOTO @handicraftmake
+
+@Dwarven^Cape 
+SET temp.currenttrophy, 171
+SET temp.currzntTrophyNumber, 10
+SET temp.currentItem, 279
+GOTO @handicraftmake
+
+@Dwarven^Jacket 
+SET temp.currenttrophy, 172
+SET temp.currzntTrophyNumber, 10
+SET temp.currentItem, 279
+GOTO @handicraftmake
+
+@Gnomish^Hat 
+SET temp.currenttrophy, 173
+SET temp.currzntTrophyNumber, 10
+SET temp.currentItem, 161
+GOTO @handicraftmake
+
+@Gnomish^Helmet 
+SET temp.currenttrophy, 175
+SET temp.currzntTrophyNumber, 10
+SET temp.currentItem, 213
+GOTO @handicraftmake
+
+@Gnomish^Sword 
+SET temp.currenttrophy, 176
+SET temp.currzntTrophyNumber, 10
+SET temp.currentItem, 312
+GOTO @handicraftmake
+
+@Gnomish^Armor 
+SET temp.currenttrophy, 178
+SET temp.currzntTrophyNumber, 10
+SET temp.currentItem, 263
+GOTO @handicraftmake
+
+@Noble's^Coat 
+SET temp.currenttrophy, 182
+SET temp.currzntTrophyNumber, 5
+SET temp.currentItem, 251
+GOTO @handicraftmake
+
+@Leather^Long^Coat 
+SET temp.currenttrophy, 183
+SET temp.currzntTrophyNumber, 5
+SET temp.currentItem, 251
+GOTO @handicraftmake
+
+@Soft^Coton^Jacket 
+SET temp.currenttrophy, 184
+SET temp.currzntTrophyNumber, 5
+SET temp.currentItem, 251
+GOTO @handicraftmake
+
+@Leather^Buskins 
+SET temp.currenttrophy, 185
+SET temp.currzntTrophyNumber, 5
+SET temp.currentItem, 566
+GOTO @handicraftmake
+
+@Walking^Leather^Boots 
+SET temp.currenttrophy, 187
+SET temp.currzntTrophyNumber, 5
+SET temp.currentItem, 567
+GOTO @handicraftmake
+
+@Large^Cape 
+SET temp.currenttrophy, 189
+SET temp.currzntTrophyNumber, 5
+SET temp.currentItem, 271
+GOTO @handicraftmake
+
+@Silk^Jacket 
+SET temp.currenttrophy, 191
+SET temp.currzntTrophyNumber, 5
+SET temp.currentItem, 271
+GOTO @handicraftmake
+
+@Leather^Bracelet 
+SET temp.currenttrophy, 192
+SET temp.currzntTrophyNumber, 5
+SET temp.currentItem, 162
+GOTO @handicraftmake
+
+@Light^Coton^Jacket 
+SET temp.currenttrophy, 194
+SET temp.currzntTrophyNumber, 5
+SET temp.currentItem, 253
+GOTO @handicraftmake
+
+@Long^Coat 
+SET temp.currenttrophy, 195
+SET temp.currzntTrophyNumber, 5
+SET temp.currentItem, 253
+GOTO @handicraftmake
+
+@Forest^Boots 
+SET temp.currenttrophy, 198
+SET temp.currzntTrophyNumber, 5
+SET temp.currentItem, 570
+GOTO @handicraftmake
+
+@Merchant^Coat 
+SET temp.currenttrophy, 200
+SET temp.currzntTrophyNumber, 5
+SET temp.currentItem, 255
+GOTO @handicraftmake
+
+@Gnomish^Blade 
+SET temp.currenttrophy, 202
+SET temp.currzntTrophyNumber, 10
+SET temp.currentItem, 379
+GOTO @handicraftmake
+
+@Gnomish^Crown 
+SET temp.currenttrophy, 203
+SET temp.currzntTrophyNumber, 10
+SET temp.currentItem, 163
+GOTO @handicraftmake
+
+@Ghostly^Blade 
+SET temp.currenttrophy, 209
+SET temp.currzntTrophyNumber, 10
+SET temp.currentItem, 164
+GOTO @handicraftmake
+
+@Beastman^Grand^Scythe 
+SET temp.currenttrophy, 331
+SET temp.currzntTrophyNumber, 10
+SET temp.currentItem, 81
+GOTO @handicraftmake
+
+@Chaos^Warrior^Helm 
+SET temp.currenttrophy, 332
+SET temp.currzntTrophyNumber, 10
+SET temp.currentItem, 216
+GOTO @handicraftmake
+
+@Black^Elf^Boots 
+SET temp.currenttrophy, 333
+SET temp.currzntTrophyNumber, 10
+SET temp.currentItem, 576
+GOTO @handicraftmake
+
+@Chaos^Knights^Greaves 
+SET temp.currenttrophy, 334
+SET temp.currzntTrophyNumber, 10
+SET temp.currentItem, 585
+GOTO @handicraftmake
+
+@Chaos^Knight^Shield 
+SET temp.currenttrophy, 336
+SET temp.currzntTrophyNumber, 10
+SET temp.currentItem, 654
+GOTO @handicraftmake
+
+@Elven^Sorcerer^Spell^Book 
+SET temp.currenttrophy, 338
+SET temp.currzntTrophyNumber, 10
+SET temp.currentItem, 463
+GOTO @handicraftmake
+
+@Protection^Helmet 
+SET temp.currenttrophy, 377
+SET temp.currzntTrophyNumber, 10
+SET temp.currentItem, 99
+GOTO @handicraftmake
+
+@Frenetic's^Scythe 
+SET temp.currenttrophy, 381
+SET temp.currzntTrophyNumber, 10
+SET temp.currentItem, 91
+GOTO @handicraftmake
+
+@Plunderer^Jacket 
+SET temp.currenttrophy, 476
+SET temp.currzntTrophyNumber, 10
+SET temp.currentItem, 277
+GOTO @handicraftmake
+
+@Highwayman^Fist 
+SET temp.currenttrophy, 477
+SET temp.currzntTrophyNumber, 10
+SET temp.currentItem, 338
+GOTO @handicraftmake
+
+@Highwayman^Sword 
+SET temp.currenttrophy, 480
+SET temp.currzntTrophyNumber, 10
+SET temp.currentItem, 319
+GOTO @handicraftmake
+
+@Highwayman^Axe
+SET temp.currenttrophy, 482
+SET temp.currzntTrophyNumber, 10
+SET temp.currentItem, 420
+GOTO @handicraftmake
+
+@Marauder^Fang 
+SET temp.currenttrophy, 483
+SET temp.currzntTrophyNumber, 10
+SET temp.currentItem, 379
+GOTO @handicraftmake
+
+@Cap
+SET temp.currenttrophy, 530
+SET temp.currzntTrophyNumber, 5
+SET temp.currentItem, 214
+GOTO @handicraftmake
+
+@Hemp^Bandeau 
+SET temp.currenttrophy, 531
+SET temp.currzntTrophyNumber, 5
+SET temp.currentItem, 100
+GOTO @handicraftmake
+
+@Leather^Plastron 
+SET temp.currenttrophy, 532
+SET temp.currzntTrophyNumber, 5
+SET temp.currentItem, 297
+GOTO @handicraftmake
+
+@Satin^Cape 
+SET temp.currenttrophy, 533
+SET temp.currzntTrophyNumber, 5
+SET temp.currentItem, 274
+GOTO @handicraftmake
+
+@Mercenary^Fists 
+SET temp.currenttrophy, 536
+SET temp.currzntTrophyNumber, 5
+SET temp.currentItem, 333
+GOTO @handicraftmake
+
+@Leather^Jacket 
+SET temp.currenttrophy, 537
+SET temp.currzntTrophyNumber, 5
+SET temp.currentItem, 300
+GOTO @handicraftmake
+
+@Elven^Coat 
+SET temp.currenttrophy, 538
+SET temp.currzntTrophyNumber, 5
+SET temp.currentItem, 277
+GOTO @handicraftmake
+
+@Colorful^Tunic 
+SET temp.currenttrophy, 539
+SET temp.currzntTrophyNumber, 5
+SET temp.currentItem, 300
+GOTO @handicraftmake
+
+@Light^Jacket 
+SET temp.currenttrophy, 540
+SET temp.currzntTrophyNumber, 5
+SET temp.currentItem, 278
+GOTO @handicraftmake
+
+@Heavy^Leather^Boots 
+SET temp.currenttrophy, 541
+SET temp.currzntTrophyNumber, 5
+SET temp.currentItem, 583
+GOTO @handicraftmake
+
+@Assassin^Katar 
+SET temp.currenttrophy, 542
+SET temp.currzntTrophyNumber, 5
+SET temp.currentItem, 381
+GOTO @handicraftmake
+
+@Leather^Shoes 
+SET temp.currenttrophy, 543
+SET temp.currzntTrophyNumber, 5
+SET temp.currentItem, 583
+GOTO @handicraftmake
+
+@Coat 
+SET temp.currenttrophy, 545
+SET temp.currzntTrophyNumber, 5
+SET temp.currentItem, 278
+GOTO @handicraftmake
+
+@Long^Leather^Tunic 
+SET temp.currenttrophy, 546
+SET temp.currzntTrophyNumber, 5
+SET temp.currentItem, 301
+GOTO @handicraftmake
+
+@Double^Stitched^Jacket 
+SET temp.currenttrophy, 547
+SET temp.currzntTrophyNumber, 5
+SET temp.currentItem, 278
+GOTO @handicraftmake
+
+@Heavy^Coat 
+SET temp.currenttrophy, 548
+SET temp.currzntTrophyNumber, 5
+SET temp.currentItem, 278
+GOTO @handicraftmake
+
+@Small^Cap 
+SET temp.currenttrophy, 549
+SET temp.currzntTrophyNumber, 5
+SET temp.currentItem, 222
+GOTO @handicraftmake
+
+@Assassin's^Dagger 
+SET temp.currenttrophy, 551
+SET temp.currzntTrophyNumber, 5
+SET temp.currentItem, 381
+GOTO @handicraftmake
+
+@Rough^Leather^Shoes 
+SET temp.currenttrophy, 552
+SET temp.currzntTrophyNumber, 5
+SET temp.currentItem, 583
+GOTO @handicraftmake
+
+@Mercenary^Cap 
+SET temp.currenttrophy, 553
+SET temp.currzntTrophyNumber, 5
+SET temp.currentItem, 222
+GOTO @handicraftmake
+
+@Light^Coat 
+SET temp.currenttrophy, 554
+SET temp.currzntTrophyNumber, 5
+SET temp.currentItem, 278
+GOTO @handicraftmake
+
+@Wizard^Stick 
+SET temp.currenttrophy, 555
+SET temp.currzntTrophyNumber, 5
+SET temp.currentItem, 361
+GOTO @handicraftmake
+
+@Mercenary^Dagger 
+SET temp.currenttrophy, 556
+SET temp.currzntTrophyNumber, 5
+SET temp.currentItem, 381
+GOTO @handicraftmake
+
+@Leather^Gloves 
+SET temp.currenttrophy, 557
+SET temp.currzntTrophyNumber, 5
+SET temp.currentItem, 341
+GOTO @handicraftmake
+
+@Coton^Bandeau 
+SET temp.currenttrophy, 558
+SET temp.currzntTrophyNumber, 5
+SET temp.currentItem, 100
+GOTO @handicraftmake
+
+@Infantryman^Boots 
+SET temp.currenttrophy, 559
+SET temp.currzntTrophyNumber, 5
+SET temp.currentItem, 583
+GOTO @handicraftmake
+
+@Oriental^Fang 
+SET temp.currenttrophy, 560
+SET temp.currzntTrophyNumber, 10
+SET temp.currentItem, 381
+GOTO @handicraftmake
+
+@Chaos^Scythe 
+SET temp.currenttrophy, 576
+SET temp.currzntTrophyNumber, 10
+SET temp.currentItem, 91
+GOTO @handicraftmake
+
+@Necromancer^Staff 
+SET temp.currenttrophy, 2013
+SET temp.currzntTrophyNumber, 5
+SET temp.currentItem, 358
+GOTO @handicraftmake
+
+@handicraftmake
+IF -Z#<temp.currenttrophy> @handicraft.needMoreTrophies0
+IF -Z#<temp.currenttrophy>.#<temp.currzntTrophyNumber> @handicraft.needMoreTrophies
+1: Alright.
+1: Just a minute, please.
+WAIT 1.5
+SOUND harvestgolem1
+WAIT 1
+SOUND sword2
+WAIT 0.4
+SOUND sword2
+WAIT 0.4
+SOUND sword2
+WAIT 1
+HOST_GIVE I#<temp.currentItem>
+HOST_TAKE Z#<temp.currenttrophy>.#<temp.currzntTrophyNumber>
+1: There.
+SET_LEN temp.len, %I#<temp.currentItem>
+SET_SUBSTR temp.grammar, #<temp.len>, 1, %I#<temp.currentItem>
+STRSTR "s",  #<temp.grammar>
+IF= @handicraftmaketer
+SET_SUBSTR temp.grammar, 0, 1, %I#<temp.currentItem>
+STRSTR "aeiouy", #<temp.grammar>
+IF> @handicraftmakevoyel
+1: Here is a %I#<temp.currentItem> for you.
+@handicraftmakebis
+H: Thanks!
+SET temp.currenttrophy, ""
+SET temp.currzntTrophyNumber, ""
+SET temp.currentItem, ""
+SET temp.grammar, ""
+SET temp.len, ""
+1: Do you want to upgrade another trophy?
+GOTO @hadicraftask2
+
+@handicraftmaketer
+1: Those %I#<temp.currentItem> are for you!
+GOTO @handicraftmakebis
+
+@handicraftmakevoyel
+1: Here is an %I#<temp.currentItem> for you.
+GOTO @handicraftmakebis
+
+@handicraft.needMoreTrophies0
+1: Adventurer, if you don't have the trophy you want to upgrade, I can't do anything.
+1: Do you want to upgrade another trophy?
+GOTO @hadicraftask2
+
+@handicraft.needMoreTrophies
+1: I'm sorry: I need #<temp.currzntTrophyNumber> %Z#<temp.currenttrophy>s to make something.
+1: You should come back when you have more.
+1: Do you want to upgrade another trophy?
+GOTO @hadicraftask2
+
+@handicraftfirsttime
+1: It seems to be the first time you've come here.
+1: This is a handicraft workshop.
+1: We can upgrade the trophies you've gotten from monsters and turn them into items.
+1: You've probably noticed that some monsters drop things like weapons and armor.
+1: Unfortunately, those pieces of equipement need to be altered to be used by humans.
+1: That's what we can do here.
+1: We cannot alter any trophy.
+1: We won't make a sword from bananas, but if you find several weapons or armor of the same kind, you can bring them to us so we can see what we can do with them.
+1: Generally, we need ten pieces to be able to make something you can use, but sometimes, five is enough.
+SET chat.handicraftFirstTime, 1
+1: Do you want us to try and upgrade some trophies now?
+GOTO @hadicraftask2
+

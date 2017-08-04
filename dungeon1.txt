@@ -1,0 +1,48 @@
+SCENE 2400, "dungeon", SCENE, ""
+ #include include.txt
+GOTO LINK 17, 1
+;
+;-------------------------------------------------------------
+;
+SCENE 2401, "dungeon", SCENE, ""
+ #include include.txt
+GOTO LINK 25, 0
+;
+;-------------------------------------------------------------
+;
+SCENE 2402, "serevaninside", SCENE, "Knight"
+ #include include.txt
+IF T1111-T1112 @9palis
+END
+
+@9palis
+ACTOR 1, Kondilor, 50, 1, 25, 90, 3
+1: What are you doing here?!
+H: You will never succeed in ruling over Athelias!
+H: Soon, you'll be where you should have been centuries ago, in a grave!
+1: Ah.
+FACE 1, 0
+WAIT 0.5
+FACE 1, 1
+1: Who the f*** is this idiot?!
+1: Sorry but I don't have time to play with you
+1: Riders!
+WAIT 1
+MOVE 1, -20, 90
+N: Kondilor runs away with the book of spells!
+FIGHT2 235, 236, 236
+IF LOSE @LOSE
+FIGHT2 234, 236, 236
+IF LOSE @LOSE
+H: Sh**!
+H: Too late, he is gone!
+H: Let's go and announce this to Tenisan.
+GIVE T1112
+END
+
+@LOSE
+END
+;
+;------------------------------------------------------------------------------
+;
+

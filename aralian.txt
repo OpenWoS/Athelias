@@ -1,0 +1,132 @@
+SCENE 9200, aralian, SCENE, "To Athelias"
+#include include.txt
+GOTO LINK 0, 43
+;
+;-------------------------------------------------------------------------
+;
+SCENE 9201, houseinside1, SCENE, "Farlot's"
+#include include.txt
+ACTOR 1, "Farlot", human79, 1, 45, 85
+IF T3993|T3988 @halloweenActors
+GOTO @nextStepAfterHalloweenActors
+
+@halloweenActors
+ACTOR 1, "Farlot", #<spEvent.Name>-humans, 79, 45, 85
+@nextStepAfterHalloweenActors
+IF T603 @end
+IF T602-T603 @back
+IF V40-T602 @quest
+1: Go away!
+1: Leave me alone!
+1: I don't want to hear of you or your aralian friends anymore!
+WAIT 3
+GOTO EXIT
+
+@quest
+1: Go away!
+H: What's wrong with you?!
+H: Don't be afraid, I don't want to kill you!
+1: So you're not with the aralian guards?
+H: No, I'm not.
+H: What happened to you?
+1: A long story, that is.
+1: I tried to lay my hands on a very rare and precious crystal, hidden somewhere in the valley.
+1: But the aralian guards were here, and almost killed me.
+1: I succeeded in running away, and since then I have been tracked and hassled by those birds of the devil!
+H: Interesting.
+H: And where is this crystal?
+1: Do you want to try to get it?
+H: Maybe.
+1: So listen: on the top of the first rocky piton of the valley, there is a den of the aralian guards.
+1: If you succeed in climbing the piton, you'll find the crystal.
+1: But beware: the aralian guards will be waiting for you as well!
+1: If you bring it here, I could use its power to forge a magical piece of equipment for you.
+H: Deal!
+GIVE T602
+END
+
+@back
+1: Ah, it's you!
+1: Have you climbed the rocky piton?
+H: Not yet. It requires some preparation.
+H: But you'll get the crystal.
+1: Hopefully...
+END
+
+@end
+IF -I1070 @rew
+1: Welcome back, %1.
+1: I see you still have the crown I forged.
+H: Yup, very good work.
+END
+
+@rew
+H: I have the crystal.
+1: What?! You've succeeded!
+1: Give it to me!
+H: Here it is.
+1: Great!
+1: Give me a few minutes so I can enchant a crown with its power for you.
+WAIT 2.3
+MOVE 1, -5, 95
+WAIT 7.5
+SOUND harvestgolem1
+WAIT 1
+SOUND sword2
+WAIT 0.4
+SOUND sword2
+WAIT 0.4
+SOUND sword2
+WAIT 1.8
+MOVE 1, 45, 92
+WAIT 2.5
+HOST_GIVE I1070
+SOUND FoundItem.wav
+1: Here you go!
+H: Great!
+H: Are you a runesmith or something?
+1: I was... I was...
+1: A long time ago...
+END
+;
+;-------------------------------------------------------------------------
+;
+SCENE 9202, aralian, SCENE, "Aralian Valley"
+#include include.txt
+IF T603 @end
+SOUND harpy3.wav
+WAIT 1
+SOUND harpy3.wav
+WAIT 1
+SOUND harpy3.wav
+H: That's here.
+WAIT 1
+N: You see the crystal but you're quickly surrounded by several aralian guards.
+WAIT 1
+N: You'll have to fight if you want to get it!
+SET temp.random, 437
+ADD temp.random, %R4
+FIGHT 438, 438, 440, 441, #<temp.random>
+IF WIN @win
+1: The old guy was right.
+H: They are tough!
+END
+
+@win
+N: You take the crystal and hurry to get out before more guards arrive.
+GIVE T603
+END
+
+@end
+SOUND harpy3.wav
+WAIT 1
+SOUND harpy3.wav
+WAIT 1
+SOUND harpy3.wav
+N: You hear some aralian guards squeaking.
+WAIT 1
+N: You'd better get out of here quickly.
+END 
+
+
+

@@ -1,0 +1,106 @@
+SCENE 11200, obrovac, SCENE, "Towards the Duchies of Kotor"
+#include include.txt
+GOTO LINK 137, 0
+;
+;------------------------------------------------------------------------------------------------------
+;
+SCENE 11201, obrovac, SCENE, "Towards the Valley of the Deads"
+#include include.txt
+GOTO LINK 114, 1
+;
+;------------------------------------------------------------------------------------------------------
+;
+SCENE 11202, templeinside, SCENE, "Temple"
+#include include.txt
+ACTOR 1, Priest, human116, 1, 45, 90
+GIVE L1
+GIVE H5000
+GIVE M5000
+OFFER 37
+COMPARE #<chat.thanPaladeDemon>, 1
+IF= @demon
+@normal
+1: Welcome to the temple.
+1: You can stay here and relax as long as you wish.
+END
+
+@demon
+IF T1139 @demonback
+H: Hello, Father.
+1: Hello.
+1: Is there something I can do for you?
+H: Yes.
+H: I'm just back from Thanaris.
+H: I went to the galleries under the town and found a demon trapped there.
+H: Someone from Thanaris told me you know how to destroy it.
+1: So you went there...
+1: You're probably the only one who has tried to get there for centuries...
+1: I think the last hero who tried his luck there was Sir Alanitch - he never came back.
+1: About a millennium ago, a Chaos god named Trezerath raised an army of undead and demons and tried to invade the region around Obrovac.
+1: Trezerath is the god of night and dreams, and most of his minions practise black magic and necromancy.
+1: The Chaos army was led by Tharanel, an avatar of the god himself.
+1: That's the creature you've fought.
+1: The clerics of yore gathered and enchanted a stone that was supposed to absorb the black magic and repel the Chaos army.
+1: The clerics went on the battlefield with the stone, and succeeded in trapping the demon in a sanctuary thanks to its power.
+1: But it didn't destroy the undead.
+1: It just changed them, changed their nature.
+1: The most common undead are not able to think.
+1: They're just walking corpses.
+1: They built a town on what was the battlefield.
+1: The dukes of Obrovac tolerated their existence as they never tried to extend their territory since.
+1: But the demonic avatar is still there.
+1: No-one could kill him without the power of the Dead Stone.
+1: You must find the stone, and use its power against the avatar of Trezerath.
+H: But what will happen to the undead of Thanaris without the stone?
+1: Nobody knows...
+1: You'd better bring it back to the town as soon as you have defeated the avatar...
+1: Good luck, adventurer.
+1: Farewell.
+H: Farewell.
+EJECT T1138
+GIVE T1139
+END
+
+@demonback
+IF T1141 @demonend
+1: Welcome back, adventurer.
+1: Hopefully you will succeed in getting rid of the demon of Thanaris.
+END
+
+@demonend
+1: Welcome back, hero.
+1: Congratulations again for having defeated the demon of Thanaris.
+1: You can stay here as long as you want.
+1: Your wounds have been healed.
+END
+;
+;------------------------------------------------------------------------------------------------------
+;
+SCENE 11208, houseinside1, SCENE, "Malderor"
+#include include.txt
+ACTOR 1, Malderor, human73, 1, 45, 85
+IF I3061 @back
+IF Z337.12 @reward
+1: Hello, adventurer.
+1: Maybe you can help me. 
+1: I need a dozen of bottles of demon blood for my... experiments.
+1: I can reward you well.
+1: What about this bag, for example?
+END
+
+@reward
+1: Ah, you've got the bottles of blood!
+1: Very well! 
+1: Here is your bag!
+HOST_TAKE Z337.12
+HOST_GIVE I3061
+END
+
+@back
+1: Ah, %1, you're back!
+1: How can I help you?
+END
+;
+;------------------------------------------------------------------------------------------------------
+;
+

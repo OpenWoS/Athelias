@@ -1,0 +1,100 @@
+SCENE 8900, "door1", SCENE, ""
+#include include.txt
+IF T1047 @healerquest4
+@pass
+GOTO LINK 21, 2
+
+@healerquest4
+COMPARE #<sqfslllqmmhealersfsfquest>, 1
+IF= @pass
+SOUND thunder.wav
+H: What's that again?!
+WAIT 1
+N: You woke up Jeren's guards!
+FIGHT 75, 75, 75, 75, 75, 75, 75, 75
+IF WIN @healerset
+GOTO @pass
+
+@healerset
+SET sqfslllqmmhealersfsfquest, 1
+GOTO @pass
+;
+;-------------------------------------------------------------------------------------------
+;
+SCENE 8901, "rodeurs1", SCENE, "Jeren's Tomb"
+#include include.txt
+IF T1046+V99+C56 @comphealer
+END
+
+@comphealer
+COMPARE #<healerquest4>, 1
+IF= @healerquest4
+END
+
+@healerquest4
+SOUND WIND2.wav
+H: That's here.
+H: The tomb...
+SOUND WIND2.wav
+SOUND pain4.wav
+H: Ah!
+FIGHT 49, 49, 49
+IF LOSE @healerLOSE
+FIGHT 49, 49, 51
+IF LOSE @healerLOSE
+FIGHT 55, 49, 49
+IF LOSE @healerLOSE
+H: They seemed to be the last ones...
+WAIT 1.8
+N: You put down Jeren's skull in the tomb.
+SOUND thunder.wav
+WAIT 1
+H: Let's go out of this place now : the creatures here are too dead to need a healer...
+HOST_GIVE T1047
+END
+;
+;-------------------------------------------------------------------------------------------
+;
+SCENE 8902, "templeoutside2", SCENE, "Dark Shrine"
+#include include.txt
+IF DEAD @end2
+IF T1203|I1073 @end
+ACTOR 1, , 17, 0, 15, 90
+H: Gloomy place...
+H: But the warpstone is here, Jeren did not lied.
+H: Let's take it and get out of here.
+WAIT 2
+SOUND thunder.wav
+WAIT 1
+H: What's going on?
+FIGHT 331, 331, 331, 331, 331
+IF WIN @reward
+N: You shall succeed.
+WAIT 1
+N: The warpstone shall stay here.
+END
+
+@reward
+MOVE 1, -20, 90, 1
+N: You kill them and take the warpstone.
+HOST_GIVE I1073
+SOUND FoundItem.wav
+HOST_GIVE T1203
+HOST_GIVE T3998
+WAIT 1
+N: You have a strange impression while you seize it.
+WAIT 1
+N: It is as if your magic skills had suddenly increased.
+END
+
+@end2
+ACTOR 1, , 17, 0, 15, 90
+N: You see the warpstone and try to take it but you realize that you are too dead to bear anything.
+END
+
+@end
+N: There is nothing left here.
+END
+;
+;-------------------------------------------------------------------------------------------
+;

@@ -1,0 +1,1339 @@
+; ne pas oublier d'ajouter le cookie checker à @LABEL
+; faire un nouveau checker for ASK (check for a space instead of a coma for the opcode 1)
+; faire un nouveau checker for the CALL command for the args (arg0, arg1, etc)
+
+; COOKIES USED :
+;
+; Whole line saved: 
+; *#<temp.scriptLine> = value of = madstoolScript.#<temp.ID>.#<temp.scriptRow> (value = #<lastAsk>)
+;
+; Command name:
+; *#<temp.scriptCom> = value of madstoolCom.#<temp.ID>.#<temp.scriptRow>
+;
+; Args content (content of arg1, arg2, arg#<temp.argID>):
+; To set the next one: SET temp.scriptArg#<temp.argID>, value of madstoolArg.#<temp.ID>.#<temp.scriptRow>.#<temp.argID>
+; *#<temp.scriptArgNN> = value of madstoolArg.#<temp.ID>.#<temp.scriptRow>.#<temp.argID>
+; 
+; #<scriptsList> = liste des script IDs used (-ID1--ID2--ID3-...-IDn-)
+;
+@scripting
+STRCMP #<1scriptList>, ""
+IF= @1stTimeScriptingMenu
+MENU "Run a recorded script=@RunningScript", "Record a new script=@scriptRecording", "Read a recorded script=@ReadingScript", "Edit a recorded script=@EditingScript", "Erase a recorded script=@scriptErasing", "List of the scripts recorded=@listingScripts", "Cancel=@madstoolcancel"
+GOTO @scripting
+
+@1stTimeScriptingMenu
+SET 1scriptList, STOP
+GOTO @scripting
+
+@ReadingScript
+N: Script ID?
+ASK #<AHS.pref.ASKduration> 1
+IF Qcancel @madstoolcancel
+@readingScriptNextThingy
+SET temp.scriptID, scriptName#<lastAsk>
+SET temp.ID, #<lastAsk>
+STRCMP *#<temp.scriptID>, ""
+IF= @nothingToRead
+COMPARE #<AHS.scriptEditingCookie>, 1
+IF= @ReadingScriptLoopEdit2
+N: ------------ READING SCRIPT "*#<temp.scriptID>" ------------
+@ReadingScriptLoopEdit2next
+SET temp.scriptRow, 1
+@ReadingScriptLoop
+SET temp.scriptLine, madstoolScript.#<temp.ID>.#<temp.scriptRow>
+STRCMP *#<temp.scriptLine>, SAVED
+IF= @ReadingScriptOver
+COMPARE #<AHS.scriptEditingCookie>, 1
+IF= @ReadingScriptLoopEdit
+N: *#<temp.scriptLine>
+@ReadingScriptLoopEditNext
+ADD temp.scriptRow, 1
+GOTO @ReadingScriptLoop
+
+@ReadingScriptOver
+N: ------------------------------ SCRIPT OVER ------------------------------
+COMPARE #<AHS.scriptEditingCookie>, 1
+IF= @EditingScriptBis
+END
+
+@ReadingScriptLoopEdit
+N: Line #<temp.scriptRow>: *#<temp.scriptLine>
+GOTO @ReadingScriptLoopEditNext
+
+@ReadingScriptLoopEdit2
+N: ------------ EDITING SCRIPT "*#<temp.scriptID>" ------------
+GOTO @ReadingScriptLoopEdit2next
+
+@nothingToRead
+N: This script doesn't seem to exist.
+END
+
+@EditingScript
+N: Script ID?
+ASK #<AHS.pref.ASKduration> 1
+IF Qcancel @madstoolcancel
+SET temp.scriptID, scriptName#<lastAsk>
+SET AHS.editingScriptID, #<lastAsk>
+STRCMP *#<temp.scriptID>, ""
+IF= @scriptErasingNothing
+N: Editing script "*#<temp.scriptID>"...
+SET AHS.scriptEditingCookie, 1
+GOTO @readingScriptNextThingy
+
+@EditingScriptBis
+SET AHS.editingLineNumber, 1
+ACTOR 50, , AHS2, 0, 20, 85
+ACTOR 51, "Editing script #<AHS.editingScriptID>: *#<temp.scriptID>", AHS2, 1, 35, 70
+ACTOR 52, ,  AHS2, 2, 80, 85
+ACTOR 53, ,  AHS2, 3, 50, 85
+ACTOR 54, ,  AHS2, 4, 35, 100
+ACTOR 55, ,  AHS2, 5, 65, 100
+ACTOR 56, "Editing script #<AHS.editingScriptID>: *#<temp.scriptID>", AHS2, 6, 65, 70
+SET temp.scriptLine, madstoolScript.#<AHS.editingScriptID>.#<AHS.editingLineNumber>
+WAIT 0.5
+N: Line #<AHS.editingLineNumber>: *#<temp.scriptLine>
+END
+
+@editingScriptPrevious
+COMPARE #<event.inActorY>, 40
+IF< @madstoolcancel
+COMPARE #<event.inActorY>, 75
+IF> @madstoolcancel
+COMPARE #<AHS.editingLineNumber>, 1
+IF= @editingScriptPreviousCant
+SUB AHS.editingLineNumber, 1
+SET temp.scriptLine, madstoolScript.#<AHS.editingScriptID>.#<AHS.editingLineNumber>
+N: Line #<AHS.editingLineNumber>: *#<temp.scriptLine>
+END
+
+@editingScriptPreviousCant
+N: No line recorded before.
+END
+
+@editingScriptEdit
+COMPARE #<event.inActorY>, 40
+IF< @madstoolcancel
+COMPARE #<event.inActorY>, 75
+IF> @madstoolcancel
+N: Replace with?
+ASK #<AHS.pref.ASKduration> 1
+IF Qcancel @madstoolcancel
+IF Qsave @scriptRecordingSave
+SET temp.ID, #<AHS.editingScriptID>
+SET temp.scriptRow, #<AHS.editingLineNumber>
+SET madstoolScript.#<temp.ID>.#<temp.scriptRow>, #<lastAsk>
+SET temp.scriptLine, madstoolScript.#<temp.ID>.#<temp.scriptRow>
+CALL 1000000@setArguments2
+END
+
+@editingScriptNext
+COMPARE #<event.inActorY>, 40
+IF< @madstoolcancel
+COMPARE #<event.inActorY>, 75
+IF> @madstoolcancel
+ADD AHS.editingLineNumber, 1
+SET temp.scriptLine, madstoolScript.#<AHS.editingScriptID>.#<AHS.editingLineNumber>
+STRCMP *#<temp.scriptLine>, SAVED
+IF= @editingScriptNextCant
+N: Line #<AHS.editingLineNumber>: *#<temp.scriptLine>
+END
+
+@editingScriptNextCant
+SUB AHS.editingLineNumber, 1
+N: The script is over.
+END
+
+@editingScriptDone
+COMPARE #<event.inActorY>, 40
+IF< @madstoolcancel
+COMPARE #<event.inActorY>, 75
+IF> @madstoolcancel
+SET AHS.editingScriptID, 0
+SET AHS.scriptEditingCookie, 0
+SET AHS.editingLineNumber, 0
+MOVE 50, 200, 200, 1
+ACTOR 51, sdfsdfsdf, AHS2, 0, 200, 200
+MOVE 52, 200, 200, 1
+MOVE 53, 200, 200, 1
+MOVE 54, 200, 200, 1
+MOVE 55, 200, 200, 1
+MOVE 56, 200, 200, 1
+END
+
+@editingScriptJump
+COMPARE #<event.inActorY>, 40
+IF< @madstoolcancel
+COMPARE #<event.inActorY>, 75
+IF> @madstoolcancel
+COMPARE #<AHS.noMessage>, 1
+IF> @languageskipJumpEdit
+N: What line?
+@languageskipJumpEdit
+ASK #<AHS.pref.ASKduration> 1
+IF Qcancel @madstoolcancel
+COMPARE #<lastAsk>, 1
+IF< @editingScriptJumpInvalid
+SET temp.scriptLine2, madstoolScript.#<AHS.editingScriptID>.#<lastAsk>
+STRCMP *#<temp.scriptLine2>, ""
+IF= @editingScriptJumpInvalid
+SET AHS.editingLineNumber, #<lastAsk>
+SET temp.scriptLine, madstoolScript.#<AHS.editingScriptID>.#<AHS.editingLineNumber>
+N: Line #<AHS.editingLineNumber>: *#<temp.scriptLine>
+END
+
+@editingScriptJumpInvalid
+N: Invalid ID.
+END
+
+@editingScriptContinue
+COMPARE #<event.inActorY>, 40
+IF< @madstoolcancel
+COMPARE #<event.inActorY>, 75
+IF> @madstoolcancel
+
+
+END
+
+@editingScriptDeleteLine
+COMPARE #<event.inActorY>, 40
+IF< @madstoolcancel
+COMPARE #<event.inActorY>, 75
+IF> @madstoolcancel
+
+
+END
+
+
+@scriptErasing
+N: Script ID?
+ASK #<AHS.pref.ASKduration> 1
+IF Qcancel @madstoolcancel
+SET temp.scriptID, scriptName#<lastAsk>
+SET temp.IDThingy, #<lastAsk>
+STRCMP *#<temp.scriptID>, ""
+IF= @scriptErasingNothing
+N: Erase the script "*#<temp.scriptID>"?
+ASK #<AHS.pref.ASKduration> 1
+IF Qcancel @madstoolcancel
+IF NO @madstoolcancel
+IF YES @scriptErasingYes
+END
+
+@scriptErasingNothing
+N: This script doesn't seem to exist.
+END
+
+@scriptErasingYes
+SET temp.num, 1
+@scriptErasingYes2
+SET temp.thingy, #<temp.num>scriptList
+STRCMP *#<temp.thingy>, STOP
+IF= @scriptErasingYesStop
+STRCMP *#<temp.thingy>, #<temp.IDThingy>
+IF= @scriptErasingYesFound
+ADD temp.num, 1
+GOTO @scriptErasingYes2
+
+@scriptErasingYesFound
+SET #<temp.num>scriptList, SKIP
+@scriptErasingYes3
+SET scriptName#<temp.IDThingy>, ""
+N: Script erased.
+END
+
+@scriptErasingYesStop
+N: Something wrong happened.
+N: Can't erase the script.
+END
+
+@listingScripts
+STRCMP #<1scriptList>, STOP
+IF= @listingScriptsEndNone
+SET temp.num, 1
+SET temp.thingy3, 0
+@listingScriptsLooop
+SET temp.thingy, #<temp.num>scriptList
+STRCMP *#<temp.thingy>, STOP
+IF= @listingScriptsEnd
+STRCMP *#<temp.thingy>, SKIP
+IF= @listingScriptsSkipThingy
+SET temp.thingy2, scriptName*#<temp.thingy>
+N: Script *#<temp.thingy>: *#<temp.thingy2>
+ADD temp.thingy3, 1
+@listingScriptsSkipThingy
+ADD temp.num, 1
+GOTO @listingScriptsLooop
+
+@listingScriptsEndNone
+N: No script recorded.
+END
+
+@listingScriptsEnd
+COMPARE #<temp.thingy3>, 0
+IF= @listingScriptsEndNone
+N: A total of #<temp.thingy3> script(s) are recorded on this character.
+END
+
+;SET temp.thingy, #<temp.num>scriptList
+;STRCMP *#<temp.thingy>, ""
+;IF= @freeScript3
+;STRCMP *#<temp.thingy>, "STOP"
+;IF= @freeScript3
+;STRCMP *#<temp.thingy>, "SKIP"
+;IF= @freeScript4
+;ADD temp.num, 1
+
+@scriptRecording
+N: Script ID?
+@scriptRecording2
+ASK #<AHS.pref.ASKduration> 1
+IF Qcancel @madstoolcancel
+COMPARE  #<lastAsk>, 0
+IF> @bugScriptRecordingID
+@bugScriptRecordingIDbis
+N: Incorrect script ID.
+N: Enter a new value (1-999999999)
+GOTO @scriptRecording2
+
+@bugScriptRecordingID
+COMPARE  #<lastAsk>, 1000000000
+IF< @bugScriptRecordingID2
+GOTO @bugScriptRecordingIDbis
+
+@bugScriptRecordingID2
+SET temp.scriptID, scriptName#<lastAsk>
+SET temp.ID, #<lastAsk>
+STRCMP *#<temp.scriptID>, ""
+IF= @freeScript
+N: The ID is already used for the script "*#<temp.scriptID>".
+N: Choose another ID.
+GOTO @scriptRecording2
+
+;N: Erase this script?
+;ASK #<AHS.pref.ASKduration> 1
+;IF Qcancel @madstoolcancel
+;IF YES @freeScript
+;N: New script ID?
+;GOTO @scriptRecording2
+
+@freeScript
+SET temp.num, 1
+@freeScript2
+SET temp.thingy, #<temp.num>scriptList
+STRCMP *#<temp.thingy>, ""
+IF= @freeScript3
+STRCMP *#<temp.thingy>, "STOP"
+IF= @freeScript3
+STRCMP *#<temp.thingy>, "SKIP"
+IF= @freeScript4
+ADD temp.num, 1
+GOTO @freeScript2
+
+@freeScript3
+SET #<temp.num>scriptList, #<temp.ID>
+ADD temp.num, 1
+SET #<temp.num>scriptList, STOP
+GOTO @freeScript5
+
+@freeScript4
+SET #<temp.num>scriptList, #<lastAsk>
+@freeScript5
+N: Name of the script?
+ASK #<AHS.pref.ASKduration> 1
+SET #<temp.scriptID>, #<lastAsk>
+SET temp.scriptRow, 1
+N: Recording the script ("cancel" to cancel or "save" to save the script)...
+@startRecording
+ASK #<AHS.pref.ASKduration> 1
+IF Qcancel @scriptRecordingSave
+IF Qsave @scriptRecordingSave
+SET madstoolScript.#<temp.ID>.#<temp.scriptRow>, #<lastAsk>
+SET temp.scriptLine, madstoolScript.#<temp.ID>.#<temp.scriptRow>
+CALL 1000000@setArguments2
+ADD temp.scriptRow, 1
+GOTO @startRecording
+
+@scriptRecordingSave
+SET madstoolScript.#<temp.ID>.#<temp.scriptRow>, SAVED
+SET madstoolCom.#<temp.ID>.#<temp.scriptRow>, SAVED
+N: Script saved.
+END
+
+@setArguments
+SET temp.start, -1
+SET num.comasFound, 0
+SET_LEN temp.lenAgain, *#<temp.scriptLine>
+
+@multipleComaFinder2
+ADD temp.start, 1
+SET_SUBSTR temp.emulatingBis, #<temp.start>, 1, *#<temp.scriptLine>
+STRCMP #<temp.emulatingBis>, ","
+IF= @multipleComaFound
+COMPARE #<temp.start>, #<temp.lenAgain>
+IF= @multipleNoComaFound
+GOTO @multipleComaFinder2
+
+@multipleComaFound
+ADD num.comasFound, 1
+SET comaFound#<num.comasFound>, #<temp.start>
+GOTO @multipleComaFinder2
+
+@multipleNoComaFound
+COMPARE #<num.comasFound>, 0
+IF= @onlyOneArg
+SET temp.thingy, madstoolCom.#<temp.ID>.#<temp.scriptRow>
+SET_LEN temp.stratThingy, *#<temp.thingy>
+ADD temp.stratThingy, 1
+SET temp.argThingyID, 1
+SET temp.scriptCom, madstoolCom.#<temp.ID>.#<temp.scriptRow>
+SET_LEN temp.offset, *#<temp.scriptCom>
+SET temp.comaFoundID, comaFound#<temp.argThingyID>
+SET temp.length, *#<temp.comaFoundID>
+SUB temp.length, #<temp.offset>
+SET temp.thingy, madstoolArg.#<temp.ID>.#<temp.scriptRow>.#<temp.argThingyID>
+SET temp.tempEmulating, #<temp.thingy>
+SET_SUBSTR #<temp.tempEmulating>, #<temp.offset>, #<temp.length>, *#<temp.scriptLine>
+COMPARE #<temp.argThingyID>, #<num.comasFound>
+IF= @lastarg
+
+
+@argLoop
+SET temp.comaFoundID, comaFound#<temp.argThingyID>
+SET temp.offset, *#<temp.comaFoundID>
+ADD temp.offset, 1
+ADD temp.argThingyID, 1
+SET temp.comaFoundID, comaFound#<temp.argThingyID>
+SET temp.length, *#<temp.comaFoundID>
+SUB temp.length, #<temp.offset>
+SET temp.thingy, madstoolArg.#<temp.ID>.#<temp.scriptRow>.#<temp.argThingyID>
+SET temp.tempEmulating, #<temp.thingy>
+SET_SUBSTR #<temp.tempEmulating>, #<temp.offset>, #<temp.length>, *#<temp.scriptLine>
+COMPARE #<temp.argThingyID>, #<num.comasFound>
+IF= @lastarg
+GOTO @argLoop
+
+@lastarg
+SET temp.comaFoundID, comaFound#<temp.argThingyID>
+SET temp.offset, *#<temp.comaFoundID>
+ADD temp.offset, 1
+ADD temp.argThingyID, 1
+SET temp.comaFoundID, comaFound#<temp.argThingyID>
+SET_LEN temp.len, *#<temp.scriptLine>
+SET temp.length, #<temp.len>
+SUB temp.len, #<temp.offset>
+SET temp.thingy, madstoolArg.#<temp.ID>.#<temp.scriptRow>.#<temp.argThingyID>
+SET temp.tempEmulating, #<temp.thingy>
+SET_SUBSTR #<temp.tempEmulating>, #<temp.offset>, #<temp.len>, *#<temp.scriptLine>
+@returnThingy
+RETURN
+
+@onlyOneArg
+SET temp.comaFoundID, comaFound#<temp.argThingyID>
+SET_LEN temp.offset, *#<temp.scriptLine>
+SET temp.thingy33, madstoolCom.#<temp.ID>.#<temp.scriptRow>
+SET_LEN temp.offset2, *#<temp.thingy33>
+SUB temp.offset, #<temp.offset2>
+ADD temp.argThingyID, 1
+SET temp.comaFoundID, comaFound#<temp.argThingyID>
+SET_LEN temp.len, *#<temp.scriptLine>
+SET temp.length, #<temp.len>
+SUB temp.len, #<temp.offset>
+ADD temp.len, 1
+SUB temp.offset, 1
+SET temp.thingy, madstoolArg.#<temp.ID>.#<temp.scriptRow>.1
+SET temp.tempEmulating, #<temp.thingy>
+; no typo in the next line - I just messed up with cookie names and used "offset" for the length and vice-versa
+SET_SUBSTR #<temp.tempEmulating>, #<temp.len>, #<temp.offset>, *#<temp.scriptLine>
+GOTO @returnThingy
+
+@setArgumentsLabels
+SET temp.start, -1
+SET_LEN temp.lenAgain, *#<temp.scriptLine>
+
+@multipleLabelFinder2
+ADD temp.start, 1
+SET_SUBSTR temp.emulatingBis, #<temp.start>, 1, *#<temp.scriptLine>
+STRCMP #<temp.emulatingBis>, "@"
+IF= @multipleLabelFound
+COMPARE #<temp.start>, #<temp.lenAgain>
+IF= @IncorrectSyntaxRec
+GOTO @multipleLabelFinder2
+
+@multipleLabelFound
+SET comaFound, #<temp.start>
+@multipleNoLabelFound
+SET temp.thingy, #<comaFound>
+SUB temp.thingy, 1
+SET_SUBSTR temp.thingy2, #<temp.thingy>, 1, *#<temp.scriptLine>
+STRSTR "1234567890", #<temp.thingy2>
+IF> @multipleNoLabelFound2
+SET madstoolArg.#<temp.ID>.#<temp.scriptRow>.1, ""
+@multipleNoLabelFound3
+SET_LEN temp.len, *#<temp.scriptLine>
+SUB temp.len, #<comaFound>
+ADD comaFound, 1
+SET_SUBSTR madstoolArg.#<temp.ID>.#<temp.scriptRow>.2, #<comaFound>, #<temp.len>, *#<temp.scriptLine>
+RETURN
+
+@multipleNoLabelFound2
+SET_LEN temp.len, *#<temp.scriptCom>
+ADD temp.thingy, 1
+SUB temp.thingy, #<temp.len>
+SET_SUBSTR madstoolArg.#<temp.ID>.#<temp.scriptRow>.1, #<temp.len>, #<temp.thingy>, *#<temp.scriptLine>
+GOTO @multipleNoLabelFound3
+
+
+@setArgumentsIf
+; For IF commands only
+SET temp.start, 2
+SET_LEN temp.lenAgain, *#<temp.scriptLine>
+@multipleSpaceFinder2
+ADD temp.start, 1
+SET_SUBSTR temp.emulatingBis, #<temp.start>, 1, *#<temp.scriptLine>
+STRCMP #<temp.emulatingBis>, " "
+IF= @multipleSpaceFound
+COMPARE #<temp.start>, #<temp.lenAgain>
+IF= @IncorrectSyntaxRec
+GOTO @multipleSpaceFinder2
+
+@multipleSpaceFound
+SET comaFound1, #<temp.start>
+
+@multipleNoSpaceFound
+SET temp.start, 2
+SET_LEN temp.lenAgain, *#<temp.scriptLine>
+@multipleSpace2Finder2
+ADD temp.start, 1
+SET_SUBSTR temp.emulatingBis, #<temp.start>, 1, *#<temp.scriptLine>
+STRCMP #<temp.emulatingBis>, "@"
+IF= @multipleSpace2Found
+COMPARE #<temp.start>, #<temp.lenAgain>
+IF= @IncorrectSyntaxRec
+GOTO @multipleSpace2Finder2
+
+@multipleSpace2Found
+SET comaFound2, #<temp.start>
+SET temp.length, #<comaFound1>
+SUB temp.length, 3
+SET_SUBSTR madstoolArg.#<temp.ID>.#<temp.scriptRow>.1, 3, #<temp.length>, *#<temp.scriptLine>
+SET temp.length, #<comaFound2>
+SUB temp.length, #<comaFound1>
+SET_SUBSTR madstoolArg.#<temp.ID>.#<temp.scriptRow>.2, #<comaFound1>, #<temp.length>, *#<temp.scriptLine>
+ADD comaFound2, 1
+SUB temp.lenAgain, #<comaFound2>
+SET_SUBSTR madstoolArg.#<temp.ID>.#<temp.scriptRow>.3, #<comaFound2>, #<temp.lenAgain>, *#<temp.scriptLine>
+RETURN
+
+@setArgumentsDialogs
+SET_SUBSTR temp.thingy, 1, 1, *#<temp.scriptLine>
+STRCMP #<temp.thingy>, ":"
+IF= @setArgumentsDialogs1
+SET temp.thingy, 3
+@setArgumentsDialogs2
+SET_LEN temp.thingy2, *#<temp.scriptLine>
+SUB temp.thingy2, #<temp.thingy>
+SET_SUBSTR madstoolArg.#<temp.ID>.#<temp.scriptRow>.1, #<temp.thingy>, #<temp.thingy2>, *#<temp.scriptLine>
+RETURN
+
+@setArgumentsDialogs1
+SET temp.thingy, 2
+GOTO @setArgumentsDialogs2
+
+
+@setArgumentsEqualLabel
+RETURN
+
+@IncorrectSyntaxRec
+N: Incorrect syntax - line not recorded
+GOTO @startRecording
+
+@recorderNotSup
+; for the commands not supported
+GOTO @startRecording
+
+@recorderMain
+CALL 1000000@eraseOldArguments
+CALL 1000000@setArguments
+RETURN
+
+@recorderMain2
+CALL 1000000@eraseOldArguments
+CALL 1000000@setArgumentsLabels
+RETURN
+
+@recorderMain3
+CALL 1000000@eraseOldArguments
+CALL 1000000@setArgumentsIf
+RETURN
+
+@recorderMain4
+; No argument so we can RETURN now
+RETURN
+
+@recorderMain5
+CALL 1000000@eraseOldArguments
+; for the menu command
+CALL 1000000@setArgumentsEqualLabel
+RETURN
+
+@recorderMain6
+CALL 1000000@setArgumentsDialogs
+RETURN
+
+@eraseOldArguments
+SET temp.argID, 1
+@eraseOldArguments2
+SET madstoolArg.#<temp.ID>.#<temp.scriptRow>.#<temp.argID>, ""
+COMPARE #<temp.argID>, #<temp.ArgsToErase>
+IF= @eraseOldArgumentsOver
+ADD temp.argID, 1
+GOTO @eraseOldArguments2
+
+@eraseOldArgumentsOver
+RETURN
+
+@setArguments2
+SET_SUBSTR temp.emulating, 0, 1, *#<temp.scriptLine>
+STRSTR "@ABCDEFGHIJKLMNOPQRSTUCWXYZ1234567890", #<temp.emulating>
+IF> @recordingBis
+GOTO @IncorrectSyntaxRec
+
+@recordingBis
+STRCMP #<temp.emulating>, "@"
+IF= @LABEL
+GOTO @#<temp.emulating>
+
+@LABEL
+SET_LEN temp.len, *#<temp.scriptLine>
+SUB temp.len, 1
+SET_SUBSTR madstoolArg.#<temp.ID>.#<temp.scriptRow>.1, 1, #<temp.len>, *#<temp.scriptLine>
+SET madstoolCom.#<temp.ID>.#<temp.scriptRow>, LABEL
+RETURN
+
+@a
+@A
+SET_SUBSTR temp.emulating, 0, 3, *#<temp.scriptLine>
+STRCMP #<temp.emulating>, ACT
+IF= @ACTOR
+STRCMP #<temp.emulating>, ADD
+IF= @ADD
+STRCMP #<temp.emulating>, AND
+IF= @AND
+STRCMP #<temp.emulating>, ASK
+IF= @ASK
+GOTO @IncorrectSyntaxRec
+
+@ACTOR 
+SET madstoolCom.#<temp.ID>.#<temp.scriptRow>, ACTOR
+SET temp.ArgsToErase, 8
+GOTO @recorderMain
+
+@ADD
+SET madstoolCom.#<temp.ID>.#<temp.scriptRow>, ADD
+SET temp.ArgsToErase, 2
+GOTO @recorderMain
+
+@AND 
+SET madstoolCom.#<temp.ID>.#<temp.scriptRow>, AND
+SET temp.ArgsToErase, 2
+GOTO @recorderMain
+
+@ASK
+SET madstoolCom.#<temp.ID>.#<temp.scriptRow>, ASK
+SET temp.ArgsToErase, 2
+GOTO @recorderMain
+
+@b
+@B
+SET_SUBSTR temp.emulating, 0, 3, *#<temp.scriptLine>
+STRCMP #<temp.emulating>, BKG
+IF= @BKGND
+GOTO @IncorrectSyntaxRec
+
+@BKGND
+SET madstoolCom.#<temp.ID>.#<temp.scriptRow>, BKGND
+SET temp.ArgsToErase, 1
+GOTO @recorderMain
+
+@c
+@C
+SET_SUBSTR temp.emulating, 0, 3, *#<temp.scriptLine>
+STRCMP #<temp.emulating>, CAL
+IF= @CALL
+STRCMP #<temp.emulating>, COL
+IF= @COLOR
+STRCMP #<temp.emulating>, COM
+IF= @COMPARE
+STRCMP #<temp.emulating>, COU
+IF= @COUNTDOWN
+GOTO @IncorrectSyntaxRec
+
+@CALL
+SET madstoolCom.#<temp.ID>.#<temp.scriptRow>, CALL
+SET temp.ArgsToErase, 12
+GOTO @recorderMain2
+
+@COLOR
+SET madstoolCom.#<temp.ID>.#<temp.scriptRow>, COLOR
+SET temp.ArgsToErase, 1
+GOTO @recorderMain
+
+@COMPARE
+SET madstoolCom.#<temp.ID>.#<temp.scriptRow>, COMPARE
+SET temp.ArgsToErase, 2
+GOTO @recorderMain
+
+@COUNTDOWN
+SET madstoolCom.#<temp.ID>.#<temp.scriptRow>, COUNTDOWN
+SET temp.ArgsToErase, 1
+GOTO @recorderMain
+
+
+
+@d
+@D
+SET_SUBSTR temp.emulating, 0, 3, *#<temp.scriptLine>
+STRCMP #<temp.emulating>, DIV
+IF= @DIV
+GOTO @IncorrectSyntaxRec
+
+@DIV
+SET madstoolCom.#<temp.ID>.#<temp.scriptRow>, DIV
+SET temp.ArgsToErase, 2
+GOTO @recorderMain
+
+
+
+@e
+@E
+SET_SUBSTR temp.emulating, 0, 3, *#<temp.scriptLine>
+STRCMP #<temp.emulating>, EJE
+IF= @EJECT
+STRCMP #<temp.emulating>, END
+IF= @END
+GOTO @IncorrectSyntaxRec
+
+@EJECT
+SET madstoolCom.#<temp.ID>.#<temp.scriptRow>, EJECT
+SET temp.ArgsToErase, 1
+GOTO @recorderMain
+
+@END
+SET madstoolCom.#<temp.ID>.#<temp.scriptRow>, END
+GOTO @recorderMain4
+
+
+
+@f
+@F
+;
+; Check only the first 2 letters for the FX command
+;
+SET_SUBSTR temp.emulating, 0, 2, *#<temp.scriptLine>
+STRCMP #<temp.emulating>, FX
+IF= @FX
+;
+; Normal checking
+;
+SET_SUBSTR temp.emulating, 0, 3, *#<temp.scriptLine>
+STRCMP #<temp.emulating>, F_A
+IF= @F_ADD
+STRCMP #<temp.emulating>, F_D
+IF= @F_DIV
+STRCMP #<temp.emulating>, F_M
+IF= @F_MUL
+STRCMP #<temp.emulating>, F_S
+IF= @F_SUB
+STRCMP #<temp.emulating>, FAC
+IF= @FACE
+STRCMP #<temp.emulating>, FLA
+IF= @FLAGS
+;
+; check the difference between FIGHT and FIGHT 2
+;
+SET_SUBSTR temp.emulating, 0, 6, *#<temp.scriptLine>
+STRCMP #<temp.emulating>, FIGHT2
+IF= @FIGHT2
+SET_SUBSTR temp.emulating, 0, 5, *#<temp.scriptLine>
+STRCMP #<temp.emulating>, FIGHT
+IF= @FIGHT
+GOTO @IncorrectSyntaxRec
+
+@F_ADD
+SET madstoolCom.#<temp.ID>.#<temp.scriptRow>, F_ADD
+SET temp.ArgsToErase, 2
+GOTO @recorderMain
+
+@F_DIV
+SET madstoolCom.#<temp.ID>.#<temp.scriptRow>, F_DIV
+SET temp.ArgsToErase, 2
+GOTO @recorderMain
+
+@F_MUL
+SET madstoolCom.#<temp.ID>.#<temp.scriptRow>, F_MUL
+SET temp.ArgsToErase, 2
+GOTO @recorderMain
+
+@F_SUB
+SET madstoolCom.#<temp.ID>.#<temp.scriptRow>, F_SUB
+SET temp.ArgsToErase, 2
+GOTO @recorderMain
+
+@FACE
+SET madstoolCom.#<temp.ID>.#<temp.scriptRow>, FACE
+SET temp.ArgsToErase, 2
+GOTO @recorderMain
+
+@FIGHT
+SET madstoolCom.#<temp.ID>.#<temp.scriptRow>, FIGHT
+SET temp.ArgsToErase, 32
+GOTO @recorderMain
+
+@FIGHT2
+SET madstoolCom.#<temp.ID>.#<temp.scriptRow>, FIGHT2
+SET temp.ArgsToErase, 32
+GOTO @recorderMain
+
+@FLAGS
+SET madstoolCom.#<temp.ID>.#<temp.scriptRow>, FLAGS
+SET temp.ArgsToErase, 1
+GOTO @recorderMain
+
+@FX
+SET madstoolCom.#<temp.ID>.#<temp.scriptRow>, FX
+SET temp.ArgsToErase, 1
+GOTO @recorderMain
+
+
+
+@g
+@G
+SET_SUBSTR temp.emulating, 0, 3, *#<temp.scriptLine>
+STRCMP #<temp.emulating>, GAM
+IF= @GAME
+STRCMP #<temp.emulating>, GIV
+IF= @GIVE
+;
+; Check the different GOTO commands
+;
+SET_SUBSTR temp.emulating, 0, 10, *#<temp.scriptLine>
+STRCMP #<temp.emulating>, "GOTO SCENE"
+IF= @GOTOSCENE
+SET_SUBSTR temp.emulating, 0, 9, *#<temp.scriptLine>
+STRCMP #<temp.emulating>, "GOTO LINK"
+IF= @GOTOLINK
+STRCMP #<temp.emulating>, "GOTO EXIT"
+IF= @GOTOEXIT
+SET_SUBSTR temp.emulating, 0, 4, *#<temp.scriptLine>
+STRCMP #<temp.emulating>, "GOTO"
+IF= @GOTO
+GOTO @IncorrectSyntaxRec
+
+@GAME
+SET madstoolCom.#<temp.ID>.#<temp.scriptRow>, GAME
+SET temp.ArgsToErase, 1
+GOTO @recorderMain
+
+@GIVE
+SET madstoolCom.#<temp.ID>.#<temp.scriptRow>, GIVE
+SET temp.ArgsToErase, 1
+GOTO @recorderMain
+
+@GOTO 
+SET madstoolCom.#<temp.ID>.#<temp.scriptRow>, GOTO
+SET temp.ArgsToErase, 2
+GOTO @recorderMain2
+
+@GOTOEXIT
+SET madstoolCom.#<temp.ID>.#<temp.scriptRow>, GOTOEXIT
+GOTO @recorderMain4
+
+@GOTOLINK
+SET madstoolCom.#<temp.ID>.#<temp.scriptRow>, GOTOLINK
+SET temp.ArgsToErase, 3
+GOTO @recorderMain
+
+@GOTOSCENE
+SET madstoolCom.#<temp.ID>.#<temp.scriptRow>, GOTOSCENE
+SET temp.ArgsToErase, 1
+GOTO @recorderMain
+
+
+
+@h
+@H
+SET_SUBSTR temp.emulating, 0, 3, *#<temp.scriptLine>
+STRCMP #<temp.emulating>, HTM
+IF= @HTML
+;
+; Check the HOST_ commands
+;
+SET_SUBSTR temp.emulating, 0, 9, *#<temp.scriptLine>
+STRCMP #<temp.emulating>, HOST_GIVE
+IF= @HOST_GIVE
+STRCMP #<temp.emulating>, HOST_TAKE
+IF= @HOST_TAKE
+;
+; Check the H command
+;
+SET_SUBSTR temp.emulating, 0, 2, *#<temp.scriptLine>
+STRCMP #<temp.emulating>, H:
+IF= @H:
+GOTO @IncorrectSyntaxRec
+
+@HOST_GIVE
+SET madstoolCom.#<temp.ID>.#<temp.scriptRow>, HOST_GIVE
+SET temp.ArgsToErase, 1
+GOTO @recorderMain
+
+@HOST_TAKE
+SET madstoolCom.#<temp.ID>.#<temp.scriptRow>, HOST_TAKE
+SET temp.ArgsToErase, 1
+GOTO @recorderMain
+
+@HTML
+SET madstoolCom.#<temp.ID>.#<temp.scriptRow>, HTML
+SET temp.ArgsToErase, 1
+GOTO @recorderMain
+
+
+
+@i
+@I
+SET_SUBSTR temp.emulating, 0, 3, *#<temp.scriptLine>
+STRCMP #<temp.emulating>, IF=
+IF= @IF=
+STRCMP #<temp.emulating>, IF>
+IF= @IF>
+STRCMP #<temp.emulating>, IF<
+IF= @IF<
+;
+; Check the IF command
+;
+SET_SUBSTR temp.emulating, 0, 2, *#<temp.scriptLine>
+STRCMP #<temp.emulating>, IF
+IF= @IF
+GOTO @IncorrectSyntaxRec
+
+@IF
+SET madstoolCom.#<temp.ID>.#<temp.scriptRow>, IF
+SET temp.ArgsToErase, 3
+GOTO @recorderMain3
+
+@IF=
+SET madstoolCom.#<temp.ID>.#<temp.scriptRow>, IF=
+SET temp.ArgsToErase, 3
+GOTO @recorderMain3
+
+@IF>
+SET madstoolCom.#<temp.ID>.#<temp.scriptRow>, IF>
+SET temp.ArgsToErase, 3
+GOTO @recorderMain3
+
+@IF<
+SET madstoolCom.#<temp.ID>.#<temp.scriptRow>, IF<
+SET temp.ArgsToErase, 3
+GOTO @recorderMain3
+
+
+
+@j
+@J
+GOTO @IncorrectSyntaxRec
+
+
+@k
+@K
+GOTO @IncorrectSyntaxRec
+
+@l
+@L
+SET_SUBSTR temp.emulating, 0, 3, *#<temp.scriptLine>
+STRCMP #<temp.emulating>, LOC
+IF= @LOC
+GOTO @IncorrectSyntaxRec
+
+@LOCK
+SET madstoolCom.#<temp.ID>.#<temp.scriptRow>, LOCK
+SET temp.ArgsToErase, 1
+GOTO @recorderMain
+
+
+
+@m
+@M
+SET_SUBSTR temp.emulating, 0, 3, *#<temp.scriptLine>
+STRCMP #<temp.emulating>, MEN
+IF= @MENU
+STRCMP #<temp.emulating>, MIS
+IF= @MISSION
+STRCMP #<temp.emulating>, MOD
+IF= @MOD
+STRCMP #<temp.emulating>, MOV
+IF= @MOVE
+STRCMP #<temp.emulating>, MUL
+IF= @MUL
+STRCMP #<temp.emulating>, MUS
+IF= @MUSIC
+GOTO @IncorrectSyntaxRec
+
+@MENU
+SET madstoolCom.#<temp.ID>.#<temp.scriptRow>, MENU
+SET temp.ArgsToErase, 40
+GOTO @recorderMain5
+
+@MISSION
+SET madstoolCom.#<temp.ID>.#<temp.scriptRow>, MISSION
+SET temp.ArgsToErase, 32
+GOTO @recorderMain
+
+@MOD
+SET madstoolCom.#<temp.ID>.#<temp.scriptRow>, MOD
+SET temp.ArgsToErase, 2
+GOTO @recorderMain
+
+@MOVE
+SET madstoolCom.#<temp.ID>.#<temp.scriptRow>, MOVE
+SET temp.ArgsToErase, 4
+GOTO @recorderMain
+
+@MUL
+SET madstoolCom.#<temp.ID>.#<temp.scriptRow>, MUL
+SET temp.ArgsToErase, 2
+GOTO @recorderMain
+
+@MUSIC
+SET madstoolCom.#<temp.ID>.#<temp.scriptRow>, MUSIC
+SET temp.ArgsToErase, 1
+GOTO @recorderMain
+
+@n
+@N
+SET_SUBSTR temp.emulating, 0, 3, *#<temp.scriptLine>
+STRCMP #<temp.emulating>, NOT
+IF= @NOT
+;
+; Check the N command
+;
+SET_SUBSTR temp.emulating, 0, 2, *#<temp.scriptLine>
+STRCMP #<temp.emulating>, N:
+IF= @N:
+GOTO @IncorrectSyntaxRec
+
+@NOT
+SET madstoolCom.#<temp.ID>.#<temp.scriptRow>, NOT
+SET temp.ArgsToErase, 2
+GOTO @recorderMain
+
+@o
+@O
+SET_SUBSTR temp.emulating, 0, 2, *#<temp.scriptLine>
+STRCMP #<temp.emulating>, OR
+IF= @OR
+SET_SUBSTR temp.emulating, 0, 6, *#<temp.scriptLine>
+STRCMP #<temp.emulating>, OFFER2
+IF= @OFFER2
+SET_SUBSTR temp.emulating, 0, 5, *#<temp.scriptLine>
+STRCMP #<temp.emulating>, OFFER
+IF= @OFFER
+GOTO @IncorrectSyntaxRec
+
+@OFFER
+SET madstoolCom.#<temp.ID>.#<temp.scriptRow>, OFFER
+SET temp.ArgsToErase, 32
+GOTO @recorderMain
+
+@OFFER2
+SET madstoolCom.#<temp.ID>.#<temp.scriptRow>, OFFER2
+SET temp.ArgsToErase, 32
+GOTO @recorderMain
+
+@OR
+SET madstoolCom.#<temp.ID>.#<temp.scriptRow>, OR
+GOTO @recorderMain
+
+@p
+@P
+SET_SUBSTR temp.emulating, 0, 3, *#<temp.scriptLine>
+STRCMP #<temp.emulating>, PAR
+IF= @PARTY
+STRCMP #<temp.emulating>, POP
+IF= @POP
+STRCMP #<temp.emulating>, POS
+IF= @POSE
+STRCMP #<temp.emulating>, PUS
+IF= @PUSH
+GOTO @IncorrectSyntaxRec
+
+@PARTY
+SET madstoolCom.#<temp.ID>.#<temp.scriptRow>, PARTY
+SET temp.ArgsToErase, 1
+GOTO @recorderMain
+
+@POP
+SET madstoolCom.#<temp.ID>.#<temp.scriptRow>, POP
+SET temp.ArgsToErase, 2
+GOTO @recorderMain
+
+@POSE
+SET madstoolCom.#<temp.ID>.#<temp.scriptRow>, POSE
+SET temp.ArgsToErase, 3
+GOTO @recorderMain
+
+@PUSH
+SET madstoolCom.#<temp.ID>.#<temp.scriptRow>, PUSH
+SET temp.ArgsToErase, 2
+GOTO @recorderMain
+
+@q
+@Q
+GOTO @IncorrectSyntaxRec
+
+@r
+@R
+GOTO @IncorrectSyntaxRec
+
+@s
+@S
+SET_SUBSTR temp.emulating, 0, 3, *#<temp.scriptLine>
+STRCMP #<temp.emulating>, SCE
+IF= @SCENE
+STRCMP #<temp.emulating>, SEL
+IF= @SEL
+STRCMP #<temp.emulating>, SOU
+IF= @SOUND
+STRCMP #<temp.emulating>, SUB
+IF= @SUB
+SET_SUBSTR temp.emulating, 0, 6, *#<temp.scriptLine>
+STRCMP #<temp.emulating>, STRCMP
+IF= @STRCMP
+STRCMP #<temp.emulating>, STRSTR
+IF= @STRSTR
+STRCMP #<temp.emulating>, SET_LE
+IF= @SET_LEN
+STRCMP #<temp.emulating>, SET_SU
+IF= @SET_SUBSTR
+SET_SUBSTR temp.emulating, 0, 3, *#<temp.scriptLine>
+STRCMP #<temp.emulating>, SET
+IF= @SET
+GOTO @IncorrectSyntaxRec
+
+@SCENE
+N: The SCENE command is not supported. The line is not recorded
+GOTO @recorderNotSup
+
+@SEL
+SET madstoolCom.#<temp.ID>.#<temp.scriptRow>, SEL
+SET temp.ArgsToErase, 1
+GOTO @recorderMain
+
+@SET
+SET madstoolCom.#<temp.ID>.#<temp.scriptRow>, SET
+SET temp.ArgsToErase, 2
+GOTO @recorderMain
+
+@SET_LEN
+SET madstoolCom.#<temp.ID>.#<temp.scriptRow>, SET_LEN
+SET temp.ArgsToErase, 2
+GOTO @recorderMain
+
+@SET_SUBSTR
+SET madstoolCom.#<temp.ID>.#<temp.scriptRow>, SET_SUBSTR
+SET temp.ArgsToErase, 4
+GOTO @recorderMain
+
+@SOUND
+SET madstoolCom.#<temp.ID>.#<temp.scriptRow>, SOUND
+SET temp.ArgsToErase, 1
+GOTO @recorderMain
+
+@STRCMP
+SET madstoolCom.#<temp.ID>.#<temp.scriptRow>, STRCMP
+SET temp.ArgsToErase, 2
+GOTO @recorderMain
+
+@STRSTR
+SET madstoolCom.#<temp.ID>.#<temp.scriptRow>, STRSTR
+SET temp.ArgsToErase, 2
+GOTO @recorderMain
+
+@SUB
+SET madstoolCom.#<temp.ID>.#<temp.scriptRow>, SUB
+SET temp.ArgsToErase, 2
+GOTO @recorderMain
+
+@t
+@T
+SET_SUBSTR temp.emulating, 0, 3, *#<temp.scriptLine>
+STRCMP #<temp.emulating>, TAK
+IF= @TAKE
+STRCMP #<temp.emulating>, THE
+IF= @THEME
+STRCMP #<temp.emulating>, TOK
+IF= @TOKEN
+GOTO @IncorrectSyntaxRec
+
+@TAKE
+SET madstoolCom.#<temp.ID>.#<temp.scriptRow>, TAKE
+SET temp.ArgsToErase, 1
+GOTO @recorderMain
+
+@THEME
+SET madstoolCom.#<temp.ID>.#<temp.scriptRow>, THEME
+SET temp.ArgsToErase, 1
+GOTO @recorderMain
+
+@TOKEN
+N: The TOKEN command is not supported. Line not recorded.
+GOTO @recorderNotSup
+
+@u
+@U
+GOTO @IncorrectSyntaxRec
+
+@v
+@V
+GOTO @IncorrectSyntaxRec
+
+@w
+@W
+SET_SUBSTR temp.emulating, 0, 3, *#<temp.scriptLine>
+STRCMP #<temp.emulating>, WAI
+IF= @WAIT
+STRCMP #<temp.emulating>, WEA
+IF= @WEATHER
+GOTO @IncorrectSyntaxRec
+
+@WAIT
+SET madstoolCom.#<temp.ID>.#<temp.scriptRow>, WAIT
+SET temp.ArgsToErase, 1
+GOTO @recorderMain
+
+@WEATHER
+SET madstoolCom.#<temp.ID>.#<temp.scriptRow>, WEATHER
+SET temp.ArgsToErase, 1
+GOTO @recorderMain
+
+@x
+@X
+SET_SUBSTR temp.emulating, 0, 3, *#<temp.scriptLine>
+STRCMP #<temp.emulating>, XOR
+IF= @XOR
+GOTO @IncorrectSyntaxRec
+
+@XOR
+SET madstoolCom.#<temp.ID>.#<temp.scriptRow>, XOR
+SET temp.ArgsToErase, 2
+GOTO @recorderMain
+
+@y
+@Y
+GOTO @IncorrectSyntaxRec
+
+@z
+@Z
+GOTO @IncorrectSyntaxRec
+;
+; ------------------------------------ DIALOGS -----------------------------
+;
+@N:
+SET madstoolCom.#<temp.ID>.#<temp.scriptRow>, N:
+GOTO @recorderMain6
+
+@H:
+SET madstoolCom.#<temp.ID>.#<temp.scriptRow>, H:
+GOTO @recorderMain6
+
+@0
+SET madstoolCom.#<temp.ID>.#<temp.scriptRow>, 0
+GOTO @recorderMain6
+
+@1
+SET_SUBSTR temp.emulating, 1, 1, *#<temp.scriptLine>
+STRCMP #<temp.emulating>, ":"
+IF> @1next
+IF< @1next
+SET madstoolCom.#<temp.ID>.#<temp.scriptRow>, 1
+GOTO @recorderMain6
+
+@1next
+SET_SUBSTR madstoolCom.#<temp.ID>.#<temp.scriptRow>, 0, 2, *#<temp.scriptLine>
+GOTO @recorderMain6
+
+@2next
+SET_SUBSTR madstoolCom.#<temp.ID>.#<temp.scriptRow>, 0, 2, *#<temp.scriptLine>
+GOTO @recorderMain6
+
+@2
+SET_SUBSTR temp.emulating, 1, 1, *#<temp.scriptLine>
+STRCMP #<temp.emulating>, ":"
+IF> @2next
+IF< @2next
+SET madstoolCom.#<temp.ID>.#<temp.scriptRow>, 2
+GOTO @recorderMain6
+
+@3next
+SET_SUBSTR madstoolCom.#<temp.ID>.#<temp.scriptRow>, 0, 2, *#<temp.scriptLine>
+GOTO @recorderMain6
+
+@3
+SET_SUBSTR temp.emulating, 1, 1, *#<temp.scriptLine>
+STRCMP #<temp.emulating>, ":"
+IF> @3next
+IF< @3next
+SET madstoolCom.#<temp.ID>.#<temp.scriptRow>, 3
+GOTO @recorderMain6
+
+@4next
+SET_SUBSTR madstoolCom.#<temp.ID>.#<temp.scriptRow>, 0, 2, *#<temp.scriptLine>
+GOTO @recorderMain6
+
+@4
+SET_SUBSTR temp.emulating, 1, 1, *#<temp.scriptLine>
+STRCMP #<temp.emulating>, ":"
+IF> @4next
+IF< @4next
+SET madstoolCom.#<temp.ID>.#<temp.scriptRow>, 4
+GOTO @recorderMain6
+
+@5
+SET_SUBSTR temp.emulating, 1, 1, *#<temp.scriptLine>
+STRCMP #<temp.emulating>, ":"
+IF> @5next
+IF< @5next
+SET madstoolCom.#<temp.ID>.#<temp.scriptRow>, 5
+GOTO @recorderMain
+
+@5next
+SET_SUBSTR madstoolCom.#<temp.ID>.#<temp.scriptRow>, 0, 2, *#<temp.scriptLine>
+GOTO @recorderMain6
+
+@6next
+SET_SUBSTR madstoolCom.#<temp.ID>.#<temp.scriptRow>, 0, 2, *#<temp.scriptLine>
+GOTO @recorderMain6
+
+@6
+SET_SUBSTR temp.emulating, 1, 1, *#<temp.scriptLine>
+STRCMP #<temp.emulating>, ":"
+IF> @6next
+IF< @6next
+SET madstoolCom.#<temp.ID>.#<temp.scriptRow>, 6
+GOTO @recorderMain6
+
+@7
+SET madstoolCom.#<temp.ID>.#<temp.scriptRow>, 7
+GOTO @recorderMain6
+
+@8
+SET madstoolCom.#<temp.ID>.#<temp.scriptRow>, 8
+GOTO @recorderMain6
+
+@9
+SET madstoolCom.#<temp.ID>.#<temp.scriptRow>, 9
+GOTO @recorderMain6
+;
+;------------------------------------------- EMULATOR -------------------------------------------
+;
+#include AHS5.txt
+

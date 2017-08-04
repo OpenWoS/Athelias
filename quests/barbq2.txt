@@ -1,0 +1,203 @@
+SCENE 110018
+@start
+N: After several hous spent following the army, you finally find the camp.
+WAIT 2
+GOTO SCENE 110020
+;
+;---------------------------------------------------------------------------------------
+;
+SCENE 110020, , CUT
+ACTOR 1, "General Bloodtider", human95, 1, 50, 99
+ACTOR 2, Soldier, guard6, 1, 5, 90
+ACTOR 3, Soldier, guard6, 1, 10, 92
+ACTOR 4, Soldier, guard6, 1, 15, 94
+ACTOR 5, Soldier, guard6, 1, 20, 90
+ACTOR 6, Soldier, guard6, 1, 25, 96
+ACTOR 7, Soldier, guard6, 1, 30, 92
+ACTOR 8, Soldier, guard6, 1, 35, 95
+ACTOR 9, Soldier, guard6, 1, 40, 96
+ACTOR 10, Soldier, guard6, 1, 45, 90
+ACTOR 11, Soldier, guard6, 1, 55, 94
+FACE 11, 0
+ACTOR 12, Soldier, guard6, 1, 60, 95
+FACE 12, 0
+ACTOR 13, Soldier, guard6, 1, 65, 92
+FACE 13, 0
+ACTOR 14, Soldier, guard6, 1, 70, 94
+FACE 14, 0
+ACTOR 15, Soldier, guard6, 1, 75, 91
+FACE 15, 0
+ACTOR 16, Soldier, guard6, 1, 80, 96
+FACE 16, 0
+ACTOR 17, Soldier, guard6, 1, 85, 94
+FACE 17, 0
+ACTOR 18, Soldier, guard6, 1, 90, 90
+FACE 18, 0
+ACTOR 19, Soldier, guard6, 1, 95, 93
+FACE 19, 0
+ACTOR 20, Soldier, guard6, 1, 3, 83
+ACTOR 21, Soldier, guard6, 1, 7, 88
+ACTOR 22, Soldier, guard6, 1, 12, 85
+ACTOR 23, Soldier, guard6, 1, 17, 83
+ACTOR 24, Soldier, guard6, 1, 22, 85
+ACTOR 25, Soldier, guard6, 1, 27, 87
+ACTOR 26, Soldier, guard6, 1, 32, 85
+ACTOR 27, Soldier, guard6, 1, 37, 89
+ACTOR 28, Soldier, guard6, 1, 42, 86
+ACTOR 29, Soldier, guard6, 1, 47, 84
+ACTOR 30, Soldier, guard6, 1, 52, 85
+FACE 30, 0
+ACTOR 31, Soldier, guard6, 1, 57, 84
+FACE 31, 0
+ACTOR 32, Soldier, guard6, 1, 62, 87
+FACE 32, 0
+ACTOR 33, Soldier, guard6, 1, 67, 88
+FACE 33, 0
+ACTOR 34, Soldier, guard6, 1, 72, 84
+FACE 34, 0
+ACTOR 35, Soldier, guard6, 1, 77, 89
+FACE 35, 0
+ACTOR 36, Soldier, guard6, 1, 82, 83
+FACE 36, 0
+ACTOR 37, Soldier, guard6, 1, 87, 83
+FACE 37, 0
+ACTOR 38, Soldier, guard6, 1, 92, 85
+FACE 38, 0
+ACTOR 39, Soldier, guard6, 1, 97, 87
+FACE 39, 0
+1: Go and rest, soldiers.
+1: We'll stay here for the night.
+1: We'll leave tomorrow just afer the sunrise.
+1: We have to be in Irkatshk in one week.
+1: The Regent wants this story to be over as soon as possible.
+1: We'll head to the mountains tomorrow.
+1: We cannot attack the city from the North if we want to succeed: it's too well guarded.
+1: We'll catch them off guard by attacking from the mountains.
+1: They won't expect this happen.
+WAIT 3.8
+GOTO SCENE 110021
+;
+;---------------------------------------------------------------------------------------
+;
+SCENE 110021
+H: Very interesting...
+H: I now need to hurry and go back to Irkatshk as soon as possible.
+H: We have to get ready and move our troops to the eastern gate.
+N: You hear a noise coming from behind.
+ACTOR 1, Soldier, guard6, 1, 0, 87
+ACTOR 2, Soldier, guard6, 1, -5, 85
+ACTOR 3, Soldier, guard6, 1, -8, 90
+MOVE 1, 25, 87
+MOVE 2, 20, 85
+MOVE 3, 17, 90
+1: What are you doing here?
+1: Who are you?
+H: Err...
+H: I guess I'm here to spy on the army.
+2: ...
+WAIT 1.2
+MOVE 1, 135, 87, 1
+MOVE 2, 130, 85, 1
+MOVE 3, 137, 90, 1
+FIGHT 144.25.87, 144.20.85, 144.17.90
+IF WIN @win
+END
+
+@win
+HOST_GIVE T134
+H: Let's go now.
+H: I'd rather not have to greet the whole army...
+END
+;
+;---------------------------------------------------------------------------------------
+;
+SCENE 110022, castle.300.70, SCENE, "Eastern Gate"
+@barbactors
+FLAGS 48
+ACTOR 1, "Felix Bracasse", human64, 1, 50, 95
+FACE 1, 0
+ACTOR 2, "Barbarian", human16, 1, 55, 80
+FACE 2, 0
+ACTOR 3, "Barbarian", human39, 1, 60, 90
+FACE 3, 0
+ACTOR 4, "Barbarian", human66, 1, 64, 80
+FACE 4, 0
+ACTOR 5, "Barbarian", human65, 1, 67, 75
+FACE 5, 0
+ACTOR 6, "Barbarian", human81, 1, 71, 82
+FACE 6, 0
+ACTOR 7, "Barbarian", human82, 1, 75, 87
+FACE 7, 0
+ACTOR 8, "Barbarian", human104, 1, 79, 80
+FACE 8, 0
+ACTOR 9, "Barbarian", human67, 1, 82, 88
+FACE 9, 0
+ACTOR 10, "Barbarian", wom24, 1, 86, 93
+FACE 10, 0
+STRCMP #<arg0>, "barq4"
+IF= @return
+ACTOR 11, "Guard", guard6, 1, 40, 90
+ACTOR 12, "Guard", guard6, 1, 35, 84
+ACTOR 13, "Guard", guard6, 1, 30, 91
+ACTOR 14, "Guard", guard6, 1, 25, 95
+ACTOR 15, "Guard", guard6, 1, 20, 83
+ACTOR 16, "Guard", guard6, 1, 15, 85
+ACTOR 17, "Guard", guard6, 1, 10, 82
+ACTOR 18, "Guard", guard6, 1, 5, 86
+ACTOR 19, "Guard", guard6, 1, 8, 81
+ACTOR 20, "Guard", guard6, 1, 13, 88
+ACTOR 21, "Guard", guard6, 1, 18, 92
+ACTOR 22, "Guard", guard6, 1, 23, 85
+ACTOR 23, "Guard", guard6, 1, 28, 94
+ACTOR 24, "Guard", guard6, 1, 33, 87
+ACTOR 25, "Guard", guard6, 1, 38, 83
+ACTOR 26, "Guard", guard6, 1, 43, 80
+ACTOR 27, "General Bloodtider", human95, 1, 45, 80
+SEL 27
+' Give us the keys to the town, and we'll spare your life.
+1: We will never surrender!
+SEL 27
+' Then this is the end...
+WAIT 2
+@barbmove
+MOVE 1, 120, 90, 1
+MOVE 2, 120, 90, 1
+MOVE 3, 120, 90, 1
+MOVE 4, 120, 90, 1
+MOVE 5, 120, 90, 1
+MOVE 6, 120, 90, 1
+MOVE 7, 120, 90, 1
+MOVE 8, 120, 90, 1
+MOVE 9, 120, 90, 1
+MOVE 10, 120, 90, 1
+STRCMP #<arg0>, "barq4"
+IF= @return
+MOVE 11, 120, 90, 1
+MOVE 12, 120, 90, 1
+MOVE 13, 120, 90, 1
+MOVE 14, 120, 90, 1
+MOVE 15, 120, 90, 1
+MOVE 16, 120, 90, 1
+MOVE 17, 120, 90, 1
+MOVE 18, 120, 90, 1
+MOVE 19, 120, 90, 1
+MOVE 20, 120, 90, 1
+MOVE 21, 120, 90, 1
+MOVE 22, 120, 90, 1
+MOVE 23, 120, 90, 1
+MOVE 24, 120, 90, 1
+MOVE 25, 120, 90, 1
+MOVE 26, 120, 90, 1
+MOVE 27, 120, 90, 1
+FIGHT -645.50.95, -646.55.80, -647.60.90, -648.64.80, -649.67.75, -650.71.82, -651.75.87, -652.79.80, -653.82.88, -654.86.93, 143.40.90, 143.35.84, 143.30.91, 143.25.95, 143.20.83, 143.15.85, 143.10.82, 143.5.86, 143.8.81, 143.13.88, 143.18.92, 143.23.85, 143.28.94, 143.33.87, 143.38.83, 143.43.80, 805.45.80
+IF WIN @win
+END
+
+@win
+H: I guess they won't try again for a long time...
+HOST_GIVE T135
+END
+
+@return
+RETURN
+END

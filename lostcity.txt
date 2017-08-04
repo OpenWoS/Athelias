@@ -1,0 +1,333 @@
+SCENE 3400, "aroundthepalaceoftheillusions", SCENE, "Gate"
+#include include.txt
+GOTO LINK 0, 1
+;
+;-------------------------------------------------------------------------------
+;
+SCENE 3465, "aroundthepalaceoftheillusions", SCENE, "Gate"
+#include include.txt
+GOTO LINK 45, 6
+;
+;-------------------------------------------------------------------------------------------------------------------------
+;
+SCENE 3466, "sanctuary", SCENE, "Unholy Temple"
+IF T3972 @antigods
+#include include.txt
+IF T3833 @normalscene
+IF -T3988 @normalscene
+COMPARE #<xmasQuestCookie>, 5
+IF= @xmasq5
+@normalscene
+IF T3993 @halloweenActors
+GOTO @nextStepAfterHalloweenActors
+
+@antigods
+FIGHT 813
+IF WIN @antigodswin
+END
+
+@antigodswin
+HOST_TAKE T3972
+HOST_GIVE Z813
+SOUND trophyFound.wav
+END
+
+@halloweenActors
+COMPARE #<halloween.ancienttemple>, 1
+IF= @pass2
+COMPARE #<halloween.pfft.stoned>, 1
+IF= @halloweenspecialeventsdsf
+GOTO @nextStepAfterHalloweenActors
+
+@pass
+WEATHER 2
+ACTOR 2, "Old Dan", #<spEvent.Name>-humans, 89, 0, 90
+MOVE 2, 35, 90
+WAIT 1
+2: You did it! You did it!
+2: I knew would succeed, adventurer!
+2: Now all you have to know is to travel through the warp to defeat the God itself.
+H: Eh! You never told me about that!
+H: Anyway, how could I travel through the w...
+SOUND thunder.wav
+COLOR 13
+COLOR 2013
+WAIT 1
+COLOR 14
+COLOR 2014
+WAIT 1
+COLOR 15
+COLOR 2015
+2: This way...
+H:...
+WAIT 1
+SET halloween.ancienttemple, 1
+@pass2
+GOTO LINK 111, 0
+
+@halloweenspecialeventsdsf
+ACTOR 1, "Jack o'Pumpkin", 46, 1, 35, 85
+POSE 1, 4
+1: Hmmm...
+1: You piss me of, you know?
+1: This gate needs to remain open, you understand?
+H: Yeah, that's why I'm here!
+1: Rrrriiight!
+WAIT 1
+MOVE 1, 120, 90, 1
+FIGHT 609.35.85, 613, 613
+IF WIN @halloween.win
+H: <cough>
+END
+
+@halloween.win
+GOTO @pass
+
+@nextStepAfterHalloweenActors
+IF T1116 @questend
+ACTOR 10, "Unholy Artifact", human4, 0, 92, 85
+IF T1115 @tenisandead
+IF T1114 @fight
+END
+
+@questend
+END
+
+@fight
+IF XP @fightXP
+COUNTDOWN 0
+ACTOR 1, Tenisan, human26, 1, 100, 95
+MOVE 1, 75, 95
+WAIT 2
+1: This is the end!
+WAIT 1.5
+MOVE 1, -20, 90, 1
+SET ten.qsdqsdqd, 260
+@fightten
+FIGHT -#<ten.qsdqsdqd>.75.95, 242, 258, 257, 243, 256, 253
+IF LOSE @LOSE
+COMPARE #<ten.qsdqsdqd>, 260
+IF= @victory
+GOTO @victorydead
+
+@tenisandead
+IF XP @tenisandeadXP
+COUNTDOWN 0
+H: This is the end!
+GOTO @fightten
+
+@fightXP
+ACTOR 1, Valin, 205, 1, 35, 90
+ACTOR 2, Durbar, 205, 1, 26, 99, 7
+ACTOR 3, Najnin, 205, 1, 41, 98, 6
+ACTOR 4, Ghadurkal, 205, 1, 10, 95, 1
+ACTOR 5, Daransyl, 205, 1, 50, 98, 3
+ACTOR 6, Fareth, 205, 1, 20, 90, 9
+ACTOR 7, Tenisan, human26, 1, 75, 95
+FACE 7, 0
+3: You arrive too late!
+3: No one could stop us now!
+7: Impossible!
+7: They summoned Remorhaz!
+WAIT 1
+MOVE 1, -20, 90, 1
+MOVE 2, -20, 90, 1
+MOVE 3, -20, 90, 1
+MOVE 4, -20, 90, 1
+MOVE 5, -20, 90, 1
+MOVE 6, -20, 90, 1
+MOVE 7, -20, 90, 1
+FIGHT -260.75.95, 237
+IF LOSE @LOSE2
+@fightXP2
+4: Nooo!!!!!
+WAIT 1
+FIGHT 242, 258, 257, 243, 256, 253
+IF LOSE @LOSE
+MOVE 1, 75, 90, 1
+GOTO @victory
+
+@tenisandeadXP
+ACTOR 1, Valin, 205, 1, 35, 90
+ACTOR 2, Durbar, 205, 1, 26, 99, 7
+ACTOR 3, Najnin, 205, 1, 41, 98, 6
+ACTOR 4, Ghadurkal, 205, 1, 10, 95, 1
+ACTOR 5, Daransyl, 205, 1, 50, 98, 3
+ACTOR 6, Fareth, 205, 1, 20, 90, 9
+3: You arrive too late!
+3: No-one could stop us now!
+H: Oh my god!
+H: They summoned Remorhaz!
+WAIT 1
+MOVE 1, -20, 90, 1
+MOVE 2, -20, 90, 1
+MOVE 3, -20, 90, 1
+MOVE 4, -20, 90, 1
+MOVE 5, -20, 90, 1
+MOVE 6, -20, 90, 1
+MOVE 7, -20, 90, 1
+FIGHT 237
+IF LOSE @LOSE2
+@fightXP2
+4: Nooo!!!!!
+WAIT 1
+FIGHT 242, 258, 257, 243, 256, 253
+IF LOSE @LOSE
+GOTO @victorydead
+
+@LOSE
+GIVE T1115
+TAKE T33
+END
+
+@LOSE2
+GIVE T1115
+TAKE T33
+END
+
+@victory
+GOTO SCENE 2000219
+
+@victorydead
+ACTOR 10, "Unholy Artifact", human4, 0, 92, 85
+ACTOR 4, "Guard", 157, 1, -25, 90
+SEL 4
+POSE 1, 4
+LOCK 1
+H: We have succeeded!
+H: We have defeated them!
+H: Let's destroy the artifact and peace will return on this world!
+H: I think that's what Tenisan wanted.
+WAIT 3
+MOVE 10, -25, 90, 1
+H: Done!
+H: ?
+H: Nothing happens!
+H: What's wrong?
+MOVE 4, 25, 95
+WAIT 2
+4: Hahaha !
+4: You, idiot!
+4: Did you think the power of chaos was coming from this artifact?
+H: ...
+4: It is just a stone, no more than a statue in a church!
+4: The companions of the priest understood that.
+4: That's why they allied themselves with us.
+4: But some people are so slow...
+WAIT 3
+MOVE 4, 58, 90
+4: You would better join us than fight us
+4: Don't be as stupid as the priests
+MOVE 4, 62, 96
+4: I am the guard of the temple.
+4: I think soon we will met again...
+4: You know where to find me.
+MOVE 4, -25, 90
+WAIT 3
+H: Err yes?!
+H: Bah! Let's take their weapons and let's go!
+GIVE I1042
+GIVE I1043
+GIVE I1044
+GIVE I1045
+GIVE I1046
+GIVE I1047
+GIVE I1048
+GIVE I1049
+GIVE I1050
+GIVE I1051
+GIVE I1052
+GIVE T1116
+TAKE T33
+SOUND FoundItem.wav
+WAIT 3
+H: Wait!
+H: Where are the crystals?
+H: The elemental crystals!
+H: I can't find them!
+H: Hmm...
+SET zedf8dgf8, "0"
+END
+
+@xmasq5
+FIGHT 2930, 2930, 2930, 2931, 2931, 2931, 2932, 2932, 2932, 2932, 2932, 2932
+IF WIN @xmaspass
+
+@xmaspass
+GOTO LINK 111, 0
+;
+;-------------------------------------------------------------------------------------------------------------------
+;
+SCENE 2000219 "sanctuary", SCENE, "Unholy Temple"
+#include include.txt
+ACTOR 10, "Unholy Artifact", human4, 0, 92, 85
+ACTOR 2, "Tenisan", human26, 1, 125, 90
+ACTOR 4, "Guard", 157, 1, -20, 95
+SEL 4
+POSE 1, 4
+LOCK 1
+MOVE 2, 75, 95
+WAIT 2
+2: We have succeeded!
+2: We have defeated them!
+2: Let's destroy the artifact and peace will return on this world!
+WAIT 3
+MOVE 2, 90, 95
+WAIT 4
+MOVE 10, -25, 90, 1
+2: Done!
+MOVE 2, 50, 85
+2: ?
+2: Nothing happens!
+2: What's wrong?
+MOVE 4, 25, 95
+WAIT 2
+4: Hahaha !
+4: You, idiot!
+4: Do you think the power of chaos comes from this artifact?
+2: ...
+4: It is just a stone, no more than a statue in a church!
+4: Your companions understood that.
+4: That's why they allied themselves with us.
+4: But priests are so slow...
+WAIT 3
+MOVE 4, 58, 90
+4: You would better join us than fight us
+4: Don't be as stupid as the priests
+MOVE 4, 62, 96
+4: I am the guard of the temple.
+4: I think soon we will met again...
+4: You know where to find me.
+MOVE 4, -25, 90
+WAIT 3
+FACE 2, 2
+2: Do not listen!
+2: Never trust the minions of the gods of Chaos
+2: Let's take their weapons and let's go!
+GIVE I1042
+GIVE I1043
+GIVE I1044
+GIVE I1045
+GIVE I1046
+GIVE I1047
+GIVE I1048
+GIVE I1049
+GIVE I1050
+GIVE I1051
+GIVE I1052
+TAKE T33
+GIVE T1116
+SOUND FoundItem.wav
+WAIT 3
+MOVE 2, 40, 95
+2: Wait!
+2: Where are the crystals?
+H: ...
+2: The elemental crystals!
+2: I can't find them!
+WAIT 3
+MOVE 2, 35, 87
+2: Only the Gods know what would happen if the creatures of the chaos learnt how to use them...
+SET zedf8dgf8, "0"
+END
+

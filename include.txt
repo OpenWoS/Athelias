@@ -1,0 +1,5 @@
+;#include AHS.txt
+;Uncomment to enable invasions - major lag
+;CALL 115000@GetInvasionStatus, #<scene.id>
+CALL 110005@start
+

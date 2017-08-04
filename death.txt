@@ -1,0 +1,17 @@
+SCENE 110001
+@start
+IF DEAD @setthecoookiequiseracheckeapresquelepersocreve3
+SET dontasktotravelwhendeadssd, 0
+@setthecoookiequiseracheckeapresquelepersocreve3
+STRSTR #<num.closestLinkStyle>, "2"
+IF> @setthecoookiequiseracheckeapresquelepersocreve
+GOTO @setthecoookiequiseracheckeapresquelepersocreve2
+
+@setthecoookiequiseracheckeapresquelepersocreve
+STRSTR "-1-2-", "-#<scene.id>-"
+IF> @setthecoookiequiseracheckeapresquelepersocreve2
+SET hfghfghsssssdgdgdeathfsfaaaaa1, #<num.mapNum>
+SET hfghfghsssssdgdgdeathfsfaaaaa2, #<num.closestLink>
+@setthecoookiequiseracheckeapresquelepersocreve2
+RETURN
+END

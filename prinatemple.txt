@@ -1,0 +1,477 @@
+SCENE 1400, "templeinside5", SCENE, "Gate"
+#include include.txt
+IF V99+T1038-T4001-T1039 @priestq4
+@pass
+GOTO LINK 7, 9
+
+@priestq4
+COMPARE #<priestq4>, 1
+IF= @pq4
+GOTO @pass
+
+@pq4
+GOTO SCENE 13
+;
+;-------------------------------------------------------------------------------------------------------
+;
+SCENE 1401, "templeinside5", SCENE, "Temple"
+IF T3970-J100 @antigods
+#include include.txt
+ACTOR 1, "Priest", human7, 1, 25, 90
+IF T3993|T3988 @halloweenActors
+GOTO @nextStepAfterHalloweenActors
+
+@antigods
+FIGHT 810
+IF WIN @antigodswin
+END
+
+@antigodswin
+HOST_TAKE T3970
+HOST_GIVE Z810
+SOUND trophyFound.wav
+END
+
+@halloweenActors
+ACTOR 1, "Priest", #<spEvent.Name>-humans, 7, 25, 90
+IF -T3988 @nextStepAfterHalloweenActors
+IF T3829 @nextStepAfterHalloweenActors
+COMPARE #<xmasQuestCookie>, 1
+IF= @xmasq1
+@nextStepAfterHalloweenActors
+OFFER 37
+GIVE L1
+GIVE H5000
+GIVE M5000
+IF S174 @evilspellbooksnext
+IF Z681.10 @evilspellbooksreward
+@evilspellbooksnext
+IF V99+T4001 @9palis
+IF T4001+C18 @wpriest
+IF V99+T1038+C18 @priestquest4
+1: God bless you.
+1: You have been healed.
+IF C18 @priest
+END
+
+@xmasq1
+MOVE 1, 150, 95, 2
+1: Help!
+1: Help!
+FIGHT 2931, 2931, 2931, 2931, 2931, 2931
+IF LOSE @xmaslose
+N: More santas arrive!
+FIGHT 2931, 2931, 2931, 2931, 2931, 2931, 2931, 2931, 2931, 2931, 2931, 2931
+IF WIN @xmaswin
+@xmaslose
+END
+
+@xmaswin
+ACTOR 1, "Santa", christmas1, 1, 105, 90
+MOVE 1, 75, 90
+WAIT 3
+1: You've succeeded!
+1: %1, you are a true hero!
+1: As promised, here is a present for you!
+SOUND foundItem.wav
+GIVE T3829
+GIVE I3063
+END
+
+@evilspellbooksreward
+COMPARE #<chat.grandPriestPrinaEvilSpellBook>, 1
+IF= @chat.grandPriestPrinaEvilSpellBook
+1: Welcome.
+1: That's strange...
+H: What?
+1: I feel like an evil presence here...
+1: Can I see what you have in your bag?
+H: Yes, but...
+1: Oh my God!
+H: ...
+1: You cannot keep those books.
+1: Their evil power would consume you and dim your heart.
+1: You must give them to me so the priests of the Temple can destroy them.
+WAIT 2.5
+SOUND sword1.wav
+@darkspellbooksmenu1
+MENU "Give the Evil Spell Books to the priest=@darkspellbooksGIVE", "Refuse to give him the Spell Books=@darkspellbooksKEEP"
+SOUND thud.wav
+GOTO @darkspellbooksmenu1
+
+@chat.grandPriestPrinaEvilSpellBook
+1: Adventurer, you should really give to the Temple the spell books you have.
+1: They need to be destroyed.
+WAIT 2.5
+GOTO @darkspellbooksmenu1
+
+@darkspellbooksKEEP
+SOUND sword1.wav
+H: No, thanks.
+H: I prefer to keep them.
+1: That's a mistake, I say.
+1: But I guess no-one can decide for you.
+SET chat.grandPriestPrinaEvilSpellBook, 1
+END
+
+@darkspellbooksGIVEbrother
+1: Listen well, brother.
+GOTO @darkspellbooksGIVEback
+
+@darkspellbooksGIVE
+SOUND sword1.wav
+1: Wise choice.
+1: Give them to me now.
+H: Here they are.
+1: Thanks.
+1: Maybe I could reward your wisdom with a new spell.
+IF C18 @darkspellbooksGIVEbrother
+1: Listen well, adventurer.
+@darkspellbooksGIVEback
+N: %1 has learned a new spell: %S174!
+GIVE S174
+TAKE Z681.10
+SOUND bell2.wav
+SET chat.grandPriestPrinaEvilSpellBook, ""
+END
+
+@necroquest3
+1: Welcome, %1.
+1: Be very careful outside : the guards of the regent are still looking for you.
+END
+
+@9palishurry
+1: I will heal your wounds, adventurer but you really have to go and find Tenisan in the palace of Irezar, adventurer.
+1: There is no time to waste if you want to help us defeat what could be a second invasion...
+END
+
+@9palisquesting
+H: I found Tenisan and woke him up.
+1: So we may have a chance. 
+1: Follow his instructions if you want to save Athelias.
+END
+
+@heroeassqfsfnjsq
+1: Welcome back to the temple, hero.
+END
+
+@0paliendCOMPARE #<chat.prinatemple9palis>, 1
+IF= @heroeassqfsfnjsq
+
+1: I knew you would succeed, adventurer.
+1: Thanks to you, Athelias is saved.
+1: For the moment...
+SET chat.prinatemple9palis, 1
+END
+
+@9palis
+IF T1116 @0paliend
+IF T1111 @9palisquesting
+IF T1109 @9palishurry
+IF C18 @back9palis
+IF C20 @back9palis
+1: Welcome, hero.
+1: I heard of your exploits.
+1: Let me congratulate you for this.
+1: Unfortunately, this was just a foretaste of the disaster announced.
+@suite9palis
+1: The situation is critical.
+1: The nine dark paladins woke up and are leading their army towards Athelias.
+1: We know that they are preparing a ritual they will complete at the new moon.
+1: We do not know exactly what demoniac creature they want to summon, but we must prevent this at all costs - all the more as their army will probably take advantage of it and launch an offensive that night.
+1: But how to stop them?
+1: They will probably gather in the old city of Arkhangal.
+1: It was the first city to fall during the first invasion.
+1: The servitors of the Chaos built their temple there.
+1: But the place was forgotten with the centuries...
+1: We have only one hope left : Tenisan, the grand priest of old.
+1: He is the only one who fought and survived the nine dark paladins.
+1: The only one who knows the location of the lost city.
+1: You must find him.
+1: It is said that he is the prisoner of an eternal sleep, in the catacombs of the palace of Irezar.
+1: Many went there to try to find him.
+1: All died.
+1: You must succeed where they failed.
+1: Destroy them or be destroyed!
+1: We don't have any choice.
+GIVE T1109
+END
+
+@back9palis
+1: Welcome back, %1.
+1: I would like to say that the world got better since your last adventure but unfortunately the situation is worse than you could imagine. 
+GOTO @suite9palis
+
+@priest
+ACTOR 60, "", 3, 0, 95, 15
+OFFER 37, 525, 526, 527, 528, 529, 530, 531, 532, 533, 534, 535, 536, 537, 538, 539, 540, 541, 542, 543, 544
+COMPARE #<priest.grandpriest>, 1
+IF= @priestV25back
+1: So you want to be a priest.
+1: Good.
+1: Your faith has to be strong to face the dangers of this world.
+1: Unfortunately I can't help you yet.
+1: Return when you have advanced more in your training.
+SET priest.grandpriest, 1
+END
+
+@priestquest4
+ACTOR 60, "", 3, 0, 95, 15
+COMPARE #<priestq4>, 0
+IF> @priestq4bis
+1: Ah, %1!
+1: How are you?
+WAIT 3
+ACTOR 2, "Friar John", human126, 1, 105, 90
+MOVE 2, 75, 90
+WAIT 0.8
+2: Friar, several guards of the palace are here and ask for you!
+2: They are surrounding the temple!
+1: What?!
+1: Follow me, %1, but stay hidden.
+1: It may concern you as well.
+WAIT 1
+SET priestq4, 1
+GOTO LINK 14, 0, 1
+
+@priestq4bis
+IF T1039 @rewardpq4
+IF T1040 @wpriest
+MOVE 1, -20, 90, 1
+END
+
+@rewardpq4
+1: We succeeded in beating off the army of the regent.
+1: But for how long?
+1: The Temple is still in peril.
+1: And I don't know what to do.
+1: You should go and find your own way now, %1.
+1: All I can do for you is allow you to receive the protection of this archangel. 
+1: May we met again in better times.
+HOST_GIVE T4001
+HOST_GIVE I1002
+SOUND FoundItem.wav
+END
+
+@wpriest
+1: Excuse me, %1 but I need to pray.
+1: I don't know what the future of the temple will be...
+END
+
+@priestV25back
+1: Welcome back, %1.
+1: How is your training?
+END
+
+@trylater2
+1: Unfortunately I can't help you more for now.
+1: Return when you have advanced more in your training.
+END
+
+@eventActorClick60
+N: Level required for the class quests:
+WAIT 1
+N: Level 25, 50, 75, 99.
+END
+;
+;--------------------------------------------------------------------------
+;
+SCENE 1402, "templeinside5", SCENE, "Temple"
+#include include.txt
+ACTOR 1, "Friar John", human126, 1, 25, 90
+IF T3993|T3988 @halloweenActors
+GOTO @nextStepAfterHalloweenActors
+
+@halloweenActors
+ACTOR 1, "Friar John", #<spEvent.Name>-humans, 126, 25, 90
+@nextStepAfterHalloweenActors
+1: God bless you.
+IF C18 @priest
+END
+
+@priest
+ACTOR 60, "", 3, 0, 95, 15
+IF T1038 @necroquest3es
+IF T1036 @quest2back
+COMPARE #<priestquest2>, 1
+IF= @quest2back2
+IF V50+T19 @priestquest2
+IF V25 @priestquest1
+@offer
+OFFER 445, 446, 447, 448, 449, 450, 451, 452, 453, 454, 455, 456, 457, 458, 459, 460, 461, 462, 463, 464
+END
+
+@eventActorClick60
+N: Level required for the class quests:
+WAIT 1
+N: Level 25, 50, 75, 99
+END
+
+@eventActorClick60
+N: Level required for the class quests:
+WAIT 1
+N: Level 25, 50, 75, 99.
+END
+
+@necroquest3es
+1: Glad to see you again, %1.
+1: You should hide until I understand what's going on.
+1: The guards of the regent are still looking for you.
+GOTO @offer
+
+@quest2back2
+IF T1037 @offer
+ACTOR 2, "Grand Priest", human7, 1, 55, 77
+1: Hello, %1.
+H: Greetings.
+1: What is the news?
+H: I went to the mercenaries house and found this bank note.
+H: It came from the palace.
+1: So the intendant himself would have hired mercenaries...
+2: Thanks for your help, %1.
+2: I will take care of this myself, and go and ask for an explanation.
+2: I'll ask for a private interview with the regent if needed.
+1: Let's talk of something else.
+1: The other grand priests agree with me : considering all that you did for the Temple, you deserve to receive a new divine protection. 
+1: This guardian angel will help and protect you during your journey.
+1: God bless you, %1.
+HOST_GIVE T1037
+HOST_GIVE I1001
+SOUND FoundItem.wav
+GOTO @offer
+
+@quest2back
+1: Welcome back, my son.
+H: Greetings, Friar John.
+H: I went to the Black Horse Tavern and know were the mercenaries live - well... lived.
+1: So you should go there and see if you can find something.
+H: Yes, Friar John.
+GOTO @offer
+
+@priestquest2
+1: Welcome back, %1.
+1: I investigated the men who attacked you by the palace and I discovered they have the Black Horse Tavern as  their headquarters. 
+1: We must discover who hired them.
+1: The temple cannot suffer this again.
+1: You should go to the tavern and ask around about them.
+H: Yes, Friar John.
+1: Come back when you have some fresh news.
+1: I may have something for you then, %1.
+1: God bless you.
+H: God bless you.
+HOST_GIVE T1035
+1: Oh, by the way, the tavern opens at seven.
+GOTO @offer
+
+@priestquest1
+IF C18+I631 @priest2
+IF T21 @attackedanddead
+IF I630 @priestquest1hurry
+IF T19 @priest
+1: Your perseverance deserves my respect, young priest.
+1: Soon, you may become a member of the council.
+1: I have a mission for you.
+1: This treaty has to be brought to the intendant of the regent.
+1: I would like you to take it to him.
+HOST_GIVE I630
+SOUND FoundItem.wav
+GOTO @offer
+
+@attackedanddead
+1: Hello, %1. 
+1: Did you bring the treaty to the palace?
+H: Yes but I have bad news....
+H: I've been attacked on the road and had the treaty the intendant in return stolen.
+1: What?
+WAIT 1
+1: Someone will have to discover who they are.
+WAIT 1
+1: This place is becoming insane.
+1: Some years ago, nobody would have dared attack a priest.
+1: But you have to return to the palace and ask for a new copy of the treaty.
+SET talkedpriestquestnube1, 1
+END
+
+@priestquest1hurry
+1: Please, go to the palace now, %1!
+1: We really need the intendant to sign this treaty!
+GOTO @offer
+
+@priest2
+H: The intendant gave me this treaty for you. 
+COMPARE #<talkedpriestquestnube1>, 1
+IF= @skiplargeare
+H: But enemies of our order tried to lay their hands on it. 
+H: I had to fight to keep it.
+1: What?
+WAIT 1
+1: Someone will have to discover who they are.
+WAIT 1
+1: This place is becoming insane.
+1: Some years ago, nobody would have dared attack a priest.
+WAIT 2
+1: Thanks anyway.
+@skiplargeare2
+1: Every priest gets several divine protections during his studies.
+1: "Pets" would call them the ignorant.
+1: But don't make a mistake : they are not pets but avatars of the gods.
+1: I would like you to receive this Cherub.
+1: I guess you are now wise enough to take care of it.
+HOST_TAKE I631
+HOST_GIVE T19
+HOST_GIVE I1000
+HOST_GIVE T3994
+SOUND FoundItem.wav
+1: God bless you.
+GOTO @offer
+
+@skiplargeare
+1: Thank you, %1.
+1: I may have something for you.
+GOTO @@skiplargeare2
+
+;
+;--------------------------------------------------------------------------------------
+;
+SCENE 1403, "walloffame", SCENE, "Temple"
+#include include.txt
+ACTOR 1, "Guard", guard3, 1, 20, 100
+IF T3993|T3988 @halloweenActors
+GOTO @nextStepAfterHalloweenActors
+
+@halloweenActors
+ACTOR 1, "Guard", #<spEvent.Name>-guard, 3, 20, 100
+@nextStepAfterHalloweenActors
+1: Welcome, adventurer.
+1: Here are the names of the greatest heroes of Athelias.
+1: You should be very respectful if by chance you meet one of them.
+WAIT 3
+ACTOR 2, Mad, "-  -   Mad", 1, 40, 100
+STRSTR "-SOUL 2006-", "-#<str.soul>-"
+IF> @heroes
+END
+
+@heroes
+HOST_GIVE I3028
+HOST_GIVE T4003
+END
+;
+;------------------------------------------------------------------------------------------------------
+;
+SCENE 1404, templeinside5, SCENE, "Library"
+#include include.txt
+ACTOR 1, "Librarian", human49, 1, 55, 80
+FACE 1, 1
+IF T3993|T3988 @halloweenActors
+GOTO @nextStepAfterHalloweenActors
+
+@halloweenActors
+ACTOR 1, "Librarian", #<spEvent.Name>-humans, 49, 55, 80
+FACE 1, 1
+@nextStepAfterHalloweenActors
+#include library.txt
+1: What kind of book are you looking for?
+END
+;
+;--------------------------------------------------------------------------------------
+;

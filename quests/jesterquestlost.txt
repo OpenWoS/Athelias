@@ -1,0 +1,18 @@
+SCENE 110023
+@start
+IF T1006 @jesterquestlost.text
+GOTO @nextstepafterjesterquestlost.text
+
+@jesterquestlost.text
+ACTOR 1, "Tax collector", human62, 1, 65, 90 
+ACTOR 2, "Makel", human1, 1, 75, 90
+FACE 2, 0
+1: What are we doing here?
+1: Hurry!
+1: I need to reach Prina as soon as possible!
+1: I am busy!
+WAIT 1
+GOTO EXIT
+
+@nextstepafterjesterquestlost.text
+RETURN

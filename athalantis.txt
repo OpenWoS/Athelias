@@ -1,0 +1,409 @@
+SCENE 4100, castle, SCENE, "Main Gate"
+#include include.txt
+GOTO LINK 0, 13
+;
+;------------------------------------------------------------------------
+;
+SCENE 4101, "port", SCENE, "Port"
+#include include.txt
+ACTOR 1, "Sailor", human63, 1, 56, 94
+IF T3993|T3988 @halloweenActors
+GOTO @nextStepAfterHalloweenActors
+
+@halloweenActors
+ACTOR 1, "Sailor", #<spEvent.Name>-humans, 63, 56, 94
+@nextStepAfterHalloweenActors
+IF T1030 @necroquest3athalsiege
+1: Hello foreigner.
+IF T1121 @menudesert
+1: Where do you want to go?
+WAIT 1
+@menu1
+SOUND sword1.wav
+MENU "Armenis=@armenis", "Karsheek Island=@illusionist", "Nowhere=@nowhere"
+GOTO @menu1
+
+@menudesert
+1: Since the defeat of the second invasion, the sea links to Tahamanraset and the Desertic Lands are open again.
+1: Maybe you want to go there?
+WAIT 1
+@menudesert2
+SOUND sword1.wav
+MENU "No I want to go to Armenis=@armenis", "No I want to go to Karsheek Island=@illusionist", "Yes I want to go to Tahamanraset=@desert", "Athalantis is a nice place - I want to stay here=@nowhere"
+GOTO @menudesert2
+
+@randomE
+#include quests\piratehat.txt
+END
+
+@desert
+SOUND sword1.wav
+1: That's 30 000 #<GP.name> to go to Tahamanraset.
+1: OK?
+@askdesert
+ASK 30
+IF YES @travdesert
+IF NO @bah
+1: What?
+1: Articulate, please!
+GOTO @askdesert
+
+@travdesert
+IF -G30000 @poor
+TAKE G30000
+1: Alright, let's go.
+IF R1+R30 @randomE
+GOTO LINK 68, 2
+
+@nowhere
+SOUND sword1.wav
+1: What are you doing here if you don't want to travel?!
+1: Don't make me waste my time!
+END
+
+@necroquest3athalsiege
+1: Sea links are broken, foreigner.
+1: You shouldn't walk alone in the streets
+1: This place is dangerous.
+END
+
+@armenis
+SOUND sword1.wav
+1: 10 000 #<GP.name> to go to Armenis.
+@ashjkl
+1: Sounds good?
+ASK 30
+IF NO @bah
+IF YES @yesqsdqd
+1: Excuse me?
+GOTO @ashjkl
+
+@yesqsdqd
+IF -G10000 @poor
+TAKE G10000
+1: Here you go.
+IF R1+R30 @randomE
+GOTO LINK 42, 1
+END
+
+@bah
+1: Bah
+1: Come back later if you change your mind...
+END
+
+@illusionist
+SOUND sword1.wav
+IF T1121-T67 @illu2
+1: This is quite a dangerous place.
+1: 50 000 #<GP.name> to go there.
+1: OK?
+@askillu
+ASK 30
+IF NO @bah
+IF YES @gotoillu
+1: Pardon?
+GOTO @askillu
+
+@gotoillu
+IF -G50000 @poor
+TAKE G50000
+1: Here you go.
+IF R1+R30 @randomE
+GOTO LINK 67, 0
+END
+
+@illu2
+1: So you want to challenge the illusionist, eh!
+1: Good luck, you'll need it!
+H: What are you talking about?
+1: So you never heard of the palace of the illusions on Karsheek Island?!
+H: No
+1: There is a strange mage living there, an illusionist.
+1: Nobody could say how old he is, it's as if he had always been there.
+1: Back in the days, all the adventurers of Athelias used to go there for his challenge.
+1: It was very popular then.
+1: No-one remember what was the prize but it probably worthed the trouble.
+1: Most of those adventurers never got out of the palace.
+1: I guess they are now illusions among the illusions.
+1: Although a few succeeded and came back alive.
+1: Some adventurers still go there from time to time.
+1: I thought you were one of them when you told me you want to go to Karsheek.
+1: So, do you still want to go there?
+GIVE T67
+@asksfszzzzz
+ASK 30
+IF YES @gokar
+IF NO @dontkar
+GOTO @asksfszzzzz
+
+@gokar
+1: Alright.
+1: I'll give you a lift for 50000 #<GP.name>, ok?
+GOTO @askillu
+
+@dontkar
+1: That's probably the wiser decision...
+END
+
+@poor
+1: Hey dude, I don't work for free!
+1: Come back when you have some money.
+1: And remember, you'll need money later to come back here.
+1: I am sure you don't wanna be trapped on one of these islands...
+END
+;
+;------------------------------------------------------------------------
+;
+SCENE 4102, castle, SCENE, "Main Gate"
+#include include.txt
+GOTO LINK 45, 3
+;
+;------------------------------------------------------------------------
+;
+SCENE 4103, "tavern1", SCENE, "Tavern"
+#include include.txt
+ACTOR 1, "Barmaid", wom30, 1, 33, 98
+IF T3993|T3988 @halloweenActors
+GOTO @nextStepAfterHalloweenActors
+
+@halloweenActors
+ACTOR 1, "Barmaid", #<spEvent.Name>-wom, 30, 33, 98
+@nextStepAfterHalloweenActors
+#include athalantissiegenecroqest3.txt
+IF -V20 @pub
+IF I671 @pub
+1: Bloody robbers.
+1: I wish someone would punish them.
+1: They owe me 1000 pounds!
+1: All that I had!
+GIVE T62
+END
+
+@pub
+1: Hello, adventurer!
+1: Do you want a booze?
+OFFER 2, 34
+END
+;
+;-----------------------------------------------------------------------
+;
+SCENE 4104, "houseinside1", SCENE, "Robbers"
+#include include.txt
+ACTOR 1, "Robber", human16, 1, 45, 85
+IF T3993|T3988 @halloweenActors
+GOTO @nextStepAfterHalloweenActors
+
+@halloweenActors
+ACTOR 1, "Robber", #<spEvent.Name>-humans, 16, 45, 85
+@nextStepAfterHalloweenActors
+1: An Intruder!
+1: Guys!
+WAIT 2
+MOVE 1, -25, 85, 1
+FIGHT 122, 123, 124.45.85
+IF WIN @win
+END
+
+@win
+N: You find 2500 Tomans and a strange ring in a box.
+GIVE G2500
+GIVE I671
+TAKE T62
+SOUND FoundItem.wav
+END
+;
+;-----------------------------------------------------------------------
+;
+SCENE 4105, weapons2, SCENE, "Smithy"
+#include include.txt
+ACTOR 1, Adenal, human81, 1, 40, 95
+IF T3993|T3988 @halloweenActors
+GOTO @nextStepAfterHalloweenActors
+
+@halloweenActors
+ACTOR 1, "Adenal", #<spEvent.Name>-humans, 81, 40, 95
+@nextStepAfterHalloweenActors
+#include athalantissiegenecroqest3.txt
+COMPARE #<c5talkedtoblacksmith>, 0
+IF= @firsttimeblacksmith.txt
+1: Hello, adventurer.
+1: Toss me the item you want to upgrade.
+OFFER 132, 134, 135
+END
+
+#include blacksmith.txt
+;
+;-------------------------------------------------------------------------------
+;
+SCENE 4106, alchemy, SCENE, "Alchemist"
+#include include.txt
+ACTOR 1, Flamines, human80, 1, 25, 97
+IF T3993|T3988 @halloweenActors
+GOTO @nextStepAfterHalloweenActors
+
+@halloweenActors
+ACTOR 1, "Flamines", #<spEvent.Name>-humans, 80, 25, 97
+@nextStepAfterHalloweenActors
+#include athalantissiegenecroqest3.txt
+1: Greetings, foreigner.
+1: How can I help you?
+OFFER 1, 3, 4, 7, 13, 29, 30, 31, 32, 33, 36, 38, 39, 12
+END 
+;
+;-------------------------------------------------------------------------------
+;
+SCENE 4107, templeinside11, SCENE,  "Temple"
+IF T3978 @antigods
+#include include.txt
+ACTOR 1, Maldon, human26, 1, 41, 88
+IF T3993|T3988 @halloweenActors
+GOTO @nextStepAfterHalloweenActors
+
+@antigods
+FIGHT 819
+IF WIN @antigodswin
+END
+
+@antigodswin
+HOST_TAKE T3978
+HOST_GIVE Z819
+SOUND trophyFound.wav
+END
+
+@halloweenActors
+ACTOR 1, "Maldon", #<spEvent.Name>-humans, 26, 41, 88
+@nextStepAfterHalloweenActors
+GIVE L1
+GIVE H5000
+GIVE M5000
+OFFER 37
+1: Greetings.
+1: You have been healed.
+END
+;
+;-------------------------------------------------------------------------------
+;
+SCENE 4108, "castle", SCENE, "Townhall"
+#include include.txt
+IF T121-T122 @fightknight2
+IF T120-T122 @fightknight1
+IF T122 @canpass
+IF I1053-M0 @canpass
+IF T1030+T1031 @fightnecroq3
+ACTOR 1, Guard, guard4, 1, 25, 95
+ACTOR 2, Guard, guard4, 1, 75, 95
+FACE 2, 0
+IF T3993|T3988 @halloweenActors
+GOTO @nextStepAfterHalloweenActors
+
+@halloweenActors
+ACTOR 1, "Guard", #<spEvent.Name>-guard, 4, 25, 95
+ACTOR 2, Guard, #<spEvent.Name>-guard, 4, 75, 95
+FACE 2, 0
+@nextStepAfterHalloweenActors
+1: Sorry, you cannot pass, foreigner.
+1: This the residence of the governor of the province.
+END
+
+@fightknight1
+FIGHT 50, 50, 50, 50
+END
+
+@fightknight2
+FIGHT -118, -118, -118, 50, 50, 50, 50, 52, 52
+IF WIN @pass
+END
+
+@canpass
+ACTOR 1, , guard4, 1, 25, 95
+ACTOR 2, , guard4, 1, 75, 95
+FACE 2, 0
+1: Welcome to the Townhall
+WAIT 1
+@pass
+GOTO LINK 2, 0
+
+@fightnecroq3
+FIGHT 367,367, 47
+IF WIN @pass
+END
+;
+;-------------------------------------------------------------------------------
+;
+SCENE 4109, "houseinside1", SCENE, "Marvel's"
+#include include.txt
+IF I1053 @marveel 
+IF T122 @marveel
+IF T120+T121 @knightquest4back
+IF T120 @knightquest4
+IF T1030+T1031 @necroquest3back
+IF T1030 @necroquest3
+N: There is nobody here
+END
+
+@knightquest4back
+N: There is nobody here.
+WAIT 1
+N: Maybe it's time to go to the Townhall and fight, hmm?
+END
+
+@knightquest4
+ACTOR 1, Marvel, human37, 1, 42, 75
+ACTOR 2, Ghamyl, lord8, 1, 64, 80
+ACTOR 3, Knight, human10, 1, 42, 93, 7
+ACTOR 4, Knight, human10, 1, 35, 100, 7
+ACTOR 5, Knight, human10, 1, 60, 98, 7
+5: Ah! #<g.sir2> %1!
+5: We were waiting for you.
+2: Welcome, knight.
+2: There is no time to waste.
+2: The necromancer who leads the army, Derar,  occupies the Townhall and made it his headquarters.
+2: The Necromancy Academy sent someone to kill Derar but he needs us to enter the Townhall.
+2: We must go and clear a path through the lines of our enemies.
+2: The necromancer from the Academy will take care of Derar while we create a distraction.
+HOST_GIVE T121
+2: Let's go!
+END
+
+@marveel
+WAIT 0.3
+H: Marvel?
+WAIT 0.8
+N: There is nobody here
+WAIT 1.2
+H: Bah
+END
+
+@necroquest3back
+ACTOR 1, Ghamyl, lord8, 1, 45, 80
+1: Are you here to help us?
+1: Lead the way to the Townhall if you really think you can defeat the necromancer.
+END
+
+@necroquest3
+ACTOR 1, Marvel, human37, 1, 25, 95
+1: Who are you?
+H: %1, from the necromancy academy.
+1: Hmm...
+1: Wait a second
+MOVE 1, -20, 90
+WAIT 5
+ACTOR 2, Ghamyl, lord8, 1, -10, 92
+MOVE 2, 30, 92
+WAIT 1.6
+2: Hello.
+2: I am Lord Ghamyl, governor of the province.
+MOVE 2, 45, 80
+2: I organized the defense of the city up to now, unsuccessfully, I have to confess.
+2: Derar and his army invaded Athalantis, and he uses the Townhall as his headquarter.
+2: There are many brave men willing to fight but Derar's power seems to be too great to be defeated.
+H: That's why I am here.
+H: I couldn't defeat his whole army on my own, but I could defeat Derar.
+H: And once Derar dead, his army will return to dust.
+H: The undead cannot survive the death of the necromancer who summoned them.
+H: All that I need is for you and your army create a distraction so I can enter the Townhall and face Derar.
+2: Alright.
+2: Let me gather my men.
+2: See you by the Townhall.
+HOST_GIVE T1031
+END

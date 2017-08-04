@@ -1,0 +1,172 @@
+SCENE 110009
+@start
+COMPARE #<chat.eraser>, 1
+IF= @notthefirsttime
+1: Welcome adventurer.
+1: I used to be an adventurer as well.
+1: I used to live in the jungle, where I became a dream traveller.
+H: What?
+1: My masters told me how to travel in the dreamlands and visit the dreams of people.
+1: I was even able to erase bad memories when they asked.
+H: Could you do that for me as well?
+1: I could, but remember that a forgotten past will have to repeat itself.
+1: I can erase bad memories but I can't prevent them from happening again.
+1: You should think about that.
+1: If you still want me to erase some of adventures from your memory, come back, and I'll try to help you.
+SET chat.eraser, 1
+END
+
+@notthefirsttime
+1: Welcome, adventurer.
+1: Which adventure would you like to forget?
+WAIT 1.5
+SOUND sword1.wav
+@erasermainmenu
+MENU "Dark Paladins=@9palis", "Terendroz Invasion=@terendrozinva", "Taj Isha=@tajisha", "Tahamanraset Palace=@tahamanrasetpalace", "Travel from the Desert to Kotor=@deserttravel", "Cancel=@erasercancel"
+SOUND thud.wav
+GOTO @erasermainmenu
+
+@nextstepaftereraser.txt
+RETURN
+END
+
+@erasercancel
+SOUND sword1.wav
+GOTO @nextstepaftereraser.txt
+
+@eraserareyousure?
+1: Are you sure you want to forget this quest?
+1: You won't get anything in return.
+ASK 30
+IF YES @eraserareyousureYES
+IF NO @eraserareyousureNO
+1: I take that as a "no".
+@eraserareyousureNO
+1: That's probably better for you.
+GOTO @nextstepaftereraser.txt
+
+@eraserareyousureYES
+1: Alright then.
+GOTO @#<temp.label>2
+
+@eraseanotherquest?
+COLOR 13
+COLOR 2013
+SOUND thunder.wav
+WAIT 2
+COLOR 0
+COLOR 2000
+1: Alright, you should now have forgotten everything about this adventure.
+1: Would you like to forget something else?
+@eraseanotherquestask
+ASK 30 
+IF YES @eraseanotherquestaskYES
+IF NO @eraseanotherquestaskNO
+1: Sorry?
+GOTO @eraseanotherquestask
+
+@eraseanotherquestaskYES
+1: Which adventure?
+WAIT 2
+SOUND sword1.wav
+GOTO @erasermainmenu
+
+@eraseanotherquestaskNO
+1: Alright.
+1: See you later, adventurer.
+GOTO @nextstepaftereraser.txt
+
+@terendrozinva
+SOUND sword1.wav
+SET temp.label, "terendrozinva"
+GOTO @eraserareyousure?
+
+@terendrozinva2
+HOST_TAKE T1117
+HOST_TAKE T1118
+HOST_TAKE T1119
+HOST_TAKE T1120
+HOST_TAKE T1121
+SET sdshfsfksjhjsvbscksvsvskvqlq, ""
+SET siegeterendrozqsdfs, ""
+SET terendrozsiegefail, ""
+SET temp.label, ""
+GOTO @eraseanotherquest?
+
+@9palis
+SOUND sword1.wav
+SET temp.label, "9palis"
+GOTO @eraserareyousure?
+
+@9palis2
+HOST_TAKE T1109
+HOST_TAKE T1111
+HOST_TAKE T1112
+HOST_TAKE T1113
+HOST_TAKE T1114
+HOST_TAKE T1115
+HOST_TAKE T1116
+HOST_TAKE T33
+SET chat.prinatemple9palis, ""
+SET ten.qsdqsdqd, ""
+SET zedf8dgf8, ""
+SET temp.label, ""
+GOTO @eraseanotherquest?
+
+@deserttravel
+SOUND sword1.wav
+SET temp.label, "deserttravel"
+GOTO @eraserareyousure?
+
+@deserttravel2
+HOST_TAKE T1122
+HOST_TAKE T1123
+HOST_TAKE T1124
+HOST_TAKE T1125
+HOST_TAKE T1126
+HOST_TAKE T1127
+HOST_TAKE T1128
+HOST_TAKE T1129
+HOST_TAKE T1130
+HOST_TAKE T1142
+HOST_TAKE T1143
+HOST_TAKE T1144
+HOST_TAKE T1145
+HOST_TAKE T1146
+HOST_TAKE T1147
+HOST_TAKE T1148
+HOST_TAKE T1149
+SET chat.medhiAfterTravelToTheOldWorld, ""
+SET desert6chat, ""
+SET temp.label, ""
+GOTO @eraseanotherquest?
+
+@tajisha
+SOUND sword1.wav
+SET temp.label, "tajisha"
+GOTO @eraserareyousure?
+
+@tajisha2
+HOST_TAKE T1100
+HOST_TAKE T1101
+HOST_TAKE T1102
+HOST_TAKE T1103
+SET arlahhhhh, ""
+SET aralsheksepsfsdfsfsfqqqq, ""
+SET temp.mapNum, ""
+SET tajIsha2, ""
+SET temp.label, ""
+GOTO @eraseanotherquest?
+
+@tahamanrasetpalace
+SOUND sword1.wav
+SET temp.label, "tahamanrasetpalace"
+GOTO @eraserareyousure?
+
+@tahamanrasetpalace2
+HOST_GIVE T1104
+HOST_GIVE T1105
+SET monsterssulatzspal, ""
+SET temp.label, ""
+GOTO @eraseanotherquest?
+

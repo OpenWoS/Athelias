@@ -1,0 +1,385 @@
+SCENE 110013
+@start
+GOTO @#<scene.bkgnd>
+GOTO @return
+
+@alchemy
+BKGND #<scene.bkgnd>.100.65
+GOTO @return
+
+@ancienthall
+BKGND #<scene.bkgnd>.100.81
+GOTO @return
+
+@aralian
+BKGND #<scene.bkgnd>.100.65
+GOTO @return
+
+@aralshek
+BKGND #<scene.bkgnd>.100.48
+GOTO @return
+
+@arena
+BKGND #<scene.bkgnd>.100.46
+GOTO @return
+
+@armeniscity1
+BKGND #<scene.bkgnd>.100.62
+GOTO @return
+
+@aroundthepalaceoftheillusions
+BKGND #<scene.bkgnd>.100.71
+GOTO @return
+
+@assassins
+BKGND #<scene.bkgnd>.100.95
+GOTO @return
+
+@athalantis1
+BKGND #<scene.bkgnd>.100.75
+GOTO @return
+
+@athalantis2
+BKGND #<scene.bkgnd>.100.75
+GOTO @return
+
+@athalantisoutside
+BKGND #<scene.bkgnd>.100.77
+GOTO @return
+
+@black
+GOTO @return
+
+@castle
+BKGND #<scene.bkgnd>.100.71
+GOTO @return
+
+@castle9
+BKGND #<scene.bkgnd>.100.77
+GOTO @return
+
+@castle10
+BKGND #<scene.bkgnd>.100.81
+GOTO @return
+
+@castle12
+BKGND #<scene.bkgnd>.100.86
+GOTO @return
+
+@cave1
+BKGND #<scene.bkgnd>.100.63
+GOTO @return
+
+@cave2
+BKGND #<scene.bkgnd>.100.83
+GOTO @return
+
+@cell
+BKGND #<scene.bkgnd>.100.83
+GOTO @return
+
+@chaos1
+BKGND #<scene.bkgnd>.100.65
+GOTO @return
+
+@cityoutside1
+BKGND #<scene.bkgnd>.100.83
+GOTO @return
+
+@cityoutside2
+BKGND #<scene.bkgnd>.100.67
+GOTO @return
+
+@cityoutside3
+BKGND #<scene.bkgnd>.100.74
+GOTO @return
+
+@darkroom
+BKGND #<scene.bkgnd>.100.83
+GOTO @return
+
+@desert2
+BKGND #<scene.bkgnd>.100.60
+GOTO @return
+
+@desert3
+BKGND #<scene.bkgnd>.100.60
+GOTO @return
+
+@desert4
+BKGND #<scene.bkgnd>.100.64
+GOTO @return
+
+@desert5
+BKGND #<scene.bkgnd>.100.64
+GOTO @return
+
+@desert6
+BKGND #<scene.bkgnd>.100.67
+GOTO @return
+
+@desert7
+BKGND #<scene.bkgnd>.100.83
+GOTO @return
+
+@door1
+BKGND #<scene.bkgnd>.100.88
+GOTO @return
+
+@dungeon1
+BKGND #<scene.bkgnd>.100.56
+GOTO @return
+
+@forest1
+BKGND #<scene.bkgnd>.100.47
+GOTO @return
+
+@forest1heal
+BKGND #<scene.bkgnd>.100.47
+GOTO @return
+
+@forest4
+BKGND #<scene.bkgnd>.100.80
+GOTO @return
+
+@houseinside1
+BKGND #<scene.bkgnd>.100.74
+GOTO @return
+
+@houseinside2
+BKGND #<scene.bkgnd>.100.83
+GOTO @return
+
+@irkatshk1
+BKGND #<scene.bkgnd>.100.58
+GOTO @return
+
+@irkatshk2
+BKGND #<scene.bkgnd>.100.74
+GOTO @return
+
+@katadyn1
+BKGND #<scene.bkgnd>.100.76
+GOTO @return
+
+@kotor1
+BKGND #<scene.bkgnd>.100.60
+GOTO @return
+
+@kotorcastle
+BKGND #<scene.bkgnd>.100.12
+GOTO @return
+
+@mangeas1
+BKGND #<scene.bkgnd>.100.64
+GOTO @return
+
+@mangeas3
+BKGND #<scene.bkgnd>.100.84
+GOTO @return
+
+@manoir1
+BKGND #<scene.bkgnd>.100.89
+GOTO @return
+
+@mine
+BKGND #<scene.bkgnd>.100.66
+GOTO @return
+
+@moon
+BKGND #<scene.bkgnd>.100.70
+GOTO @return
+
+@mountain1
+BKGND #<scene.bkgnd>.100.84
+GOTO @return
+
+@mountain2
+BKGND #<scene.bkgnd>.100.59
+GOTO @return
+
+@mountain4
+BKGND #<scene.bkgnd>.100.62
+GOTO @return
+
+@mountain5
+BKGND #<scene.bkgnd>.100.45
+GOTO @return
+
+@oasis
+BKGND #<scene.bkgnd>.100.54
+GOTO @return
+
+@obrovac
+BKGND #<scene.bkgnd>.100.48
+GOTO @return
+
+@palace
+BKGND #<scene.bkgnd>.100.97
+GOTO @return
+
+@palace2
+BKGND #<scene.bkgnd>.100.69
+GOTO @return
+
+@port
+BKGND #<scene.bkgnd>.100.75
+GOTO @return
+
+@prina1
+BKGND #<scene.bkgnd>.100.62
+GOTO @return
+
+@rodeurs1
+BKGND #<scene.bkgnd>.100.90
+GOTO @return
+
+@room2
+BKGND #<scene.bkgnd>.100.64
+GOTO @return
+
+@ruins(temple)
+BKGND #<scene.bkgnd>.100.87
+GOTO @return
+
+@sanctuary
+BKGND #<scene.bkgnd>.100.83
+GOTO @return
+
+@seaside2
+BKGND #<scene.bkgnd>.100.80
+GOTO @return
+
+@serevaninside
+BKGND #<scene.bkgnd>.100.81
+GOTO @return
+
+@sewers3
+BKGND #<scene.bkgnd>.100.71
+GOTO @return
+
+@souterrain
+BKGND #<scene.bkgnd>.100.57
+GOTO @return
+
+@street3
+BKGND #<scene.bkgnd>.100.87
+GOTO @return
+
+@street4
+BKGND #<scene.bkgnd>.100.71
+GOTO @return
+
+@street6
+BKGND #<scene.bkgnd>.100.80
+GOTO @return
+
+@street7
+BKGND #<scene.bkgnd>.100.85
+GOTO @return
+
+@streetatnight
+BKGND #<scene.bkgnd>.100.79
+GOTO @return
+
+@taj
+BKGND #<scene.bkgnd>.100.96
+GOTO @return
+
+@tavern1
+BKGND #<scene.bkgnd>.100.61
+GOTO @return
+
+@temple6
+BKGND #<scene.bkgnd>.100.95
+GOTO @return
+
+@temple7
+BKGND #<scene.bkgnd>.100.90
+GOTO @return
+
+@templeinside
+BKGND #<scene.bkgnd>.100.62
+GOTO @return
+
+@templeinside4
+BKGND #<scene.bkgnd>.100.75
+GOTO @return
+
+@templeinside5
+BKGND #<scene.bkgnd>.100.65
+GOTO @return
+
+@templeinside6
+BKGND #<scene.bkgnd>.100.72
+GOTO @return
+
+@templeinside7
+BKGND #<scene.bkgnd>.100.95
+GOTO @return
+
+@templeinside8
+BKGND #<scene.bkgnd>.100.95
+GOTO @return
+
+@templeinside10
+BKGND #<scene.bkgnd>.100.91
+GOTO @return
+
+@templeinside11
+BKGND #<scene.bkgnd>.100.37
+GOTO @return
+
+@templeinside12
+BKGND #<scene.bkgnd>.100.95
+GOTO @return
+
+@templeoutside2
+BKGND #<scene.bkgnd>.100.88
+GOTO @return
+
+@terendrozinside1
+BKGND #<scene.bkgnd>.100.78
+GOTO @return
+
+@terendrozinside2
+BKGND #<scene.bkgnd>.100.85
+GOTO @return
+
+@terendrozinside3
+BKGND #<scene.bkgnd>.100.71
+GOTO @return
+
+@undergroundgalleries
+BKGND #<scene.bkgnd>.100.92
+GOTO @return
+
+@vestibulary
+BKGND #<scene.bkgnd>.100.88
+GOTO @return
+
+@walloffame
+BKGND #<scene.bkgnd>.100.70
+GOTO @return
+
+@wallofshame
+BKGND #<scene.bkgnd>.100.88
+GOTO @return
+
+@weapons
+BKGND #<scene.bkgnd>.100.70
+GOTO @return
+
+@weapons2
+BKGND #<scene.bkgnd>.100.88
+GOTO @return
+
+@Widepalace2
+BKGND #<scene.bkgnd>.100.66
+GOTO @return
+
+
+
+@return
+RETURN
+END

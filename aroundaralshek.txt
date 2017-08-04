@@ -1,0 +1,93 @@
+SCENE 8200, desert5, SCENE, "To Aralshek's Tomb"
+#include include.txt
+COMPARE #<aralsheksepsfsdfsfsfqqqq>, 1
+IF= @pass
+END
+
+@pass
+GOTO LINK 123, 0
+;
+;---------------------------------------------------------------------------------------------------------------------------------
+;
+SCENE 8201, desert5, SCENE, "Towards Tahamanraset"
+#include include.txt
+GOTO LINK 81, 2
+;
+;---------------------------------------------------------------------------------------------------------------------------------
+;
+SCENE 8202, desert5, SCENE, "Around Aralshek's Sepulchre"
+#include include.txt
+IF T1102-T1101 @pass
+IF T1102 @guards
+END
+
+@pass
+GOTO LINK 82, 3
+
+@guards
+COMPARE #<arlahhhhh>, 1
+IF= @pass
+ACTOR 1, Massoud, oriental2, 1, 50, 90
+ACTOR 2, Fathie, oriental5, 1, 33, 70, 13
+ACTOR 3, Reza, oriental5, 1, 25, 80
+1: Hello, foreigner.
+1: We knew you would come.
+H: Yeah I seem to be famous in the region...
+1: We are the Azeris, guards of Aralshek's sepulchre.
+1: For centuries, we've guarded the place and made sure that Aralshek stays asleep.
+1: But a few months ago, another foreigner came.
+1: I don't know who he was but he was not human.
+1: We fought him but he was animated by surnatural powers.
+1: Many of my men died, and most of those who survived died thereafter.
+1: The foreigner went to Aralshek's sepulchre and woke him up.
+1: Some of my companions went to the town to inform the Grand Priest of the temple.
+1: And he told us that you would come, with Taj Isha's scepter, to face Aralshek.
+1: Here is by the entrance of the sepulchre.
+1: Be very careful, my friend, you will also have to fight his bodyguards.
+1: May the Gods help you, foreigner, and save us all...
+WAIT 2
+N: Remember to equip Taj Isha's scepter!
+WAIT 2
+SET arlahhhhh, 1
+SET aralsheksepsfsdfsfsfqqqq, 1
+GOTO @pass
+;
+;---------------------------------------------------------------------------------------------------------------------------------
+;
+SCENE 8203, desert5, SCENE, "Around Aralshek's Sepulchre"
+#include include.txt
+GOTO LINK 82, 2
+;
+;---------------------------------------------------------------------------------------------------------------------------------
+;
+SCENE 8204, cave1, SCENE, "Grotto"
+#include include.txt
+ACTOR 1, Abdulatif, 7, 0, 25, 90
+1: What are you doing here, foreigner?
+1: This is not a place for living creatures.
+1: Run!
+1: Run before the deads come and take you with them!
+WAIT 3
+SOUND pain4.wav
+WAIT 1.2
+1: Too late.
+WAIT 1
+MOVE 1, 120, 50
+FIGHT 525, 526, 527, 528
+IF WIN @reward
+N: I told you, human...
+WAIT 1
+N: Your place is not here.
+END
+
+@reward
+GIVE I1076
+TAKE T1206
+N: The deads disappear in a cloud of ashes.
+WAIT 1
+N: Only the armour of the Lord of the Pit on the sandy rocks remains.
+SOUND FoundItem.wav
+END
+;
+;---------------------------------------------------------------------------------------------------------------------------------
+;

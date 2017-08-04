@@ -1,0 +1,654 @@
+SCENE 0, castle, WELL, "Well of Souls", 2, 0
+THEME -1
+MUSIC "title.mid"
+COMPARE #<num.serverTimeMonth>, 1
+IF= @xmas1
+COMPARE #<num.serverTimeMonth>, 12
+IF= @xmas12
+GOTO @checkdone
+
+@xmas1
+COMPARE #<num.serverTimeDay>, 5
+IF> @checkbis
+GOTO @xmasstarted
+
+@xmas12
+COMPARE #<num.serverTimeDay>, 20
+IF< @checkdone
+@xmasstarted
+ACTOR 1, "Gatekeeper", "-  -   Mad", 1, 48, 66
+WEATHER 9
+1: Greetings, lost soul, and merry christmas!
+1: A special event takes place online during christmas.
+1: The event will last until the 5th january.
+1: Enjoy!
+END
+
+@checkdone
+COMPARE #<num.timeMonth>, 10
+IF= @halloween?oct
+COMPARE #<num.timeMonth>, 11
+IF= @halloween?nov
+GOTO @normalfight
+
+@halloween?oct
+COMPARE #<num.timeDay>, 31
+IF= @halloweenspecialevent
+GOTO @normalfight
+
+@halloweenspecialevent
+ACTOR 1, "Gatekeeper", "-  -   Mad", 1, 48, 66
+1: Greetings, lost soul, and happy halloween!
+1: A special event takes place online during halloween.
+1: If you want to participate, check the list of the servers and pick Mad's Hospital.
+1: The special event will last until the 2nd november.
+1: Enjoy!
+END
+
+@halloween?nov
+COMPARE #<num.timeDay>, 3
+IF< @halloweenspecialevent
+@normalfight
+ACTOR 1, "Gatekeeper", "-  -   Mad", 1, 48, 66
+SEL 1
+POSE 1, 1, 4
+1: Welcome to the Well of Souls, traveler.
+MOVE 1, 40, 70
+1: I am the gatekeeper of this world.
+1: Unincarnated souls can stay here and relax, but I cannot let them pass.
+MOVE 1, 55, 77
+1: Select a soul and resume its struggle or create a new soul and start another journey...
+N: Right-click on the gatekeeper if you are new to Well of Souls.
+END
+
+@eventActorClick1
+SOUND sword1.wav
+MENU "New to WoS=@newby", "Quests of the world=@quests", "Do you think I am scared by a little cat?=@scared"
+END
+
+@quests
+SOUND sword1.wav
+1: This world is one of the largest worlds published, and there is considerable amount of quests to do.
+1: However, you'll have a choice to pick when you start leveling your character.
+1: You can level it either in the so-called training grounds or in the wild.
+1: Some players prefer the training grounds.
+1: That's a good option, but keep in mind that there are no quests there.
+1: Therefore, if you choose this option, remember to explore the world as well and complete the quests.
+1: You should also regularly visit the masters of your class to accomplish the class quests.
+1: You can find a list of the quests of the world on athelias.biz (URL: http://athelias.biz/quests.html).
+END
+
+@scared
+SOUND sword1.wav
+1: Hmm yeah but the difference between you and me is that all YOU can do at the moment is click on my skin or chat. 
+1: So INCARNATE if you want to do or kill something.
+WAIT 1.5
+1: Humans are so stupid sometimes...
+END
+
+@newby
+SOUND sword1.wav
+1: I can help you create a new soul, or restore a treasured one.
+1: When you are ready, select your soul and then incarnate into the physical world.
+1: Notice the buttons along the bottom of your screen.  Point to a button to see its name.
+1: Press the NEW button to create a new soul, and select its skin and abilities.
+ACTOR 15, , buttons, 2, 95, 95
+1: Press the RESTORE button to select an old soul, and resume its struggle.
+SEL 15
+POSE 1
+1: Press the INCARNATE button to enter the physical world again.
+SEL 15
+POSE 4
+1: Press the MAP button to see what other souls roam the world.
+SEL 15
+POSE 0
+1: Press the HAUNT button to spy invisibly over another incarnated soul.
+SEL 15
+POSE 3
+1: All you need to know about this world is explained in the castle where you will be sent after your first incarnation.
+1: Don't skip the lessons if you are new to Athelias!
+1: You may rest here safely, for as long as you like.
+MOVE 15, 120, 90, 1
+END
+;
+;-------------------------------------------------------------------------------------------------------------
+;
+SCENE 3, forest1heal, SCENE, "Shrine of Life"
+#include include.txt
+IF ALIVE @skip1
+WAIT 3
+@skip1
+SOUND magic3.wav
+WAIT 2.5
+GIVE L1
+GIVE H5000
+GIVE M5000 
+N: You walk under the light and feel fine.
+WAIT 1
+N: You have your health and mana points recharged!
+END
+;
+;-------------------------------------------------------------------------------------------------------------
+;
+SCENE 5, desert2, SCENE, ""
+#include include.txt
+#include version.txt
+IF ALIVE, @skip1
+WAIT 3
+@skip1
+WAIT 2.5
+GIVE L1
+GIVE H5000
+GIVE M5000 
+SOUND magic3.wav
+N: You feel in fine fettle.
+WAIT 1
+N: You have your health and mana points recharged!
+END
+;
+;----------------------------------------------------------------------------------------------------------
+;
+SCENE 10, , SCENE, "Mad's", 0,0
+#include madstool.txt
+#include include.txt 
+END
+;
+;-------------------------------------------------------------------------------------------
+;
+SCENE 12
+#include include.txt
+IF T669 @off
+N: Hunting Skill is now on.
+HOST_GIVE T669
+END
+
+@off
+N: Hunting Skill is now off.
+HOST_TAKE T669
+END
+;
+;--------------------------------------------------------------------------------------------
+;
+SCENE 13, "templeinside5", CUT, "Gate" 
+; no #include include.txt 
+ACTOR 1, "Priest", human7, 1, 75, 90 
+FACE 1, 0 
+ACTOR 2, Sergent, guard7, 1, 30, 95
+ACTOR 3, Guard, guard6, 1, 20, 99 
+2: We know that %1 is in the temple. 
+2: The Regent ordered that he gets arrested. 
+2: If you don't tell him to give way, we'll have to enter the palace and arrest him ourselves. 
+1: Who do you think you are, young man?! 
+1: Nobody dared enter the temple with a weapon since its foundation, and you're talking of invading it?! 
+1: You have half an hour to go away. 
+1: End of topic. 
+1: And I will make an official complaint at the palace for such an attitude. 
+WAIT 3
+MOVE 1, 125, 90
+WAIT 3
+GOTO SCENE 14
+;
+;--------------------------------------------------------------------------------------------
+;
+SCENE 14, "templeinside5", SCENE, "Gate"
+#include include.txt
+ACTOR 1, "Priest", human7, 1, 25, 90
+H: They are looking for me.
+H: You cannot compromise the temple for one person.H: Since that's what they want, I'm going to surrender.
+1: Don't be stupid, %1.
+1: The temple will never give up.
+1: The regent is mad.
+1: Even if we have to fight, the guards of the regent won't pass.
+WAIT 2
+SOUND growl8.wav
+WAIT 0.5
+1: What's that again?!
+ACTOR 2, "Friar John", human126, 1, 105, 85
+MOVE 2, 75, 85
+WAIT 1
+2: The guards are trying to batter the main gate!
+1: WHAT?!
+1: So they want a war!
+H: I will take care of them myself.
+WAIT 2
+MOVE 1, -20, 90
+MOVE 2, 120, 85
+WAIT 4
+MOVE 1, -20, 90, 1
+MOVE 2, 120, 85, 1
+BKGND temple6
+ACTOR 3, Sergent, guard7, 1, 30, 95
+H: So you're looking for me, eh!
+H: I am here, ready to fight!
+3: Soldiers!
+WAIT 1.3
+MOVE 3, -20, 90, 1
+FIGHT 136, 136, 136, 136
+IF LOSE @loose1
+N: More guards arrive!
+ACTOR 4, Priest, human58, 1, 100, 90
+ACTOR 5, Priest, human58, 1, 105, 98
+MOVE 4, 80, 90
+MOVE 5, 85, 98
+WAIT 1
+4: We are here to help you, %1.
+5: We'll never leave a friar in trouble!
+WAIT 2.6
+MOVE 4, 120, 120, 1
+MOVE 5, 120, 120, 1
+@fight2
+FIGHT 136, 136, 136, 139, -141, -141, 136, 136
+IF LOSE @loose2
+N: More guards arrive!
+MOVE 5, 90, 105, 1
+MOVE 1, 96, 100, 1
+MOVE 5, 85, 90
+MOVE 1, 80, 96
+WAIT 1
+1: The temple won't fall!
+WAIT 2
+MOVE 1, 120, 120, 1
+MOVE 5, 125, 120, 1
+@fight3
+FIGHT 136, 136, 136, 136, 136, 140, -142, -141, 136, 136, 136, 136
+IF LOSE @loose3
+N: The guards of the regent move back!
+HOST_GIVE T1039
+WAIT 1
+N: Victory is yours!
+END
+
+@loose1
+ACTOR 4, Priest, human58, 1, 100, 90
+ACTOR 5, Priest, human58, 1, 105, 98
+MOVE 4, 80, 90
+MOVE 5, 85, 98
+WAIT 1
+4: We are here to help you, %1.
+5: We'll never leave a friar in trouble!
+GIVE L1
+GIVE H4000
+GIVE M4000
+WAIT 2.6
+MOVE 4, 120, 120, 1
+MOVE 5, 120, 120, 1
+GOTO @fight2
+
+@loose2
+MOVE 5, 90, 105, 1
+MOVE 1, 96, 100, 1
+MOVE 5, 85, 90
+MOVE 1, 80, 96
+WAIT 1
+1: The temple won't fall!
+1: Fight for the gods, %1!
+GIVE L1
+GIVE H5000
+GIVE M5000
+WAIT 2
+MOVE 1, 120, 120, 1
+MOVE 5, 125, 120, 1
+GOTO @fight3
+
+@loose3
+END
+;
+;-------------------------------------------------------------------------------------------
+;
+SCENE 15
+HTML leveling.html
+END
+
+;
+;-------------------------------------------------------------------------------------------
+;
+SCENE 16
+HTML elem.html
+END
+;
+;-------------------------------------------------------------------------------------------
+;
+SCENE 17
+HTML stats.html
+END
+;
+;-------------------------------------------------------------------------------------------
+;
+SCENE 18
+IF E1082 @travel
+END
+
+@travel
+GOTO LINK 7, 0
+;
+;-------------------------------------------------------------------------------------------
+;
+SCENE 19, palace2, SCENE, "Palace"
+ACTOR 1, Guard, guard6, 1, 100, 90
+ACTOR 2, Guard, guard6, 1, 105, 95
+MOVE 1, 60, 90
+MOVE 2, 65, 95
+WAIT 1
+H: Let me go!
+1: Shut up!
+H: Alright...
+MOVE 1, -20, 90, 1
+MOVE 2, -20, 90, 1
+FIGHT 144.60.90, 144.65.95
+HOST_GIVE T1054
+IF WIN @win
+1: Bah, we now have to go to the morgue, not to the Prison.
+END
+
+@win
+H: Ok, let's go out now.
+END
+;
+;-----------------------------------------------------------------------------
+;
+SCENE 20
+HTML armenisgiants.html
+END
+;
+;-----------------------------------------------------------------------------
+;
+SCENE 21
+SET temp.bettingRabbit, 0
+ACTOR 1, Marius, human100, 1, 38, 92
+ACTOR 2, , betting1, 0, 38, 100
+ACTOR 3, , betting1, 0, 41, 95
+ACTOR 4, , betting1, 0, 45, 90
+1: Hello!
+1: Do you want to try your luck and find where the rabbit is?
+WAIT 1.9
+SOUND sword1.wav
+@menu1
+MENU "Yes=@yes", "No=@no"
+SOUND thud.wav
+GOTO @menu1
+
+@menu12
+MENU "Yes=@yes", "No=@no2"
+SOUND thud.wav
+GOTO @menu12
+
+@no2
+SET temp.bettingRabbit, 0
+H: No, that's enough.
+END
+
+@no
+SOUND sword1.wav
+H: No, I don't feel like being cheated today.
+END
+
+@yes
+SET temp.bettingRabbit, 1
+SOUND sword1.wav
+H: Why not?
+1: How much do you want to bet?
+WAIT 1.5
+SOUND sword1.wav
+@menu523
+MENU "100 Tomans=@bet100", "250 Tomans=@bet250", "500 tomans=@bet500", "1000 Tomans=@bet1000", "2500 Tomans=@bet2500", "5000 Tomans=@bet5000", "10 000 Tomans=@bet10000", "Cancel=@betcancel"
+SOUND thud.wav
+GOTO @menu523
+
+@betcancel
+SOUND sword1.wav
+SET temp.bettingRabbit, 0
+END
+
+@bet100
+SOUND sword1.wav
+SET temp.bet, 100
+GOTO @checkpoor
+
+@bet250
+SOUND sword1.wav
+SET temp.bet, 250
+GOTO @checkpoor
+
+@bet500
+SOUND sword1.wav
+SET temp.bet, 500
+GOTO @checkpoor
+
+@bet1000
+SOUND sword1.wav
+SET temp.bet, 1000
+GOTO @checkpoor
+
+@bet2500
+SOUND sword1.wav
+SET temp.bet, 2500
+GOTO @checkpoor
+
+@bet5000
+SOUND sword1.wav
+SET temp.bet, 5000
+GOTO @checkpoor
+
+@bet10000
+SOUND sword1.wav
+SET temp.bet, 10000
+GOTO @checkpoor
+
+@checkpoor
+IF -G#<temp.bet> @poor
+HOST_TAKE G#<temp.bet>
+GOTO @bet
+
+@poor
+SOUND thud.wav
+N: You need to have the money to bet.
+WAIT 
+N: Do you want to choose another amount?
+ASK 30
+IF YES @menu523
+END
+
+@bet
+IF R2 @move1
+IF R2 @move2
+IF R2 @move3
+IF R2 @move4
+GOTO @bet
+
+@move1
+MOVE 2, 41, 95
+MOVE 3, 45, 90
+MOVE 4, 38, 100
+SET tem.coord2x, 41
+SET tem.coord3x, 45
+SET tem.coord4x, 38
+SET tem.coord2y, 95
+SET tem.coord3y, 90
+SET tem.coord4y, 100
+GOTO @pick
+
+@move2
+MOVE 2, 45, 90
+MOVE 3, 38, 100
+MOVE 4, 41, 95
+SET tem.coord2x, 45
+SET tem.coord3x, 38
+SET tem.coord4x, 41
+SET tem.coord2y, 90
+SET tem.coord3y, 100
+SET tem.coord4y, 95
+GOTO @pick
+
+@move3
+MOVE 2, 38, 100
+MOVE 3, 45, 90
+MOVE 4, 41, 95
+SET tem.coord2x, 38
+SET tem.coord3x, 45
+SET tem.coord4x, 41
+SET tem.coord2y, 100
+SET tem.coord3y, 90
+SET tem.coord4y, 95
+GOTO @pick
+
+@move4
+MOVE 2, 41, 95
+MOVE 3, 38, 100
+MOVE 4, 45, 90
+SET tem.coord2x, 41
+SET tem.coord3x, 38
+SET tem.coord4x, 45
+SET tem.coord2y, 95
+SET tem.coord3y, 100
+SET tem.coord4y, 90
+GOTO @pick
+
+@pick
+1: Pick a hat.
+WAIT 1
+N: Right-click on it!
+END
+
+@eventActorClick2
+COMPARE #<temp.bettingRabbit>, 0
+IF= @betcancel
+MOVE 2, -20, 90, 1
+IF R66 @lose
+ACTOR 5, , betting1, 1, #<tem.coord2x>, #<tem.coord2y>
+GOTO @win
+
+@eventActorClick3
+COMPARE #<temp.bettingRabbit>, 0
+IF= @betcancel
+MOVE 3, -20, 90, 1
+IF R66 @lose
+ACTOR 5, , betting1, 1, #<tem.coord3x>, #<tem.coord3y>
+GOTO @win
+
+@eventActorClick4
+COMPARE #<temp.bettingRabbit>, 0
+IF= @betcancel
+MOVE 4, -20, 90, 1
+IF R66 @lose
+ACTOR 5, , betting1, 1, #<tem.coord4x>, #<tem.coord4y>
+GOTO @win
+
+@lose
+N: You lose!
+WAIT 1
+ACTOR 2, , betting1, 0, 38, 100
+ACTOR 3, , betting1, 0, 41, 95
+ACTOR 4, , betting1, 0, 45, 90
+MOVE 5, 120, 1, 1
+1: Do you want to try again?
+SOUND sword1.wav
+GOTO @menu12
+
+@win
+N: You win!
+WAIT 1
+1: Congratulations!
+MUL temp.bet, 3
+HOST_GIVE G#<temp.bet>
+SOUND kaching.wav
+ACTOR 2, , betting1, 0, 38, 100
+ACTOR 3, , betting1, 0, 41, 95
+ACTOR 4, , betting1, 0, 45, 90
+MOVE 5, 120, 1, 1
+1: Do you want to try again?
+SOUND sword1.wav
+GOTO @menu12
+;
+;-----------------------------------------------------------------------------
+;
+; SCENE 22 : pasagardae scene
+;
+;-----------------------------------------------------------------------------
+;
+SCENE 23, kotor1, SCENE, "Michel"
+#include include.txt
+ACTOR 1, Marcus, human90, 1, 25, 90
+1: Good job, %1.
+1: Let's take the bag and the money and get out of here before someone comes.
+COMPARE #<num.TrophyBagSlots>, 48
+IF> @shit
+SET num.TrophyBagWidth, 8
+SET num.TrophyBagHeight, 6
+SET num.TrophyBagOpen, 1
+HOST_GIVE T614
+N: You take the bag.
+END
+
+@shit
+H: Wait!
+H: THIS is the bag you told me about?!
+H: Mine is larger!
+WAIT 1.2
+@menu1
+MENU "Ask for a part of the money=@ask", "Give up=@giveup"
+GOTO @menu1
+
+@giveup
+HOST_GIVE T614
+H: I have the feeling I have been somehow cheated...
+END
+
+@ask
+HOST_GIVE T614
+HOST_GIVE T615
+H: I want a part of his money!
+1: That was not the deal. 
+1: You have the bag.
+WAIT 1.2
+@menu2
+MENU "Insist=@insist", "Don't insist=@giveup"
+GOTO @menu2
+
+@insist
+H: I am sorry but I have to insist.
+1: Now you're really pissing me off, %1.
+H: Maybe but I want a part of the money.
+1: In your dreams!
+WAIT 1.3
+MOVE 1, 120, 90, 1
+FIGHT 583.25.90
+IF WIN @winmar
+HOST_GIVE T616
+END
+
+@winmar
+N: You kill him and takes the gold.
+HOST_GIVE T615
+HOST_GIVE G300000
+END
+;
+;-----------------------------------------------------------------------------
+;
+SCENE 24, kotor1, SCENE, "Michel"
+MOVE H, #<temp.X>, #<temp.Y>, 1
+#include include.txt
+ACTOR 1, Michel, human117, 1, 25, 90
+1: Thanks a lot, %1.
+COMPARE #<num.TrophyBagSlots>, 48
+IF> @shit
+1: I don't know how to reward you.
+1: Maybe...
+1: I am a part of an old family of bagmakers.
+1: Since several centuries we use the power of the runes to magically increase the capacity of our bags.
+1: Let me offer you this one.
+1: I am sure it will help you in your journey!
+H: Thanks!
+SET num.TrophyBagWidth, 8
+SET num.TrophyBagHeight, 6
+SET num.TrophyBagOpen, 1
+HOST_GIVE T613
+END
+
+@shit
+1: I don't know how to reward you.
+1: I think you wouldn't refuse this gold.
+HOST_GIVE G150000
+HOST_GIVE T613
+SOUND kaching.wav
+1: Thanks!
+END

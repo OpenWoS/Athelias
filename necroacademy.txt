@@ -1,0 +1,625 @@
+SCENE 400, templeinside4, SCENE, "Gate"
+#include include.txt
+COMPARE #<c6amphidfgdf>, 1
+IF= @endnothidfgsdf
+@pass
+GOTO LINK 18, 15
+
+@meetDerar
+ACTOR 1, "Master Derar",human7, 1, 25, 90, 3,
+ACTOR 2, Dalis, human20, 2, 18, 85
+ACTOR 3, Amel, human3, 1, 30, 92
+2: Ah, %1!
+2: We were waiting for you
+2: Let's go to Athalantis
+WAIT 1.5
+GOTO LINK 18, 15
+
+@endnothidfgsdf
+IF T1028 @meetDerar
+IF T1029 @pass
+IF T3025 @pass
+ACTOR 1, Caretaker, human8, 1, 23, 97
+1: Mistress Razel asked for you.
+1: You should go and meet her in her office. 
+END
+;
+;--------------------------------------------------------------------------------------------------------
+;
+SCENE 401, templeinside4, SCENE, "Mistress Razel's"
+ACTOR 1, "Mistress Razel", wom4, 1, 25, 90, 6
+#include include.txt
+IF C2+T3968-J113 @supernewbquest
+COMPARE #<illuq1>, 3
+IF= @illuq1
+IF> @illuqbacks
+IF -C16 @nothingforyou
+ACTOR 60, "", 3, 0, 95, 15
+IF T3035 @classqcompleted
+IF T1035-T3035 @necroq4rew
+IF -T1023 @firsttime
+IF V99+T3026-T3035 @necroquest4
+IF V25 @necroquest1
+@wbdfgherh
+1: Welcome back, %1.
+1: Can I do something for you?
+END
+
+@supernewbquest
+1: So a novice has come to challenge me!
+1: I knew this day would happen.
+1: Then fight!
+WAIT 2
+MOVE 1, 150, 150, 1
+FIGHT 2919.25.90
+END
+
+@eventActorClick60
+N: Level required for the class quests:
+WAIT 1
+N: Level 25, 50, 75, 99.
+END
+
+@illuqbacks
+1: Welcome back, illusionist.
+1: Can I do something for you?
+END
+
+@illuq1
+1: Hello.
+1: Can I do something for you?
+H: Yes. My masters from the Illusory Magic Academy asked me to come here and search some information about Lord Jeren.
+1: Lord Jeren?!
+1: That's very strange : some months ago appeared again an old relic that everyone had forgotten : the Skull of Jeren, and now you're here and ask me about him...
+H: A relic?
+1: Yes, an old man in Prina found it - don't ask me how - but we succeeded in bringing it back to the Academy to study it.
+1: Unfortunately, the fellow necromancer who was in charge of experimenting its powers had his soul corrupted by the Chaos laying in it and summoned an army of undead.
+1: He besieged Athalantis and threatened the population, but we succeeded in stopping him and he is now in a jail in Prina.
+H: And what about the relic?
+1: It is now in the palace of the Regent.
+1: We asked him to give it back to the Academy so we can destroy it but he refused.
+1: The relationship between the Academy and the Palace are a bit cold at the moment.
+1: I don't know what will happen now...
+H: Very interesting. Thanks for the information.
+1: No problem. I'll let you know if I learn something new.
+SET illuq1, 4
+END
+
+@classqcompleted
+1: Welcome, #<g.Cmaster> %1.
+1: What can I do for you?
+END
+
+@necroq4rew
+H: Hello, Mistress Razel.
+H: Derar is dead.
+1: Good.
+H: However...
+1: What?
+H: He wasn't in a jail.
+H: He had been appointed "advisor of the regent".
+1: Advisor!
+1: So I was right...
+1: You should be careful when you approach the regent, %1.
+1: Very Careful.
+1: But it's not the time to talk about that.
+1: You are courageous, %1.
+1: You proved to us how brave you are.
+1: I think I can now teach you the last spell you may have to learn : how to summon the undead.
+1: Please, sit down and listen.
+WAIT 2
+N: %1 has learnt a new spell : Summon an Undead.
+HOST_GIVE S265
+SOUND bell2.wav
+HOST_GIVE T3035
+HOST_GIVE T4001
+HOST_TAKE T3034
+1: Go now, %1.
+1: You will soon be one of the masters of the Academy.
+1: May the gods help you, fellow necromancer.
+END
+
+@necroquest4
+IF -T1032 @quest4intro
+1: You're still here, %1!
+1: It's time to go to Prina and definitely get rid of Derar!
+END
+
+@quest4intro
+ACTOR 1, "Mistress Razel", wom4, 1,  40, 100, 6
+ACTOR 2, "Lord Ghamyl", lord8, 1, 25, 90
+1: Hello, %1.
+H: Lord Ghamyl
+2: Hello, Knight. 
+1: Lord Ghamyl has very bad news for us.
+2: Four weeks ago, the guards of the regent came into Athalantis and wanted Derar to be transferred to the prison of Prina. 
+2: But since, the undead walk again in the street of Athalantis and several villages around were attacked by bands of ghouls.
+2: It must cease.
+2: Derar must be killed.
+1: Neither the city of Athalantis nor the Academy can afford to start a war - for the regent won't be willing to send us back Derar.
+1: That's why we would like you to go to Prina and solve the problem.
+H: Where is he imprisoned?
+2: In a jail below the palace of the regent.
+H: So basically you want me to go to the palace, fight all the guards of Prina, raid the prison, and kill one of the Masters of the Academy. 
+1: That's the idea, yes.
+H: Sounds good.
+2: Thank you, Knight %1.
+1: Be careful, that's a dangerous mission.
+1: Maybe you should to try and find a mercenary to help you...
+HOST_GIVE T1032
+END
+
+@nothingforyou
+1: Hello, stranger.
+1: There is nothing for you in the academy, sorry.
+END
+
+@necroquest1
+COMPARE #<c6amphidfgdf>, 1
+IF= @necroquest2
+IF T3025 @wbdfgherh
+IF T1025 @necroquest1rew
+IF T1024 @necro1back
+1: Hello, %1.
+1: I see you are well advanced in your studies.
+1: I may have a new spell to teach you.
+1: But first I'd need you to do me a favor.
+1: An old man in Prina owe a relic I could use for some incantations.
+1: I managed to convince him to exchange it for an old book of spells I have.
+1: Although, my duty prevent me from going myself to Prina.
+1: I would like you to go there to do the exchange for me.
+H: Sure.
+1: Thank you.
+1: His name is Aden.
+1: Ask around to find where he lives.
+1: And here is the book.
+MOVE 1, #<num.hostX>, #<num.hostY>
+HOST_GIVE T1024
+END
+
+@necroquest3back
+1: Hurry, %1!
+1: You must go and stop the siege of Athalantis!
+END
+
+@necro1back
+1: You are still here, %1?!
+1: Please hurry and go to Prina.
+1: I really need this relic.
+END
+
+@necroquest3reward
+1: Hello, %1.
+1: I heard of your victory against Derar.
+1: You saved the honor of the Academy.
+1: I think you now deserve to learn one of the secret incantations of our order.
+1: Listen carefully : I am going to teach you how to raise someone from the death.
+WAIT 2
+N: %1 has learnt a new spell : Resurrect All.
+HOST_GIVE T3026
+WAIT 2
+1: Go now and achieve your training, %1.
+1: Take care.
+END
+
+@recroquest3end
+1: You did a very good job in Athalantis, %1.
+1: We are all proud of you.
+END
+
+@necroquest3
+IF T1030 @necroquest3back
+IF I1053-T3026 @necroquest3reward
+IF I1053 @recroquest3end
+1: Enter, %1.
+1: We have to talk.
+1: Derar's power grew up again.
+1: He has now invaded Athalantis with his army of undead.
+1:The city asks for help and accuses the academy of being responsible of this.
+1: You let Derar escape.
+1: You now have to stop him.
+1: 
+May you succeed.
+HOST_GIVE T1030
+END
+
+@necrowit
+1: Come back later, %1.
+1: I am busy.
+END
+
+@necroquest2
+IF T3024+V75 @necroquest3
+IF T3024 @necrowit
+IF T1029 @necroquest2backsf
+IF T1028 @necroquest2backsfsdf
+1: Hello, %1.
+1: I saw you at the assembly.
+1: I never fully trusted Derar, but I wouldn't have expected him to be corrupted.
+1: I guess that this relic corrupted his heart.
+1: It seems to be an evil power laying on its own.
+1: Derar's power grew up since he got it.
+1: Fast, very fast.
+1: But his heart dimmed as well.
+1: I need to inquire about this relic.
+1: I don't know what to do with it.
+1: What I cannot understand is why you don't seem to be affected by its power.
+1: Anyway, Derar needs to be escorted to Athalantis Port, to embark to the Desertic Lands.
+1: I would like you to go with him and two other members of the Academy to the port.
+H: Fine.
+1: Meet them at the main gate.
+HOST_GIVE T1028
+END
+
+@necroquest2backsf
+ACTOR 2, Dalis, human20, 2, 120, 85
+ACTOR 3, Amel, human3, 1, 125, 92
+MOVE 2, 50, 85
+MOVE 3, 55, 92
+WAIT 2
+1: Ah you are back!
+1: How was the trip?
+2: Derar escaped.
+1: WHAT?
+1: You let him go?!
+3: He summoned several undead and escaped during the fight.
+1: I don't want any excuse!
+1: Out of here!
+1: I need to think about that.
+SET c5necroquest2escaped, 1
+WAIT 3
+GOTO EXIT
+
+@necroquest2backsfsdf
+1: %1, you must hurry and go with Derar to Prina!
+END
+
+@necroquest1rew
+IF T1027 @necroquest1rew1
+H: Hello, Mistress Razel
+H: I have the relic.
+1: Oh great!
+1: Please, bring it to Derar and come back so I could teach you some spells.
+HOST_GIVE T1026
+END
+
+@necroquest1rew1
+1: Welcome back, %1.
+1: Please, have a sit and listen. 
+1: The spell I am going to teach you is called : Vampire Kiss.
+1: It allows you to turn your HP into MP for the whole team.
+WAIT 1.5
+N: %1 has learnt a new spell : Vampire Kiss.
+HOST_GIVE T3025
+END
+
+@firsttime
+1: Hello, novice.
+1: I am Razel, Mistress Necromancer.
+1: Be welcome among us.
+1: Necromancers are probably the best mages of Athelias.
+1: We are the masters of life and death.
+1: Unfortunately, some of us make their art serve the chaos.
+1: That's why have a bad reputation.
+1: You can hardly trust a necromancer nowadays.
+1: Don't let your heart be corrupted, young man.
+1: Feel free to come back if you have any question about our art.
+HOST_GIVE T1023
+END
+;
+;--------------------------------------------------------------------------------------------------------
+;
+SCENE 402, templeinside4, SCENE, "Derar's"
+#include include.txt
+IF C80 @endnothidfgsdf
+COMPARE #<c6amphidfgdf>, 1
+IF= @endnothidfgsdf
+ACTOR 1, "Master Derar",human7, 1, 25, 90, 3
+IF -C16 @nothingforyou
+IF T1026 @relic
+@nothingforyou
+1: Scat, I am busy!
+END
+
+@endnothidfgsdf
+N: The office is empty.
+END
+
+@relic
+H: Greetings, Master Derar
+H: Mistress Razel asked me to bring you this relic.
+1: Oh my God!
+MOVE 1, #<num.hostX>, #<num.hostY>
+1: Jeren's Skull!
+1: She finally managed to convince the old idiot to give it to the academy!
+1: Splendid!
+HOST_TAKE T1026
+HOST_GIVE T1027
+END
+;
+;--------------------------------------------------------------------------------------------------------
+;
+SCENE 403, widepalace2.200.25, SCENE, "Lecture Hall"
+#include include.txt
+
+IF -C16 @endnothidfgsdf
+COMPARE #<c5necroquest2escaped>, 1
+IF= @necro2rewsdg
+IF T3025+V50-T1028 @necroquest2
+@dkdksddddsszrg
+ACTOR 1, "Pr Noreth", human136, 1, 35, 62
+ACTOR 2, Student, human5, 1, 10, 75, 
+ACTOR 3, Student, human4, 1, 15, 80, 
+ACTOR 4, Student, human6, 1, 25, 99, 
+ACTOR 5, Student, human8, 1, 30, 85, 
+ACTOR 6, Student, wom69, 1, 40, 70, 
+ACTOR 7, Student, human21, 1, 45, 80, 
+ACTOR 8, Student, human18, 1, 50, 85, 
+ACTOR 9, Student, wom14, 1, 60, 80, 
+ACTOR 10, Student, human17, 1, 65, 90, 
+ACTOR 11, Student, human15, 1, 80, 96, 
+FACE 6, 0
+FACE 7, 0
+FACE 8, 0
+FACE 9, 0
+FACE 10, 0
+FACE 11, 0
+COMPARE #<c5necroquest2escaped>, 1
+IF= @necro2rewsdgjklfffdsq
+1: You are late, %1!
+1: What was I saying?
+1: Oh yes : the importance of snake flesh for the preparation of incantations of the 3rd order.
+1: The African House Snake is small to medium-sized colubrid snake from Africa.  
+1: Although it is commonly called the "African" House Snake in the herpetocultural community, there are at least ten other species in this genus found on the continent.   
+1: (There is also an Afalian species and one endemic to the Sprongelles).
+1: Lamprophis fuliginosus is a highly variable snake.  
+1:  It can be unicolored, spotted, or even striped.   
+1: Many individuals are spotted as hatchlings and become unicolored as adults.  
+1:  Some adults retain this spotting on the anterior part of the body.   
+1: As the common name suggests, they are often brown, ranging from tan to deep chocolate brown.   
+1: However, they can also be olive-green, dark-green, orange, brick-red, or even black (in fact, the specific epithet fuliginosus comes from a latin word meaning "black" or "soot").   
+1: The ventral scales are pearly white and the whole snake has an iridescence that rivals even such snakes as the Rainbow Boa (Epicrates cenchria).
+1: Most L. fuliginosus have a distinct light stripe on each side of the head from the rostrum to the back of the head.   
+1: The presence or absence of this stripe has been used to taxonomically distinguish certain populations in the past, but is now simply regarded as part of the snakes geographic variation.  
+1:  Some individuals have very broad head stripes, which gives the head a very "boxy" appearance.
+WAIT 2
+SOUND bell3.wav
+WAIT 2
+1: The lesson is over.
+1: See you on monday.
+MOVE 2, 120, 85
+MOVE 3, 120, 85
+MOVE 4, 120, 85
+MOVE 5, 120, 85
+MOVE 6, 120, 85
+MOVE 7, 120, 85
+MOVE 8, 120, 85
+MOVE 9, 120, 85
+MOVE 10, 120, 85
+MOVE 11, 120, 85
+WAIT 2
+MOVE 1, 120, 80
+END
+
+@necro2rewsdgjklfffdsq
+1: Ah, %1!
+1: You are late, as usually.
+1: Have a seat, we are studying a new spell.
+1: So
+1: As I said, Vampire Bite allows to take on your HP to heal the whole team.
+1: blah blah
+WAIT 1
+N: After one hour, he finally teaches you the spell.
+WAIT 0.1
+N: %1 has learnt a new spell : Vampire Bite.
+HOST_GIVE T3024
+END
+
+@necro2rewsdg
+IF T3024 @endnothidfgsdf
+GOTO @dkdksddddsszrg
+
+@necroquest2
+COMPARE #<c6amphidfgdf>, 1
+IF= @endnothidfgsdf
+THEME 23
+MUSIC #silence
+ACTOR 1, "Mistress Razel", wom4, 1, 35, 62, 6
+ACTOR 2, "Master Derar",human7, 1, 125, 90, 3
+ACTOR 3, "Academician", human84, 1, 10, 90
+ACTOR 4, "Academician", human84, 1, 7, 88
+ACTOR 5, "Academician", human84, 1, 45, 88
+ACTOR 6, "Academician", human84, 1, 44, 85
+ACTOR 7, "Academician", human84, 1, 56, 85
+ACTOR 8, "Academician", human84, 1, 16, 83
+ACTOR 9, "Academician", human84, 1, 60, 83
+ACTOR 10, "Academician", human84, 1, 18, 80
+ACTOR 11, "Academician", human84, 1, 80, 80
+ACTOR 12, "Academician", human84, 1, 23, 78
+ACTOR 13, "Academician", human84, 1, 43, 78
+ACTOR 14, "Academician", human84, 1, 45, 85
+ACTOR 15, "Academician", human84, 1, 68, 85
+ACTOR 16, "Academician", human84, 1, 34, 92
+ACTOR 17, "Academician", human84, 1, 26, 84
+ACTOR 18, "Academician", human84, 1, 26, 88
+ACTOR 19, "Academician", human84, 1, 14, 79
+ACTOR 20, "Academician", human84, 1, 58, 83
+ACTOR 21, "Academician", human84, 1, 42, 90
+ACTOR 22, "Academician", human84, 1, 60, 92
+ACTOR 23, "Academician", human84, 1, 50, 94
+ACTOR 24, "Academician", human84, 1, 30, 96
+FACE 5,0
+FACE 14,0
+FACE 6,0
+FACE 13,0
+FACE 21,0
+FACE 9,0
+FACE 20,0
+FACE 7,0
+FACE 22,0
+FACE 23,0
+FACE 11,0
+FACE 15,0
+1:... So I think you all understand now how serious the situation is.
+1: And for this reason, I ask the assembly to vote for Derar's banishment.
+H: 'What happened?
+FACE 11, 2
+SEL 11
+' 'Derar became mad
+' 'He summoned several powerful undead and planed to seize Irezar.
+1: Who vote for?
+3: I do!
+4: I do!
+5: So do I!
+6: Same for me!
+7: And me!
+SEL 8
+' And me!
+SEL 9
+' I do as well!
+SEL 10
+' I do
+SEL 11
+' I vote for!
+SEL 12
+' I vote for!
+SEL 13
+' Same for me!
+SEL 14
+' And me!
+SEL 15
+' And me!
+SEL 16
+' Me too!
+SEL 17
+' I vote for!
+SEL 18
+' I vote for!
+SEL 19
+' Everybody do
+SEL 20
+' I do!
+SEL 21
+' I do!
+SEL 22
+' I do!
+SEL 23
+' I do!
+SEL 24
+' I do!
+1: The members of the assembly have voted!
+1: Derar will be banned and deported to the desertic lands where hopefully he will expiate his crimes!
+1: Bring the prisoner in!
+WAIT 2
+MOVE 3, 10, 90
+MOVE 4, 12, 88
+MOVE 5, 58, 88
+MOVE 6, 14, 85
+MOVE 7, 56, 85
+MOVE 8, 16, 83
+MOVE 9, 54, 83
+MOVE 10, 18, 80
+MOVE 11,  52, 80
+MOVE 12, 20, 78
+MOVE 13, 50, 78
+MOVE 14, 22, 75
+MOVE 15, 48, 75
+MOVE 16,  24, 73
+MOVE 17, 46, 73
+MOVE 18,  26, 70
+MOVE 19, 44, 70
+MOVE 20, 28, 68
+MOVE 21, 42, 68
+MOVE 22, 30, 65
+MOVE 23, 40, 65
+MOVE 24, 60, 90
+WAIT 7.6
+FACE 24, 0
+FACE 5, 0
+FACE 7, 0
+FACE 9, 0
+FACE 11, 0
+FACE 13, 0
+FACE 15, 0
+FACE 17, 0
+FACE 19, 0
+FACE 21, 0
+FACE 23, 0
+FACE 3, 1
+FACE 4, 1
+FACE 6, 1
+FACE 8, 1
+FACE 10, 1
+FACE 12, 1
+FACE 14, 1
+FACE 16, 1
+FACE 18, 1
+FACE 20, 1
+FACE 22, 1
+ACTOR 25, Guard, guard3, 1, 128, 88, 6
+ACTOR 26, Guard, guard3, 1, 122, 92, 6
+MOVE 2, 50, 90
+MOVE 25, 53, 88
+MOVE 26, 47, 92
+WAIT 12
+1: Derar
+1: For having transgressed the law of the order, and for devoting yourself to the black magic, the assembly voted your banishment!
+1: You do not exist anymore for the Academy.
+1: You have lost all the privileges of the members.
+1: You will be deported to the desertic lands where hopefully you will have a honest life and make amends for your crimes.
+2: Bitch!
+2: You'll pay for it!
+2:! YOU WILL ALL PAY FOR IT!
+1: That's enough!
+1: Bring the prisoner out!
+SET c6amphidfgdf, 1
+WAIT 2
+MOVE 8, -16, 83
+WAIT 0.3
+MOVE 9, -54, 83
+MOVE 10, -18, 80
+WAIT 0.3
+MOVE 25, 128, 88
+MOVE 26, 122, 92
+MOVE 2, 147, 92
+WAIT 0.3
+MOVE 14, -22, 75
+MOVE 15, -48, 75
+WAIT 0.3
+MOVE 16, - 24, 77
+MOVE 17, -46, 76
+WAIT 0.3
+MOVE 18,  -26, 80
+WAIT 0.3
+MOVE 3, -10, 90
+MOVE 4, -12, 88
+WAIT 0.3
+MOVE 5, -58, 88
+MOVE 6, -14, 85
+WAIT 0.3
+MOVE 7, -56, 85
+MOVE 11,  -52, 80
+MOVE 12, -20, 78
+WAIT 0.3
+MOVE 13, -50, 78
+WAIT 0.3
+MOVE 19, -44, 80
+WAIT 0.3
+MOVE 20, -28, 75
+WAIT 0.3
+MOVE 21, -42, 76
+MOVE 22, -30, 78
+WAIT 0.3
+MOVE 23, -40, 75
+MOVE 24, -60, 90
+WAIT 0.3
+MOVE 1, -35, 75
+WAIT 5
+END
+
+@endnothidfgsdf
+N: The lecture hall is empty.
+END
+;
+;--------------------------------------------------------------------------------------------------------
+;

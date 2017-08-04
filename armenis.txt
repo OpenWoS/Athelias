@@ -1,0 +1,557 @@
+SCENE 4200, "armeniscity1", SCENE, "Main Gate"
+#include include.txt
+GOTO LINK 53, 0
+;
+;--------------------------------------------------------------
+;
+SCENE 4201, "port", SCENE, "Port"
+#include include.txt
+ACTOR 1, "Sailor", human63, 1, 56, 94
+IF T3993|T3988 @halloweenActors
+GOTO @nextStepAfterHalloweenActors
+
+@halloweenActors
+ACTOR 1, "Sailor", #<spEvent.Name>-humans, 63, 56, 94
+@nextStepAfterHalloweenActors
+1: Greetings, foreigner.
+1: Where do you want to go?
+WAIT 1
+@menu
+SOUND sword1.wav
+MENU "Athalantis=@athalantis", "Karsheek Island=@illusionist", "Nowhere=@nowhere"
+GOTO @menu
+
+@nowhere
+SOUND sword1.wav
+H: Nowhere
+1: You choose...
+1: Have a good day!
+END
+
+@bah
+1: Bah.
+1: Come back later if you change your mind...
+END
+
+@athalantis
+SOUND sword1.wav
+1: Athalantis, eh!
+1: How about 10 000 #<GP.name> to go there?
+1: Sounds good?
+@askath
+ASK 30
+IF YES @travath
+IF NO @bah
+1: What?
+GOTO @askath
+
+@travath
+IF -G10000 @poor
+TAKE G10000
+1: Here you go.
+IF R1+R30 @randomE
+GOTO LINK 41, 1
+END
+
+@illusionist
+SOUND sword1.wav
+1: This is quite a dangerous place.
+1: 50 000 #<GP.name> to go there.
+1: OK?
+@askillu
+ASK 30
+IF YES @gotoillu
+1: Sorry?
+GOTO @askillu
+
+@gotoillu
+IF NO @bah
+IF -G50000 @poor
+TAKE G50000
+1: Here you go.
+IF R1+R30 @randomE
+GOTO LINK 67, 0
+END
+
+@poor
+1: Hey dude, I don't work for free!
+1: Come back when you have some money.
+END
+
+@randomE
+#include quests\piratehat.txt
+END
+;
+;------------------------------------------------------------------------------------------------------------------------------------------------
+;
+SCENE 4202, "houseinside1", SCENE, "Alchemist"
+#include include.txt
+OFFER 1, 3, 4, 7, 13, 29, 30, 31, 32, 33, 36, 38, 39
+ACTOR 1, "Alchemist", human105, 1, 45, 90
+IF T3993|T3988 @halloweenActors
+GOTO @nextStepAfterHalloweenActors
+
+@halloweenActors
+ACTOR 1, "Alchemist", #<spEvent.Name>-humans, 105, 45, 90
+@nextStepAfterHalloweenActors
+COMPARE #<chat.agnathisspecialtrophy>, 2
+IF= @agnathisnext
+COMPARE #<chat.agnathisspecialtrophy>, 1
+IF= @agnathisbackish
+IF Z574 @agnathis
+@agnathisnext
+IF T90 @cmp
+COMPARE #<c5talkedtothealchemistinarmenis>, 1
+IF= @again
+1: Hello, foreigner.
+1: You looks like someone needing some of my elixirs.
+1: I can make very special potions, but you'll have to bring me several items to make them, and it will cost 2500 #<GP.name>.
+1: Sounds good?
+@question
+ASK 60
+IF YES @yes
+IF NO @nosdfsdf
+1: What?
+GOTO @question
+
+@agnathis
+COMPARE #<chat.agnathisspecialtrophy>, 1
+IF= @agnathisnext
+1: Hey!
+1: It looks like Agnathis's Robe!
+H: Yeah, that is, why?
+1: I may have a deal for you.
+1: If you can find five Hill Giants Bandeaux, five Hill Giants Beard, and five Hill Giants Belts as well, I'll exchange them for Battle Puppet.
+IF Z574+Z571.5+Z570.5+Z572.5 @agnathisexchange
+H: Hmm... I'll see if I can find that.
+1: Come back with the items, adventurer: you won't regret it!
+H: Hopefully!
+SET chat.agnathisspecialtrophy, 1
+END
+
+@agnathisexchange
+H: I've got the crap.
+1: Really?!
+H: If I tell you...
+1: That's great!
+1: Do you accept the deal?
+@askagnathismake
+ASK 60
+IF YES @askagnathismakeYES
+IF NO @askagnathismakeNO
+1: What?
+GOTO @askagnathismake
+
+@askagnathismakeYES
+1: You won't regret it!
+1: Here is the puppet!
+SOUND foundItem.wav
+HOST_GIVE I1144
+HOST_TAKE Z574
+HOST_TAKE Z571.5
+HOST_TAKE Z570.5
+HOST_TAKE Z572.5
+SET chat.agnathisspecialtrophy, 2
+END
+
+@askagnathismakeNO
+1: Are you sure?
+H: Yeah.
+1: I hope you will change your mind and come back then.
+END
+
+@agnathisbackish
+H: Greetings.
+H: I've got what you was looking for.
+1: Excellent, adventurer!
+1: So, do you accept the deal?
+GOTO @askagnathismake
+
+@nosdfsdf
+SET c5talkedtothealchemistinarmenis, 1
+@fuckoff
+1: No problem.
+1: I have lots of customers.
+1: Bye.
+END
+
+@again
+1: Welcome back.
+1: Did you change your mind?
+ASK 30
+IF YES @yes
+GOTO @fuckoff
+
+@yes
+1: So listen, for every potion you want me to make I need a white potion, a scorpion tail, and yellow herb.
+1: Come back with these ingredients if you're still interested.
+HOST_GIVE T90
+END
+
+@cmp
+1: Welcome back.
+IF Z1000+Z358+I32 @cmp2
+1: Do you remember?
+1: I need a white potion, a scorpion nipper, and yellow herb to make my elixirs...
+END
+
+@cmp2
+H: I have all the ingredients.
+1: Good.
+COMPARE #<num.Trophy1000>, 1
+IF> @mul1
+@cmp3
+IF -G2500 @poor
+HOST_TAKE G2500
+HOST_TAKE Z1000
+HOST_TAKE Z358
+HOST_TAKE I32
+HOST_GIVE I733
+SOUND FoundItem.wav
+1: Here you go, this antidote is yours!
+1: Come back if you need more.
+END
+
+@cmp4
+1: You're the boss.
+1: Give me a few minutes.
+GOTO @cmp3
+
+@mul1
+COMPARE #<num.Trophy358>, 1
+IF> @mul2
+GOTO @cmp3
+
+@mul2
+COMPARE #<num.item32>, 1
+IF> @mul3
+1: I see you have enough ingredients to make several elixirs.
+1: Do you want me to make several elixers?
+ASK 30
+IF NO @cmp4
+COMPARE #<num.item132>, #<num.Trophy358>
+IF> @item117less
+COMPARE #<num.item132>, #<num.Trophy1000>
+IF> @item131less
+SET c6antidotesdarmenis, #<num.item32>
+GOTO @makemul
+
+@item117less
+COMPARE #<num.item117>, #<num.Trophy1000>
+IF> @item131less
+SET c6antidotesdarmenis, #<num.Trophy358>
+GOTO @makemul
+
+@item131less
+SET c6antidotesdarmenis, #<num.Trophy1000>
+GOTO @makemul
+
+@makemul
+SET c6antidotesdarmenismoney, #<c6antidotesdarmenis>
+MUL c6antidotesdarmenismoney, 2500
+IF -G#<c6antidotesdarmenismoney> @makemulpoor
+1:  I can make #<c6antidotesdarmenis> elixirs with what you brought.
+1: Give me a few minutes.
+SOUND bubble.wav
+WAIT 3
+HOST_TAKE Z1000.#<c6antidotesdarmenis>
+HOST_TAKE Z358.#<c6antidotesdarmenis>
+HOST_TAKE I32.#<c6antidotesdarmenis>
+HOST_GIVE I733.#<c6antidotesdarmenis>
+HOST_TAKE G#<c6antidotesdarmenismoney>
+SOUND FoundItem.wav
+1: Here you go!
+1: See you soon!
+END
+
+@makemulpoor
+1: Hmm
+SET c6antidotesdarmenismoney2, #<num.hostGP>
+DIV c6antidotesdarmenismoney2, 2500
+1: I see you can only afford to buy #<c6antidotesdarmenismoney2> elixirs.
+1: Give me a few minutes.
+SOUND bubble.wav
+WAIT 3
+HOST_TAKE Z1000.#<c6antidotesdarmenismoney2>
+HOST_TAKE Z358.#<c6antidotesdarmenismoney2>
+HOST_TAKE I32.#<c6antidotesdarmenismoney2>
+HOST_GIVE I733.#<c6antidotesdarmenismoney2>
+MUL c6antidotesdarmenismoney2, 2500
+HOST_TAKE G#<c6antidotesdarmenismoney2>
+SOUND FoundItem.wav
+1: Here you go!
+1: See you soon!
+END
+
+@poor
+1: But you have no money.
+1: <sigh>
+1: I told you, it's 2500 #<GP.name> a potion.
+1: Come back later.
+END
+;
+;-------------------------------------------------------------------------------
+;
+SCENE 4203, weapons2, SCENE, "Smithy"
+#include include.txt
+ACTOR 1, John, human81, 1, 40, 95
+IF T3993|T3988 @halloweenActors
+GOTO @nextStepAfterHalloweenActors
+
+@halloweenActors
+ACTOR 1, "John", #<spEvent.Name>-humans, 81, 40, 95
+@nextStepAfterHalloweenActors
+COMPARE #<c5talkedtoblacksmith>, 0
+IF= @firsttimeblacksmith.txt
+1: Hello, adventurer.
+1: Toss me the item you want to upgrade.
+OFFER 132, 134, 135
+END
+
+#include blacksmith.txt
+;
+;-------------------------------------------------------------------------------
+; Quest adapted from a RPG scenario by Keven Simmons
+;
+SCENE 4204, armeniscity1, SCENE, "Townhall"
+#include include.txt
+IF T3988-T3830 @xmasq2
+ACTOR 1, Mayor, human133, 1, 35, 90
+IF T3993|T3988 @halloweenActors
+GOTO @nextStepAfterHalloweenActors
+
+@halloweenActors
+ACTOR 1, "Mayor", #<spEvent.Name>-humans, 133, 35, 90
+@nextStepAfterHalloweenActors
+IF T1208 @end
+IF T1207 @back
+IF V99 @start
+1: Welcome to Armenis City, foreigner.
+1: Feel free to stay and relax as long as you wish in our peaceful hunting village.
+END
+
+@end2
+1: Thanks again for what you did for us, adventurer.
+1: Feel free to stay and relax as long as you wish in our now peaceful hunting village.
+END
+
+@end
+COMPARE #<chat.armenis.mayor.giants>, 1
+IF= @end2
+H: Hello, Mayor.
+H: You won't hear of the giants anymore.
+1: Really?!
+1: Did you find them?!
+H: Found and killed, yes.
+1: Thank you so much, adventurer!
+H: No prob.
+SET chat.armenis.mayor.giants, 1
+END
+
+@back
+1: What is the news, foreigner?
+H: I'm still looking for signs of the giants.
+END
+
+@start
+1: Adventurer, I'll put it plainly: we need your help.
+1: Several weeks ago, the game in the area has become scarce, and signs of some giant-sized bipedal creatures have started to appear about 6-8 miles to the south-west of Armenis. 
+1: The number of these creatures is unknown, but there are definitely more than two or three. 
+1: From what evidence can be found they stand over 10 feet high and must be very strong, as shown by several broken trees. 
+1: While it was certainly possible to follow the path these creatures left, none of the hunters wanted to risk their lives to do so.
+1: Ever since the signs were first found, that area has been generally avoided by the Armenisians, but even so, two hunters have been found dead within a few miles of the village, apparently beaten to death with clubs. 
+1: Many of the hunters are now unwilling to venture very far into the forest, and thus are bringing back less game.
+1: The most chilling event however, occurred only three days ago, when one of the Armenisian guards was found dead at his post, which was inside the compound. 
+1: He was killed by a number of dagger-like slash wounds and had apparently been surprised, for his weapons were all undrawn. 
+1: When the body was first discovered by one of the other guards, a quick search of the compound found the gate unbarred and several prime pelt stolen from the tanner's shop. 
+1: There had been no strangers in the village for several weeks, and none of the villagers are missing. 
+1: Some believe that the theft and murder was the work of one of the more desperate hunters who are on the verge of poverty because of the loss of game, but as yet, none of the stolen pelts have been found. 
+1: We are poor hunters and can't offer anything in the way of payment, but would be very grateful to anyone who rid them of the creatures that are killing our friends and crippling our livelihood.
+H: I'll see what I can find.
+HOST_GIVE T1207
+END
+
+@xmasq2
+ACTOR 1, "Jack O'Frozen", christmas2, 1, 105, 90
+MOVE 1, 75, 90
+ACTOR 2, "Spirit of Christmas", christmas6, 1, 25, 90
+POSE 1, 4, 2
+WAIT 1
+1: It's here!
+1: The spirit of Christmas is here!
+WAIT 2
+1: Oh my...
+1: It's a trap!
+FIGHT 2937, 2936, 2936, 2936, 2936, 2936, 2936
+IF WIN @xmaswin
+1: We're lost!
+END
+
+@xmaswin
+1: You've succeeded!
+1: You have freed the Spirit of Christmas!
+1: You will never forget this moment, %1.
+1: The Spirit of Christmas will forever be with you in your journeys.
+GIVE T3830
+GIVE S676
+SOUND foundItem.wav
+END
+;
+;-------------------------------------------------------------------------------
+;
+SCENE 4205, tavern1, SCENE, "Tavern"
+#include include.txt
+ACTOR 1, Dutanee, wom69, 1, 40, 89
+ACTOR 2, Soltunie, elf14, 1, 91, 75
+FACE 2, 0
+ACTOR 3, Illimandire, wom46, 1, 13, 92
+IF T3993|T3988 @halloweenActors
+GOTO @nextStepAfterHalloweenActors
+
+@halloweenActors
+ACTOR 1, "Dutanee", #<spEvent.Name>-wom, 69, 40, 89
+ACTOR 2, Soltunie, #<spEvent.Name>-elf, 14, 91, 75
+FACE 2, 0
+ACTOR 3, Illimandire, #<spEvent.Name>-wom, 46, 13, 92 
+@nextStepAfterHalloweenActors
+1: Hello.
+1: What do you want to drink?
+OFFER 2, 34
+IF V99 @comparemerc.firsttime
+@normalV99
+END
+
+@comparemerc.firsttime
+COMPARE #<merc.firstTime>, 1
+IF= @normalV99
+GOTO @mercfirstime.txt
+
+#include merc-firsttime.txt
+
+@eventActorClick2
+SOUND sword1.wav
+SET temp.currentMerc, 2912
+#include merc-alreadyHired.txt
+@nextstepaftermercalreadyhired2912
+ACTOR 20, , merc2912, 0, 50, 50
+ACTOR 21, , hire, 0, 40, 75
+ACTOR 22, , cancel, 0, 60, 75
+END
+
+@eventActorClick3
+SOUND sword1.wav
+SET temp.currentMerc, 2911
+#include merc-alreadyHired.txt
+@nextstepaftermercalreadyhired2911
+ACTOR 20, , merc2911, 0, 50, 50
+ACTOR 21, , hire, 0, 40, 75
+ACTOR 22, , cancel, 0, 60, 75
+END
+
+#include merc-hire.txt
+;
+;-------------------------------------------------------------------------------
+;
+SCENE 4206, templeinside12, SCENE,  "Temple"
+IF T3975 @antigods
+#include include.txt
+GIVE L1
+GIVE H5000
+GIVE M5000
+OFFER 37
+ACTOR 1, Aralen, human5, 4, 25, 99
+IF T3993|T3988 @halloweenActors
+GOTO @nextStepAfterHalloweenActors
+
+@antigods
+FIGHT 816
+IF WIN @antiwin
+END
+
+@antiwin
+HOST_GIVE Z816
+HOST_TAKE T3975
+SOUND trophyFound.wav
+END
+
+@halloweenActors
+ACTOR 1, "Aralen", #<spEvent.Name>-humans, 5, 25, 99
+@nextStepAfterHalloweenActors
+1: Welcome, adventurer.
+1: Feel free to stay here and relax as long as you wish.
+END
+;
+;-------------------------------------------------------------------------------
+;
+SCENE 4207, armeniscity1, SCENE,  "Temple"
+#include include.txt
+ACTOR 1, "Novice Master", human68, 1, 35, 90
+IF C2 @novice
+1: You shouldn't be here, you know.
+END
+
+@novice
+IF T3968 @questback
+COMPARE #<talk.noviceMaster>, 1
+IF= @noviceBack
+1: So you have escaped from the castle!
+1: Good job, I hadn't seen a novice for a long time.
+1: Who needs the training of the Masters of Athelias?
+1: We are the best, and we will prove it!
+IF V45 @novicequest
+1: Return to me later, %1, and we will show them all!
+SET talk.noviceMaster, 1
+END
+
+@noviceBack
+IF V45 @novicequest
+1: Welcome back, %1.
+1: Keep up the good work: soon we'll show the Masters of Athelias nobody can beat a novice!
+1: You should return to me later.
+END
+
+@novicequest
+1: %1!
+1: Or should I say Master %1?!
+1: I'm proud of you!
+1: You've grown proud and strong.
+1: I have to tell you a secret.
+1: Novices count among the best fighters of Athelias, but a legend says they can acquire even a greater power.
+1: Back in the days, a Novice called Lyndz challenged the Masters for their power.
+1: She fought them and stole their secrets.
+1: She became the very first Super Novice.
+H: It souds interesting, but how could I do that?
+1: Travel back to Athelias island and defeat the Masters of every academy.
+1: Then return to me, and I will show you the path to become a Super Novice.
+MISSION 113
+END
+
+@questback
+IF J113 @questDone
+MISSION 113
+1: Welcome back, %1.
+1: Defeat the Masters of Athelias and return to me.
+1: I'll show you the path to become a Super Novice.
+END
+
+@questDone
+COMPARE #<supernewsquestmorph>, 1
+IF= @donesupernewb
+1: You've succeeded, %1!
+1: Seek the Master Novice in Benadrim and show him this Proof of Bravery.
+1: He will help you.
+SET supernewsquestmorph, 1
+END
+
+@donesupernewb
+IF C10 @supernewbmorphed
+1: Welcome back, %1.
+1: Seek the Master Novice in Benadrim and show him this Proof of Bravery.
+1: He will help you.
+
+@supernewbmorphed
+1: Woo! %1!
+1: You're now a Super Novice!
+1: Congratulation!
+END
+

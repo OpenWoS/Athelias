@@ -1,0 +1,468 @@
+SCENE 11300, streetatnight, SCENE, "Main Gate"
+#include include.txt
+IF T1138 @check
+GOTO @pass
+
+@check
+COMPARE #<chat.thanPaladeDemon>, 1
+IF= @demon
+@pass
+GOTO LINK 114, 0
+
+@back
+ACTOR 1, Helen, 265, 1, 30, 90
+POSE 1, 4
+1: So, you're back!
+1: Do you accept the deal now?
+IF -G100000 @poor
+GOTO @ask
+
+@demon
+COMPARE #<chat.demonThan>, 2
+IF= @back
+COMPARE #<chat.demonThan>, 1
+IF= @pass
+ACTOR 1, Helen, 265, 1, 30, 90
+POSE 1, 4
+1: So you went to the galleries, adventurer...
+H: How do you know that?
+1: Who cares?
+1: But I can help you.
+H: What?
+1: I know someone who knows a way to defeat the demon trapped there.
+1: I'll give you his name and where to find it for 100,000 Tomans.
+IF -G100000 @poor
+1: Deal?
+@ask
+ASK 60
+IF YES @yes
+IF NO @no
+1: What?
+GOTO @ask
+
+@no
+H: No way, that's too much.
+1: Fine.
+1: You'll come back, I know it.
+WAIT 2
+SET chat.demonThan, 2
+GOTO @pass
+
+@poor
+H: I don't have the money.
+1: Then come back later.
+WAIT 2
+SET chat.demonThan, 2
+GOTO @pass
+
+@yes
+H: Alright: here is the money.
+SOUND kaching.wav
+TAKE G100000
+1: The priest of Obrovac has studied the history of the region.
+1: Apparently, he discovered a way to destroy the demon trapped in the galleries, but you'll have to go and ask him to know it.
+H: How do you know that?
+1: I was her assistant before.
+1: Farewell.
+H: Yeah, farewell.
+SET chat.demonThan, 1
+GOTO @pass
+;
+;---------------------------------------------------------------------------------------------------------------
+;
+SCENE 11301, streetatnight, SCENE, "Library"
+#include include.txt
+#include library.txt
+ACTOR 1, Toter, 269, 1, 35, 90
+POSE 1, 4
+1: Greetings, #<g.mylord>!
+1: Can I be of any help?
+END
+;
+;---------------------------------------------------------------------------------------------------------------
+;
+SCENE 11302, streetatnight, SCENE, "Armory"
+#include include.txt
+OFFER 
+ACTOR 1, Fortol, 273, 1, 35, 90
+POSE 1, 4
+1: Watch that bow, adventurer!
+1: Deadly that is, and I know what I'm talking about!
+1: Well, I also have whips and stuff.
+END
+;
+;---------------------------------------------------------------------------------------------------------------
+;
+SCENE 11303, streetatnight, SCENE, "Armory"
+#include include.txt
+OFFER 
+ACTOR 1, Karbal, 261, 1, 35, 90
+POSE 1, 4
+1: Great armors, I have!
+1: And good helms as well!
+END
+;
+;---------------------------------------------------------------------------------------------------------------
+;
+SCENE 11304, streetatnight, SCENE, "Townhall"
+#include include.txt
+IF T1141 @newstuff
+IF T1140 @governordead
+ACTOR 1, "Korgol", 23, 1, 35, 90
+ACTOR 2, "Marel", 271, 1, 45, 95
+SEL 1
+POSE 1, 4
+SEL 2
+POSE 1, 4
+IF T1139 @dedstone
+IF T1138 @demonback
+IF T1137 @part2back
+IF T1136 @questback
+IF T1133-T1136 @hurry
+IF -V99 @tooyoung
+1: A living thingy, eh!
+1: Welcome to our town!
+1: How do you like the place?
+H: Should I really answer?
+1: Be careful, hero, you're not at home here!
+H: Is it a threat?
+1: Take it as you want, nasty creature.
+2: Calm down, dude, this guy could help us...
+FACE 2, 0
+1: Dude?!
+1: I am your king!
+2: Yeah, a dead kingy thingy, I know!
+2: But still, this mortal could help us.
+1: Hmm...
+1: <whisper> Alright, let's try to be polite.
+2: <whisper> So don't kill him this time!
+1: <whisper> Yeah, you're right...
+1: <whisper> Maybe I should let you talk...
+2: Alright.
+FACE 2, 1
+2: Dear, brave adventurer, or whatever.
+2: Would you mind if I ask you a favor?
+1: <whisper> Damn, you're good at being hypocritical - err polite!
+2: <whisper> I was a politician before... when I was still alive.
+FACE 2, 0
+2: <whisper> But not shut up, please.
+1: <whisper> Bah!
+H: What favor?
+FACE 2, 1
+2: Well some really weak necromancers - well  I don't know if that's really necromancers but that's mages anyway - are pissing our peaceful community off.
+2: They stole a magical artifact belonging to this town.
+2: I'm sure that would be nothing for you, but could you get rid of them and get the artifact back, please?
+2: You'll be well rewarded, you have the King's word!
+1: What king are you talking about?!
+1: And what word?!
+2: <whisper> Shut up!
+2: <whisper> I was a politician, I've said!
+1: Oh yeah, right!
+1: Yeah, well rewarded, you'll be!
+1: Gold, and magical stuff, and everything!
+1: You'll become rich!
+2: <whisper> I can't believe this guy was a king once!
+2: Anyway.
+2: Do you feel like helping us, brave, brave adventurer?
+H: How could I be sure I could trust you?
+2: You have the King's word!
+1: Yeah the King's.. errr MY word!
+2: That's what I've just said!
+1: Shut up now!
+1: Well, if you don't help us, I guess we could just kill you...
+H: Try...
+2: You don't want this to happen...
+H: Hmm... Alright.
+H: Where are your necromancers or something?
+1: In a fortress on the south of Thanaris.
+1: Go to the south of the city, you'll find a passage there leading to a swamp.
+1: The fortress is beyond.
+EJECT V99
+GIVE T1133
+END
+
+@newstuff
+ACTOR 1, Parlos, 270, 1, 40, 90
+POSE 1, 4
+COMPARE #<chat.thanarisquestend>, 1
+IF= @newstuffbis
+H: Who are you?
+1: I'm the new governor of Thanaris.
+H: Hmm?
+H: Well I guess I should give you this then.
+1: The Dead Stone!
+1: Incredible!
+1: Thanks!
+H: No problem.
+SET chat.thanarisquestend, 1
+END
+
+@newstuffbis
+1: Welcome back, living thingy.
+H: Thanks.
+END
+
+@governordead
+N: The place is empty.
+END
+
+@dedstone
+H: Greetings.
+1: What do you want, again?!
+COMPARE #<chat.thanPaladeDemon>, 1
+IF= @deadstonesev
+H: We need to borrow the Dead Stone.
+1: What?!
+2: They must be joking!
+H: Listen, the only way to defeat the demon trapped under the town is to use the power of the Dead Stone.
+H: We need it - you'll get it back when we'll be done.
+1: They're no longer funny.
+1: Let's kill them.
+@deadsqtonecom
+2: Agreed.
+WAIT 1.5
+MOVE 1, 120, 90, 1
+MOVE 2, 120, 90, 1
+FIGHT 457.35.90, 458.45.95
+IF WIN @deadstonefightwin
+END
+
+@deadstonefightwin
+N: You find a rune on the corpse of Marel and take it.
+SOUND foundItem.wav
+WAIT 1
+N: You grab the Dead Stone and lead to the galleries.
+EJECT T1139
+GIVE I1091
+GIVE T1140
+END
+
+@deadstonesev
+H: I need to borrow the Dead Stone.
+1: What?!
+2: He must be joking!
+H: Listen, the only way to defeat the demon trapped under the town is to use the power of the Dead Stone.
+H: I need it - you'll get it back when I'm done.
+1: He's no longer funny.
+1: Let's kill him.
+GOTO @deadsqtonecom
+
+@demonback
+COMPARE #<chat.thanPaladeDemon>, 1
+IF= @demonback2
+H: Why the hell did not you tell me about the demon in the galleries?!!!
+1: Did we forget to mention that?
+1: So sad...
+1: Now scat!
+H: What?
+2: Scat, he said.
+2: We gave you a reward, you just haven't been able to grab it...
+2: Goodbye.
+SET chat.thanPaladeDemon, 1
+END
+
+@demonback2
+1: Do you want something else?
+1: Scat!
+END
+
+@part2back
+2: Welcome back, %1.
+2: You seem to be still alive, eh!
+END
+
+@hurry
+1: What are you doing here?!
+2: Yeah, hurry and kill the necromancers!
+END
+
+@questback
+H: Here is your stone.
+1: Great!
+2: See, when you ask politely, you get what you want...
+1: Shut up!
+COMPARE #<num.peopleInScene>, 1
+IF= @questbackonlyone
+1: Thanks, adventurers.
+H: Our pleasure...
+FACE 2, 0
+2: I guess we should reward them...
+1: Yeah, but how?
+1: Don't count on me to reward them!
+2: There is maybe...
+1: What?
+FACE 2, 1
+2: Dear adventurers, usually, we don't let strangers go there, but since you've helped us...
+2: There is a place in town where...
+FACE 2, 0
+1: No! You don't want to send them there?!
+2: Yes.
+1: You're mean!
+2: Thanks!
+FACE 2, 1
+2: Well, adventurers, one of the most powerful plate is somewhere in this town.
+2: If you can reach it, it's yours.
+2: Just head to the galleries, on the south of Thanaris, and try your luck...
+GIVE T1137
+END
+
+@questbackonlyone
+1: Thanks, adventurer.
+H: Our pleasure...
+FACE 2, 0
+2: I guess we should reward him...
+1: Yeah, but how?
+1: Don't count on me to reward him!
+2: There is maybe...
+1: What?
+FACE 2, 1
+2: Dear adventurer, usually, we don't let strangers go there, but since you've helped us...
+2: There is a place in town where...
+FACE 2, 0
+1: No! You don't want to send him there?!
+2: Yes.
+1: You're mean!
+2: Thanks!
+FACE 2, 1
+2: Well, adventurer, one of the most powerful plate is somewhere in this town.
+2: If you can reach it, it's yours.
+2: Just head to the galleries, on the south of Thanaris, and try your luck...
+GIVE T1137
+END
+
+@tooyoung
+1: Oh, what a cute baby!
+1: Do you want a candy, kid?!
+1: Scat, before I eat you!
+2: Calm down, kingy thingy!
+1: How do you dare...?!
+END
+;
+;----------------------------------------------------------------------------------------
+;
+SCENE 11305, streetatnight, SCENE, "Southern Gate"
+#include include.txt
+EJECT T1133
+GOTO LINK 115, 0
+;
+;----------------------------------------------------------------------------------------
+;
+SCENE 11306, streetatnight, SCENE, "To the Galleries"
+#include include.txt
+EJECT T1137
+IF T1138 @pass
+H: Alright, let's find this plate now.
+WAIT 2
+@pass
+GOTO LINK 141, 0
+;
+;----------------------------------------------------------------------------------------
+;
+SCENE 11307, streetatnight, SCENE, "Super Nono"
+#include include.txt
+IF I2993 @nothing
+H: I guess that's the dude...
+HOST_GIVE T3825
+TIMER 1, %R90
+FIGHT 2939
+IF WIN @reward
+IF LOSE @lose
+@end
+END
+
+@nothing
+N: There is nothing left here.
+END
+
+@eventTimer1
+IF I2993 @end
+IF -T3987 @end
+IF -T3825 @end
+N: Super Nono uses Newbies' Call!
+TIMER 1, %R90
+FIGHT 2939, 2928, 2928, 2928, 2928
+IF WIN @reward
+IF LOSE @lose
+END
+
+@lose
+HOST_TAKE T3825
+END
+
+@reward
+HOST_TAKE T3825
+N: You kill the ghost and take his gear.
+GIVE I2993
+GIVE I2994
+GIVE I2995
+GIVE I2996
+GIVE I2997
+GIVE I2998
+GIVE I2999
+TAKE T3987
+SOUND foundItem.wav
+END
+;
+;----------------------------------------------------------------------------------------
+;
+SCENE 11310, streetatnight, SCENE, "Healing Thnigy"
+#include include.txt
+N: Tou walk under the light and feel... kinda fine.
+WAIT 2
+GIVE L1
+GIVE H6000
+GIVE M6000
+SOUND magic3.wav
+WAIT 1
+N: You have your health and mana points recharged!
+END
+;
+;----------------------------------------------------------------------------------------
+;
+SCENE 11311, streetatnight, SCENE, "Super Dead One"
+#include include.txt
+ACTOR 1, "Master Novice", 150, 1, 35, 90
+POSE 1, 4
+IF -C10 @cheat
+@start
+IF I2993 @end
+IF T3987 @back
+1: Look at that!
+1: Just LOOK AT THAT!
+1: A Super Newb!
+H: Super Novice, please.
+1: You, worthless piece of meat, don't tell me the do and don't!
+1: You call yourself a Super Novice?
+1: I am a Master Novice!
+H: Master or not, you're dead...
+1: You, <censored>!
+1: Do you know why I am dead?
+1: Because I had the <censured> to do what you will never do!
+1: I challenged the ghost of the mightiest novice on Gaia!
+H: Hmm?
+H: And where can I find this ghost?
+1: If you so want do die, fine: I'm going to tell you.
+1: Just look for him in Thanaris and you will find him.
+HOST_GIVE T3987
+END
+
+@back
+1: So... is it still that easy now?
+1: You miserable, the super novice's still not dead!
+END
+
+@end
+1: Woohoo, you've got your super-strong equipment!
+1: Congratulations!
+1: Now I guess you're gonna be like: "Oh, look at me, see how strong I am!".
+1: Silly human.
+END
+
+@cheat
+1: What the fuck are you doing here, you, pathetic piece of flesh?!
+HOST_TAKE H100000
+HOST_TAKE G1000000
+END
+
+
+

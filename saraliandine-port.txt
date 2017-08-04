@@ -1,0 +1,44 @@
+SCENE 14400, forest1, SCENE, "To the woods"
+#include include.txt
+GOTO LINK 
+;
+;--------------------------------------------------------------------------------------
+;
+SCENE 14401, port2, SCENE, "Port"
+#include include.txt
+ACTOR 1, "Captain Fireleaf", human78, 45, 90
+; insérer une quête avant de proposer the trip vers la jungle
+1: An adventurer, eh!
+1: Do you want to travel to the jungle?
+1: 50 000 Tomans to get there.
+@ask
+IF -G50000 @poordude
+ASK 30
+IF YES @yes
+IF NO @no
+1: What?
+GOTO @ask
+
+@poordude
+H: I don't have the money...
+1: Then you should come back later.
+END
+
+@no
+1: Come back if you change your mind.
+END
+
+@yes
+1: Alright, let's go then.
+HOST_TAKE G50000
+SOUND kaching.wav
+WAIT 2.5
+GOTO LINK 146, 0
+;
+;-----------------------------------------------------------------------------------------
+;
+
+
+
+
+

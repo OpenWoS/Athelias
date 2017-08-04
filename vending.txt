@@ -1,0 +1,141 @@
+SCENE 14800, vending, SCENE, Banker
+#include include.txt
+ACTOR 1, Basmek, human69, 1, 35, 85
+GAME 7
+1: Come and invest in the most famous corporations of Athelias! 
+END
+;
+;---------------------------------------------------------------
+;
+SCENE 14801, vending, SCENE, Gambling
+#include include.txt
+ACTOR 1, Indra, wom61, 1, 35, 85
+GAME 1
+1: If you need a break, adventurer, my slot machines are perfect for you!
+END
+;
+;---------------------------------------------------------------
+;
+SCENE 14802, vending, SCENE, Gambling
+#include include.txt
+ACTOR 1, Senia, wom48, 1, 35, 85
+GAME 2
+1: Monster racing!
+1: Do you want to try your luck, adventurer?
+END
+;
+;---------------------------------------------------------------
+;
+SCENE 14803, vending, SCENE, Gambling
+#include include.txt
+ACTOR 1, Itsuro, wom63, 1, 35, 85
+GAME 4
+1: You need money?
+1: Come and play blackjack then!
+END
+;
+;---------------------------------------------------------------
+;
+SCENE 14804, vending2.200.50, SCENE, "First Vending Room"
+#include include.txt
+CALL 110029@start 1
+END
+;
+;---------------------------------------------------------------
+;
+SCENE 14805, vending2.200.50, SCENE, "Second Vending Room"
+#include include.txt
+CALL 110029@start 2
+END
+;
+;---------------------------------------------------------------
+;
+SCENE 14806, vending2.200.50, SCENE, "Third Vending Room"
+#include include.txt
+CALL 110029@start 3
+END
+;
+;---------------------------------------------------------------
+;
+SCENE 14807, vending2.200.50, SCENE, "Fourth Vending Room"
+#include include.txt
+CALL 110029@start 4
+END
+;
+;---------------------------------------------------------------
+;
+SCENE 14808, vending2.200.50, SCENE, "Fifth Vending Room"
+#include include.txt
+CALL 110029@start 5
+END
+;
+;---------------------------------------------------------------
+;
+SCENE 14809, vending, SCENE, Guard
+#include include.txt
+ACTOR 1, Guard, guard1, 1, 35, 85
+1: Farewell, adventurer.
+WAIT 2
+GOTO LINK 7, 32
+;
+;---------------------------------------------------------------
+;
+SCENE 14810, vending, SCENE, "Vending Tickets"
+#include include.txt
+ACTOR 1, Bernard, human93, 1, 35, 85
+OFFER 129
+1: Oh, sorry, lad: the vending area is still under contruction.
+1: There's not much I can do for you. 
+END
+1: Welcome, adventurer!
+1: Do you want to exchange you vending tickets for boxes of 10?
+@ask
+ASK 300
+IF YES @yes
+IF NO @no
+1: Pardon?
+GOTO @ask
+
+@no
+1: Feel free to come back later if you want to exchange them.
+END
+
+@yes
+IF -I129.10 @notenough
+1: How many boxes do you want?
+@ask2
+ASK 300
+COMPARE #<lastAsk>, 1
+IF< @onetoten
+COMPARE #<lastAsk>, 10
+IF> @onetoten
+SET temp, #<lastAsk>
+MUL temp, 10
+IF -I129.#<temp> @notenough
+HOST_TAKE I129.#<temp>
+HOST_GIVE I130.#<lastAsk>
+SOUND foundItem.wav
+1: Et voila! #<lastAsk> boxes for you!
+END
+
+@onetoten
+1: That's ten tickets for a box, so you can only get from one to ten.
+1: Come back several times if you want more.
+END
+
+@notenough
+1: Sorry but you don't have enough tickets.
+1: That's 10 tickets for a box.
+END
+;
+;---------------------------------------------------------------
+;
+SCENE 14811, vending, SCENE, "Gambling"
+#include include.txt
+ACTOR 1, Maldenel, wom41, 1, 35, 85
+GAME 
+
+END
+;
+;---------------------------------------------------------------
+;

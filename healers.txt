@@ -1,0 +1,304 @@
+SCENE 8800, mangeas1, SCENE, "To Mangeas"
+#include include.txt
+GOTO LINK 13, 17
+;
+;-------------------------------------------------------------------------------
+;
+SCENE 8801, mangeas1, SCENE, "Master Arvalon's"
+#include include.txt
+ACTOR 1, "Mistress Arvalon", elf7, 1, 46, 84
+IF T3993|T3988 @halloweenActors
+GOTO @nextStepAfterHalloweenActors
+
+@halloweenActors
+ACTOR 1, "Mistress Arvalon", #<spEvent.Name>-elf, 7, 46, 84
+@nextStepAfterHalloweenActors
+IF C2+T3968-J113 @supernewbquest
+GIVE L1
+GIVE H5000
+GIVE M5000
+IF C56 @healer
+1: Welcome to the sanctuary.
+1: You can stay here and relax as long as you wish.
+END
+
+@supernewbquest
+1: Excuse me if I hurt you, but it's your choice after all!
+WAIT 3
+MOVE 1, 150, 150, 1
+FIGHT 2922.46.84
+END
+
+@healer
+ACTOR 60, "", 3, 0, 95, 15
+IF V99+T1046+S243 @healerquest4
+IF V75+T1043 @healerquest3
+IF V50+T1042 @healerq2
+IF V25 @healerquest1
+COMPARE #<chat.healers.arvalon>, 1
+IF< @healersfirsttime
+1: Welcome, young %L.
+1: Keep training hard and soon I'll have some skills to teach you.
+END
+
+
+
+@eventActorClick60
+N: Level required for the class quests:
+WAIT 1
+N: Level 25, 50, 75, 99.
+END
+
+@healerq4end
+COMPARE #<healerquest4>, 2
+IF= @healerend
+H: I did it.
+H: The skull of Jeren is buried with the rest of his corpse.
+H: And I doubt that someone would dare go and get it there.
+1: Good.
+1: At least this story is over.
+1: But the regent of Prina still hassles the sanctuary.
+1: Healers are not welcome anymore there.
+1: And you should be very careful if you go to Prina : you are now an outlaw and the guards would arrest you if they's find you.
+WAIT 2
+1: Oh by the way, the master tamer got a new pet.
+1: I asked her to keep it for you, you'll probably be interested.
+SET healerquest4, 2
+END
+
+@healerend
+1: Welcome back, %1.
+1: You know that you can stay here and relax as long as you wish.
+END
+
+@healerquest4
+IF T1047 @healerq4end
+COMPARE #<healerquest4>, 1
+IF= @healerquest4bis
+1: Greetings, %1.
+1: We cannot keep the skull of Jeren in the Sanctuary.
+1: Its evil power could corrupt the wisest.
+1: You must take it and bury it with the rest of Jeren's skeleton, in the palace of Irezar.
+H: I knew I would have to.
+SET healerquest4, 1
+END
+
+@healerquest4bis
+H: Mistress Arvalon...
+1: There is no time to waste, %1.
+1: You must go to Irezar and bury the skull.
+END
+
+@hq3hurry
+1: There is no time to waste, %1.
+1: Go to the palace and get this relic back.
+END
+
+@hq3return
+1: Greetings, %1.
+1: Did you go to the palace?
+H: Yes, and as expected the regent refused to give me the relic.
+H: I had to fight his guards.
+1: You must return there and get it, regardless of what the regent can say or do.
+1: Do you understand?
+H: Yes, Mistress Arvalon. 
+END
+
+@hq3grats
+IF S214 @healerback
+H: Hello, Mistress Arvalon.
+H: I've got the relic.
+1: Fantastic!
+1: Did you easily get it?
+H: I can't say so...
+H: The relationship with the regent may be a bit... cold now.
+1: The most important is to have the relic.
+1: You did well.
+WAIT 2
+1: Your training is almost achieved but you have some spells left to learn as a healer.
+1: I think it's time for you to learn them.
+WAIT 3
+N: %1 has learnt a new spell : %S243.
+SOUND bell2.wav
+WAIT 1
+N: %1 has learnt a new spell : %S244.
+SOUND bell2.wav
+WAIT 1
+N: %1 has learnt a new spell : %S245.
+SOUND bell2.wav
+WAIT 1
+N: %1 has learnt a new spell : %S239.
+SOUND bell2.wav
+WAIT 1
+N: %1 has learnt a new spell : %S236.
+SOUND bell2.wav
+WAIT 1
+N: %1 has learnt a new spell : %S232.
+SOUND bell2.wav
+WAIT 1
+N: %1 has learnt a new spell : %S214.
+SOUND bell2.wav
+HOST_GIVE S243
+HOST_GIVE S244
+HOST_GIVE S245
+HOST_GIVE S239
+HOST_GIVE S236
+HOST_GIVE S232
+HOST_GIVE S214
+END
+
+@healerquest3
+IF T1046 @hq3grats
+IF T1045 @hq3return
+IF T1044 @hq3hurry
+1: Greetings, %1.
+1: We cannot let the regent keep the Skull of Jeren.
+1: You must go to the palace and take it back.
+1: It must be destroyed.
+H: I agree but I doubt that the regent will be willing to abandon the relic.
+1: I know.
+1: But you MUST take it back.
+1: Do you understand?
+H: I guess...
+1: Go now.
+1: May Isindra help you.
+HOST_GIVE T1044
+SET healq3, 1
+END
+
+@healersfirsttime
+1: Welcome to the sanctuary, young healer.
+1: I am Arvalon, holder of the ancient elven magic.
+1: I will teach you how to improve your healing skills, but you'll have to start your journey without my help.
+1: Please, return when you think you are ready to receive my instruction.
+SET chat.healers.arvalon, 1
+END
+
+@healerback
+1: Welcome to the sanctuary, %1.
+END
+
+@healerq2back
+1: Hello, %1.
+1: Did you get the relic?
+H: No, I was about to leave for Prina.
+H: I'll let you know.
+1: Get a move on!
+END
+
+@healerq2back2
+COMPARE #<healerq2>, 2
+IF= @healerq2back3
+1: Welcome back, %1.
+1: Do you have the relic with you?
+H: The relic is now the regent's.
+1: What?!
+H: Several guards of the regent came when I was trying to convince Aden to give me the relic - they wanted it as well.
+H: Then, Aden got crazy and I had to fight against both the guards and Aden.
+H: Unfortunately, one of the guards succeeded in running away with the skull during the fight.
+1: Hmm
+1: Why would the regent want this relic?
+1: I hope it is not what I think...
+SET healerq2, 2
+END
+
+@healerq2back3
+1: Welcome back, %1.
+1: I heard that the master tamer got a new pet.
+1: You may want to go and have a look : you'll possibly be interested.
+END
+
+@healerq2
+IF T1043 @healerq2back2
+COMPARE #<healerq2>, 1
+IF= @healerq2back
+1: Welcome back, %1.
+1: I inquired about Aden's relic.
+1: If I am right, this the Skull of Jeren, a powerful necromancer who allied with the chaos during the first invasion.
+1: Jeren was the lord of Irezar and the palace there was his.
+1: The relic must be buried with the rest of Jeren's body, in the palace.
+1: You must go back to back to Prina and lay hands on the skull.
+SET healerq2, 1
+END
+
+@healerquest1
+COMPARE #<healerquest1>, 3
+IF= @healerback
+IF T1042 @healerquest1back
+COMPARE #<healerquest1>, 0
+IF> @healerq1inquire
+IF T1041 @healerq1hurry
+1: Welcome back, %1.
+1: Can I ask you for a favor?
+1: A traveller from Prina told me of someone infected with an rare disease there, who requires our medicine.
+1: Unfortunately, I cannot go to Prina myself, but I have prepared all the potions needed for the cure.
+1: Could you please go to Prina for me and give him the elixirs?
+H: Of course.
+1: Thank you, %1.
+1: His name is Aden.
+HOST_GIVE T1041
+END
+
+@healerq1hurry
+1: Hello, %1.
+1: How is Aden?
+1: I didn't go to Prina yet.
+1: What?!
+1: Hurry and go there!
+1: He really need our medicines.
+END
+
+@healerq1inquire
+COMPARE #<healerquest1>, 2
+IF= @healerq1inquire2
+1: Welcome back, %1.
+1: Did you bring the potions to Prina?
+H: Yes, and you were right : Aden's case is... uncommon.
+1: What do you mean?
+H: It's as if he is turning into an undead.
+H: And strangely he doesn't seem to notice it.
+1: Strange, indeed.
+1: Maybe you should go back to Prina and ask around to get some informations about the origin of his troubles.
+SET healerquest1, 2
+END
+
+@healerq1inquire2
+1: Ah, %1!
+1: What are the news?
+1: Did you learn something in Prina?
+H: I didn't go back yet.
+1: Please, go, it's very important.
+END
+
+@healerquest1back
+1: Greetings, %1.
+COMPARE #<healerquest1>, 2
+IF= @healerq1back2
+H: Hello, Mistress Arvalon. 
+1: Did you bring the medicines to Prina?
+H: Yes, and you were right : Aden's case is... uncommon.
+1: What do you mean?
+H: It's as if he is turning into an undead.
+H: And strangely he doesn't seem to notice it.
+1: Strange, indeed.
+H: I asked around about the origin of his problem, and I learnt that it started just after Aden acquired an ancient relic.
+H: However, I don't know what this relic is.
+1: Hmm
+1: I'll have to think about that.
+SET healerquest1, 3
+END
+
+@healerq1back2
+H: Greetings, Mistress Arvalon.
+H: I went back to Prina.
+1: Did you find something?
+H: Yes, I learnt that his troubles started just after Aden acquired an ancient relic.
+H: However, I don't know what this relic is.
+1: Hmm
+1: I'll have to think about that.
+SET healerquest1, 3
+END
+
+;
+;-------------------------------------------------------------------------------
+;

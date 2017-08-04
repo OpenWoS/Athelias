@@ -1,0 +1,23 @@
+SCENE 7800, cave2, SCENE, "To the cave, level 1"
+#include include.txt
+GOTO LINK 77, 1
+;
+;----------------------------------------------------------------------------------------------
+;
+SCENE 7801, cave2, SCENE, "Dark Queen"
+#include include.txt
+N: After having roamed during several hours in the cave, you finally find the Dark Queen's lair!
+FIGHT 581
+IF LOSE @end
+N: You kill the Dark Queen and gather all the web you can.
+TAKE T607
+GIVE T608
+END
+
+@end
+H: Errr...
+H: I'll be back?!
+END
+;
+;----------------------------------------------------------------------------------------------
+;

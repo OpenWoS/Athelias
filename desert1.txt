@@ -1,0 +1,227 @@
+SCENE 8100, desert6, SCENE, "To Tahamanraset"
+#include include.txt
+IF T3998 @illuteleport
+GOTO @nextstepafterilluteleport
+
+@illuteleport
+HOST_GIVE T2913
+GOTO @nextstepafterilluteleport
+
+@nextstepafterilluteleport
+STRCMP #<tahamanexit>, east
+IF= @east
+GOTO LINK 68, 1
+
+@east
+GOTO LINK 68, 0
+;
+;----------------------------------------------------------------------------------------------------
+;
+SCENE 8101, desert6, SCENE, "To Taj Isha's Sepulchre"
+#include include.txt
+@grave
+IF R1 @grave1
+IF R1 @grave2
+IF R1 @grave3
+IF R1 @grave4
+IF R1 @grave5
+IF R1 @grave6
+IF R1 @grave7
+IF R1 @grave8
+IF R1 @grave9
+IF R1 @grave10
+GOTO @grave
+
+@grave1
+GOTO LINK 100, 0
+
+@grave2
+GOTO LINK 101, 0
+
+@grave3
+GOTO LINK 102, 0
+
+@grave4
+GOTO LINK 103, 0
+
+@grave5
+GOTO LINK 104, 0
+
+@grave6
+GOTO LINK 105, 0
+
+@grave7
+GOTO LINK 106, 0
+
+@grave8
+GOTO LINK 107, 0
+
+@grave9
+GOTO LINK 108, 0
+
+@grave10
+GOTO LINK 109, 0
+;
+;----------------------------------------------------------------------------------------------------
+;
+SCENE 8102, desert7, SCENE, "Further in the Desert"
+#include include.txt
+GOTO LINK 82, 1
+;
+;----------------------------------------------------------------------------------------------------
+;
+SCENE 8103, desert7, SCENE, "Ali's"
+#include include.txt
+ACTOR 1, Ali, oriental5, 1, 25, 90
+COMPARE #<talk.ali.towersofsilence>, 1
+IF< @firsttime
+1: Welcome back, foreigner.
+1: Please, let me offer you a glass of tea.
+HOST_GIVE I14
+SOUND FoundItem.wav
+END
+
+@firsttime
+1: Hello, foreigner.
+1: You are here to visit the Towers of Silence?
+H: What? What are you talking about?
+1: People in the region have their own religion, they are Zoroastrian.
+1: According to their faith, when they die, they cannot be buried not to corrupt the earth, nor be incinerated not to corrupt the fire or the wind, so the corpses of the Zoroastrians are laid down on the top of these towers where they will remain until the vulture clean them.
+H: You mean... eat them?
+1: Yes. A priest stay by the corpses to watch which eye is picked first, and see if the soul will go to hell or paradise.
+SET talk.ali.towersofsilence, 1
+END
+;
+;----------------------------------------------------------------------------------------------------
+;
+SCENE 8104, desert7, SCENE, "Tower of Silence"
+IF T3983 @antigods
+#include include.txt
+IF T1206|I1076 @back
+IF T1104 @start
+@firsttime
+WAIT 1
+SOUND harpy3.wav
+THEME 3
+H: Gloomy place...
+END
+
+@antigods
+ACTOR 1, "Nero Bloodfire", human146, 1, 75, 90
+ACTOR 2, Felty, human4, 1, 80, 95, 3
+ACTOR 3, "Avatar of Soleram the Summoner", god12, 1, 25, 90
+ACTOR 4, "Avatar of Soleram the Death Bringer", god13, 1, 30, 95
+ACTOR 5, "Avatar of Soleram the Healer", god14, 1, 20, 85
+1: You Gods will not destroy Athelias 
+2: We are tired of you Belief that you are above us. 
+1: Your reign is over, Soleram!
+MOVE 1, 150, 50, 1
+MOVE 2, 150, 50, 1
+MOVE 3, 150, 50, 1
+MOVE 4, 150, 50, 1
+MOVE 5, 150, 50, 1
+IF E1152+E1153+E1150+E1151|E1152+E1153+E1150+E1157|E1152+E1153+E1150+E1158|E1152+E1153+E1150+E1159|E1152+E1153+E1150+E1160|E1152+E1153+E1156+E1151|E1152+E1153+E1156+E1157|E1152+E1153+E1156+E1158|E1152+E1153+E1156+E1159|E1152+E1153+E1156+E1160|E1152+E1153+E1155+E1151|E1152+E1153+E1155+E1157|E1152+E1153+E1155+E1158|E1152+E1153+E1155+E1159|E1152+E1153+E1155+E1160|E1152+E1153+E1154+E1151|E1152+E1153+E1154+E1157|E1152+E1153+E1154+E1158|E1152+E1153+E1154+E1159|E1152+E1153+E1154+E1160 @antigodsequip
+FIGHT -806.75.90, -807.80.95, -808, -809, -809, 825.25.90, 826.30.95, 827.20.85
+IF WIN @antigodswin
+END
+
+@antigodsequip
+FIGHT -806.75.90, -807.80.95, -808, -809, -809, 822.25.90, 823.30.95, 824.20.85
+IF WIN @antigodswin
+END
+
+@antigodswin
+SOUND trophyFound.wav
+HOST_GIVE Z827
+HOST_GIVE T3984
+END
+
+@start
+COMPARE #<talk.ali.towersofsilence>, 1
+IF< @firsttime
+THEME 3
+MUSIC dark2.mid
+ACTOR 1, Priest, human99, 1, 70, 90
+FACE 1, 0
+ACTOR 2, , oriental8, 0, 40, 90
+H: A burial...
+WAIT 3.5
+1: What's that?!
+1: Ah!
+WAIT 1
+MOVE 1, 120, 90, 2
+IF DEAD @dead
+COLOR 13
+COLOR 2013
+FIGHT2 521, 522, 523, 524, 521, 522, 523, 524, 521, 522, 523, 524
+IF LOSE @dead
+MOVE 1, 75, 90
+WAIT 2
+1: What's going on?
+H: I was about to ask the same question.
+1: It's as if...
+1: Oh my God, I hope I am wrong!
+H: What?
+1: Ravens are psychopomps - the spirits that lead the dead souls to the Forgotten Realms.
+1: The man I've been burying was a member of our order who decided to reject the monastic life to follow his own way.
+1: He went to the desert and we no longer heard of him, until he came back to Tahamanraset to die.
+1: What did he find there?
+H: What was his name?
+1: Abdulatif.
+H: I'll see if I can find something about him.
+GIVE T1206
+END
+
+@dead
+H: ...
+END
+
+@back
+WAIT 1
+SOUND harpy3.wav
+THEME 3
+N: There is nothing left here but the bones of a dead half buried under the sand.
+END
+;
+;----------------------------------------------------------------------------------------------------
+;
+SCENE 8106, desert7, SCENE, "Further in the Desert"
+#include include.txt
+IF T3985 @pass
+IF T2899 @borninathelias
+END
+
+@borninathelias
+IF -T1104 @shouldntbehere
+EJECT T1104
+IF T1123-T1124 @travelquest
+@pass
+GOTO LINK 83, 0
+
+@travelquest
+CALL 110025@start
+1: Let's go, %1.
+1: Sadramand is close now.
+WAIT 1.8
+GOTO @pass
+
+@shouldntbehere
+N: You shouldn't be here.
+WAIT 1
+N: Return to Tahamanraset and complete the quests there first.
+END
+;
+;----------------------------------------------------------------------------------------------------
+;
+SCENE 8107, castle, SCENE, "Templars Castle"
+#include include.txt
+ACTOR 1, Tiffa, wom74, 1, 40, 90
+1: Welcome to the Castle, %1.
+1: Please, enter.
+WAIT 1.2
+GOTO LINK 99, 0
+;
+;----------------------------------------------------------------------------------------------------
+;
+
+

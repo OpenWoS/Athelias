@@ -1,0 +1,156 @@
+SCENE 10000, taj, SCENE, "Taj Isha's Mausoleum"
+#include include.txt
+GOTO LINK 81, 1
+;
+;-----------------------------------------------------------------------------------------------------------
+;
+SCENE 10001, taj, SCENE, "Taj Isha's Mausoleum"
+#include include.txt
+FIGHT 78, 78, 78
+IF WIN+#100 @pass
+N: The door is closed.
+END
+
+@pass
+N: The door opens and you reach Taj Isha's sepulchre.
+WAIT 2
+SET tajIsha2, 1
+GOTO LINK 120, 0
+;
+;-----------------------------------------------------------------------------------------------------------
+;
+SCENE 10002, taj, SCENE, "Taj Isha's Mausoleum"
+#include include.txt
+FIGHT 79, 79, 79
+IF WIN+#101 @pass
+N: The door is closed.
+END
+
+@pass
+N: The door opens and you reach Taj Isha's sepulchre.
+WAIT 2
+SET tajIsha2, 2
+GOTO LINK 120, 0
+;
+;-----------------------------------------------------------------------------------------------------------
+;
+SCENE 10003, taj, SCENE, "Taj Isha's Mausoleum"
+#include include.txt
+FIGHT 80, 80, 80
+IF WIN+#102 @pass
+N: The door is closed.
+END
+
+@pass
+N: The door opens and you reach Taj Isha's sepulchre.
+WAIT 2
+SET tajIsha2, 3
+GOTO LINK 120, 0
+;
+;-----------------------------------------------------------------------------------------------------------
+;
+SCENE 10004, taj, SCENE, "Taj Isha's Mausoleum"
+#include include.txt
+FIGHT 81, 81, 81
+IF WIN+#103 @pass
+N: The door is closed.
+END
+
+@pass
+N: The door opens and you reach Taj Isha's sepulchre.
+WAIT 2
+SET tajIsha2, 4
+GOTO LINK 120, 0
+;
+;-----------------------------------------------------------------------------------------------------------
+;
+SCENE 10005, taj, SCENE, "Taj Isha's Mausoleum"
+#include include.txt
+FIGHT 78, 78, 79
+IF WIN+#104 @pass
+N: The door is closed.
+END
+
+@pass
+N: The door opens and you reach Taj Isha's sepulchre.
+WAIT 2
+SET tajIsha2, 5
+GOTO LINK 120, 0
+;
+;-----------------------------------------------------------------------------------------------------------
+;
+SCENE 10006, taj, SCENE, "Taj Isha's Mausoleum"
+#include include.txt
+FIGHT 79, 79, 78
+IF WIN+#105 @pass
+N: The door is closed.
+END
+
+@pass
+N: The door opens and you reach Taj Isha's sepulchre.
+WAIT 2
+SET tajIsha2, 6
+GOTO LINK 120, 0
+;
+;-----------------------------------------------------------------------------------------------------------
+;
+SCENE 10007, taj, SCENE, "Taj Isha's Mausoleum"
+#include include.txt
+FIGHT 80, 80, 81
+IF WIN+#106 @pass
+N: The door is closed.
+END
+
+@pass
+N: The door opens and you reach Taj Isha's sepulchre.
+WAIT 2
+SET tajIsha2, 7
+GOTO LINK 120, 0
+;
+;-----------------------------------------------------------------------------------------------------------
+;
+SCENE 10008, taj, SCENE, "Taj Isha's Mausoleum"
+#include include.txt
+FIGHT 81, 81, 80
+IF WIN+#107 @pass
+N: The door is closed.
+END
+
+@pass
+N: The door opens and you reach Taj Isha's sepulchre.
+WAIT 2
+SET tajIsha2, 8
+GOTO LINK 120, 0
+;
+;-----------------------------------------------------------------------------------------------------------
+;
+SCENE 10009, taj, SCENE, "Taj Isha's Mausoleum"
+#include include.txt
+FIGHT 78, 79, 80, 81
+IF WIN+#108 @pass
+N: The door is closed.
+END
+
+@pass
+N: The door opens and you reach Taj Isha's sepulchre.
+WAIT 2
+SET tajIsha2, 9
+GOTO LINK 120, 0
+;
+;-----------------------------------------------------------------------------------------------------------
+;
+SCENE 10010, taj, SCENE, "Taj Isha's Mausoleum"
+#include include.txt
+FIGHT 78, 79, 80, 81
+IF WIN+#109 @pass
+N: The door is closed.
+END
+
+@pass
+N: The door opens and you reach Taj Isha's sepulchre.
+WAIT 2
+SET tajIsha2, 10
+GOTO LINK 120, 0
+;
+;-----------------------------------------------------------------------------------------------------------
+;

@@ -1,0 +1,306 @@
+
++CREDITS
+
+Athelias
+Free plug-in for Well of Soul game engine.
+Infos and downloads at http://www.athelias.biz
+Contact Synthetic Reality on the web at: http://www.synthetic-reality.com
+
+-CREDITS
+
+
++STORY
+
+:F Mistral
+:S 500
+:C 155,0,0
+|Athelias
+:S 60
+:C 255,255,155
+:F Papyrus
+|Version 1.38
+|The awakening of the deads...
+|~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+|The wind from the north is getting up and pushes through the morning mist... 
+|Lonesome, a hero is waiting for his time to come. 
+|He's clearing a path through the steppes, proceeding towards the neighbouring inhabited lands. 
+|He's seeking his master. 
+|He feels that the world is going to change - one more time. 
+|The Chaos is back. 
+|The demons reappeared and are about to take over the Old World. 
+|A new war is going to break out, the world will be once again torn apart by two antagonistic powers.
+
+|~~~~~~~~~~~~~~~~~~~~~~~~~~
+:S 50
+|A sudden vision...
+|The shadows of a forgotten past...
+|A village blazing...
+|The screams of the dying dwellers... 
+|Chaos...
+|Death...
+|~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+:S 60
+|The mist lifts.
+|A fortress comes into view on the horizon.
+|The adventurer moves forward - the gate opens.
+|He has made up his mind.
+|Henceforth, he knows his fate, he knows on which side he will fight, which banner he will hold.
+
+|But his destiny is still to fulfill...
+
+|~~~~~~~~~~~~~~~~~~~~~~~~~~
+:C 255, 255, 255
+:S 30
+:F Arial
+|Athelias is a free plug-in for Well of Souls, developed by athelias.biz. Optimal screen resolution: 1024x768 - many aspects of the game will be messed up with a lower resolution. Scripting by athelias.com. Most of the skins from Ragnarok.
+
+
+
+-STORY
+
+
++TERRAINS
+
+0,	"No Hindrance",	0
+1,	"Lava",		10
+2,	"Mountains",	0
+3,	"Snow",		0
+4,	"Deep Water",	0
+5,	"Forest",		0
+6,	"Desert",		10
+7,	"Walls",		0
+8,	"Healing",		-10
+9,	"Impassable",	0
+
+-TERRAINS
+
+
++EQUIP
+
+0,	"Head Gear"
+1,	"Body Gear" 
+10,	"Foot Gear" 
+11,	"Left Hand" 
+12,	"Ring"
+13,	"Amulet" 
+
+-EQUIP
+
+
++THEMES
+
+21, Athelias, Athelias
+22, battle1, battle1
+23, battle2, battle2
+24, orient1, orient1
+25, orient2, orient2
+26, orient3, orient3
+27, quest1, quest1
+28, city, city
+29, quest2, quest2
+30, chant, chant
+
+-THEMES
+
+
++MAPS
+#include maps.txt
+-MAPS
+
+
++TOKENS
+#include tokens.txt
+-TOKENS
+
+
++HANDS
+
+0, "Swords", 30, "sword3.wav"
+1, "Staves", 20, "boom1.wav"
+2, "Bows and Crossbows", 100, "bow.wav"
+3, "Puppets", 10, "travel2.wav"
+4, "Fists", 20, "sword1.wav"
+5, "Daggers and Claws", 25, "sword3.wav"
+6, "Axes and Maces",	40, "sword2.wav"
+7, "Fetishes", 80, "athelias2XXX.wav"
+
+-HANDS
+
+
++ITEMS
+#include items.txt
+-ITEMS
+
+
++ELEMENTS
+#include elements.txt
+-ELEMENTS
+
+
++SPELLS
+#include spells.txt
+-SPELLS
+
+
++MONSTERS
+#include monsters.txt
+-MONSTERS
+
+
++GROUPS
+#include groups.txt
+-GROUPS
+
+
++LEVELS
+#include levels.txt
+-LEVELS
+
+
++TROPHIES
+#include DevTable01.txt
+-TROPHIES
+
+
++SCENES
+
+#include desert1.txt
+#include Tahamanraset.txt
+#include crypt.txt
+#include healers.txt
+#include barbarians.txt
+#include athalantistownhall1.txt
+#include athalantistownhall2.txt
+#include athalantistownhall3.txt
+#include athalantistownhall4.txt
+#include sinhall.txt
+#include nightmarelands.txt
+#include cave1.txt
+#include cave2.txt
+#include battlefield.txt
+#include necroacademy.txt
+#include deathdancers.txt
+#include prinaprison.txt
+#include scenes.txt
+#include alchemistacademy.txt
+#include castle.txt
+#include armenis.txt
+#include athalantis.txt
+#include coliseum.txt
+#include goblinscave2.txt
+#include evergreed.txt
+#include guildhall.txt
+#include invasionscript.txt
+#include irezar.txt
+#include katadyn.txt
+#include lostcity.txt
+#include karsheek.txt
+#include ancientordertemple.txt
+#include armenisisland.txt
+#include athelias.txt
+#include jesters.txt
+#include dungeon1.txt
+#include flammingblade.txt
+#include illupalace.txt
+#include irezarpalace.txt
+#include benadrim.txt
+#include mangeas.txt
+#include arguazil.txt
+#include assassinscastle.txt
+#include catacombs.txt
+#include catacombs2.txt
+#include dungeon2.txt
+#include goblinscave.txt
+#include irkatshk.txt
+#include latsha.txt
+#include mine.txt
+#include dungeonirezar.txt
+#include paladinscastle.txt
+#include prinatemple.txt
+#include terendroz.txt
+#include petarena.txt
+#include regent.txt
+#include serevan.txt
+#include underground.txt
+#include prina.txt
+#include roddeurstemple.txt
+#include serevandungeon.txt
+#include varanas.txt
+#include shops.txt
+#include camp.txt
+#include fight.txt
+#include traininground.txt
+#include castle.txt
+#include darkwoods.txt
+#include swamps.txt
+#include aralian.txt
+#include sewers.txt
+#include thesarian.txt
+#include tajisha.txt
+#include tajisha2.txt
+#include tajisha3.txt
+#include aroundaralshek.txt
+#include aralshek.txt
+#include Tahamanrasetpalace.txt
+#include harem.txt
+#include desertgalleries.txt
+#include illusoryac.txt
+#include chaoticdomensionillus.txt
+#include armenistower.txt
+#include desert3.txt
+#include desert4.txt
+#include desert5.txt
+#include desert6.txt
+#include desert7.txt
+#include sadramand.txt
+#include pasagardae.txt
+#include wormcave.txt
+#include talween.txt
+#include kotor.txt
+#include kotorcastle.txt
+#include templars.txt
+#include templarsdungeon.txt
+#include specialscenes.txt
+#include halloween-chaos.txt
+#include maps\TrainingGround, level 8.OBL
+#include death.txt
+#include config\skillz.txt
+#include include2.txt
+#include config\automatedpatching.txt
+#include config\eraserthingy.txt
+#include AHS2.txt
+#include thanaris.txt
+#include oldworld1.txt
+#include oldworld2.txt
+#include obrovac.txt
+#include saraliandine.txt
+#include saraliandine2.txt
+#include saraliandine3.txt
+#include saraliandine4.txt
+#include saraliandine5.txt
+#include saraliandine2bis.txt
+#include saraliandine6.txt
+#include necros-thanaris.txt
+#include necros-thanaris2.txt
+#include thanarisgalleries.txt
+#include config\horizon.txt
+#include config\donationbox.txt
+#include config\handicraft.txt
+#include config\werewolf.txt
+#include quests\barbq2.txt
+#include config\blacksmith2.txt
+#include quests\jesterquestlost.txt
+#include quests\necro-athalantis.txt
+#include archers.txt
+#include saraliandine-port.txt
+#include quests\caravan.txt
+#include sp.events\easter.txt
+#include sp.events\xmas.txt
+#include quests\archq3.txt
+#include wizards.txt
+#include vending.txt
+#include config\vending.txt
+
+
+-SCENES

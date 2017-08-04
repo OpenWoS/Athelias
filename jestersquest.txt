@@ -1,0 +1,133 @@
+IF T1001+C20 @lookingforawagon 
+IF T1024+C16 @necrosdfghj
+IF T1041+C56 @necrosdfghj
+IF T116-T117 @knightquest1gdfged
+GOTO @nextstepafterjestersquest.txt 
+
+@knightquest1gdfged
+H: Excuse me!
+H: I'm looking for a knight... Lord Gerzel.
+H: Didn't you see him by chance?
+@randomkightsgqsdgqsg
+IF R20 @knightsgsdDBDFGJ1
+IF R20 @knightsgsdDBDFGJ2
+IF R20 @knightsgsdDBDFGJ3
+IF R20 @knightsgsdDBDFGJ4
+IF R20 @knightsgsdDBDFGJ5
+GOTO @randomkightsgqsdgqsg
+
+@knightsgsdDBDFGJ1
+1: Who?
+END
+
+@knightsgsdDBDFGJ2
+1: Nope.
+1: Sorry.
+END
+
+@knightsgsdDBDFGJ3
+1: No, sorry, I am busy.
+END
+
+@knightsgsdDBDFGJ4
+1: Dunno...
+1: What does he look like?
+H: Err actually I don't know.
+1: So I can't help you.
+END
+
+@knightsgsdDBDFGJ5
+1: I can't help you, sorry.
+END
+
+@necrosdfghj
+COMPARE #<healerquest1>, 0
+IF> @nextstepafterjestersquest.txt
+IF R20 @necrosdfghj1
+IF R20 @necrosdfghj2
+IF R20 @necrosdfghj3
+IF R20 @necrosdfghj4
+IF R20 @necrosdfghj5
+GOTO @necrosdfghj
+
+@necrosdfghj5
+H: Excuse me, do you know where Aden lives?
+GOTO @necrosdfghjanswer
+
+@necrosdfghj1
+H: Hello
+H: Could you help me please?
+H: I am looking for Aden's house.
+GOTO @necrosdfghjanswer
+
+@necrosdfghj2
+H: Pardon
+H: Could you indicate me where Aden lives?
+GOTO @necrosdfghjanswer
+
+@necrosdfghj3
+H: Hello
+H: I am looking for Aden but I don't know where he lives.
+H: Any idea?
+GOTO @necrosdfghjanswer
+
+@necrosdfghj4
+H: Pardon
+H: Do you know where Aden lives?
+GOTO @necrosdfghjanswer
+
+@necrosdfghjanswer
+IF R20 @necrosdfghjanswer1
+IF R40 @necrosdfghjanswer2
+IF R60 @necrosdfghjanswer3
+IF R80 @necrosdfghjanswer4
+IF R20 @necrosdfghjanswer5
+GOTO @necrosdfghjanswer
+
+@necrosdfghjanswer5
+1: Aden?
+1: Hmm
+1: That sounds familiar but I cannot remember where he lives, sorry.
+END
+
+@necrosdfghjanswer1
+1: Damn if I know!
+END
+
+@necrosdfghjanswer2
+1: Aden?
+1: If I am right he lives by the palace of the regent.
+H: Ah, ok.
+H: Thanks
+1: You're welcome.
+END
+
+@necrosdfghjanswer3
+1: I have no idea, sorry.
+END
+
+@necrosdfghjanswer4
+1: Aden?
+1: Oh yeah!
+1: He lives on the main street, by the temple.
+H: Thanks
+END
+
+@lookingforawagon 
+H: Hey! 
+H: Do you know where I could find a wagon to rent? 
+IF R25 @lookingforawagon2 
+IF R62 @lookingforawagon3 
+1: I have no idea, sorry. 
+END 
+
+@lookingforawagon2 
+1: I'm not sure... 
+1: Maybe you should ask around the taverns. 
+END 
+
+@lookingforawagon3 
+1: Dunno, sorry. 
+END 
+
+@nextstepafterjestersquest.txt

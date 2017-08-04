@@ -1,0 +1,90 @@
+SCENE 110027
+END
+
+@check
+STRCMP #<str.serverName>, "Solo Channel"
+IF= @checkdone
+COMPARE #<num.serverTimeMonth>, 1
+IF= @xmas1
+COMPARE #<num.serverTimeMonth>, 12
+IF= @xmas12
+GOTO @checkdone
+
+@xmas1
+COMPARE #<num.serverTimeDay>, 5
+IF> @checkdone
+GOTO @xmasstarted
+
+@xmas12
+COMPARE #<num.serverTimeDay>, 20
+IF< @checkdone
+@xmasstarted
+GIVE T3988
+SET spEvent.Name, christmas
+STRCMP #<scene.bkgnd>, "alchemy"
+IF= @return
+STRCMP #<scene.bkgnd>, "ancienthall"
+IF= @return
+STRCMP #<scene.bkgnd>, "aralshek"
+IF= @return
+STRCMP #<scene.bkgnd>, "arena"
+IF= @return
+STRCMP #<scene.bkgnd>, "assassins"
+IF= @return
+STRSTR #<scene.bkgnd>, "cave"
+IF> @return
+STRCMP #<scene.bkgnd>, "cell"
+IF= @return
+STRCMP #<scene.bkgnd>, "darkroom"
+IF= @return
+STRSTR #<scene.bkgnd>, "desert"
+IF> @return
+STRCMP #<scene.bkgnd>, "door1"
+IF= @return
+STRSTR #<scene.bkgnd>, "inside"
+IF> @return
+STRCMP #<scene.bkgnd>, "kotorcastle"
+IF= @return
+STRCMP #<scene.bkgnd>, "mine"
+IF= @return
+STRCMP #<scene.bkgnd>, "oasis"
+IF= @return
+STRCMP #<scene.bkgnd>, "palace"
+IF= @return
+STRCMP #<scene.bkgnd>, "palace2"
+IF= @return
+STRCMP #<scene.bkgnd>, "rodeurs1"
+IF= @return
+STRSTR #<scene.bkgnd>, "room"
+IF> @return
+STRSTR #<scene.bkgnd>, "sewer"
+IF> @return
+STRCMP #<scene.bkgnd>, "souterrain"
+IF= @return
+STRCMP #<scene.bkgnd>, "taj"
+IF= @return
+STRSTR #<scene.bkgnd>, "tavern"
+IF> @return
+STRCMP #<scene.bkgnd>, "undergroundgalleries"
+IF= @return
+STRCMP #<scene.bkgnd>, "vestibulary"
+IF= @return
+STRCMP #<scene.bkgnd>, "weapons2"
+IF= @return
+STRSTR #<scene.bkgnd>, "wallof"
+IF> @return
+STRCMP #<scene.bkgnd>, "widepalace2"
+IF= @return
+WEATHER 9
+@return
+RETURN
+
+@taket3988
+TAKE T3988
+RETURN
+
+@checkdone
+IF T3988 @taket3988
+RETURN
+
+

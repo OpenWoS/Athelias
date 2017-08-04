@@ -1,0 +1,356 @@
+SCENE 3800, templeinside10, SCENE, "Main Gate"
+#include include.txt
+GOTO LINK 19, 2
+;
+;-----------------------------------------------------------------------------------------------------------------------------------
+;
+SCENE 3801, templeinside10, SCENE, "Weapons"
+#include include.txt
+ACTOR 1, Artal, human28, 1, 25, 98
+1: You can't find better swords anywhere else in Athelias!
+OFFER 485, 489, 493, 497, 501
+END 
+;
+;-----------------------------------------------------------------------------------------------------------------------------------
+;
+SCENE 3802, templeinside10, SCENE, "Armory"
+#include include.txt
+ACTOR 1, Durtesk, human2, 1, 25, 98
+OFFER 292, 293, 294, 295, 296, 297, 298, 299, 300, 301, 302, 200, 209, 213, 217, 221, 565, 569, 573, 578, 582
+IF I1139 @normal
+IF Z379 @whitetal1
+IF Z380 @whitetl2
+@normal
+IF C5+T4001 @hellomaster
+IF C5 @hellobrother
+1: Hello, foreigner.
+1: What do you need?
+END
+
+@hellobrother
+1: Hello, brother.
+1: What do you need?
+END
+
+@hellomaster
+1: Hello, Master.
+1: What do you need?
+END
+
+@whitetal1
+COMPARE #<num.chat.ArmoryPaladinsWhiteTalisman>, 1
+IF= @whitetl3
+1: I feel a strange presence...
+1: What have you got here?
+1: A %Z379?!
+@whitetl4
+1: An evil power lays within this item, %1, but I could use it and neutralize it to create a white magic talisman, if you want.
+1: I would need five %Z379 and five %Z380 to do that.
+1: Please, come back with all the items needed if you are interested.
+SET num.chat.ArmoryPaladinsWhiteTalisman, 1
+IF Z379.5+Z380.5 @everythingwhitetal
+END
+
+@whitetl2
+COMPARE #<num.chat.ArmoryPaladinsWhiteTalisman>, 1
+IF= @whitetl3
+1: I feel a strange presence...
+1: What have you got here?
+1: A %Z380?!
+GOTO@whitetl4
+
+@everythingwhitetal
+H: I've already all what you need!
+1: Fantastic!
+1: Do you want me to make the talisman now?
+GOTO @maketalismanask
+
+@whitetl3
+IF Z379.5+Z380.5 @whitetl5
+1: Welcome back, adventurer.
+H: Hey!
+H: What do you need, again, to make the talisman?
+1: Five %Z379 and five %Z380.
+H: Oh, yeah, right!
+END
+
+@whitetl5
+H: Greetings!
+H: I have all the items you needed to make a Talisman.
+1: Great!
+1: Do you want me to make it now?
+@maketalismanask
+ASK 30
+IF YES @whitetaliumakenow
+IF NO @whitetalno
+1: Sorry?
+GOTO @maketalismanask
+
+@whitetalno
+1: Fine.
+1: Come back if you change your mind.
+END
+
+@whitetaliumakenow
+1: Alright.
+1: Just a second, please.
+WAIT 1.5
+SOUND harvestgolem1
+WAIT 1
+SOUND sword2
+WAIT 0.4
+SOUND sword2
+WAIT 0.4
+SOUND sword2
+WAIT 1
+HOST_GIVE I1139
+HOST_TAKE Z379.5
+HOST_TAKE Z380.5
+1: Here you go!
+1: Enjoy this artifact: I am the only one who still know how to make it!
+SOUND foundItem.wav
+H: Great!
+END
+;
+;---------------------------------------------------------------------------------------------------------------
+;
+SCENE 3805, "templeinside10", SCENE, "Master Paladin"
+#include include.txt
+ACTOR 1, "Master Alric", human10, 1, 25, 98
+IF C2+T3968-J113 @supernewbquest
+IF C5 @start
+1: Hello, %L.
+END
+
+@supernewbquest
+1: You're a fool if you think a novice can defeat a Master Paladin!
+WAIT 3
+MOVE 1, 150, 150, 1
+FIGHT 2920.25.98
+END
+
+@eventActorClick60
+N: Level required for the class quests:
+WAIT 1
+N: Level 25, 50, 75, 99
+END
+
+@start
+ACTOR 60, "", 3, 0, 95, 15
+COMPARE #<chat.palisfirstime>, 1
+IF= @paliback
+1: Welcome to the castle, %L.
+1: I am the sword master Alric.
+1: The masters of the order assigned me to help you during your training. 
+1: And as a paladin you will need all the help you can  get, trust me. 
+1: Our life is hard.
+1: We are the last rampart against the chaos and evil.
+1: The world becomes more corrupt every day.
+1: The temptation is everywhere but our destiny is to suffer and resist, to fight to the death for the sake of the true Gods. 
+1: Go now.
+1: It's time for you to train.
+1: Return in a few weeks, I may have something to teach you then. 
+SET chat.palisfirstime, 1
+END
+
+@paliback
+IF V25 @quest1
+H: Hello, Master Alric.
+1: Welcome back, %1.
+END
+
+@quest1
+IF T124  @quest1back
+1: Welcome back, %1.
+1: I have something to ask you.
+1: A few weeks ago, someone came here and told us of an old evil relic, the Skull of Jeren. 
+1: It has been forgotten for centuries but it seems that someone recently found it. 
+1: Before making a decision, we must know what the real nature of the power of the relic is.
+1: I think the only person who can help us discover that is a mage from Latsha called Marlyn. 
+1: He has some ancient books talking of the relic, but someone from the Academy will have to go there to get them.
+1: I would like you to do that.
+H: Yes, Master Alric.
+HOST_GIVE T124
+END
+
+@quest1back
+IF T125 @quest1rew
+1: Hello, %1.
+H: Do you have the books?
+1: No, I didn't go to Latsha yet.
+1: So go now!
+1: A paladin cannot be lazy!
+END
+
+@quest1rew
+COMPARE #<chat.paliq1>, 1
+IF= @quest2start
+1: Welcome back, %1.
+1: Do you have the books.
+H: Yes but I had to fight to get them.
+1: What do you mean?
+H: Two guards of the palace arrived and wanted Marlyn to follow them to Prina.
+H: Marlyn refused, I tried to help him and they unsheathed their weapons.
+SET chat.paliq1, 1
+END
+
+@quest2start
+IF V50 @quest2start2
+1: Welcome back, %1.
+1: You should return when you're more advanced in your training.
+END
+
+@quest2start2
+IF T126 @returnlaterdude
+1: Welcome back, %1.
+1: I have bad news.
+1: The Regent sent someone to get an explanation about what happened in Latsha.
+1: I told him that the Castle had no explanation to provide to the Regent - Benadrim is autonomous since centuries.
+H: I guess he won't like this...
+1: Probably not. Be careful if you meet guards of Prina.
+H: I will.
+1: We have also studied the story of Jeren thanks to the books you brought from Latsha.
+1: Our conclusion is that it must be destroyed.
+1: Jeren was the lord of Irezar during the first invasion, and the founder of the Necromancy Academy.
+1: But his heart dimmed and he joined the Chaos Armies.
+1: The evil power of the relic could probably corrupt the wisest.
+1: We must find it, and destroy it.
+HOST_GIVE T126
+END
+
+@returnlaterdude
+IF T127 @paliq2attacked
+1: Hello, %1.
+1: Can I do something for you?
+END
+
+@paliq2attacked
+COMPARE #<chat.paliQuest2Attacked>, 0
+IF> @paliq2attackedend
+H: Master Alric, I have bad news.
+1: What?
+H: I've been attacked by several guards of the Regent.
+H: They were at Benedrim's Gates!
+1: What?!
+1: How the Regent can...
+1: I will immediately send a messenger to Prina and once more ask for an explanation.
+1: If the Regent feels like going back on the status of Benadrim, we'll have to get ready.
+1: The paladins will never surrender.
+1: Leave me now, please.
+1: I have to prepare an eventual defence of the city.
+SET chat.paliQuest2Attacked, 1
+END
+
+@paliq2attackedend
+IF V75 @paliq3start
+1: Welcome back, %1.
+1: I'm still waiting for the messenger I sent to Prina to come back.
+1: You should return in a while: no doubt I'll have a job for you then.
+END
+
+@paliq3start
+COMPARE #<paliq3>, 0
+IF> @paliq3back
+1: Welcome, %1.
+1: The messenger I sent to Prina came back with bad news.
+1: The Regent refused to receive him.
+1: He asked around, and apparently the Regent is planning to send his army towards Benadrim to take control of the city.
+1: We must get ready.
+1: We have to gather our troops to organize the defence of the city.
+1: I need your help for this task.
+1: I would like you to go to Irkatshk to seek the help of the Barbarians.
+1: I know they never liked the Regent and they may be willing to help us.
+1: Do your best, we will need their help.
+1: I've already sent several brothers to the Desertic Lands as well to try to get some help from the Templars.
+H: The Templars?
+H: But... we haven't gotten in touch since such a long time...
+1: Because of an old quarrel, I know.
+1: But it's now time to unite again.
+1: Our brothers from the Desertic Lands can help us - what's an several centuries old argue compared to the threat of the Regent?
+1: You should go now, and reach Irkatshk as soon as possible.
+H: Yes, Master.
+SET paliq3, 1
+END
+
+@paliq3back
+IF T128 @paliq3end
+1: It's time to go now, %1.
+1: Benadrim's fate relies on an eventual help from the Barbarian of Irkatshk.
+1: You must convince them to help us.
+H: Yes, Master.
+END
+
+@paliq3end
+IF T129 @paliq3endbis
+H: Hello, Master.
+H: I went to the Barbarian Training Ground: they'll fight with us.
+1: Great news!
+1: Now if we can convince the Templars to help us as well, we may have a chance against the troops of the Regent.
+H: We shall overcome, master!
+1: May the gods hear you!
+1: I think it's now time for me to teach you something, %1.
+1: You've proven you're deserving of this spell.
+1: Listen carefully, %1: I'm going to teach you something that will help you in your future quests: the secret o the strength of the paladins.
+WAIT 4
+N: Master Alric teaches you a new spell: Frenzy.
+HOST_GIVE S232
+HOST_GIVE T129
+SOUND bell2.wav
+END
+
+@paliq3endbis
+IF V99 @paliq4
+1: We are still organizing the defence of the city, %1.
+1: You should get ready for the battle.
+END
+
+@paliq4
+IF T130 @paliq4end
+1: Welcome back, %1.
+H: Do you know how far from Benadrim the troops of the Regent are?
+1: A spy saw them near Irezar yesterday.
+1: They'll be here soon.
+1: What are the Barbarians doing?
+1: We need their help to resist until the Templars arrive.
+1: Are you sue they will come?
+H: No doubt.
+H: They will be there.
+ACTOR 2, "Felix Bracasse", human64, 1, 100, 90
+MOVE 2, 75, 90
+2: Master Alric, our troops are here and ready to fight!
+H: What was I saying?
+1: Great news,  General.
+2: The troops of the Regent will be here in a short time.
+2: We came across a group of scouts just before Benadrim.
+2: All dead now...
+WAIT 1.5
+SOUND horn.wav
+2: What's that again?
+1: The horn of our scouts!
+1: They arrive!
+2: Time to kill, eh!
+1: Let's hurry to the main gate!
+WAIT 2.5
+SET paliq4, 1
+GOTO LINK 19, 0, 1
+
+@paliq4end
+IF T4001 @paliend
+1: Welcome back, %1.
+1: We won a battle but not the war.
+1: I know that we should walk with our army towards Prina now, but unfortunately another threat has appeared.
+1: The Chaos is back.
+1: A new invasion is about to start.
+1: We must focus on it first.
+1: We must stop it.
+1: You should go and seek the advice of the masters of the temple of Prina now, %1.
+1: Maybe they'll now what to do.
+HOST_GIVE T4001
+END
+
+@paliend
+1: Welcome back, %1.
+1: Be prepared for the battle.
+1: I can feel dark times coming soon...
+END
+

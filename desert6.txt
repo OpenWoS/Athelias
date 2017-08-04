@@ -1,0 +1,117 @@
+SCENE 8600, desert5, SCENE, "Crossroad", 1
+#include include.txt
+IF T3985 @bornoldworld
+@pass
+EJECT T1145
+GOTO LINK 85, 1
+
+@bornoldworld
+IF T1146 @pass
+CALL 8401@traveldesert tripkotor
+GOTO @pass
+;
+;----------------------------------------------------------------------------------------------------
+;
+SCENE 8601, desert5, SCENE, "Crossroad", 1
+#include include.txt
+IF T2899 @borninathelias
+IF T3985 @bornoldworld
+END
+
+@borninathelias
+IF -T1104 @shouldntbehere
+EJECT T1126+T1127
+IF T1129 @map2
+GOTO LINK 95, 0
+
+@bornoldworld
+@map2
+EJECT T1129
+GOTO LINK 96, 0
+
+@shouldntbehere
+N: You shouldn't be here.
+WAIT 1
+N: Return to Tahamanraset and complete the quests there first.
+END
+;
+;----------------------------------------------------------------------------------------------------
+;
+SCENE 8602, desert5, SCENE, "Crossroad", 1
+#include include.txt
+IF T2899 @borninathelias
+IF T3985 @bornoldworld
+END
+
+@bornoldworld
+IF T1145 @nothing
+GOTO @nothingdfgdfgdfg
+
+@borninathelias
+IF T1127 @nothing
+@nothingdfgdfgdfg
+CALL 110025@start
+IF R40 @fight
+COMPARE #<desert6chat>, 1
+IF= @chat2
+N: You see a large hole in the sand.
+3: What could it be?
+1: I don't know but I have a bad feeling.
+1: We'd better be very careful here.
+1: I heard some strange stories about this region when I was younger...
+SET desert6chat, 1
+END
+
+@chat2
+N: You see another large hole in the sand.
+1: Let's go, %1.
+1: I feel ill at ease, here.
+END
+
+@fight
+COMPARE #<desert6fight>, 1
+IF= @fight2
+N: You see a large hole in the sand.
+WAIT 1.5
+N: Suddenly, a giant worm gets out of it and attacks the caravan!
+FIGHT2 578
+1: Let's go now, there is still a long way.
+SET desert6fight, 1
+END
+
+@fight2
+N: You see another large hole in the sand.
+WAIT 1.5
+N: Another giant worm gets out of it and attacks the caravan!
+FIGHT2 578
+1: Let's go, %1.
+1: We must try to reach the corridor of Talween before the nightfall.
+END
+
+@nothing
+N: There is no trace of the giant worm here.
+END
+;
+;----------------------------------------------------------------------------------------------------
+;
+SCENE 8605, desert5, SCENE, "Crossroad", 1
+#include include.txt
+IF T2899 @borninathelias
+IF T3985 @bornoldworld
+END
+
+@bornoldworld
+IF T1145 @nothing
+GOTO @ssdghfjd
+
+@borninathelias
+IF T1127 @nothing
+@ssdghfjd
+CALL 110025@start
+1: Quicksands!
+WAIT 1
+GOTO LINK 97, 0
+
+@nothing
+N: There is no trace of the giant worm here.
+END

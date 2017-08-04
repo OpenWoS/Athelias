@@ -1,0 +1,155 @@
+SCENE 4800, vestibulary, SCENE, "Main Gate"
+#include include.txt
+GOTO LINK 0, 14
+;
+;--------------------------------------------------------------------------------------------------------
+;
+SCENE 4801, palace2, SCENE, Armory
+#include include.txt
+ACTOR 1, Denzel, human11, 1, 25, 90
+IF T3993|T3988 @halloweenActors
+GOTO @nextStepAfterHalloweenActors
+
+@halloweenActors
+ACTOR 1, "Denzel", #<spEvent.Name>-humans, 11, 25, 90
+@nextStepAfterHalloweenActors
+IF C55 @welcome
+IF C1 @welcome
+1: Hello
+1: Your place is not here.
+1: You are not a part of our order.
+1: Now, excuse me...
+MOVE 1,-20, 90
+END
+
+@welcome
+1: Welcome, brother.
+1: What are your needs?
+OFFER 565, 569, 573, 578, 582, 635, 639, 643, 647, 651, 250, 254, 258, 262, 266, 200, 209, 213, 217, 221
+END
+;
+;--------------------------------------------------------------------------------------------------------
+;
+SCENE 4802, palace2, SCENE, Armory
+#include include.txt
+ACTOR 1, Tardi, human1, 1, 25, 90
+IF T3993|T3988 @halloweenActors
+GOTO @nextStepAfterHalloweenActors
+
+@halloweenActors
+ACTOR 1, "Tardi", #<spEvent.Name>-humans, 1, 25, 90
+@nextStepAfterHalloweenActors
+IF C55 @welcome
+IF C1 @welcome
+1: Hello
+1: You shouldn't be here, you know?
+1: Go to Prina or Benadrim if you are looking for a sword.
+END
+
+@welcome
+1: Hello, brother
+1: Do you need a new sword?
+OFFER 304, 308, 312, 316, 320
+END
+;
+;--------------------------------------------------------------------------------------------------------
+;
+;
+;--------------------------------------------------------------------------------------------------------
+;
+;
+;--------------------------------------------------------------------------------------------------------
+;
+;
+;--------------------------------------------------------------------------------------------------------
+;
+;
+;--------------------------------------------------------------------------------------------------------
+;
+;
+;--------------------------------------------------------------------------------------------------------
+;
+SCENE 4808, "rodeurs1", SCENE, "Mausoleum"
+#include include.txt
+ACTOR 1, "Guard", human94, 1, 25, 90
+IF T3993|T3988 @halloweenActors
+GOTO @nextStepAfterHalloweenActors
+
+@halloweenActors
+ACTOR 1, "Guard", #<spEvent.Name>-humans, 94, 25, 90
+@nextStepAfterHalloweenActors
+1: Here is the sword of Thorn, God of Blood and War.
+1: No human could take it out of the ground.
+END
+;
+;--------------------------------------------------------------------------------------------------------
+;
+SCENE 4809, "palace", SCENE, "Ancient"
+#include include.txt
+ACTOR 1, "Ancient", human129, 1, 25, 98, 12
+IF T3993|T3988 @halloweenActors
+GOTO @nextStepAfterHalloweenActors
+
+@halloweenActors
+ACTOR 1, "Ancient", #<spEvent.Name>-humans, 129, 25, 98, 12
+@nextStepAfterHalloweenActors
+IF -C55 @welcome
+1: Welcome, %L.
+1: Let me teach you your history. 
+1: Rodeurs are the descendants of the companions of the last king of Athelias, Argoz.
+1: A long time ago, when the chaos was invading Athelias, humans united themselves and raised an immense army under Argoz's banner.
+1: This was the ultimate battle, that sealed the destiny of Athelias.
+1: Men and chaos creatures kept fighting during two whole days.
+1: The soldiers could hardly stand up at the end of the battle.
+1: But victory was theirs.
+1: But when they thought they had defeated their enemy, the darkness covered the land. 
+1: A vortex was opened in the sky and the most dreadful major demon came out of the shadows. 
+1: Argoz rushed on the creature and faced it.
+1: Then began a terrible duel.
+1: Argoz was wounded, and died on the battle field.
+1: But while the demon was not ready, he succeeded in putting his sword through its heart. 
+1: The battle was won.
+1: The creature of chaos were pushed back.
+1: But Athelias lost its king.
+1: And the victory was short.
+1: The chaos soon recovered its power.
+1: Men seemed to never be able to win.
+1: A regent was appointed to lead the armies : the King was dead childless.
+1: Facing the threat of chaos, the regent decided to invoke Thorn, God of blood and war.
+1: He knew that by doing that he would curse all of his descendants, but it appeared to be the only solution. 
+1: The sword of Thorn was taken out.
+1: The regent took the holy cup holding the blood of the god, and drank it, so did his most faithful companions.
+1: And together, they leaded the army to the victory.
+1: They were fighting with the soul of Thorn.
+1: But the human heart is too weak to endure such an ordeal.
+1: The regent and his companions needed war, needed blood.
+1: Their government became tyrannical.
+1: The country was absorbed in brutality.
+WAIT 2
+1: Some knights were opposed to the regent taking the Sword of Thorn. 
+1: King Argoz always refused to come to that extremity, and his men kept their fidelity towards him, even after his death. 
+1: As they watched the land get ruled by anger and brutality, they decided to kill the regent and his minions. 
+1: They were the worthiest knights of the island, but they had to fight with an avatar of the god of war himself.
+1: The fight took place here. Most of the fighters died during the battle.
+1: At the end, only three knights and the regent remained.
+1: It was as if nothing could stop his shots. 
+1: But he stumbled and one of the knights took advantage of it and hit him on the head. 
+1: The regent felt down.
+1: In a last effort, he took his sword again, and thrust it into the ground. 
+1: Nobody succeeded in taking it out since.
+1: The temple was built around it, and the sword of Thorn is still here.
+1: Rodeurs are the guards of the temple.
+1: They are the descendants of these knights, the companions of King Argoz.
+1: But another king has never been appointed.
+1: The sons of the regent kept ruling over Athelias.
+1: Rodeurs keeps waiting, and watching.
+1: They know that this family was cursed when the sword of Thorn was taken out.
+1: No good may come from them.
+END
+
+@welcome
+1: Welcome, young man.
+END
+;
+;--------------------------------------------------------------------------------------------------------
+;

@@ -1,0 +1,5 @@
+CALL 1000000@st #<scene.id>
+GOTO @AHS
+@eventActorClick0
+CALL 1000003@st 0
+@AHS

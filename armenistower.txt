@@ -1,0 +1,40 @@
+SCENE 13300, ruins(temple), SCENE, "Abandoned Tower"
+#include include.txt
+GOTO LINK 53, 1
+;
+;-------------------------------------------------------------------------------------------------------
+;
+SCENE 13301, ruins(temple), SCENE, "Cook Stove"
+#include include.txt
+IF T1209 @nothing
+IF -T1208 @end
+N: You found what was once a huge cook stove.
+WAIT 2
+N: You move it and reveal a hole in what used to be the floor of the kitchen.
+WAIT 2
+N: A set of rubble clogged stairs leads down into the darkness.
+WAIT 2
+N: You light a torch and realize it is a trap!
+WAIT 2
+N: The cook stove behind you comes alive and rushed toward you!
+FIGHT 588
+IF WIN @win
+END
+
+@nothing
+N: There is nothing left here.
+END
+
+@end
+N: You found what was once a huge cook stove.
+END
+
+@win
+N: You kill the monsters of the kitchen and find the hidden treasure.
+WAIT 1
+GIVE T1209
+GIVE G300000
+GIVE I3058
+SOUND FoundItem.wav
+N: You gather a total of 300,000 Tomans and find a strange crystal.
+END

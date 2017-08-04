@@ -1,0 +1,53 @@
+SCENE 9700, cave1, SCENE, "Sand Worm Lair"
+#include include.txt
+IF T1127|DEAD @pass
+CALL 110025@start
+N: You try to escape but you are taken back by the quicksand!
+WAIT 3
+GOTO EXIT
+
+@pass
+GOTO LINK 86, 5
+;
+;---------------------------------------------------------------------------------------------------
+;
+SCENE 9701, cave1, SCENE, "Sand Worm Lair"
+#include include.txt
+IF -T1126 @shouldntbehere
+IF T1127 @end
+IF DEAD @dead
+N: You penetrate the lair of the giant worm, and it rushes on you!
+FIGHT2 579
+IF WIN @win
+END
+
+@win
+IF T3985 @bornoldworld
+EJECT T1126
+GIVE T1127
+N: You kill the giant worm and reaches the surface again.
+WAIT 2.3
+GOTO LINK 86, 5
+
+@bornoldworld
+EJECT T1144
+GIVE T1145
+N: You kill the giant worm and reaches the surface again.
+WAIT 2.3
+GOTO LINK 86, 5
+
+@shouldntbehere
+N: You shouldn't be here.
+WAIT 1
+N: Go back to the desert.
+WAIT 2
+GOTO LINK 86, 5
+
+@dead
+N: You should try to come back alive if you want to fight the giant worm.
+END
+
+@end
+H: There is nothing left here but the carcass of the giant worm.
+END
+

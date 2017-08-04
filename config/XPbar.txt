@@ -1,0 +1,18 @@
+SET temp.num.hostTNL, 14
+SET temp.loop, #<num.hostLevel>
+@poseTheXPLevelButton
+SUB temp.loop, 1
+COMPARE #<temp.loop>, 0
+IF= @poseTheXPLevelButton2
+SET temp.num.hostTNL2, #<temp.num.hostTNL>
+DIV temp.num.hostTNL2, 2
+ADD temp.num.hostTNL, #<temp.num.hostTNL2>
+
+
+GOTO @poseTheXPLevelButton
+
+@poseTheXPLevelButton2
+MUL temp.num.hostTNL, 180
+DIV temp.num.hostTNL, #<num.hostTNL>
+DIV temp.num.hostTNL, 10
+ACTOR 32, , level, #<temp.num.hostTNL>, 15, 15

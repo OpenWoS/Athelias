@@ -1,0 +1,89 @@
+SCENE 13800, chaos1, SCENE, "Vortex"
+#include include.txt
+IF T1205 @pass2
+IF -C80 @pass3
+IF DEAD @dead
+N: You try to escape from this dimension but several demons block the way.
+FIGHT *, *
+IF DEAD @dead
+N: More demons arrive!
+WAIT 1
+N: You have to run away!
+WAIT 2
+GOTO EXIT
+
+@dead
+N: You failed.
+WAIT 1
+N: Return to Athelias to try again.
+WAIT 2.5
+@pass
+GOTO LINK 89, 1
+
+@pass3
+EJECT -C80
+@pass2
+HOST_TAKE T3997
+GOTO @pass
+;
+;---------------------------------------------------------------------------------------
+;
+SCENE 13801, chaos1, SCENE, "Dark Throne"
+#include include.txt
+IF -C80 @end
+IF T1205 @end
+ACTOR 1, "Trezerath's Major Demon", 248, 1, 30, 90
+SEL 1
+POSE 1, 4
+ACTOR 2, Demon, 249, 1, 50, 80
+SEL 2
+POSE 1, 4
+ACTOR 3, Demon, 249, 1, 40, 75
+SEL 3
+POSE 1, 4
+ACTOR 4, Demon, 249, 1, 29, 54
+SEL 4
+POSE 1, 4
+ACTOR 5, Demon, 249, 1, 12, 72
+SEL 5
+POSE 1, 4
+ACTOR 6, Demon, 249, 1, 24, 70
+SEL 6
+POSE 1, 4
+IF DEAD @laugh
+1: What are you doing here, human?
+H: We discovered your plans, infernal creature.
+H: I am here to make sure that you'll never leave this dimension!
+1: You fool! 
+1: This will be your resting place!
+WAIT 1.8
+MOVE 1, 120, 90, 1
+MOVE 2, 120, 90, 1
+MOVE 3, 120, 90, 1
+MOVE 4, 120, 90, 1
+MOVE 5, 120, 90, 1
+MOVE 6, 120, 90, 1
+FIGHT 519.30.90, 520.50.80, 520.40.75, 520.29.54, 520.33.60, 520.12.72
+IF WIN @reward
+@laugh
+SOUND grownl8.wav
+WAIT 2.5
+GOTO EXIT
+
+@end
+END
+
+@reward
+SOUND thunder.wav
+FX 4
+WAIT 2
+N: Another vortex is opening while the major demon passes away.
+WAIT 1
+N: You are taken away in the warp.
+WAIT 2.8
+HOST_GIVE T1205
+HOST_TAKE T3997
+GOTO LINK 89, 1
+;
+;---------------------------------------------------------------------------------------
+;

@@ -1,0 +1,5829 @@
+; add: TIMER
+;
+@madstoolcurrentversion
+N: You have the version 1.11 of AHS.
+END
+
+@madstoolnewversionchange
+N: The following changes were made to AHS:
+N: *** Version 1.11 ***
+N: Improved the control of AHS over the @events of the world.
+N: AHS can now check if an actor was created by the tool and automatically skip the eventual events of the scene in this case.
+N: *** Version 1.10 ***
+N: Reduced the size of AHS to 5 lines of script per scene (0.084Kb).
+N: ADDED: all 64 possible actors can now be managed by AHS (only the first 32 actors were supported before).
+N: ADDED: all the newest commands, cookies, and flags of WoS are now supported.
+N: ADDED: delete option for actors.
+N: CHANGED: you no longer have to replace the @eventActorClicks of your world by "@eventBis" (but the @eventBis will still be working if you have any left in your world).
+N: CHANGED: you now have to click one time on AHS button to load it at the beginning of a scene to make it work. It is automatically unloaded (sorry) whenever it sends you to a local @event.
+N: CHANGED: AHS button now has two pose: one when it's loaded, one when it's not.
+N: ADDED: Beta version of an emulator for WoS. You can now record scripts and save them (use QUEST syntax - cookies, MENUs TIMERs, and CALLs are not supported yet).
+N: CHANGED: you can now directly enter what you wanna take and give with AHS (for example you can just write "Z300+L1+T34+I34.50").
+N: CHANGED: the main menu was cleaned up. Many options felt under other categories, including a new "Misc" category. Hopefully  you'll easily find your way through the new menus.
+N: ADDED: support for the other @events of WoS to prevent potential bugs and to anticipate their addition to the emulator.
+N: ADDED: the search function now supports the latest item stock cookies, and you can search items by ability points provided, description, and probability of finding.
+N: FIXED : the few bugs of the last version reported (I know I should have made the list - soz).
+N: ADDED: Give all items and spells of the world options (laggy)
+N: CHANGED: When getting a list of IDs (for fighting multiple monsters for example, or offering several items in a shop), you can now use the same word ("go") for stopping the list (the old keywords should be still working, but I thought I had to harmonize this).
+N: ADDED: "flags" option in the Beta Tools menu.
+END
+
+
+#include AHS4.txt
+
+@madstoolmenu1 
+MENU "Mod the art and the FX=@madstoolfxandart", "Actors=@mdstoolmenuactormenu2", "Fights and monsters=@madstoolfightz", "Heal and rez =@madstoolhealz", "Take and Give=@madstooltakeandgive", "Travel=@madstooltravelz", "Have fun with cookies=@madstoolcookiez", "Miscellaneous=@madstoolmiscellaneous", "Have fun=@madstoolfun", "Scripting=@scripting", "Beta tools=@madstoolbetatools", "Preferences=@madtoolpreferences", "Plugins=@madtoolplugins", "Cancel=@madstoolcancel" 
+GOTO @madstoolmenu1
+
+@madstoolmenu2 
+MENU "Change the pose=@madstoolpose", "Several poses=@severalposesthingy", "Make him move (default speed)=@madstoolactormove", "Make him move (custom speed)=@madstoolactormovefsfsdfsfsdfsf", "Face=@madstoolface", "Make him speak=@madstoolspeak", "Make him speak (looped)=@madstoolspeakloopedspeech", "New actor=@madstoolactor", "New actor fully described=@newactorfullydescribed", "Delete actor=@actorDeleteThingy", "Get the ID of the actor=@actorIDget", "Help=@madstoolactorhelp", "Cancel=@madstoolcancel" 
+GOTO @madstoolmenu2bissfsdfsqfqfqf 
+
+@madstoolactormenu2 
+MENU "Change the pose=@madstoolpose", "Several poses=@severalposesthingy", "Make him move (default speed)=@madstoolactormove", "Make him move (custom speed)=@madstoolactormovefsfsdfsfsdfsf", "Face=@madstoolface", "Make him speak=@madstoolspeak", "Make him speak (looped)=@madstoolspeakloopedspeech", "Delete actor=@actorDeleteThingy", "Get the ID of the actor=@actorIDget", "Help=@madstoolactorhelp", "Cancel=@madstoolcancel" 
+GOTO @madstoolactormenu2 
+
+@madstoollvl99eqip
+MENU "Host only=@madstoollvl99eqiphost", "Everyone=@madstoollvl99eqipevery", "Cancel=@madstoolcancel"
+GOTO @madstoollvl99eqip
+
+@madstollpotionsheal
+MENU "Host only=@madstollpotionshealhost", "Everybody=@madstollpotionshealevery", "Cancel=@madstoolcancel"
+GOTO @madstollpotionsheal
+
+@madstoolmissionmenu
+MENU "Offer a single mission=@missionthingy1", "Offer several missions=@missionthingy2", "Cancel=@madstoolcancel" 
+GOTO @madstoolmissionmenu
+
+@madstoolcandy
+MENU "Full lvl 99 equip set=@madstoollvl99eqip", "Max healing potion=@madstollpotionsheal", "Largest trophy bag possible=@madstooltrophybagmax", "Reserved spells=@madstoolreservedspells", "Max Gold=@maxGoldThingy", "Give all the items of the world (host only - laggy)=@AHSgiveAll1", "Give all the spells of the world=@AHSgiveAll2", "Cancel=@madstoolcancel"
+GOTO @madstoolcandy
+
+@mdstoolmenuactormenu2
+MENU "New Actor (overwrite actor #1)=@madstoolactor0thingy", "New actor fully described=@madstoolactor0thingyfullydescribed", "Cancel=@madstoolcancel" 
+GOTO @mdstoolmenuactormenu2
+
+@madstoolmiscellaneous
+MENU "Open a shop=@madstoolshop", "Offer a mission=@madstoolmissionmenu", "Play a mini-game=@madstoolgame", "Eject command=@madstooleject", "Start a countdown=@madstoolcountdown", "Wait command=@madstoolpause", "Have fun with flags=@madstoolflag", "Lock/unlock the scene=@madstoollock", "Open an HTML page=@madstoolhtml", "Server variables=@madstoolSSVmenu", "Cancel=@madstoolcancel" 
+GOTO @madstoolmiscellaneous
+
+@madstoolbetatools
+MENU "Information about my char=@madstoolinfos", "Information about spells, items and monsters=@madstoolinfo10", "Information about classes=@generalmenuclasssearch", "Information about tokens=@madstooltokensinfo", "Information about flags=@madstoolflag", "Cancel=@madstoolcancel" 
+GOTO @madstoolbetatools
+
+@madtoolpreferences
+MENU "EventClicks=@madtoolpreferenceseventActors", "Button options=@buttonoptions", "Text options=@textoptionsblabla", "Actors options=@actorsoptionssdgdf", "Default ASKs duration=@defaultASKdurationpref", "Proxbeta compatibility=@proxbetacompatibilityvsAHS", "Version info=@madstoolversioninfo", "Reset to default=@resetpreferencesagain", "Cancel=@madstoolcancel" 
+GOTO @madtoolpreferences
+
+@proxbetacompatibilityvsAHS
+MENU "Disable AHS in the scenes where Proxbeta is implanted=@proxbetacompatibilityvsAHS1", "Disable Proxbeta in the scenes where AHS is impanted=@proxbetacompatibilityvsAHS2", "Cancel=@madstoolcancel"
+GOTO @proxbetacompatibilityvsAHS
+
+@buttonoptions
+MENU "Select a new skin for the button=@selectaskinfodrg", "Move the button=@movethebuttonsfsd", "Cancel=@madstoolcancel"
+GOTO @buttonoptions
+
+@selectaskinfodrg
+MENU "Default skin=@setanewskinsdfsf1", "Default Skin Dark=@setanewskinsdfsf2", "Diablo AHS=@setanewskinsdfsf3", "Animated Box=@setanewskinsdfsf4", "Mad's=@setanewskinsdfsf5", "Cancel=@madstoolcancel"
+GOTO @selectaskinfodrg
+
+@generalmenuclasssearch
+MENU "Search by name=@classsearchbyname343", "List of the classes=@listoftheclassesmadstool", "List of the free IDs=@classfreeIDSssearch", "Cancel=@madstoolcancel"
+GOTO @generalmenuclasssearch
+
+@madstooltokensinfo
+MENU "Check if this char has a specific token=@tokenhascheck", "Description of a token=@tokensdescription", "Cancel=@madstoolcancel"
+GOTO @madstooltokensinfo
+
+@textoptionsblabla
+MENU "All texts enabled=@textoptionsblabla1", "All texts but the loading message enabled=@textoptionsblabla4", "Skip the most common or intuitive texts=@textoptionsblabla2", "Skip all texts, unless they are absolutely necesary=@textoptionsblabla3", "Cancel=@madstoolcancel"
+GOTO @textoptionsblabla
+
+@actorsoptionssdgdf
+MENU "Enter a new default name=@defaultnameactorthingy", "Enter new values for the default birth coords=@actorsbirthcoordspref", "Cancel=@madstoolcancel"
+GOTO @actorsoptionssdgdf
+
+@madstoolversioninfo
+MENU "Current version=@madstoolcurrentversion", "List of the changes=@madstoolnewversionchange", "AHS download page=@madstoolahsdlpage", "Cancel=@madstoolcancel"
+GOTO @madstoolversioninfo
+
+@madstoolSSVmenu
+MENU "Set a server variable=@madstoolSSVset", "Get a server variable=@madstoolSSVget", "Cancel=@madstoolcancel"
+GOTO @madstoolSSVmenu
+
+@madstoolinfo10 
+MENU "Information about monsters=@madstoolinfo11", "Information about items=@madstoolinfo12", "Information about spells=@madstoolinfo13", "Find a monster=@madstoolmonstersearchesdgdf", "Find an item=@madstoolitemsearchmenu", "Find a spell=@spellssearchesmainmenu", "Cancel=@madstoolcancel" 
+GOTO @madstoolinfo10 
+
+@madstoolfun 
+MENU "Kill everybody in scene=@madstoolkill", "Kill everybody but you=@madstoolkill2", "Kill everyone who is not in the party=@killeveryonenorinparrty", "Make the HP of everybody but you drop to 1=@madstoolHPdrop", "Morph into another class=@madstoolmorph", "Change your gender=@madstoolgender", "New trophy bag size=@madsoolnewtrophynagsize", "Give a candy=@madstoolcandy", "Type a 'N' message=@madstoolmessageN", "Type a 'N' message (looped)=@madstoolmessageNLooped", "Cancel=@madstoolcancel" 
+GOTO @madstoolfun 
+
+@madstoolgender 
+MENU "Gender 0=@madstoolgender0", "Gender 1=@madstoolgender1", "Gender 2=@madstoolgender2", "Gender 3=@madstoolgender3", "Cancel=@madstoolcancel" 
+GOTO @madstoolgender 
+
+@madstoolfxandart 
+MENU "Change the background=@madstoolbkgnd", "Change the width of the scene=@horizoncahange", "New Theme=@madstooltheme", "Play a wav file (not looped)=@madstoolsound", "Play a new MIDI=@madstoolmusic", "New FX=@madstoolfx", "New Weather=@madstoolweather", "Change the background color=@madstoolbkgndcolor", "Change the actors and monsters color=@madstoolactorcolor", "Cancel=@madstoolcancel" 
+GOTO @madstoolfxandart 
+
+@madstooltravelz
+MENU "Travel to a link=@madstoollink", "Travel to a scene=@madstoolscene", "Travel to a label in the scene=@madstoollabelz", "Travel to a label in another scene=@madstooltravelotherlabelotherscene", "CALL a scene=@madstoolacallascene", "CUT this scene=@madstooltravelCUT", "Reload the current scene=@madstoolreloadthescene", "Restart the current scene=@madstoolreloadthesceneXX", "Cancel=@madstoolcancel" 
+GOTO @madstooltravelz 
+
+@madstoolcookiez 
+MENU "SET a cookie=@madstoolcookie", "Check the value of a cookie=@madstoolvaluecookie", "Check the value of a stock cookie=@madstoolstockcookiesdsc", "Do maths with cookies=@madstoolcookiezmath", "Tutorial=@madstooltutcookie", "Cancel=@madstoolcancel"
+GOTO @madstoolcookiez 
+
+@madstoolcookiezmath
+MENU "ADD a cookie=@madstooladdcookie", "DIV a cookie=@madstooldivcookie", "SUB a cookie=@madstoolsubcookie", "MUL a cookie=@madstoolmulcookie", "MOD a cookie=@madstoolmodcookie", "COMPARE 2 cookies=@madstoolcomparecookie", "STRCMP 2 cookies=@madstoolstrcmpcookie", "STRSTR 2 cookies=@madstoolstrstrcookie", "SET_LEN a cookie=@madstoolsetlen", "SET_SUBSTR a cookie=@madstoolcookiesetsubstr", "PUSH a cookie=@madstoolPUSH", "POP a cookie=@madstoolPOP", "F_ADD a cookie=@madstoolcookiesFADD", "F_SUB a cookie=@madstoolcookiesFSUB", "F_MUL a cookie=@madstoolcookiesFMUL", "F_DIV a cookie=@madstoolcookiesFDIV", "F_MOD a cookie=@madstoolcookiesFMOD", "AND a cookie=@madstoolcookiesAND", "OR a cookie=@madstoolcookiesOR", "XOR a cookie=@madstoolcookiesXOR", "NOT a cookie=@madstoolcookiesNOT", "Cancel=@madstoolcancel"
+GOTO @madstoolcookiezmath
+
+@madstoolserverrulesmeny
+MENU "num.ruleMaxPlayers=@num.ruleMaxPlayers","num.ruleMaxAFK=@num.ruleMaxAFK","num.ruleMinVersion=@num.ruleMinVersion","num.ruleLadder=@num.ruleLadder","num.ruleNoCheat=@num.ruleNoCheat","num.ruleNoMod=@num.ruleNoMod","num.ruleNoMigrate=@num.ruleNoMigrate","num.ruleNoPK=@num.ruleNoPK","num.ruleAllPK=@num.ruleAllPK","num.ruleNoBleep=@num.ruleNoBleep","num.ruleNoEavesdrop=@num.ruleNoEavesdrop","num.ruleNoPets=@num.ruleNoPets","num.ruleArenaPK=@num.ruleArenaPK", "Cancel=@madstoolcancel"
+GOTO @madstoolserverrulesmeny
+
+@madstoolstockcookiesdsc
+MENU "Dev Table cookies=@madstooldevtablescookies", "Gender cookies=@madstoolcookielist5","Host cookies=@madstoolcookielist1","Host Pet Cookies=@madstoolcookielist2","Holiday cookies=@holidaycookiescheckvalue", "Item cookies=@madstoolcookielist7","Monster cookies=@madstoolcookielist8","Scene cookies=@madstoolcookielist9","Server cookies=@madstoolcookielist3", "Server Rules cookies=@madstoolserverrulesmeny", "Spell cookies=@madstoolcookielist10","Time cookies=@madstoolcookielist4","Toss cookies=@madstoolcookielist6", "Trophy Bag cookies=@madstoolcookielist11", "Version cookies=@madstoolversioncookies", "Cancel=@madstoolcancel" 
+GOTO @madstoolstockcookiesdsc
+
+@holidaycookiescheckvalue
+MENU "num.holidayID=@holidaycookiescheckvalue1", "str.holidayName=@holidaycookiescheckvalue2", "str.holidayGreeting=@holidaycookiescheckvalue3", "Cancel=@madstoolcancel" 
+GOTO @holidaycookiescheckvalue
+
+@madstoolversioncookies
+MENU "num.wosVersion=@num.wosVersion", "Cancel=@madstoolcancel"
+GOTO @madstoolversioncookies
+
+@madstoolcookielist1 
+MENU "lastAsk=@lastAsk", "KM.alignment=@KM.alignment", "num.hostClass=@num.hostClass", "num.hostLevel=@num.hostLevel", "num.hostX=@num.hostX", "num.hostY=@num.hostY", "num.hostAge=@num.hostAge", "num.hostTotalAge=@num.hostTotalAge", "num.hostHP=@num.hostHP", "num.hostMP=@num.hostMP", "num.hostMaxHP=@num.hostMaxHP", "num.hostMaxMP=@num.hostMaxMP", "num.hostSTR=@num.hostSTR", "num.hostWIS=@num.hostWIS", "num.hostSTA=@num.hostSTA", "num.hostAGI=@num.hostAGI", "num.hostDEX=@num.hostDEX", "num.hostHandSkillN=@num.hostHandSkillN", "num.hostElementSkillN=@num.hostElementSkillN", "num.hostGP=@num.hostGP", "num.hostPP=@num.hostPP", "Next=@madstoolcookielist1bis", "Cancel=@madstoolcancel"
+GOTO @madstoolcookielist1
+
+@madstoolcookielist1bis 
+MENU "num.hostTNL=@num.hostTNL", "num.hostHaloPoints=@num.hostHaloPoints", "num.hostPKs=@num.hostPKs", "num.hostDeaths=@num.hostDeaths", "num.hostKills=@num.hostKills", "num.hostRating=@num.hostRating", "num.hostHuntSkill=@num.hostHuntSkill", "num.itemNNN=@num.itemNNN", "num.hostBravery=@num.hostBravery", "num.hostAggressiveness=@num.hostAggressiveness", "num.hostHandPPN=@num.hostHandPPN", "num.hostElementPPN=@num.hostElementPPN", "num.hostXP=@num.hostXP", "num.hostMaxXP=@num.hostMaxXP", "num.hostTotalXP=@num.hostTotalXP", "num.hostBirthDay=@num.hostBirthDay", "num.hostBirthMonth=@num.hostBirthMonth", "num.hostBirthYear=@num.hostBirthYear", "num.hostHandRatio=@num.hostHandRatio", "num.hostMagicRatio=@num.hostMagicRatio", "num.hostEquipIdNN=@num.hostEquipIdNN", "num.hostTotalPP=@num.hostTotalPP", "Previous=@madstoolcookielist1", "Cancel=@madstoolcancel" 
+GOTO @madstoolcookielist1bis
+
+@madstoolcookielist2
+MENU "num.hostPets=@num.hostPets", "num.hostPetLevel=@num.hostPetLevel", "num.hostPetId=@num.hostPetId", "num.hostHasPetNNN=@num.hostHasPetNNN", "Cancel=@madstoolcancel"
+GOTO @madstoolcookielist2
+
+@madstoolcookielist3
+MENU "num.serverTimeHour=@num.serverTimeHour", "num.serverTimeMinute=@num.serverTimeMinute", "num.serverTimeMonth=@num.serverTimeMonth", "num.serverTimeDay=@num.serverTimeDay", "num.serverTimeYear=@num.serverTimeYear", "num.serverTimeDoW=@num.serverTimeDoW", "num.serverTimeNow=@num.serverTimeNow", "str.serverName=@str.serverName", "Cancel=@madstoolcancel"
+GOTO @madstoolcookielist3
+
+@madstoolcookielist4
+MENU "num.timeHour=@num.timeHour", "num.timeMinute=@num.timeMinute", "num.timeMonth=@num.timeMonth", "num.timeDay=@num.timeDay", "num.timeYear=@num.timeYear", "num.timeDoW=@num.timeDoW", "num.countDown=@num.countDown", "num.timeNow=@num.timeNow", "num.timerLengthN=@num.timerLengthN", "Cancel=@madstoolcancel"
+GOTO @madstoolcookielist4
+
+@madstoolcookielist5
+MENU "g.num=@g.num", "str.uniform=@str.uniform", "str.name=@str.name", "str.soul=@str.soul", "Cancel=@madstoolcancel"
+GOTO @madstoolcookielist5
+
+@madstoolcookielist6
+MENU "item.id=@item.id", "item.goldGiven=@item.goldGiven", "Cancel=@madstoolcancel"
+GOTO @madstoolcookielist6
+
+@madstoolcookielist7
+MENU "item.id=@item.id", "item.name=@item.name", "item.class=@item.class", "item.desc=@item.desc", "item.price=@item.price", "item.level=@item.level", "item.element=@item.element", "item.attack=@item.attack", "item.defense=@item.defense", "item.hp=@item.hp", "item.mp=@item.mp", "item.ap=@item.ap", "item.fp=@item.fp", "Cancel=@madstoolcancel"
+GOTO @madstoolcookielist7
+
+@madstoolcookielist8
+MENU "monster.id=@monster.id", "monster.name=@monster.name", "monster.dex=@monster.dex", "monster.agi=@monster.agi", "monster.sta=@monster.sta", "monster.str=@monster.str", "monster.wis=@monster.wis", "monster.level=@monster.level", "monster.element=@monster.element", "monster.mp=@monster.mp", "monster.attack=@monster.attack", "monster.defense=@monster.defense", "monster.expPts=@monster.expPts", "monster.gold=@monster.gold", "monster.alignment=@monster.alignment", "monster.skin=@monster.skin", "monster.lastFightCount=@monster.lastFightCount", "monster.lastFightIdN=@monster.lastFightIdN", "monster.hp=@monster.hp", "Cancel=@madstoolcancel"
+GOTO @madstoolcookielist8
+
+@madstoolcookielist9
+MENU "scene.id=@scene.id", "scene.bkgnd=@scene.bkgnd", "scene.fx=@scene.fx", "scene.weather=@scene.weather", "num.isPKAttack=@num.isPKAttack", "num.closestLink=@num.closestLink", "num.closestLinkStyle=@num.closestLinkStyle", "str.mapName=@str.mapName", "num.mapNum=@num.mapNum", "num.mapFlags=@num.mapFlags", "num.peopleInScene=@num.peopleInScene", "num.peopleInParty=@num.peopleInParty", "str.actorNameNN=@str.actorNameNN", "Cancel=@madstoolcancel"
+GOTO @madstoolcookielist9
+
+@madstoolcookielist10
+MENU "spell.id=@spell.id", "spell.name=@spell.name", "spell.pp=@spell.pp", "spell.element=@spell.element", "spell.damage=@spell.damage", "spell.price=@spell.price", "spell.level=@spell.level", "Cancel=@madstoolcancel"
+GOTO @madstoolcookielist10
+
+@madstoolcookielist11
+MENU "num.TrophyBagOpen=@num.TrophyBagOpen", "num.TrophyBagWidth=@num.TrophyBagWidth", "num.TrophyBagHeight=@num.TrophyBagHeight", "num.TrophyBagSlots=@num.TrophyBagSlots", "num.TrophyBagSlotsInUse=@num.TrophyBagSlotsInUse", "num.TrophyBagEmptySlots=@num.TrophyBagEmptySlots", "num.TrophyNNN=@num.TrophyNNN", "num.TrophyBagRoomNNN=@num.TrophyBagRoomNNN", "num.TrophyIdInSlotNNN=@num.TrophyIdInSlotNNN", "num.TrophyCountInSlotNNN=@num.TrophyCountInSlotNNN", "Cancel=@madstoolcancel" 
+GOTO @madstoolcookielist11
+
+@madstooltakeandgive 
+MENU "Give=@takeAndGive1", "Host Give=@takeAndGive2", "Party Give=@takeAndGive3", "Take=@takeAndGive4", "Host Take=@takeAndGive5", "Party Take=@takeAndGive6", "Cancel=@madstoolcancel" 
+;MENU "Give a spell=@madstoolgspell", "Take a spell=@madstooltspell", "Give an item=@madstoolgitem", "Take an item=@madstooltitem", "Give a token=@madstoolgtoken", "Take a token=@madstoolttoken", "Give a trophy=@madstooltrophgive", "Take a Trophy=@madstooltrophytake", "Gold=@madstoolgold", "Cancel=@madstoolcancel" 
+GOTO @madstooltakeandgive 
+
+@madstoolhealz 
+MENU "Resurrect=@madstoolrez", "Recharge HP/MP=@madstoolHPMP", "Cancel=@madstoolcancel" 
+GOTO @madstoolhealz 
+
+@madstoolfightz 
+MENU "Fight a monster=@madstoolfight", "Fight several monsters=@madstoolfightmul", "Fight a monster (locked)=@madstoolfight2", "Fight several monsters (locked)=@madstoolfight2mul", "Level up=@madstoollevel", "See a monster=@madstoolsee", "Fight ALL the monsters of the world=@madstoolfightall", "Cancel=@madstoolcancel" 
+GOTO @madstoolfightz 
+
+@madstoolfightall 
+SET monsterzz, 0
+MENU "Get a heal between each fight=@madstoolfightall6","Don't heal after the fights=@madstoolfightall2", "Cancel=@madstoolcancel" 
+GOTO @madstoolfightall
+
+@madstoolcolor 
+MENU "1 red becomes green, green becomes red=@madstoolactorcolor1", "2 red monster becomes blue, blue monster becomes red=@madstoolactorcolor2", "3 green becomes blue, blue becomes green=@madstoolactorcolor3", "4 these tables replace one pigment with another=@madstoolactorcolor4", "5 blue gets same value as red=@madstoolactorcolor5", "6 red gets same value as green=@madstoolactorcolor6", "7 blue gets same value as green=@madstoolactorcolor7", "8 red gets same value as blue=@madstoolactorcolor8", "9 green gets same value as blue=@madstoolactorcolor9", "10 red component gets dimmer=@madstoolactorcolor10", "11 green component gets dimmer=@madstoolactorcolor11", "12 blue component gets dimmer=@madstoolactorcolor12", "13 skin stays same color, but gets dimmer=@madstoolactorcolor13", "14 even dimmer=@madstoolactorcolor14", "15 dimmest=@madstoolactorcolor15", "16 skin stays same color, but gets brighter=@madstoolactorcolor16", "17 even brighter=@madstoolactorcolor17", "18 brighter still, getting washed out now=@madstoolactorcolor18", "19 quite bright indeed=@madstoolactorcolor19", "20 almost white, it is so bright=@madstoolactorcolor20", "21 removes color (makes skin B&W). and darkens it=@madstoolactorcolor21", "22 removes color, and darkens just a little=@madstoolactorcolor22", "23 removes color, but maintains intensity=@madstoolactorcolor23", "Restore the original colors=@madstoolactorcolorrestore", "Second coat=@madstoolsecondcoat", "Next colors=@madstoolothercolors1", "Cancel=@madstoolcancel" 
+GOTO @madstoolcolor 
+
+@madstoolothercolors1 
+MENU "24 removes color, and brightens a little=@madstoolactorcolor24", "25 removes color, and brightens a lot=@madstoolactorcolor25", "26 invert red=@madstoolactorcolor26", "27 invert green=@madstoolactorcolor27", "28 invert blue=@madstoolactorcolor28", "29 invert red and green=@madstoolactorcolor29", "30 invert red and blue=@madstoolactorcolor30", "31 invert blue and green=@madstoolactorcolor31", "32 invert all=@madstoolactorcolor32", "Restore the original colors=@madstoolactorcolorrestore", "Second coat=@madstoolsecondcoat", "Previous colors=@madstoolcolor", "Cancel=@madstoolcancel" 
+GOTO @madstoolothercolors1 
+
+@madstoolface 
+MENU "0 Face Left of Screen=@madstoolface0","1 Face Right of Screen=@madstoolface1","2 Face Scene Host=@madstoolface2","3 Face away from Scene Host=@madstoolface3","4 Turn Around (face other way)=@madstoolface4","Cancel=@madstoolcancel" 
+GOTO @madstoolface 
+
+@madstooleject
+MENU "Eject from party and scene=@madstoolejectps","Eject from party only=@madstoolejectp","Cancel=@madstoolcancel" 
+GOTO @madstooleject 
+
+@madstoolflag
+MENU "Set a new map flag=@madstoolflagbis", "Check if a map flag is active in this scene=@madstoolflagter",  "Get the list of all the active flags in scene=@getthelistofalltheactiveflagsinscene", "Get the list of the map flags available=@mapflagslistavailabe", "List of the monsters flags=@monstersflagslistvwxc","List of the items flags=@itemsflagslisdtdfsgsfdg","List of the spells flags=@spellsflagslistgdfgs","List of the trophies flags=@trophiesflagslistgdfgs","Cancel=@madstoolcancel"
+GOTO @madstoolflag
+
+@madstoolfx 
+MENU "0 No effects=@madstoolfx0", "1 Underwater ripple=@madstoolfx1", "2 Lake ripple=@madstoolfx2", "3 Video=@madstoolfx3", "4 Jitter=@madstoolfx4", "5 EarthQuake=@madstoolfx5", "6 Melty=@madstoolfx6", "Cancel=@madstoolcancel" 
+GOTO@madstoolfx 
+
+@madstooltheme 
+MENU "-1 stop ambient sounds=@madstooltheme0", "0 Revert to default map theme=@madstooltheme0bis", "1 near a bubbling brook=@madstooltheme1", "2 rain storm=@madstooltheme2", "3 windy aerie=@madstooltheme3", "4 light wind=@madstooltheme4", "5 waterFall=@madstooltheme5", "6 campfire=@madstooltheme6", "7 Raging Fire=@madstooltheme7", "8 Birds=@madstooltheme8", "Personnal theme=@madstoolthemeperso", "Cancel=@madstoolcancel" 
+GOTO @madstooltheme 
+
+@madstoolweather 
+MENU "0 no weather=@madstoolweather0", "1 rain=@madstoolweather1", "2 medium rain=@madstoolweather2", "3 heavy rain=@madstoolweather3", "4 light static=@madstoolweather4", "5 medium static=@madstoolweather5", "6 heavy static=@madstoolweather6", "7 light snow=@madstoolweather7", "8 medium snow=@madstoolweather8", "9 heavy snow=@madstoolweather9", "4xxx light colored static =@madstoolweather10", "5xxx medium colored static=@madstoolweather11", "6xxx heavy colored static=@madstoolweather12", "7xxx light colored snow=@madstoolweather13", "8xxx medium colored snow=@madstoolweather14", "9xxx heavy colored snow=@madstoolweather15", "Cancel=@madstoolcancel" 
+GOTO @madstoolweather 
+
+@madstoolshop
+MENU "Unique items shops=@madstoolshopuniqueitems", "Shop selling a whole category of items=@madstoolsshopsbycategory", "Cancel=@madstoolcancel"
+GOTO @madstoolshop
+ 
+@madstoolgame 
+MENU "1 The slobber slots machine=@madstoolgame1", "2 The Monster Racer=@madstoolgame2", "3 The Search for Pi at Home=@madstoolgame3", "4 Blackjack=@madstoolgame4", "5 Pokegatchi Training Center =@madstoolgame5", "6 Asteroids=@madstoolgame6", "7 Stock Market Game=@madstoolgame7", "8 Quadris (Tetris Clone)=@madstoolgame8", "Cancel=@madstoolcancel" 
+GOTO @madstoolgame 
+
+@madstoollock 
+MENU "Lock the scene=@madstoollock2", "Unlock the scene=@madstoollock3", "Cancel=@madstoolcancel" 
+GOTO @madstoollock 
+
+@madstoolrez 
+MENU "Rez the host only=@madstoolhostrez", "Rez the whole team=@madstoolteamrez", "Cancel=@madstoolcancel" 
+GOTO @madstoolrez 
+
+@madstoolHPMP 
+MENU "Full recharge=@madstoolfullHPMP", "Choose the amount of HP=@madstoolHPamount", "Choose the amount of MP=@madstoolMPamount", "Cancel=@madstoolcancel" 
+GOTO @madstoolHPMP 
+
+@madstoolfullHPMP 
+MENU "Host only=@madstoolhostfull","Whole team=@madstoolteamfull", "Cancel=@madstoolcancel" 
+GOTO @madstoolfullHPMP 
+
+@actorIDget
+N: Actor ID: #<madstoolcurrentactor>
+END
+
+@madtoolplugins
+#include AHS-plugins.txt
+END
+
+@madstoolcancel 
+END
+
+@madstooltrophybagmax
+SET num.trophyBagWidth, 16
+SET num.trophyBagHeight, 8
+SET num.trophyBagOpen, 1
+END
+
+@proxbetacompatibilityvsAHS1
+SET madstooldVSproxbeta, 1
+END
+
+@proxbetacompatibilityvsAHS2
+SET madstooldVSproxbeta, 0
+END
+
+@actorDeleteThingy
+MOVE #<madstoolcurrentactor>, 500, 500, 1
+END
+
+@defaultnameactorthingy
+ASK #<AHS.pref.ASKduration> 1
+IF Qcancel @madstoolcancel
+SET AHS.defaultname, "#<lastAsk>"
+END
+
+@resetpreferencesagain
+N: Are you sure?
+ASK #<AHS.pref.ASKduration> 1
+IF YES @resetpreferencesagainNext
+END
+
+@resetpreferencesagainNext
+SET temp.checker, 1
+@resetpreferences
+SET madstooldVSproxbeta, 0
+SET AHS.loadedMessage, 0
+SET AHS.defaultname, Test
+SET AHS.defaultcoordsactorX, 50
+SET AHS.defaultcoordsactorY, 85
+SET AHS.pref.ASKduration, 3000
+SET AHS.noMessage, 0
+SET AHS.mainIconPose, 0
+SET AHS.mainIconX, 5
+SET AHS.mainIconY, 15
+SET madstoolpref.actorClicks, 1
+SET AHS.configurated, 1
+COMPARE #<temp.checker>, 1
+IF= @madstoolcancel
+GOTO @defaultvalueactor0posenext
+
+@defaultASKdurationpref
+N: How long (in seconds)?
+ASK #<AHS.pref.ASKduration> 1
+IF Qcancel @madstoolcancel
+SET AHS.pref.ASKduration, #<lastAsk>
+END
+
+@actorsbirthcoordspref
+N: Coords X?
+ASK #<AHS.defaultcoordsactorX> 1
+IF Qcancel @madstoolcancel
+SET AHS.defaultname, "#<lastAsk>"
+N: Coords Y?
+ASK #<AHS.defaultcoordsactorY> 1
+IF Qcancel @madstoolcancel
+SET AHS.defaultname, "#<lastAsk>"
+END
+
+@monstersflagslistvwxc
+N: 1 - monster cannot be tamed (cannot capture as a pet)
+N: 2 - monster can only cast spells in his or her own element (no matter how wise)
+N: 4 - monster CAN use 'summon' spells, if within element and level restrictions
+N: 8 - monster can use magic only (has no physical attack to fall back on)
+N: 16 - when picking spells, can ONLY use those from the Arg20 AI command
+N: 32 - monster will never flee from battle
+END
+
+@itemsflagslisdtdfsgsfdg
+N: General Flags:
+N: 1 - private use only (item cannot be given to another player)
+N: --------------------------------------------------------
+N: Attack Path Flags:
+N: 0-3 - duration of attack (0 is quick, 3 is slow)
+N: 4 - if this flag is set, each of the 8 frames of animation consumes one eigth the entire attack (instead of rolling through the frames over and over)
+N: 8 - If this is set, the images is not 'flipped' when attacking from left to right.
+END
+
+@spellsflagslistgdfgs
+N: 0 - no flags (in case you want to use minPLayerLevel option)
+N: 1 - monsters/pets cannot use this spell
+N: 2 - humans are not offered this spell on LEARN SPELL dialog
+N: 4 - this spell can only be used on yourself
+END
+
+@trophiesflagslistgdfgs
+N: 1  - Cannot be GIVEN
+N: 2  - Cannot be SOLD
+N: 4  - Cannot be DISCARDED (use sparingly or bag will fill with crap)
+N: 8  - Mission Only (only dropped if it is required by some open mission)
+END
+
+@textoptionsblabla1
+SET AHS.noMessage, 0
+END
+
+@textoptionsblabla2
+SET AHS.noMessage, 1
+END
+
+@textoptionsblabla3
+SET AHS.noMessage, 2
+END
+
+@textoptionsblabla4
+SET AHS.noMessage, 0
+SET AHS.loadedMessage, 1
+END
+
+@tokenhascheck
+COMPARE #<AHS.noMessage>, 1
+IF> @languageskip1
+N: ID of the token?
+ASK #<AHS.pref.ASKduration> 1
+IF Qcancel @madstoolcancel
+@languageskip1
+IF T#<lastAsk> @tokenhaschaeckhave
+N: You don't have this token.
+END
+
+@tokenhaschaeckhave
+N: You have this token.
+END
+
+@tokensdescription
+COMPARE #<AHS.noMessage>, 1
+IF> @languageskip2  
+N: Name of the token?
+@languageskip2
+ASK #<AHS.pref.ASKduration> 1
+STRCMP %T#<lastAsk>, ""
+IF= @tokensdescriptionnothing
+N: Description: "%T#<lastAsk>"
+END
+
+@tokensdescriptionnothing
+N: No description for this token.
+END
+
+@listoftheclassesmadstool
+SET temp.classnumber, 0
+@listoftheclassesmadstoolbis
+ADD temp.classnumber, 1
+COMPARE #<temp.classnumber>, 89
+IF= @searchallclassqsdnomatch
+STRCMP %C#<temp.classnumber>, ""
+IF= @listoftheclassesmadstoolbis
+N: ID: #<temp.classnumber>, %C#<temp.classnumber>
+GOTO @listoftheclassesmadstoolbis
+
+@searchallclassqsdnomatch
+SET temp.classnumber, ""
+END
+
+@classfreeIDSssearch
+N: Searching...
+SET temp.classnumber, 1
+SET temp.results, 0
+@classfreeIDSssearchbis
+STRCMP %C#<temp.classnumber>, ""
+IF= @freeIDfoundsdgfsg
+@classfreeIDSssearchter
+ADD temp.classnumber, 1
+COMPARE #<temp.classnumber>, 89
+IF= @searchclasfreeIDsqsdnomatch
+GOTO @classfreeIDSssearchbis
+
+@searchclasfreeIDsqsdnomatch
+COMPARE #<temp.results>, 0
+IF= @searchclasfreeIDsqsdnomatchbis
+N: The following IDs seem to be free:
+@searchclasfreeIDsqsdnomatchter
+COMPARE #<temp.results>, 0
+IF= @searchclasfreeIDsqsdnomatchbisend
+SET temp.stuff, temp.resultbis#<temp.results>
+N: ID *#<temp.stuff>
+SUB temp.results, 1
+GOTO @searchclasfreeIDsqsdnomatchter
+
+@searchclasfreeIDsqsdnomatchbisend
+SET temp.classnumber, ""
+SET temp.results, ""
+SET temp.stuff, ""
+END
+
+@searchclasfreeIDsqsdnomatchbis
+N: No free ID found.
+GOTO @searchclasfreeIDsqsdnomatchbisend
+
+@freeIDfoundsdgfsg
+ADD temp.results, 1
+SET temp.resultbis#<temp.results>, #<temp.classnumber>
+GOTO @classfreeIDSssearchter
+
+@classsearchbyname343
+N: Name of the class?
+ASK #<AHS.pref.ASKduration> 1
+IF Qcancel @madstoolcancel
+SET temp.classnumber, 1
+@classsearchbynamesf
+STRCMP #<lastAsk>, %C#<temp.classnumber>
+IF= @classsearchbynamefound
+ADD temp.classnumber, 1
+COMPARE #<temp.classnumber>, 89
+IF= @searchclassbynamenomatch
+GOTO @classsearchbynamesf
+
+@searchclassbynamenomatch
+N: None of the classes has this name.
+GOTO @searchclassbynamenomatchend
+
+@classsearchbynamefound
+N: ID: #<temp.classnumber>, Name: %C#<temp.classnumber>
+@searchclassbynamenomatchend
+SET temp.classnumber, ""
+END
+
+@madstoolendeventactorclicks
+END
+
+@returneventactorthingyfalse
+RETURN false
+END
+
+@returneventactorthingytrue
+RETURN true, #<arg1>
+END
+
+@defaultvaluesforactor0
+SET AHS.mainIconX, 15
+SET AHS.mainIconY, 15
+GOTO @defaultvaluesforactor0next
+
+@defaultvalueactor0pose
+SET AHS.mainIconPose, 0
+GOTO @defaultvalueactor0posenext
+
+@madstoolmadstoolworlddev
+STRCMP #<arg0>, "checking"
+IF= @returneventactorthingytrue
+SET temp.checker, ""
+COMPARE #<AHS.configurated>, 1
+IF= @madstoolmadstoolworlddevnext
+GOTO @resetpreferences
+
+@madstoolmadstoolworlddevnext
+SET AHS.actorConfig1, ""
+SET AHS.actorConfig2, ""
+SET AHS.actorConfig3, ""
+SET AHS.actorConfig4, ""
+SET AHS.actorConfig5, ""
+SET AHS.actorConfig6, ""
+SET AHS.actorConfig7, ""
+SET AHS.actorConfig8, ""
+SET AHS.actorConfig9, ""
+SET AHS.actorConfig10, ""
+SET AHS.actorConfig11, ""
+SET AHS.actorConfig12, ""
+SET AHS.actorConfig13, ""
+SET AHS.actorConfig14, ""
+SET AHS.actorConfig15, ""
+SET AHS.actorConfig16, ""
+SET AHS.actorConfig17, ""
+SET AHS.actorConfig18, ""
+SET AHS.actorConfig19, ""
+SET AHS.actorConfig20, ""
+SET AHS.actorConfig21, ""
+SET AHS.actorConfig22, ""
+SET AHS.actorConfig23, ""
+SET AHS.actorConfig24, ""
+SET AHS.actorConfig25, ""
+SET AHS.actorConfig26, ""
+SET AHS.actorConfig27, ""
+SET AHS.actorConfig28, ""
+SET AHS.actorConfig29, ""
+SET AHS.actorConfig30, ""
+SET AHS.actorConfig31, ""
+SET AHS.actorConfig32, ""
+SET AHS.actorConfig33, ""
+SET AHS.actorConfig34, ""
+SET AHS.actorConfig35, ""
+SET AHS.actorConfig36, ""
+SET AHS.actorConfig37, ""
+SET AHS.actorConfig38, ""
+SET AHS.actorConfig39, ""
+SET AHS.actorConfig40, ""
+SET AHS.actorConfig41, ""
+SET AHS.actorConfig42, ""
+SET AHS.actorConfig43, ""
+SET AHS.actorConfig44, ""
+SET AHS.actorConfig45, ""
+SET AHS.actorConfig46, ""
+SET AHS.actorConfig47, ""
+SET AHS.actorConfig48, ""
+SET AHS.actorConfig49, ""
+SET AHS.actorConfig50, ""
+SET AHS.actorConfig51, ""
+SET AHS.actorConfig52, ""
+SET AHS.actorConfig53, ""
+SET AHS.actorConfig54, ""
+SET AHS.actorConfig55, ""
+SET AHS.actorConfig56, ""
+SET AHS.actorConfig57, ""
+SET AHS.actorConfig58, ""
+SET AHS.actorConfig59, ""
+SET AHS.actorConfig60, ""
+SET AHS.actorConfig61, ""
+SET AHS.actorConfig62, ""
+SET AHS.actorConfig63, ""
+SET AHS.actorConfig64, ""
+SET AHS.loaded, 0
+COMPARE #<AHS.mainIconX>, 100
+IF> @defaultvaluesforactor0
+COMPARE #<AHS.mainIconX>, 0
+IF< @defaultvaluesforactor0
+COMPARE #<AHS.mainIconY>, 100
+IF> @defaultvaluesforactor0
+COMPARE #<AHS.mainIconY>, 0
+IF< @defaultvaluesforactor0
+@defaultvaluesforactor0next
+STRCMP #<AHS.mainIconPose>, ""
+IF= @defaultvalueactor0pose
+@defaultvalueactor0posenext
+COMPARE #<madstoolScriptingConfig>, 1
+IF= @scriptingConfig1stTimeDone
+SET madstoolScriptingConfig, 1
+SET 1scriptList, STOP
+@scriptingConfig1stTimeDone
+ACTOR 0, , "AHS", #<AHS.mainIconPose>, #<AHS.mainIconX>, #<AHS.mainIconY>
+COMPARE #<AHS.mainIconPose>, 3
+IF> @madstoolworlddev3
+IF< @madstoolworlddev3
+POSE 3, 4
+STRCMP #<lastAsk>, "" 
+IF= @entersomethingdeposit 
+SET numbers, "0123456789" 
+SET_LEN len, #<lastAsk> 
+@check1 
+SUB len, 1 
+COMPARE #<len>, -1 
+IF= @next1sfsdfgdsfsdfsf
+SET_SUBSTR symbol, #<len>, 1, #<lastAsk> 
+STRSTR #<numbers>, #<symbol> 
+IF> @check1
+@next1bissgfsfsghhg
+SET AHS.pref.ASKduration, 300
+@next1sfsdfgdsfsdfsf
+COMPARE #<AHS.pref.ASKduration>, 0
+IF= @next1bissgfsfsghhg
+@next2sfsdfsfssfdsdf
+COMPARE #<AHS.defaultcoordsactorX>, 100
+IF> @next2sfsdfsfs
+COMPARE #<AHS.defaultcoordsactorX>, 0
+IF< @next2sfsdfsfs
+COMPARE #<AHS.defaultcoordsactorY>, 100
+IF> @next2sfsdfsfs
+COMPARE #<AHS.defaultcoordsactorY>, 0
+IF< @next2sfsdfsfs
+@madstoolworlddev3 
+RETURN
+END 
+
+@next2sfsdfsfs
+SET AHS.defaultcoordsactorX, 50
+SET AHS.defaultcoordsactorY, 85
+GOTO @next2sfsdfsfssfdsdf
+
+@eventActorClick0
+CALL 1000000@soulIDchecker, checking
+STRCMP #<arg0>, false
+IF= @madstoolendeventactorclicks
+COMPARE #<madstooldVSproxbeta>, 1
+IF= #<madstool.scene.id>@eventBis0
+COMPARE #<AHS.loaded>, 0
+IF= @AHSload
+STRSTR #<str.actorName51>, "Editing script"
+IF> @madstoolcancel
+SET AHS.editingScriptID, 0
+SET AHS.scriptEditingCookie, 0
+SET AHS.editingLineNumber, 0
+GOTO @madstoolmenu1 
+
+@AHSload
+SET temp.pose, #<AHS.mainIconPose>
+ADD temp.pose, 6
+SEL 0
+POSE #<temp.pose>
+SET AHS.loaded, 1
+COMPARE #<temp.pose>, 9
+IF= @AHSloadAnime
+@AHSloadAnime2
+COMPARE #<AHS.noMessage>, 0
+IF> @madstoolcancel
+COMPARE #<AHS.loadedMessage>, 1
+IF= @madstoolcancel
+N: AHS successfully loaded.
+END
+
+@AHSloadAnime
+POSE 9, 10
+GOTO @AHSloadAnime2
+
+@setanewskinsdfsf1
+SET AHS.mainIconPose, 0
+SET AHS.mainIconPose2, 6
+SEL 0
+POSE #<AHS.mainIconPose2>
+N: Preferences saved.
+END
+
+@setanewskinsdfsf2
+SET AHS.mainIconPose, 1
+SET AHS.mainIconPose2, 7
+SEL 0
+POSE #<AHS.mainIconPose2>
+N: Preferences saved.
+END
+
+@setanewskinsdfsf3
+SET AHS.mainIconPose, 2
+SET AHS.mainIconPose2, 8
+SEL 0
+POSE #<AHS.mainIconPose2>
+N: Preferences saved.
+END
+
+@setanewskinsdfsf4
+SET AHS.mainIconPose, 0
+SET AHS.mainIconPose2, 9
+SEL 0
+POSE #<AHS.mainIconPose2>, 10
+N: Preferences saved.
+END
+
+@setanewskinsdfsf5
+SET AHS.mainIconPose, 0
+SET AHS.mainIconPose2, 11
+SEL 0
+POSE #<AHS.mainIconPose2>
+N: Preferences saved.
+END
+
+@movethebuttonsfsd
+N: New coords X?
+ASK #<AHS.pref.ASKduration> 1
+IF Qcancel @madstoolcancel
+SET AHS.mainIconX, #<lastAsk>
+N: New coords Y?
+ASK #<AHS.pref.ASKduration> 1
+IF Qcancel @madstoolcancel
+SET AHS.mainIconY, #<lastAsk>
+WAIT 0.8
+MOVE 0, #<AHS.mainIconX>, #<AHS.mainIconY>, 1
+N: Preferences saved.
+END
+
+@madstoolahsdlpage
+HTML http://athelias.biz/AHS.html
+END
+
+@madtoolpreferenceseventActors
+N: Skip the eventual eventActorClicks of your scenes and replace them by this tool?
+ASK #<AHS.pref.ASKduration> 1
+IF Qcancel @madstoolcancel
+IF YES @madtoolpreferenceseventActorsYES
+IF NO @madtoolpreferenceseventActorsNO
+N: Timed out.
+END
+
+@madtoolpreferenceseventActorsYES
+SET madstoolpref.actorClicks, 0
+N: The primary events are now the events of this tool.
+END
+
+@madtoolpreferenceseventActorsNO
+SET madstoolpref.actorClicks, 1
+N: The primary events are now the local events of the world.
+END
+
+@madstoolSSVset
+COMPARE #<AHS.noMessage>, 1
+IF> @languageskip3  
+N: Category name ("cancel" to cancel)?
+@languageskip3
+ASK #<AHS.pref.ASKduration> 1
+IF Qcancel @madstoolcancel
+SET temp.categoryName, #<lastAsk>
+COMPARE #<AHS.noMessage>, 1
+IF> @languageskip4  
+N: Variable name ("cancel" to cancel)?
+@languageskip4  
+ASK #<AHS.pref.ASKduration> 1
+IF Qcancel @madstoolcancel
+SET temp.variableName, #<lastAsk>
+COMPARE #<AHS.noMessage>, 1
+IF> @languageskip5  
+N: Value ("cancel" to cancel)?
+@languageskip5  
+ASK #<AHS.pref.ASKduration> 1
+IF Qcancel @madstoolcancel
+SET temp.value, #<lastAsk>
+COMPARE #<AHS.noMessage>, 1
+IF> @madstoolSSVsetYES
+N: Set the variable  #<temp.variableName>, in the category #<temp.categoryName>, with the value #<temp.value>?
+ASK #<AHS.pref.ASKduration> 1
+IF YES @madstoolSSVsetYES
+IF NO @madstoolSSVsetNO
+N: Timed out.
+WAIT 1
+@madstoolSSVsetNO
+N: Action canceled.
+GOTO @madstoolSSVsetYESbis
+
+@madstoolSSVsetYES
+SET_SERVER_VAR #<temp.categoryName>, #<temp.variableName>, #<temp.value>
+@madstoolSSVsetYESbis
+SET temp.value, ""
+SET temp.variableName, ""
+SET temp.categoryName, ""
+END
+
+@madstoolSSVget
+N: Name of the variable ("cancel" to cancel)?
+ASK #<AHS.pref.ASKduration> 1
+IF Qcancel @madstoolcancel
+SET temp.variableName, #<lastAsk>
+N: Name of the category ("cancel" to cancel)?
+ASK #<AHS.pref.ASKduration> 1
+IF Qcancel @madstoolcancel
+SET temp.categoryName, #<lastAsk>
+N: Stored in what cookie?
+ASK #<AHS.pref.ASKduration> 1
+IF Qcancel @madstoolcancel
+SET temp.value, #<lastAsk>
+GET_SERVER_VAR #<temp.value>, #<temp.categoryName>, #<temp.variableName>
+N: The value of #<temp.variableName> is *#<temp.value>.
+SET temp.value, ""
+SET temp.variableName, ""
+SET temp.categoryName, ""
+END
+
+@madstoolinfo11 
+N: ID of the monster? 
+@madstoolinfo110
+ASK #<AHS.pref.ASKduration> 1
+IF Qcancel @madstoolcancel 
+SET monster.id, #<lastAsk> 
+STRCMP #<monster.name>, "" 
+IF= @madstooldexmon 
+N: Monster name : #<monster.name> 
+N: Level : #<monster.level> 
+N: Element : #<monster.element> 
+N: Skin : #<monster.skin> 
+N: Alignment : #<monster.alignment> 
+N: A points : #<monster.attack> 
+N: D points : #<monster.defense> 
+N: STR : #<monster.str> 
+N: WIS : #<monster.wis> 
+N: STA : #<monster.sta> 
+N: AGI : #<monster.agi> 
+N: DEX : #<monster.dex> 
+N: HP : #<monster.hp> 
+N: MP : #<monster.mp> 
+N: XP given : #<monster.expPts> 
+N: Gold expected : #<monster.gold> 
+N: END 
+WAIT 1 
+@madstoolmenuinfo11 
+N: Information on another monster? 
+MENU "Yes=@madstoolinfo11","No=@madstoolcancel" 
+GOTO @madstoolmenuinfo11 
+
+@madstoolinfo12 
+N: ID of the item? 
+@madstoolinfo120 
+ASK #<AHS.pref.ASKduration> 1
+IF Qcancel @madstoolcancel 
+SET item.id, #<lastAsk> 
+STRCMP #<item.name>, "" 
+IF= @madstooldexite 
+N: Item name : #<item.name> 
+N: Class : #<item.class> 
+N: Level : #<item.level> 
+COMPARE #<item.price>, 2 
+IF< @madstoolinfo122 
+N: Price in shops : #<item.price> GP
+@madstoolinfo121 
+N: Description: #<item.desc>
+N: Element : #<item.element> 
+N: A points : #<item.attack> 
+N: D points : #<item.defense> 
+N: HP restored when used : #<item.hp> 
+N: MP restored when used : #<item.mp> 
+N: Ability points provided: #<item.ap>
+N: Probability of finding: #<item.fp>
+WAIT 1 
+@madstoolmenuinfo12 
+N: Information on another item? 
+MENU "Yes=@madstoolinfo12","No=@madstoolcancel" 
+GOTO @madstoolmenuinfo12 
+
+@madstoolinfo122 
+N: Price in shops : can't be bought.
+GOTO @madstoolinfo121 
+
+@madstoolinfo13 
+N: ID of the spell? 
+@madstoolinfo130 
+ASK #<AHS.pref.ASKduration> 1
+IF Qcancel @madstoolcancel 
+SET spell.id, #<lastAsk> 
+STRCMP #<spell.name>, "" 
+IF= @madstooldexspe 
+N: Spell name : #<spell.name> 
+N: Element : #<spell.element> 
+N: Level : #<spell.level> 
+N: PP requiered to learn : #<spell.pp> 
+N: Damage : #<spell.damage> 
+N: PP required to cast : #<spell.price> 
+WAIT 1 
+@madstoolmenuinfo13 
+N: Information on another spell? 
+MENU "Yes=@madstoolinfo13","No=@madstoolcancel" 
+GOTO @madstoolmenuinfo13 
+
+@madstooldexmon 
+N: Sorry but this monster doesn't seem to exist. 
+N: Choose another ID 
+GOTO @madstoolinfo110 
+
+@madstooldexite 
+N: Sorry but this item doesn't seem to exist. 
+N: Choose another ID 
+GOTO @madstoolinfo120 
+
+@madstooldexspe 
+N: Sorry but this spell doesn't seem to exist. 
+N: Choose another ID 
+GOTO @madstoolinfo130 
+
+@killeveryonenorinparrty
+TAKE H32000
+PARTY_GIVE L1
+PARTY_GIVE H32000
+END
+
+@maxGoldThingy
+HOST_GIVE G1000000
+END
+
+@madsoolnewtrophynagsize
+COMPARE #<AHS.noMessage>, 1
+IF> @languageskip6  
+N: Trophy bag width (max size: 128 slots)?
+@languageskip6
+ASK #<AHS.pref.ASKduration> 1
+IF Qcancel @madstoolcancel
+SET num.trophyBagWidth, #<lastAsk>
+COMPARE #<AHS.noMessage>, 1
+IF> @languageskip7  
+N: Trophy bag Height (max size: 128 slots)?
+@languageskip7
+ASK #<AHS.pref.ASKduration> 1
+IF Qcancel @madstoolcancel
+SET num.trophyBagHeight, #<lastAsk>
+SET num.trophyBagOpen, 1
+END
+
+@madstoolmessageN 
+COMPARE #<AHS.noMessage>, 0
+IF> @languageskip8  
+N: What message? 
+@languageskip8
+ASK #<AHS.pref.ASKduration> 1
+IF Qcancel @madstoolcancel 
+N: #<lastAsk> 
+END 
+
+@madstoolmessageNLooped
+COMPARE #<AHS.noMessage>, 0
+IF> @languageskip833
+N: What message? 
+@languageskip833
+ASK #<AHS.pref.ASKduration> 1
+IF Qcancel @madstoolcancel 
+N: #<lastAsk> 
+GOTO @languageskip833
+
+@madstoolgender0 
+SET g.num, 0 
+COMPARE #<AHS.noMessage>, 1
+IF> @languageskip9  
+N: %1 is now a #<g.he> 
+@languageskip9  
+END 
+
+@madstoolgender1 
+SET g.num, 1 
+COMPARE #<AHS.noMessage>, 1
+IF> @languageskip10  
+N: %1 is now a #<g.he> 
+@languageskip10  
+END 
+
+@madstoolgender2 
+SET g.num, 2 
+COMPARE #<AHS.noMessage>, 1
+IF> @languageskip11  
+N: %1 is now a #<g.he> 
+@languageskip11  
+END 
+
+@madstoolgender3 
+SET g.num, 3 
+COMPARE #<AHS.noMessage>, 1
+IF> @languageskip12  
+N: %1 is now a #<g.he> 
+@languageskip12  
+END 
+
+@madstoolpause 
+COMPARE #<AHS.noMessage>, 0
+IF> @languageskip150  
+N: How long (in seconds)? 
+@languageskip150
+ASK #<AHS.pref.ASKduration> 1
+IF Qcancel @madstoolcancel 
+WAIT #<lastAsk> 
+END 
+
+@madstoolmorph 
+COMPARE #<AHS.noMessage>, 1
+IF> @languageskip13  
+N: Enter the ID of the new class 
+@languageskip13
+ASK #<AHS.pref.ASKduration> 1
+IF Qcancel @madstoolcancel 
+COMPARE #<lastAsk>, 0 
+IF< @madstoolunvalidmorph 
+COMPARE #<lastAsk>, 89
+IF< @madstoolmorph2 
+@madstoolunvalidmorph 
+N: Unvalid ID 
+N: Try again 
+GOTO @madstoolmorph 
+
+@madstoolmorph0 
+N: This class doesn't seem to exist. 
+WAIT 1
+N: Continue? 
+WAIT 1 
+@madstoolmorph1 
+MENU "Yes=@madstoolmorph2","No=@madstoolcancel" 
+GOTO @madstoolmorph1 
+
+@madstoolmorph2 
+SET classmorph, %C#<lastAsk> 
+STRCMP #<classmorph>, "" 
+IF= @madstoolmorph0
+COMPARE #<AHS.noMessage>, 1
+IF> @madstoolmorph4
+N: Do you want to be turned into a %C#<lastAsk> ? 
+@madstoolmorph3 
+MENU "Yes=@madstoolmorph4","No=@madstoolcancel" 
+GOTO @madstoolmorph3 
+
+@madstoolmorph4 
+SET num.hostClass, #<lastAsk> 
+END 
+
+@madstoolHPdrop 
+TAKE H10000 
+TAKE M10000 
+GIVE L1 
+HOST_GIVE H10000 
+HOST_GIVE M10000 
+END 
+
+@madstoolkill 
+TAKE H10000 
+TAKE M10000 
+END 
+
+@madstoolkill2 
+TAKE H10000 
+TAKE M10000 
+HOST_GIVE L1 
+HOST_GIVE H10000 
+HOST_GIVE M10000 
+END 
+
+@horizoncahange
+COMPARE #<AHS.noMessage>, 1
+IF> @languageskip9  
+N: New width of the scene?
+@languageskip9
+ASK #<AHS.pref.ASKduration> 1
+IF Qcancel @madstoolcancel
+SET temp.width, #<lastAsk>
+COMPARE #<AHS.noMessage>, 1
+IF> @languageskip10  
+N: New coords for the horizon?
+@languageskip10
+ASK #<AHS.pref.ASKduration> 1
+IF Qcancel @madstoolcancel
+BKGND #<scene.bkgnd>.#<temp.width>.#<lastAsk>
+END
+
+@madstoolacallascene
+COMPARE #<AHS.noMessage>, 1
+IF> @languageskip11bbb  
+N: ID of the scene?
+@languageskip11bbb
+ASK #<AHS.pref.ASKduration> 1
+IF Qcancel @madstoolcancel 
+SET temp.scenetotravel, #<lastAsk>
+COMPARE #<AHS.noMessage>, 1
+IF> @languageskip12bbb  
+N: Name of the label?
+@languageskip12bbb
+ASK #<AHS.pref.ASKduration> 1
+IF Qcancel @madstoolcancel 
+CALL #<temp.scenetotravel>@#<lastAsk>
+N: Scene or label not found.
+END
+
+@madstooltravelotherlabelotherscene
+COMPARE #<AHS.noMessage>, 1
+IF> @languageskip13dddddddd  
+N: ID of the scene?
+@languageskip13dddddddd
+ASK #<AHS.pref.ASKduration> 1
+IF Qcancel @madstoolcancel 
+SET temp.scenetotravel, #<lastAsk>
+COMPARE #<AHS.noMessage>, 1
+IF> @languageskip14dddddddd
+N: Name of the label?
+@languageskip14dddddddd
+ASK #<AHS.pref.ASKduration> 1
+IF Qcancel @madstoolcancel 
+GOTO #<temp.scenetotravel>@#<lastAsk>
+N: Label not found.
+END
+
+@madstoolreloadthescene
+GOTO SCENE #<madstool.scene.id> 
+
+@madstoolreloadthesceneXX
+GOTO #<madstool.scene.id>@AHS
+
+@madstoollabelz 
+COMPARE #<AHS.noMessage>, 0
+IF> @languageskip15  
+N: Name of the label? 
+@languageskip15
+ASK #<AHS.pref.ASKduration> 1
+IF Qcancel @madstoolcancel 
+GOTO #<madstool.scene.id>@#<lastAsk> 
+N: Label not found.
+END
+
+@num.ruleMaxPlayers
+N: The value of num.ruleMaxPlayers is #<num.ruleMaxPlayers>.
+END
+
+@num.ruleMaxAFK
+N: The value of num.ruleMaxAFK is #<num.ruleMaxAFK>.
+END
+
+@num.ruleMinVersion
+N: The value of num.ruleMinVersion is #<num.ruleMinVersion>.
+END
+
+@num.ruleLadder
+N: The value of num.ruleLadder is #<num.ruleLadder>.
+END
+
+@num.ruleNoCheat
+N: The value of num.ruleNoCheat is #<num.ruleNoCheat>.
+END
+
+@num.ruleNoMod
+N: The value of num.ruleNoMod is #<num.ruleNoMod>.
+END
+
+@num.ruleNoMigrate
+N: The value of num.ruleNoMigrate is #<num.ruleNoMigrate>.
+END
+
+@num.ruleNoPK
+N: The value of num.ruleNoPK is #<num.ruleNoPK>.
+END
+
+@num.ruleAllPK
+N: The value of num.ruleAllPK is #<num.ruleAllPK>.
+END
+
+@num.ruleNoBleep
+N: The value of num.ruleNoBleep is #<num.ruleNoBleep>.
+END
+
+@num.ruleNoEavesdrop
+N: The value of num.ruleNoEavesdrop is #<num.ruleNoEavesdrop>.
+END
+
+@num.ruleNoPets
+N: The value of num.ruleNoPets is #<num.ruleNoPets>.
+END
+
+@num.ruleArenaPK
+N: The value of num.ruleArenaPK is #<num.ruleArenaPK>.
+END
+
+@madstoolcookiesAND
+COMPARE #<AHS.noMessage>, 1
+IF> @languageskip16AND
+N: Name of the cookie?
+@languageskip16AND
+ASK #<AHS.pref.ASKduration> 1
+IF Qcancel @madstoolcancel
+SET temp.source, #<lastAsk>
+COMPARE #<AHS.noMessage>, 1
+IF> @languageskip17AND
+N: AND with?
+@languageskip17AND
+ASK #<AHS.pref.ASKduration> 1
+IF Qcancel @madstoolcancel
+AND temp.source, #<lastAsk>
+END
+
+@madstoolcookiesOR
+COMPARE #<AHS.noMessage>, 1
+IF> @languageskip16OR
+N: Name of the cookie?
+@languageskip16OR
+ASK #<AHS.pref.ASKduration> 1
+IF Qcancel @madstoolcancel
+SET temp.source, #<lastAsk>
+COMPARE #<AHS.noMessage>, 1
+IF> @languageskip17OR
+N: OR with?
+@languageskip17OR
+ASK #<AHS.pref.ASKduration> 1
+IF Qcancel @madstoolcancel
+OR temp.source, #<lastAsk>
+END
+
+@madstoolcookiesXOR
+COMPARE #<AHS.noMessage>, 1
+IF> @languageskip16XOR
+N: Name of the cookie?
+@languageskip16XOR
+ASK #<AHS.pref.ASKduration> 1
+IF Qcancel @madstoolcancel
+SET temp.source, #<lastAsk>
+COMPARE #<AHS.noMessage>, 1
+IF> @languageskip17XOR
+N: XOR with?
+@languageskip17XOR
+ASK #<AHS.pref.ASKduration> 1
+IF Qcancel @madstoolcancel
+XOR temp.source, #<lastAsk>
+END
+
+@madstoolcookiesNOT
+N: Name of the cookie?
+ASK #<AHS.pref.ASKduration> 1
+IF Qcancel @madstoolcancel
+NOR #<lastAsk>
+END
+
+@madstoolsetlen
+N: Name of the cookie?
+ASK #<AHS.pref.ASKduration> 1
+IF Qcancel @madstoolcancel
+SET_LEN temp.len, *#<lastAsk>
+N: #<lastAsk> is #<temp.len> characters long.
+SET temp.len, ""
+END
+
+@madstoolcookiesetsubstr
+COMPARE #<AHS.noMessage>, 1
+IF> @languageskip16  
+N: Name of the source cookie?
+@languageskip16
+ASK #<AHS.pref.ASKduration> 1
+IF Qcancel @madstoolcancel
+SET temp.source, #<lastAsk>
+COMPARE #<AHS.noMessage>, 1
+IF> @languageskip17  
+N: Start at offset number...?
+@languageskip17  
+ASK #<AHS.pref.ASKduration> 1
+IF Qcancel @madstoolcancel
+SET temp.offset, #<lastAsk>
+N: Length of the string extracted?
+IF Qcancel @madstoolcancel
+SET temp.len, #<lastAsk>
+COMPARE #<AHS.noMessage>, 1
+IF> @languageskip18  
+N: Name of the cookie where the value will be stored?
+@languageskip18
+ASK #<AHS.pref.ASKduration> 1
+IF Qcancel @madstoolcancel
+SET temp.cookie, #<lastAsk>
+SET_SUBSTR #<temp.cookie>, #<temp.offset>, #<temp.len>, *#<temp.source>
+COMPARE #<AHS.noMessage>, 1
+IF> @languageskip19  
+N: *#<temp.cookie> has been set as the new value of #<temp.cookie>.
+@languageskip19  
+SET temp.cookie, ""
+SET temp.offset, ""
+SET temp.len, ""
+SET temp.source, ""
+END
+
+@madstoolcookiesFADD
+N: Name of the cookie?
+ASK #<AHS.pref.ASKduration> 1
+IF Qcancel @madstoolcancel
+SET temp.cookiename, #<lastAsk>
+N: Value F_ADDed?
+ASK #<AHS.pref.ASKduration> 1
+IF Qcancel @madstoolcancel
+F_ADD #<temp.cookiename>, #<lastAsk>
+N: Result: *#<temp.cookiename>.
+END
+
+@madstoolcookiesFSUB
+N: Name of the cookie?
+ASK #<AHS.pref.ASKduration> 1
+IF Qcancel @madstoolcancel
+SET temp.cookiename, #<lastAsk>
+N: Value F_SUBstracted?
+ASK #<AHS.pref.ASKduration> 1
+IF Qcancel @madstoolcancel
+F_SUB #<temp.cookiename>, #<lastAsk>
+N: Result: *#<temp.cookiename>.
+END
+
+@madstoolcookiesFMUL
+N: Name of the cookie?
+ASK #<AHS.pref.ASKduration> 1
+IF Qcancel @madstoolcancel
+SET temp.cookiename, #<lastAsk>
+N: F_MULtiplied by?
+ASK #<AHS.pref.ASKduration> 1
+IF Qcancel @madstoolcancel
+F_MUL #<temp.cookiename>, #<lastAsk>
+N: Result: *#<temp.cookiename>.
+END
+
+@madstoolcookiesFDIV
+N: Name of the cookie?
+ASK #<AHS.pref.ASKduration> 1
+IF Qcancel @madstoolcancel
+SET temp.cookiename, #<lastAsk>
+N: F_DIVided by?
+ASK #<AHS.pref.ASKduration> 1
+IF Qcancel @madstoolcancel
+F_DIV #<temp.cookiename>, #<lastAsk>
+N: Result: *#<temp.cookiename>.
+END
+
+@madstoolcookiesFMOD
+N: Name of the cookie?
+ASK #<AHS.pref.ASKduration> 1
+IF Qcancel @madstoolcancel
+SET temp.cookiename, #<lastAsk>
+N: F_DIVided by?
+ASK #<AHS.pref.ASKduration> 1
+IF Qcancel @madstoolcancel
+F_MOD #<temp.cookiename>, #<lastAsk>
+N: Result: *#<temp.cookiename>.
+END
+
+@madstoolPUSH
+N: Name of the cookie whose content will be pushed?
+ASK #<AHS.pref.ASKduration> 1
+IF Qcancel @madstoolcancel
+PUSH #<lastAsk>
+N: the value *#<lastAsk> has been pushed.
+END
+
+@madstoolPOP
+N: Name of the cookie whose content will be popped?
+ASK #<AHS.pref.ASKduration> 1
+IF Qcancel @madstoolcancel
+POP #<lastAsk>
+N: The value *#<lastAsk> has been popped.
+END
+
+@madstoolvaluecookie 
+N: Name of the cookie? 
+ASK #<AHS.pref.ASKduration> 1
+IF Qcancel @madstoolcancel 
+N: The value of #<lastAsk> is *#<lastAsk> 
+END 
+
+@madstoolcomparecookie 
+N: Name of the 1st cookie? 
+@madstoolcomparecookie1 
+;MENU "Choose in the stock cookie list=@madstoolstockcookie", "Enter the name=@madstoolcomparecookie2", "Cancel=@madstoolcancel" 
+;GOTO @madstoolcomparecookie1 
+ASK #<AHS.pref.ASKduration> 1
+IF Qcancel @madstoolcancel 
+SET cookiecmp1, #<lastAsk> 
+N: Name of the 2nd cookie? 
+ASK #<AHS.pref.ASKduration> 1
+IF Qcancel @madstoolcancel 
+COMPARE *#<cookiecmp1>, *#<lastAsk> 
+IF= @madstoollabelEquals 
+IF> @madstoollabelGreater 
+IF< @madstoollabelLess 
+END 
+
+@madstoollabelEquals 
+N: Both cookies are equal. 
+END 
+
+@madstoollabelGreater 
+N: The value of the first cookie is larger. 
+END 
+
+@madstoollabelLess 
+N: The value of the second cookie is larger. 
+END 
+
+@madstoolstrstrcookie 
+N: Name of the 1st cookie? 
+@madstoolcomparecookie1 
+;WAIT 0.1 
+;MENU "Choose in the stock cookie list=@madstoolstockcookie", "Enter the name=@madstoolcomparecookie2", "Cancel=@madstoolcancel" 
+;GOTO @madstoolcomparecookie1 
+ASK #<AHS.pref.ASKduration> 1
+IF Qcancel @madstoolcancel 
+SET cookiecmp1, #<lastAsk> 
+N: Name of the 2nd cookie? 
+ASK #<AHS.pref.ASKduration> 1
+IF Qcancel @madstoolcancel 
+STRSTR *#<cookiecmp1>, *#<lastAsk> 
+IF> @madstoolfoundinside 
+N: The second cookie is not included in the first one. 
+END 
+
+@madstoolfoundinside 
+N: The second cookie is included in the first one. 
+END 
+
+@madstoolstrcmpcookie 
+N: Name of the 1st cookie? 
+@madstoolcomparecookie1 
+;WAIT 0.1 
+;MENU "Choose in the stock cookie list=@madstoolstockcookie", "Enter the name=@madstoolcomparecookie2", "Cancel=@madstoolcancel" 
+;GOTO @madstoolcomparecookie1 
+ASK #<AHS.pref.ASKduration> 1
+IF Qcancel @madstoolcancel 
+SET cookiecmp1, #<lastAsk> 
+N: Name of the 2nd cookie? 
+ASK #<AHS.pref.ASKduration> 1
+IF Qcancel @madstoolcancel 
+STRCMP *#<cookiecmp1>, *#<lastAsk> 
+IF= @madstoolYesTheyAreTheSameWord 
+IF< @madstoolNoTheFirstWordComesEarlierInTheAlphabet 
+IF> @madstoolNoTheFirstWordComesLaterInTheAlphabet 
+END 
+
+@madstoolYesTheyAreTheSameWord 
+N: Both strings are the same word. 
+END 
+
+@madstoolNoTheFirstWordComesEarlierInTheAlphabet 
+N: The first string comes first in the alphabet. 
+END 
+
+@madstoolNoTheFirstWordComesLaterInTheAlphabet 
+N: The second string comes first in the alphabet. 
+END 
+
+@madstooldevtablescookies
+COMPARE #<AHS.noMessage>, 1
+IF> @gdhfhsdf23245553
+N: ID of the DevTable (2 digits)?
+@gdhfhsdf23245553
+ASK #<AHS.pref.ASKduration> 1
+IF Qcancel @madstoolcancel 
+SET temp.ask1, #<lastAsk>
+COMPARE #<AHS.noMessage>, 1
+IF> @gdhfhsdf232455532
+N: ID of the row?
+@gdhfhsdf232455532
+ASK #<AHS.pref.ASKduration> 1
+IF Qcancel @madstoolcancel 
+SET temp.ask2, #<lastAsk>
+COMPARE #<AHS.noMessage>, 1
+IF> @gdhfhsdf2324555323
+N: ID of the column?
+@gdhfhsdf2324555323
+ASK #<AHS.pref.ASKduration> 1
+IF Qcancel @madstoolcancel 
+SET temp.ask3, #<lastAsk>
+SET num.DevTableId, #<temp.ask1>
+SET str.DevTableRowId, #<temp.ask2>
+SET temp.ask4, str.DevTableCOL#<temp.ask3>
+N: Value: *#<temp.ask4>
+SET temp.ask1, ""
+SET temp.ask2, ""
+SET temp.ask3, ""
+END
+
+@holidaycookiescheckvalue1
+COMPARE #<num.holidayID>, 0
+IF= @holidaycookiescheckvalue1none
+N: The value of num.holidayID is #<num.holidayID>.
+END
+
+@holidaycookiescheckvalue1none
+N: No holiday active (num.holidayID = 0).
+END
+
+@holidaycookiescheckvalue2
+N: The current holiday's name is "#<str.holidayName>".
+END
+
+@holidaycookiescheckvalue3
+N: The value of str.holidayGreeting is "#<str.holidayGreeting>".
+END
+
+@num.wosVersion
+N: The value of num.wosVersion is #<num.wosVersion>.
+END
+
+@lastAsk
+N: The value of lastAsk is #<lastAsk>.
+END
+
+@KM.alignment
+N: What alignment?
+ASK #<AHS.pref.ASKduration> 1
+IF Qcancel @madstoolcancel
+SET temp.align, KM.#<lastAsk>
+N: The value KM.alignment of is *#<temp.align> for that alignment.
+SET temp.align, ""
+END
+
+@num.hostClass
+N: The value of num.hostClass is #<num.hostClass>.
+END
+
+@num.hostLevel
+N: The value of num.hostLevel is #<num.hostLevel>.
+END
+
+@num.hostX
+N: The value of num.hostX is #<num.hostX>.
+END
+
+@num.hostY
+N: The value of num.hostY is #<num.hostY>.
+END
+
+@num.hostAge
+N: The value of num.hostAge is #<num.hostAge>.
+END
+
+@num.hostTotalAge
+N: The value of num.hostTotalAge is #<num.hostTotalAge>.
+END
+
+@num.hostHP
+N: The value of num.hostHP is #<num.hostHP>.
+END
+
+@num.hostMP
+N: The value of num.hostMP is #<num.hostMP>.
+END
+
+@num.hostMaxHP
+N: The value of num.hostMaxHP is #<num.hostMaxHP>.
+END
+
+@num.hostMaxMP
+N: The value of num.hostMaxMP is #<num.hostMaxMP>.
+END
+
+@num.hostSTR
+N: The value of num.hostSTR is #<num.hostSTR>.
+END
+
+@num.hostWIS
+N: The value of num.hostWIS is #<num.hostWIS>.
+END
+
+@num.hostSTA
+N: The value of num.hostSTA is #<num.hostSTA>.
+END
+
+@num.hostAGI
+N: The value of num.hostAGI is #<num.hostAGI>.
+END
+
+@num.hostDEX
+N: The value of num.hostDEX is #<num.hostDEX>.
+END
+
+@num.hostHandSkillN
+1 What hand ID?
+ASK #<AHS.pref.ASKduration> 1
+IF Qcancel @madstoolcancel
+SET temp.num.hostHandSkillN, num.hostHandSkill#<lastAsk>
+N: The value of num.hostHandSkill#<lastAsk> is *#<temp.num.hostHandSkillN>.
+SET temp.num.hostHandSkillN, ""
+END
+
+@num.hostElementSkillN
+1 What element ID?
+ASK #<AHS.pref.ASKduration> 1
+IF Qcancel @madstoolcancel
+SET temp.num.hostElementSkillN, num.hostElementSkill#<lastAsk>
+N: The value of num.hostElementSkill#<lastAsk> is *#<temp.num.hostElementSkillN>.
+SET temp.num.hostElementSkillN, ""
+END
+
+@num.hostGP
+N: The value of num.hostGP is #<num.hostGP>.
+END
+
+@num.hostPP
+N: The value of num.hostPP is #<num.hostPP>.
+END
+
+@num.hostTNL
+N: The value of num.hostTNL is #<num.hostTNL>.
+END
+
+@num.hostHaloPoints
+N: The value of num.hostHaloPoints is #<num.hostHaloPoints>.
+END
+
+@num.hostPKs
+N: The value of num.hostPKs is #<num.hostPKs>.
+END
+
+@num.hostDeaths
+N: The value of num.hostDeaths is #<num.hostDeaths>.
+END
+
+@num.hostKills
+N: The value of num.hostKills is #<num.hostKills>.
+END
+
+@num.hostRating
+N: The value of num.hostRating is #<num.hostRating>.
+END
+
+@num.hostHuntSkill
+N: The value of num.hostHuntSkill is #<num.hostHuntSkill>.
+END
+
+@num.itemNNN
+N: What item ID?
+ASK #<AHS.pref.ASKduration> 1
+IF Qcancel @madstoolcancel
+SET num.itemtemp, num.item#<lastAsk>
+N: The value of num.item#<lastAsk> is *#<num.itemtemp>.
+END
+
+@num.hostBravery
+N: The value of num.hostBravery is #<num.hostBravery>.
+END
+
+@num.hostAggressiveness
+N: The value of num.hostAggressiveness is #<num.hostAggressiveness>.
+END
+
+@num.hostHandPPN
+1: What hand ID?
+ASK #<AHS.pref.ASKduration> 1
+IF Qcancel @madstoolcancel
+SET temp.hostHandPP, num.hostHandPP#<lastAsk>
+N: The value of num.hostHandPP#<lastAsk> is *#<temp.hostHandPP>.
+END
+
+@num.hostElementPPN
+1: What hand ID?
+ASK #<AHS.pref.ASKduration> 1
+IF Qcancel @madstoolcancel
+SET temp.hostElementPP, num.hostElementPP#<lastAsk>
+N: The value of num.hostElementPP#<lastAsk> is *#<temp.hostElementPP>.
+END
+
+@num.hostXP
+N: The value of num.hostXP is #<num.hostXP>.
+END
+
+@num.hostMaxXP
+N: The value of num.hostMaxXP is #<num.hostMaxXP>.
+END
+
+@num.hostTotalXP
+N: The value of num.hostTotalXP is #<num.hostTotalXP>.
+END
+
+@num.hostBirthDay
+N: The value of num.hostBirthDay is #<num.hostBirthDay>.
+END
+
+@num.hostBirthMonth
+N: The value of num.hostBirthMonth is #<num.hostBirthMonth>.
+END
+
+@num.hostBirthYear
+N: The value of num.hostBirthYear is #<num.hostBirthYear>.
+END
+
+@num.hostHandRatio
+N: The value of num.hostHandRatio is #<num.hostHandRatio>.
+END
+
+@num.hostMagicRatio
+N: The value of num.hostMagicRatio is #<num.hostMagicRatio>.
+END
+
+@num.hostEquipIdNN
+N: The value of num.hostEquipIdNN is #<num.hostEquipIdNN>.
+END
+
+@num.hostTotalPP
+N: The value of num.hostTotalPP is #<num.hostTotalPP>.
+END
+
+@num.hostPets
+N: The value of num.hostPets is #<num.hostPets>.
+END
+
+@num.hostPetLevel
+N: The value of num.hostPetLevel is #<num.hostPetLevel>.
+END
+
+@num.hostPetId
+N: The value of num.hostPetId is #<num.hostPetId>.
+END
+
+@num.hostHasPetNNN
+N: What pet ID?
+ASK #<AHS.pref.ASKduration> 1
+SET temp.num.hostHasPetNNN, num.hostHasPet#<lastAsk>
+N: The value of num.hostHasPet#<lastAsk> is *#<temp.num.hostHasPetNNN>.
+END
+
+@num.serverTimeHour
+N: The value of num.serverTimeHour is #<num.serverTimeHour>.
+END
+
+@num.serverTimeMinute
+N: The value of num.serverTimeMinute is #<num.serverTimeMinute>.
+END
+
+@num.serverTimeMonth
+N: The value of num.serverTimeMonth is #<num.serverTimeMonth>.
+END
+
+@num.serverTimeDay
+N: The value of num.serverTimeDay is #<num.serverTimeDay>.
+END
+
+@num.serverTimeYear
+N: The value of num.serverTimeYear is #<num.serverTimeYear>.
+END
+
+@num.serverTimeDoW
+N: The value of num.serverTimeDoW is #<num.serverTimeDoW>.
+END
+
+@num.serverTimeNow
+N: The value of num.serverTimeNow is #<num.serverTimeNow>.
+END
+
+@str.serverName
+N: The value of str.serverName is #<str.serverName>.
+END
+
+@num.timeHour
+N: The value of num.timeHour is #<num.timeHour>.
+END
+
+@num.timeMinute
+N: The value of num.timeMinute is #<num.timeMinute>.
+END
+
+@num.timeMonth
+N: The value of num.timeMonth is #<num.timeMonth>.
+END
+
+@num.timeDay
+N: The value of num.timeDay is #<num.timeDay>.
+END
+
+@num.timeYear
+N: The value of num.timeYear is #<num.timeYear>.
+END
+
+@num.timeDoW
+N: The value of num.timeDoW is #<num.timeDoW>.
+END
+
+@num.countDown
+N: The value of num.countDown is #<num.countDown>.
+END
+
+@num.timeNow
+N: The value of num.timeNow is #<num.timeNow>.
+END
+
+@num.timerLengthN
+N: What timer ID?
+ASK #<AHS.pref.ASKduration> 1
+IF Qcancel
+SET tmp.lastfight, num.timerLength#<lastAsk>
+N: The value of num.timerLength#<lastAsk> is *#<tmp.lastfight> (in milliseconds).
+SET tmp.lastfight, ""
+END
+
+@g.num
+N: The value of g.num is #<g.num>.
+END
+
+@str.uniform
+N: The value of str.uniform is #<str.uniform>.
+END
+
+@str.name
+N: The value of str.name is #<str.name>.
+END
+
+@str.soul
+N: The value of str.soul is #<str.soul>.
+END
+
+@item.id
+N: The value of item.id is #<item.id>.
+END
+
+@item.goldGiven
+N: The value of item.goldGiven is #<item.goldGiven>.
+END
+
+@item.ap
+N: This item provides #<item.ap> ability points when used.
+END
+
+@item.fp
+N: The probability of finding this item is #<item.fp>
+END
+
+@item.desc
+N: The description of this item is: #<item.desc>
+END
+
+@item.id
+N: The id of the item is #<item.id>.
+END
+
+@item.name
+N: The name of the current item is #<item.name>.
+END
+
+@item.class
+N: The class of the current item is #<item.class>.
+END
+
+@item.price
+N: The value of item.price is #<item.price>.
+END
+
+@item.level
+N: The value of item.level is #<item.level>.
+END
+
+@item.element
+N: The value of item.element is #<item.element>.
+END
+
+@item.attack
+N: The value of item.attack is #<item.attack>.
+END
+
+@item.defense
+N: The value of item.defense is #<item.defense>.
+END
+
+@item.hp
+N: The value of item.hp is #<item.hp>.
+END
+
+@item.mp
+N: The value of item.mp is #<item.mp>.
+END
+
+@monster.id
+N: The value of monster.id is #<monster.id>.
+END
+
+@monster.name
+N: The value of monster.name is #<monster.name>.
+END
+
+@monster.dex
+N: The value of monster.dex is #<monster.dex>.
+END
+
+@monster.agi
+N: The value of monster.agi is #<monster.agi>.
+END
+
+@monster.sta
+N: The value of monster.sta is #<monster.sta>.
+END
+
+@monster.str
+N: The value of monster.str is #<monster.str>.
+END
+
+@monster.wis
+N: The value of monster.wis is #<monster.wis>.
+END
+
+@monster.level
+N: The value of monster.level is #<monster.level>.
+END
+
+@monster.element
+N: The value of monster.element is #<monster.element>.
+END
+
+@monster.mp
+N: The value of monster.mp is #<monster.mp>.
+END
+
+@monster.attack
+N: The value of monster.attack is #<monster.attack>.
+END
+
+@monster.defense
+N: The value of monster.defense is #<monster.defense>.
+END
+
+@monster.expPts
+N: The value of monster.expPts is #<monster.expPts>.
+END
+
+@monster.gold
+N: The value of monster.gold is #<monster.gold>.
+END
+
+@monster.alignment
+N: The value of monster.alignment is #<monster.alignment>.
+END
+
+@monster.skin
+N: The value of monster.skin is #<monster.skin>.
+END
+
+@monster.lastFightCount
+N: The value of monster.lastFightCount is #<monster.lastFightCount>.
+END
+
+@monster.lastFightIdN
+N: What ID?
+ASK #<AHS.pref.ASKduration> 1
+IF Qcancel
+SET tmp.lastfight, monster.lastFightId#<lastAsk>
+N: The value of monster.lastFightId#<lastAsk> is *#<tmp.lastfight>.
+SET tmp.lastfight, ""
+END
+
+@monster.hp
+N: The value of monster.hp is #<monster.hp>.
+END
+
+@str.actorNameNN
+N: What ID?
+ASK #<AHS.pref.ASKduration> 1
+IF Qcancel
+SET tmp.lastfight, str.actorName#<lastAsk>
+N: The name of actor #<lastAsk> is *#<tmp.lastfight>.
+SET tmp.lastfight, ""
+END
+
+@scene.id
+N: The value of scene.id is #<scene.id>.
+END
+
+@scene.bkgnd
+N: The value of scene.bkgnd is #<scene.bkgnd>.
+END
+
+@scene.fx
+N: The value of scene.fx is #<scene.fx>.
+END
+
+@scene.weather
+N: The value of scene.weather is #<scene.weather>.
+END
+
+@num.isPKAttack
+N: The value of num.isPKAttack is #<num.isPKAttack>.
+END
+
+@num.closestLink
+N: The value of num.closestLink is #<num.closestLink>.
+END
+
+@num.closestLinkStyle
+N: The value of num.closestLinkStyle is #<num.closestLinkStyle>.
+END
+
+@str.mapName
+N: The value of str.mapName is #<str.mapName>.
+END
+
+@num.mapNum
+N: The value of num.mapNum is #<num.mapNum>.
+END
+
+@num.mapFlags
+N: The value of num.mapFlags is #<num.mapFlags>.
+END
+
+@num.peopleInScene
+N: The value of num.peopleInScene is #<num.peopleInScene>.
+END
+
+@num.peopleInParty
+N: The value of num.peopleInParty is #<num.peopleInParty>.
+END
+
+@spell.id
+N: The value of spell.id is #<spell.id>.
+END
+
+@spell.name
+N: The value of spell.name is #<spell.name>.
+END
+
+@spell.pp
+N: The value of spell.pp is #<spell.pp>.
+END
+
+@spell.element
+N: The value of spell.element is #<spell.element>.
+END
+
+@spell.damage
+N: The value of spell.damage is #<spell.damage>.
+END
+
+@spell.price
+N: The value of spell.price is #<spell.price>.
+END
+
+@spell.level
+N: The value of spell.level is #<spell.level>.
+END
+
+@num.TrophyBagOpen
+N: The value of num.TrophyBagOpen is #<num.TrophyBagOpen>.
+END
+
+@num.TrophyBagWidth
+N: The value of num.TrophyBagWidth is #<num.TrophyBagWidth>.
+END
+
+@num.TrophyBagHeight
+N: The value of num.TrophyBagHeight is #<num.TrophyBagHeight>.
+END
+
+@num.TrophyBagSlots
+N: The value of num.TrophyBagSlots is #<num.TrophyBagSlots>.
+END
+
+@num.TrophyBagSlotsInUse
+N: The value of num.TrophyBagSlotsInUse is #<num.TrophyBagSlotsInUse>.
+END
+
+@num.TrophyBagEmptySlots
+N: The value of num.TrophyBagEmptySlots is #<num.TrophyBagEmptySlots>.
+END
+
+@num.TrophyNNN
+ASK #<AHS.pref.ASKduration> 1
+IF Qcancel @madstoolcancel
+SET temp.something, num.Trophy#<lastAsk>
+N: The value of num.Trophy#<lastAsk> is *#<temp.something>.
+SET temp.something, ""
+END
+
+@num.TrophyBagRoomNNN
+ASK #<AHS.pref.ASKduration> 1
+IF Qcancel @madstoolcancel
+SET temp.something, num.TrophyBagRoom#<lastAsk>
+N: The value of num.TrophyBagRoom#<lastAsk> is *#<temp.something>.
+SET temp.something, ""
+END
+
+@num.TrophyIdInSlotNNN
+ASK #<AHS.pref.ASKduration> 1
+IF Qcancel @madstoolcancel
+SET temp.something, num.TrophyIdInSlot#<lastAsk>
+N: The value of num.TrophyIdInSlot#<lastAsk> is *#<temp.something>.
+SET temp.something, ""
+END
+
+@num.TrophyCountInSlotNNN
+ASK #<AHS.pref.ASKduration> 1
+IF Qcancel @madstoolcancel
+SET temp.something, num.TrophyCountInSlot#<lastAsk>
+N: The value of num.TrophyCountInSlot#<lastAsk> is *#<temp.something>.
+SET temp.something, ""
+END
+
+@madstoolmodcookie 
+N: Name of the cookie? 
+ASK #<AHS.pref.ASKduration> 1
+IF Qcancel @madstoolcancel 
+SET cookie122, #<lastAsk> 
+N: Div by? 
+ASK #<AHS.pref.ASKduration> 1
+IF Qcancel @madstoolcancel 
+MOD #<cookie122>, #<lastAsk> 
+N: The remainder is *#<cookie122> 
+END 
+
+@madstooltutcookie 
+HTML http://www.synthetic-reality.com/cgi-bin/ultimatebb.cgi?ubb=get_topic;f=12;t=000757
+END 
+
+@takeAndGive1
+COMPARE #<AHS.noMessage>, 0
+IF> @languageskiptakeAndGive1
+N: What (object, ID, and eventually quantity)?
+@languageskiptakeAndGive1
+ASK #<AHS.pref.ASKduration> 1
+IF Qcancel @madstoolcancel
+GIVE #<lastAsk>
+END
+
+@takeAndGive2
+COMPARE #<AHS.noMessage>, 0
+IF> @languageskiptakeAndGive2
+N: What (object, ID, and eventually quantity)?
+@languageskiptakeAndGive2
+ASK #<AHS.pref.ASKduration> 1
+IF Qcancel @madstoolcancel
+HOST_GIVE #<lastAsk>
+END
+
+@takeAndGive3
+COMPARE #<AHS.noMessage>, 0
+IF> @languageskiptakeAndGive3
+N: What (object, ID, and eventually quantity)?
+@languageskiptakeAndGive3
+ASK #<AHS.pref.ASKduration> 1
+IF Qcancel @madstoolcancel
+PARTY_GIVE #<lastAsk>
+END
+
+@takeAndGive4
+COMPARE #<AHS.noMessage>, 0
+IF> @languageskiptakeAndGive4
+N: What (object, ID, and eventually quantity)?
+@languageskiptakeAndGive4
+ASK #<AHS.pref.ASKduration> 1
+IF Qcancel @madstoolcancel
+TAKE #<lastAsk>
+END
+
+@takeAndGive5
+COMPARE #<AHS.noMessage>, 0
+IF> @languageskiptakeAndGive5
+N: What (object, ID, and eventually quantity)?
+@languageskiptakeAndGive5
+ASK #<AHS.pref.ASKduration> 1
+IF Qcancel @madstoolcancel
+HOST_TAKE #<lastAsk>
+END
+
+@takeAndGive6
+COMPARE #<AHS.noMessage>, 0
+IF> @languageskiptakeAndGive6
+N: What (object, ID, and eventually quantity)?
+@languageskiptakeAndGive6
+ASK #<AHS.pref.ASKduration> 1
+IF Qcancel @madstoolcancel
+PARTY_TAKE #<lastAsk>
+END
+
+@madstoolfightall2 
+ADD monsterzz, 1 
+COMPARE #<monsterzz>, 4096 
+IF> @madstoolfightallstop 
+SET monster.id, #<monsterzz>
+STRCMP #<monster.name>, ""
+IF= @madstoolfightall2
+FIGHT #<monsterzz> 
+IF LOSE @madstoolfightall3 
+GOTO @madstoolfightall2 
+
+@madstoolfightall3 
+N: Get a rez and continue? 
+@madstoolfightall4 
+MENU "Yes=@madstoolfightall5","No=@madstoolCancel" 
+GOTO @madstoolfightall4 
+
+@madstoolfightall5 
+GIVE L1 
+GIVE H5000 
+GIVE M5000 
+GOTO @madstoolfightall2 
+
+@madstoolfightall6 
+ADD monsterzz, 1 
+COMPARE #<monsterzz>, 4096 
+IF> @madstoolfightallstop 
+SET monster.id, #<monsterzz>
+STRCMP #<monster.name>, ""
+IF= @madstoolfightall6
+FIGHT #<monsterzz> 
+GIVE H5000 
+GIVE M5000 
+IF LOSE @madstoolfightall3 
+GOTO @madstoolfightall6 
+
+@madstoolfightall7 
+N: Get a rez and continue? 
+@madstoolfightall8 
+MENU "Yes=@madstoolfightall9","No=@madstoolCancel" 
+GOTO @madstoolfightall8 
+
+@madstoolfightall9 
+GIVE L1 
+GIVE H5000 
+GIVE M5000 
+GOTO @madstoolfightall2 
+
+@madstoolfightallstop 
+COMPARE #<AHS.noMessage>, 0
+IF> @mastoolcancel
+H: No monster left. 
+END 
+
+@madstoolactor0thingy
+COMPARE #<AHS.noMessage>, 0
+IF> @languageskip20gg
+N: Name of the skin?
+@languageskip20gg
+ASK #<AHS.pref.ASKduration> 1
+IF Qcancel @madstoolcancel
+@madstooladdmadstoolcurrentactor2
+SET AHS.actorConfig1, 1
+ACTOR 1, #<AHS.defaultname>, #<lastAsk>, 1, #<AHS.defaultcoordsactorX>, #<AHS.defaultcoordsactorY> 
+COMPARE #<AHS.noMessage>, 0
+IF> @languageskip21g
+N: Right-click on him for more options. 
+@languageskip21g
+END
+
+@madstoolactor
+ADD madstoolcurrentactor, 1
+COMPARE #<AHS.noMessage>, 0
+IF> @languageskip20  
+N: Name of the skin?
+@languageskip20 
+ASK #<AHS.pref.ASKduration> 1
+IF Qcancel @madstoolcancel
+COMPARE #<madstoolcurrentactor>, 1 
+IF< @madstooladdmadstoolcurrentactor 
+@madstooladdmadstoolcurrentactor2
+SET AHS.actorConfig#<madstoolcurrentactor>, 1
+ACTOR #<madstoolcurrentactor>, #<AHS.defaultname>, #<lastAsk>, 1, #<AHS.defaultcoordsactorX>, #<AHS.defaultcoordsactorY> 
+COMPARE #<AHS.noMessage>, 0
+IF> @languageskip21  
+N: Right-click on him for more options. 
+@languageskip21
+END
+
+@madstoolactor0thingyfullydescribed
+COMPARE #<AHS.noMessage>, 1
+IF> @languageskip20xxx
+N: ID of the actor?
+@languageskip20xxx
+ASK #<AHS.pref.ASKduration> 1
+IF Qcancel @madstoolcancel
+SET temp.skin1, #<lastAsk>
+COMPARE #<AHS.noMessage>, 1
+IF> @languageskip20a  
+N: Name of the actor?
+@languageskip20a
+ASK #<AHS.pref.ASKduration> 1
+IF Qcancel @madstoolcancel
+SET temp.skin2, #<lastAsk>
+COMPARE #<AHS.noMessage>, 1
+IF> @languageskip20b
+N: Name of the skin?
+@languageskip20b
+ASK #<AHS.pref.ASKduration> 1
+IF Qcancel @madstoolcancel
+SET temp.skin3, #<lastAsk>
+COMPARE #<AHS.noMessage>, 1
+IF> @languageskip20c
+N: ID of the pose?
+@languageskip20c
+ASK #<AHS.pref.ASKduration> 1
+IF Qcancel @madstoolcancel
+SET temp.skin4, #<lastAsk>
+COMPARE #<AHS.noMessage>, 1
+IF> @languageskip20d
+N: Coords X?
+@languageskip20d
+ASK #<AHS.pref.ASKduration> 1
+IF Qcancel @madstoolcancel
+SET temp.skin5, #<lastAsk>
+COMPARE #<AHS.noMessage>, 1
+IF> @languageskip20e
+N: Coords Y?
+@languageskip20e
+ASK #<AHS.pref.ASKduration> 1
+IF Qcancel @madstoolcancel
+SET temp.skin6, #<lastAsk>
+SET AHS.actorConfig#<temp.skin1>, 1
+ACTOR #<temp.skin1>, #<temp.skin2>, #<temp.skin3>, #<temp.skin4>, #<temp.skin5>, #<temp.skin6> 
+COMPARE #<AHS.noMessage>, 0
+IF> @languageskip21f
+N: Right-click on him for more options. 
+@languageskip21f
+SET temp.skin1, ""
+SET temp.skin2, ""
+SET temp.skin3, ""
+SET temp.skin4, ""
+SET temp.skin5, ""
+SET temp.skin6, ""
+END 
+
+@madstooladdmadstoolcurrentactor 
+SET madstoolcurrentactor, 1
+GOTO @madstooladdmadstoolcurrentactor2 
+
+@eventActorClick1
+CALL 1000000@soulIDchecker, checking
+STRCMP #<arg0>, false
+IF= @madstoolendeventactorclicks
+SET madstoolcurrentactor, 1 
+@madstoolmenu2bissfsdfsqfqfqf
+COMPARE #<AHS.scriptEditingCookie>, 1
+IF= @madstoolcancel
+COMPARE #<madstoolpref.actorClicks>, 1
+IF= @madstooltraveltoeventthingyrepaired
+COMPARE #<madstoolcurrentactor>, 63
+IF= @madstoolactormenu2
+GOTO @madstoolmenu2
+
+@madstooltraveltoeventthingyrepaired
+; Now we check if the actor was created by AHS.
+; In this case, we automatically skip the eventual @event of the original scene.
+SET temp.AHS.actorConfig, AHS.actorConfig#<madstoolcurrentactor>
+COMPARE *#<temp.AHS.actorConfig>, 1
+IF= @madstooltraveltoeventthingyrepairedskipcheck
+; Now we check if there is an @event in the original scene.
+GOTO #<madstool.scene.id>@eventActorClick#<madstoolcurrentactor>
+; Here we leave the enventBis thingy for compatability with old versions of AHS.
+GOTO #<madstool.scene.id>@eventBis#<madstoolcurrentactor>
+; If the script is still running at this point, no @event has been found in the original scene of the world.
+@madstooltraveltoeventthingyrepairedskipcheck
+COMPARE #<madstoolcurrentactor>, 63
+IF= @madstoolactormenu2
+GOTO @madstoolmenu2
+
+@madstooltraveltoeventthingy
+COMPARE #<AHS.loaded>, 1
+IF= @madstooltraveltoeventthingyunload
+@madstooltraveltoeventthingyunload3
+GOTO #<madstool.scene.id>@eventActorClick#<madstoolcurrentactor>
+; here we leave the enventBis thingy for compatability with old versions of AHS.
+GOTO #<madstool.scene.id>@eventBis#<madstoolcurrentactor>
+; If the script is still running at this point, no @event has been found in the original scene of the world.
+SET AHS.mainIconPose2, #<AHS.mainIconPose>
+ADD AHS.mainIconPose2, 6
+SET AHS.loaded, 1
+COMPARE #<AHS.mainIconPose2>, 9
+IF= @madstooltraveltoeventthingyreloadanime
+SEL 0
+POSE #<AHS.mainIconPose2>
+@madstooltraveltoeventthingyunload4
+COMPARE #<madstoolcurrentactor>, 63
+IF= @madstoolactormenu2
+GOTO @madstoolmenu2
+
+@madstooltraveltoeventthingyreloadanime
+SEL 0
+POSE 9, 10
+GOTO @madstooltraveltoeventthingyunload4
+
+@madstooltraveltoeventthingyunload
+SET AHS.loaded, 0
+COMPARE #<AHS.mainIconPose>, 3
+IF= @madstooltraveltoeventthingyunloadanime
+SEL 0
+POSE #<AHS.mainIconPose>
+@madstooltraveltoeventthingyunload2
+GOTO @madstooltraveltoeventthingyunload3
+
+@madstooltraveltoeventthingyunloadanime
+SEL 0
+POSE 3, 4
+GOTO @madstooltraveltoeventthingyunload2
+ 
+@eventActorClick2 
+CALL 1000000@soulIDchecker, checking
+STRCMP #<arg0>, false
+IF= @madstoolendeventactorclicks
+SET madstoolcurrentactor, 2 
+GOTO @madstoolmenu2bissfsdfsqfqfqf 
+
+@newactorfullydescribed
+COMPARE #<AHS.noMessage>, 1
+IF> @newactorfullydescribedthingy1
+N: Name of the actor?
+@newactorfullydescribedthingy1
+ASK #<AHS.pref.ASKduration> 1
+IF Qcancel @madstoolcancel 
+SET temp.name, #<lastAsk>
+COMPARE #<AHS.noMessage>, 1
+IF> @newactorfullydescribedthingy2
+N: Name of the skin?
+@newactorfullydescribedthingy2
+ASK #<AHS.pref.ASKduration> 1
+IF Qcancel @madstoolcancel 
+SET temp.skin, #<lastAsk>
+COMPARE #<AHS.noMessage>, 1
+IF> @newactorfullydescribedthingy3
+N: Pose?
+@newactorfullydescribedthingy3
+ASK #<AHS.pref.ASKduration> 1
+IF Qcancel @madstoolcancel 
+SET temp.pose, #<lastAsk>
+COMPARE #<AHS.noMessage>, 1
+IF> @newactorfullydescribedthingy4
+N: Coords X?
+@newactorfullydescribedthingy4
+ASK #<AHS.pref.ASKduration> 1
+IF Qcancel @madstoolcancel 
+SET temp.x, #<lastAsk>
+COMPARE #<AHS.noMessage>, 1
+IF> @newactorfullydescribedthingy5
+N: Coords Y?
+@newactorfullydescribedthingy5
+ASK #<AHS.pref.ASKduration> 1
+IF Qcancel @madstoolcancel 
+ADD madstoolcurrentactor, 1
+SET AHS.actorConfig#<madstoolcurrentactor>, 1
+ACTOR #<madstoolcurrentactor>, #<temp.name>, #<temp.skin>, #<temp.pose>, #<temp.x>, #<lastAsk>
+SET temp.name, ""
+SET temp.skin, ""
+SET temp.pose, ""
+SET temp.x, ""
+END
+
+@severalposesthingy
+COMPARE #<AHS.noMessage>, 1
+IF> @languageskip388sfds  
+N: Number of the 3 poses?
+@languageskip388sfds
+ASK #<AHS.pref.ASKduration> 1
+IF Qcancel @madstoolcancel 
+SET temp.pose1, #<lastAsk>
+ASK #<AHS.pref.ASKduration> 1
+IF Qcancel @madstoolcancel 
+SET temp.pose2, #<lastAsk>
+ASK #<AHS.pref.ASKduration> 1
+IF Qcancel @madstoolcancel 
+SEL #<madstoolcurrentactor> 
+POSE #<temp.pose1>, #<temp.pose2>, #<lastAsk>
+SET temp.pose1, ""
+SET temp.pose2, ""
+END
+
+@madstoolactorhelp 
+N: You can have up to 63 actors in your camp. 
+N: (Actually you can have up to 64 but actor 0 is reserved for AHS button)
+N: If you click on an actor, you can either change his pose, color, etc or implant a new actor. 
+N: The ID of the new actor will the ID of the actor click +1. 
+N: ie: if you click on the actor # 2, the ID of the new actor will be 3. 
+N: If there's already an actor # 3 in the scene, he will be overwritten by the new actor. 
+N: You can also select the option "New actor fully described" and enter the ID you want.
+END 
+
+@madstoolspeakloopedspeech
+COMPARE #<AHS.noMessage>, 1
+IF> @languageskip37sfds  
+N: Text?
+@languageskip37sfds
+ASK #<AHS.pref.ASKduration> 1
+IF Qcancel @madstoolcancel 
+SEL #<madstoolcurrentactor> 
+' #<lastAsk> 
+GOTO @languageskip37sfds
+
+@eventActorClick3 
+CALL 1000000@soulIDchecker, checking
+STRCMP #<arg0>, false
+IF= @madstoolendeventactorclicks
+SET madstoolcurrentactor, 3 
+GOTO @madstoolmenu2bissfsdfsqfqfqf 
+
+@eventActorClick4 
+CALL 1000000@soulIDchecker, checking
+STRCMP #<arg0>, false
+IF= @madstoolendeventactorclicks
+SET madstoolcurrentactor, 4 
+GOTO @madstoolmenu2bissfsdfsqfqfqf 
+
+@eventActorClick5 
+CALL 1000000@soulIDchecker, checking
+STRCMP #<arg0>, false
+IF= @madstoolendeventactorclicks
+SET madstoolcurrentactor, 5 
+GOTO @madstoolmenu2bissfsdfsqfqfqf 
+
+@eventActorClick6 
+CALL 1000000@soulIDchecker, checking
+STRCMP #<arg0>, false
+IF= @madstoolendeventactorclicks
+SET madstoolcurrentactor, 6 
+GOTO @madstoolmenu2bissfsdfsqfqfqf 
+
+@eventActorClick7 
+CALL 1000000@soulIDchecker, checking
+STRCMP #<arg0>, false
+IF= @madstoolendeventactorclicks
+SET madstoolcurrentactor, 7 
+GOTO @madstoolmenu2bissfsdfsqfqfqf 
+
+@eventActorClick8 
+CALL 1000000@soulIDchecker, checking
+STRCMP #<arg0>, false
+IF= @madstoolendeventactorclicks
+SET madstoolcurrentactor, 8 
+GOTO @madstoolmenu2bissfsdfsqfqfqf 
+
+@eventActorClick9 
+CALL 1000000@soulIDchecker, checking
+STRCMP #<arg0>, false
+IF= @madstoolendeventactorclicks
+SET madstoolcurrentactor, 9 
+GOTO @madstoolmenu2bissfsdfsqfqfqf 
+
+@eventActorClick10 
+CALL 1000000@soulIDchecker, checking
+STRCMP #<arg0>, false
+IF= @madstoolendeventactorclicks
+SET madstoolcurrentactor, 10 
+GOTO @madstoolmenu2bissfsdfsqfqfqf 
+
+@eventActorClick11 
+CALL 1000000@soulIDchecker, checking
+STRCMP #<arg0>, false
+IF= @madstoolendeventactorclicks
+SET madstoolcurrentactor, 11 
+GOTO @madstoolmenu2bissfsdfsqfqfqf 
+
+@eventActorClick12 
+CALL 1000000@soulIDchecker, checking
+STRCMP #<arg0>, false
+IF= @madstoolendeventactorclicks
+SET madstoolcurrentactor, 12 
+GOTO @madstoolmenu2bissfsdfsqfqfqf 
+
+@eventActorClick13 
+CALL 1000000@soulIDchecker, checking
+STRCMP #<arg0>, false
+IF= @madstoolendeventactorclicks
+SET madstoolcurrentactor, 13 
+GOTO @madstoolmenu2bissfsdfsqfqfqf 
+
+@eventActorClick14 
+CALL 1000000@soulIDchecker, checking
+STRCMP #<arg0>, false
+IF= @madstoolendeventactorclicks
+SET madstoolcurrentactor, 14 
+GOTO @madstoolmenu2bissfsdfsqfqfqf 
+
+@eventActorClick15 
+CALL 1000000@soulIDchecker, checking
+STRCMP #<arg0>, false
+IF= @madstoolendeventactorclicks
+SET madstoolcurrentactor, 15 
+GOTO @madstoolmenu2bissfsdfsqfqfqf 
+
+@eventActorClick16 
+CALL 1000000@soulIDchecker, checking
+STRCMP #<arg0>, false
+IF= @madstoolendeventactorclicks
+SET madstoolcurrentactor, 16 
+GOTO @madstoolmenu2bissfsdfsqfqfqf 
+
+@eventActorClick17 
+CALL 1000000@soulIDchecker, checking
+STRCMP #<arg0>, false
+IF= @madstoolendeventactorclicks
+SET madstoolcurrentactor, 17 
+GOTO @madstoolmenu2bissfsdfsqfqfqf 
+
+@eventActorClick18 
+CALL 1000000@soulIDchecker, checking
+STRCMP #<arg0>, false
+IF= @madstoolendeventactorclicks
+SET madstoolcurrentactor, 18 
+GOTO @madstoolmenu2bissfsdfsqfqfqf 
+
+@eventActorClick19 
+CALL 1000000@soulIDchecker, checking
+STRCMP #<arg0>, false
+IF= @madstoolendeventactorclicks
+SET madstoolcurrentactor, 19 
+GOTO @madstoolmenu2bissfsdfsqfqfqf 
+
+@eventActorClick20 
+CALL 1000000@soulIDchecker, checking
+STRCMP #<arg0>, false
+IF= @madstoolendeventactorclicks
+SET madstoolcurrentactor, 20 
+GOTO @madstoolmenu2bissfsdfsqfqfqf 
+
+@eventActorClick21 
+CALL 1000000@soulIDchecker, checking
+STRCMP #<arg0>, false
+IF= @madstoolendeventactorclicks
+SET madstoolcurrentactor, 21 
+GOTO @madstoolmenu2bissfsdfsqfqfqf 
+
+@eventActorClick22 
+CALL 1000000@soulIDchecker, checking
+STRCMP #<arg0>, false
+IF= @madstoolendeventactorclicks
+SET madstoolcurrentactor, 22 
+GOTO @madstoolmenu2bissfsdfsqfqfqf 
+
+@eventActorClick23 
+CALL 1000000@soulIDchecker, checking
+STRCMP #<arg0>, false
+IF= @madstoolendeventactorclicks
+SET madstoolcurrentactor, 23 
+GOTO @madstoolmenu2bissfsdfsqfqfqf 
+
+@eventActorClick24 
+CALL 1000000@soulIDchecker, checking
+STRCMP #<arg0>, false
+IF= @madstoolendeventactorclicks
+SET madstoolcurrentactor, 24 
+GOTO @madstoolmenu2bissfsdfsqfqfqf 
+
+@eventActorClick25 
+CALL 1000000@soulIDchecker, checking
+STRCMP #<arg0>, false
+IF= @madstoolendeventactorclicks
+SET madstoolcurrentactor, 25 
+GOTO @madstoolmenu2bissfsdfsqfqfqf 
+
+@eventActorClick26 
+CALL 1000000@soulIDchecker, checking
+STRCMP #<arg0>, false
+IF= @madstoolendeventactorclicks
+SET madstoolcurrentactor, 26 
+GOTO @madstoolmenu2bissfsdfsqfqfqf 
+
+@eventActorClick27 
+CALL 1000000@soulIDchecker, checking
+STRCMP #<arg0>, false
+IF= @madstoolendeventactorclicks
+SET madstoolcurrentactor, 27 
+GOTO @madstoolmenu2bissfsdfsqfqfqf 
+
+@eventActorClick28 
+CALL 1000000@soulIDchecker, checking
+STRCMP #<arg0>, false
+IF= @madstoolendeventactorclicks
+SET madstoolcurrentactor, 28 
+GOTO @madstoolmenu2bissfsdfsqfqfqf 
+
+@eventActorClick29 
+CALL 1000000@soulIDchecker, checking
+STRCMP #<arg0>, false
+IF= @madstoolendeventactorclicks
+SET madstoolcurrentactor, 29 
+GOTO @madstoolmenu2bissfsdfsqfqfqf 
+
+@eventActorClick30 
+CALL 1000000@soulIDchecker, checking
+STRCMP #<arg0>, false
+IF= @madstoolendeventactorclicks
+SET madstoolcurrentactor, 30 
+GOTO @madstoolmenu2bissfsdfsqfqfqf 
+
+@eventActorClick31 
+CALL 1000000@soulIDchecker, checking
+STRCMP #<arg0>, false
+IF= @madstoolendeventactorclicks
+SET madstoolcurrentactor, 31 
+GOTO @madstoolmenu2bissfsdfsqfqfqf
+
+@eventActorClick32
+CALL 1000000@soulIDchecker, checking
+STRCMP #<arg0>, false
+IF= @madstoolendeventactorclicks
+SET madstoolcurrentactor, 32
+GOTO @madstoolmenu2bissfsdfsqfqfqf
+
+@eventActorClick33
+CALL 1000000@soulIDchecker, checking
+STRCMP #<arg0>, false
+IF= @madstoolendeventactorclicks
+SET madstoolcurrentactor, 33
+GOTO @madstoolmenu2bissfsdfsqfqfqf
+
+@eventActorClick34
+CALL 1000000@soulIDchecker, checking
+STRCMP #<arg0>, false
+IF= @madstoolendeventactorclicks
+SET madstoolcurrentactor, 34
+GOTO @madstoolmenu2bissfsdfsqfqfqf
+
+@eventActorClick35
+CALL 1000000@soulIDchecker, checking
+STRCMP #<arg0>, false
+IF= @madstoolendeventactorclicks
+SET madstoolcurrentactor, 35
+GOTO @madstoolmenu2bissfsdfsqfqfqf
+
+@eventActorClick36
+CALL 1000000@soulIDchecker, checking
+STRCMP #<arg0>, false
+IF= @madstoolendeventactorclicks
+SET madstoolcurrentactor, 36
+GOTO @madstoolmenu2bissfsdfsqfqfqf
+
+@eventActorClick37
+CALL 1000000@soulIDchecker, checking
+STRCMP #<arg0>, false
+IF= @madstoolendeventactorclicks
+SET madstoolcurrentactor, 37
+GOTO @madstoolmenu2bissfsdfsqfqfqf
+
+@eventActorClick38
+CALL 1000000@soulIDchecker, checking
+STRCMP #<arg0>, false
+IF= @madstoolendeventactorclicks
+SET madstoolcurrentactor, 38
+GOTO @madstoolmenu2bissfsdfsqfqfqf
+
+@eventActorClick39
+CALL 1000000@soulIDchecker, checking
+STRCMP #<arg0>, false
+IF= @madstoolendeventactorclicks
+SET madstoolcurrentactor, 39
+GOTO @madstoolmenu2bissfsdfsqfqfqf
+
+@eventActorClick40
+CALL 1000000@soulIDchecker, checking
+STRCMP #<arg0>, false
+IF= @madstoolendeventactorclicks
+SET madstoolcurrentactor, 40
+GOTO @madstoolmenu2bissfsdfsqfqfqf
+
+@eventActorClick41
+CALL 1000000@soulIDchecker, checking
+STRCMP #<arg0>, false
+IF= @madstoolendeventactorclicks
+SET madstoolcurrentactor, 41
+GOTO @madstoolmenu2bissfsdfsqfqfqf
+
+@eventActorClick42
+CALL 1000000@soulIDchecker, checking
+STRCMP #<arg0>, false
+IF= @madstoolendeventactorclicks
+SET madstoolcurrentactor, 42
+GOTO @madstoolmenu2bissfsdfsqfqfqf
+
+@eventActorClick43
+CALL 1000000@soulIDchecker, checking
+STRCMP #<arg0>, false
+IF= @madstoolendeventactorclicks
+SET madstoolcurrentactor, 43
+GOTO @madstoolmenu2bissfsdfsqfqfqf
+
+@eventActorClick44
+CALL 1000000@soulIDchecker, checking
+STRCMP #<arg0>, false
+IF= @madstoolendeventactorclicks
+SET madstoolcurrentactor, 44
+GOTO @madstoolmenu2bissfsdfsqfqfqf
+
+@eventActorClick45
+CALL 1000000@soulIDchecker, checking
+STRCMP #<arg0>, false
+IF= @madstoolendeventactorclicks
+SET madstoolcurrentactor, 45
+GOTO @madstoolmenu2bissfsdfsqfqfqf
+
+@eventActorClick46
+CALL 1000000@soulIDchecker, checking
+STRCMP #<arg0>, false
+IF= @madstoolendeventactorclicks
+SET madstoolcurrentactor, 46
+GOTO @madstoolmenu2bissfsdfsqfqfqf
+
+@eventActorClick47
+CALL 1000000@soulIDchecker, checking
+STRCMP #<arg0>, false
+IF= @madstoolendeventactorclicks
+SET madstoolcurrentactor, 47
+GOTO @madstoolmenu2bissfsdfsqfqfqf
+
+@eventActorClick48
+CALL 1000000@soulIDchecker, checking
+STRCMP #<arg0>, false
+IF= @madstoolendeventactorclicks
+SET madstoolcurrentactor, 48
+GOTO @madstoolmenu2bissfsdfsqfqfqf
+
+@eventActorClick49
+CALL 1000000@soulIDchecker, checking
+STRCMP #<arg0>, false
+IF= @madstoolendeventactorclicks
+SET madstoolcurrentactor, 49
+GOTO @madstoolmenu2bissfsdfsqfqfqf
+
+@eventActorClick50
+CALL 1000000@soulIDchecker, checking
+STRCMP #<arg0>, false
+IF= @madstoolendeventactorclicks
+SET madstoolcurrentactor, 50
+COMPARE #<AHS.scriptEditingCookie>, 1
+IF= @editingScriptPrevious
+GOTO @madstoolmenu2bissfsdfsqfqfqf
+
+@eventActorClick51
+CALL 1000000@soulIDchecker, checking
+STRCMP #<arg0>, false
+IF= @madstoolendeventactorclicks
+SET madstoolcurrentactor, 51
+COMPARE #<AHS.scriptEditingCookie>, 1
+IF= @editingScriptEdit
+GOTO @madstoolmenu2bissfsdfsqfqfqf
+
+@eventActorClick52
+CALL 1000000@soulIDchecker, checking
+STRCMP #<arg0>, false
+IF= @madstoolendeventactorclicks
+SET madstoolcurrentactor, 52
+COMPARE #<AHS.scriptEditingCookie>, 1
+IF= @editingScriptNext
+GOTO @madstoolmenu2bissfsdfsqfqfqf
+
+@eventActorClick53
+CALL 1000000@soulIDchecker, checking
+STRCMP #<arg0>, false
+IF= @madstoolendeventactorclicks
+SET madstoolcurrentactor, 53
+COMPARE #<AHS.scriptEditingCookie>, 1
+IF= @editingScriptDone
+GOTO @madstoolmenu2bissfsdfsqfqfqf
+
+@eventActorClick54
+CALL 1000000@soulIDchecker, checking
+STRCMP #<arg0>, false
+IF= @madstoolendeventactorclicks
+SET madstoolcurrentactor, 54
+COMPARE #<AHS.scriptEditingCookie>, 1
+IF= @editingScriptJump
+GOTO @madstoolmenu2bissfsdfsqfqfqf
+
+@eventActorClick55
+CALL 1000000@soulIDchecker, checking
+STRCMP #<arg0>, false
+IF= @madstoolendeventactorclicks
+SET madstoolcurrentactor, 55
+COMPARE #<AHS.scriptEditingCookie>, 1
+IF= @editingScriptContinue
+GOTO @madstoolmenu2bissfsdfsqfqfqf
+
+@eventActorClick56
+CALL 1000000@soulIDchecker, checking
+STRCMP #<arg0>, false
+IF= @madstoolendeventactorclicks
+SET madstoolcurrentactor, 56
+COMPARE #<AHS.scriptEditingCookie>, 1
+IF= @editingScriptDeleteLine
+GOTO @madstoolmenu2bissfsdfsqfqfqf
+
+@eventActorClick57
+CALL 1000000@soulIDchecker, checking
+STRCMP #<arg0>, false
+IF= @madstoolendeventactorclicks
+SET madstoolcurrentactor, 57
+GOTO @madstoolmenu2bissfsdfsqfqfqf
+
+@eventActorClick58
+CALL 1000000@soulIDchecker, checking
+STRCMP #<arg0>, false
+IF= @madstoolendeventactorclicks
+SET madstoolcurrentactor, 58
+GOTO @madstoolmenu2bissfsdfsqfqfqf
+
+@eventActorClick59
+CALL 1000000@soulIDchecker, checking
+STRCMP #<arg0>, false
+IF= @madstoolendeventactorclicks
+SET madstoolcurrentactor, 59
+GOTO @madstoolmenu2bissfsdfsqfqfqf
+
+@eventActorClick60
+CALL 1000000@soulIDchecker, checking
+STRCMP #<arg0>, false
+IF= @madstoolendeventactorclicks
+SET madstoolcurrentactor, 60
+GOTO @madstoolmenu2bissfsdfsqfqfqf
+
+@eventActorClick61
+CALL 1000000@soulIDchecker, checking
+STRCMP #<arg0>, false
+IF= @madstoolendeventactorclicks
+SET madstoolcurrentactor, 61
+GOTO @madstoolmenu2bissfsdfsqfqfqf
+
+@eventActorClick62
+CALL 1000000@soulIDchecker, checking
+STRCMP #<arg0>, false
+IF= @madstoolendeventactorclicks
+SET madstoolcurrentactor, 62
+GOTO @madstoolmenu2bissfsdfsqfqfqf
+
+@eventActorClick63
+CALL 1000000@soulIDchecker, checking
+STRCMP #<arg0>, false
+IF= @madstoolendeventactorclicks
+SET madstoolcurrentactor, 63
+GOTO @madstoolmenu2bissfsdfsqfqfqf
+
+@madstoolpose 
+COMPARE #<AHS.noMessage>, 0
+IF> @languageskip23  
+N: What is the # of the new pose? 
+@languageskip23
+ASK #<AHS.pref.ASKduration> 1
+SEL #<madstoolcurrentactor> 
+POSE #<lastAsk> 
+END 
+
+@madstoolactorcolor 
+SET color, 0 
+GOTO @madstoolcolor 
+
+@madstoolbkgndcolor 
+SET color, 2000 
+GOTO @madstoolcolor 
+
+@madstoolsecondcoat 
+SET color, 1000 
+GOTO @madstoolcolor 
+
+@madstoolactorcolorrestore 
+COLOR 0 
+COLOR 1000 
+COLOR 2000 
+END 
+
+@madstoolactorcolor1 
+ADD color, 1 
+COLOR #<color> 
+END 
+
+@madstoolactorcolor2 
+ADD color, 2 
+COLOR #<color> 
+END 
+
+@madstoolactorcolor3 
+ADD color, 3 
+COLOR #<color> 
+END 
+
+@madstoolactorcolor4 
+ADD color, 4 
+COLOR #<color> 
+END 
+
+@madstoolactorcolor5 
+ADD color, 5 
+COLOR #<color> 
+END 
+
+@madstoolactorcolor6 
+ADD color, 6 
+COLOR #<color> 
+END 
+
+@madstoolactorcolor7 
+ADD color, 7 
+COLOR #<color> 
+END 
+
+@madstoolactorcolor8 
+ADD color, 8 
+COLOR #<color> 
+END 
+
+@madstoolactorcolor9 
+ADD color, 9 
+COLOR #<color> 
+END 
+
+@madstoolactorcolor10 
+ADD color, 10 
+COLOR #<color> 
+END 
+
+@madstoolactorcolor11 
+ADD color, 11 
+COLOR #<color> 
+END 
+
+@madstoolactorcolor12 
+ADD color, 12 
+COLOR #<color> 
+END 
+
+@madstoolactorcolor13 
+ADD color, 13 
+COLOR #<color> 
+END 
+
+@madstoolactorcolor14 
+ADD color, 14 
+COLOR #<color> 
+END 
+
+@madstoolactorcolor15 
+ADD color, 15 
+COLOR #<color> 
+END 
+
+@madstoolactorcolor16 
+ADD color, 16 
+COLOR #<color> 
+END 
+
+@madstoolactorcolor17 
+ADD color, 17 
+COLOR #<color> 
+END 
+
+@madstoolactorcolor18 
+ADD color, 18 
+COLOR #<color> 
+END 
+
+@madstoolactorcolor19 
+ADD color, 19 
+COLOR #<color> 
+END 
+
+@madstoolactorcolor20 
+ADD color, 20 
+COLOR #<color> 
+END 
+
+@madstoolactorcolor21 
+ADD color, 21 
+COLOR #<color> 
+END 
+
+@madstoolactorcolor22 
+ADD color, 22 
+COLOR #<color> 
+END 
+
+@madstoolactorcolor23 
+ADD color, 23 
+COLOR #<color> 
+END 
+
+@madstoolactorcolor24 
+ADD color, 24 
+COLOR #<color> 
+END 
+
+@madstoolactorcolor25 
+ADD color, 25 
+COLOR #<color> 
+END 
+
+@madstoolactorcolor26 
+ADD color, 26 
+COLOR #<color> 
+END 
+
+@madstoolactorcolor27 
+ADD color, 27 
+COLOR #<color> 
+END 
+
+@madstoolactorcolor28 
+ADD color, 28 
+COLOR #<color> 
+END 
+
+@madstoolactorcolor29 
+ADD color, 29 
+COLOR #<color> 
+END 
+
+@madstoolactorcolor30 
+ADD color, 30 
+COLOR #<color> 
+END 
+
+@madstoolactorcolor31 
+ADD color, 31 
+COLOR #<color> 
+END 
+
+@madstoolactorcolor32 
+ADD color, 32 
+COLOR #<color> 
+END 
+
+@madstoolactormove 
+COMPARE #<AHS.noMessage>, 0
+IF> @languageskip24  
+N: What coords X? 
+@languageskip24
+ASK #<AHS.pref.ASKduration> 1
+SET actorcoordsX, #<lastAsk> 
+COMPARE #<AHS.noMessage>, 0
+IF> @languageskip25  
+N: What coords Y? 
+@languageskip25
+ASK #<AHS.pref.ASKduration> 1
+SET actorcoordsY, #<lastAsk> 
+MOVE #<madstoolcurrentactor>, #<actorcoordsX>, #<actorcoordsY> 
+END 
+
+@madstoolactormovefsfsdfsfsdfsf
+COMPARE #<AHS.noMessage>, 0
+IF> @languageskip24xxxxxxx
+N: What coords X? 
+@languageskip24xxxxxxx
+ASK #<AHS.pref.ASKduration> 1
+SET actorcoordsX, #<lastAsk> 
+COMPARE #<AHS.noMessage>, 0
+IF> @languageskip25xxxxxxx
+N: What coords Y? 
+@languageskip25xxxxxxx
+ASK #<AHS.pref.ASKduration> 1
+SET actorcoordsY, #<lastAsk>
+COMPARE #<AHS.noMessage>, 0
+IF> @languageskip26xxxxxxx
+N: What speed? 
+@languageskip26xxxxxxx
+ASK #<AHS.pref.ASKduration> 1
+SET temp.speed, #<lastAsk>
+MOVE #<madstoolcurrentactor>, #<actorcoordsX>, #<actorcoordsY>, #<temp.speed>
+END 
+
+@madstoolface0 
+FACE #<madstoolcurrentactor>, 0 
+END 
+
+@madstoolface1 
+FACE #<madstoolcurrentactor>, 1 
+END 
+
+@madstoolface2 
+FACE #<madstoolcurrentactor>, 2 
+END 
+
+@madstoolface3 
+FACE #<madstoolcurrentactor>, 3 
+END 
+
+@madstoolface4 
+FACE #<madstoolcurrentactor>, 4 
+END 
+
+@madstoolspeak 
+COMPARE #<AHS.noMessage>, 0
+IF> @madstoolspeak2   
+N: Text? 
+@madstoolspeak2 
+ASK #<AHS.pref.ASKduration> 1
+IF Qcancel @madstoolcancel 
+SEL #<madstoolcurrentactor> 
+' #<lastAsk> 
+END 
+
+@madstoolejectp 
+COMPARE #<AHS.noMessage>, 1
+IF> @languageskip26  
+N: Requierments to stay in the party?
+@languageskip26
+ASK #<AHS.pref.ASKduration> 1
+PARTY #<lastAsk> 
+END
+
+@madstoolejectps 
+COMPARE #<AHS.noMessage>, 1
+IF> @languageskip40  
+N: Requierments to stay in the scene?
+@languageskip40
+ASK #<AHS.pref.ASKduration> 1
+EJECT #<lastAsk> 
+END 
+
+@madstoolcountdown 
+COMPARE #<AHS.noMessage>, 0
+IF> @languageskip56  
+N: How long? 
+@languageskip56
+ASK #<AHS.pref.ASKduration> 1
+COUNTDOWN #<lastAsk> 
+END 
+
+@getthelistofalltheactiveflagsinscene
+SET temp.found, 0
+SET temp.searchflags, 1
+@nextstepaftermapflagscheckinsceneall
+IF F#<temp.searchflags> @listofalltheactiveflagsset
+@listofalltheactiveflagssetnext
+MUL temp.searchflags, 2
+COMPARE #<temp.searchflags>, 1048576
+IF> @listofalltheactiveflagssetdone
+GOTO @nextstepaftermapflagscheckinsceneall
+
+@listofalltheactiveflagssetdone
+COMPARE #<temp.found>, 0
+IF= @listofalltheactiveflagssetdonenothing
+N: The following flags are active:
+@listofalltheactiveflagssetdoneagain
+COMPARE #<temp.found>, 0
+IF= @madstoolcancel
+SET temp.resultbis, temp.result#<temp.found>
+N: *#<temp.resultbis>
+SET temp.result#<temp.found>, ""
+SUB temp.found, "1"
+GOTO @listofalltheactiveflagssetdoneagain
+
+@listofalltheactiveflagssetdonenothing
+N: No active flag.
+END
+
+@listofalltheactiveflagsset
+ADD temp.found, 1
+GOTO @listofalltheactiveflagsset#<temp.searchflags>
+
+@listofalltheactiveflagsset1
+SET temp.result#<temp.found>, "1 - enables pet vs pet battles (but protects players from pets)"
+GOTO @listofalltheactiveflagssetnext
+
+@listofalltheactiveflagsset2
+SET temp.result#<temp.found>, "2 - enables pets to be used against other players or pets (if pkers or no safehaven)"
+GOTO @listofalltheactiveflagssetnext
+
+@listofalltheactiveflagsset4
+SET temp.result#<temp.found>, "4 - enables no protection from PKer"
+GOTO @listofalltheactiveflagssetnext
+
+@listofalltheactiveflagsset8
+SET temp.result#<temp.found>, "8 - enables no PKing allowed here at all"
+GOTO @listofalltheactiveflagssetnext
+
+@listofalltheactiveflagsset16
+SET temp.result#<temp.found>, "16 - enables LADDER reporting. (PK kills on this map are reported to ladder server)"
+GOTO @listofalltheactiveflagssetnext
+
+@listofalltheactiveflagsset32
+SET temp.result#<temp.found>, "32 - enables show all link names.Normally link names are hidden until after first use of link."
+GOTO @listofalltheactiveflagssetnext
+
+@listofalltheactiveflagsset64
+SET temp.result#<temp.found>, "64 - disables Shadows under heroes (and monsters) on map and in scenes of that map."
+GOTO @listofalltheactiveflagssetnext
+
+@listofalltheactiveflagsset128
+SET temp.result#<temp.found>, "128 - disables the use of pets (cannot summon them) on this map."
+GOTO @listofalltheactiveflagssetnext
+
+@listofalltheactiveflagsset256
+SET temp.result#<temp.found>, "256 - disables eavesdropping to and from players on this map. (you can still whisper, shout, etc.)"
+GOTO @listofalltheactiveflagssetnext
+
+@listofalltheactiveflagsset512
+SET temp.result#<temp.found>, "512 - designates the map a GUILD HALL map. (not sure what this means yet...)"
+GOTO @listofalltheactiveflagssetnext
+
+@listofalltheactiveflagsset1024
+SET temp.result#<temp.found>, "1024 - Prevents Humans from being able to damage monsters or pets"
+GOTO @listofalltheactiveflagssetnext
+
+@listofalltheactiveflagsset2048
+SET temp.result#<temp.found>, "2048 - NO_REWARD - No XP, GP, or items given to surviving players after fight."
+GOTO @listofalltheactiveflagssetnext
+
+@listofalltheactiveflagsset5096
+SET temp.result#<temp.found>, "4096 - NO_HEAL - Healing spells and potions provide only 1 unit of HP"
+GOTO @listofalltheactiveflagssetnext
+
+@listofalltheactiveflagsset8192
+SET temp.result#<temp.found>, "8192 - NO_TICKETS - Tickets won't work here"
+GOTO @listofalltheactiveflagssetnext
+
+@listofalltheactiveflagsset16384
+SET temp.result#<temp.found>, "16384 - NO_MINI_MAP - Upper right mini-map is uninformative here."
+GOTO @listofalltheactiveflagssetnext
+
+@listofalltheactiveflagsset32768
+SET temp.result#<temp.found>, "32768 - NO_STUN - The non-buff disease spells will not work here (stun, sleep, paralyze, etc.)"
+GOTO @listofalltheactiveflagssetnext
+
+@listofalltheactiveflagsset65536
+SET temp.result#<temp.found>, "65536 - NO_BUFF - The Buff/Debuff disease spells will not work here"
+GOTO @listofalltheactiveflagssetnext
+
+@listofalltheactiveflagsset131072
+SET temp.result#<temp.found>, "131072 - NO_PKREZ. PKers cannot use resurrection spells on others"
+GOTO @listofalltheactiveflagssetnext
+
+@listofalltheactiveflagsset262144
+SET temp.result#<temp.found>, "262144 - MAP_FLAG_HIDE_LINKS. don't show white link boxes on minimap until visited"
+GOTO @listofalltheactiveflagssetnext
+
+@listofalltheactiveflagsset524288
+SET temp.result#<temp.found>, "524288 - MAP_FLAG_NO_WAYPOINTS disable automatic waypoint calculations (good for mazes)"
+GOTO @listofalltheactiveflagssetnext
+
+@listofalltheactiveflagsset1048576
+SET temp.result#<temp.found>, "1048576 - NO_ITEM - No using of items in the scene"
+GOTO @listofalltheactiveflagssetnext
+
+@mapflagslistavailabe
+N: 0 - Revert to actual map flags   
+N: 1 - enables pet vs pet battles (but protects players from pets)   
+N: 2 - enables pets to be used against other players or pets (if pkers or no safehaven)   
+N: 4 - enables "no protection from PKer"   
+N: 8 - enables "no PKing allowed here at all"   
+N: 16 - enables "LADDER" reporting. (PK kills on this map are reported to ladder server)   
+N: 32 - enables "show all link names." Normally link names are hidden until after first use of link.   
+N: 64 - disables "Shadows" under heroes (and monsters) on map and in scenes of that map.   
+N: 128 - disables the use of pets (cannot summon them) on this map.   
+N: 256 - disables eavesdropping to and from players on this map. (you can still whisper, shout, etc.)   
+N: 512 - designates the map a GUILD HALL map. (not sure what this means yet...)   
+N: 1024 - Prevents Humans from being able to damage monsters or pets   
+N: 2048 - NO_REWARD - No XP, GP, or items given to surviving players after fight.   
+N: 4096 - NO_HEAL - Healing spells and potions provide only 1 unit of HP   
+N: 8192 - NO_TICKETS - Tickets won't work here   
+N: 16384 - NO_MINI_MAP - Upper right mini-map is uninformative here.   
+N: 32768 - NO_STUN - The non-buff disease spells will not work here (stun, sleep, paralyze, etc.)   
+N: 65536 - NO_BUFF - The Buff/Debuff disease spells will not work here   
+N: 131072 - NO_PKREZ. PKers cannot use resurrection spells on others   
+N: 262144 - MAP_FLAG_HIDE_LINKS. don't show white link boxes on minimap until visited   
+N: 524288 - MAP_FLAG_NO_WAYPOINTS disable automatic waypoint calculations (good for mazes)   
+N: 1048576 - NO_ITEM - No using of items in the scene
+END
+
+@madstoolflagter
+COMPARE #<AHS.noMessage>, 0
+IF> @languageskip5733  
+N: Which flag?
+@languageskip5733
+MENU "1 enables pet vs pet battles (but protects players from pets)=@madstoolflagbis1", "2 enables pets to be used against other players or pets (if pkers or no safehaven)=@madstoolflagbis2", "4 enables 'no protection from PKer'=@madstoolflagbis3", "8 enables 'no PKing allowed here at all'=@madstoolflagbis4", "16 enables "LADDER" reporting. (PK kills on this map are reported to ladder server)=@madstoolflagbis5", "32 enables 'show all link names.' Normally link names are hidden until after first use of link.=@madstoolflagbis6", "64 disables 'Shadows' under heroes (and monsters) on map and in scenes of that map.=@madstoolflagbis7", "128 disables the use of pets (cannot summon them) on this map.=@madstoolflagbis8", "256 disables eavesdropping to and from players on this map. (you can still whisper, shout, etc.)=@madstoolflagbis9", "512 designates the map a GUILD HALL map. (not sure what this means yet...)=@madstoolflagbis10", "1024 Prevents Humans from being able to damage monsters or pets=@madstoolflagbis11", "2048 NO_REWARD - No XP, GP, or items given to surviving players after fight.=@madstoolflagbis12", "4096 NO_HEAL - Healing spells and potions provide only 1 unit of HP=@madstoolflagbis13", "8192 NO_TICKETS - Tickets won't work here=@madstoolflagbis14", "16384 NO_MINI_MAP - Upper right mini-map is uninformative here.=@madstoolflagbis15", "32769 NO_STUN - The non-buff disease spells will not work here (stun, sleep, paralyze, etc.)=@madstoolflagbis16", "65536 NO_BUFF - The Buff/Debuff disease spells will not work here=@madstoolflagbis17", "131072 NO_PKREZ. - PKers cannot use resurrection spells on others=@madstoolflagbis18", "262144 MAP_FLAG_HIDE_LINKS. - don't show white link boxes on minimap until visited=@madstoolflagbis19", "524288  MAP_FLAG_NO_WAYPOINTS - disable automatic waypoint calculations=@madstoolflagbis20", "1048576 NO_ITEM - no using of items in scene=@madstoolflagbis21", "Cancel=@madstoolcancel" 
+GOTO @languageskip5733
+
+@madstoolflagbis1
+SET temp.flag, 1
+GOTO @madstoolflagbisend
+
+@madstoolflagbis2
+SET temp.flag, 2
+GOTO @madstoolflagbisend
+
+@madstoolflagbis3
+SET temp.flag, 4
+GOTO @madstoolflagbisend
+
+@madstoolflagbis4
+SET temp.flag, 8
+GOTO @madstoolflagbisend
+
+@madstoolflagbis5
+SET temp.flag, 16
+GOTO @madstoolflagbisend
+
+@madstoolflagbis6
+SET temp.flag, 32
+GOTO @madstoolflagbisend
+
+@madstoolflagbis7
+SET temp.flag, 64
+GOTO @madstoolflagbisend
+
+@madstoolflagbis8
+SET temp.flag, 128
+GOTO @madstoolflagbisend
+
+@madstoolflagbis9
+SET temp.flag, 256
+GOTO @madstoolflagbisend
+
+@madstoolflagbis10
+SET temp.flag, 512
+GOTO @madstoolflagbisend
+
+@madstoolflagbis11
+SET temp.flag, 1024
+GOTO @madstoolflagbisend
+
+@madstoolflagbis12
+SET temp.flag, 2048
+GOTO @madstoolflagbisend
+
+@madstoolflagbis13
+SET temp.flag, 4096
+GOTO @madstoolflagbisend
+
+@madstoolflagbis14
+SET temp.flag, 8192
+GOTO @madstoolflagbisend
+
+@madstoolflagbis15
+SET temp.flag, 16384
+GOTO @madstoolflagbisend
+
+@madstoolflagbis16
+SET temp.flag, 32768
+GOTO @madstoolflagbisend
+
+@madstoolflagbis17
+SET temp.flag, 65536
+GOTO @madstoolflagbisend
+
+@madstoolflagbis18
+SET temp.flag, 131072
+GOTO @madstoolflagbisend
+
+@madstoolflagbis19
+SET temp.flag, 262144
+GOTO @madstoolflagbisend
+
+@madstoolflagbis20
+SET temp.flag, 524288
+GOTO @madstoolflagbisend
+
+@madstoolflagbis21
+SET temp.flag, 1048576
+GOTO @madstoolflagbisend
+
+@madstoolflagbisend
+IF F#<temp.flag> @gotitflagschecker
+N: #<temp.flag> is disabled in this scene.
+SET temp.flag, ""
+END
+
+@gotitflagschecker
+N: #<temp.flag> is enabled in this scene.
+SET temp.flag, ""
+END
+
+@madstoolflagbis 
+COMPARE #<AHS.noMessage>, 0
+IF> @madstoolflagmenu
+N: Which flags? 
+@madstoolflagmenu 
+GOTO @flagSetterThingy
+@madstoolflagmenuAg
+MENU "0 Revert to actual map flags=@madstoolflag0", "1 enables pet vs pet battles (but protects players from pets)=@madstoolflag1", "2 enables pets to be used against other players or pets (if pkers or no safehaven)=@madstoolflag2", "4 enables 'no protection from PKer'=@madstoolflag3", "8 enables 'no PKing allowed here at all'=@madstoolflag4", "16 enables LADDER reporting. (PK kills on this map are reported to ladder server)=@madstoolflag5", "32 enables 'show all link names.' Normally link names are hidden until after first use of link.=@madstoolflag6", "64 disables 'Shadows' under heroes (and monsters) on map and in scenes of that map.=@madstoolflag7", "128 disables the use of pets (cannot summon them) on this map.=@madstoolflag8", "256 disables eavesdropping to and from players on this map. (you can still whisper, shout, etc.)=@madstoolflag9", "512 designates the map a GUILD HALL map. (not sure what this means yet...)=@madstoolflag10", "1024 Prevents Humans from being able to damage monsters or pets=@madstoolflag11", "2048 NO_REWARD - No XP, GP, or items given to surviving players after fight.=@madstoolflag12", "4096 NO_HEAL - Healing spells and potions provide only 1 unit of HP=@madstoolflag13", "8192 NO_TICKETS - Tickets won't work here=@madstoolflag14", "16384 NO_MINI_MAP - Upper right mini-map is uninformative here.=@madstoolflag15", "32769 NO_STUN - The non-buff disease spells will not work here (stun, sleep, paralyze, etc.)=@madstoolflag16", "65536 NO_BUFF - The Buff/Debuff disease spells will not work here=@madstoolflag17", "131072 NO_PKREZ. - PKers cannot use resurrection spells on others=@madstoolflag18", "262144 MAP_FLAG_HIDE_LINKS. - don't show white link boxes on minimap until visited=@madstoolflag19", "524288  MAP_FLAG_NO_WAYPOINTS - disable automatic waypoint calculations=@madstoolflag20", "1048576 NO_ITEM - No using of items in the scene=@madstoolflag21", "Cancel=@madstoolcancel" 
+GOTO @madstoolflagmenuAg
+
+@madstoolflagmenu2 
+COMPARE #<AHS.noMessage>, 0
+IF> @madstoolcancel
+N: Do you want to set another flag? 
+@madstoolflagmenu3 
+MENU "Yes=@madstoolflagmenu", "No=@madstoolcancel" 
+GOTO @madstoolflagmenu3 
+
+@flagSetterThingy
+SET AHS.tempFlag, 0
+IF F1 @2flagSetterThingy1
+@flagSetterThingy2
+IF F2 @2flagSetterThingy2
+@flagSetterThingy4
+IF F4 @2flagSetterThingy4
+@flagSetterThingy8
+IF F8 @2flagSetterThingy8
+@flagSetterThingy16
+IF F16 @2flagSetterThingy16
+@flagSetterThingy32
+IF F32 @2flagSetterThingy32
+@flagSetterThingy64
+IF F64 @2flagSetterThingy64
+@flagSetterThingy128
+IF F128 @2flagSetterThingy128
+@flagSetterThingy256
+IF F256 @2flagSetterThingy256
+@flagSetterThingy512
+IF F512 @2flagSetterThingy512
+@flagSetterThingy1024
+IF F1024 @2flagSetterThingy1024
+@flagSetterThingy2048
+IF F2048 @2flagSetterThingy2048
+@flagSetterThingy4096
+IF F4096 @2flagSetterThingy4096
+@flagSetterThingy8192
+IF F8192 @2flagSetterThingy8192
+@flagSetterThingy16384
+IF F16384 @2flagSetterThingy16384
+@flagSetterThingy32768
+IF F32768 @2flagSetterThingy32768
+@flagSetterThingy65536
+IF F65536 @2flagSetterThingy65536
+@flagSetterThingy262144
+IF F131072 @2flagSetterThingy131072
+@flagSetterThingy131072
+IF F262144 @2flagSetterThingy262144
+@flagSetterThingy524288
+IF F524288 @2flagSetterThingy524288
+@flagSetterThingy1048576
+IF F1048576 @2flagSetterThingy1048576
+@flagSetterThingy2097152
+GOTO @madstoolflagmenuAg
+
+@2flagSetterThingy1
+ADD AHS.tempFlag, 1
+GOTO @flagSetterThingy2
+
+@2flagSetterThingy2
+ADD AHS.tempFlag, 2
+GOTO @flagSetterThingy4
+
+@2flagSetterThingy4
+ADD AHS.tempFlag, 4
+GOTO @flagSetterThingy8
+
+@2flagSetterThingy8
+ADD AHS.tempFlag, 8
+GOTO @flagSetterThingy16
+
+@2flagSetterThingy16
+ADD AHS.tempFlag, 16
+GOTO @flagSetterThingy32
+
+@2flagSetterThingy32
+ADD AHS.tempFlag, 32
+GOTO @flagSetterThingy64
+
+@2flagSetterThingy64
+ADD AHS.tempFlag, 64
+GOTO @flagSetterThingy128
+
+@2flagSetterThingy128
+ADD AHS.tempFlag, 128
+GOTO @flagSetterThingy256
+
+@2flagSetterThingy256
+ADD AHS.tempFlag, 256
+GOTO @flagSetterThingy512
+
+@2flagSetterThingy512
+ADD AHS.tempFlag, 512
+GOTO @flagSetterThingy1024
+
+@2flagSetterThingy1024
+ADD AHS.tempFlag, 1024
+GOTO @flagSetterThingy2048
+
+@2flagSetterThingy2048
+ADD AHS.tempFlag, 2048
+GOTO @flagSetterThingy4096
+
+@2flagSetterThingy4096
+ADD AHS.tempFlag, 4096
+GOTO @flagSetterThingy8192
+
+@2flagSetterThingy8192
+ADD AHS.tempFlag, 8192
+GOTO @flagSetterThingy16384
+
+@2flagSetterThingy16384
+ADD AHS.tempFlag, 16384
+GOTO @flagSetterThingy32768
+
+@2flagSetterThingy32768
+ADD AHS.tempFlag, 32768
+GOTO @flagSetterThingy65536
+
+@2flagSetterThingy65536
+ADD AHS.tempFlag, 65536
+GOTO @flagSetterThingy131072
+
+@2flagSetterThingy131072
+ADD AHS.tempFlag, 131072
+GOTO @flagSetterThingy262144
+
+@2flagSetterThingy262144
+ADD AHS.tempFlag, 262144
+GOTO @flagSetterThingy524288
+
+@2flagSetterThingy524288
+ADD AHS.tempFlag, 524288
+GOTO @flagSetterThingy1048576
+
+@2flagSetterThingy1048576
+ADD AHS.tempFlag, 1048576
+GOTO @flagSetterThingy2097152
+
+@madstoolflag0 
+FLAGS 0 
+END 
+
+@madstoolflag1 
+IF F1 @madstoolflagmenu2 
+SET AHS.flags, #<num.mapFlags> 
+ADD AHS.flags, 1 
+FLAGS #<AHS.flags> 
+END 
+
+@madstoolflag2 
+IF F2 @madstoolflagmenu2 
+SET AHS.flags, #<num.mapFlags> 
+ADD AHS.flags, 2 
+FLAGS #<AHS.flags> 
+END 
+
+@madstoolflag3 
+IF F4 @madstoolflagmenu2 
+SET AHS.flags, #<num.mapFlags> 
+ADD AHS.flags, 4 
+FLAGS #<AHS.flags> 
+END 
+
+@madstoolflag4 
+IF F8 @madstoolflagmenu2 
+SET AHS.flags, #<num.mapFlags> 
+ADD AHS.flags, 8 
+FLAGS #<AHS.flags> 
+END 
+
+@madstoolflag5 
+IF F16 @madstoolflagmenu2 
+SET AHS.flags, #<num.mapFlags> 
+ADD AHS.flags, 16 
+FLAGS #<AHS.flags> 
+END 
+
+@madstoolflag6 
+IF F32 @madstoolflagmenu2 
+SET AHS.flags, #<num.mapFlags> 
+ADD AHS.flags, 32 
+FLAGS #<AHS.flags> 
+END 
+
+@madstoolflag7 
+IF F64 @madstoolflagmenu2 
+SET AHS.flags, #<num.mapFlags> 
+ADD AHS.flags, 64 
+FLAGS #<AHS.flags> 
+END 
+
+@madstoolflag8 
+IF F128 @madstoolflagmenu2 
+SET AHS.flags, #<num.mapFlags> 
+ADD AHS.flags, 128 
+FLAGS #<AHS.flags> 
+END 
+
+@madstoolflag9 
+IF F256 @madstoolflagmenu2 
+SET AHS.flags, #<num.mapFlags> 
+ADD AHS.flags, 256 
+FLAGS #<AHS.flags> 
+END 
+
+@madstoolflag10 
+IF F512 @madstoolflagmenu2 
+SET AHS.flags, #<num.mapFlags> 
+ADD AHS.flags, 512 
+FLAGS #<AHS.flags> 
+END 
+
+@madstoolflag11 
+IF F1024 @madstoolflagmenu2 
+SET AHS.flags, #<num.mapFlags> 
+ADD AHS.flags, 1024 
+FLAGS #<AHS.flags> 
+END 
+
+@madstoolflag12 
+IF F2048 @madstoolflagmenu2 
+SET AHS.flags, #<num.mapFlags> 
+ADD AHS.flags, 2048 
+FLAGS #<AHS.flags> 
+END 
+
+@madstoolflag13 
+IF F4096 @madstoolflagmenu2 
+SET AHS.flags, #<num.mapFlags> 
+ADD AHS.flags, 4096 
+FLAGS #<AHS.flags> 
+END 
+
+@madstoolflag14 
+IF F8192 @madstoolflagmenu2 
+SET AHS.flags, #<num.mapFlags> 
+ADD AHS.flags, 8192 
+FLAGS #<AHS.flags> 
+END 
+
+@madstoolflag15 
+IF F16384 @madstoolflagmenu2 
+SET AHS.flags, #<num.mapFlags> 
+ADD AHS.flags, 16384 
+FLAGS #<AHS.flags> 
+END 
+
+@madstoolflag16 
+IF F32768 @madstoolflagmenu2 
+SET AHS.flags, #<num.mapFlags> 
+ADD AHS.flags, 32768 
+FLAGS #<AHS.flags> 
+END 
+
+@madstoolflag17 
+IF F65536 @madstoolflagmenu2 
+SET AHS.flags, #<num.mapFlags> 
+ADD AHS.flags, 65536 
+FLAGS #<AHS.flags> 
+END 
+
+@madstoolflag18
+IF F131072 @madstoolflagmenu2 
+SET AHS.flags, #<num.mapFlags> 
+ADD AHS.flags, 131072
+FLAGS #<AHS.flags> 
+END 
+
+@madstoolflag19 
+IF F262144 @madstoolflagmenu2 
+SET AHS.flags, #<num.mapFlags> 
+ADD AHS.flags, 262144
+FLAGS #<AHS.flags> 
+END 
+
+@madstoolflag20 
+IF F524288 @madstoolflagmenu2
+SET AHS.flags, #<num.mapFlags> 
+ADD AHS.flags, 524288
+FLAGS #<AHS.flags> 
+END 
+
+@madstoolflag21
+IF F1048576 @madstoolflagmenu2
+SET AHS.flags, #<num.mapFlags> 
+ADD AHS.flags, 1048576
+FLAGS #<AHS.flags> 
+END 
+
+@madstoolfx0 
+FX 0 
+END 
+
+@madstoolfx1 
+FX 1 
+END 
+
+@madstoolfx2 
+FX 2 
+END 
+
+@madstoolfx3 
+FX 3 
+END 
+
+@madstoolfx4 
+FX 4 
+END 
+
+@madstoolfx5 
+FX 5 
+END 
+
+@madstoolfx6
+FX 6
+END 
+
+@madstoolsound 
+COMPARE #<AHS.noMessage>, 0
+IF> @languageskip58  
+N: Name of the wav? 
+@languageskip58
+ASK #<AHS.pref.ASKduration> 1
+IF Qcancel @madstoolcancel 
+SOUND #<lastAsk> 
+END 
+
+@madstooltheme0bis
+THEME 0
+END
+
+@madstooltheme0 
+THEME -1 
+END 
+
+@madstooltheme1 
+THEME 1 
+END 
+
+@madstooltheme2 
+THEME 2 
+END 
+
+@madstooltheme3 
+THEME 3 
+END 
+
+@madstooltheme4 
+THEME 4 
+END 
+
+@madstooltheme5 
+THEME 5 
+END 
+
+@madstooltheme6 
+THEME 6 
+END 
+
+@madstooltheme7 
+THEME 7 
+END 
+
+@madstooltheme8 
+THEME 8 
+END 
+
+@madstoolthemeperso 
+COMPARE #<AHS.noMessage>, 0
+IF> @languageskip59  
+N: What is the ID? 
+@languageskip59
+ASK #<AHS.pref.ASKduration> 1
+IF Qcancel @madstoolcancel 
+THEME #<lastAsk> 
+END 
+
+@madstoolmusic 
+COMPARE #<AHS.noMessage>, 0
+IF> @languageskip60  
+N: Name of the midi file? 
+@languageskip60
+ASK #<AHS.pref.ASKduration> 1
+IF Qsilence @madstoolsilence 
+IF Qcancel @madstoolcancel 
+MUSIC #<lastAsk>.mid 
+END 
+
+@madstoolsilence 
+MUSIC #silence 
+END 
+
+@madstoolweather0 
+WEATHER 0 
+END 
+
+@madstoolweather1 
+WEATHER 1 
+END 
+
+@madstoolweather2 
+WEATHER 2 
+END 
+
+@madstoolweather3 
+WEATHER 3 
+END 
+
+@madstoolweather4 
+WEATHER 4 
+END 
+
+@madstoolweather5 
+WEATHER 5 
+END 
+
+@madstoolweather6 
+WEATHER 6 
+END 
+
+@madstoolweather7 
+WEATHER 7 
+END 
+
+@madstoolweather8 
+WEATHER 8 
+END 
+
+@madstoolweather9 
+WEATHER 9 
+END 
+
+@madstoolweather10 
+WEATHER 4000 
+COMPARE #<AHS.noMessage>, 1
+IF> @languageskip61  
+N: Color of the fx? 
+WAIT 1
+N: From 000 to 255 (enter 3 digits) 
+@languageskip61
+ASK #<AHS.pref.ASKduration> 1
+IF Qcancel @madstoolweather0 
+WEATHER 4#<lastAsk> 
+COMPARE #<AHS.noMessage>, 1
+IF> @madstoolcancel
+N: Keep this color? 
+@madstoolweathermenu 
+MENU "Yes=@madstoolcancel", "No=@madstoolweather10" 
+GOTO @madstoolweather10 
+
+@madstoolweather11 
+WEATHER 5000 
+COMPARE #<AHS.noMessage>, 1
+IF> @languageskip62  
+N: Color of the fx? 
+WAIT 1
+N: From 000 to 255 (enter 3 digits) 
+@languageskip62
+ASK #<AHS.pref.ASKduration> 1
+IF Qcancel @madstoolweather0 
+WEATHER 5#<lastAsk> 
+COMPARE #<AHS.noMessage>, 1
+IF> @madstoolcancel
+N: Keep this color? 
+@madstoolweathermenu 
+MENU "Yes=@madstoolcancel", "No=@madstoolweather11" 
+GOTO @madstoolweather11 
+
+@madstoolweather12 
+WEATHER 6000 
+COMPARE #<AHS.noMessage>, 1
+IF> @languageskip63  
+N: Color of the fx? 
+WAIT 1
+N: From 000 to 255 (enter 3 digits) 
+@languageskip63
+ASK #<AHS.pref.ASKduration> 1
+IF Qcancel @madstoolweather0 
+WEATHER 6#<lastAsk> 
+COMPARE #<AHS.noMessage>, 1
+IF> @madstoolcancel
+N: Keep this color? 
+@madstoolweathermenu 
+MENU "Yes=@madstoolcancel", "No=@madstoolweather12" 
+GOTO @madstoolweather12 
+
+@madstoolweather13 
+WEATHER 7000 
+COMPARE #<AHS.noMessage>, 1
+IF> @languageskip64  
+N: Color of the fx? 
+WAIT 1
+N: From 000 to 255 (enter 3 digits) 
+@languageskip64
+ASK #<AHS.pref.ASKduration> 1 
+IF Qcancel @madstoolweather0 
+WEATHER 7#<lastAsk> 
+COMPARE #<AHS.noMessage>, 1
+IF> @madstoolcancel
+N: Keep this color? 
+@madstoolweathermenu 
+MENU "Yes=@madstoolcancel", "No=@madstoolweather13" 
+GOTO @madstoolweather13 
+
+@madstoolweather14 
+WEATHER 8000 
+COMPARE #<AHS.noMessage>, 1
+IF> @languageskip65  
+N: Color of the fx? 
+WAIT 1
+N: From 000 to 255 (enter 3 digits) 
+@languageskip65
+ASK #<AHS.pref.ASKduration> 1 
+IF Qcancel @madstoolweather0 
+WEATHER 8#<lastAsk> 
+COMPARE #<AHS.noMessage>, 1
+IF> @madstoolcancel  
+N: Keep this color? 
+@madstoolweathermenu 
+MENU "Yes=@madstoolcancel", "No=@madstoolweather14" 
+GOTO @madstoolweather14 
+
+@madstoolweather15 
+WEATHER 9000 
+COMPARE #<AHS.noMessage>, 1
+IF> @languageskip66  
+N: Color of the fx? 
+WAIT 1
+N: From 000 to 255 (enter 3 digits) 
+@languageskip66
+ASK #<AHS.pref.ASKduration> 1 
+IF Qcancel @madstoolweather0 
+WEATHER 9#<lastAsk> 
+COMPARE #<AHS.noMessage>, 1
+IF> @madstoolcancel  
+N: Keep this color? 
+@madstoolweathermenu 
+MENU "Yes=@madstoolcancel", "No=@madstoolweather15" 
+GOTO @madstoolweather15 
+
+@madstoollink 
+COMPARE #<AHS.noMessage>, 0
+IF> @languageskip70  
+N: ID of the map? 
+@languageskip70
+ASK #<AHS.pref.ASKduration> 1 
+IF Qcancel @madstoolcancel 
+SET coordmaptravel, #<lastAsk> 
+COMPARE #<AHS.noMessage>, 0
+IF> @languageskip71  
+N: ID of the link? 
+@languageskip71
+ASK #<AHS.pref.ASKduration> 1 
+IF Qcancel @madstoolcancel 
+WAIT 0.5
+GOTO LINK #<coordmaptravel>, #<lastAsk> 
+N: Link not found.
+END 
+
+@madstoolscene 
+COMPARE #<AHS.noMessage>, 0
+IF> @languageskip72  
+N: ID of the scene? 
+@languageskip72
+ASK #<AHS.pref.ASKduration> 1 
+IF Qcancel @madstoolcancel 
+GOTO SCENE #<lastAsk> 
+N: Scene not found.
+END
+
+@madstoolhtml 
+COMPARE #<AHS.noMessage>, 0
+IF> @languageskip73  
+N: Name of the page? 
+WAIT 0.5
+N: (URL or name of the file if it is in the HTML folder of the world) 
+@languageskip73
+ASK #<AHS.pref.ASKduration> 1 
+IF Qcancel @madstoolcancel 
+WAIT 0.8 
+HTML #<lastAsk> 
+END 
+
+@madstoolcookie 
+COMPARE #<AHS.noMessage>, 1
+IF> @languageskip74  
+N: Name of the cookie? 
+@languageskip74
+ASK #<AHS.pref.ASKduration> 1 
+IF Qcancel @madstoolcancel 
+SET cookiename, #<lastAsk> 
+COMPARE #<AHS.noMessage>, 1
+IF> @languageskip75  
+N: Value? 
+@languageskip75
+ASK #<AHS.pref.ASKduration> 1 
+IF Qcancel @madstoolcancel 
+SET #<cookiename>, #<lastAsk> 
+END 
+
+@madstooladdcookie 
+COMPARE #<AHS.noMessage>, 1
+IF> @languageskip76  
+N: Name of the cookie? 
+@languageskip76
+ASK #<AHS.pref.ASKduration> 1
+IF Qcancel @madstoolcancel 
+SET cookiename, #<lastAsk> 
+COMPARE #<AHS.noMessage>, 1
+IF> @languageskip77  
+N: Value added? 
+@languageskip77
+ASK #<AHS.pref.ASKduration> 1 
+IF Qcancel @madstoolcancel 
+ADD #<cookiename>, #<lastAsk> 
+N: Result : *#<cookiename> 
+END 
+
+@madstooldivcookie 
+N: Name of the cookie? 
+ASK #<AHS.pref.ASKduration> 1 
+IF Qcancel @madstoolcancel 
+SET cookiename, #<lastAsk> 
+N: Divided by? 
+ASK #<AHS.pref.ASKduration> 1 
+IF Qcancel @madstoolcancel 
+DIV #<cookiename>, #<lastAsk> 
+N: Result : *#<cookiename> 
+END 
+
+@madstoolsubcookie 
+N: Name of the cookie? 
+ASK #<AHS.pref.ASKduration> 1 
+IF Qcancel @madstoolcancel 
+SET cookiename, #<lastAsk> 
+N: Value substracted? 
+ASK #<AHS.pref.ASKduration> 1 
+IF Qcancel @madstoolcancel 
+SUB #<cookiename>, #<lastAsk> 
+N: Result : *#<cookiename> 
+END 
+
+@madstoolmulcookie 
+N: Name of the cookie? 
+ASK #<AHS.pref.ASKduration> 1 
+IF Qcancel @madstoolcancel 
+SET cookiename, #<lastAsk> 
+N: Multiply by? 
+ASK #<AHS.pref.ASKduration> 1 
+IF Qcancel @madstoolcancel 
+MUL #<cookiename>, #<lastAsk> 
+N: Result : *#<cookiename> 
+END
+
+@madstoolsshopsbycategory
+COMPARE #<AHS.noMessage>, 1
+IF> @languageskip78  
+N: ID of the category?
+@languageskip78
+ASK #<AHS.pref.ASKduration> 1
+IF Qcancel @madstoolcancel 
+SET temp.cat, #<lastAsk>
+COMPARE #<AHS.noMessage>, 1
+IF> @languageskip79  
+N: Minimum level?
+@languageskip79
+ASK #<AHS.pref.ASKduration> 1
+IF Qcancel @madstoolcancel 
+SET temp.minlvl, #<lastAsk>
+COMPARE #<AHS.noMessage>, 1
+IF> @languageskip80  
+N: Maximum level?
+@languageskip80
+ASK #<AHS.pref.ASKduration> 1
+IF Qcancel @madstoolcancel
+SET temp.maxlvl, #<lastAsk> 
+OFFER2 #<temp.minlvl>,#<temp.maxlvl>,#<temp.cat>
+SET temp.minlvl, ""
+SET temp.cat, ""
+SET temp.maxlvl, ""
+END
+
+@madstoolshopuniqueitems
+SET shop1, ""
+SET shop2, ""
+SET shop3, ""
+SET shop4, ""
+SET shop5, ""
+SET shop6, ""
+SET shop7, ""
+SET shop8, ""
+SET shop9, ""
+SET shop10, "" 
+SET shop11, ""
+SET shop12, ""
+SET shop13, ""
+SET shop14, ""
+SET shop15, ""
+SET shop16, ""
+SET shop17, ""
+SET shop18, ""
+SET shop19, ""
+SET shop20, ""
+SET shop21, ""
+SET shop22, ""
+SET shop23, ""
+SET shop24, ""
+SET shop25, ""
+SET shop26, ""
+SET shop27, ""
+SET shop28, ""
+SET shop29, ""
+SET shop30, ""
+COMPARE #<AHS.noMessage>, 1
+IF> @languageskip81  
+N: Give me the list of the ID of the items for sale, one by one. 
+WAIT 2
+N: Say "cancel" to cancel or "go" to stop the list and open the shop. 
+WAIT 2
+N: 1st item 
+@languageskip81
+ASK #<AHS.pref.ASKduration> 1 
+IF Qcancel @madstoolcancel 
+IF Qstop @madstoolshopstop 
+IF Qgo @madstoolshopstop 
+SET shop1, #<lastAsk> 
+COMPARE #<AHS.noMessage>, 1
+IF> @languageskip82  
+N: 2nd item 
+@languageskip82
+ASK #<AHS.pref.ASKduration> 1 
+IF Qcancel @madstoolcancel 
+IF Qstop @madstoolshopstop 
+SET shop2, #<lastAsk> 
+COMPARE #<AHS.noMessage>, 1
+IF> @languageskip83  
+N: 3rd item 
+@languageskip83
+ASK #<AHS.pref.ASKduration> 1 
+IF Qcancel @madstoolcancel 
+IF Qstop @madstoolshopstop 
+SET shop3, #<lastAsk> 
+SET temp.currentireminshop, 4
+@madstoolitemlistsettinfd
+COMPARE #<AHS.noMessage>, 0
+IF> @nextaftrfsdfgrthjetj
+STRSTR -21-22-23-12-11-13-, -#<temp.currentireminshop>-
+IF> @itemslistgrammar
+N: #<temp.currentireminshop>th item?
+@nextaftrfsdfgrthjetj
+ASK #<AHS.pref.ASKduration> 1
+IF Qcancel @madstoolcancel 
+IF Qstop @madstoolshopstop 
+SET shop#<temp.currentireminshop>, #<lastAsk>
+COMPARE  temp.currentireminshop, 30
+IF= @madstoolshopstop 
+ADD temp.currentireminshop, 1
+GOTO @madstoolitemlistsettinfd
+
+@itemslistgrammar
+STRSTR -21-11-, -#<temp.currentireminshop>-
+IF> @itemslistgrammar1
+STRSTR -22-12-, -#<temp.currentireminshop>-
+IF> @itemslistgrammar2
+STRSTR -23-13-, -#<temp.currentireminshop>-
+IF> @itemslistgrammar3
+N: There is a problem with this script.
+END
+
+@itemslistgrammar1
+N: #<temp.currentireminshop>st item?
+GOTO @nextaftrfsdfgrthjetj
+
+@itemslistgrammar2
+N: #<temp.currentireminshop>nd item?
+GOTO @nextaftrfsdfgrthjetj
+
+@itemslistgrammar3
+N: #<temp.currentireminshop>rd item?
+GOTO @nextaftrfsdfgrthjetj
+
+@madstoolshopstop 
+OFFER #<shop1>, #<shop2>, #<shop3>, #<shop4>, #<shop5>, #<shop6>, #<shop7>, #<shop8>, #<shop9>, #<shop10>, #<shop11>, #<shop12>, #<shop13>, #<shop14>, #<shop15>, #<shop16>, #<shop17>, #<shop18>, #<shop19>, #<shop20>, #<shop21>, #<shop22>, #<shop23>, #<shop24>, #<shop25>, #<shop26>, #<shop27>, #<shop28>, #<shop29>, #<shop30> 
+END 
+
+@madstoolgame1 
+GAME 1 
+END 
+
+@madstoolgame2 
+GAME 2 
+END 
+
+@madstoolgame3 
+GAME 3 
+END 
+
+@madstoolgame4 
+GAME 4 
+END 
+
+@madstoolgame5 
+GAME 5 
+END 
+
+@madstoolgame6 
+GAME 6 
+END 
+
+@madstoolgame7 
+GAME 7 
+END 
+
+@madstoolgame8 
+GAME 8 
+END 
+
+@madstoolbkgnd 
+COMPARE #<AHS.noMessage>, 0
+IF> @skipthetext4444  
+N: Name of the new background image? 
+@skipthetext4444
+ASK #<AHS.pref.ASKduration> 1 
+BKGND #<lastAsk>
+END 
+
+@madstoolsee 
+COMPARE #<AHS.noMessage>, 0
+IF> @skipthetext4445  
+N: ID of the monster? 
+@skipthetext4445
+ASK #<AHS.pref.ASKduration> 1 
+IF Qcancel @madstoolcancel 
+FIGHT -#<lastAsk> 
+END 
+
+@madstoolfightmul
+SET temp.num, 0
+@madstoolfightmulnext1
+ADD temp.num, 1
+SET monstertofight#<temp.num>, ""
+COMPARE #<temp.num>, 31
+IF> @madstoolfightmulnext
+GOTO @madstoolfightmulnext1
+
+@madstoolfightmulnext
+SET temp.num, 0
+COMPARE #<AHS.noMessage>, 1
+IF> @languageskip84  
+N: Name of the monsters, one by one (say "cancel" to cancel or "go" to start the fight)? 
+@languageskip84
+ADD temp.num, 1
+ASK #<AHS.pref.ASKduration> 1
+IF Qcancel @madstoolcancel 
+IF Qfight @madstoolfightmul2 
+IF Qgo @madstoolfightmul2 
+SET monstertofight#<temp.num>, #<lastAsk> 
+COMPARE #<temp.num>, 31
+IF> @madstoolfightmul2
+GOTO @languageskip84
+
+@madstoolfightmul2 
+FIGHT #<monstertofight1>, #<monstertofight2>, #<monstertofight3>, #<monstertofight4>, #<monstertofight5>, #<monstertofight6>, #<monstertofight7>, #<monstertofight8>, #<monstertofight9>, #<monstertofight10>, #<monstertofight11>, #<monstertofight12>, #<monstertofight13>, #<monstertofight14>, #<monstertofight15>, #<monstertofight16>, #<monstertofight17>, #<monstertofight18>, #<monstertofight19>, #<monstertofight20>, #<monstertofight21>, #<monstertofight22>, #<monstertofight23>, #<monstertofight24>, #<monstertofight25>, #<monstertofight26>, #<monstertofight27>, #<monstertofight28>, #<monstertofight29>, #<monstertofight30>, #<monstertofight31>, #<monstertofight32> 
+IF LOSE @end
+END 
+
+@madstoolfight 
+COMPARE #<AHS.noMessage>, 0
+IF> @languageskip85  
+N: ID of the monster? 
+@languageskip85
+ASK #<AHS.pref.ASKduration> 1 
+IF Qcancel @madstoolcancel 
+FIGHT #<lastAsk> 
+IF LOSE @end
+@end
+END 
+
+@madstoolfight2mul 
+SET temp.num, 0
+@madstoolfightmulnext12
+ADD temp.num, 1
+SET monstertofight#<temp.num>, ""
+COMPARE #<temp.num>, 31
+IF> @madstoolfightmulnext22
+GOTO @madstoolfightmulnext12
+
+@madstoolfightmulnext22
+SET temp.num, 0
+COMPARE #<AHS.noMessage>, 1
+IF> @languageskip88  
+N: Name of the monsters, one by one (say "cancel" to cancel or "go" to start the fight)? 
+@languageskip88
+ADD temp.num, 1
+ASK #<AHS.pref.ASKduration> 1
+IF Qcancel @madstoolcancel 
+IF Qfight @madstoolfightmul2 
+IF Qgo @madstoolfightmul2 
+SET monstertofight#<temp.num>, #<lastAsk> 
+COMPARE #<temp.num>, 31
+IF> @madstoolfightmul233
+GOTO @languageskip88
+
+@madstoolfightmul233
+FIGHT2 #<monstertofight1>, #<monstertofight2>, #<monstertofight3>, #<monstertofight4>, #<monstertofight5>, #<monstertofight6>, #<monstertofight7>, #<monstertofight8>, #<monstertofight9>, #<monstertofight10>, #<monstertofight11>, #<monstertofight12>, #<monstertofight13>, #<monstertofight14>, #<monstertofight15>, #<monstertofight16>, #<monstertofight17>, #<monstertofight18>, #<monstertofight19>, #<monstertofight20>, #<monstertofight21>, #<monstertofight22>, #<monstertofight23>, #<monstertofight24>, #<monstertofight25>, #<monstertofight26>, #<monstertofight27>, #<monstertofight28>, #<monstertofight29>, #<monstertofight30>, #<monstertofight31>, #<monstertofight32> 
+IF LOSE @end
+END 
+
+
+@madstoolfight2 
+COMPARE #<AHS.noMessage>, 0
+IF> @languageskip89  
+N: ID of the monster? 
+@languageskip89
+ASK #<AHS.pref.ASKduration> 1
+IF Qcancel @madstoolcancel 
+FIGHT2 #<lastAsk> 
+IF LOSE @end
+END 
+
+@madstoollock2 
+LOCK 1 
+COMPARE #<AHS.noMessage>, 0
+IF> @madstoolcancel
+N: Scene locked 
+END 
+
+@madstoollock3 
+LOCK 0 
+COMPARE #<AHS.noMessage>, 0
+IF> @madstoolcancel  
+N: Scene unlocked 
+END 
+
+@madstoolteamrez 
+GIVE L1 
+GIVE H5000 
+GIVE M5000 
+END 
+
+@madstoolhostrez 
+HOST_GIVE L1 
+HOST_GIVE H5000 
+HOST_GIVE M5000 
+END 
+
+@madstoolhostfull 
+HOST_GIVE H10000 
+HOST_GIVE M10000 
+END 
+
+@madstoolteamfull 
+GIVE H10000 
+GIVE M10000 
+END 
+
+@madstoolHPamount 
+COMPARE #<AHS.noMessage>, 0
+IF> @madstoolHPamount2 
+N: For you only or for the whole team?
+WAIT 0.2
+@madstoolHPamount2 
+MENU "Only me=@madstoolHPamount3", "The whole team=@madstoolHPamount4", "Cancel=@madstoolcancel" 
+GOTO @madstoolHPamount2 
+
+@madstoolHPamount3 
+COMPARE #<AHS.noMessage>, 0
+IF> @languageskip146  
+N: How many HP do you need? 
+@languageskip146
+ASK #<AHS.pref.ASKduration> 1
+IF Qcancel @madstoolcancel 
+HOST_GIVE H#<lastAsk> 
+END 
+
+@madstoolHPamount4
+COMPARE #<AHS.noMessage>, 0
+IF> @languageskip147  
+N: How many HP do you need?
+@languageskip147
+ASK #<AHS.pref.ASKduration> 1
+IF Qcancel @madstoolcancel 
+GIVE H#<lastAsk> 
+END
+
+@madstoolMPamount 
+COMPARE #<AHS.noMessage>, 0
+IF> @madstoolMPamount2 
+N: For you only or for the whole team? 
+@madstoolMPamount2 
+MENU "Only me=@madstoolMPamount3", "The whole team=@madstoolMPamount4", "Cancel=@madstoolcancel" 
+GOTO @madstoolMPamount2 
+
+@madstoolMPamount3 
+COMPARE #<AHS.noMessage>, 0
+IF> @languageskip148  
+N: How many MP do you need? 
+@languageskip148
+ASK #<AHS.pref.ASKduration> 1
+IF Qcancel @madstoolcancel 
+HOST_GIVE M#<lastAsk> 
+END 
+
+@madstoolMPamount4
+COMPARE #<AHS.noMessage>, 0
+IF> @languageskip149  
+N: How many MP do you need?
+@languageskip149
+ASK #<AHS.pref.ASKduration> 1
+IF Qcancel @madstoolcancel 
+GIVE M#<lastAsk> 
+END
+
+@madstoolinfos
+N: This character is #<num.hostAge> minutes old (out of the total of #<num.hostTotalAge> minutes you have played WoS).
+N: You are born the #<num.hostBirthDay>.#<num.hostBirthMonth>.#<num.hostBirthYear>.
+N: You have picked the class #<num.hostClass> (%C#<num.hostClass>).
+N: You are level #<num.hostLevel> (level name: %L#<num.hostLevel>).
+N: Your hand ratio is: #<num.hostHandRatio>.
+N: Your magic ratio is: #<num.hostMagicRatio>.
+N: You currently have #<num.hostHP> HP out of a maximum of #<num.hostMaxHP>.
+N: You currently have #<num.hostMP> MP out of a maximum of #<num.hostMaxMP>.
+N: You have #<num.hostSTR> STR.
+N: You have #<num.hostWIS> WIS.
+N: You have #<num.hostSTA> STA.
+N: You have #<num.hostAGI> AGI.
+N: You have #<num.hostDEX> DEX.
+N: You have #<num.hostGP> GP.
+N: You died #<num.hostDeaths> times.
+N: You have killed #<num.hostKills> monsters.
+N: You have killed #<num.hostPKs> players.
+N: Your rating is: #<num.hostRating>.
+N: Your hunting skill level is: #<num.hostHuntSkill>.
+N: Your bravery is #<num.hostBravery>.
+N: Your aggressiveness is: #<num.hostAggressiveness>.
+N: You currently have #<num.hostPP> unspent PP.
+N: You bought #<num.hostHaloPoints> halo points.
+N: You spent #<num.hostHandPP1> PP on training the 1st weapon.
+N: You spent #<num.hostHandPP2> PP on training the 2nd weapon.
+N: You spent #<num.hostHandPP3> PP on training the 3rd weapon.
+N: You spent #<num.hostHandPP4> PP on training the 4th weapon.
+N: You spent #<num.hostHandPP5> PP on training the 5th weapon.
+N: You spent #<num.hostHandPP6> PP on training the 6th weapon.
+N: You spent #<num.hostHandPP7> PP on training the 7th weapon.
+N: You spent #<num.hostHandPP8> PP on training the 8th weapon.
+N: You spent #<num.hostElementPP1> PP on training the 1st element.
+N: You spent #<num.hostElementPP2> PP on training the 2nd element.
+N: You spent #<num.hostElementPP3> PP on training the 3rd element.
+N: You spent #<num.hostElementPP4> PP on training the 4th element.
+N: You spent #<num.hostElementPP5> PP on training the 5th element.
+N: You spent #<num.hostElementPP6> PP on training the 6th element.
+N: You spent #<num.hostElementPP7> PP on training the 7th element.
+N: You spent #<num.hostElementPP8> PP on training the 8th element.
+N: You've got a total of #<num.hostTotalPP> PP on this char (approx).
+N: Your current XP is #<num.hostXP> XP (approx).
+N: You need #<num.hostTNL> XP until your next level.
+N: Your highest XP ever was #<num.hostMaxXP> XP (approx).
+N: You earned a total of #<num.hostTotalXP> PP (approx). 
+N: End.
+END
+
+;<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+@madstoolitemsearchmenu
+MENU "Search by name=@madstoolitemssearch1", "Search by class=@madstoolitemssearch2", "Search by price=@madstoolitemssearch3", "Search by level=@madstoolitemssearch4", "Search by element=@madstoolitemssearch5", "Search by attack points=@madstoolitemssearch6", "Search by defense points=@madstoolitemssearch7", "Search by hp restored=@madstoolitemssearch8", "Search by mp restored=@madstoolitemssearch9", "Search by description=@madstoolitemssearch10", "Search by ability points provided=@madstoolitemssearch11", "Search by probability of finding=@madstoolitemssearch12", "Cancel=@madstoolcancel"
+GOTO @madstoolitemsearchmenu
+
+@madstoolmonstersearchesdgdf
+MENU "Search by name=@monstersearchesmonster.name","Search by dexterity points=@monstersearchesmonster.dex","Search by agility points=@monstersearchesmonster.agi","Search by stamina points=@monstersearchesmonster.sta","Search by strengh points=@monstersearchesmonster.str","Search by wisdom points=@monstersearchesmonster.wis","Search by level=@monstersearchesmonster.level","Search by element=@monstersearchesmonster.element","Search by hp=@monstersearchesmonster.mp","Search by mp=@monstersearchesmonster.mp","Search by attack points=@monstersearchesmonster.attack","Search by defense points=@monstersearchesmonster.defense","Search by XP for killing one=@monstersearchesmonster.expPts","Search by gold droped=@monstersearchesmonster.gold","Search by alignement=@monstersearchesmonster.alignment","Search by skin name=@monstersearchesmonster.skin", "Cancel=@madstoolcancel"
+GOTO @madstoolmonstersearchesdgdf
+
+@spellssearchesmainmenu
+MENU "Search by name=@spellssearchesspell.name","Search by pp required to purchase=@spellssearchesspell.pp","Search by element=@spellssearchesspell.element","Search by damage=@spellssearchesspell.damage","Search by mp required to cast=@spellssearchesspell.price","Search by level=@spellssearchesspell.level","Cancel=@madstoolcancel"
+GOTO @spellssearchesmainmenu
+
+@spellssearchesspell.name
+SET temp.searchkey, spell.name
+SET temp.searchnature, spell
+GOTO @madstooluniquesearch
+
+@spellssearchesspell.pp
+SET temp.searchkey, spell.pp
+SET temp.searchnature, spell
+GOTO @madstoolmultiplesearch
+
+@spellssearchesspell.element
+SET temp.searchkey, spell.element
+SET temp.searchnature, spell
+GOTO @madstooluniquesearch
+
+@spellssearchesspell.damage
+SET temp.searchkey, spell.damage
+SET temp.searchnature, spell
+GOTO @madstoolmultiplesearch
+
+@spellssearchesspell.price
+SET temp.searchkey, spell.price
+SET temp.searchnature, spell
+GOTO @madstoolmultiplesearch
+
+@spellssearchesspell.level
+SET temp.searchkey, spell.level
+SET temp.searchnature, spell
+GOTO @madstoolmultiplesearch
+
+@monstersearchesmonster.name
+SET temp.searchkey, monster.name
+SET temp.searchnature, monster
+GOTO @madstooluniquesearch
+
+@monstersearchesmonster.dex
+SET temp.searchkey, monster.dex
+SET temp.searchnature, monster
+GOTO @madstoolmultiplesearch
+
+@monstersearchesmonster.agi
+SET temp.searchkey, monster.agi
+SET temp.searchnature, monster
+GOTO @madstoolmultiplesearch
+
+@monstersearchesmonster.sta
+SET temp.searchkey, monster.sta
+SET temp.searchnature, monster
+GOTO @madstoolmultiplesearch
+
+@monstersearchesmonster.str
+SET temp.searchkey, monster.str
+SET temp.searchnature, monster
+GOTO @madstoolmultiplesearch
+
+@monstersearchesmonster.wis
+SET temp.searchkey, monster.wis
+SET temp.searchnature, monster
+GOTO @madstoolmultiplesearch
+
+@monstersearchesmonster.level
+SET temp.searchkey, monster.level
+SET temp.searchnature, monster
+GOTO @madstoolmultiplesearch
+
+@monstersearchesmonster.element
+SET temp.searchkey, monster.element
+SET temp.searchnature, monster
+GOTO @madstooluniquesearch
+
+@monstersearchesmonster.mp
+SET temp.searchkey, monster.mp
+SET temp.searchnature, monster
+GOTO @madstoolmultiplesearch
+
+@monstersearchesmonster.attack
+SET temp.searchkey, monster.attack
+SET temp.searchnature, monster
+GOTO @madstoolmultiplesearch
+
+@monstersearchesmonster.defense
+SET temp.searchkey, monster.defense
+SET temp.searchnature, monster
+GOTO @madstoolmultiplesearch
+
+@monstersearchesmonster.expPts
+SET temp.searchkey, monster.expPts
+SET temp.searchnature, monster
+GOTO @madstoolmultiplesearch
+
+@monstersearchesmonster.gold
+SET temp.searchkey, monster.gold
+SET temp.searchnature, monster
+GOTO @madstoolmultiplesearch
+
+@monstersearchesmonster.alignment
+SET temp.searchkey, monster.alignment
+SET temp.searchnature, monster
+GOTO @madstooluniquesearch
+
+@monstersearchesmonster.skin
+SET temp.searchkey, monster.skin
+SET temp.searchnature, monster
+GOTO @madstooluniquesearch
+
+@monstersearchesmonster.hp
+SET temp.searchkey, monster.hp
+SET temp.searchnature, monster
+GOTO @madstoolmultiplesearch
+
+@madstoolitemssearch1
+SET temp.searchnature, item
+SET temp.searchkey, item.name
+GOTO @madstooluniquesearch
+
+@madstoolitemssearch2
+SET temp.searchkey, item.class
+SET temp.searchnature, item
+GOTO @madstoolmultiplesearch
+
+@madstoolitemssearch3
+SET temp.searchkey, item.price
+SET temp.searchnature, item
+GOTO @madstoolmultiplesearch
+
+@madstoolitemssearch4
+SET temp.searchkey, item.level
+SET temp.searchnature, item
+GOTO @madstoolmultiplesearch
+
+@madstoolitemssearch5
+SET temp.searchkey, item.element
+SET temp.searchnature, item
+GOTO @madstoolmultiplesearch
+
+@madstoolitemssearch6
+SET temp.searchkey, item.attack
+SET temp.searchnature, item
+GOTO @madstoolmultiplesearch
+
+@madstoolitemssearch7
+SET temp.searchkey, item.defense
+SET temp.searchnature, item
+GOTO @madstoolmultiplesearch
+
+@madstoolitemssearch8
+SET temp.searchkey, item.hp
+SET temp.searchnature, item
+GOTO @madstoolmultiplesearch
+
+@madstoolitemssearch9
+SET temp.searchkey, item.mp
+SET temp.searchnature, item
+GOTO @madstoolmultiplesearch
+
+@madstoolitemssearch10
+SET temp.searchkey, item.desc
+SET temp.searchnature, item
+GOTO @madstooluniquesearch
+
+@madstoolitemssearch11
+SET temp.searchkey, item.ap
+SET temp.searchnature, item
+GOTO @madstoolmultiplesearch
+
+@madstoolitemssearch12
+SET temp.searchkey, item.fp
+SET temp.searchnature, item
+GOTO @madstoolmultiplesearch
+
+@madstoolmultiplesearch
+SET temp.numberofmatches, 0
+N: Minimum?
+ASK #<AHS.pref.ASKduration> 1
+IF Qcancel @madstoolcancel
+SET temp.checkerminimum, #<lastAsk>
+N: Maximum?
+ASK #<AHS.pref.ASKduration> 1
+IF Qcancel @madstoolcancel
+SET temp.checkermaximum, #<lastAsk>
+N: Searching...
+SET temp.currentItem, 0
+SET temp.matches, 0
+@madstooluniquesearchbisdd
+ADD temp.currentItem, 1
+SET #<temp.searchnature>.id, #<temp.currentItem>
+COMPARE #<temp.checkermaximum>, *#<temp.searchkey>
+IF< @madstooluniquesearchter
+COMPARE #<temp.checkerminimum>, *#<temp.searchkey>
+IF> @madstooluniquesearchter
+GOTO @madstooluniquesearchbisfound
+
+@madstooluniquesearch
+SET temp.checkerminimum, ""
+SET temp.checkermaximum, ""
+SET temp.numberofmatches, 0
+N: What value am I supposed to look for?
+ASK #<AHS.pref.ASKduration> 1
+IF Qcancel @madstoolcancel
+SET temp.lastAsk, #<lastAsk>
+N: Searching...
+@madstoolcommonsearch
+SET temp.currentItem, 0
+SET temp.matches, 0
+@madstooluniquesearchbis
+ADD temp.currentItem, 1
+SET #<temp.searchnature>.id, #<temp.currentItem>
+STRCMP #<temp.lastAsk>, *#<temp.searchkey>
+IF= @madstooluniquesearchbisfound
+@madstooluniquesearchter
+COMPARE #<temp.currentItem>, 767
+IF= @madstooluniquesearchbreakspellsend?
+@madstooluniquesearchbreakspellsend?bis
+COMPARE #<temp.currentItem>, 1000
+IF= @madstooluniquesearchbreak500
+COMPARE #<temp.currentItem>, 2000
+IF= @madstooluniquesearchbreak500
+COMPARE #<temp.currentItem>, 3000
+IF= @madstooluniquesearchbreak500
+COMPARE #<temp.currentItem>, 4000
+IF= @madstooluniquesearchbreak500
+COMPARE #<temp.currentItem>, 4095
+IF= @madstooluniquesearchbreakmonstersend?
+@madstooluniquesearchbreakmonstersend?bis
+COMPARE #<temp.currentItem>, 5000
+IF= @madstooluniquesearchbreak500
+COMPARE #<temp.currentItem>, 5119
+IF= @madstooluniquesearchbisresults
+STRCMP #<temp.checkermaximum>, ""
+IF= @madstooluniquesearchbis
+GOTO @madstooluniquesearchbisdd
+
+@madstooluniquesearchbreakspellsend?
+STRCMP #<temp.searchnature>, spell
+IF= @madstooluniquesearchbisresults
+GOTO @madstooluniquesearchbreakspellsend?bis
+
+@madstooluniquesearchbreakmonstersend?
+STRCMP #<temp.searchnature>, monster
+IF= @madstooluniquesearchbisresults
+GOTO @madstooluniquesearchbreakmonstersend?bis
+
+@madstooluniquesearchbisfound
+SET temp.resultthingy, #<temp.searchnature>.id
+ADD temp.numberofmatches, 1
+SET result#<temp.numberofmatches>, *#<temp.resultthingy>
+GOTO @madstooluniquesearchter
+
+@madstooluniquesearchbisresults
+N: We have found #<temp.numberofmatches> match(es), for #<temp.currentItem> #<temp.searchnature>s checked.
+WAIT 2
+N: The following IDs match:
+WAIT 1
+@madstooluniquesearchbisresultsbis
+SET temp.stuff, result#<temp.numberofmatches>
+SET temp.resultthingy, #<temp.searchnature>.name
+SET #<temp.searchnature>.id, *#<temp.stuff>
+N: *#<temp.stuff> : *#<temp.resultthingy>
+SUB temp.numberofmatches, 1
+COMPARE #<temp.numberofmatches>, 1
+IF< @madstoolcancel
+GOTO @madstooluniquesearchbisresultsbis
+
+@madstooluniquesearchbreak500
+N: Up to now, we have found #<temp.numberofmatches> match(es), for #<temp.currentItem> #<temp.searchnature>s checked.
+GOTO @madstooluniquesearchbis
+
+@missionthingy1
+COMPARE #<AHS.noMessage>, 0
+IF> @languageskip110ccc  
+N: ID of the mission? 
+@languageskip110ccc
+ASK #<AHS.pref.ASKduration> 1
+IF Qcancel @madstoolcancel 
+MISSION #<lastAsk>
+END
+
+@missionthingy2
+SET temp.something, 0
+COMPARE #<AHS.noMessage>, 0
+IF> @languageskip110ccc1
+N: ID of the first mission? 
+@languageskip110ccc1
+ASK #<AHS.pref.ASKduration> 1
+IF Qcancel @madstoolcancel 
+IF Qstop @missionthingyopen
+IF Qgo @missionthingyopen
+ADD temp.something, 1
+SET temp.mission#<temp.something>, #<lastAsk>
+COMPARE #<temp.something>, 20
+IF= @missionthingyopen
+COMPARE #<AHS.noMessage>, 0
+IF> @languageskip110ccc2
+N: Next one ("Cancel" to cancel, "go" to open the mission thingy)? 
+@languageskip110ccc2
+GOTO @languageskip110ccc1
+
+@missionthingyopen
+MISSION #<temp.mission1>, #<temp.mission2>, #<temp.mission3>, #<temp.mission4>, #<temp.mission5>, #<temp.mission6>, #<temp.mission7>, #<temp.mission8>, #<temp.mission9>, #<temp.mission10>, #<temp.mission11>, #<temp.mission12>, #<temp.mission13>, #<temp.mission14>, #<temp.mission15>, #<temp.mission16>, #<temp.mission17>, #<temp.mission18>, #<temp.mission19>, #<temp.mission20>, #<temp.mission21>, #<temp.mission22>, #<temp.mission23>, #<temp.mission24>, #<temp.mission25>, #<temp.mission26>, #<temp.mission27>, #<temp.mission28>, #<temp.mission29>, #<temp.mission30>, #<temp.mission31>, #<temp.mission32>
+SET temp.something, ""
+END
+
+;<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+@AHSgiveAll1
+SET temp.item, 0
+COMPARE #<AHS.noMessage>, 1
+IF> @languageskipASHgiveALL
+N: How many?
+@languageskipASHgiveALL
+ASK #<AHS.pref.ASKduration> 1
+IF Qcancel @madstoolcancel
+COMPARE #<AHS.noMessage>, 1
+IF> @AHSgiveAll1loop
+N: Working...
+@AHSgiveAll1loop
+ADD temp.item, 1
+SET item.id, #<temp.item>
+COMPARE #<item.class>, 200
+IF= @AHSgiveAll1loop
+HOST_GIVE I#<temp.item>.#<lastAsk>
+COMPARE #<temp.item>, 5119
+IF= @AHSgiveAll1end
+GOTO @AHSgiveAll1loop
+
+@AHSgiveAll1end
+COMPARE #<AHS.noMessage>, 1
+IF> @madstoolcancel
+N: Done.
+END
+
+@AHSgiveAll2
+SET temp.item, 0
+COMPARE #<AHS.noMessage>, 1
+IF> @AHSgiveAll1loop2
+N: Working...
+@AHSgiveAll1loop2
+ADD temp.item, 1
+HOST_GIVE S#<temp.item>
+COMPARE #<temp.item>, 767
+IF= @AHSgiveAll1end2
+GOTO @AHSgiveAll1loop2
+
+@AHSgiveAll1end2
+COMPARE #<AHS.noMessage>, 1
+IF> @madstoolcancel
+N: Done.
+END
+
+;<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+@madstooltravelCUT
+SET temp.bkgnd, #<scene.bkgnd>
+SET temp.fx, #<scene.fx>
+SET temp.weather, #<scene.weather>
+SET temp.mapFlags, #<num.mapFlags>
+GOTO SCENE 1000002
+
+;<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+@eventTimer0
+GOTO #<madstool.scene.id>@eventTimer0
+END
+
+@eventTimer1
+GOTO #<madstool.scene.id>@eventTimer1
+END
+
+@eventTimer2
+GOTO #<madstool.scene.id>@eventTimer2
+END
+
+@eventTimer3
+GOTO #<madstool.scene.id>@eventTimer3
+END
+
+@eventTimer4
+GOTO #<madstool.scene.id>@eventTimer4
+END
+
+@eventTimer5
+GOTO #<madstool.scene.id>@eventTimer5
+END
+
+@eventTimer6
+GOTO #<madstool.scene.id>@eventTimer6
+END
+
+@eventTimer7
+GOTO #<madstool.scene.id>@eventTimer7
+END
+
+@eventTimer8
+GOTO #<madstool.scene.id>@eventTimer8
+END
+
+@eventTimer9
+GOTO #<madstool.scene.id>@eventTimer9
+END
+
+@eventMissionAccepted
+GOTO #<madstool.scene.id>@eventMissionAccepted
+END
+
+@eventMissionAbandoned
+GOTO #<madstool.scene.id>@eventMissionAbandoned
+END
+
+@eventMissionRewarded
+GOTO #<madstool.scene.id>@eventMissionRewarded
+END
+
+@eventHostGive
+GOTO #<madstool.scene.id>@eventHostGive
+END
+
+@eventActorGive0
+SET temp.labelID, 0
+GOTO @eventActorGiveConfig
+
+@eventActorGive1
+SET temp.labelID, 1
+GOTO @eventActorGiveConfig
+
+@eventActorGive2
+SET temp.labelID, 2
+GOTO @eventActorGiveConfig
+
+@eventActorGive3
+SET temp.labelID, 3
+GOTO @eventActorGiveConfig
+
+@eventActorGive4
+SET temp.labelID, 4
+GOTO @eventActorGiveConfig
+
+@eventActorGive5
+SET temp.labelID, 5
+GOTO @eventActorGiveConfig
+
+@eventActorGive6
+SET temp.labelID, 6
+GOTO @eventActorGiveConfig
+
+@eventActorGive7
+SET temp.labelID, 7
+GOTO @eventActorGiveConfig
+
+@eventActorGive8
+SET temp.labelID, 8
+GOTO @eventActorGiveConfig
+
+@eventActorGive9
+SET temp.labelID, 9
+GOTO @eventActorGiveConfig
+
+@eventActorGive10
+SET temp.labelID, 10
+GOTO @eventActorGiveConfig
+
+@eventActorGive11
+SET temp.labelID, 11
+GOTO @eventActorGiveConfig
+
+@eventActorGive12
+SET temp.labelID, 12
+GOTO @eventActorGiveConfig
+
+@eventActorGive13
+SET temp.labelID, 13
+GOTO @eventActorGiveConfig
+
+@eventActorGive14
+SET temp.labelID, 14
+GOTO @eventActorGiveConfig
+
+@eventActorGive15
+SET temp.labelID, 15
+GOTO @eventActorGiveConfig
+
+@eventActorGive16
+SET temp.labelID, 16
+GOTO @eventActorGiveConfig
+
+@eventActorGive17
+SET temp.labelID, 17
+GOTO @eventActorGiveConfig
+
+@eventActorGive18
+SET temp.labelID, 18
+GOTO @eventActorGiveConfig
+
+@eventActorGive19
+SET temp.labelID, 19
+GOTO @eventActorGiveConfig
+
+@eventActorGive20
+SET temp.labelID, 20
+GOTO @eventActorGiveConfig
+
+@eventActorGive21
+SET temp.labelID, 21
+GOTO @eventActorGiveConfig
+
+@eventActorGive22
+SET temp.labelID, 22
+GOTO @eventActorGiveConfig
+
+@eventActorGive23
+SET temp.labelID, 23
+GOTO @eventActorGiveConfig
+
+@eventActorGive24
+SET temp.labelID, 24
+GOTO @eventActorGiveConfig
+
+@eventActorGive25
+SET temp.labelID, 25
+GOTO @eventActorGiveConfig
+
+@eventActorGive26
+SET temp.labelID, 26
+GOTO @eventActorGiveConfig
+
+@eventActorGive27
+SET temp.labelID, 27
+GOTO @eventActorGiveConfig
+
+@eventActorGive28
+SET temp.labelID, 28
+GOTO @eventActorGiveConfig
+
+@eventActorGive29
+SET temp.labelID, 29
+GOTO @eventActorGiveConfig
+
+@eventActorGive30
+SET temp.labelID, 30
+GOTO @eventActorGiveConfig
+
+@eventActorGive31
+SET temp.labelID, 31
+GOTO @eventActorGiveConfig
+
+@eventActorGive32
+SET temp.labelID, 32
+GOTO @eventActorGiveConfig
+
+@eventActorGive33
+SET temp.labelID, 33
+GOTO @eventActorGiveConfig
+
+@eventActorGive34
+SET temp.labelID, 34
+GOTO @eventActorGiveConfig
+
+@eventActorGive35
+SET temp.labelID, 35
+GOTO @eventActorGiveConfig
+
+@eventActorGive36
+SET temp.labelID, 36
+GOTO @eventActorGiveConfig
+
+@eventActorGive37
+SET temp.labelID, 37
+GOTO @eventActorGiveConfig
+
+@eventActorGive38
+SET temp.labelID, 38
+GOTO @eventActorGiveConfig
+
+@eventActorGive39
+SET temp.labelID, 39
+GOTO @eventActorGiveConfig
+
+@eventActorGive40
+SET temp.labelID, 40
+GOTO @eventActorGiveConfig
+
+@eventActorGive41
+SET temp.labelID, 41
+GOTO @eventActorGiveConfig
+
+@eventActorGive42
+SET temp.labelID, 42
+GOTO @eventActorGiveConfig
+
+@eventActorGive43
+SET temp.labelID, 43
+GOTO @eventActorGiveConfig
+
+@eventActorGive44
+SET temp.labelID, 44
+GOTO @eventActorGiveConfig
+
+@eventActorGive45
+SET temp.labelID, 45
+GOTO @eventActorGiveConfig
+
+@eventActorGive46
+SET temp.labelID, 46
+GOTO @eventActorGiveConfig
+
+@eventActorGive47
+SET temp.labelID, 47
+GOTO @eventActorGiveConfig
+
+@eventActorGive48
+SET temp.labelID, 48
+GOTO @eventActorGiveConfig
+
+@eventActorGive49
+SET temp.labelID, 49
+GOTO @eventActorGiveConfig
+
+@eventActorGive50
+SET temp.labelID, 50
+GOTO @eventActorGiveConfig
+
+@eventActorGive51
+SET temp.labelID, 51
+GOTO @eventActorGiveConfig
+
+@eventActorGive52
+SET temp.labelID, 52
+GOTO @eventActorGiveConfig
+
+@eventActorGive53
+SET temp.labelID, 53
+GOTO @eventActorGiveConfig
+
+@eventActorGive54
+SET temp.labelID, 54
+GOTO @eventActorGiveConfig
+
+@eventActorGive55
+SET temp.labelID, 55
+GOTO @eventActorGiveConfig
+
+@eventActorGive56
+SET temp.labelID, 56
+GOTO @eventActorGiveConfig
+
+@eventActorGive57
+SET temp.labelID, 57
+GOTO @eventActorGiveConfig
+
+@eventActorGive58
+SET temp.labelID, 58
+GOTO @eventActorGiveConfig
+
+@eventActorGive59
+SET temp.labelID, 59
+GOTO @eventActorGiveConfig
+
+@eventActorGive60
+SET temp.labelID, 60
+GOTO @eventActorGiveConfig
+
+@eventActorGive61
+SET temp.labelID, 61
+GOTO @eventActorGiveConfig
+
+@eventActorGive62
+SET temp.labelID, 62
+GOTO @eventActorGiveConfig
+
+@eventActorGive63
+SET temp.labelID, 63
+GOTO @eventActorGiveConfig
+
+@eventActorAttack0
+SET temp.labelID, 0
+GOTO @eventActorAttackConfig
+
+@eventActorAttack1
+SET temp.labelID, 1
+GOTO @eventActorAttackConfig
+
+@eventActorAttack2
+SET temp.labelID, 2
+GOTO @eventActorAttackConfig
+
+@eventActorAttack3
+SET temp.labelID, 3
+GOTO @eventActorAttackConfig
+
+@eventActorAttack4
+SET temp.labelID, 4
+GOTO @eventActorAttackConfig
+
+@eventActorAttack5
+SET temp.labelID, 5
+GOTO @eventActorAttackConfig
+
+@eventActorAttack6
+SET temp.labelID, 6
+GOTO @eventActorAttackConfig
+
+@eventActorAttack7
+SET temp.labelID, 7
+GOTO @eventActorAttackConfig
+
+@eventActorAttack8
+SET temp.labelID, 8
+GOTO @eventActorAttackConfig
+
+@eventActorAttack9
+SET temp.labelID, 9
+GOTO @eventActorAttackConfig
+
+@eventActorAttack10
+SET temp.labelID, 10
+GOTO @eventActorAttackConfig
+
+@eventActorAttack11
+SET temp.labelID, 11
+GOTO @eventActorAttackConfig
+
+@eventActorAttack12
+SET temp.labelID, 12
+GOTO @eventActorAttackConfig
+
+@eventActorAttack13
+SET temp.labelID, 13
+GOTO @eventActorAttackConfig
+
+@eventActorAttack14
+SET temp.labelID, 14
+GOTO @eventActorAttackConfig
+
+@eventActorAttack15
+SET temp.labelID, 15
+GOTO @eventActorAttackConfig
+
+@eventActorAttack16
+SET temp.labelID, 16
+GOTO @eventActorAttackConfig
+
+@eventActorAttack17
+SET temp.labelID, 17
+GOTO @eventActorAttackConfig
+
+@eventActorAttack18
+SET temp.labelID, 18
+GOTO @eventActorAttackConfig
+
+@eventActorAttack19
+SET temp.labelID, 19
+GOTO @eventActorAttackConfig
+
+@eventActorAttack20
+SET temp.labelID, 20
+GOTO @eventActorAttackConfig
+
+@eventActorAttack21
+SET temp.labelID, 21
+GOTO @eventActorAttackConfig
+
+@eventActorAttack22
+SET temp.labelID, 22
+GOTO @eventActorAttackConfig
+
+@eventActorAttack23
+SET temp.labelID, 23
+GOTO @eventActorAttackConfig
+
+@eventActorAttack24
+SET temp.labelID, 24
+GOTO @eventActorAttackConfig
+
+@eventActorAttack25
+SET temp.labelID, 25
+GOTO @eventActorAttackConfig
+
+@eventActorAttack26
+SET temp.labelID, 26
+GOTO @eventActorAttackConfig
+
+@eventActorAttack27
+SET temp.labelID, 27
+GOTO @eventActorAttackConfig
+
+@eventActorAttack28
+SET temp.labelID, 28
+GOTO @eventActorAttackConfig
+
+@eventActorAttack29
+SET temp.labelID, 29
+GOTO @eventActorAttackConfig
+
+@eventActorAttack30
+SET temp.labelID, 30
+GOTO @eventActorAttackConfig
+
+@eventActorAttack31
+SET temp.labelID, 31
+GOTO @eventActorAttackConfig
+
+@eventActorAttack32
+SET temp.labelID, 32
+GOTO @eventActorAttackConfig
+
+@eventActorAttack33
+SET temp.labelID, 33
+GOTO @eventActorAttackConfig
+
+@eventActorAttack34
+SET temp.labelID, 34
+GOTO @eventActorAttackConfig
+
+@eventActorAttack35
+SET temp.labelID, 35
+GOTO @eventActorAttackConfig
+
+@eventActorAttack36
+SET temp.labelID, 36
+GOTO @eventActorAttackConfig
+
+@eventActorAttack37
+SET temp.labelID, 37
+GOTO @eventActorAttackConfig
+
+@eventActorAttack38
+SET temp.labelID, 38
+GOTO @eventActorAttackConfig
+
+@eventActorAttack39
+SET temp.labelID, 39
+GOTO @eventActorAttackConfig
+
+@eventActorAttack40
+SET temp.labelID, 40
+GOTO @eventActorAttackConfig
+
+@eventActorAttack41
+SET temp.labelID, 41
+GOTO @eventActorAttackConfig
+
+@eventActorAttack42
+SET temp.labelID, 42
+GOTO @eventActorAttackConfig
+
+@eventActorAttack43
+SET temp.labelID, 43
+GOTO @eventActorAttackConfig
+
+@eventActorAttack44
+SET temp.labelID, 44
+GOTO @eventActorAttackConfig
+
+@eventActorAttack45
+SET temp.labelID, 45
+GOTO @eventActorAttackConfig
+
+@eventActorAttack46
+SET temp.labelID, 46
+GOTO @eventActorAttackConfig
+
+@eventActorAttack47
+SET temp.labelID, 47
+GOTO @eventActorAttackConfig
+
+@eventActorAttack48
+SET temp.labelID, 48
+GOTO @eventActorAttackConfig
+
+@eventActorAttack49
+SET temp.labelID, 49
+GOTO @eventActorAttackConfig
+
+@eventActorAttack50
+SET temp.labelID, 50
+GOTO @eventActorAttackConfig
+
+@eventActorAttack51
+SET temp.labelID, 51
+GOTO @eventActorAttackConfig
+
+@eventActorAttack52
+SET temp.labelID, 52
+GOTO @eventActorAttackConfig
+
+@eventActorAttack53
+SET temp.labelID, 53
+GOTO @eventActorAttackConfig
+
+@eventActorAttack54
+SET temp.labelID, 54
+GOTO @eventActorAttackConfig
+
+@eventActorAttack55
+SET temp.labelID, 55
+GOTO @eventActorAttackConfig
+
+@eventActorAttack56
+SET temp.labelID, 56
+GOTO @eventActorAttackConfig
+
+@eventActorAttack57
+SET temp.labelID, 57
+GOTO @eventActorAttackConfig
+
+@eventActorAttack58
+SET temp.labelID, 58
+GOTO @eventActorAttackConfig
+
+@eventActorAttack59
+SET temp.labelID, 59
+GOTO @eventActorAttackConfig
+
+@eventActorAttack60
+SET temp.labelID, 60
+GOTO @eventActorAttackConfig
+
+@eventActorAttack61
+SET temp.labelID, 61
+GOTO @eventActorAttackConfig
+
+@eventActorAttack62
+SET temp.labelID, 62
+GOTO @eventActorAttackConfig
+
+@eventActorAttack63
+SET temp.labelID, 63
+GOTO @eventActorAttackConfig
+
+@eventActorSpell0
+SET temp.labelID, 0
+GOTO @eventActorSpellConfig
+
+@eventActorSpell1
+SET temp.labelID, 1
+GOTO @eventActorSpellConfig
+
+@eventActorSpell2
+SET temp.labelID, 2
+GOTO @eventActorSpellConfig
+
+@eventActorSpell3
+SET temp.labelID, 3
+GOTO @eventActorSpellConfig
+
+@eventActorSpell4
+SET temp.labelID, 4
+GOTO @eventActorSpellConfig
+
+@eventActorSpell5
+SET temp.labelID, 5
+GOTO @eventActorSpellConfig
+
+@eventActorSpell6
+SET temp.labelID, 6
+GOTO @eventActorSpellConfig
+
+@eventActorSpell7
+SET temp.labelID, 7
+GOTO @eventActorSpellConfig
+
+@eventActorSpell8
+SET temp.labelID, 8
+GOTO @eventActorSpellConfig
+
+@eventActorSpell9
+SET temp.labelID, 9
+GOTO @eventActorSpellConfig
+
+@eventActorSpell10
+SET temp.labelID, 10
+GOTO @eventActorSpellConfig
+
+@eventActorSpell11
+SET temp.labelID, 11
+GOTO @eventActorSpellConfig
+
+@eventActorSpell12
+SET temp.labelID, 12
+GOTO @eventActorSpellConfig
+
+@eventActorSpell13
+SET temp.labelID, 13
+GOTO @eventActorSpellConfig
+
+@eventActorSpell14
+SET temp.labelID, 14
+GOTO @eventActorSpellConfig
+
+@eventActorSpell15
+SET temp.labelID, 15
+GOTO @eventActorSpellConfig
+
+@eventActorSpell16
+SET temp.labelID, 16
+GOTO @eventActorSpellConfig
+
+@eventActorSpell17
+SET temp.labelID, 17
+GOTO @eventActorSpellConfig
+
+@eventActorSpell18
+SET temp.labelID, 18
+GOTO @eventActorSpellConfig
+
+@eventActorSpell19
+SET temp.labelID, 19
+GOTO @eventActorSpellConfig
+
+@eventActorSpell20
+SET temp.labelID, 20
+GOTO @eventActorSpellConfig
+
+@eventActorSpell21
+SET temp.labelID, 21
+GOTO @eventActorSpellConfig
+
+@eventActorSpell22
+SET temp.labelID, 22
+GOTO @eventActorSpellConfig
+
+@eventActorSpell23
+SET temp.labelID, 23
+GOTO @eventActorSpellConfig
+
+@eventActorSpell24
+SET temp.labelID, 24
+GOTO @eventActorSpellConfig
+
+@eventActorSpell25
+SET temp.labelID, 25
+GOTO @eventActorSpellConfig
+
+@eventActorSpell26
+SET temp.labelID, 26
+GOTO @eventActorSpellConfig
+
+@eventActorSpell27
+SET temp.labelID, 27
+GOTO @eventActorSpellConfig
+
+@eventActorSpell28
+SET temp.labelID, 28
+GOTO @eventActorSpellConfig
+
+@eventActorSpell29
+SET temp.labelID, 29
+GOTO @eventActorSpellConfig
+
+@eventActorSpell30
+SET temp.labelID, 30
+GOTO @eventActorSpellConfig
+
+@eventActorSpell31
+SET temp.labelID, 31
+GOTO @eventActorSpellConfig
+
+@eventActorSpell32
+SET temp.labelID, 32
+GOTO @eventActorSpellConfig
+
+@eventActorSpell33
+SET temp.labelID, 33
+GOTO @eventActorSpellConfig
+
+@eventActorSpell34
+SET temp.labelID, 34
+GOTO @eventActorSpellConfig
+
+@eventActorSpell35
+SET temp.labelID, 35
+GOTO @eventActorSpellConfig
+
+@eventActorSpell36
+SET temp.labelID, 36
+GOTO @eventActorSpellConfig
+
+@eventActorSpell37
+SET temp.labelID, 37
+GOTO @eventActorSpellConfig
+
+@eventActorSpell38
+SET temp.labelID, 38
+GOTO @eventActorSpellConfig
+
+@eventActorSpell39
+SET temp.labelID, 39
+GOTO @eventActorSpellConfig
+
+@eventActorSpell40
+SET temp.labelID, 40
+GOTO @eventActorSpellConfig
+
+@eventActorSpell41
+SET temp.labelID, 41
+GOTO @eventActorSpellConfig
+
+@eventActorSpell42
+SET temp.labelID, 42
+GOTO @eventActorSpellConfig
+
+@eventActorSpell43
+SET temp.labelID, 43
+GOTO @eventActorSpellConfig
+
+@eventActorSpell44
+SET temp.labelID, 44
+GOTO @eventActorSpellConfig
+
+@eventActorSpell45
+SET temp.labelID, 45
+GOTO @eventActorSpellConfig
+
+@eventActorSpell46
+SET temp.labelID, 46
+GOTO @eventActorSpellConfig
+
+@eventActorSpell47
+SET temp.labelID, 47
+GOTO @eventActorSpellConfig
+
+@eventActorSpell48
+SET temp.labelID, 48
+GOTO @eventActorSpellConfig
+
+@eventActorSpell49
+SET temp.labelID, 49
+GOTO @eventActorSpellConfig
+
+@eventActorSpell50
+SET temp.labelID, 50
+GOTO @eventActorSpellConfig
+
+@eventActorSpell51
+SET temp.labelID, 51
+GOTO @eventActorSpellConfig
+
+@eventActorSpell52
+SET temp.labelID, 52
+GOTO @eventActorSpellConfig
+
+@eventActorSpell53
+SET temp.labelID, 53
+GOTO @eventActorSpellConfig
+
+@eventActorSpell54
+SET temp.labelID, 54
+GOTO @eventActorSpellConfig
+
+@eventActorSpell55
+SET temp.labelID, 55
+GOTO @eventActorSpellConfig
+
+@eventActorSpell56
+SET temp.labelID, 56
+GOTO @eventActorSpellConfig
+
+@eventActorSpell57
+SET temp.labelID, 57
+GOTO @eventActorSpellConfig
+
+@eventActorSpell58
+SET temp.labelID, 58
+GOTO @eventActorSpellConfig
+
+@eventActorSpell59
+SET temp.labelID, 59
+GOTO @eventActorSpellConfig
+
+@eventActorSpell60
+SET temp.labelID, 60
+GOTO @eventActorSpellConfig
+
+@eventActorSpell61
+SET temp.labelID, 61
+GOTO @eventActorSpellConfig
+
+@eventActorSpell62
+SET temp.labelID, 62
+GOTO @eventActorSpellConfig
+
+@eventActorSpell63
+SET temp.labelID, 63
+GOTO @eventActorSpellConfig
+
+@eventActorSpellConfig
+STRCMP #<str.worldname>, "Athelias"
+IF= @specialruleseventAttThingy
+@specialruleseventAttThingynext
+GOTO #<madstool.scene.id>@eventActorSpell#<temp.labelID>
+END
+
+@specialruleseventAttThingy
+IF #12 @terendrozeventthingies
+GOTO @specialruleseventAttThingynext
+
+@terendrozeventthingies
+COMPARE #<temp.labelID>, 57
+IF< @specialruleseventAttThingynext
+COMPARE #<temp.labelID>, 59
+IF> @specialruleseventAttThingynext
+GOTO 110005@eventActorSpell#<temp.labelID>
+
+@eventActorGiveConfig
+GOTO #<madstool.scene.id>@eventActorGive#<temp.labelID>
+END
+
+@eventActorAttackConfig
+STRCMP #<str.worldname>, "Athelias"
+IF= @specialruleseventSpellThingy
+@specialruleseventSpellThingynext
+GOTO #<madstool.scene.id>@eventActorAttack#<temp.labelID>
+END
+
+@specialruleseventSpellThingy
+IF #12 @terendrozeventthingiesbis
+GOTO @specialruleseventSpellThingynext
+
+@terendrozeventthingiesbis
+COMPARE #<temp.labelID>, 57
+IF< @specialruleseventSpellThingynext
+COMPARE #<temp.labelID>, 59
+IF> @specialruleseventSpellThingynext
+GOTO 110005@eventActorAttack#<temp.labelID>
+
+@nextstepaftermadstool.txt
+RETURN 
+END
+;
+;----------------------------------------------------------------------------------------------------------------------------------
+;
+SCENE 1000001
+#include AHS.txt
+END
+;
+;----------------------------------------------------------------------------------------------------------------------------------
+;
+SCENE 1000002, #<temp.bkgnd>, CUT, , #<temp.fx>, #<temp.weather>
+FLAGS #<temp.mapFlags>
+#include AHS.txt
+SET temp.bkgnd, ""
+SET temp.fx, ""
+SET temp.weather, ""
+SET temp.mapFlags, ""
+END
+;
+;----------------------------------------------------------------------------------------------------------------------------------
+;
+SCENE 1000003
+@st
+SET temp.labelNumber, #<arg0>
+CALL 1000000@soulIDchecker, checking
+STRCMP #<arg0>, false
+IF= @madstooltraveltoevent
+COMPARE #<temp.labelNumber>, 0
+IF= @specialrules
+COMPARE #<madstoolpref.actorClicks>, 1
+IF= @madstooltraveltoevent
+GOTO 1000000@eventActorClick#<temp.labelNumber>
+
+@madstooltraveltoevent
+GOTO #<madstool.scene.id>@eventActorClick#<temp.labelNumber>
+GOTO 1000000@eventActorClick#<temp.labelNumber>
+
+@specialrules
+STRCMP #<scene.id>, 2
+IF= 1000000@eventActorClick0
+COMPARE #<madstooldVSproxbeta>, 1
+IF= #<madstool.scene.id>@eventBis0
+GOTO 1000000@eventActorClick0
+ 

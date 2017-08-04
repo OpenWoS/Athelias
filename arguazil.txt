@@ -1,0 +1,324 @@
+SCENE 1000, dungeon1, "Main Gate"
+#include include.txt
+GOTO LINK 0, 9
+;
+;-----------------------------------------------------------------------
+;
+SCENE 1001, dungeon1, "Main Gate"
+#include include.txt
+GOTO LINK 11,0
+;
+;-----------------------------------------------------------------------
+;
+SCENE 1002, dungeon1, "Mine Entry"
+#include include.txt
+GOTO LINK 39,0
+;
+;-----------------------------------------------------------------------
+;
+SCENE 1003, dungeon1, "Main Gate"
+#include include.txt
+GOTO LINK 45,1
+;
+;-----------------------------------------------------------------------
+;
+SCENE 1005, "weapons", SCENE, "Weapons", 0, 1
+#include include.txt
+ACTOR 1, Bartac, dwarf5, 1, 25, 90
+IF T3993|T3988 @halloweenActors
+GOTO @nextStepAfterHalloweenActors
+
+@halloweenActors
+ACTOR 1, "Bartac", #<spEvent.Name>-dwarf, 5, 25, 90
+@nextStepAfterHalloweenActors
+1: Welcome, %C.
+OFFER 324, 328, 332, 336, 340
+END
+;
+;-----------------------------------------------------------------------
+;
+SCENE 1006, alchemy, SCENE, "Alchemist"
+#include include.txt
+ACTOR 1, Heragel, dwarf5, 1, 25, 90
+IF T3993|T3988 @halloweenActors
+GOTO @nextStepAfterHalloweenActors
+
+@halloweenActors
+ACTOR 1, "Heragel", #<spEvent.Name>-dwarf, 5, 25, 90
+@nextStepAfterHalloweenActors
+1: Welcome to my shop
+OFFER 1, 3, 4, 7, 13, 29, 30, 31, 32, 33, 36, 38, 39
+END 
+;
+;-------------------------------------------------------------------------------
+;
+SCENE 1007, weapons2, SCENE, "Smithy"
+#include include.txt
+ACTOR 1,Godul, dwarf9, 1, 40, 95
+IF T3993|T3988 @halloweenActors
+GOTO @nextStepAfterHalloweenActors
+
+@halloweenActors
+ACTOR 1, "Godul", #<spEvent.Name>-dwarf, 9, 40, 95
+@nextStepAfterHalloweenActors
+COMPARE #<c5talkedtoblacksmith>, 0
+IF= @firsttimeblacksmith.txt
+1: Hello, adventurer.
+1: Toss me the item you want to upgrade.
+OFFER 132, 134, 135, 658
+END
+
+#include blacksmith.txt
+;
+;-------------------------------------------------------------------------------
+;
+;
+;-----------------------------------------------------------------------
+;
+SCENE 1009, "mine", SCENE, "Minor"
+#include include.txt
+ACTOR 1, "Minor", dwarf8, 1, 25, 85
+IF T3993|T3988 @halloweenActors
+GOTO @nextStepAfterHalloweenActors
+
+@halloweenActors
+ACTOR 1, "Minor", #<spEvent.Name>-dwarf, 8, 25, 85
+@nextStepAfterHalloweenActors
+IF -T41+V70 @start
+IF T42-I662-T619 @reward
+IF T42+I662 @end
+1: No way to return there...
+1: I'd better find another job.
+1: It's hard times for miners, traveller.
+END
+
+@start
+1: The mine is closed.
+1: The ancients went too far.
+1: They dug galleries deep in the mountain and woke up a dragon, asleep for centuries.
+1: I think of the gold, laying in the galleries...
+GIVE T41
+END
+
+@reward
+1: What?!
+1: You have killed the dragon?!
+1: I can't believe it!
+1: You are my savior!
+1: Please, accept this gold as a reward.
+HOST_GIVE I662
+HOST_GIVE T619
+SOUND FoundItem.wav
+END
+
+@end
+OFFER 662
+1: Too much money?
+1: Buy some gold!
+END
+;
+;---------------------------------------------------------------------------------
+;
+SCENE 1010, "houseinside1", SCENE, "Elder"
+#include include.txt
+ACTOR 1, "Elder", dwarf11, 1, 45, 80
+IF T3993|T3988 @halloweenActors
+GOTO @nextStepAfterHalloweenActors
+
+@halloweenActors
+ACTOR 1, "Elder", #<spEvent.Name>-dwarf, 11, 45, 80
+@nextStepAfterHalloweenActors
+IF T75 @wb
+IF -T75 @welcome
+END
+
+@wb
+1: Welcome back.
+1: I hope you have found a master to teach you what you need to know.
+END
+
+@welcome
+1: Hello, young adventurer.
+IF C7 @alchemist
+IF C11 @hardcore
+END
+
+@alchemist
+HOST_GIVE T101
+HOST_GIVE T2
+HOST_GIVE T7
+HOST_GIVE T12
+HOST_GIVE T3000
+HOST_GIVE T3001
+HOST_GIVE T3002
+HOST_GIVE T3003
+HOST_GIVE T3004
+HOST_GIVE T3005
+HOST_GIVE T3008
+HOST_GIVE T3009
+HOST_GIVE T3010
+HOST_GIVE T3011
+HOST_GIVE T3012
+HOST_GIVE T3013
+HOST_GIVE T3019
+1: So you have chosen to become an alchemist.
+1: Good.
+1: Arguazil is the best place to learn that job.
+1: Seek masters in the Academy of Alchemy.
+1: May you become a great alchemist, young adventurer.
+HOST_GIVE T75
+GOTO @trainingground
+
+@hardcore
+HOST_GIVE T1
+HOST_GIVE T4
+HOST_GIVE T12
+HOST_GIVE T3001
+HOST_GIVE T3003
+HOST_GIVE T3006
+HOST_GIVE T3009
+HOST_GIVE T3011
+HOST_GIVE T3014
+HOST_GIVE T3019
+HOST_GIVE T102
+1: So you have chosen to become a hardcore.
+1: You'd better know how to fight...
+1: You should go to the city of Irkatshk for good training.
+1: Be careful, people may be brutal there.
+1: Only the strongest can survive.
+HOST_GIVE T75
+GOTO @trainingground
+
+@trainingground
+END
+;
+;---------------------------------------------------------------------------------
+;
+SCENE 1011, tavern1, SCENE, "Tavern"
+#include include.txt
+ACTOR 1, Ozul, dwarf4, 1, 30, 89
+ACTOR 2, Grosbill, human64, 1, 91, 85
+FACE 2, 0
+ACTOR 3, Demetor, human136, 1, 15, 83
+IF T3993|T3988 @halloweenActors
+GOTO @nextStepAfterHalloweenActors
+
+@halloweenActors
+ACTOR 1, "Ozul", #<spEvent.Name>-dwarf, 4, 30, 89
+ACTOR 2, Grosbill, #<spEvent.Name>-humans, 64, 91, 85
+FACE 2, 0
+ACTOR 3, Demetor, #<spEvent.Name>-humans, 136, 15, 83
+@nextStepAfterHalloweenActors
+1: Hello.
+1: What do you want to drink?
+OFFER 2, 34
+IF V99 @comparemerc.firsttime
+@normalV99
+END
+
+@comparemerc.firsttime
+COMPARE #<merc.firstTime>, 1
+IF= @normalV99
+GOTO @mercfirstime.txt
+
+#include merc-firsttime.txt
+
+@eventActorClick2
+SOUND sword1.wav
+SET temp.currentMerc, 2915
+#include merc-alreadyHired.txt
+@nextstepaftermercalreadyhired2915
+ACTOR 20, , merc2915, 0, 50, 50
+ACTOR 21, , hire, 0, 40, 75
+ACTOR 22, , cancel, 0, 60, 75
+END
+
+@eventActorClick3
+SOUND sword1.wav
+SET temp.currentMerc, 2916
+#include merc-alreadyHired.txt
+@nextstepaftermercalreadyhired2916
+ACTOR 20, , merc2916, 0, 50, 50
+ACTOR 21, , hire, 0, 40, 75
+ACTOR 22, , cancel, 0, 60, 75
+END
+
+#include merc-hire.txt
+;
+;-------------------------------------------------------------------------------
+;
+SCENE 1012, houseinside1, SCENE, "Library"
+#include include.txt
+ACTOR 1, "Librarian", dwarf6, 1, 47, 80
+IF T3993|T3988 @halloweenActors
+GOTO @nextStepAfterHalloweenActors
+
+@halloweenActors
+ACTOR 1, "Librarian", #<spEvent.Name>-dwarf, 6, 47, 80
+@nextStepAfterHalloweenActors
+#include library.txt
+1: Welcome to Arguazil Library!
+END
+;
+;--------------------------------------------------------------------------------------
+;
+SCENE 1013, weapons, SCENE, "Armory", 0, 1
+#include include.txt
+ACTOR 1, Kaliz, dwarf6, 1, 25, 90
+IF T3993|T3988 @halloweenActors
+GOTO @nextStepAfterHalloweenActors
+
+@halloweenActors
+ACTOR 1, "Kaliz", #<spEvent.Name>-dwarf, 6, 25, 90
+@nextStepAfterHalloweenActors
+1: Best armors in Athelias!
+OFFER 270, 271, 272, 273, 274, 275, 276, 277, 278, 279, 200, 209, 213, 217, 221, 250, 254, 258, 262, 266, 635, 639, 643, 647, 651, 565, 569, 573, 578, 582
+1: And we now supply some equipment for mages as well!
+END
+;
+;---------------------------------------------------------------------------------
+;
+SCENE 1014, weapons, SCENE, "Runesmith", 0, 1
+#include include.txt
+ACTOR 1, Salduz, dwarf6, 1, 25, 90
+IF T3993|T3988 @halloweenActors
+GOTO @nextStepAfterHalloweenActors
+
+@halloweenActors
+ACTOR 1, "Salduz", #<spEvent.Name>-dwarf, 6, 25, 90
+@nextStepAfterHalloweenActors
+1: Hello.
+1: What are your needs?
+OFFER 545, 546, 547, 548, 549, 550, 551, 552, 553, 554, 555, 556, 557, 558, 559, 560, 561, 562, 563, 564
+END
+;
+;---------------------------------------------------------------------------------
+;
+SCENE 1015, templeinside7, SCENE, "Temple"
+IF T3980 @antigods
+#include include.txt
+ACTOR 1, Zelim, dwarf11, 2, 35, 100
+IF T3993|T3988 @halloweenActors
+GOTO @nextStepAfterHalloweenActors
+
+@antigods
+FIGHT 821
+IF WIN @antigodswin
+END
+
+@antigodswin
+HOST_TAKE T3980
+HOST_GIVE Z821ss
+SOUND trophyFound.wav
+END
+
+@halloweenActors
+ACTOR 1, "Zelim", #<spEvent.Name>-dwarf, 11, 35, 100
+@nextStepAfterHalloweenActors
+GIVE L1
+GIVE H5000
+GIVE M5000
+OFFER 37
+1: Welcome to the temple of Arguazil.
+1: You have been healed.
+END

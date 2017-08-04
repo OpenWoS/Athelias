@@ -1,0 +1,724 @@
+;>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+;>>>>>>>>>>>>>>>>>>>>>>>>  Mercenaries  <<<<<<<<<<<<<<<<<<<<<<<<<<<
+;<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+;
+@eventActorClick21
+STRCMP #<buttonsHere>, no
+IF= @nothing
+STRCMP #<temp.buttonThingy>, "x"
+IF= @eventClick21bis
+COMPARE #<temp.buttonThingy>, 2
+IF< @end222
+IF> @end222
+@eventClick21bis
+SET temp.buttonThingy, 2
+SOUND sword1.wav
+IF -V99 @nomercenriesbeforelevel99
+COMPARE #<merclist>, 1
+SET temp.reorganize, 0
+IF= @mercmenu2qfdqfdshjkjkkkkk
+MENU "List of the mercenaries=@mercenarieslistinthecampsfs", "Reorganize your mercenaries=@mercenariesreorganizefzzfsgllmlmm", "Preferences=@mercenariespreferencesinsfsfsd", "Cancel=@cancelsqmsdmsdgomercenaries"
+SET temp.buttonThingy, "x"
+END
+
+@nomercenriesbeforelevel99
+MENU "You must be level 99 to hire mercenaries.=@end"
+SET temp.buttonThingy, "x"
+END
+
+@mercmenu2qfdqfdshjkjkkkkk
+MENU "Cancel=@cancelsqmsdmsdgomercenaries"
+SET temp.reorganize, 0
+END
+
+@mercenariesreorganizefzzfsgllmlmm
+SOUND sword1.wav
+SET merclist, 1
+SET temp.curMerc, 0
+SET temp.currentSlot, 0
+MOVE 22, 200, 90, 1
+MOVE 23, 200, 90, 1
+MOVE 24, 200, 90, 1
+MOVE 25, 200, 90, 1
+MOVE 20, 200, 90, 1
+COMPARE #<mhna1>, 0
+IF> @merciconsactorawaken1dllddll
+COMPARE #<mha1>, 0
+IF= @merciconsactorawaken1dllddllnoone!
+ACTOR 31, , mer#<mha1>, 0, 10, 50
+SET temp.mercNumber, 1
+
+@mericonactorsasleep1dllddll
+COMPARE #<mhna2>, 0
+IF> @merciconsactorawaken2dllddll
+COMPARE #<mha2>, 0
+IF= @mericonactorsasleeponlyoneguy!
+ACTOR 30, , mer#<mha2>, 0, 30, 50
+ADD temp.mercNumber, 1
+
+@mericonactorsasleep2dllddll
+COMPARE #<mhna3>, 0
+IF> @merciconsactorawaken3dllddll
+STRCMP #<mha3>, ""
+IF= @mericonactorsasleep3dllddll
+ACTOR 29, , mer#<mha3>, 0, 50, 50
+ADD temp.mercNumber, 1
+
+@mericonactorsasleep3dllddll
+COMPARE #<mhna4>, 0
+IF> @merciconsactorawaken4dllddll
+STRCMP #<mha4>, ""
+IF= @merciconsactorawaken4dllddll
+ACTOR 28, , mer#<mha4>, 0, 70, 50
+ADD temp.mercNumber, 1
+
+@mericonactorsasleep4dllddll
+COMPARE #<mhna5>, 0
+IF> @merciconsactorawaken5dllddll
+STRCMP #<mha5>, ""
+IF= @merciconsactorawaken5dllddll
+ACTOR 27, , mer#<mha5>, 0, 90, 50
+ADD temp.mercNumber, 1
+
+@merciconsactorasleep5dllddll
+SET temp.reorganize, 1
+SET temp.merc.number2, 1
+SET temp.mhna5, ''
+SET temp.mhna4, ''
+SET temp.mhna3, ''
+SET temp.mhna2, ''
+SET temp.mhna1, ''
+COMPARE #<temp.mercNumber>, 4
+IF= @manymanymercbutonly4
+COMPARE #<temp.mercNumber>, 3
+IF= @manymanymercbutonly3
+COMPARE #<temp.mercNumber>, 2
+IF= @manymanymercbutonly2
+@nextstepaftermercmoved
+N: Right-click on the one you choose to be your prime mercenary.
+END
+
+@manymanymercbutonly2
+MOVE 31, 40, 50, 1
+MOVE 30, 60, 50, 1
+GOTO @nextstepaftermercmoved
+
+@manymanymercbutonly3
+MOVE 31, 30, 50, 1
+MOVE 30, 50, 50, 1
+MOVE 29, 70, 50, 1
+GOTO @nextstepaftermercmoved
+
+@manymanymercbutonly4
+MOVE 31, 20, 50, 1
+MOVE 30, 40, 50, 1
+MOVE 29, 60, 50, 1
+MOVE 28, 80, 50, 1
+GOTO @nextstepaftermercmoved
+
+@mericonactorsasleeponlyoneguy!
+MOVE 31, 200, 200, 1
+SET merclist, 0
+N: Nothing to do!
+WAIT 1
+N: You have hired only one mercenary!
+SET temp.buttonThingy, "x"
+END
+
+@merciconsactorawaken1dllddllnoone!
+SET merclist, 0
+N: You don't have hired any mercenary yet!
+WAIT 1
+N: Get 200 000 Tomans and go to a tavern to hire one.
+SET temp.buttonThingy, "x"
+END
+
+@merciconsactorawaken1dllddll
+ACTOR 31, , "mer#<mhna1>", 0, 10, 50
+SET temp.mercNumber, 1
+GOTO @mericonactorsasleep1dllddll
+
+@merciconsactorawaken2dllddll
+ACTOR 30, , "mer#<mhna2>", 0, 30, 50
+ADD temp.mercNumber, 1
+GOTO @mericonactorsasleep2dllddll
+
+@merciconsactorawaken3dllddll
+STRCMP #<mhna3>, ""
+IF= @mericonactorsasleep3dllddll
+ACTOR 29, , mer#<mhna3>, 0, 50, 50
+ADD temp.mercNumber, 1
+GOTO @mericonactorsasleep3dllddll
+
+@merciconsactorawaken4dllddll
+STRCMP #<mhna4>, ""
+IF= @mericonactorsasleep4dllddll
+ACTOR 28, , mer#<mhna4>, 0, 70, 50
+ADD temp.mercNumber, 1
+GOTO @mericonactorsasleep4dllddll
+
+@merciconsactorawaken5dllddll
+STRCMP #<mhna5>, ""
+IF= @merciconsactorasleep5dllddll
+ACTOR 27, , mer#<mhna5>, 0, 90, 50
+ADD temp.mercNumber, 1
+GOTO @merciconsactorasleep5dllddll
+
+@mercenariespreferencesinsfsfsd
+SOUND sword1.wav
+WAIT 0.5
+COMPARE #<merc.scat>, 1
+IF= @mercenariespreferencesinsfsfsdbiqsqs
+@mercenariespreferencesinsfsfsd2
+MENU "Mercenaries in the camp scenes=@merccampsceneheresfs", "NO mercenaries in the camp scenes=@merccampnotheresssfdf", "Disable the mercenary option=@nomercenaryinanyscene", "Cancel=@cancelsqmsdmsdgomercenaries"
+GOTO @mercenariespreferencesinsfsfsd2
+
+@mercenariespreferencesinsfsfsdbiqsqs
+MENU "Mercenaries in the camp scenes=@merccampsceneheresfs", "NO mercenaries in the camp scenes=@merccampnotheresssfdf", "Enable the mercenary option=@nomercenaryinanyscenesdsvsvsv", "Cancel=@cancelsqmsdmsdgomercenaries"
+GOTO @mercenariespreferencesinsfsfsdbiqsqs
+
+@nomercenaryinanyscenesdsvsvsv
+SOUND sword1.wav
+SET merc.scat, 0
+SET temp.buttonThingy, "x"
+END
+
+@nomercenaryinanyscene
+SOUND sword1.wav
+SET merc.scat, 1
+SET temp.buttonThingy, "x"
+END
+
+@merccampsceneheresfs
+SOUND sword1.wav
+SET mercInCampScenes, 1
+WAIT 0.5
+GOTO @menu2mercprefscscsc
+
+@merccampnotheresssfdf
+SOUND sword1.wav
+SET mercInCampScenes, 0
+WAIT 0.5
+GOTO @menu2mercprefscscsc
+
+@menu2mercprefscscsc
+MENU "Mercenaries in the fight scenes=@mercfightscenesheresscsf", "NO mercenaries in the fight scenes=@mercenariesfightnothereffffffff", "Cancel=@cancelsqmsdmsdgomercenaries"
+GOTO @menu2mercprefscscsc
+
+@mercfightscenesheresscsf
+SOUND sword1.wav
+SET mercInFightScenes, 1
+SET temp.buttonThingy, "x"
+END
+
+@mercenariesfightnothereffffffff
+SOUND sword1.wav
+SET mercInFightScenes, 0
+SET temp.buttonThingy, "x"
+END
+
+@cancelsqmsdmsdgomercenaries
+SOUND sword1.wav
+MOVE 22, 200, 90, 1
+MOVE 23, 200, 90, 1
+MOVE 24, 200, 90, 1
+MOVE 25, 200, 90, 1
+MOVE 20, 200, 90, 1
+MOVE 31, 200, 90, 1
+MOVE 30, 200, 90, 1
+MOVE 29, 200, 90, 1
+MOVE 28, 200, 90, 1
+MOVE 27, 200, 90, 1
+SET merclist, 0
+SET temp.buttonThingy, "x"
+END
+
+@mercenarieslistinthecampsfs
+SET  temp.reorganize, 0
+SET merclist, 1
+SOUND sword1.wav
+SET temp.curMerc, 0
+SET temp.currentSlot, 0
+MOVE 22, 200, 90, 1
+MOVE 23, 200, 90, 1
+MOVE 24, 200, 90, 1
+MOVE 25, 200, 90, 1
+MOVE 20, 200, 90, 1
+COMPARE #<mhna1>, 0
+IF> @merciconsactorawaken1
+ACTOR 31, , mer#<mha1>, 0, 10, 50, 22
+@mericonactorsasleep1
+COMPARE #<mhna2>, 0
+IF> @merciconsactorawaken2
+ACTOR 30, , mer#<mha2>, 0, 30, 50, 22
+@mericonactorsasleep2
+COMPARE #<mhna3>, 0
+IF> @merciconsactorawaken3
+ACTOR 29, , mer#<mha3>, 0, 50, 50, 22
+@mericonactorsasleep3
+COMPARE #<mhna4>, 0
+IF> @merciconsactorawaken4
+ACTOR 28, , mer#<mha4>, 0, 70, 50, 22
+@mericonactorsasleep4
+COMPARE #<mhna5>, 0
+IF> @merciconsactorawaken5
+ACTOR 27, , mer#<mha5>, 0, 90, 50, 22
+@mericonactorsasleep5
+END
+
+@merciconsactorawaken1
+ACTOR 31, , "mer#<mhna1>", 0, 10, 50
+GOTO @mericonactorsasleep1
+
+@merciconsactorawaken2
+ACTOR 30, , "mer#<mhna2>", 0, 30, 50
+GOTO @mericonactorsasleep2
+
+@merciconsactorawaken3
+ACTOR 29, , mer#<mhna3>, 0, 50, 50
+GOTO @mericonactorsasleep3
+
+@merciconsactorawaken4
+ACTOR 28, , mer#<mhna4>, 0, 70, 50
+GOTO @mericonactorsasleep4
+
+@merciconsactorawaken5
+ACTOR 27, , mer#<mhna5>, 0, 90, 50
+GOTO @mericonactorsasleep5
+
+@reorganoisatiosdfsfovermercdone
+SET mhna1, #<temp.mhna1>
+SET mhna2, #<temp.mhna2>
+SET mhna3, #<temp.mhna3>
+SET mhna4, #<temp.mhna4>
+SET mhna5, #<temp.mhna5>
+SET mha1, ""
+SET mha2, ""
+SET mha3, ""
+SET mha4, ""
+SET mha5, ""
+SET merclist, 0
+N: Reorganisation completed.
+SET temp.buttonThingy, "x"
+END
+
+@merc-reorg-actorclick31
+SOUND sword1.wav
+MOVE 31, 200, 200, 1
+SUB temp.mercNumber, 1
+COMPARE #<mhna1>, 0
+IF= @merc-reorg-actorclick31bis
+SET temp.mhna#<temp.merc.number2>, #<mhna1>
+@merc-reorg-actorclick31ter
+ADD temp.merc.number2, 1
+COMPARE #<temp.mercNumber>, 0
+IF= @reorganoisatiosdfsfovermercdone
+N: Next one?
+END
+
+@merc-reorg-actorclick31bis
+SET temp.mhna#<temp.merc.number2>, #<mha1>
+GOTO @merc-reorg-actorclick31ter
+
+@merc-reorg-actorclick30
+SOUND sword1.wav
+MOVE 30, 200, 200, 1
+SUB temp.mercNumber, 1
+COMPARE #<mhna2>, 0
+IF= @merc-reorg-actorclick30bis
+SET temp.mhna#<temp.merc.number2>, #<mhna2>
+@merc-reorg-actorclick30ter
+ADD temp.merc.number2, 1
+COMPARE #<temp.mercNumber>, 0
+IF= @reorganoisatiosdfsfovermercdone
+N: Next one?
+END
+
+@merc-reorg-actorclick30bis
+SET temp.mhna#<temp.merc.number2>, #<mha2>
+GOTO @merc-reorg-actorclick30ter
+
+@merc-reorg-actorclick29
+SOUND sword1.wav
+MOVE 29, 200, 200, 1
+SUB temp.mercNumber, 1
+COMPARE #<mhna3>, 0
+IF= @merc-reorg-actorclick29bis
+SET temp.mhna#<temp.merc.number2>, #<mhna3>
+@merc-reorg-actorclick29ter
+ADD temp.merc.number2, 1
+COMPARE #<temp.mercNumber>, 0
+IF= @reorganoisatiosdfsfovermercdone
+N: Next one?
+END
+
+@merc-reorg-actorclick29bis
+SET temp.mhna#<temp.merc.number2>, #<mha3>
+GOTO @merc-reorg-actorclick29ter
+
+@merc-reorg-actorclick28
+SOUND sword1.wav
+MOVE 28, 200, 200, 1
+SUB temp.mercNumber, 1
+COMPARE #<mhna4>, 0
+IF= @merc-reorg-actorclick28bis
+SET temp.mhna#<temp.merc.number2>, #<mhna4>
+@merc-reorg-actorclick28ter
+ADD temp.merc.number2, 1
+COMPARE #<temp.mercNumber>, 0
+IF= @reorganoisatiosdfsfovermercdone
+N: Next one?
+END
+
+@merc-reorg-actorclick28bis
+SET temp.mhna#<temp.merc.number2>, #<mha4>
+GOTO @merc-reorg-actorclick28ter
+
+@merc-reorg-actorclick27
+SOUND sword1.wav
+MOVE 27, 200, 200, 1
+SUB temp.mercNumber, 1
+COMPARE #<mhna5>, 0
+IF= @merc-reorg-actorclick27bis
+SET temp.mhna#<temp.merc.number2>, #<mhna5>
+@merc-reorg-actorclick27ter
+ADD temp.merc.number2, 1
+COMPARE #<temp.mercNumber>, 0
+IF= @reorganoisatiosdfsfovermercdone
+N: Next one?
+END
+
+@merc-reorg-actorclick27bis
+SET temp.mhna#<temp.merc.number2>, #<mha5>
+GOTO @merc-reorg-actorclick31ter
+
+@eventActorClick31
+STRCMP #<buttonsHere>, no
+IF= @nothing
+SET temp.currentSlot, 1
+COMPARE #<temp.reorganize>, 1
+IF= @merc-reorg-actorclick31
+COMPARE #<mhna1>, 0
+IF> @merciconsactorawakenbis1
+COMPARE #<mha1>, 0
+IF= @end222
+SET temp.curMerc, #<mha1>
+SOUND sword1.wav
+MOVE 31, 200, 90, 1
+MOVE 30, 200, 90, 1
+MOVE 29, 200, 90, 1
+MOVE 28, 200, 90, 1
+MOVE 27, 200, 90, 1
+ACTOR 20, , merc#<mha1>, 0, 50, 50
+ACTOR 25, , awake, 0, 35, 75
+ACTOR 22, , dismiss, 0, 50, 75
+ACTOR 23, , cancel, 0, 65, 75
+END
+
+@merciconsactorawakenbis1
+SET temp.curMerc, #<mhna1>
+SOUND sword1.wav
+MOVE 31, 200, 90, 1
+MOVE 30, 200, 90, 1
+MOVE 29, 200, 90, 1
+MOVE 28, 200, 90, 1
+MOVE 27, 200, 90, 1
+ACTOR 20, , merc#<mhna1>, 0, 50, 50
+ACTOR 24, , sleep, 0, 35, 75
+ACTOR 22, , dismiss, 0, 50, 75
+ACTOR 23, , cancel, 0, 65, 75
+END
+
+@eventActorClick30
+STRCMP #<buttonsHere>, no
+IF= @nothing
+SET temp.currentSlot, 2
+COMPARE #<temp.reorganize>, 1
+IF= @merc-reorg-actorclick30
+COMPARE #<mhna2>, 0
+IF> @merciconsactorawakenbis2
+COMPARE #<mha2>, 0
+IF= @end222
+SOUND sword1.wav
+SET temp.curMerc, #<mha2>
+MOVE 31, 200, 90, 1
+MOVE 30, 200, 90, 1
+MOVE 29, 200, 90, 1
+MOVE 28, 200, 90, 1
+MOVE 27, 200, 90, 1
+ACTOR 20, , merc#<mha2>, 0, 50, 50
+ACTOR 25, , awake, 0, 35, 75
+ACTOR 22, , dismiss, 0, 50, 75
+ACTOR 23, , cancel, 0, 65, 75
+END
+
+@merciconsactorawakenbis2
+SET temp.curMerc, #<mhna2>
+SOUND sword1.wav
+MOVE 31, 200, 90, 1
+MOVE 30, 200, 90, 1
+MOVE 29, 200, 90, 1
+MOVE 28, 200, 90, 1
+MOVE 27, 200, 90, 1
+ACTOR 20, , merc#<mhna2>, 0, 50, 50
+ACTOR 24, , sleep, 0, 35, 75
+ACTOR 22, , dismiss, 0, 50, 75
+ACTOR 23, , cancel, 0, 65, 75
+END
+
+@eventActorClick29
+STRCMP #<buttonsHere>, no
+IF= @nothing
+SET temp.currentSlot, 3
+COMPARE #<temp.reorganize>, 1
+IF= @merc-reorg-actorclick29
+COMPARE #<mhna3>, 0
+IF> @merciconsactorawakenbis3
+COMPARE #<mha3>, 0
+IF= @end222
+SOUND sword1.wav
+SET temp.curMerc, #<mha3>
+MOVE 31, 200, 90, 1
+MOVE 30, 200, 90, 1
+MOVE 29, 200, 90, 1
+MOVE 28, 200, 90, 1
+MOVE 27, 200, 90, 1
+ACTOR 20, , merc#<mha3>, 0, 50, 50
+ACTOR 25, , awake, 0, 35, 75
+ACTOR 22, , dismiss, 0, 50, 75
+ACTOR 23, , cancel, 0, 65, 75
+END
+
+@merciconsactorawakenbis3
+SET temp.curMerc, #<mhna3>
+SOUND sword1.wav
+MOVE 31, 200, 90, 1
+MOVE 30, 200, 90, 1
+MOVE 29, 200, 90, 1
+MOVE 28, 200, 90, 1
+MOVE 27, 200, 90, 1
+ACTOR 20, , merc#<mhna3>, 0, 50, 50
+ACTOR 24, , sleep, 0, 35, 75
+ACTOR 22, , dismiss, 0, 50, 75
+ACTOR 23, , cancel, 0, 65, 75
+END
+
+@eventActorClick28
+STRCMP #<buttonsHere>, no
+IF= @nothing
+SET temp.currentSlot, 4
+COMPARE #<temp.reorganize>, 1
+IF= @merc-reorg-actorclick28
+COMPARE #<mhna4>, 0
+IF> @merciconsactorawakenbis4
+COMPARE #<mha4>, 0
+IF= @end222
+SOUND sword1.wav
+SET temp.curMerc, #<mha4>
+MOVE 31, 200, 90, 1
+MOVE 30, 200, 90, 1
+MOVE 29, 200, 90, 1
+MOVE 28, 200, 90, 1
+MOVE 27, 200, 90, 1
+ACTOR 20, , merc#<mha4>, 0, 50, 50
+ACTOR 25, , awake, 0, 35, 75
+ACTOR 22, , dismiss, 0, 50, 75
+ACTOR 23, , cancel, 0, 65, 75
+END
+
+@merciconsactorawakenbis4
+SET temp.curMerc, #<mhna4>
+SOUND sword1.wav
+MOVE 31, 200, 90, 1
+MOVE 30, 200, 90, 1
+MOVE 29, 200, 90, 1
+MOVE 28, 200, 90, 1
+MOVE 27, 200, 90, 1
+ACTOR 20, , merc#<mhna4>, 0, 50, 50
+ACTOR 24, , sleep, 0, 35, 75
+ACTOR 22, , dismiss, 0, 50, 75
+ACTOR 23, , cancel, 0, 65, 75
+END
+
+@eventActorClick27
+STRCMP #<buttonsHere>, no
+IF= @nothing
+SET temp.currentSlot, 5
+COMPARE #<temp.reorganize>, 1
+IF= @merc-reorg-actorclick27
+COMPARE #<mhna5>, 0
+IF> @merciconsactorawakenbis5
+COMPARE #<mha5>, 0
+IF= @end222
+SET temp.curMerc, #<mha5>
+SOUND sword1.wav
+MOVE 31, 200, 90, 1
+MOVE 30, 200, 90, 1
+MOVE 29, 200, 90, 1
+MOVE 28, 200, 90, 1
+MOVE 27, 200, 90, 1
+ACTOR 20, , merc#<mha5>, 0, 50, 50
+ACTOR 25, , awake, 0, 35, 75
+ACTOR 22, , dismiss, 0, 50, 75
+ACTOR 23, , cancel, 0, 65, 75
+END
+
+@merciconsactorawakenbis5
+SOUND sword1.wav
+SET temp.curMerc, #<mhna5>
+MOVE 31, 200, 90, 1
+MOVE 30, 200, 90, 1
+MOVE 29, 200, 90, 1
+MOVE 28, 200, 90, 1
+MOVE 27, 200, 90, 1
+ACTOR 20, , merc#<mhna5>, 0, 50, 50
+ACTOR 24, , sleep, 0, 35, 75
+ACTOR 22, , dismiss, 0, 50, 75
+ACTOR 23, , cancel, 0, 65, 75
+END
+
+@eventActorClick23
+STRCMP #<buttonsHere>, no
+IF= @nothing
+GOTO @mercenarieslistinthecampsfs
+
+@eventActorClick22
+STRCMP #<buttonsHere>, no
+IF= @nothing
+SOUND sword1.wav
+N: Dismiss this mercenary? (YES/NO)
+ASK 50
+IF YES @dismissmercanrytesdqfdhfrh
+IF NO @mercenarieslistinthecampsfs
+N: We take this as a "No".
+GOTO @mercenarieslistinthecampsfs
+
+@dismissmercanrytesdqfdhfrh
+SET mha#<temp.currentSlot>, ""
+SET mhna#<temp.currentSlot>, ""
+GOTO @MercAutomaticReorganisation
+
+@eventActorClick24
+STRCMP #<buttonsHere>, no
+IF= @nothing
+SET temp.thingy, mhna#<temp.currentSlot>
+SET mha#<temp.currentSlot>, *#<temp.thingy>
+SET mhna#<temp.currentSlot>, ""
+GOTO @MercAutomaticReorganisation
+
+@eventActorClick25
+STRCMP #<buttonsHere>, no
+IF= @nothing
+SET temp.thingy, mha#<temp.currentSlot>
+SET mhna#<temp.currentSlot>, *#<temp.thingy>
+SET mha#<temp.currentSlot>, ""
+GOTO @MercAutomaticReorganisation
+
+@MercAutomaticReorganisation
+COMPARE #<mhna1>, 0
+IF> @MercAutomaticReorganisation2.1
+SET temp.reorg1, 0
+@MercAutomaticReorganisation2
+COMPARE #<mhna2>, 0
+IF> @MercAutomaticReorganisation3.1
+SET temp.reorg2, 0
+@MercAutomaticReorganisation3
+COMPARE #<mhna3>, 0
+IF> @MercAutomaticReorganisation4.1
+SET temp.reorg3, 0
+@MercAutomaticReorganisation4
+COMPARE #<mhna4>, 0
+IF> @MercAutomaticReorganisation5.1
+SET temp.reorg4, 0
+@MercAutomaticReorganisation5
+COMPARE #<mhna5>, 0
+IF> @MercAutomaticReorganisation6.1
+SET temp.reorg5, 0
+@MercAutomaticReorganisation6
+STRCMP 1-1-1-1-1, #<temp.reorg1>-#<temp.reorg2>-#<temp.reorg3>-#<temp.reorg4>-#<temp.reorg5>
+IF= @mercenarieslistinthecampsfs
+STRCMP 1-1-1-1-0, #<temp.reorg1>-#<temp.reorg2>-#<temp.reorg3>-#<temp.reorg4>-#<temp.reorg5>
+IF= @mercenarieslistinthecampsfs
+STRCMP 1-1-1-0-0, #<temp.reorg1>-#<temp.reorg2>-#<temp.reorg3>-#<temp.reorg4>-#<temp.reorg5>
+IF= @mercenarieslistinthecampsfs
+STRCMP 1-1-0-0-0, #<temp.reorg1>-#<temp.reorg2>-#<temp.reorg3>-#<temp.reorg4>-#<temp.reorg5>
+IF= @mercenarieslistinthecampsfs
+STRCMP 1-0-0-0-0, #<temp.reorg1>-#<temp.reorg2>-#<temp.reorg3>-#<temp.reorg4>-#<temp.reorg5>
+IF= @mercenarieslistinthecampsfs
+STRCMP 0-0-0-0-0, #<temp.reorg1>-#<temp.reorg2>-#<temp.reorg3>-#<temp.reorg4>-#<temp.reorg5>
+IF= @mercenarieslistinthecampsfs
+@MercAutomaticReorganisationMove1
+COMPARE #<temp.reorg1>, 1
+IF= @MercAutomaticReorganisationMove2
+COMPARE #<temp.reorg2>, 0
+IF= @MercAutomaticReorganisationMove2
+SET temp.thingy1, #<mha1>
+SET temp.thingy2, #<mhna2>
+SET mhna1, #<temp.thingy2>
+SET mha2, #<temp.thingy1>
+SET mha1, ""
+SET mhna2, ""
+GOTO @MercAutomaticReorganisation
+
+@MercAutomaticReorganisationMove2
+COMPARE #<temp.reorg2>, 1
+IF= @MercAutomaticReorganisationMove3
+COMPARE #<temp.reorg3>, 0
+IF= @MercAutomaticReorganisationMove3
+SET temp.thingy2, #<mha2>
+SET temp.thingy3, #<mhna3>
+SET mhna2, #<temp.thingy3>
+SET mha3, #<temp.thingy2>
+SET mha2, ""
+SET mhna3, ""
+GOTO @MercAutomaticReorganisation
+
+@MercAutomaticReorganisationMove3
+COMPARE #<temp.reorg3>, 1
+IF= @MercAutomaticReorganisationMove4
+COMPARE #<temp.reorg4>, 0
+IF= @MercAutomaticReorganisationMove4
+SET temp.thingy3, #<mha3>
+SET temp.thingy4, #<mhna4>
+SET mhna3, #<temp.thingy4>
+SET mha4, #<temp.thingy3>
+SET mha3, ""
+SET mhna4, ""
+GOTO @MercAutomaticReorganisation
+
+@MercAutomaticReorganisationMove4
+COMPARE #<temp.reorg4>, 1
+IF= @MercAutomaticReorganisation
+COMPARE #<temp.reorg5>, 0
+IF= @MercAutomaticReorganisation
+SET temp.thingy4, #<mha4>
+SET temp.thingy5, #<mhna5>
+SET mhna4, #<temp.thingy5>
+SET mha5, #<temp.thingy4>
+SET mha4, ""
+SET mhna5, ""
+GOTO @MercAutomaticReorganisation
+
+
+@MercAutomaticReorganisation2.1
+SET temp.reorg1, 1
+GOTO @MercAutomaticReorganisation2
+
+@MercAutomaticReorganisation3.1
+SET temp.reorg2, 1
+GOTO @MercAutomaticReorganisation3
+
+@MercAutomaticReorganisation4.1
+SET temp.reorg3, 1
+GOTO @MercAutomaticReorganisation4
+
+@MercAutomaticReorganisation5.1
+SET temp.reorg4, 1
+GOTO @MercAutomaticReorganisation5
+
+@MercAutomaticReorganisation6.1
+SET temp.reorg5, 1
+GOTO @MercAutomaticReorganisation6
+
+@end222
+END

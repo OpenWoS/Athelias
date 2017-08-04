@@ -1,0 +1,617 @@
+SCENE 1900, castle, SCENE, "Western Gate"
+#include include.txt
+COMPARE #<paliq4>, 1
+IF= @paliq4
+@passbs
+SET c2kotorexit, west
+GOTO LINK 0, 6
+
+@paliq4
+BKGND castle.300.70
+IF T130 @passbs
+IF T137 @passbs
+ACTOR 1, "Master Alric", human10, 1, 95, 95
+MOVE 1, 55, 95
+ACTOR 2, "Felix Bracasse", human64, 1, 100, 90
+MOVE 2, 60, 90
+ACTOR 3, "Barbarian", human16, 1, 103, 80
+MOVE 3, 63, 80
+ACTOR 4, "Barbarian", human39, 1, 110, 83
+MOVE 4, 70, 83
+ACTOR 5, "Barbarian", human65, 1, 107, 86
+MOVE 5, 67, 86
+ACTOR 6, "Barbarian", human66, 1, 113, 90
+MOVE 6, 73, 90
+ACTOR 7, "Barbarian", human81, 1, 111, 95
+MOVE 7, 71, 95
+ACTOR 8, "Barbarian", human82, 1, 120, 85
+MOVE 8, 80, 85
+ACTOR 9, "Barbarian", human104, 1, 118, 83
+MOVE 9, 78, 83
+ACTOR 10, "Barbarian", human67, 1, 115, 96
+MOVE 10, 75, 96
+ACTOR 11, "Barbarian", wom24, 1, 122, 88
+MOVE 11, 82, 88
+ACTOR 22, "General Paldrake", human60, 1, 45, 85, 
+ACTOR 23, Guard, guard6, 1, 40, 70
+ACTOR 24, Guard, guard6, 1, 37, 77
+ACTOR 25, Guard, guard6, 1, 34, 84
+ACTOR 26, Guard, guard6, 1, 31, 91
+ACTOR 27, Guard, guard6, 1, 28, 98
+ACTOR 28, Guard, guard6, 1, 30, 70
+ACTOR 29, Guard, guard6, 1, 27, 77
+ACTOR 30, Guard, guard6, 1, 24, 84
+ACTOR 31, Guard, guard6, 1, 21, 91
+ACTOR 12, Guard, guard6, 1, 18, 98
+ACTOR 13, Guard, guard6, 1, 20, 70
+ACTOR 14, Guard, guard6, 1, 17, 77
+ACTOR 15, Guard, guard6, 1, 14, 84
+ACTOR 16, Guard, guard6, 1, 11, 91
+ACTOR 17, Guard, guard6, 1, 8, 98
+ACTOR 18, Guard, guard6, 1, 10, 70
+ACTOR 19, Guard, guard6, 1, 7, 77
+ACTOR 20, Guard, guard6, 1, 4, 84
+ACTOR 21, Guard, guard6, 1, 1, 91
+;ACTOR 42, Guard, guard6, 1, -2, 98
+WAIT 4
+SEL 22
+' Alric, the Regent decreed the end of the political privileges of Benadrim.
+' The city will be administrated by his ministers, as any city of Athelias.
+' Give us the keys of the city and the army will withdraw.
+1: Do you really think we will do such a thing?!
+SEL 22
+' That's your last chance, Alric.
+' Your new allies won't save you!
+1: Soldiers!
+1: Get ready!
+2: Guys! Focus on the guards first!
+WAIT 1.8
+THEME 22
+; looped script deleted: too laggy
+;SET temp.actor, 1
+;@paliq4moveactors
+;MOVE #<temp.actor>, 120, 90, 1
+;ADD temp.actor, 1
+;COMPARE #<temp.actor>, 32
+;IF> @palisq4fight1
+;GOTO @paliq4moveactors
+;@palisq4fight1
+MOVE 0, 120, 90, 1
+MOVE 1, 120, 90, 1
+MOVE 2, 120, 90, 1
+MOVE 3, 120, 90, 1
+MOVE 4, 120, 90, 1
+MOVE 5, 120, 90, 1
+MOVE 6, 120, 90, 1
+MOVE 7, 120, 90, 1
+MOVE 8, 120, 90, 1
+MOVE 9, 120, 90, 1
+MOVE 10, 120, 90, 1
+MOVE 11, 120, 90, 1
+MOVE 12, 120, 90, 1
+MOVE 13, 120, 90, 1
+MOVE 14, 120, 90, 1
+MOVE 15, 120, 90, 1
+MOVE 16, 120, 90, 1
+MOVE 17, 120, 90, 1
+MOVE 18, 120, 90, 1
+MOVE 19, 120, 90, 1
+MOVE 20, 120, 90, 1
+MOVE 21, 120, 90, 1
+MOVE 22, 120, 90, 1
+MOVE 23, 120, 90, 1
+MOVE 24, 120, 90, 1
+MOVE 25, 120, 90, 1
+MOVE 26, 120, 90, 1
+MOVE 27, 120, 90, 1
+MOVE 28, 120, 90, 1
+MOVE 29, 120, 90, 1
+MOVE 30, 120, 90, 1
+MOVE 31, 120, 90, 1
+MOVE 32, 120, 90, 1
+FIGHT -645.60.90, -646.63.80, -647.70.83, -648.67.86, -649.73.90, -650.71.95, -651.80.85, -652.78.83, -653.75.96, -654.82.88, -670.55.95, -671, -672, -673, -674, -675, -676, -677, -678, -679, -680
+FIGHT 665.45.85, 136.40.70, 136.37.77, 136.34.84, 136.31.91, 136.28.98, 136.30.70, 136.27.77, 136.24.84, 136.21.91, 136.18.98, 136.20.70, 136.17.77, 136.14.84, 136.11.91, 136.8.98, 136.10.70, 136.7.77, 136.4.84, 136.1.91, 136.-2.98
+IF LOSE @paliq4lose
+GIVE L1
+N: - More guards arrive!
+WAIT 1.5
+N: - We are surrounded!
+WAIT 1.5
+N: - We must hold out until the templars arrive!
+FIGHT 136, 136, 136, 136, 136, 136, 136, 136, 136, 136, 136, 136, 136, 136, 136, 136.100.90, 136.95.90, 136.98.98, 136.97.88, 136.100.85, 136.105.90, 136.102.85, 136.103.97, 136.107.90, 136.107.85, 136.110.90, 136.108.85, 136.110.85, 136.104.85, 136.101.90
+IF LOSE @paliq4lose
+GIVE L1
+WAIT 2
+SOUND horn.wav
+WAIT 1.5
+N: The Templars arrive!
+FIGHT -655, -656, -657, -658, -659, -660, -661, -662, -663, -664
+FIGHT 681, 136, 136, 136, 136, 136, 136, 136, 136, 136, 136, 136, 136, 136, 136, 136.100.90, 681.95.90, 136.98.98, 136.97.88, 136.100.85, 136.105.90, 136.102.85, 136.103.97, 136.107.90, 136.107.85, 136.110.90, 136.108.85, 136.110.85, 136.104.85, 136.101.90
+IF LOSE @paliq4lose
+GOTO SCENE 110000
+
+@paliq4lose
+H: You gotta explain to me how you managed to lose this battle...
+WAIT 2
+H: Well... you can try again I guess.
+END
+;
+;------------------------------------------------------------
+;
+SCENE 1901, castle, SCENE, "Eastern Gate"
+#include include.txt
+SET c2kotorexit, east
+GOTO LINK 0, 6
+;
+;------------------------------------------------------------
+;
+SCENE 1902, castle, SCENE, "Gate of the Castle"
+#include include.txt
+IF T136-T137 @barbq4
+@pass
+GOTO LINK 38, 0
+
+@barbq4
+CALL 110022@barbactors barq4
+ACTOR 11, "Master Alric", human10, 1, 25, 98
+' Felix Bracasse!
+' You're more than welcome!
+' The army of the Regent is here!
+1: Yeah, we've came across one of their patrols.
+SEL 11
+' Get ready to fight!
+WAIT 2
+SET paliq4, 1
+GOTO LINK 19, 0, 1
+;
+;------------------------------------------------------------
+;
+SCENE 1903, castle, SCENE, "Gate"
+#include include.txt
+GOTO LINK 45, 8
+;
+;------------------------------------------------------------
+;
+SCENE 1904, alchemy, SCENE, "Alchemist"
+#include include.txt
+ACTOR 1, "Pr Elanol",human50, 1, 25, 98
+IF T3993|T3988 @halloweenActors
+GOTO @nextStepAfterHalloweenActors
+
+@halloweenActors
+ACTOR 1, "Pr Elanol", #<spEvent.Name>-humans, 50, 25, 98
+@nextStepAfterHalloweenActors
+1: Welcome, foreigner
+1: What do you need?
+OFFER 1, 3, 4, 7, 13, 29, 30, 31, 32, 33, 36, 38, 39, 12
+END 
+;
+;-------------------------------------------------------------------------------
+;
+SCENE 1905, weapons2, SCENE, "Smithy"
+#include include.txt
+ACTOR 1, Lancerol, human81, 1, 40, 95
+IF T3993|T3988 @halloweenActors
+GOTO @nextStepAfterHalloweenActors
+
+@halloweenActors
+ACTOR 1, "Lancerol", #<spEvent.Name>-humans, 81, 40, 95
+@nextStepAfterHalloweenActors
+COMPARE #<c5talkedtoblacksmith>, 0
+IF= @firsttimeblacksmith.txt
+1: Hello, adventurer.
+1: Toss me the item you want to upgrade.
+OFFER 132, 134, 135
+END
+
+#include blacksmith.txt
+;
+;-------------------------------------------------------------------------------
+;
+SCENE 1906,tavern1 , SCENE, "Tavern"
+#include include.txt
+ACTOR 1, Maryn, wom28, 1, 30, 89
+ACTOR 2, Gurdoz, human94, 1, 91, 85
+FACE 2, 0
+ACTOR 3, Alberic, human36, 1, 15, 83
+IF T3993|T3988 @halloweenActors
+GOTO @nextStepAfterHalloweenActors
+
+@halloweenActors
+ACTOR 1, "Maryn", #<spEvent.Name>-wom, 28, 30, 89
+ACTOR 2, "Gurdoz", #<spEvent.Name>-humans, 94, 91, 85
+FACE 2, 0
+ACTOR 3, "Alberic", #<spEvent.Name>-humans, 36, 15, 83
+@nextStepAfterHalloweenActors
+OFFER 2, 34
+COMPARE #<chat.paliQuest2Attacked>, 1
+IF= @palisquest2horse
+@normalscene
+1: Hello.
+1: What do you want to drink?
+IF V99 @comparemerc.firsttime
+@normalV99
+END
+
+@palisquest2horse
+IF -G10000 @normalscene
+ACTOR 4, Gueric, human53, 1, 46, 95
+4: Hey, paladin!
+H: Hmm?
+4: Would you be interested in acquiring a new horse?
+H: Maybe...
+4: I can sell you mine for 10,000 Tomans.
+4: Deal?
+4: That's a good one...
+@askpaliq2horse
+ASK 60
+IF YES @askpaliq2horseYes
+IF NO @askpaliq2horseNo
+4: What?
+GOTO @askpaliq2horse
+
+@askpaliq2horseYes
+4: Geat!
+4: Give me the gold!
+H: Here it is.
+SOUND kaching.wav
+4: Alright - the horse is outside.
+SOUND foundItem.wav
+HOST_TAKE G10000
+HOST_GIVE I1011
+END
+
+@askpaliq2horseNo
+4: Bah.
+4: I guess I'll have sold it when you come back...
+SET chat.paliQuest2Attacked, 2
+END
+
+@comparemerc.firsttime
+COMPARE #<merc.firstTime>, 1
+IF= @normalV99
+GOTO @mercfirstime.txt
+
+#include merc-firsttime.txt
+
+@eventActorClick2
+SOUND sword1.wav
+SET temp.currentMerc, 2914
+#include merc-alreadyHired.txt
+@nextstepaftermercalreadyhired2914
+ACTOR 20, , merc2914, 0, 50, 50
+ACTOR 21, , hire, 0, 40, 75
+ACTOR 22, , cancel, 0, 60, 75
+END
+
+@eventActorClick3
+SOUND sword1.wav
+SET temp.currentMerc, 2910
+#include merc-alreadyHired.txt
+@nextstepaftermercalreadyhired2910
+ACTOR 20, , merc2910, 0, 50, 50
+ACTOR 21, , hire, 0, 40, 75
+ACTOR 22, , cancel, 0, 60, 75
+END
+
+#include merc-hire.txt
+;
+;-------------------------------------------------------------------------------
+;
+SCENE 1907, templeinside8, SCENE,  "Temple"
+IF T3973 @antigods
+#include include.txt
+GIVE L1
+GIVE H5000
+GIVE M5000
+OFFER 37
+ACTOR 1, Halek, human4, 1, 25, 102
+IF T3993|T3988 @halloweenActors
+GOTO @nextStepAfterHalloweenActors
+
+@antigods
+FIGHT 814
+IF WIN @antigodswin
+END
+
+@antigodswin
+HOST_TAKE T3973
+HOST_GIVE Z814
+SOUND trophyFound.wav
+END
+
+@halloweenActors
+ACTOR 1, "Halek", #<spEvent.Name>-humans, 4, 25, 102
+@nextStepAfterHalloweenActors
+1: Welcome to the temple, foreigner.
+END
+;
+;-------------------------------------------------------------------------------
+;
+SCENE 1908, kotor1, SCENE,  "Marcus"
+#include include.txt
+IF T613|T615 @marcusdead
+ACTOR 1, Marcus, human90, 1, 25, 90
+IF T3993|T3988 @halloweenActors
+GOTO @nextStepAfterHalloweenActors
+
+@halloweenActors
+ACTOR 1, "Marcus", #<spEvent.Name>-humans, 90, 25, 90
+@nextStepAfterHalloweenActors
+IF T616 @killedbymarcus
+IF T614 @killedmichel
+IF T611 @ref2
+IF T612 @acc2
+1: Hello, adventurer!
+1: Would you be interested by a contract?
+H: It depends on what you want me to do...
+1: Well, don't repeat it but one of the sellers of this market is rich - very rich.
+1: Some days ago, Michel - that's his name- received a very aggressive letter from his cousin - he almost wrote he'd kill him for some family stuff.
+1: Everybody knows about this letter, so if something happens to this guy, most likely the investigation will be very quick and his cousin will be arrested.
+H: So you're asking me to help kill him for money, that's right?
+1: That's the idea, yes, but you could get more than money.
+1: I know he owns a magical bag that would be of little use for me, but not for an adventurer like you.
+1: If you help me, I'll take the money but you'll keep the magical bag.
+1: I think the deal is fair.
+IF C5 @paladin
+IF C18 @priest
+IF C15 @monk
+IF C56 @healer
+WAIT 1.5
+@menu1
+SOUND sword1.wav
+MENU "Probably but I don't want to kill anyone to rob him.=@dontkill","Yes the deal is fair, I'll help you.=@help", "No, I also want a part of his money.=@part"
+GOTO @menu1
+
+@acc2
+1: Let's go, %1.
+1: Meet me by Michel's stand.
+END
+
+@ref2
+1: Eh! That's #<g.Cmister> I-am-honest- and-don't-want-to-kill-an- innocent!
+1: Scat!
+END
+
+@killedmichel
+1: Welcome back, %1!
+1: Do you enjoy your bag?
+END
+
+@marcusdead
+N: There's nobody here.
+WAIT 1
+N: Marcus is dead, do you remember?
+END
+
+@killedbymarcus
+1: %1, eh!
+1: What are you doing here?
+1: Do you want me to kick your ass another time?!
+1; Leave my sight!
+END
+
+@healer
+H: Who do you think I am?
+H: Do you really think a healer would kill someone for money?
+H: Now, excuse me but I have to go.
+GOTO @class
+
+@paladin
+H: Are you stupid or what?
+H: Do you realize what you are asking to a paladin?
+H: And in the holy city of Benadrim!
+H: Leave my sight now or I'll get very angry, and you don't want to know how I am when I am very angry, trust me.
+GOTO @class
+
+@monk
+H: Eh!
+H: You don't seem to be very familiar with the gnomish habits, right?
+H: Let's make it easy for you.
+H: I am a Monk of the Ancient Order.
+H: I spend most of my life in the Grand Library of Terendroz, studying the history of yore to try to prevent the errors of the past happen again.
+H: DO YOU REALLY THINK I WILL HELP YOU KILL AN INNOCENT?
+GOTO @class
+
+@healer
+H: I knew that humans could be sometimes really stupid, but I was not expecting such a proposition.
+H: Do you really think that someone from the sanctuary of Mangeas would be you killing someone?
+H: I think you'd better not ask this anymore.
+GOTO @class
+
+@dontkill
+SOUND sword1.wav
+H: Probably but I don't want to kill anyone to rob him.
+@class
+HOST_GIVE T610
+HOST_GIVE T611
+1: You don't know what you miss...
+H: The opportunity of killing you so you will no longer try to commit crimes?
+END
+
+@help
+SOUND sword1.wav
+H: Yes the deal is fair, I'll help you.
+@help2
+1: Great! Then see you by his shop.
+HOST_GIVE T612
+HOST_GIVE T610
+END
+
+@part
+SOUND sword1.wav
+H: No, I also want a part of his money.
+1: No way.
+1: I am sure that his bag worths more that what I'll get.
+1: You should consider happy that I let you know about it.
+H: OK, I'll help you for the bag.
+GOTO @help2
+;
+;-------------------------------------------------------------------------------
+;
+SCENE 1909, kotor1, SCENE,  "Michel"
+#include include.txt
+IF T614|T615 @killed
+ACTOR 1, Michel, human117, 1, 25, 90
+IF T3993|T3988 @halloweenActors
+GOTO @nextStepAfterHalloweenActors
+
+@halloweenActors
+ACTOR 1, "Michel", #<spEvent.Name>-humans, 117, 25, 90
+@nextStepAfterHalloweenActors
+IF T613 @welcomeback
+ACTOR 2, Marcus, human90, 1, -5, 90
+IF T611 @refused
+IF T612 @accepted
+END
+
+@pali
+H: Hello, Michel.
+H: How are you?
+1: Fine, thanks.
+END
+
+@killed
+N: The shop seems to be abandoned since Michel's death.
+END
+
+@welcomeback
+1: Welcome back, %1!
+IF C5 @pali
+H: Hey! Any news from Benadrim?
+1: No, the place has been surprisingly quiet lately.
+END
+
+@accepted
+1: Hello, foreigner!
+1: How can I help you?
+H: Just die.
+MOVE 2, 15, 90
+1: I beg your pardon?
+2: You've heard what he has said.
+FACE 1, 0
+1: Marcus! What's that again?!
+2: Just the last time someone hear of you.
+2: Goodbye, Michel!
+WAIT 1.3
+MOVE 1, 120, 90, 1
+MOVE 2, 120, 90, 1
+FIGHT 582.25.90, -583.12.90
+IF WIN @michelkilled
+N: Maybe you should level up before you try again to kill him...
+END
+
+@michelkilled
+GOTO SCENE 23
+
+@refused
+H: Hello.
+H: You're Michel, right?
+1: Yes, do I know you?
+H: No, but I heard of you.
+H: You should be very careful.
+1: Why?
+H: Do you know a merchant called Marcus?
+1: Yes.
+H: He is planning to kill you.
+MOVE 2, 15, 85
+1: What?! Marcus is an idiot but I can't believe that...
+2: %1! I cannot say I am surprised to see you here...
+FACE 1, 0
+2: But now I'll have to kill two people instead of one.
+WAIT 2
+MOVE 1, 120, 90, 1
+MOVE 2, 120, 90, 1
+FIGHT 583.15.90, -582.25.90
+IF WIN @movescene24
+END
+
+@movescene24
+SET temp.X, #<num.hostX>
+SET temp.Y, #<num.hostY>
+GOTO SCENE 24
+;
+;-------------------------------------------------------------------------------
+;
+SCENE 1910, houseinside1, SCENE,  "Handicrafts Workshop"
+#include include.txt
+ACTOR 1, Erameen, wom32, 1, 40, 85
+1: Welcome to the workshop!
+CALL 110014@start
+END
+;
+;-------------------------------------------------------------------------------
+;
+SCENE 1911, houseinside1, SCENE,  "Shaman"
+#include include.txt
+ACTOR 1, Masouf, trib2, 1, 40, 85
+CALL 110009@start
+END
+;
+;-------------------------------------------------------------------------------
+;
+SCENE 1912, kotor1, SCENE,  "Master Novice"
+#include include.txt
+ACTOR 1, "Master novice", human115, 1, 25, 85
+IF C10 @supernovice
+IF C2 @novice
+1: You should be here, you know...
+END
+
+@supernovice
+1: Welcome back, %1.
+1: Did you meet my friend in the Black Horse Tavern?
+END
+
+@novice
+IF I3059 @novicemorph
+1: Welcome, %1.
+1: The Master of Armenis told me about you.
+1: However, you haven't proved your bravery yet.
+1: Return to me when you will be ready.
+END
+
+@novicemorph
+1: You've succeeded, %1!
+1: You have defeated the Masters of Athelias!
+1: You can now become a Super Novice if you want.
+1: What do you say?
+@asksup
+ASK 300
+IF YES @yes
+IF NO @no
+1: What?
+GOTO @asksup
+
+@no
+1: Fine. Return to me if you change your mind.
+END
+
+@yes
+1: Here we go.
+SET num.hostClass, 10
+HOST_GIVE T3000
+HOST_GIVE T3001
+HOST_GIVE T3002
+HOST_GIVE T3003
+HOST_GIVE T3004
+HOST_GIVE T3005
+HOST_GIVE T3006
+HOST_GIVE T3007
+HOST_GIVE T3008
+HOST_GIVE T3009
+HOST_GIVE T3010
+HOST_GIVE T3011
+HOST_GIVE T3012
+HOST_GIVE T3013
+HOST_GIVE T3014
+HOST_GIVE T3015
+HOST_GIVE T3827
+HOST_GIVE T4001
+1: Congratulations, you're now a Super Novice!
+1: You should now go to Prina and look for a friend of mine.
+1: He's the owner of the Black Horse Tavern.
+1: I'm sure he can help you.
+END
+
+

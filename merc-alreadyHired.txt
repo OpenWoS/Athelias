@@ -1,0 +1,30 @@
+COMPARE #<temp.currentMerc>, #<mhna5>
+IF= @merc-alreadyhired.txtalready
+COMPARE #<temp.currentMerc>, #<mha5>
+IF= @merc-alreadyhired.txtalready
+COMPARE #<temp.currentMerc>, #<mhna4>
+IF= @merc-alreadyhired.txtalready
+COMPARE #<temp.currentMerc>, #<mha4>
+IF= @merc-alreadyhired.txtalready
+COMPARE #<temp.currentMerc>, #<mhna3>
+IF= @merc-alreadyhired.txtalready
+COMPARE #<temp.currentMerc>, #<mha3>
+IF= @merc-alreadyhired.txtalready
+COMPARE #<temp.currentMerc>, #<mhna2>
+IF= @merc-alreadyhired.txtalready
+COMPARE #<temp.currentMerc>, #<mha2>
+IF= @merc-alreadyhired.txtalready
+COMPARE #<temp.currentMerc>, #<mhna1>
+IF= @merc-alreadyhired.txtalready
+COMPARE #<temp.currentMerc>, #<mha1>
+IF= @merc-alreadyhired.txtalready
+GOTO @nextstepaftermercalreadyhired#<temp.currentMerc>
+
+@merc-alreadyhired.txtalready
+N: You've already hired this mercenary!
+WAIT 1
+N: Try again with another one.
+END
+
+
+@nextstepaftermercalreadyhired#<temp.currentMerc>

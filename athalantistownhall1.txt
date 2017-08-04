@@ -1,0 +1,25 @@
+SCENE 200, serevaninside, SCENE, "Main Gate"
+#include include.txt
+GOTO LINK 41, 8
+;
+;----------------------------------------------------------------------------------------------
+;
+SCENE 201, serevaninside, SCENE, "Main Gate"
+#include include.txt
+IF T120-T122 @fightknight
+IF T1030+T1031 @fight
+@pass
+GOTO LINK 64, 0
+
+@fightknight
+IF DEAD @end
+FIGHT -118, -118, -118, 48, 48, 49, 49, 51, 51
+IF WIN @pass
+@end
+END
+
+#include necrofightsathalantistownhall.txt
+;
+;----------------------------------------------------------------------------------------------
+;
+

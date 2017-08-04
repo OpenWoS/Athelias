@@ -1,0 +1,133 @@
+SCENE 9900, templeinside5, SCENE, "Main Gate"
+#include include.txt
+GOTO LINK 81, 7
+;
+;-------------------------------------------------------------------------
+;
+SCENE 9901, templeinside5, SCENE, "To the Dungeon"
+#include include.txt
+ACTOR 1, Minal, human144, 1, 30, 85
+IF T3993|T3988 @halloweenActors
+GOTO @nextStepAfterHalloweenActors
+
+@halloweenActors
+ACTOR 1, "Minal", #<spEvent.Name>-humans, 144, 30, 85
+@nextStepAfterHalloweenActors
+IF T1132 @end
+IF T1131 @queststart
+1: I am sorry but the access to the dungeon is closed.
+END
+
+@queststart
+1: Welcome, adventurer.
+1: The Masters Paladins asked me to let you pass.
+1: Good luck once inside.
+WAIT 1.3
+GOTO @pass
+
+@end
+1: Welcome back, adventurer!
+WAIT 1.4
+@pass
+GOTO LINK 110, 0
+;
+;-------------------------------------------------------------------------
+;
+SCENE 9902, templeinside5, SCENE, "To the Dungeon"
+#include include.txt
+ACTOR 1, "Sir Artalis", human141, 1, 54, 83
+FACE 1, 1
+IF T3993|T3988 @halloweenActors
+GOTO @nextStepAfterHalloweenActors
+
+@halloweenActors
+ACTOR 1, "Sir Artalis", #<spEvent.Name>-humans, 141, 54, 83
+FACE 1, 1
+@nextStepAfterHalloweenActors
+IF T1132 @end
+IF T1131 @start
+1: I am sorry, foreigner, but I have to ask you to leave the castle.
+1: Only the members of our order are allowed to stay here.
+END
+
+@start
+1: Welcome, %1.
+1: Lead the way to the dungeon when you're ready, if you really want to help us.
+END
+
+@end2
+1: Welcome, %1.
+1: You can stay in the castle as long as you like.
+END
+
+@end
+IF I1094 @end2
+1: Thank you, %1!
+1: I knew you would succeed.
+1: I see you still have Sir Almeen's sword.
+1: After all I think you can keep it.
+1: You are the one who defeated its prisoner, the one who knew how to master it.
+1: I think you also deserve to receive the seal of the templars.
+1: May it help you triumph over your opponents during your quests.
+GIVE I1095
+SOUND FoundItem.wav
+IF C22|C18 @morph
+HOST_GIVE I1094
+END
+
+@morph
+1: If you want, you could even become a templar.
+1: We'd be proud to have you with us.
+1: But you maybe have your own projects.
+1: Becoming a templar is a long task.
+1: You'd have to start again from nothing: all you experience earned will be lost and you'll have to train again as when you were a novice.
+1: Is it what you want?
+@ask
+ASK 30
+IF YES @yes
+IF NO @no
+1: Pardon?
+GOTO @ask
+
+@yes
+1: Alright.
+1: You are now a Templar, %1.
+SET num.hostClass, 3
+HOST_GIVE I1094
+HOST_GIVE T6
+HOST_GIVE T3016
+HOST_GIVE T1
+HOST_GIVE T8
+HOST_GIVE T3046
+HOST_GIVE T3006
+HOST_GIVE T3004
+HOST_GIVE T3014
+HOST_GIVE T3012
+1: Welcome among us!
+END
+
+@no
+HOST_GIVE I1094
+1: Then follow your own way, hero.
+1: May the Gods be with you.
+END
+;
+;-------------------------------------------------------------------------
+;
+SCENE 9904, templeinside5, SCENE, "Armory"
+#include include.txt
+ACTOR 1, Tarik, human143, 1, 25, 80
+IF T3993|T3988 @halloweenActors
+GOTO @nextStepAfterHalloweenActors
+
+@halloweenActors
+ACTOR 1, "Tarik", #<spEvent.Name>-humans, 143, 25, 80
+@nextStepAfterHalloweenActors
+OFFER 200, 209, 213, 217, 221, 565, 569, 573, 578, 582, 485, 489, 493, 497, 501, 292, 293, 294, 295, 296, 297, 298, 299, 300, 301, 302
+1: Welcome, brother.
+1: I have some of the best armors of the desertic lands!
+END
+
+
+
+

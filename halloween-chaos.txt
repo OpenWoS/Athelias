@@ -1,0 +1,66 @@
+SCENE 11100, chaos1, SCENE, "Portal"
+#include include.txt
+GOTO LINK 34, 66
+;
+;---------------------------------------------------------------------
+;
+SCENE 11101, chaos1, SCENE, "Pupmkan's Throne"
+#include include.txt
+IF T3993 @hallow
+IF T3988 @xmas
+N: ...
+END
+
+@xmas
+WEATHER 9
+IF T3833 @xmasend
+H: He's here!
+FIGHT 2935, 2931, 2931, 2931, 2931
+IF WIN @xmaswin
+END
+
+@xmasend
+N: There is nothing left here...
+H: Until next year, I presume?
+END
+
+@xmaswin
+N: You kill Pumpkan and find a %I3062.
+GIVE I3062
+GIVE T3833
+SOUND foundItem.wav
+END
+
+@hallow
+COMPARE #<halloween.final>, 1
+IF= @end
+ACTOR 1, Pumpkan, 46, 0, 45, 75
+1: So you're back!
+1: You want to kill me, eh!
+1: Do you realize who I am?
+H: Make it easy, shut up!
+H: And fight!
+FIGHT 613, 613, 613, 614
+1: Bah!
+1: I guess that's my turn!
+WAIT 2
+MOVE 1, 120, 90, 1
+FIGHT 617.45.75, 613
+IF LOSE @end2
+N: You kill Pumpkan and cut his head.
+SET halloween.final, 1
+GIVE I1119
+SOUND FoundItem.wav
+H: Twill make a nice helm!
+END
+
+@end2
+H: I'll be back!
+END
+
+@end
+N: No pumpkin left here.
+END
+
+
+

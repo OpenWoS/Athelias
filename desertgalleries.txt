@@ -1,0 +1,29 @@
+SCENE 12600, cell, SCENE, "Underground Galleries"
+#include include.txt
+GOTO LINK 125, 5
+;
+;-----------------------------------------------------------------------------------------------------
+;
+SCENE 12601, cell, SCENE, "Underground Galleries"
+#include include.txt
+IF T1104 @end
+SOUND growl8.wav
+WAIT 1.5
+H: What's that?
+H: Hmm I think I've just found the boss...
+FIGHT 96
+IF LOSE @dead
+GIVE T1104
+H: Now I have to find the exit again...
+END
+
+@dead
+H: Good luck, he said!
+END
+
+@end
+N: Nothing left here.
+END
+;
+;-----------------------------------------------------------------------------------------------------
+;

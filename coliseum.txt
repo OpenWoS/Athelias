@@ -1,0 +1,35 @@
+SCENE 4400, arena, SCENE, "Gate"
+#include include.txt
+GOTO LINK 7, 10
+;
+;-------------------------------------------------------------
+;
+SCENE 4401, arena, SCENE, "Gate"
+#include include.txt
+IF -T3988 @take
+ACTOR 1, "Sandy", christmas4, 1, 75, 90
+FACE 1, 0
+1: Weee! Presents!
+H: This girl is crazy!
+FIGHT 2932, 2932, 2932, 2932, 2932, 2932, 2932, 2932, 2932, 2932, 2932, 2932, 2932, 2932, 2932, 2932, 2932, 2932, 2932, 2932
+IF WIN @xmaswin
+1: My doll!
+1: I won't have my doll because of you!
+1: You're so mean!
+END
+
+@xmaswin
+1: Aww!
+1: There is no doll here!
+1: But i'll still give you my candies!
+1: That was funny!
+H: Very funny, indeed.
+GIVE T3832
+GIVE I3064
+SOUND foundItem.wav
+@take
+TAKE T3834
+END
+;
+;-------------------------------------------------------------
+;

@@ -1,0 +1,40 @@
+;SCENE 110017
+@werewolfcheckerstart
+IF -T150 @werewolfcheckernotAWolfYet
+IF C8 @werewolfcheckerhuman
+SET wolfTime, #<num.hostAge>
+SUB wolfTime, #<num.wolfStart>
+COMPARE #<wolfTime>, 14
+IF> @werewolfcheckermorph
+@werewolfcheckernotAWolfYet
+;RETURN
+;END
+GOTO @werewolfchecherreturn
+
+@werewolfcheckermorph
+SET temp.wolfMorph, 1
+SET temp.bkgnd, #<scene.bkgnd>
+BKGND moon
+CALL 110016@werewolfcheckerhastomorph
+BKGND #<temp.bkgnd>
+SET temp.bkgnd, ""
+SET temp.wolfMorph, ""
+SET num.wolfHumanStart, #<num.hostAge>
+;RETURN
+GOTO @werewolfchecherreturn
+
+@werewolfcheckerhuman
+SET temp.humanTime, #<num.hostAge>
+SUB temp.humanTime, #<num.wolfStart>
+SUB temp.humanTime, #<wolfTimeBis>
+COMPARE #<temp.humanTime>, 1
+IF< @werewolfcheckerlycanthropyGive
+;RETURN
+GOTO @werewolfchecherreturn
+
+@werewolfcheckerlycanthropyGive
+HOST_GIVE S589
+;RETURN
+@werewolfchecherreturn
+
+

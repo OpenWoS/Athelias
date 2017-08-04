@@ -1,0 +1,141 @@
+SCENE 1500, "cave1", "Exit"
+#include include.txt
+GOTO LINK 0, 5
+;
+;----------------------------------------------------------------------------------------------------------------------
+;
+SCENE 1501, "cave1", SCENE, "Level 2"
+#include include.txt
+GOTO LINK 23, 0
+;
+;----------------------------------------------------------------------------------------------------------------------
+;
+SCENE 1502, "cave1", SCENE, "Basilic Lair"
+#include include.txt
+COLOR 13
+IF I634 @end
+@fight
+FIGHT 213
+IF WIN @win
+IF LOSE @endbis
+END
+
+@endbis
+H: ...
+END
+
+@end
+N: The corpse of the basilic is no longer here.
+WAIT 1
+N: You guess he has probably been picked up by goblins to be cooked for a wedding...
+END
+
+@win
+HOST_GIVE I634
+SOUND FoundItem.wav
+N: You kill the basilic and find Sir Derangon's corpse.
+WAIT 1
+N: You take his amulet.
+END
+;
+;----------------------------------------------------------------------------------------------------------------------
+;
+SCENE 1503, "cave1", SCENE, ""
+#include include.txt
+IF R25 @find
+END
+
+@find
+N: You find a black stone.
+SOUND FoundItem.wav
+GIVE I656
+END
+;
+;-------------------------------------------------------------------------
+;
+SCENE 1504, "cave1", SCENE, "Goblin Cave"
+#include include.txt
+ACTOR 1, "Kid", kid10, 1, 65, 55
+IF T3993|T3988 @halloweenActors
+GOTO @nextStepAfterHalloweenActors
+
+@halloweenActors
+ACTOR 1, "Kid", #<spEvent.Name>-kid, 10, 65, 55
+@nextStepAfterHalloweenActors
+1: Help me please!
+H: I'm here for that...
+FIGHT 9, 9, 9, 10
+IF LOSE @end
+1: Thanks for rescuing me!
+1: My parents will reward you.
+H: Yeah, I know.
+H: But how the heck have you been kidnapped by goblins???
+MOVE 1, 120, 55
+H: Hey! Wait!
+H: Wait!
+HOST_GIVE T58
+HOST_TAKE T59
+WAIT 1
+H: Hmm
+END
+
+@end
+END
+;
+;-------------------------------------------------------------------------
+;
+SCENE 1510, "cave1", SCENE, "Goblin Cave"
+#include include.txt
+IF -T131 @shouldntbehere
+IF T132 @done
+IF DEAD @rez
+@reznext
+ACTOR 1, "Ernst Sharak", human104, 1, 50, 80
+ACTOR 2, Barbarian, human66, 1, 45, 90
+ACTOR 3, Barbarian, human65, 1, 37, 75
+ACTOR 4, Barbarian, human81, 1, 41, 80
+ACTOR 5, Barbarian, human82, 1, 32, 85
+H: Sir Sharak, Felix Bracasse send me to ask you to gather your troops and head back to Irkatshk as soon as possible.
+H: The objectives have changed.
+H: Irkatshk has broken off with Prina and now lives with the threat of a war with the army of the Regent.
+H: We need all the warriors there to prepare an eventual siege of the town.
+1: That's sad news, young %L.
+1: I'll do as requested.
+WAIT 1.5
+SOUND gnoll2.wav
+1: What's that?
+2: It's a trap!
+WAIT 1.5
+MOVE 1, 150, 90, 1
+MOVE 2, 150, 90, 1
+MOVE 3, 150, 90, 1
+MOVE 4, 150, 90, 1
+MOVE 5, 150, 90, 1
+FIGHT 2, 2, 2, 2, 2, 5, -799.50.80, -800.45.90, -801.37.75, -802.41.80, -803.32.85
+IF WIN @barbq1win
+H: <Cough>
+H: I think I'll come back when I'm ready.
+END
+
+@barbq1win
+N: Return to Irkatshk and inform Felix Bracasse he can count on Ernst Sharak.
+HOST_GIVE T132
+END
+
+@rez
+GIVE L1
+GOTO @reznext
+
+@done
+N: There is no trace of the fight left.
+WAIT 1.8
+N: The goblins have probably taken the corpses for an orgy...
+END
+
+@shouldntbehere
+N: Just tell me one thing. 
+N: WHAT THE FUCK ARE YOU DOING HERE SINCE IT REQUIRES A TOKEN YOU DON'T HAVE?!
+END
+;
+;------------------------------------------------------------------------------------------------------
+;

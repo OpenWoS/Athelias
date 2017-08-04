@@ -1,0 +1,29 @@
+; Cookies used:
+;
+; temp.roomID: # of the vending room
+;
+;
+; SSV used:
+; 
+; roomPopulation#<temp.roomID> : number of sellers
+; roomFree#<temp.roomID> : unused sellers IDs
+; 
+
+
+SCENE 110029
+@start
+SET temp.roomID, #<arg0>
+GET_SERVER_VAR roomPopulation#<temp.roomID>, vending, roomPopulation#<temp.roomID>
+SET temp.pop, roomPopulation#<temp.roomID>
+COMPARE *#<temp.pop>, 0
+IF> @vendingNext
+; vending room empty
+SET_SERVER_VAR vending, roomFree#<temp.roomID>, -00-01-02-03-04-05-06-07-08-09-10-11-12-13-14-15-16-17-18-19-20-21-22-23-24-25-26-27-28-29-30-
+
+
+@vendingNext
+
+
+
+SOUND foundItem.wav
+END

@@ -1,0 +1,63 @@
+@fight
+IF DEAD @end
+IF R2 @necroquest3fight1
+IF R2 @necroquest3fight2
+IF R2 @necroquest3fight3
+IF R2 @necroquest3fight4
+IF R2 @necroquest3fight5
+IF R2 @necroquest3fight6
+IF R2 @necroquest3fight7
+IF R2 @necroquest3fight8
+IF R2 @necroquest3fight9
+IF R2 @necroquest3fight10
+GOTO @fight
+
+@necroquest3fight1
+FIGHT 293, 293, 293, 293, 293, 293, 293, 293
+IF WIN @pass
+GOTO @end
+
+@necroquest3fight2
+FIGHT 297, 297, 297, 297, 297
+IF WIN @pass
+GOTO @end
+
+@necroquest3fight3
+FIGHT 367, 367, 367, 367
+IF WIN @pass
+GOTO @end
+
+@necroquest3fight4
+FIGHT 47, 47
+IF WIN @pass
+GOTO @end
+
+@necroquest3fight5
+FIGHT 48
+IF WIN @pass
+GOTO @end
+
+@necroquest3fight6
+FIGHT 49
+IF WIN @pass
+GOTO @end
+
+@necroquest3fight7
+FIGHT 50
+IF WIN @pass
+GOTO @end
+
+@necroquest3fight8
+FIGHT 51
+IF WIN @pass
+GOTO @end
+
+@necroquest3fight9
+FIGHT 52
+IF WIN @pass
+GOTO @end
+
+@necroquest3fight10
+FIGHT 51, 52
+IF WIN @pass
+GOTO @end

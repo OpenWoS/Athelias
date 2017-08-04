@@ -1,0 +1,36 @@
+SCENE 1700, "serevaninside", SCENE, "Main Gate"
+#include include.txt
+GOTO LINK 0, 2
+;
+;-----------------------------------------------------------------
+;
+SCENE 1701, "serevaninside", SCENE, "Dungeon"
+#include include.txt
+GOTO LINK 24, 0
+;
+;-----------------------------------------------------------------
+;
+SCENE 1702, "serevaninside", SCENE, "Tower"
+#include include.txt
+GOTO LINK 26, 0
+;
+;-----------------------------------------------------------------
+;
+SCENE 1703, "serevaninside", SCENE, "Tower"
+#include include.txt
+GOTO LINK 28, 0
+;
+;-----------------------------------------------------------------
+;
+SCENE 17004, "serevaninside", SCENE, "Tower"
+#include include.txt
+GOTO LINK 32, 0
+;
+;-----------------------------------------------------------------
+;
+SCENE 1705, "serevaninside", SCENE, "Tower"
+#include include.txt
+GOTO LINK 30, 0
+;
+;-----------------------------------------------------------------
+;

@@ -1,0 +1,37 @@
+SCENE 9000, forest1, SCENE, "To Athelias"
+#include include.txt
+GOTO LINK 0, 42
+;
+;---------------------------------------------------------------------------------------
+;
+SCENE 9001, forest1, SCENE, "Witch"
+#include include.txt
+IF T605 @end
+ACTOR 1, Witch, 9, 1, 35, 90, 7
+POSE 1, 4
+H: Hello, Madam.
+1: Who are you?
+H: Well, my good name is %1.
+H: I am here because I've met two very nice ents on the way who have asked me to try make you understand as kindly as possible that your place is not here.
+H: They want you to leave these woods.
+1: Are you stupid or what?
+H: Pardon?
+1: Hmm no, you're not stupid: you're dead!
+WAIT 1.5
+MOVE 1, -20, 90, 1
+FIGHT 580.35.90
+IF WIN @reward
+ 
+
+@reward
+GIVE T605
+GIVE I1089
+SOUND FoundItem.wav
+N: You kill her and try her broom.
+WAIT 1
+N: After a few attempts, you succeed in making it work.
+END
+
+@end
+N: There is nothing left here but some dead trunks.
+END

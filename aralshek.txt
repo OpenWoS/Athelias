@@ -1,0 +1,106 @@
+SCENE 12300, aralshek, SCENE, "To the desert"
+#include include.txt
+GOTO LINK 82, 00
+;
+;-----------------------------------------------------------------------------------------------------
+;
+SCENE 12301, aralshek, SCENE, "First Gate"
+#include include.txt
+IF -T1101 @pass
+FIGHT 90, 90, 90, 90
+IF WIN @pass
+END
+
+@pass
+GOTO LINK 123, 2
+;
+;-----------------------------------------------------------------------------------------------------
+;
+SCENE 12302, aralshek, SCENE, "First Gate"
+#include include.txt
+GOTO LINK 123, 1
+;
+;-----------------------------------------------------------------------------------------------------
+;
+SCENE 12303, aralshek, SCENE, "Second Gate"
+#include include.txt
+IF -T1101 @pass
+FIGHT 89, 89, 89, 89
+IF WIN @pass
+END
+
+@pass
+GOTO LINK 123, 4
+;
+;-----------------------------------------------------------------------------------------------------
+;
+SCENE 12304, aralshek, SCENE, "Second Gate"
+#include include.txt
+GOTO LINK 123, 3
+;
+;-----------------------------------------------------------------------------------------------------
+;
+SCENE 12305, aralshek, SCENE, "Third Gate"
+#include include.txt
+IF -T1101 @pass
+FIGHT 88, 88, 88
+IF WIN @pass
+END
+
+@pass
+GOTO LINK 123, 6
+;
+;-----------------------------------------------------------------------------------------------------
+;
+SCENE 12306, aralshek, SCENE, "Third Gate"
+#include include.txt
+GOTO LINK 123, 5
+;
+;-----------------------------------------------------------------------------------------------------
+;
+SCENE 12307, rodeurs1, SCENE, "Aralshek"
+#include include.txt
+IF -T1101 @end
+ACTOR 1, Aralshek, 151, 1, 25, 99
+FX 4
+COLOR 13
+COLOR 2013
+WAIT 2
+SOUND growl8.wav
+WAIT 2.5
+N: Who dares to penetrate my realm?
+WAIT 3
+MOVE 1, 120, 90, 1
+IF -E1054 @fight2
+FIGHT 86.25.99
+@afterfight
+IF WIN @win
+SOUND growl8.wav
+N: Run, human, your place is not here.
+END
+
+@fight2
+FIGHT 87.25.99
+GOTO @afterfight
+
+@end
+N: There is nothing left here.
+END
+
+@win
+THEME -1
+MUSIC temple.mid
+COLOR 0
+COLOR 2000
+FX 0
+TAKE T1101
+GIVE T1103
+WAIT 2.5
+N: You defeat Aralshek and lead the way out of the sanctuary.
+WAIT 2.5
+GOTO LINK 82, 00
+;
+;-----------------------------------------------------------------------------------------------------
+;
+
+

@@ -1,0 +1,600 @@
+SCENE 6800, athalantis1, SCENE, "Eastern Gate"
+#include include.txt
+SET tahamanexit, east
+GOTO LINK 81,00
+;
+;------------------------------------------------------------------------------------------------------
+;
+SCENE 6801, athalantis1, SCENE, "Western Gate"
+#include include.txt
+SET tahamanexit, west
+GOTO LINK 81,00
+;
+;------------------------------------------------------------------------------------------------------
+;
+SCENE 6802, athalantis1, SCENE, "Port"
+#include include.txt
+ACTOR 1, "Sailor", oriental5, 1, 56, 94
+1: Hello foreigner.
+1: Where do you want to go?
+WAIT 1
+@menu1
+SOUND sword1.wav
+MENU "Armenis=@armenis", "Athelias Island=@athelias", "Nowhere=@nowhere"
+GOTO @menu1
+
+@nowhere
+SOUND sword1.wav
+1: What are you doing here if you don't want to travel?!
+1: Don't make me waste my time!
+END
+
+@armenis
+SOUND sword1.wav
+1: For Armenis, my price is 25 000 #<GP.name>.
+@ashjkl
+1: Sounds good?
+ASK 30
+IF NO @bah
+IF YES @yesqsdqd
+1: Excuse me?
+GOTO @ashjkl
+
+@yesqsdqd
+IF -G25000 @poor
+TAKE G25000
+1: Here you go.
+WAIT 1.5
+IF R1+R30 @randomE
+GOTO LINK 42, 1
+
+@bah
+1: Bah!
+1: Come back later if you change your mind...
+END
+
+@athelias
+SOUND sword1.wav
+1: 30 000 #<GP.name> to go to Athelias.
+1: OK?
+@skskskdks
+ASK 30
+IF NO @bah
+IF YES @yesathelias
+1: Pardon?
+GOTO @skskskdks
+
+@poor
+H: Well, I don't have all the cash on me but...
+1: No credit here!
+1: Come back with the money if you want to sail!
+END
+
+@randomE
+#include quests\piratehat.txt
+END
+
+@yesathelias
+IF -G30000 @poor
+TAKE G30000
+1: Here you go.
+WAIT 1.5
+IF R1+R30 @randomE
+GOTO LINK 41, 1
+;
+;------------------------------------------------------------------------------------------------------
+;
+SCENE 6803, temple6, SCENE, "Palace"
+#include include.txt
+IF T1103+T1104 @pass
+ACTOR 1, Guard, guard2, 1, 20, 100
+ACTOR 2, Guard, guard2, 1, 80, 100
+FACE 2, 0
+ACTOR 3, Mehdi, oriental9, 1, 35, 95
+IF T1103+T1105-T1104 @tryagain
+IF T1103 @sultanquest
+3: Halt!
+3: You cannot pass foreigner.
+END
+
+@tryagain
+3: You did a good job up to now, adventurer.
+3: Go and achieve what you've started now.
+GOTO @pass2
+
+@sultanquest
+3: Hello foreigner.
+3: I am Mehdi, captain of the army of Tahamanraset.
+3: I know what you did or our city, and it is much appreciated.
+3: But the battle is not over.
+3: The palace has been invaded by chaos creatures.
+3: Up to now, we succeeded in keeping them inside, but for how long?
+3: Somebody must go and get rid of them.
+H: And "somebody" is me, I presume?
+3: Yes.
+H: OK, let me pass.
+3: Be careful, once inside, we will have to close the door again.
+3: We cannot afford to let those creatures invade the city.
+H: So I'll be trapped there until they are all dead...
+3: Yes.
+3: Good luck, foreigner.
+@pass2
+WAIT 1
+N: You have 5 seconds to run if you don't want to do this quest now.
+COUNTDOWN 5
+WAIT 5
+GOTO LINK 124, 0
+
+@pass
+ACTOR 1, Guard, guard2, 1, 20, 95
+ACTOR 2, Guard, guard2, 1, 80, 95
+FACE 2, 0
+1: Welcome back.
+WAIT 1
+GOTO LINK 124, 0
+;
+;------------------------------------------------------------------------------------------------------
+;
+SCENE 6804, tavern1, SCENE, "Teahouse"
+#include include.txt
+ACTOR 1, Faret, human122, 1, 33, 100
+OFFER 14
+IF T1132 @templarToHire
+@nextStepAfterTemplarsToHire
+COMPARE #<chat.blackHerbTahamanrasetTavern>, 2
+IF= @nextstepafterblackherbs
+COMPARE #<chat.blackHerbTahamanrasetTavern>, 1
+IF= @blackherbs4
+@nextstepafterblackherbs
+IF Z85 @blackherbs1
+IF Z86 @blackherbs2
+1: Tchai?
+H: Nah a beer please.
+1: Mashallah!
+1: We don't drink alcohol here!
+1: Sit down, I bring you a glass of tea.
+END
+
+@blackherbs1
+1: Greeting, adventurer!
+1: I've heard you had acquired an %Z85...
+H: that's right.
+1: Well, if you can find an %Z86 as well, maybe you'll interested in exchanging them for this rare magical potion...
+IF Z85+Z86 @blackherbs3
+H: Maybe... I'll think about it.
+END
+
+@blackherbs2
+1: Greeting, adventurer!
+1: I've heard you had acquired an %Z86...
+H: that's right.
+1: Well, if you can find an %Z85 as well, maybe you'll interested in exchanging them for this rare magical potion...
+H: Maybe... I'll think about it.
+SET chat.blackHerbTahamanrasetTavern, 1
+END
+
+@blackherbs3
+H: I've got one...
+H: What's your potion?
+@blackherbs6
+1: It's made with extremly rare plants from the desert.
+1: It can greatly enhance your abilities.
+1: So, do you accept the deal?
+@blackherbs6ask
+ASK 60
+IF YES @blackherbs6YES
+IF NO @blackherbs6NO
+1: What?
+GOTO @blackherbs6ask
+
+@blackherbs6YES
+1: Great!
+1: Here is the potion!
+SOUND foundItem.wav
+HOST_GIVE I105
+HOST_TAKE Z85
+HOST_TAKE Z86
+H: Thanks!
+SET chat.blackHerbTahamanrasetTavern, 2
+END
+
+@blackherbs6NO
+1: Are you sure?
+H: Yes, I prefer to keep these two items.
+1: But... you don't have the use of them!
+1: Well, come back if you change your mind...
+END
+
+@blackherbs4
+IF Z85+Z86 @blackherbs5
+1: Welcome back, adventurer!
+1: Do you remember our last conversation?
+H: Yes, I'm still for looking for what you want.
+H: An %Z85 and an %Z86, right?
+1: Exactly!
+1: But maybe you want a cup of tea, now?
+END
+
+@blackherbs5
+H: I've got the items you wanted...
+1: Great!
+H: So, what's the potion you want to exchange?
+GOTO @blackherbs6
+
+@templarToHire
+ACTOR 2, Eldit, wom26, 1, 70, 90
+FACE 2, 0
+GOTO @nextStepAfterTemplarsToHire
+
+@eventActorClick2
+SOUND sword1.wav
+SET temp.currentMerc, 2918
+#include merc-alreadyHired.txt
+@nextstepaftermercalreadyhired2918
+ACTOR 20, , merc2918, 0, 50, 50
+ACTOR 21, , hire, 0, 40, 75
+ACTOR 22, , cancel, 0, 60, 75
+END
+
+#include merc-hire.txt
+;
+;------------------------------------------------------------------------------------------------------
+;
+SCENE 6805, templeinside6, SCENE, "Temple"
+#include include.txt
+ACTOR 1, Salman, oriental1, 1, 35, 100
+GIVE L1
+GIVE M5000
+GIVE H5000
+OFFER 37
+IF T1103+I1055-T1131 @templarsqstart
+IF T1103 @taj4
+IF T1102 @taj3
+IF T1101 @tajIshaq2
+IF T1100 @hurry
+IF V99 @tajisha
+1: Welcome to the temple.
+1: You have been healed.
+END
+
+@templarsqstart
+ACTOR 2, "Sir Artalis", human141, 1, 47, 90
+1: Hello, %1.
+1: That's the man you've heard of, Sir Artalis.
+2: So you are %1.
+2: I am pleased to meet the man who defeated Aralshek and his minions.
+H: Nice to meet you as well... but I feel you have something to ask.
+1: You're right, %1, Sir Artalis has a request for you.
+2: Let me introduce myself.
+2: I am Sir Artalis, Commander of the Templars of the Great Desert.
+2: We have a castle in the desert near Tahamanraset.
+2: The story of its construction is pretty uncommon.
+2: Eight hundred years ago dozen of paladins from Athelias Island sailed to the Desertic Lands and arrived in Tahamanraset.
+2: The troubles in the Desertic Lands haven't started with Aralshek's awakening.
+2: The region was already periodically raided by bands of beastmen and demons.
+2: The paladins decided to settle down in the desert to help the Tahamanaris fight the Chaos.
+2: Later, they split with the paladins from Benadrim.
+2: The settlement quickly grew up and they agreed that their old fortress no longer sufficed, and that they had to build a new castle.
+2: An architect from the Old World came to organize the construction.
+2: But the Templars didn't know that the architect was once a part of a sect vowed to Margesh.
+2: When the castle was finished, the templars didn't notice the existence of a secret room under the central dungeon.
+2: However, one detail surprised the templars then: the architect had mysteriously disappeared just before the end of the construction.
+2: But three weeks later a scream burst in the silence of the night.
+2: The ground started quaking.
+2: The templars went outside and when one of them opened the gate of the dungeon, dozens of demons went out  of it, invading the castle.
+2: The templars bravely fought during the whole night and succeeded in clearing a path to the lower levels of the dungeon.
+2: There they discovered the secret room built by the architect from the Old World.
+2: The walls of the room were covered by magical crystals, reflecting the light to the center, where a huge warpstone had been placed.
+2: They understood later that it was the configuration for an antic ritual for summoning one of the most dreadful major demon. 
+2: But it was already too late when they arrived.
+2: The ritual was accomplished.
+2: The major demon, an avatar of Margesh itself had incarnated our dimension.
+2: The templars tried to fight him but they couldn't win.
+2: They had to run away.
+2: But the Commander of the templars, Sir Almeen, refused to let the Chaos seize the castle and the region.
+2: Alone, he walked through the galleries of the dungeon and faced the avatar of Margesh.
+2: And he vainquished.
+2: He knew that he couldn't kill the avatar, but he trapped it in another chaotic dimension.
+2: How did he open a gate through the warp?
+2: No one really knows. It is said that he used the power of his magical sword, Alendal, to open it.
+2: But he scarified himself while doing so, for he knew that he couldn't open the gate without being trapped in the warp as well.
+2: Only remains his sword, hanging in the void somewhere in the dungeon.
+2: No one dared touch it since as we know that it would probably reopen the gate through the warp.
+2: But your recent victory against Aralshek seems to mark the end of the curse over the templars castle, for the one who can face and survive Aralshek could defeat the major demon.
+2: It is now up to you, foreigner.
+2: Come to the castle and help us.
+2: You can defeat the evil laying in the castle.
+H: And I will.
+GIVE T1131
+END
+
+@taj5
+1: Welcome back, hero.
+1: What can I do for you?
+END
+
+@taj4
+IF I1055 @taj5
+1: Greetings, hero.
+1: I knew you would succeed.
+H: Really? I didn't know it myself...
+1: The prophecies are never false.
+1: Everything was written.
+1: You now deserve to receive and wear this amulet.
+1: It only exists a few of them on the world.
+1: They were made by the grand priests of the past ages.
+1: They became the symbol of our temple.
+1: Be worthy of it.
+GIVE I1055
+SOUND FoundItem.wav
+END
+
+@taj3
+1: You must go to Aralshek's Sepulchre now.
+1: The chaos must stop.
+END
+
+@tajIshaq2
+1: Welcome back, %1.
+1: I see you're bringing good news.
+H: Yes, I have Taj Isha's scepter.
+1: So the prophecy was true.
+1: You must now lead the way through the desert to find Aralshek's tomb and defeat him.
+1: May your travel be safe.
+EJECT T1101
+GIVE T1102
+END
+
+@hurry
+1: There is no time to waste, foreigner.
+1: The city is lost if you can't get Taj Isha's scepter.
+1: You must seek his sepulchre in the desert and find it.
+END
+
+@tajisha
+SEL 1
+POSE 2
+;IF C[born in the desertic lands] @tajisha2
+1: I knew you would come, foreigner.
+1: The prophecy announced it.
+1: And I also know that only you could help us get rid of the Evil that haunts the region.
+1: Please, have a seat.
+@tajisha3
+WAIT 2
+1: An ancient curse alights on our lands. 
+1: Taj Isha's curse.
+1: Taj Isha was the last of the great sultans of Tahamanraset.
+1: He was murdered by his Grand Priest, Aralshek.
+1: Aralshek was in love with the first courtesan of Taj Isha.
+1: But Taj Isha one day discovered their relationship.
+1: Aralshek then took his ceremonial fang and sticked it in Taj Isha's heart.
+1: But Taj Isha's guards arrived soon after and arrested the Grand Priest.
+1: The most terrible curse was then pronounced against Aralshek.
+1: He was buried alive and condemned to an eternal suffering.
+1: But it was said that if someone dared open Aralshek's grave, the priest would wake up and wreak the country.
+1: The place where Aralshek was buried was kept secret. Only a few people in the desertic lands knew its location.
+1: And the place was finally completely forgotten.
+1: Taj Isha's story became a legend, and nobody heard of Aralshek's curse anymore.
+1: Taj Isha was buried in the middle of the desert, where a mausoleum was built.
+1: His guards, feeling guilty to have let this crime happen decided to be buried with him, in order to protect him and prevent in the death what they didn't succeed in preventing in the life.
+WAIT 2
+1: Six months ago, a stranger arrived in the city.
+1: Nobody knew exactly what he was looking for.
+1: But soon after, a sand wind started blowing.
+1: And when it stopped started our torment.
+1: Deads came again to life.
+1: Unknown creatures went out of the sands and attacked travellers.
+1: It's even getting worse.
+1: They are now trying to invade the city.
+1: It must stop.
+1: No one dare cross the walls of the city anymore.
+1: We concluded that the foreigner had found Aralshek's grave and woke him up.
+1: He is now way too powerful for us to face him.
+1: Only the power of the scepter of his former master, Taj Isha, could possibly defeat him.
+1: You must go to the desert and find the scepter in Taj Isha's sepulchre. 
+1: But be very careful there : the guards of the sultan are still here, looking after his grave...
+1: May the Gods help you, adventurer.
+1: Tahamanraset's fate depends now on the success of your quest.
+GIVE T1100
+END
+
+@tajisha2
+1: Welcome back, %1.
+1: Dark are those days, and one more time we need your help.
+1: As you know, strange things happen in the desertic lands since some months.
+GOTO @tajisha3
+;
+;------------------------------------------------------------------------------------------------------
+;
+SCENE 6806, houseinside1, SCENE, "Alchemist"
+#include include.txt
+ACTOR 1, "Alchemist", oriental5, 1, 47, 80
+OFFER 1, 3, 4, 7, 12, 13, 30, 31, 32, 33, 35, 36, 38, 39
+IF I1132 @welcoebackbonering
+COMPARE #<chat.tahamanrasetAlchemistAncientRing>, 1
+IF= @ancientring6
+IF Z89 @ancientring1
+IF Z88 @ancientring2
+IF Z90 @ancientring3
+1: Be well prepared for your journey, adventurer!
+1: Don't forget to bring some potions!
+END
+
+@welcoebackbonering
+1: Welcome back, adventurer!
+1: Do you need some potions?
+END
+
+@ancientring1
+IF Z89.5+Z88.5+Z90.5 @ancientring5
+1: Eh! What's that?!
+1: An %Z89!
+@ancientring4
+1: Very interesting!
+1: I may have good use of it!
+1: I could even give you a magical ring in you bring me several of those items.
+1: I would need five %Z88s, five %Z89s, and five %Z90s.
+H Hmm... I'll try to find what you need.
+1: Great!
+SET chat.tahamanrasetAlchemistAncientRing, 1
+END
+
+@ancientring2
+IF Z89.5+Z88.5+Z90.5 @ancientring5
+1: Eh! What's that?!
+1: An %Z88!
+GOTO @ancientring4
+
+@ancientring3
+IF Z89.5+Z88.5+Z90.5 @ancientring5
+1: Eh! What's that?!
+1: A %Z90!
+GOTO @ancientring4
+
+@ancientring5
+1: Ancient fangs... Ancient bracelets... Drags...
+1: Adventurer, that's great!
+1: I exchange all of this for a magical ring!
+1: Are you interested?
+@ancientringak
+ASK 30
+IF YES @ancientringakYES
+IF NO @ancientringakNO
+1: Sorry?
+GOTO @ancientringak
+
+@ancientringakYES
+1: Great!
+1: Here is the ring!
+SOUND foundItem.wav
+HOST_GIVE I1132
+HOST_TAKE Z88.5
+HOST_TAKE Z89.5
+HOST_TAKE Z90.5
+END
+
+@ancientring6
+IF Z89.5+Z88.5+Z90.5 @ancientring5
+1: Welcome back, adventurer!
+1: Remember: bring me five %Z88s, five %Z89s, and five %Z90s and I'll give you a magical item.
+1: But maybe you want to buy some potions now?
+END
+;
+;------------------------------------------------------------------------------------------------------
+;
+SCENE 6807, houseinside1, SCENE, "Library"
+#include include.txt
+ACTOR 1, "Librarian", oriental3, 1, 47, 80
+#include library.txt
+1: Hello, Sir.
+1: Are you looking for a specific book?
+END
+;
+;------------------------------------------------------------------------------------------------------
+;
+SCENE 6808, athalantis1, SCENE, "Caravan"
+#include include.txt
+ACTOR 1, Firoz, oriental2, 1, 60, 90
+FACE 1, 1
+ACTOR 2, , oriental5, 1, 35, 85
+ACTOR 3, , oriental6, 1, 38, 80
+ACTOR 4, , oriental3, 1, 40, 93
+ACTOR 5, Camel, human54, 0, 5, 90
+ACTOR 6, Camel, human54, 0, 10, 85
+ACTOR 7, Camel, human54, 0, 15, 95
+ACTOR 8, Camel, human54, 0, 18, 87
+ACTOR 9, Camel, human54, 0, 22, 93
+1: Hello
+1: You are #<g.sir2> %1, aren't you?
+H: Yes, and I presume this is the caravan I have to escort.
+1: Yes.
+1: My name is Firoz. I am the leader of the caravan.
+1: We'd better go as soon as possible.
+1: That will be a long way till the Old World.
+EJECT T1104
+TAKE T1122
+GIVE T1123
+END
+;
+;------------------------------------------------------------------------------------------------------
+;
+SCENE 6810, athalantis1, SCENE, "Blacksmith"
+#include include.txt
+ACTOR 1, Marnak, human81, 1, 42, 95
+OFFER 132, 134, 135
+IF I1131 @normalblacksmith
+IF Z75 @ancientaxe
+COMPARE #<c5talkedtoblacksmith>, 0
+IF= @firsttimeblacksmith.txt
+@normalblacksmith
+1: Hello, adventurer.
+1: Toss me the item you want to upgrade.
+END
+
+#include blacksmith.txt
+
+@ancientaxe
+COMPARE #<chat.tahamanrasetBlacksmithAncientAxe>, 1
+IF= @ancientaxe3
+IF Z65.5 @ancientaxe2
+1: What's that?
+1: An ancient axe?!
+1: That's incredible!
+1: I could forge a magical axe for you if you bring me 5 magical axes.
+H: Really? That's great!
+SET chat.tahamanrasetBlacksmithAncientAxe, 1
+END
+
+@ancientaxe2
+1: Incredible!
+1: You have 5 ancient axes!
+1: If you give them to me I can make a magical axe for you.
+1: Do you want me to make it?
+@ancientaxeask
+ASK 30
+IF YES @ancientaxemake
+IF NO @ancientaxeno
+1: I beg your pardon?
+GOTO @ancientaxeask
+
+@ancientaxemake
+1: Alright.
+1: Wait a moment please.
+WAIT 1.5
+SOUND harvestgolem1
+WAIT 1
+SOUND sword2
+WAIT 0.4
+SOUND sword2
+WAIT 0.4
+SOUND sword2
+WAIT 1
+HOST_GIVE I1131
+HOST_TAKE Z75.5
+1: Here you go!
+1: Take this Psychedelic Axe.
+SOUND FoundItem.wav
+H: Great!
+END
+
+@ancientaxeno
+1: That's fine.
+1: Do you want me to upgrade a piece of equipment?
+END
+
+@ancientaxe3
+IF Z65.5 @ancientaxe2
+1: Welcome back, adventurer.
+1: Remember that I could forge a magical axe or you if you bring me five ancient axes.
+1: But maybe you want me to upgrade a piece of equipment now?
+END
+;
+;-------------------------------------------------------------------------------
+;
+SCENE 6811, houseinside1, SCENE,  "Shaman"
+#include include.txt
+ACTOR 1, Aroud, trib10, 1, 40, 85
+CALL 110009@start
+END
+
+

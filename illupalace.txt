@@ -1,0 +1,341 @@
+SCENE 4300, "darkroom", SCENE, "Gate"
+#include include.txt
+GOTO LINK 67, 1
+;
+;------------------------------------------------------------------------------
+;
+SCENE 4301, "darkroom", SCENE, "Gate"
+#include include.txt
+IF T70 @cantpass
+N: Welcome to the challenge!
+FIGHT 205, 205, 205
+IF LOSE @end
+GOTO LINK 43, 2
+END
+
+@cantpass
+N: There's nothing left here
+END
+
+@end
+END
+;
+;------------------------------------------------------------------------------
+;
+SCENE 4302, "darkroom", SCENE, "Gate"
+#include include.txt
+GOTO LINK 43, 1
+;
+;------------------------------------------------------------------------------
+;
+SCENE 4303, "darkroom", SCENE, "Gate"
+#include include.txt
+IF T70 @cantpass
+FIGHT 207, 207, 208, 209
+IF LOSE @end
+GOTO LINK 43, 4
+
+@end
+END
+
+@cantpass
+N: There's nothing left here
+END
+;
+;------------------------------------------------------------------------------
+;
+SCENE 4304, "darkroom", SCENE, "Gate"
+#include include.txt
+GOTO LINK 43, 3
+;
+;------------------------------------------------------------------------------
+;
+SCENE 4305, "darkroom", SCENE, "Gate"
+#include include.txt
+IF T70 @cantpass
+FIGHT 210, 210, 211, 211
+IF LOSE @end
+GOTO LINK 43, 6
+
+@cantpass
+N: There's nothing left here
+END
+
+@end
+END
+;
+;------------------------------------------------------------------------------
+;
+SCENE 4306, "darkroom", SCENE, "Gate"
+#include include.txt
+GOTO LINK 43, 5
+;
+;------------------------------------------------------------------------------
+;
+SCENE 4307, "darkroom", SCENE, "Gate"
+#include include.txt
+IF T70 @cantpass
+FIGHT 212, 212, 212
+IF LOSE @end
+GOTO LINK 43, 8
+
+@cantpass
+N: There's nothing left here
+END
+
+@end
+END
+;
+;------------------------------------------------------------------------------
+;
+SCENE 4308, "darkroom", SCENE, "Gate"
+#include include.txt
+GOTO LINK 43, 7
+;
+;------------------------------------------------------------------------------
+;
+SCENE 4309, "darkroom", SCENE, "Gate"
+#include include.txt
+IF T70 @cantpass
+FIGHT 212, 212, 213
+IF LOSE @end
+GOTO LINK 43, 10
+
+@cantpass
+N: There's nothing left here
+END
+
+@end
+END
+;
+;------------------------------------------------------------------------------
+;
+SCENE 4310, "darkroom", SCENE, "Gate"
+#include include.txt
+GOTO LINK 43, 9
+;
+;------------------------------------------------------------------------------
+;
+SCENE 4311, "darkroom", SCENE, "Gate"
+#include include.txt
+IF T70 @cantpass
+FIGHT 211, 211, 211, 240 
+IF LOSE @end
+GOTO LINK 43, 12
+
+@cantpass
+N: There's nothing left here
+END
+
+@end
+END
+;
+;------------------------------------------------------------------------------
+;
+SCENE 4312, "darkroom", SCENE, "Gate"
+#include include.txt
+GOTO LINK 43, 11
+;
+;------------------------------------------------------------------------------
+;
+SCENE 4313, "darkroom", SCENE, "Gate"
+#include include.txt
+IF T70 @cantpass
+FIGHT 240, 212, 212, 212
+IF LOSE @end
+GOTO LINK 43, 14
+
+@cantpass
+N: There's nothing left here
+END
+
+@end
+END
+;
+;------------------------------------------------------------------------------
+;
+SCENE 4314, "darkroom", SCENE, "Gate"
+#include include.txt
+GOTO LINK 43, 13
+;
+;------------------------------------------------------------------------------
+;
+SCENE 4315, "darkroom", SCENE, "Gate"
+#include include.txt
+IF T70 @cantpass
+ACTOR 1, "Illusionist", 22, 1, 25, 90, 12
+1: Congratulations.
+1: You have succeeded in reaching this place.
+1: Could you kill one more illusion?
+1: Or maybe it's real?
+1: But, by the way, are YOU real?
+MOVE 1, -25, 90, 1
+FIGHT 76.25.90
+IF LOSE @end
+MOVE 1, 25, 90
+WAIT 3
+1: Don't believe in what you see.
+WAIT 2
+GOTO LINK 43, 16
+
+@cantpass
+N: There's nothing left here
+END
+
+@end
+END
+;
+;------------------------------------------------------------------------------
+;
+SCENE 4316, "darkroom", SCENE, "Gate"
+#include include.txt
+GOTO LINK 43, 15
+;
+;------------------------------------------------------------------------------
+;
+SCENE 4317, "darkroom", SCENE, "Gate"
+#include include.txt
+IF T70 @cantpass
+TAKE T69
+IF DEAD @4313
+SET peopleheretohelp, #<num.peopleInScene>
+FIGHT 211, 211, 211, 211, 211
+IF LOSE @end
+@goto
+GOTO LINK 43, 18
+
+@cantpass
+N: There's nothing left here
+END
+
+@end
+END
+;
+;------------------------------------------------------------------------------
+;
+SCENE 4318, "darkroom", SCENE, "Gate"
+#include include.txt
+GOTO LINK 43, 17
+;
+;------------------------------------------------------------------------------
+;
+SCENE 4319, "darkroom", SCENE, "Gate"
+#include include.txt
+IF T70 @end
+FIGHT 77
+IF LOSE @end
+N: You find a shining crystal on the corpse of the illusionist.
+GIVE T70
+GIVE I702
+GIVE T3000
+GIVE T3001
+GIVE T3002
+GIVE T3003
+GIVE T3004
+GIVE T3005
+GIVE T3006
+GIVE T3007
+GIVE T3008
+GIVE T3009
+GIVE T3010
+GIVE T3011
+GIVE T3012
+GIVE T3013
+GIVE T3014
+GIVE T3015
+SOUND FoundItem.wav
+WAIT 3
+GOTO LINK 43, 0
+
+@end
+N: There is nothing left here.
+END
+;
+;-----------------------------------------------
+;
+; Here is an evil part of the challenge I took off - too evil I'd say...
+;
+SCENE 4399, "darkroom", SCENE, "Gate"
+#include include.txt
+LOCK 1
+FLAGS 45204
+IF T70 @pass
+ACTOR 1, "Illusionist", 22, 1, 25, 90, 12
+IF DEAD @return
+IF T69 @where
+COMPARE #<peopleheretohelp>, #<num.peopleInScene>
+IF> @where2
+COMPARE #<num.peopleInScene>, "1"
+IF= @pass
+1: There is an impostor among you...
+1: A dead shadow thinking he is alive...
+1: You didn't tell that to your companions, %1, did you?
+1: Maybe you didn't know it...
+1: However there is one way for you to join again the other souls: kill one of your companions, take his life to get yours back.
+SET PKPKPKPK, #<num.hostPKs>
+GIVE T69
+1: Fight and kill someone here to pass.
+1: Fight and kill to join me.
+1: Or maybe you want to run away?
+ASK 30
+IF YES @run
+1: Right-click on me when your companions will have taken your place among the deads.
+END
+
+@where2
+1: That's funny.
+1: There were #<peopleheretohelp> people with you for the last fights...
+1: I bet they ran out at the end of the last fight, staying in the party though, in order to avoid the next challenge...
+1: Or Maybe they have left the party and try to pass one by one.
+1: Good job, but this trick doesn't work.
+GOTO LINK 43, 14
+END
+
+@where
+1: Do you think this trick can work?
+1: You've just left the party and try to pass one by one.
+1: Good job, but I'm not stupid.
+1: Uncamp and remake the party.
+1: Or run away!
+END
+
+@eventActorClick1
+GOTO @blablabla
+END
+
+@set 
+COMPARE #<num.hostPKs>, "0"
+IF= @blablabla
+SET PKPKPKPK, #<num.hostPKs>
+GOTO @blablabla
+END
+
+@blablabla
+COMPARE #<PKPKPKPK>, "#<num.hostPKs>"
+IF< @pass
+1: You haven't killed anyone here yet...
+1: Maybe you want to run?
+ASK 30
+IF YES @run
+1: No?
+1: So take a weapon and FIGHT!
+1: Fight for your life!
+END
+
+@return
+GOTO LINK 43, 0
+TAKE T69
+END
+
+@pass
+EJECT ALIVE
+GOTO LINK 43, 18
+END
+
+@run
+1: Here you go, weak %3!
+GOTO LINK 43, 0
+END
+;
+;------------------------------------------------------------------------------------------------
+;

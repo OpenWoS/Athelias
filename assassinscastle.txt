@@ -1,0 +1,526 @@
+SCENE 2000, assassins, SCENE, "Main Gate"
+#include include.txt
+GOTO LINK 0, 11
+;
+;----------------------------------------------------------------------------------------------
+;
+SCENE 2001, assassins, SCENE, "Weapons"
+#include include.txt
+ACTOR 1, Tediz, human18, 1, 25, 90
+IF T3993|T3988 @halloweenActors
+GOTO @nextStepAfterHalloweenActors
+
+@halloweenActors
+ACTOR 1, "Tediz", #<spEvent.Name>-humans, 18, 25, 90
+@nextStepAfterHalloweenActors
+IF C50 @welcome
+1: Excuse me, but I am busy.
+WAIT 1.5
+MOVE 1, -20, 90
+END
+
+@welcome
+1: Welcome.
+1: Do you need new daggers or claws?
+OFFER 364, 368, 372, 376, 380, 505, 509, 513, 517, 521
+END
+;
+;----------------------------------------------------------------------------------------------
+;
+SCENE 2002, assassins, SCENE, "Armory"
+#include include.txt
+ACTOR 1, Daret, human22, 1, 25, 90
+IF T3993|T3988 @halloweenActors
+GOTO @nextStepAfterHalloweenActors
+
+@halloweenActors
+ACTOR 1, "Daret", #<spEvent.Name>-humans, 22, 25, 90
+@nextStepAfterHalloweenActors
+IF C50 @welcome
+1: There is nothing for you here, stranger.
+1: Scat!
+END
+
+@welcome
+1: Welcome, brother.
+OFFER 250, 254, 258, 262, 266, 200, 209, 213, 217, 221, 565, 569, 573, 578, 582
+END
+;
+;----------------------------------------------------------------------------------------------
+;
+SCENE 2003, assassins, SCENE, "Master Wilnaurt"
+#include include.txt
+ACTOR 1, "Master Wilnaurt", human22, 1, 30, 92
+IF T3993|T3988 @halloweenActors
+GOTO @nextStepAfterHalloweenActors
+
+@halloweenActors
+ACTOR 1, "Master Wilnaurt", #<spEvent.Name>-humans, 22, 30, 92
+@nextStepAfterHalloweenActors
+IF -C50 @end
+EJECT C50
+ACTOR 60, "", 3, 0, 95, 15
+IF T1062 @shop3
+IF T1054 @shop2
+IF T1051 @shop1
+@nexstepaftershops
+IF T4001 @assaqend
+IF T1062 @aasaq4rew
+IF T1061 @assaq4back
+IF T1059+V90+S32 @assaq4start
+IF T1058 @assaq3endrelic
+IF T1057 @assaq3ENDDEAD
+IF V75+T1054 @assaq3start
+IF V50+T1051 @assaq2start
+IF -T1049 @assstart
+IF V25 @assaq1
+1: Welcome back, %1.
+1: Can I do something for you?
+END
+
+@eventActorClick60
+N: Level required for the class quests:
+WAIT 1
+N: Level 25, 50, 75, 90.
+END
+
+@shop1
+OFFER 1006
+GOTO @nexstepaftershops
+
+@shop2
+OFFER 1006, 1007
+GOTO @nexstepaftershops
+
+@shop3
+OFFER 1006, 1007, 1008
+GOTO @nexstepaftershops
+
+@assaqend
+1: Welcome back, Master Assassin.
+1: The minions of the Regent haven't dared come back yet.
+END
+
+@aasaq4rew
+ACTOR 2, Loki, human22, 1, 100, 97
+MOVE 2, 75, 97
+H: We've succeeded, Master.
+1: Excellent!
+1: I am sure the Regent will soon send another patrol, but at least we've saved some time.
+1: %1, There is nothing more I could teach you.
+1: You've proven your worth.
+1: You deserve more than many of us, the rank of Master Assassin.
+H: I am proud of this, Master.
+HOST_GIVE T4001
+COMPARE #<mhna5>, 0
+IF> @assalastend
+COMPARE #<mha5>, 0
+IF> @assalastend
+2: %1, I've enjoyed fighting with you.
+2: If you want, I could stay with you and help you with your next quests.
+1: That would be wonderful!
+SET temp.currentMerc, 2903
+SET monster.id, #<temp.currentMerc>
+N: #<monster.name> will now fight by your side!
+COMPARE #<mha1>, 0
+IF= @mercHire1
+@merc.hire?????????????2
+COMPARE #<mha2>, 0
+IF= @mercHire2
+@merc.hire?????????????3
+COMPARE #<mha3>, 0
+IF= @mercHire3
+@merc.hire?????????????4
+COMPARE #<mha4>, 0
+IF= @mercHire4
+@merc.hire?????????????5
+GOTO @mercHire5
+
+@mercHire5
+SET mhna5, #<temp.currentMerc>
+END
+
+@mercHire4
+COMPARE #<mhna4>, 0
+IF> @merc.hire?????????????5
+SET mhna4, #<temp.currentMerc>
+END
+
+@mercHire3
+COMPARE #<mhna3>, 0
+IF> @merc.hire?????????????4
+SET mhna3, #<temp.currentMerc>
+END
+
+@mercHire2
+COMPARE #<mhna2>, 0
+IF> @merc.hire?????????????3
+SET mhna2, #<temp.currentMerc>
+END
+
+@mercHire1
+COMPARE #<mhna1>, 0
+IF> @merc.hire?????????????2
+SET mhna1, #<temp.currentMerc>
+END
+
+@assalastend
+END
+
+@assaq4back
+1: %1, hurry!
+1: You must find the guards before they return to Prina!
+END
+
+@assaq4start
+ACTOR 2, Loki, human22, 1, 38, 97
+H: Master Wilnaurt!
+1: What's going on?
+H: I've just caught some guards of Prina looking for the castle.
+H: They haven't found it but they were close.
+1: Does the Regent want a war?!
+1: We won't let this happen, %1.
+1: You must hunt down the guards around the castle and kill them.
+1: Loki will come and help you.
+1: Two of you would have a better chance to find them.
+2: We should hunt them separately, %1.
+H: Alright, let's take a horn so we can call each other when we have found them.
+2: Good idea.
+2: Let's go.
+HOST_GIVE T1061
+END
+
+@illuq3back
+1: You must go to Prina and join the Rodeur there, %1.
+1: There is no time to waste!
+END
+
+@assaq3ENDDEAD
+COMPARE #<chat.illuq3sfsdfgh>, 1
+IF= @assaq3last
+1: Hey, %1!
+1: So, what happened in Prina?
+H: We failed.
+H: The guards found us.
+H: We don't have the relic.
+1: I guess that was a suicidal mission...
+1: Now all we have to do is to wait.
+1: The Regent won't probably leave it at that.
+1: By the way, there is maybe a spell I can teach you now.
+1: Listen, apprentice.
+WAIT 1
+N: %1 has learnt a new spell: %S32.
+HOST_GIVE S32
+SET chat.illuq3sfsdfgh, 1
+END
+
+@assaq3last
+1: Welcome back, %1.
+1: We must be on our guard.
+1: I guess the Castle will soon be in trouble with the Palace of Prina.
+END
+
+@assaq3endrelic
+COMPARE #<chat.illuq3sfsdfgh>, 1
+IF= @assaq3last
+1: Hey, %1!
+1: So, what happened in Prina?
+H: We succeeded.
+H: We've got the relic.
+1: Great news!
+H: However we had to kill several guards to get it.
+1: I guess that was needed...
+1: Now all we have to do is to wait.
+1: The Regent won't probably leave it at that.
+1: By the way, there is maybe a spell I can teach you now.
+1: Listen, apprentice.
+WAIT 1
+N: %1 has learnt a new spell: %S32.
+HOST_GIVE S32
+SET chat.illuq3sfsdfgh, 1
+END
+
+@assaq3start
+IF T1055 @illuq3back
+ACTOR 2, Rodeur, human37, 1, 45, 90
+1: Hello, %1.
+1: I was about to solicit you.
+1: This rodeur came to the Castle to ask some help to get back the Skull of Jeren.
+1: The masters of his order do not want to let the Regent have it.
+2: The idea is to secretly penetrate the palace and steal the relic.
+2: We don't want an open battle with the guards of the Regent not to plunge Athelias into a major crisis.
+H: And I guess you want me to go with you?
+1: Yes, %1.
+H: Alright.
+H: When shall we go?
+1: As soon as you're ready.
+2: I'm heading to Prina now.
+2: Join me there.
+H: Okay.
+HOST_GIVE T1055
+END
+
+@assaq2hurry
+1: Hurry and go to Prina, %1.
+1: We really need the relic back.
+END
+
+@assaq2endbis
+1: Hello, %1.
+1: You should return in a while.
+1: I may have another mission for you then.
+END
+
+@aasaq2end
+COMPARE #<aalq2end>, 1
+IF= @assaq2endbis
+H: Hello, Master Wilnaurt.
+H: I went to the palace, but the regent refused to give back the relic.
+H: He even tried to arrest me!
+1: Then we'll have to find another way to get it back.
+1: The regent cannot keep it.
+SET aalq2end, 1
+END
+
+@assaq2.2
+IF T1054 @aasaq2end
+COMPARE #<chat.master.assq2>, 1
+IF= @assaq2hurry
+H: Hello, Master Wilnaurt.
+H: I have bad news.
+H: Aden is dead ; he has been killed by several guards of the Regent who took the relic.
+1: WHAT?!
+1: You should immediately go to the Palace and get it back.
+1: The Regent would be mad to keep it.
+SET chat.master.assq2, 1
+END
+
+@assaq2start
+IF T1053 @assaq2.2
+IF T1052 @assaq2hurry
+1: Welcome back, %1.
+1: We succeeded in locating Aden, the thief who attacked you and took the relic.
+1: We discovered that he recently bought -well... acquired- a house in Prina.
+1: You must go there and get it back as soon as possible.
+H: I pack my bag and I go.
+HOST_GIVE T1052
+END
+
+@illuq1back
+1: %1, I really need you to go to the Necromancy Academy.
+1: It is important.
+END
+
+@illuq1end2
+1: Hello, %1.
+1: You should come back later, I am busy at the moment.
+END
+
+@illuq1end
+COMPARE #<assaq1.talk>, 1
+IF= @illuq1end2
+1: Hello, %1.
+1: Did you go to Irezar?
+H: Yes, but I have bad news.
+H: I don't have the relic anymore.
+1: What?
+H: I've been attacked by several bandits and they ran away with it.
+1: That's catastrophic!
+1: Do you have an idea of who they are?
+H: No. I just know that one of them is called Aden.
+1: I'll have to send someone to discover who they are then.
+H: I can do that...
+1: After this mess?!
+1: No, I'll send someone else.
+1: Apparently, you need more training.
+SET assaq1.talk, 1
+END
+
+@assaq1
+IF T1051 @illuq1end
+IF T1050 @illuq1back
+1: Welcome back, %1.
+1: I have a mission for you.
+H: What is it?
+1: I would like you to go to the Necromancy Academy in Irezar to show them the relic you brought from Prina.
+1: See if you can get some informations about it there.
+H: No problem.
+HOST_GIVE T1050
+END
+
+@assstart
+WAIT 1
+H: Hello.
+H: Are you Master Wilnaurt?
+1: Yes... but who are you and how did you get there?!
+H: I met a member of the sect in Prina who was about to die and he shew me the location of the castle.
+H: He asked me to bring you an old relic...
+1: The Skull of Jeren!
+1: But... You've said "about to die"?!
+1: What happened to him? 
+H: Yes he had been attacked by  several guards of the Regent, and deadly wounded.
+1: Today is a sad day...
+1: Well thank you very much for having brought the relic.
+1: Usually, strangers are not allowed to leave the castle, but I guess we can make an exception, if you promise you will never reveal its location.
+H: I don't want to leave.
+1: What?
+H: I want to become an assassin.
+1: Fine. Then we will train you.
+1: But you'll have to work hard.
+H: I will.
+1: Good.
+1: You should return to me in a while.
+HOST_GIVE T1049
+END
+
+@end
+1: Hello, foreigner.
+1; There is nothing for you here.
+1: You should go, now.
+END
+;
+;----------------------------------------------------------------------------------------------
+;
+SCENE 2004, assassins, SCENE, "Throwing Weapons"
+#include include.txt
+ACTOR 1, "", human22, 1, 30, 92
+IF T3993|T3988 @halloweenActors
+GOTO @nextStepAfterHalloweenActors
+
+@halloweenActors
+ACTOR 1, "Merkel", #<spEvent.Name>-humans, 22, 30, 92
+@nextStepAfterHalloweenActors
+IF-C50 @nonassa
+EJECT C50
+LOCK 1
+OFFER 225, 226,227, 228, 229, 230, 231, 232, 233, 234
+1: Welcome to my shop!
+1: Do you want to buy throwing weapons?
+END
+
+@nonassa
+1: Hmm?
+END
+;
+;
+; La suite est supprimée (quête originale)
+;
+IF -V10 @noshop
+IF -V20 @shop10
+IF -V30 @shop20
+GOTO @shop30
+
+@shop10
+OFFER 225
+GOTO @noshop
+
+@shop20
+OFFER 225, 226
+GOTO @noshop
+
+@shop30
+OFFER 225, 226, 227
+@noshop
+COMPARE #<chat.assasinThrowingweapons>, 1
+IF= @nextstepafterintro
+1: Greetings, apprentice assassin.
+1: I am the master poisoner of the castle.
+1: I can teach you hw to make throwing weapons.
+1: But you'll need to train a bit before.
+1: You can already buy some throwing weapons but you should come back when you're more advanced in your training so I can teach you what I know.
+SET chat.assasinThrowingweapons, 1
+END
+
+@nextstepafterintro
+GOTO @poisonthrowingweaponsskill#<num.ThrowingWeaponsSkills>
+
+@throwigknife
+
+@throwingstars
+
+@throwinghatchets
+
+@masterthrow
+
+@masterninj
+
+@masterhatch
+
+@shadowknife
+
+
+
+@poisonthrowingweaponsskill
+
+
+@poisonthrowingweaponsskill1
+IF V40 @poisonthrowingweaponsskill1bis
+1: Welcome back, assassin.
+1: What weapon do you want to make?
+@menupoisonthrowingweaponsskill
+MENU "Poisoned Throwing Knife=@throwigknife", "Poisoned Ninja Stars=@throwingstars", "Poisoned Throwing Hatchet=@throwinghatchets"
+GOTO @menupoisonthrowingweaponsskill
+
+@poisonthrowingweaponsskill2
+IF V70 @poisonthrowingweaponsskill2bis
+1: Welcome back, assassin.
+1: What weapon do you want to make?
+@menupoisonthrowingweaponsskill2
+MENU  "Poisoned Throwing Knife=@throwigknife", "Poisoned Ninja Stars=@throwingstars", "Poisoned Throwing Hatchet=@throwinghatchets", "Master Assassin Throwing Knife=@masterthrow", "Master Assassin Ninja Stars=@masterninj", "Master Assassin Throwing Hatchet=@masterhatch"
+GOTO @menupoisonthrowingweaponsskill2
+
+@poisonthrowingweaponsskill3
+IF V90 @poisonthrowingweaponsskill3bis
+1: Welcome back, assassin.
+1: What weapon do you want to make?
+@menupoisonthrowingweaponsskill3
+MENU  "Poisoned Throwing Knife=@throwigknife", "Poisoned Ninja Stars=@throwingstars", "Poisoned Throwing Hatchet=@throwinghatchets", "Master Assassin Throwing Knife=@masterthrow", "Master Assassin Ninja Stars=@masterninj", "Master Assassin Throwing Hatchet=@masterhatch", "Shadows Master Throwing Knife=@shadowknife"
+GOTO @menupoisonthrowingweaponsskill3
+
+@poisonthrowingweaponsskill4
+IF V99 @poisonthrowingweaponsskill4bis
+1: Welcome back, assassin.
+1: What weapon do you want to make?
+@menupoisonthrowingweaponsskill4
+MENU 
+GOTO @menupoisonthrowingweaponsskill4
+
+@poisonthrowingweaponsskill5
+1: Welcome back, assassin.
+1: What weapon do you want to make?
+@menupoisonthrowingweaponsskill5
+MENU 
+GOTO @menupoisonthrowingweaponsskill5
+
+@poisonthrowingweaponsskill1bis
+1: Welcome back, assassin.
+1: I think you're now ready to learn how to use poisoned throwing weapons.
+1: I can teach you how to make such weapons, but you'll need to find the poison on the monsters you'll kill.
+1: If you can find some %Z274, I'll teach you how to make them.
+SET num.ThrowingWeaponsSkills, 2
+END
+
+@poisonthrowingweaponsskill2bis
+1: Welcome back, assassin.
+1: I think you're now ready to learn how to use more advanced poisoned throwing weapons.
+1: I can teach you how to make such weapons, but you'll need to find the poison on the monsters you'll kill.
+1: If you can find some %Z300, I'll teach you how to make them.
+SET num.ThrowingWeaponsSkills, 3
+END
+
+@poisonthrowingweaponsskill3bis
+1: Welcome back, assassin.
+1: I think you're now ready to learn how to use more advanced poisoned throwing weapons again.
+1: I can teach you how to make such weapons, but you'll need to find the poison on the monsters you'll kill.
+1: If you can find some %Z298, I'll teach you how to make them.
+SET num.ThrowingWeaponsSkills, 4
+END
+
+@poisonthrowingweaponsskill4bis
+1: Welcome back, assassin.
+1: I think you're now ready to learn how to use master assassins' throwing weapons.
+1: I can teach you how to make such weapons, but you'll need to find the poison on the monsters you'll kill.
+1: If you can find some %Z52, I'll teach you how to make them.
+SET num.ThrowingWeaponsSkills, 5
+END
+

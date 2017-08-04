@@ -1,0 +1,83 @@
+SCENE 12400, serevaninside, SCENE, "To Tahamanraset"
+#include include.txt
+IF T1104-I1069 @reward
+IF T1104 @pass
+IF DEAD @dead
+N: The door is closed.
+END
+
+@reward
+BKGND temple6.jpg
+ACTOR 1, Guard, guard2, 1, 20, 100
+ACTOR 2, Guard, guard2, 1, 80, 100
+FACE 2, 0
+ACTOR 3, Mehdi, oriental9, 1, 35, 95
+H: Done.
+3: Done?!
+3: You killed them?!
+H: Yeah, you can open the gate again.
+3: I don't know how to thank you, %1.
+H: No problem.
+3: You are a brave.
+3: You deserve this ring more than many Tahamanaris.
+3: Usually foreigners are not allowed to have one, but considering all what you did for the city, we can make an exception...
+3: It's power is great - use it for the best.
+SOUND FoundItem.wav
+GIVE I1069
+END
+
+@dead
+EJECT DEAD
+GOTO @pass
+
+@pass
+GOTO LINK 68, 3
+;
+;--------------------------------------------------------------------------------------------------------------
+;
+SCENE 12401, serevaninside, SCENE, "To Tahamanraset"
+#include include.txt
+IF -T1105 @set
+@pass
+GOTO LINK 124, 2
+
+@set
+COMPARE #<monsterssulatzspal>, 0
+IF> @pass
+SET monsterssulatzspal, 25
+WAIT 1
+N: Kill all the monsters of this level.
+WAIT 1
+N: Monsters remaining : 25
+WAIT 1
+N: The players must pass one by one.
+WAIT 1.7
+HOST_GIVE T4000
+EJECT T4000
+TAKE T4000
+GOTO LINK 124, 02
+;
+;--------------------------------------------------------------------------------------------------------------
+;
+SCENE 12402, serevaninside, SCENE, "To Tahamanraset"
+#include include.txt
+GOTO LINK 124, 1
+;
+;--------------------------------------------------------------------------------------------------------------
+;
+;
+;--------------------------------------------------------------------------------------------------------------
+;
+SCENE 12407, serevaninside, SCENE, "To the Harem"
+#include include.txt
+IF -T1105 @kill
+GOTO LINK 125, 0
+
+@kill
+N: Kill all the monsters of the first level.
+WAIT
+N: Monsters remaining: #<monsterssulatzspal>
+END
+;
+;--------------------------------------------------------------------------------------------------------------
+;

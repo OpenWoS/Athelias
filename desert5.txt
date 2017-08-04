@@ -1,0 +1,138 @@
+SCENE 8500, desert4, SCENE, "Crossroad", 1
+#include include.txt
+IF T1145-T1146 @kotortrip
+@pass
+GOTO LINK 84, 1
+
+@kotortrip
+CALL 8301@desertq tripkotor
+GOTO @pass
+;
+;----------------------------------------------------------------------------------------------------
+;
+SCENE 8501, desert4, SCENE, "Crossroad", 1
+#include include.txt
+IF T2899 @borninathelias
+IF T3985 @bornoldworld
+END
+
+@borninathelias
+IF -T1104 @shouldntbehere
+@bornoldworld
+EJECT T1126
+GOTO LINK 86, 0
+
+@shouldntbehere
+N: You shouldn't be here.
+WAIT 1
+N: Return to Tahamanraset and complete the quests there first.
+END
+;
+;----------------------------------------------------------------------------------------------------
+;
+SCENE 8502, desert4, SCENE, "Malik", 1
+#include include.txt
+IF T3985 @bornoldworld
+IF T1126 @dead
+IF T1125 @back
+@malik
+CALL 110025@start
+ACTOR 9, Malik, human137, 1, 25, 90
+9: Travellers!
+9: You're looking for water?!
+9: Don't go to the well!
+9: Don't go there!
+9: All my companions died there!
+1: We have no choice.
+1: We must go there.
+1: Whatever we'll find there, we need water.
+9: You are crazy!
+1: You can stay here and die and come with us, it's up to you.
+9: Thirst is nothing compared to what you will find there!
+STRCMP #<arg0>, bacscd
+IF= @return
+EJECT T1124
+GIVE T1125
+END
+
+@return
+RETUN
+END
+
+@bornoldworld
+IF T1147 @dead
+IF T1146 @back
+CALL 8502@malik bacscd
+EJECT T1145
+GIVE T1146
+GIVE T1125
+END
+
+@back
+CALL 110025@start
+ACTOR 9, Malik, human137, 1, 25, 90
+9: Trust me, don't go to the well, travellers!
+1: I've told you we have no choice.
+END
+
+@dead
+ACTOR 1, Malik, 86, 0, 25, 90
+N: You approach the place where you met Malik and find a skeleton.
+END
+;
+;----------------------------------------------------------------------------------------------------
+;
+SCENE 8503, oasis, SCENE, "Well"
+#include include.txt
+IF T3985 @bornoldworld
+IF T1126 @back
+@OWbis
+CALL 110025@start
+1: That's here!
+1: The well!
+2: Water, finally!
+WAIT 2
+N: You're about to draw some water when you see something crawling under the surface.
+SOUND splash2.wav
+3: What was that?
+1: Oh my god!
+N: A water elemental gets out of the well and attacks!
+FIGHT 577.25.80
+IF WIN @token
+H: Such is the rule in the Great Desert, he said!
+H: What's this DUMB RULE?!!!
+END
+
+@bornoldworld
+IF T1147 @back
+GOTO @OWbis
+
+@token
+1: Let's draw all the water we can carry and let's get out of this place.
+1: I have the feeling that something worse may happen...
+IF T3985 @bornoldworldffff
+EJECT T1124
+GIVE T1126
+IF DEAD @tellmeaboutthat
+END
+
+@bornoldworldffff
+EJECT T1145
+GIVE T1147
+IF DEAD @tellmeaboutthat
+END
+
+@tellmeaboutthat
+H: Worse than...?
+H: I don't know if you've noticed but I'M DEAD!
+END
+
+@back
+N: You drink the water of the well and have your health and mana points restored.
+GIVE L1
+GIVE H5000
+GIVE M5000
+END
+;
+;----------------------------------------------------------------------------------------------------
+;

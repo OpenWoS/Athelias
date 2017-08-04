@@ -1,0 +1,90 @@
+; Cookies to set the first time:
+; SET num.wolfStart, #<num.hostAge>
+; SET wolfTimeBis, 2
+;
+;
+SCENE 110016, moon.100.70, CUT
+@hastomorph
+MOVE H, 1000, 90, 1
+ACTOR 1, , 97, 4, 38, 82, 15
+; trouver un meilleur "wolf" sound et remplacer pain14 par за.
+SOUND pain14.wav
+IF C8 @werewolf
+IF C9 @human
+END
+
+@human
+SET wolfTime, #<num.hostAge>
+SUB wolfTime, #<num.wolfStart>
+SET worlfTimeBis, #<wolfTime>
+SET num.hostClass, 8
+HOST_TAKE T3989
+HOST_TAKE S589
+HOST_GIVE T1
+HOST_GIVE T4
+HOST_GIVE T3004
+HOST_GIVE T3006
+HOST_GIVE T3007
+HOST_GIVE T3012
+HOST_GIVE T3014
+HOST_GIVE T3015
+HOST_GIVE T3016
+IF T70 @illuchalenge
+@illuchalengenext
+COMPARE #<temp.wolfMorph>, 1
+IF= @hadtomorphbis
+SET werewolf.move, 1
+WAIT 3
+GOTO SCENE 1
+
+@illuchalenge
+HOST_GIVE T3000
+HOST_GIVE T3001
+HOST_GIVE T3002
+HOST_GIVE T3003
+HOST_GIVE T3005
+HOST_GIVE T3008
+HOST_GIVE T3009
+HOST_GIVE T3010
+HOST_GIVE T3011
+HOST_GIVE T3013
+GOTO @illuchalengenext
+
+@werewolf
+SET num.hostClass, 9
+SET num.wolfStart, #<num.hostAge>
+HOST_GIVE T3989
+HOST_GIVE S589
+HOST_TAKE T1
+HOST_TAKE T4
+HOST_TAKE T3004
+HOST_TAKE T3006
+HOST_TAKE T3007
+HOST_TAKE T3012
+HOST_TAKE T3014
+HOST_TAKE T3015
+HOST_TAKE T3016
+IF T70 @illuchalenge2
+@illuchalengenext2
+SET werewolf.move, 1
+WAIT 3
+GOTO SCENE 1
+
+@illuchalenge2
+HOST_TAKE T3000
+HOST_TAKE T3001
+HOST_TAKE T3002
+HOST_TAKE T3003
+HOST_TAKE T3005
+HOST_TAKE T3008
+HOST_TAKE T3009
+HOST_TAKE T3010
+HOST_TAKE T3011
+HOST_TAKE T3013
+GOTO @illuchalengenext2
+
+@hadtomorphbis
+SET temp.wolfMorph, ""
+RETURN
+
+

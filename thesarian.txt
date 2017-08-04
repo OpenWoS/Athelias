@@ -1,0 +1,101 @@
+SCENE 9400, athalantisoutside, SCENE, "To Athelias"
+#include include.txt
+GOTO LINK 0, 41
+;
+;----------------------------------------------------------------------------------------
+;
+SCENE 9401, athalantisoutside, SCENE, "Lady Ardon"
+#include include.txt
+ACTOR 1, "Lady Ardon", wom68, 1, 30, 95
+IF T3993|T3988 @halloweenActors
+GOTO @nextStepAfterHalloweenActors
+
+@halloweenActors
+ACTOR 1, "Lady Ardon", #<spEvent.Name>-wom, 68, 30, 95
+@nextStepAfterHalloweenActors
+IF T598 @back
+IF DEAD @lose
+1: Help! Help!
+MOVE 1, 80, 95
+FIGHT 394, 394, 394
+IF LOSE @lose
+FACE 1, 2
+1: Thank you so much, adventurer!
+1: I don't know why those creatures are so aggressive nowadays.
+1: When I was young the place was safe and we could walk along the beach without being attacked.
+1: My guess is that dark times are coming...
+1: How could I thank you for what you did?
+1: I may have an idea...
+1: Sometimes a magical pearl can be found in their shell.
+1: If you bring me at least five of them, I could make a magical necklace for you.
+H: That's great!
+H: I'll keep an eye open!
+GIVE T598
+END
+
+@lose
+1: Aaaaah!!!
+MOVE 1, 120, 95, 2
+END
+
+@backrex
+1: Hello again, %1.
+1: If you want, I could make another necklace if you bring me five new pearls.
+END
+
+@back
+OFFER 1, 3, 4, 7, 12, 13, 30, 31, 32, 33, 35, 36, 38, 39
+GIVE H1000
+GIVE M1000
+IF I1074+Z71.5 @another?
+IF I1074 @backrex
+IF Z71.5 @reward
+1: Hello, %1.
+1: Try to find at least five Thesarian Shell pearls and I'll make a magical necklace for you.
+END
+
+@another?
+1: Hello again, %1.
+1: Do you want me to make another necklace?
+@anotherask
+ASK 300
+IF YES @anotheryes
+IF NO @anotherno
+1: Pardon?
+GOTO @anotherask
+
+@anotheryes
+H: Yes, please.
+1: Alright, wait a moment please.
+GOTO @necklace
+
+@anotherno
+1: Okies.
+END
+
+@reward
+H: Hello, Lady Ardon.
+H: I have the pearls.
+1: Excellent, young #<g.man>. 
+1: Give them to me, so I can make a necklace for you.
+H: Here they are.
+1: Alright.
+1: One moment, please.
+@necklace
+WAIT 1.2
+SOUND skeleton1
+WAIT 1.2
+SOUND skeleton1
+WAIT 1.2
+SOUND skeleton1
+WAIT 1.2
+SOUND skeleton1
+WAIT 1.2
+1: Here you go: a Thesarian necklace for you!
+1: May it help you in your quests.
+H: Thanks a lot, Lady Ardon!
+HOST_TAKE Z71.5
+HOST_GIVE I1074
+SOUND FoundItem.wav
+END
+

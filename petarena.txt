@@ -1,0 +1,232 @@
+SCENE 3700, "forest1", SCENE, "Gate"
+#include include.txt
+GOTO LINK 36, 4
+;
+;------------------------------------------------------------------
+;
+SCENE 3701, "forest1", SCENE, "Training Ground"
+#include include.txt
+FLAGS 5120
+ACTOR 1, Beastmaster, human32, 1, 25, 60
+IF T3993|T3988 @halloweenActors
+GOTO @nextStepAfterHalloweenActors
+
+@halloweenActors
+ACTOR 1, "Beastmaster", #<spEvent.Name>-humans, 32, 25, 60
+@nextStepAfterHalloweenActors
+1: Hello, adventurer.
+1: Do your pets need training?
+1: There is no reward, it is just for the fun of it.
+ASK 30
+IF YES @fight2thingy
+1: Come back if you change your mind.
+END
+
+@fight2thingy
+1: Here you go.
+1: Only pets can fight. 
+@fightbis
+GOTO @fight#<monstersofthepetarena>
+
+@fight
+SET monstersofthepetarena, 30
+GOTO @fight30
+
+@fight30
+FIGHT 262
+IF WIN @sub
+IF LOSE @LOSE
+END
+
+@sub
+SUB monstersofthepetarena, 1
+COMPARE #<monstersofthepetarena>, "0"
+IF= @win
+GOTO @fight#<monstersofthepetarena>
+
+@fight0
+1: Err... wait!
+1: You defeated all the monsters I had.
+1: I think your pets don't need training anymore.
+1: Of course, they can fight them again if they want to. 
+1: Is this what you want?
+ASK 30
+IF YES @again
+1: May your journeys be safe, hero.
+END
+
+@again
+1: Here you go.
+SET monstersofthepetarena, 30
+GOTO @fightbis
+END
+
+@LOSE
+1: You are dead...
+1: I am sorry but you can't fight anymore.
+1: Come back when you're more... alive.
+END
+
+@fight29
+FIGHT 262, 262
+IF WIN @sub
+GOTO @LOSE
+
+@fight28
+FIGHT 262, 262, 262
+IF WIN @sub
+GOTO @LOSE
+
+@fight27
+FIGHT 1
+IF WIN @sub
+GOTO @LOSE
+
+@fight26
+FIGHT 1, 1, 1
+IF WIN @sub
+GOTO @LOSE
+
+@fight25
+FIGHT 264, 1, 1
+IF WIN @sub
+GOTO @LOSE
+
+@fight24
+FIGHT
+IF WIN @sub
+GOTO @LOSE
+
+@fight23
+FIGHT 239, 239, 239, 239, 239
+IF WIN @sub
+GOTO @LOSE
+
+@fight22
+FIGHT 265, 267
+IF WIN @sub
+GOTO @LOSE
+
+@fight21
+FIGHT 268, 268, 268, 268, 268
+IF WIN @sub
+GOTO @LOSE
+
+@fight20
+FIGHT 271, 272, 272, 272
+IF WIN @sub
+GOTO @LOSE
+
+@fight19
+FIGHT 1, 1, 276
+IF WIN @sub
+GOTO @LOSE
+
+@fight18
+FIGHT 1, 276, 276
+IF WIN @sub
+GOTO @LOSE
+
+@fight17
+FIGHT 275, 280
+IF WIN @sub
+GOTO @LOSE
+
+@fight16
+FIGHT 280, 280
+IF WIN @sub
+GOTO @LOSE
+
+@fight15
+FIGHT 275, 280, 282
+IF WIN @sub
+GOTO @LOSE
+
+@fight14
+FIGHT 285, 285
+IF WIN @sub
+GOTO @LOSE
+
+@fight13
+FIGHT 285, 286
+IF WIN @sub
+GOTO @LOSE
+
+@fight12
+FIGHT 285, 285, 286
+IF WIN @sub
+GOTO @LOSE
+
+@fight11
+FIGHT 285, 286, 286
+IF WIN @sub
+GOTO @LOSE
+
+@fight10
+FIGHT 27
+IF WIN @sub
+GOTO @LOSE
+
+@fight9
+FIGHT 28
+IF WIN @sub
+GOTO @LOSE
+
+@fight8
+FIGHT 29
+IF WIN @sub
+GOTO @LOSE
+
+@fight7
+FIGHT 30
+IF WIN @sub
+GOTO @LOSE
+
+@fight6
+FIGHT 31
+IF WIN @sub
+GOTO @LOSE
+
+@fight5
+FIGHT 32
+IF WIN @sub
+GOTO @LOSE
+
+@fight4
+FIGHT 33
+IF WIN @sub
+GOTO @LOSE
+
+@fight3
+FIGHT 35
+IF WIN @sub
+GOTO @LOSE
+
+@fight2
+FIGHT 36
+IF WIN @sub
+GOTO @LOSE
+
+@fight1
+FIGHT 34
+IF WIN @win
+GOTO @LOSE
+
+@win
+1: Congratulations!
+1: Nobody has ever made it so far. 
+1: You are a good master for your pets.
+1: Maybe this present will help you, adventurer.
+N: %1 has received some %I8.
+GIVE I8
+SET monstersofthepetarena, ""
+SOUND FoundItem.wav
+IF R5 @reward2
+END
+
+@reward2
+GIVE I1022
+END
+;
+;---------------------------------------------------------------------------------------------------------
+;

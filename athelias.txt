@@ -1,0 +1,755 @@
+SCENE 100000, castle, SCENE, "Gate"
+#include include.txt
+CALL 110024@start
+IF C61+T141-T142 @archq3
+IF T1056-T1057-T1058 @assaq3bis
+IF T1055-T1056 @assasq3
+IF T1006 @fermiergeneral
+IF T1037+C18+V75+T1038 @priestq3again
+IF T1037+C18+V75-T1038 @priestq3
+@pass
+IF T3998 @illuteleport
+GOTO @nextstepafterilluteleport
+
+@illuteleport
+HOST_GIVE T2900
+@nextstepafterilluteleport
+IF C50+T1052-T1053 @assaq2
+STRCMP #<c2prinaexit>, north
+IF= @north
+STRCMP #<c2prinaexit>, east
+IF= @east
+STRCMP #<c2prinaexit>, south
+IF= @south
+GOTO LINK 7, 4
+
+@archq3
+CALL 110028@start
+END
+
+@assasq3
+ACTOR 1, Rodeur, human37, 1, 45, 90
+1: Ah, you're here!
+1: Let's go.
+H: What's the plan?
+1: We're going to lead to the palace.
+1: I know a secret entrance.
+1: Once inside, we'll have to explore the rooms to try and discover where the relic is.
+1: My guess is that the Regent keeps it in his office, but I'm not sure.
+H: Alright, let's go.
+HOST_GIVE T1056
+WAIT 2
+GOTO @pass
+
+@assaq3bis
+ACTOR 1, Rodeur, human37, 1, 45, 90
+1: Let's go, %1.
+1: Lead the way to the secret entrance of the palace I told you about.
+WAIT 2
+GOTO @pass
+
+@assaq2
+ACTOR 1, Healer, elf1, 1, 35, 90
+1: Hello.
+H: Hello. You're going to Prina as well?
+1: No I am returning to the Healers' Sanctuary.
+1: I had to bring some medicines to an old man here - poor Aden he won't suffer anymore.
+H: Aden?!
+1: Do you know him?
+H: Oh yeah! He robbed a relic belonging to the Assassins Castle.
+H: I am here to get it back.
+1: A relic? The Skull of Jeren?
+H: How do you know about it?
+1: Its evil power was the cause of Jeren's trouble.
+1: But you won't get it back.
+H: Why?
+1: Jeren is dead and the relic is now in the palace of the Regent.
+1: Several guards came when I was there and killed Jeren and ran away with the relic.
+H: I should go back to the Castle and let my Masters know about this.
+HOST_GIVE T1053
+END
+
+@priestq3again
+ACTOR 1, Guard, guard6, 1, 20, 90 
+ACTOR 2, Guard, guard6, 1, 80, 90 
+FACE 2, 0
+1: You won't escape, %1!
+1: Follow us now!
+WAIT 1.5
+GOTO LINK 7, 5, 1
+
+@priestq3
+ACTOR 1, Guard, guard6, 1, 20, 90 
+ACTOR 2, Guard, guard6, 1, 80, 90 
+FACE 2, 0
+1: Halt!
+1: %1, the regent ordered your detention.
+1: Follow us quietly.
+H: What's the...
+WAIT 1.3
+HOST_GIVE T1038
+GOTO LINK 7, 5, 1
+
+@fermiergeneral
+ACTOR 1, "Tax collector", human62, 1, 65, 90 
+ACTOR 2, "Makel", human1, 1, 75, 90
+FACE 2, 0
+1: Everything was fine...
+1: We haven't been attacked.
+2: Yes, we must go back to Benadrim, %1.
+2: We'll do the road again with another tax collector.
+HOST_TAKE T1006
+HOST_GIVE T1005
+WAIT 1
+MOVE 1, 50, 68
+WAIT 3, 5
+MOVE 1, -20, 90, 1
+END
+
+@north
+GOTO LINK 7, 0
+
+@east
+GOTO LINK 7, 3
+
+@south
+GOTO LINK 7, 2
+;
+;-----------------------------------------------------------------------------------------------------------
+;
+SCENE 100001, "vestibulary", SCENE, "First door"
+#include include.txt
+CALL 110024@start
+IF T3993 @halloweenActors
+GOTO @nextStepAfterHalloweenActors
+
+@halloweenActors
+COMPARE #<halloween.pfft.stoned>, 1
+IF= @nextStepAfterHalloweenActors
+ACTOR 1, "Jack o'Pumpkin", 46, 1, 35, 85
+POSE 1, 4
+1: Whaaat are you doin here?
+1: Hmmm....
+1: You look like an ally of those dumb, dumb Chaos Gods!
+H: ...
+1: Yep!
+1: We need to kill you!
+H: Can I say something?
+MOVE 1, -20, 110
+1: Yup, you've just done it!
+FIGHT 610, 611, 611, 611, 611, 611
+IF WIN @halloweenActors2
+N: You hear a pumpkin laughing...
+END
+
+@halloweenActors2
+H: Aiight.
+H: Let's go!
+SET halloween.pfft.stoned, 1
+GOTO @pass
+
+@nextStepAfterHalloweenActors
+IF T1114 @pass
+IF T1113-T33 @notenisan
+ACTOR 1, Tenisan, human26, 1, 100, 95
+MOVE 1, 70, 95
+ACTOR 2, Ifendel, 98, 1, 50, 95
+ACTOR 3, Karsek, 50, 1, 30, 100
+ACTOR 4, Kondilor, 50, 1, 40, 90, 3
+3: Tenisan!
+3: What a surprise!
+3: Unfortunately, you arrive too late
+3: Our army ever walks on Athelias
+3: Soon, Terendroz will be ours, and then, Prina!
+2: I see you found some friends...
+2: Ah! Ah! Ah!
+2: So you will have some company in hell!
+1: I am here to achieve what I started centuries ago.
+1: The chaos shall be stopped!
+1: You shall be stopped!
+WAIT 1
+MOVE 1, 120, 90, 1
+MOVE 2, -20, 90, 1
+MOVE 3, -20, 90, 1
+MOVE 4, -20, 90, 1
+SET pretre, 260
+@gotofight
+FIGHT 255, 233.40.90, 241.30.100, 259.50.95, -#<pretre>.70.95
+IF LOSE @LOSE
+GIVE T1114
+WAIT 1
+@pass
+GOTO LINK 34, 0
+
+@LOSE
+GIVE T1115
+MOVE 2, 20, 85, 1
+MOVE 3, 30, 90, 1
+MOVE 4, 40, 80, 1
+3: You, fools!
+3: Did you really believe you could succeed?!
+END
+
+@notenisan
+ACTOR 1, Ifendel, 98, 1, 50, 95
+ACTOR 2, Karsek, 50, 1, 30, 100
+ACTOR 3, Kondilor, 50, 1, 40, 90, 3
+1: And they come...
+1: Nice idea to wake up Tenisan, but he cannot help you anymore from where he is!
+1: And you will soon join him!
+WAIT 1.8
+MOVE 1, -20, 90, 1
+MOVE 2, -20, 90, 1
+MOVE 3, -20, 90, 1
+SET pretre, 0
+GOTO @gotofight
+;
+;-----------------------------------------------------------------------------------------------------------
+;
+SCENE 100002, castle, SCENE, "Main Gate"
+#include include.txt
+CALL 110023@start
+CALL 110024@start
+IF T3998 @illuteleport
+GOTO @nextstepafterilluteleport
+
+@illuteleport
+HOST_GIVE T2901
+GOTO @nextstepafterilluteleport
+
+@nextstepafterilluteleport
+GOTO LINK 17, 0
+;
+;-----------------------------------------------------------------------------
+;
+SCENE 100003, castle, SCENE, "Main Gate"
+#include include.txt
+CALL 110024@start
+CALL 110023@start
+IF T3998 @illuteleport
+GOTO @nextstepafterilluteleport
+
+@illuteleport
+HOST_GIVE T2902
+GOTO @nextstepafterilluteleport
+
+@nextstepafterilluteleport
+STRCMP #<c2latshaexit>, west
+IF= @west
+GOTO LINK 16, 1
+
+@west
+GOTO LINK 16, 0
+;
+;-------------------------------------------------------------------------------------------------------------------------------------------------------
+;
+SCENE 100004, ruins(temple), SCENE, "Main Gate"
+#include include.txt
+CALL 110024@start
+CALL 110023@start
+IF T3998 @illuteleport
+GOTO @nextstepafterilluteleport
+
+@illuteleport
+HOST_GIVE T2903
+GOTO @nextstepafterilluteleport
+
+@assaq1
+WAIT 1
+H: Irezar, finally!
+WAIT 1
+ACTOR 1, Mike, human19, 1, -5, 90
+ACTOR 2, Aden, human16, 1, -10, 95
+MOVE 1, 30, 90
+MOVE 2, 25, 95
+1: Hello, man.
+2: Do you travel alone?
+2: It may be dangerous, you know.
+1: Yeah, Aden is right, especially if you carry valuables with you.
+H: Probably...
+1: Look after you bag, we never know what could happen.
+2: Yeah, someone could take it, like this.
+WAIT 1
+N: He takes your bag and look at the relic.
+WAIT 1
+2: What's this?
+2: Hehe, it looks like expensive.
+H: Don't touch this relic!
+H: Give me back my bag right now!
+1: Calm down, we just want to help you!
+2: Yeah, we only do this to help you.
+MOVE 2, -20, 95
+H: He! Where are you going to?!
+MOVE 1, -20, 90, 1
+FIGHT 200.30.90
+HOST_GIVE T1051
+IF LOSE @assaq1lose
+N: You get your bag back but Aden is gone with the relic.
+WAIT 1
+H: I can't believe it!
+H: The Masters are going to kill me!
+END
+
+@assaq1lose
+HOST_TAKE G1000000
+N: Mike takes your money but Aden seems to be more interested by the relic.
+WAIT 1
+N: He takes it and goes away.
+WAIT 1
+H: I can't believe it!
+H: The Masters are going to kill me!
+H: Well, I'm already dead so...
+END
+
+
+@nextstepafterilluteleport
+IF T1050-T1051 @assaq1
+STRCMP #<c3irezarexit>,  north
+IF= @north
+STRCMP #<c3irezarexit>,  south
+IF= @south
+STRCMP #<c3irezarexit>,  east
+IF= @east
+GOTO LINK 18, 0
+
+@north
+GOTO LINK 18, 1
+
+@south
+GOTO LINK 18, 8
+
+@east
+GOTO LINK 18, 9
+;
+;-----------------------------------------------------------------------------------------------------------
+;
+SCENE 100005, cave1, SCENE, "Goblins cave"
+#include include.txt
+CALL 110024@start
+CALL 110023@start
+IF T131-T132 @barbsq1
+@pass
+GOTO LINK, 15, 0
+
+@barbsq1
+H: Alright, now I have to explore this bloody cave to find Ernst Sharak.
+H: That's rather grim...
+WAIT 1.7
+GOTO @pass
+;
+;-----------------------------------------------------------------------------
+;
+SCENE 100006, castle, SCENE, "Main Gate"
+#include include.txt
+CALL 110024@start
+IF T136-T137 @paliq4
+IF T1006 @fermiergeneral2 
+IF T1005 @fermiergeneral 
+IF T126-T127 @paliquests2
+IF T3998 @illuteleport
+GOTO @nextstepafterilluteleport
+
+@paliq4
+COMPARE #<barbquest4>, 0
+IF> @pass
+BKGND forest1.100.47
+CALL 110022@barbactors barq4
+2: Shht!
+2: Haven't you heard a noise?
+1: Hmm?
+3: A patrol of the army of the Regent!
+WAIT 1.5
+CALL 110022@barbmove
+FIGHT -645.25.95, -646.55.80, -647.60.90, -648.64.80, -649.67.75, -650.71.82, -651.75.87, -652.79.80, -653.82.88, -654.86.93, 136, 136, 136, 136, 136, 136, 136, 136, 136, 136
+IF WIN @barbq4win
+END
+
+@barbq4win
+SET barbquest4, 1
+H: Benadrim is close now, let's go!
+WAIT 1.4
+GOTO @pass
+
+@illuteleport
+HOST_GIVE T2904
+GOTO @nextstepafterilluteleport
+
+@token609give
+HOST_GIVE T609
+@nextstepafterilluteleport
+IF V35-T609 @token609give
+@pass
+STRCMP #<c2kotorexit>, west
+IF= @west
+GOTO LINK 19, 1
+
+@paliquests2
+ACTOR 1, Guard, guard6, 1, 20, 80
+ACTOR 2, Guard, guard6, 1, 40, 70
+1: Finally!
+2: Hello, %1.
+2: Follow us quietly.
+H: The guards of Prina definitely cannot get it!
+H: You'd better let me go if you want to have a long life.
+H: Try to be more clever than the two guards who have attempted to arrest me in Latsha.
+1: Shut up now!
+WAIT 2
+MOVE 1, 120, 90, 1
+MOVE 2, 120, 90, 1
+FIGHT 144.20.80, 144.40.70
+IF WIN @paliq2win
+H: Well...
+HOST_GIVE T127
+END
+
+@paliq2win
+HOST_GIVE T127
+H: If they now dare to come at the gates of Benadrim, the Castle may get in trouble...
+END
+
+@fermiergeneral 
+ACTOR 1, "Tax collector", human62, 1, 25, 90 
+ACTOR 2, "Makel", human1, 1, 75, 90
+FACE 2, 0
+1: Hello 
+1: You are late 
+1: I am waiting since one hour. 
+1: Let's go. 
+1: No time to waste. 
+1: Lead to Prina. 
+2: We'll walk at bay. 
+2: If you are attacked, do not resist and give the chest to the bandits. 
+2: So we could track them and find their lair. 
+1: OK. 
+1: Let's go. 
+HOST_TAKE T1005 
+HOST_GIVE T1006 
+WAIT 1 
+GOTO EXIT 
+
+@fermiergeneral2 
+ACTOR 1, "Tax collector", human62, 1, 25, 90 
+ACTOR 2, "Makel", human1, 1, 75, 90
+FACE 2, 0
+1: Why are we still at Benadrim's gate? 
+1: Let's go. 
+1: I have no time to waste! 
+END
+
+@west
+GOTO LINK 19, 0
+;
+;-----------------------------------------------------------------------------
+;
+SCENE 100007, "cave1", SCENE, "Dragon Lair"
+#include include.txt
+CALL 110024@start
+CALL 110023@start
+END
+;------------------------la suite est supprimée-------------
+IF T79 @end
+FIGHT 34
+IF WIN @cmp
+END
+
+@cmp
+HOST_GIVE T79
+IF C16 @rwd
+END
+
+@rwd
+H: You kill the dragon and take a pint of its blood.
+GIVE I706
+SOUND FoundItem.wav
+END
+
+@end
+N: The lair appears empty.
+END
+;
+;-------------------------------------------------------------------------------------------------------
+;
+SCENE 100008, street6, SCENE, "Main Gate"
+#include include.txt
+CALL 110023@start
+CALL 110024@start
+IF T1117-T1121 @siege
+@pass
+IF T3998 @illuteleport
+GOTO @nextstepafterilluteleport
+
+@illuteleport
+HOST_GIVE T2905
+GOTO @nextstepafterilluteleport
+
+@nextstepafterilluteleport
+STRCMP #<c2terendrozexit>, west
+IF= @west
+STRCMP #<c2terendrozexit>, south
+IF= @south
+GOTO LINK 12, 0
+
+@siege
+N: You now have to clear a path through the lines of the chaos army!
+FIGHT 331, 331, 331, 331, 331, 332, 332, 332, 332, 332
+IF LOSE @siegelost
+FIGHT 331, 331, 331, 331, 331, 331, 331, 334, 334, 334
+IF LOSE @siegelost
+FIGHT 334, 336, 334, 336, 338, 335, 333, 333
+IF LOSE @siegelost
+N: You reach Terendoz's Gate and enter the town
+WAIT 2
+GOTO @pass
+
+@siegelost
+END
+
+@south
+GOTO LINK 12, 9
+
+@west
+GOTO LINK 12, 10
+;
+;-----------------------------------------------------------------------------
+;
+SCENE 100009, dungeon1, SCENE, "Main Gate"
+#include include.txt
+CALL 110023@start
+CALL 110024@start
+IF T3998 @illuteleport
+GOTO @nextstepafterilluteleport
+
+@illuteleport
+HOST_GIVE T2906
+GOTO @nextstepafterilluteleport
+
+@nextstepafterilluteleport
+GOTO LINK 10, 0
+;
+;-----------------------------------------------------------------------------------------------------------
+;
+SCENE 100010, castle, SCENE, "Main Gate"
+#include include.txt
+CALL 110024@start
+CALL 110023@start
+IF T3998 @illuteleport
+GOTO @nextstepafterilluteleport
+
+@illuteleport
+HOST_GIVE T2907
+GOTO @nextstepafterilluteleport
+
+@nextstepafterilluteleport
+GOTO LINK 46, 0
+;
+;-----------------------------------------------------------------------------
+;
+SCENE 100011, vestibulary, SCENE, "Main Gate"
+#include include.txt
+CALL 110024@start
+CALL 110023@start
+IF T1057-T1059+V90 @assaq4fight
+IF T1058-T1059+V90 @assaq4fight
+IF C50-T1049 @assafirst
+@pass
+GOTO LINK 20, 0
+
+@assaq4fight
+GOTO SCENE 110008
+
+@assafirst
+ACTOR 1, Gatekeeper, human18, 1, 35, 90
+1: What are you doing here, adventurer?!
+1: You cannot pass!
+H: Wait!
+H: I found this place thanks to this map.
+H: I met one of your brothers in Prina who was about to die.
+H: He charged me to bring an old relic here.
+1: Then you should go to Master Wilnaurt's office and tell him about this.
+1: Enter.
+WAIT 1.3
+GOTO @pass
+
+;
+;-----------------------------------------------------------------------------
+;
+SCENE 100012, irkatshk1, SCENE, "Main Gate"
+#include include.txt
+CALL 110023@start
+CALL 110024@start
+IF T3998 @illuteleport
+GOTO @nextstepafterilluteleport
+
+@illuteleport
+HOST_GIVE T2908
+GOTO @nextstepafterilluteleport
+
+@nextstepafterilluteleport
+STRCMP #<c2irkatshkexit>, north
+IF= @north
+GOTO LINK 40, 2
+
+@north
+GOTO LINK 40, 0
+;
+;-----------------------------------------------------------------------------
+;
+SCENE 100013, castle, SCENE, "Main Gate"
+#include include.txt
+CALL 110023@start
+CALL 110024@start
+IF T3998 @illuteleport
+GOTO @nextstepafterilluteleport
+
+@illuteleport
+HOST_GIVE T2909
+GOTO @nextstepafterilluteleport
+
+@nextstepafterilluteleport
+GOTO LINK 41, 0
+;
+;-----------------------------------------------------------------------------
+;
+SCENE 100014, vestibulary, SCENE, "Main Gate"
+#include include.txt
+CALL 110023@start
+CALL 110024@start
+GOTO LINK 48, 0
+;
+;-----------------------------------------------------------------------------
+;
+SCENE 100015, castle, SCENE, "Main Gate"
+#include include.txt
+CALL 110023@start
+CALL 110024@start
+IF T3998 @illuteleport
+GOTO @nextstepafterilluteleport
+
+@illuteleport
+HOST_GIVE T2910
+GOTO @nextstepafterilluteleport
+
+@nextstepafterilluteleport
+STRCMP #<c2katadynexit>, north
+IF= @north
+STRCMP #<c2katadynexit>, south
+IF= @south
+GOTO LINK 36, 2
+
+@north
+GOTO LINK 36, 0
+
+@south
+GOTO LINK 36, 3
+;
+;-----------------------------------------------------------------------------
+;
+SCENE 100016, mangeas3, SCENE, "Main Gate"
+#include include.txt
+CALL 110024@start
+CALL 110023@start
+IF T3998 @illuteleport
+GOTO @nextstepafterilluteleport
+
+@illuteleport
+HOST_GIVE T2911
+GOTO @nextstepafterilluteleport
+
+@nextstepafterilluteleport
+STRCMP #<c2mangeasexit>, south
+IF= @south
+GOTO LINK 13, 0
+
+@south
+GOTO LINK 13, 1
+;
+;-----------------------------------------------------------------------------
+;
+SCENE 100033, forest1, SCENE, "To the Cave"
+#include include.txt
+CALL 110024@start
+CALL 110023@start
+IF V50-T606 @quest
+@pass
+GOTO LINK 77, 0
+
+@quest
+HOST_GIVE T606
+GOTO @pass
+;
+;-----------------------------------------------------------------------------
+;
+SCENE 100041, forest1, SCENE, "To Thesarian Creek"
+#include include.txt
+CALL 110024@start
+CALL 110023@start
+GOTO LINK 94, 0
+;
+;-----------------------------------------------------------------------------
+;
+SCENE 100042, forest1, SCENE, "To the Dark Woods"
+#include include.txt
+CALL 110024@start
+CALL 110023@start
+IF V30-T604 @quest
+@pass
+GOTO LINK 90, 0
+
+@quest
+ACTOR 1, Ent, 91, 1, 25, 90
+ACTOR 2, Ent, 91, 1, 40, 80
+SEL 1
+POSE 1, 4
+SEL 2
+POSE 1, 4
+1: Halt!
+2: What are you doing in our woods, #<g.menu>?
+1: You work with her, right?!
+H: Her?
+2: We know your tricks, #<g.menu>, don't make as if you don't know her!
+H: What are you talking about?!
+H: I am here to slay some beasts, not to work with "her"!
+1: Do you realize what you are saying to the protectors of the woods?
+2: You pretend not to work for her, fine!
+2: But you now have to prove it!
+H: How?
+1: Kill her.
+H: Or what?!
+2: Or we'd have to get rid of you.
+H: Sweet! But will you finally tell me who you are talking about?!
+1: The witch.
+1: The witch who cuts trees and destroys the forest since several weeks.
+2: She is looking for a treasure it is said.
+2: But you'll find her before.
+2: And stop her.
+H: It's asked so kindly that I can't refuse...
+1: Good.
+1: Do your job now.
+GIVE T604
+WAIT 2
+GOTO @pass
+;
+;-----------------------------------------------------------------------------
+;
+SCENE 100043, forest1, SCENE, "To Aralian Valley"
+#include include.txt
+CALL 110024@start
+CALL 110023@start
+GOTO LINK 92, 0
+;
+;-----------------------------------------------------------------------------
+;
+SCENE 100044, forest1, SCENE, "To Southern Swamps"
+#include include.txt
+CALL 110024@start
+CALL 110023@start
+IF V90-T617 @tokengive
+@pass
+GOTO LINK 91, 0
+
+@tokengive
+HOST_GIVE T617
+GOTO @pass
+;
+;-----------------------------------------------------------------------------
+;

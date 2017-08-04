@@ -1,0 +1,83 @@
+SCENE 9800, kotorcastle, SCENE, "Main Gate"
+#include include.txt
+GOTO LINK 139, 4
+;
+;---------------------------------------------------------------------------------------------------------------------
+;
+SCENE 9801, kotorcastle, SCENE, "Throne Room"
+#include include.txt
+ACTOR 1, "Duke Pokerar", lord2, 1, 25, 80
+IF T1141-T2899 @deserttripstart
+IF T1130 @wbhero
+IF T1129 @travelqend
+1: Hello, adventurer.
+1: I am sorry but I am too busy to greet you now.
+1: You should come back later.
+END
+
+@tripend
+1: Welcome back, hero.
+END
+
+@tripback
+1: %1, I really need you to escort the caravan back to Tahamanraset.
+END
+
+@deserttripstart
+IF T1149 @tripend
+IF T1142 @tripback
+1: Welcome, adventurer.
+1: I heard of your adventures in Thanaris.
+1: You did well.
+1: But unfortunatly, the Chaos is back, we won't defeat it on our own.
+1: A few weeks ago, Medhi, general of the armies of the Tahamanraset, sent an ambassador to Kotor to suggest a new alliance between the Desertic Lands of the Old World.
+1: For the sake of the true Gods, Kotor will join Tahamanraset in its struggle against the Chaos.
+1: I would like you to escort the plenipotentiary caravan back to Tahamanraset.
+1: That's a dangerous trip, but I know you can succeed.
+H: I will, my lord.
+1: Thank you, %1.
+EJECT V99
+GIVE T1123
+GIVE T1124
+GIVE T1126
+GIVE T1127
+GIVE T1142
+END
+
+@travelqend
+ACTOR 5, Firoz, oriental2, 1, 100, 90
+MOVE 5,  60, 90
+ACTOR 2, Ahmet, oriental5, 1, 105, 85
+MOVE 2, 65, 85
+ACTOR 3, Shoukri, oriental6, 1, 103, 80
+MOVE 3, 63, 80
+ACTOR 4, Deniz, oriental3, 1, 113, 93
+MOVE 4, 73, 93
+WAIT 1.8
+5: Lord Pokerar, I am pleased to met you.
+1: So am I...
+1: But tell me what Tahamanaris are doing so far from their country - because you are from Tahamanraset, right?
+1: And how did you get there?
+1: The roads to the Desertic Lands are closed!
+5: Yes, we are from Tahamanraset. 
+CALL 110012@start %C
+5: The roads were closed but thanks to this man, %1, #<arg0> %C from Athelias Island, we succeeded in passing through the perils of such a trip and reached the Old World.
+5: We were sent by the Commander of Tahamanraset's army, Medhi, after the defeat of the Chaos troops in the Desertic Lands.
+5: He sent us to offer you the support of Tahamanraset and the armies of the Desertic Lands.
+5: We know that your realms have to fight the Chaos armies as we did.
+5: It is now time for a new alliance among humans.
+1: I am as glad as surprised to see you here and hear this.
+1: Go and tell Commander Medhi that the Dukes of Kotor would proudly accept his offer and fight by his side.
+1: Many people, here as in the Desertic Lands, had to suffer from the threat of the Chaos.
+1: May this new alliance terminate this.
+EJECT T1129
+HOST_GIVE T1130
+END
+
+@wbhero
+1: Welcome back, adventurer.
+1: Is there something I can do for you?
+END
+;
+;---------------------------------------------------------------------------------------------------------------------
+;

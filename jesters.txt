@@ -1,0 +1,160 @@
+SCENE 4900, darkroom, SCENE, "To Prina"
+#include include.txt
+GOTO LINK 7, 11
+;
+;-----------------------------------------------------------------------
+;
+SCENE 4901, darkroom, SCENE, "Toy store"
+#include include.txt
+ACTOR 1, Marwin, gnome3, 1, 25, 90
+IF T3993|T3988 @halloweenActors
+GOTO @nextStepAfterHalloweenActors
+
+@halloweenActors
+ACTOR 1, "Marwin", #<spEvent.Name>-gnome, 3, 25, 90
+@nextStepAfterHalloweenActors
+IF C20 @welcome
+1: Hello
+1: You do not look like a jester.
+1: There is nothing for you here.
+END
+
+@welcome
+1: Welcome, fellow jester.
+1: Do you need a new puppet?
+OFFER 425, 426, 427, 428, ,429, 430, 431, 432, 433, 434, 435, 436, 437, 438, 439, 440, 441, 442, 443, 444
+END
+;
+;-----------------------------------------------------------------------
+;
+SCENE 4902, darkroom, SCENE, "Maitre Oudano's"
+#include include.txt
+ACTOR 1, "Maitre Oudano", gnome9, 1, 25, 90 
+IF T3993|T3988 @halloweenActors
+GOTO @nextStepAfterHalloweenActors
+
+@halloweenActors
+ACTOR 1, "Maitre Oudano", #<spEvent.Name>-gnome, 9, 25, 90
+@nextStepAfterHalloweenActors
+IF V90+T1007-T1008+C20 @jesterquest3
+IF V50+T1004-T1005+C20 @jesterquest2 
+IF T1004 @backagain 
+IF T1003+C20 @jesterquest1back3 
+IF T1002+C20 @jesterquest1back2 
+IF T1001+C20 @jesterquest1back 
+IF V25-T1001+C20 @jesterquest1 
+IF C20 @backagain 
+@busy
+1: Hmm
+1: What's that again?!
+1: Can't you see that I am BUSY?!
+END 
+
+@jesterquest3
+ACTOR 60, "", 3, 0, 95, 15
+1: Hello %1.
+1: Please, have a seat.
+1: We have to talk.
+1: A revolt broke out at the palace.
+1: And the leader was your friend, Makel.
+1: The rebels accused the regent of being corrupted.
+1: They were arrested and Makel is now in a jail below the palace.
+1: But the guards are now looking for you.
+1: The regent asked us to hand over you to the guards of the city.
+1: But we won't.
+1: We will never extradite a member of the guild.
+1: But we can't do more.
+1: Do what you have to do.
+1: You will be in security here.
+1: But we cannot protect you outside.
+1: May the gods help you.
+HOST_TAKE T1007
+HOST_GIVE T1008
+END
+
+@jesterquest2 
+ACTOR 60, "", 3, 0, 95, 15
+ACTOR 2, Makel, human1, 1, 50, 80 
+1: Ah you are here! 
+1: This guard of the palace asked for you. 
+2: Hello, %1. 
+H: Hello, Makel. 
+1: Well excuse me but I am busy. 
+MOVE 1, -20, 90 
+2: Are you still looking for exciting adventures? 
+H: Err yes, why? 
+2: The Regent finally decided to trust me and gave me something else to do than standing by the door of the throne room... 
+2: Since a while, the tax collectors are attacked and robbed between Prina and Benadrim. 
+2: I have to find their lair and to arrest them. 
+2: Do you want to join me? 
+H: Why not... I am bored. 
+2: In this case, let's go to Benadrim : a tax collector is waiting for us there. 
+2: We will follow the convoy at bay. 
+HOST_TAKE T1004
+HOST_GIVE T1005 
+END 
+
+@jesterquest1back 
+ACTOR 60, "", 3, 0, 95, 15
+ACTOR 1, Merzen, gnome10, 1, 25, 90 
+1: What are you doing here? 
+1: Hurry and bring this hardware to the palace. 
+1: Maitre Oudano is waiting for you! 
+END 
+
+@jesterquest1 
+ACTOR 60, "", 3, 0, 95, 15
+COMPARE #<gchjjsfhwsdhsrjfyukdjsrhsrthtyklfrldyjxhj>, 1
+IF= @backagain2
+1: Ah. %1! 
+1: Come with me, we need your help. 
+1: The masters of the guild have been summoned by the regent for an extraordinary performance. 
+1: Several lords will be present. 
+1: Unfortunately, Erik, who was in charge of the attendance, felt ill. 
+1: You must replace him and manage to bring the hardware to the palace. 
+1: The cases are here. 
+1: You need to find a wagon to carry them. 
+HOST_GIVE T1001 
+SET gchjjsfhwsdhsrjfyukdjsrhsrthtyklfrldyjxhj, 1
+END 
+
+@jesterquest1back2 
+ACTOR 60, "", 3, 0, 95, 15
+MOVE 1, -20, -20, 1
+N: Maitre Oudano is not at his office. 
+END 
+
+@jesterquest1back3 
+ACTOR 60, "", 3, 0, 95, 15
+1: Thanks again for having done such a good job today. 
+1: We are proud to have you as a part of the guild. 
+1: This cat is for you. 
+1: Our masters tamer especially trained it for you. 
+HOST_GIVE I1039
+HOST_GIVE T1004 
+HOST_TAKE T1003 
+SOUND FoundItem.wav
+END 
+
+@backagain 
+ACTOR 60, "", 3, 0, 95, 15
+COMPARE #<oudano>, 1 
+IF= @backagain2 
+1: Welcome, young Novice. 
+1: I am Master Oudano, director of the Guild. 
+1: You must work and train a bit before I can do something for you. 
+1: Follow the lessons of my fellow teachers, and come back in a while. 
+SET oudano, 1
+END 
+
+@backagain2 
+ACTOR 60, "", 3, 0, 95, 15
+1: Listen, I like you, %1, but you must quit bothering me all the time as you do. 
+END
+
+@eventActorClick60
+N: Level required for the class quests:
+WAIT 1
+N: Level 25, 50, 90.
+END
+

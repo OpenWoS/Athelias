@@ -1,0 +1,43 @@
+BKGND seaside2
+ACTOR 1, "Captain Jack the Dead One", 237, 1, 35, 95
+POSE 1, 4
+ACTOR 2, "Captain Jack the Dead One", 238, 1, 25, 95
+POSE 1, 4
+ACTOR 3, "Captain Jack the Dead One", 238, 1, 15, 95
+POSE 1, 4
+ACTOR 4, "Captain Jack the Dead One", 238, 1, 5, 95
+POSE 1, 4
+ACTOR 5, "Captain Jack the Dead One", 238, 1, 28, 97
+POSE 1, 4
+ACTOR 6, "Captain Jack the Dead One", 238, 1, 23, 93
+POSE 1, 4
+ACTOR 7, "Captain Jack the Dead One", 238, 1, 17, 97
+POSE 1, 4
+ACTOR 8, "Captain Jack the Dead One", 238, 1, 8, 91
+POSE 1, 4
+ACTOR 9, "Captain Jack the Dead One", 238, 1, 12, 99
+POSE 1, 4
+1: Yawwr!
+H: What?
+1: YAWRR!
+H: Ok...
+WAIT 1.2
+MOVE 1, 150, 150, 1
+MOVE 2, 150, 150, 1
+MOVE 3, 150, 150, 1
+MOVE 4, 150, 150, 1
+MOVE 5, 150, 150, 1
+MOVE 6, 150, 150, 1
+MOVE 7, 150, 150, 1
+MOVE 8, 150, 150, 1
+MOVE 9, 150, 150, 1
+FIGHT 829.35.95, 830.25.95, 830.15.95, 830.5.95, 830.28.97, 830.23.93, 830.17.97, 830.8.91, 830.12.99
+IF WIN @piratehatreward
+H: ...
+END
+
+@piratehatreward
+GIVE I92
+SOUND foundItem.wav
+END
+

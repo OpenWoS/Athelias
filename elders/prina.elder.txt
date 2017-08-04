@@ -1,0 +1,328 @@
+ACTOR 1, "Elder", human92, 1, 50, 75
+IF T3993 @halloweenActors
+GOTO @nextStepAfterHalloweenActors
+
+@halloweenActors
+ACTOR 1, "Elder", halloween-humans, 92, 50, 75
+@nextStepAfterHalloweenActors
+IF T46 @wb
+IF -T46 @welcome
+END
+
+@wb
+1: Welcome back.
+1: I hope you have found a master to teach you what you need to know.
+END
+
+@assassinwel
+1: Welcome, adventurer.
+1: I hope you have found a master to teach you what you need to know.
+END
+
+@welcome
+1: Hello, young adventurer.
+IF C5 @paladin
+IF C16 @necromancer
+IF C18 @priest
+IF C22 @knight
+IF C43 @elementalist
+IF C45 @mercenary
+IF C50 @assassinwel
+IF C55 @rodeur
+IF C70 @wizard
+IF C80 @illusionist
+1: You should go and visit the elder in your own city.
+1: I am not familiar with your class.
+END
+
+@paladin
+HOST_GIVE T6
+HOST_GIVE T10
+HOST_GIVE T100
+HOST_GIVE T11
+HOST_GIVE T3000
+HOST_GIVE T3001
+HOST_GIVE T3002
+HOST_GIVE T3003
+HOST_GIVE T3004
+HOST_GIVE T3006
+HOST_GIVE T3008
+HOST_GIVE T3009
+HOST_GIVE T3010
+HOST_GIVE T3012
+HOST_GIVE T3016
+1: So you have chosen to become a paladin.
+1: But do you even know their story?
+1: The order of the Paladins of Athelias was created a few years before the first invasion, during the so-called Dark Ages.
+1: The men were not prepared for this new threat and many swore allegiance to the Chaos Gods.
+1: Among them were the Knights of the Dark Blade.
+1: They prepared the first invasion, raiding the cities of Athelias, killing everyone on their way, and, worst of all, converting many warriors to the Chaos.
+1: But some of the members of the Brotherhood of the Dark Blade had remained loyal to the true Gods, and decided to hunt them down and do all what they could to defeat them.
+1: During years, they tracked them, and ended up actually defeating them.
+1: As a reward, King Argoz, Sovereign of Athelias Island, offered them the lands around the Holy City of Benadrim, independant since then.
+1: This world couldn't face the chaos if the paladins disappeared.
+1: You will have to suffer many ordeals during your training.
+1: If you accept that, go to the city of Benadrim, on the East of Prina.
+1: There you will find the Castle of the Paladins.
+1: May the Gods protect you during your travel.
+HOST_GIVE T46
+GOTO @trainingground
+
+@necromancer
+HOST_GIVE T2
+HOST_GIVE T7
+HOST_GIVE T11
+HOST_GIVE T97
+HOST_GIVE T3000
+HOST_GIVE T3001
+HOST_GIVE T3002
+HOST_GIVE T3003
+HOST_GIVE T3005
+HOST_GIVE T3008
+HOST_GIVE T3009
+HOST_GIVE T3010
+HOST_GIVE T3013
+HOST_GIVE T3017
+1: So you have chosen to become a necromancer.
+1: This is a real challenge.
+1: You will have to fight the chaos with ways similar to what it uses. 
+1: Only pure souls will resist the corruption.
+1: The order of the Necromancers was founded by Lord Jeren, from Irezar, during the Dark Ages.
+1: He was the first necromancer, the first mage who discovered how to animate the dead.
+1: He had studied illusory magic in Latsha, but when his power grew, he decided to create his own academy, far away from the city of the mages.
+1: Unfortunatly, he was not ready to face the temptation of the Chaos that came with his new powers, and joined their armies.
+1: He was one of the generals of the first invasion.
+1: He was defeated, and the city of Irezar burnt down by King Argoz, but the necromancy academy never closed.
+1: Its masters learned from Jeren's mistakes, and it is now one of the worst enemies of the minions of the Chaos.
+1: But every necromancer will one day have to face the temptation of the Chaos.
+1: You will have to face it, adventurer.
+1: If you think you are not wise enough to resist, then you should choose another job.
+1: But if you think you are, you should go to the Ruins of Irezar, on the South-East of Prina, to learn about necromancy.
+1: Be strong, young #<g.man>.
+HOST_GIVE T46
+GOTO @trainingground
+
+@priest
+HOST_GIVE T3
+HOST_GIVE T7
+HOST_GIVE T11
+HOST_GIVE T104
+HOST_GIVE T3000
+HOST_GIVE T3001
+HOST_GIVE T3002
+HOST_GIVE T3003
+HOST_GIVE T3004
+HOST_GIVE T3007
+HOST_GIVE T3008
+HOST_GIVE T3009
+HOST_GIVE T3010
+HOST_GIVE T3012
+HOST_GIVE T3015
+HOST_GIVE T3018
+1: So you have chosen to become a priest.
+1: Congratulations.
+1: Prina is the best place for an ecclesiastic.
+1: Seek the grand priest in the temple.
+1: He can teach you the secrets of his order.
+1: May God help you in your quests, worshipper.
+HOST_GIVE T46
+GOTO @trainingground
+
+@knight
+HOST_GIVE T1
+HOST_GIVE T106
+HOST_GIVE T4
+HOST_GIVE T11
+HOST_GIVE T3005
+HOST_GIVE T3006
+HOST_GIVE T3007
+HOST_GIVE T3013
+HOST_GIVE T3014
+HOST_GIVE T3015
+HOST_GIVE T3016
+1: So you have chosen to become a knight.
+1: Good.
+1: Prina is the best place to learn that job.
+1: You should go to the Brotherhood of the Flaming Blade.
+1: You will find masters there who will teach you what you need to know.
+HOST_GIVE T46
+GOTO @trainingground
+
+@elementalist
+HOST_GIVE T2
+HOST_GIVE T7
+HOST_GIVE T11
+HOST_GIVE T98
+HOST_GIVE T3000
+HOST_GIVE T3008
+HOST_GIVE T3001
+HOST_GIVE T3009
+HOST_GIVE T3002
+HOST_GIVE T3010
+HOST_GIVE T3003
+HOST_GIVE T3011
+HOST_GIVE T3004
+HOST_GIVE T3012
+HOST_GIVE T3005
+HOST_GIVE T3013
+HOST_GIVE T3007
+HOST_GIVE T3015
+HOST_GIVE T3017
+1: So you have chosen to become an elementalist.
+1: Good.
+1: Any apprentice magician should go to the city of Latsha, on the West of Prina, to learn this art.
+1: May your journey be safe.
+HOST_GIVE T46
+GOTO @trainingground
+
+@mercenary
+HOST_GIVE T1
+HOST_GIVE T108
+HOST_GIVE T4
+HOST_GIVE T11
+HOST_GIVE T3000
+HOST_GIVE T3008
+HOST_GIVE T3001
+HOST_GIVE T3009
+HOST_GIVE T3004
+HOST_GIVE T3012
+HOST_GIVE T3006
+HOST_GIVE T3014
+HOST_GIVE T3021
+1: So you have chosen to become a mercenary. 
+1: Prina is the best place to learn that job.
+1: You should go to the Black Horse Tavern tonight.
+1: Be careful. That place can be dangerous.
+1: But that is the meeting place for mercenaries...
+HOST_GIVE T46
+GOTO @trainingground
+
+@rodeur
+HOST_GIVE T45
+HOST_GIVE T1
+HOST_GIVE T110
+HOST_GIVE T4
+HOST_GIVE T11
+HOST_GIVE T3004
+HOST_GIVE T3005
+HOST_GIVE T3006
+HOST_GIVE T3007
+HOST_GIVE T3012
+HOST_GIVE T3013
+HOST_GIVE T3014
+HOST_GIVE T3015
+HOST_GIVE T3016
+1: So you have chosen to become a rodeur. 
+1: Good.
+1: But do you even know their story?
+1: A long time ago, when the chaos invaded Athelias, humans united and raised an immense army under King Argoz's banner.
+1: This was the ultimate battle, that sealed the destiny of Athelias.
+1: Men and Chaos creatures kept fighting during two whole days.
+1: The soldiers could hardly stand up at the end of the battle.
+1: But victory was theirs.
+1: But when they thought they had defeated their enemy, the darkness covered the land. 
+1: A vortex was opened in the sky and the most dreadful major demon came out of the shadows. 
+1: Argoz rushed on the creature and faced it.
+1: Then began a terrible duel.
+1: Argoz was wounded, and died on the battle field.
+1: But while the demon was not ready, he succeeded in putting his sword through its heart. 
+1: The battle was won.
+1: The creatures of Chaos were pushed back.
+1: But Athelias lost its king.
+1: And the victory was short.
+1: The Chaos soon recovered its power.
+1: Men seemed to never be able to win.
+1: A regent was appointed to lead the armies: the King was dead childless.
+1: Facing the threat of chaos, the regent decided to invoke Thorn, God of blood and war.
+1: He knew that by doing that he would curse all of his descendants, but it appeared to be the only solution. 
+1: The sword of Thorn was taken out.
+1: The regent took the holy cup holding the blood of the god and drank it, and so did his most faithful companions.
+1: And together, they led the army to victory.
+1: They were fighting with the soul of Thorn.
+1: But the human heart is too weak to endure such an ordeal.
+1: The regent and his companions needed war, needed blood.
+1: Their government became tyrannical.
+1: The country was absorbed in brutality.
+WAIT 2
+1: Some knights opposed the regent when he took out the Sword of Thorn. 
+1: King Argoz always refused to come to that extremity, and his men kept their fidelity towards him, even after his death. 
+1: As they watched the land get ruled by anger and brutality, they decided to kill the regent and his minions. 
+1: They were the worthiest knights of the island, but they had to fight against an avatar of the god of war himself.
+1: The fight took place here. Most of the fighters died during the battle.
+1: At the end, only three knights and the regent remained.
+1: It was as if nothing could stop his shots. 
+1: But he stumbled and one of the knights took advantage of it and hit him on the head. 
+1: The regent fell down.
+1: In a last effort, he took his sword again, and thrust it into the ground. 
+1: Nobody has succeeded in taking it out since.
+1: A temple was built around it, and the sword of Thorn is still here.
+1: Rodeurs are the guards of the temple.
+1: They are the descendants of these knights, the companions of King Argoz.
+1: But another king has never been appointed.
+1: The sons of the regent kept ruling over Athelias.
+1: Rodeurs keep waiting, and watching.
+1: They know that this family was cursed when the sword of Thorn was taken out.
+1: No good may come from them.
+WAIT 2
+1: Courage and honor: that's what you will need to become a great rodeur.
+1: Seek their hidden temple, to the South of Athelias. 
+1: The masters and the knowledge you need to face your enemies is there, waiting for a hero to come. 
+1: May your journey be safe. 
+HOST_GIVE T45
+HOST_GIVE T46
+GOTO @trainingground
+
+@wizard
+HOST_GIVE T2
+HOST_GIVE T7
+HOST_GIVE T11
+HOST_GIVE T91
+HOST_GIVE T3000
+HOST_GIVE T3008
+HOST_GIVE T3001
+HOST_GIVE T3009
+HOST_GIVE T3002
+HOST_GIVE T3010
+HOST_GIVE T3003
+HOST_GIVE T3011
+HOST_GIVE T3004
+HOST_GIVE T3012
+HOST_GIVE T3005
+HOST_GIVE T3013
+HOST_GIVE T3007
+HOST_GIVE T3015
+HOST_GIVE T3017
+1: So you have chosen to become a wizard. 
+1: Good.
+1: Any apprentice magician should go to the city of Latsha, on the East of Prina, to learn this art.
+1: May your journey be safe.
+HOST_GIVE T46
+GOTO @trainingground
+
+@illusionist
+HOST_GIVE T2
+HOST_GIVE T7
+HOST_GIVE T11
+HOST_GIVE T92
+HOST_GIVE T3000
+HOST_GIVE T3001
+HOST_GIVE T3002
+HOST_GIVE T3003
+HOST_GIVE T3004
+HOST_GIVE T3007
+HOST_GIVE T3008
+HOST_GIVE T3009
+HOST_GIVE T3010
+HOST_GIVE T3011
+HOST_GIVE T3012
+HOST_GIVE T3015
+HOST_GIVE T3017
+1: So you have chosen to become an illusionist. 
+1: Good.
+1: Any apprentice magician should go to the city of Latsha, on the East of Prina, to learn this art.
+1: May your journey be safe.
+HOST_GIVE T46
+GOTO @trainingground
+
+@trainingground
+END

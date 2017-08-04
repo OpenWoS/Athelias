@@ -1,0 +1,56 @@
+SCENE 14700, templeinside, SCENE, "Illusory Magic Academy"
+#include include.txt
+GOTO LINK 16, 12
+;
+;--------------------------------------------------------------------------------------------------
+;
+SCENE 14701, templeinside, SCENE, "Meldinor"
+#include include.txt
+ACTOR 1, Meldinor, human93, 1, 40, 90
+IF T3993|T3988 @halloweenActors
+GOTO @nextStepAfterHalloweenActors
+
+@halloweenActors
+ACTOR 1, "Meldinor", #<spEvent.Name>-humans, 93, 40, 90
+@nextStepAfterHalloweenActors
+IF C70 @wizard
+1: Who let you in?
+1: If you're not a wizard, scat!
+1: I'm busy!
+END
+
+; Quest 1: a magic book has disapeared - inquire and discover who did that.
+; Quest 2: 
+; Quest 3: 
+
+@wizard
+ACTOR 60, "", 3, 0, 95, 15
+IF V25 @wizq1
+COMPARE #<wiz.talkIntro>, 1
+IF= @wiznewbreturn
+1: Welcome, my young apprentice.
+1: We will teach you all what you need to become a powerful mage.
+@dfgtfdhdsbsfhjdtfjfxg
+1: Come back later, we will have plenty of things to talk about.
+SET wiz.talkIntro, 1
+END
+
+@eventActorClick60
+N: Level required for the class quests:
+WAIT 1
+N: Level 25, 50, 75.
+END
+
+@wiznewbreturn
+1: Welcome back, my young apprentice.
+1: Keep going with the good training.
+GOTO @dfgtfdhdsbsfhjdtfjfxg
+
+@wizq1
+ACTOR 1, "Mad", "-  -   Mad", 1, 48, 66
+1: I have bad news, my friend: the wizard quests ain't implanted yet.
+1: Yes, Iknow: it sucks, and I'm lazy...
+1: But maybe someone will feel like writing something for them.
+1: Until then, you won't be able to do much with this char.
+END
+

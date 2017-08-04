@@ -1,0 +1,217 @@
+SCENE 110005
+@start
+IF C2 @noviceeject
+EJECT -C2
+@noviceeject2
+COMPARE #<werewolf.move>, 1
+IF= @werewolfthingymovebfsdfsf
+@werewolfthingymovebfsdfsf2
+CALL 110013@start ; horizon
+IF #999 @fightinclude.txt
+IF #998 @fightinclude.txt2
+IF #1 @110004end
+CALL 110004@start
+@110004end
+CALL 110001@start ; death
+@110001end
+CALL 110002@start ; skillz
+@110002end
+;CALL 110003@start ; merc-fights
+#include merc-fights.txt
+@110003end
+IF C8|C9 @werewolfchecker
+@110017end
+@guildChecker
+STRCMP "Anti-Gods", "#<str.uniform>"
+IF= @guildChecker1
+IF T2896 @guildChecker1bis
+@guildCheckerEnd1
+CALL 110026@start
+CALL 110027@check
+IF #12+R25 @terebdrozchicken
+GOTO @nextstepqfterinclude.txt
+
+@terebdrozchicken
+SET temp.actorX, 10
+ADD temp.actorX, %R70
+SET temp.actorY, 80
+ADD temp.actorY, %R18
+ACTOR 57, , 188, 1, #<temp.actorX>, #<temp.actorY>
+IF R10 @terebdrozchickentalk1
+@terebdrozchickenbis
+IF R15 @terebdrozchicken2
+GOTO @nextstepqfterinclude.txt
+
+@terebdrozchicken2
+SET temp.actorX, 10
+ADD temp.actorX, %R70
+SET temp.actorY, 80
+ADD temp.actorY, %R18
+ACTOR 58, , 188, 1, #<temp.actorX>, #<temp.actorY>
+IF R10 @terebdrozchickentalk2
+@terebdrozchickenbis2
+IF R10 @terebdrozchicken3
+GOTO @nextstepqfterinclude.txt
+
+@terebdrozchicken3
+SET temp.actorX, 10
+ADD temp.actorX, %R70
+SET temp.actorY, 80
+ADD temp.actorY, %R18
+ACTOR 59, , 188, 1, #<temp.actorX>, #<temp.actorY>
+IF R10 @terebdrozchickentalk3
+@terebdrozchickenbis3
+GOTO @nextstepqfterinclude.txt
+
+@terebdrozchicken4
+FIGHT 2938
+END
+
+@terebdrozchickentalk1
+SEL 57
+' Clock!
+GOTO @terebdrozchickenbis
+
+@terebdrozchickentalk2
+SEL 58
+' Clock!
+GOTO @terebdrozchickenbis2
+
+@terebdrozchickentalk3
+SEL 59
+' Clock!
+GOTO @terebdrozchicken4
+
+@noviceeject
+EJECT C2
+LOCK 1
+GOTO @noviceeject2
+
+@guildChecker1bis
+HOST_TAKE T2896
+GOTO @guildCheckerEnd1
+
+@guildChecker1
+IF T2896 @guildCheckerEnd1
+HOST_GIVE T2896
+GOTO @guildCheckerEnd1
+
+@werewolfchecker
+; CALL 110017@start ; checker for werewolves
+#include config\werewolf.checker.txt
+GOTO @110017end
+
+@werewolfthingymovebfsdfsf
+MOVE H, 75, 90, 1
+SET werewolf.move, ""
+GOTO @werewolfthingymovebfsdfsf2
+
+@fightinclude.txt
+STRCMP #<str.soul>, "SOUL 2006"
+IF= @nextstepqfterinclude.txt
+STRCMP #<str.soul>, "SOUL 3171"
+IF= @nextstepqfterinclude.txt
+STRCMP #<str.soul>, "SOUL 2465"
+IF= @nextstepqafterinclude.txt
+SET temp.cookie, #<xyws>#<gdfgd>#<rat>#<musicthingy>
+COMPARE *#<temp.cookie>, 1
+IF< @innocenttravelback
+SET temp.cookie, ""
+FIGHT2 668, 668, 668, 668, 668, 668, 668, 668
+GIVE L1
+GOTO EXIT
+
+@innocenttravelback
+SET temp.cookie, ""
+GOTO LINK #<hfghfghsssssdgdgdeathfsfaaaaa1>, #<hfghfghsssssdgdgdeathfsfaaaaa2>
+
+@fightinclude.txt2
+N: - Love, the Aerianell newby.
+COUNTDOWN 10
+WAIT 10
+STRCMP #<str.uniform>, "Dark Lotus"
+IF= 110005@fightinclude.txt2bis
+N: Good.
+WAIT 1
+GOTO LINK 0,0
+
+
+@fightinclude.txt2bis
+FIGHT2 669, 669, 669, 669, 669, 669, 669, 669
+IF WIN @fightinclude.txt3
+N: Leave #<str.uniform> if you want to play this world.
+GIVE L1
+GOTO EXIT
+
+@fightinclude.txt3
+FIGHT2 668, 668, 668, 668, 668, 668, 668, 668
+GOTO LINK 999, 0
+
+@endnochicken57
+GOTO #<scene.id>@eventActorAttack57
+END
+
+@endnochicken58
+GOTO #<scene.id>@eventActorAttack58
+END
+
+@endnochicken59
+GOTO #<scene.id>@eventActorAttack59
+END
+
+@endnochicken57b
+GOTO #<scene.id>@eventActorSpell57
+END
+
+@endnochicken58b
+GOTO #<scene.id>@eventActorSpell58
+END
+
+@endnochicken59b
+GOTO #<scene.id>@eventActorSpell59
+END
+
+@eventActorAttack57
+IF -#12 @endnochicken57
+SEL 57
+' Clock!
+IF R1+R1 @terebdrozchicken4
+END
+
+@eventActorAttack58
+IF -#12 @endnochicken58
+SEL 58
+' Clock!
+IF R1+R1 @terebdrozchicken4
+END
+
+@eventActorAttack59
+IF -#12 @endnochicken59
+SEL 59
+' Clock!
+IF R1+R1 @terebdrozchicken4
+END
+
+@eventActorSpell57
+IF -#12 @endnochicken57b
+SEL 57
+' Clock!
+IF R1+R1 @terebdrozchicken4
+END
+
+@eventActorSpell58
+IF -#12 @endnochicken58b
+SEL 58
+' Clock!
+IF R1+R1 @terebdrozchicken4
+END
+
+@eventActorSpell59
+IF -#12 @endnochicken59b
+SEL 59
+' Clock!
+IF R1+R1 @terebdrozchicken4
+END
+
+@nextstepqfterinclude.txt
+RETURN

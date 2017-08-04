@@ -1,0 +1,173 @@
+SCENE 110028
+@start
+ACTOR 1, "John Beaster", human121, 50, 90
+FACE 1, 0
+ACTOR 2, "Elise Everton", wom3, 1, 55, 95
+FACE 2, 0
+ACTOR 3, "Arctus Feral", human9, 1, 60, 90
+FACE 3, 0
+ACTOR 4, "Charles Guizar", human47, 1, 65, 93
+FACE 4, 0
+ACTOR 5, "Claire Lasor", wom65, 1, 53, 93
+FACE 5, 0
+ACTOR 6, "Sid Carol", wom24, 1, 58, 97
+FACE 6, 0
+ACTOR 7, "Effret Roland", human119, 1, 63, 92
+FACE 7, 0
+ACTOR 8, "Daz Ligerard", human111, 1, 52, 96
+FACE 8, 0
+ACTOR 9, "Emarc Skilent", human90, 1, 57, 88
+FACE 9, 0
+ACTOR 10, "Peter Afalmoon", human85, 1, 62, 95
+FACE 10, 0
+ACTOR 11, "Brent Huiter", human55, 1, 67, 98
+FACE 11, 0
+SET temp.skin, %R45
+ACTOR 12, Townsfolk, human#<temp.skin>, 1, 70, 90
+FACE 12, 0
+SET temp.skin, %R45
+ACTOR 13, Townsfolk, human#<temp.skin>, 1, 75, 90
+FACE 13, 0
+SET temp.skin, %R45
+ACTOR 14, Townsfolk, human#<temp.skin>, 1, 80, 90
+FACE 14, 0
+SET temp.skin, %R45
+ACTOR 15, Townsfolk, human#<temp.skin>, 1, 85, 90
+FACE 15, 0
+SET temp.skin, %R45
+ACTOR 16, Townsfolk, human#<temp.skin>, 1, 90, 90
+FACE 16, 0
+SET temp.skin, %R45
+ACTOR 17, Townsfolk, human#<temp.skin>, 1, 95, 90
+FACE 17, 0
+SET temp.skin, %R45
+ACTOR 18, Townsfolk, human#<temp.skin>, 1, 99, 90
+FACE 18, 0
+SET temp.skin, %R45
+ACTOR 19, Townsfolk, human#<temp.skin>, 1, 72, 85
+FACE 19, 0
+SET temp.skin, %R45
+ACTOR 20, Townsfolk, human#<temp.skin>, 1, 77, 95
+FACE 20, 0
+SET temp.skin, %R45
+ACTOR 21, Townsfolk, human#<temp.skin>, 1, 83, 85
+FACE 21, 0
+SET temp.skin, %R45
+ACTOR 22, Townsfolk, human#<temp.skin>, 1, 88, 85
+FACE 22, 0
+SET temp.skin, %R45
+ACTOR 23, Townsfolk, human#<temp.skin>, 1, 92, 95
+FACE 23, 0
+SET temp.skin, %R45
+ACTOR 24, Townsfolk, human#<temp.skin>, 1, 97, 85
+FACE 24, 0
+SET temp.skin, %R45
+ACTOR 25, Townsfolk, human#<temp.skin>, 1, 73, 95
+FACE 25, 0
+SEL 16
+' The reign of the regent is over!
+ACTOR 26, Guard, guard6, 1, 0, 95
+ACTOR 27, Guard, guard6, 1, -5, 90
+ACTOR 28, Guard, guard6, 1, -10, 85
+ACTOR 29, Guard, guard6, 1, -5, 95
+ACTOR 30, Guard, guard6, 1, -10, 90
+ACTOR 31, Guard, guard6, 1, -15, 85
+ACTOR 32, Guard, guard6, 1, -10, 95
+ACTOR 33, Guard, guard6, 1, -15, 90
+ACTOR 34, Guard, guard6, 1, -20, 85
+ACTOR 35, Guard, guard6, 1, -15, 95
+MOVE 26, 30, 95
+MOVE 27, 25, 90
+MOVE 28, 20, 85
+MOVE 29, 25, 95
+MOVE 30, 20, 90
+MOVE 31, 15, 85
+MOVE 32, 20, 95
+MOVE 33, 15, 90
+MOVE 34, 10, 85
+MOVE 35, 15, 95
+WAIT 2
+SEL 26
+' Go back home, miscreants!
+' Don't make us show you what happens to those who betray the regent!
+SEL 14
+' Betray?!
+' Just tell me who pledged alligeance to the regent here?
+SEL 16
+' The tyrany is over!
+SEL 26
+' Soldiers! Get ready!
+WAIT 2.5
+MOVE 26, 200, 90, 1
+MOVE 27, 200, 90, 1
+MOVE 28, 200, 90, 1
+MOVE 29, 200, 90, 1
+MOVE 30, 200, 90, 1
+MOVE 31, 200, 90, 1
+MOVE 32, 200, 90, 1
+MOVE 33, 200, 90, 1
+MOVE 34, 200, 90, 1
+MOVE 35, 200, 90, 1
+MOVE 1, 200, 90, 1
+MOVE 2, 200, 90, 1
+MOVE 3, 200, 90, 1
+MOVE 4, 200, 90, 1
+MOVE 5, 200, 90, 1
+MOVE 6, 200, 90, 1
+MOVE 7, 200, 90, 1
+MOVE 8, 200, 90, 1
+MOVE 9, 200, 90, 1
+MOVE 10, 200, 90, 1
+MOVE 11, 200, 90, 1
+FIGHT 143.30.95, 143.25.90, 143.20.85, 143.25.95, 143.20.90, 143.15.85, 143.20.95, 143.15.90, 143.10.85, 143.15.95, -852.50.90, -842.55.95, -843.60.90, -844.65.93, -845.53.93, -846.58.97, -847.63.92, -848.52.96, -849.57.88, -850.62.95, -851.67.98
+IF WIN @archq3fight1win
+@lose
+SEL 14
+' Run away!
+MOVE 12, 200, 90, 2
+MOVE 13, 200, 90, 2
+MOVE 14, 200, 90, 2
+MOVE 16, 200, 90, 2
+MOVE 15, 200, 90, 2
+MOVE 17, 200, 90, 2
+MOVE 18, 200, 90, 2
+MOVE 19, 200, 90, 2
+MOVE 20, 200, 90, 2
+MOVE 21, 200, 90, 2
+MOVE 22, 200, 90, 2
+MOVE 23, 200, 90, 2
+MOVE 24, 200, 90, 2
+MOVE 25, 200, 90, 2
+N: Quest failed.
+END
+
+@archq3fight1win
+MOVE 12, 200, 90, 2
+MOVE 13, 200, 90, 2
+MOVE 16, 200, 90, 2
+MOVE 15, 200, 90, 2
+MOVE 17, 200, 90, 2
+MOVE 18, 200, 90, 2
+MOVE 19, 200, 90, 2
+MOVE 20, 200, 90, 2
+MOVE 21, 200, 90, 2
+MOVE 22, 200, 90, 2
+MOVE 23, 200, 90, 2
+MOVE 24, 200, 90, 2
+MOVE 25, 200, 90, 2
+SEL 14
+' More guards arrive!
+' Run away!
+FIGHT 143, 143, 143, 143, 143, 143, 143, 143, 143, 143
+IF WIN @lastbattlewin
+N: Quest failed.
+END
+
+@lastbattlewin
+SEL 14
+' We cannot win this battle: they are too many!
+' We must retreat quickly!
+HOST_GIVE T142
+END
+
+

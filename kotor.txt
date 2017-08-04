@@ -1,0 +1,400 @@
+SCENE 13900, temple7, SCENE, "Gate"
+#include include.txt
+SET kotor2exit, "north"
+GOTO LINK 87, 2
+;
+;-------------------------------------------------------------------------
+;
+SCENE 13901, temple7, SCENE, "Gate"
+#include include.txt
+SET kotor2exit, "west"
+GOTO LINK 87, 2
+;
+;-------------------------------------------------------------------------
+;
+SCENE 13902, temple7, SCENE, "Gate"
+#include include.txt
+SET kotor2exit, "south"
+GOTO LINK 87, 2
+;
+;-------------------------------------------------------------------------
+;
+SCENE 13903, temple7, SCENE, "Gate"
+#include include.txt
+SET kotor2exit, "east"
+GOTO LINK 87, 2
+;
+;-------------------------------------------------------------------------
+;
+SCENE 13904, temple7, SCENE, "Gate"
+#include include.txt
+GOTO LINK 98, 0
+;
+;-------------------------------------------------------------------------
+;
+SCENE 13906, weapons2, SCENE, "Smithy"
+#include include.txt
+ACTOR 1, Makar, human81, 1, 40, 95
+IF T3993|T3988 @halloweenActors
+GOTO @nextStepAfterHalloweenActors
+
+@halloweenActors
+ACTOR 1, "Makar", #<spEvent.Name>-humans, 81, 40, 95
+@nextStepAfterHalloweenActors
+COMPARE #<c5talkedtoblacksmith>, 0
+IF= @firsttimeblacksmith.txt
+OFFER 132, 134, 135
+IF I1133 @ormalblacksmith
+IF Z584 @livingstone
+@ormalblacksmith
+1: Greetings, traveller.
+1: Toss me the item you want to upgrade.
+END
+
+@livingstone
+COMPARE #<chat.kotorBlacksmith>, 1
+IF @livingstone2
+1: Hey! What's that!
+1: A living stone!
+1: Those items a very powerful, you know?
+1: I could forge a great armor for you if you bring me enough stones.
+1: I'd need twenty of them to do the job.
+H: Sounds interesting...
+SET chat.kotorBlacksmith, 1
+IF Z584.20 @livingstone3
+END
+
+@livingstone2
+IF Z584.20 @livingstone4
+1: Welcome back, adventurer.
+1: Remember that I need  twenty living stones to make a magical armor.
+1: Come back when you have found all of them.
+1: But maybe you want me to upgrade your equipment now?
+END
+
+@livingstone3
+H: And I have good news: I already have the twenty stones!
+1: Fantastic!
+1: Do you want me to forge the armor now?
+GOTO @livingstoneask
+
+@livingstone4
+H: Hello.
+H: I have the twenty stones.
+1: That's great!
+1: Do you want me to forge the armor now?
+@livingstoneask
+ASK 30
+IF YES @livingstoneaskYES
+IF NO @livingstoneaskNO
+1: Pardon?
+GOTO @livingstoneask
+
+@livingstoneaskNO
+1: Alright.
+1: You know you can come back if you change your mind...
+END
+
+@livingstoneaskYES
+1: Alright.
+1: Just a moment, please.
+WAIT 1.5
+SOUND harvestgolem1
+WAIT 1
+SOUND sword2
+WAIT 0.4
+SOUND sword2
+WAIT 0.4
+SOUND sword2
+WAIT 1
+HOST_GIVE I205
+1: There.
+1: This Stone Armor is for you!
+SOUND foundItem.wav
+HOST_TAKE Z584.20
+HOST_GIVE I1133
+H: Thanks!
+END
+
+#include blacksmith.txt
+;
+;-------------------------------------------------------------------------------
+;
+SCENE 13907, alchemy, SCENE, "Library"
+#include include.txt
+ACTOR 1, Melindra, wom14, 1, 30, 90
+IF T3993|T3988 @halloweenActors
+GOTO @nextStepAfterHalloweenActors
+
+@halloweenActors
+ACTOR 1, "Melindra", #<spEvent.Name>-wom, 14, 30, 90
+@nextStepAfterHalloweenActors
+#include library.txt
+1: Welcome, adventurer.
+1: Are you looking for a specific book?
+END
+
+;
+;-------------------------------------------------------------------------------
+;
+SCENE 13908, tavern1 , SCENE, "Tavern"
+#include include.txt
+ACTOR 1, Jan, human102, 1, 30, 89
+ACTOR 2, Grosbill, human64, 1, 191, 85
+FACE 2, 0
+ACTOR 3, Albrecht, human37, 1, 115, 83
+IF T3993|T3988 @halloweenActors
+GOTO @nextStepAfterHalloweenActors
+
+@halloweenActors
+ACTOR 1, "Jan", #<spEvent.Name>-humans, 102, 30, 89
+ACTOR 2, Grosbill, #<spEvent.Name>-humans, 64, 191, 85
+FACE 2, 0
+ACTOR 3, Albrecht, #<spEvent.Name>-humans, 37, 115, 83
+@nextStepAfterHalloweenActors
+1: Hello.
+1: What do you want to drink?
+OFFER 2, 34
+IF V99 @comparemerc.firsttime
+@normalV99
+END
+
+@comparemerc.firsttime
+COMPARE #<merc.firstTime>, 1
+IF= @normalV99
+GOTO @mercfirstime.txt
+
+#include merc-firsttime.txt
+
+@eventActorClick2
+SOUND sword1.wav
+SET temp.currentMerc, 2915
+#include merc-alreadyHired.txt
+@nextstepaftermercalreadyhired2915
+ACTOR 20, , merc2915, 0, 50, 50
+ACTOR 21, , hire, 0, 40, 75
+ACTOR 22, , cancel, 0, 60, 75
+END
+
+@eventActorClick3
+SOUND sword1.wav
+SET temp.currentMerc, 2909
+#include merc-alreadyHired.txt
+@nextstepaftermercalreadyhired2909
+ACTOR 20, , merc2909, 0, 50, 50
+ACTOR 21, , hire, 0, 40, 75
+ACTOR 22, , cancel, 0, 60, 75
+END
+
+#include merc-hire.txt
+;
+;-------------------------------------------------------------------------------
+;
+SCENE 13909, templeinside7, SCENE, "Temple"
+#include include.txt
+ACTOR 1, "Piotr", human142, 1, 38, 100
+POSE 1, 1, 4
+OFFER 37
+GIVE L1
+GIVE H5000
+GIVE M5000
+1: Welcome to the temple, adventurer.
+1: Feel free to stay here and relax as long as you want.
+END
+;
+;-------------------------------------------------------------------------------
+;
+SCENE 13910, alchemy, SCENE, "Alchemist"
+#include include.txt
+ACTOR 1, Igor, human56, 1, 35, 90
+OFFER 1, 3, 4, 7, 13, 29, 30, 31, 32, 33, 36, 38, 39
+IF I1140 @nextstepafterdemonshield
+COMPARE #<chat.remorhazTrophiesmake>, 1
+IF= @remorhazmakemake
+IF Z237 @remorhazmake?1
+IF Z586 @remorhazmake?2
+IF Z74 @remorhazmake?3
+@nextstepafterdemonshield
+1: Let me guess!
+1: You're looking for some potions, right?
+END
+
+@remorhazmake?1
+1: What a nice surprise!
+1: A %Z237!
+GOTO @remorhazmake?4
+
+@remorhazmake?2
+1: What a nice surprise!
+1: A %Z586!
+GOTO @remorhazmake?4
+
+@remorhazmake?3
+1: What a nice surprise!
+1: An %Z74!
+GOTO @remorhazmake?4
+
+@remorhazmake?4
+1: Listen, I need a %Z237, a %Z586, and an %Z74 for... well... personal stuff.
+1: I have this old magical shield I don't use.
+1: If you bring me what I'm looking for, I can exchange it for the items.
+SET chat.remorhazTrophiesmake, 1
+IF Z237+Z586+Z74 @alreadyhaveremorhaz
+END
+
+@alreadyhaveremorhaz
+H: I already ave the stuff you need.
+1: Excellent!
+1: Do you accept the deal?
+@alreadyhaveremorhazask
+ASK 300
+IF YES @alreadyhaveremorhazaskYES
+IF NO @alreadyhaveremorhazaskNO
+1: Sorry?
+GOTO @alreadyhaveremorhazask
+
+@alreadyhaveremorhazaskYES
+1: Great!
+1: Here is the magical shield!
+SOUND foundItem.wav
+HOST_TAKE Z237
+HOST_TAKE Z586
+HOST_TAKE Z74
+HOST_GIVE I1140
+END
+
+@alreadyhaveremorhazaskNO
+1: That was a good deal...
+1: Come back if you change your mind.
+END
+
+@remorhazmakemake
+IF Z237+Z586+Z74 @alreadyhaveremorhaz2
+1: Welcome back, adventurer.
+1: Remember: I need a %Z237, a %Z586, and an %Z74.
+1: You'll be well rewarded if you can find that.
+END
+
+@alreadyhaveremorhaz2
+H: Greetings, alchemist.
+H: I have what you've asked for.
+1: Excellent!
+1: Do you accept the deal?
+1: Do you want to exchange them for a Demon Skin Shield?
+GOTO @alreadyhaveremorhazask
+;
+;-------------------------------------------------------------------------------
+;
+SCENE 13911, houseinside1, SCENE,  "Shaman"
+#include include.txt
+ACTOR 1, Bardol, trib11, 1, 40, 85
+CALL 110009@start
+END
+;
+;-------------------------------------------------------------------------------
+;
+SCENE 13912, houseinside1, SCENE,  "Summoner"
+#include include.txt
+ACTOR 1, Aldernal, human34, 1, 47, 74
+1: Welcome adventurer. 
+COMPARE #<monstersSummoningChat>, 1
+IF= @return
+1: I am a Master Summoner of Kotor.
+1: If you want, I can summon a random monster you can fight.
+1: Of course, I don't do that for free.
+1: I ask 10000 Tomans per summon.
+SET monstersSummoningChat, 1
+@return
+1: Do you want me to summon a monster?
+@ask
+ASK 300
+IF YES @yes
+IF NO @no
+1: I don't hear you...
+GOTO @ask
+
+@yes
+IF G10000 @summon
+1: Sorry but you don't have enough money.
+END
+
+@no
+1: Fine.
+@end
+END
+
+@summon
+SET monster.id, %R3999
+STRCMP #<monster.name>, ""
+IF= @summon
+COMPARE #<monster.id>, 667
+IF= @summon
+COMPARE #<monster.id>, 668
+IF= @summon
+COMPARE #<monster.level>, 1
+IF< @summon
+TAKE G10000
+1: Here we go!
+FIGHT #<monster.id>
+IF LOSE @end
+CALL 2@reward.txt called
+1: Do you want me to summon another monster?
+GOTO @ask
+;
+;-------------------------------------------------------------------------------
+;
+SCENE 13913, houseinside1, SCENE,  "Summoner"
+#include include.txt
+ACTOR 1, Einbrech, human40, 1, 47, 74
+1: Welcome adventurer. 
+COMPARE #<monstersSummoningChat2>, 1
+IF= @return
+1: I am the Greatest Summoner of Kotor.
+1: If you want, I can summon powerful monsters you can fight.
+1: Of course, I don't do that for free.
+1: I ask 100000 Tomans per summon.
+SET monstersSummoningChat2, 1
+@return
+1: Do you want me to summon a monster?
+@ask
+ASK 300
+IF YES @yes
+IF NO @no
+1: I don't hear you...
+GOTO @ask
+
+@yes
+IF G100000 @summon
+1: Sorry but you don't have enough money.
+END
+
+@no
+1: Fine.
+@end
+END
+
+@summon
+SET monster.id, %R3999
+STRCMP #<monster.alignment>, ""
+IF= @summon
+STRSTR #<monster.alignment>, "boss"
+IF> @summon2
+GOTO @summon
+
+@summon2
+1: Here we go!
+TAKE G100000
+FIGHT #<monster.id>
+IF LOSE @end
+CALL 2@reward.txt called
+1: Do you want me to summon another monster?
+GOTO @ask
+;
+;-------------------------------------------------------------------------------
+;
+
+
+
+
+
+

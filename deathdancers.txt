@@ -1,0 +1,675 @@
+SCENE 500, mangeas1, SCENE, "To Mangeas"
+#include include.txt
+GOTO LINK 13, 12
+;
+;-----------------------------------------------------------------------------------------------
+;
+SCENE 501, mangeas1 , SCENE, "Mistress Temal's"
+ACTOR 1, "Mistress Temal", elf9, 1, 17, 78
+IF T3993|T3988 @halloweenActors
+GOTO @nextStepAfterHalloweenActors
+
+@halloweenActors
+ACTOR 1, "Mistress Temal", #<spEvent.Name>-elf, 9, 17, 78
+@nextStepAfterHalloweenActors
+#include include.txt
+IF -C60 @isnot
+ACTOR 60, "", 3, 0, 95, 15
+IF I291 @endpainting
+IF V99+I290-I291 @painting10
+IF V90+I289-I290 @painting9
+IF V80+I288-I289 @painting8
+IF V70+I287-I288 @painting7
+IF V60+I286-I287 @painting6
+IF V50+I285-I286 @painting5
+IF V40+I284-I285 @painting4
+IF V30+I283-I284 @painting3
+IF V20+I282-I283 @painting2
+IF V10+I280-I282 @painting1
+IF -T1015 @firsttime
+1: Welcome, %1.
+1: You have to keep training and learn more before I could help you again.
+1: Come back when you're more advanced, young death dancer.
+END
+
+@eventActorClick60
+N: You can get new war paintings every 10 levels from level 1 to level 99.
+WAIT 2
+N: Every time, you need to find and kill a specific monster and bring its blood to the Brotherhood.
+END
+
+@endpainting
+1: Welcome back, hero.
+1: I am glad that our order counts a new master.
+END
+
+@firsttime
+1: Hello, young death dancer.
+1: I am Temal, mistress of the elven arcana.
+1: As you probably know, Death Dancers do not wear any armor.
+1: But they have magical paintings to help and protect them, drawn with the blood of their enemies.
+1: I can draw the symbol of the worshipers on your torso.
+1: Please, sit down here.
+MOVE 1, #<num.hostX>, #<num.hostY>
+WAIT 8
+FACE 1, 2
+N: She draws magical paintings on your torso with the blood of a salamander.
+WAIT 1
+MOVE 1, 17, 78
+FACE 1, 2
+WAIT 2
+1: Here you go.
+HOST_GIVE I280
+SOUND FoundItem.wav
+HOST_GIVE T1015
+END
+
+@isnot
+1: This is not your place, adventurer.
+1: I cannot help those who are not a part of our order.
+1: Sorry.
+END
+
+@painting1
+COMPARE #<painting>, 0
+IF> @painting1.1
+1: Welcome back.
+1: You are experienced enough to allow me to draw new magical paintings.
+1: Bring me some bat blood and I'll do the job.
+SET painting, 1
+END
+
+@painting1.1
+IF I3000 @painting1.2
+1: Welcome back, %1.
+1: Bring me some bat blood if you want me to draw new symbols.
+END
+
+@painting1.2
+H: Hello again, Mistress Temal.
+H: I have the blood.
+1: Excellent.
+1: Sit down and wait a while so I can draw magical symbols for you.
+MOVE 1, #<num.hostX>, #<num.hostY>
+WAIT 8
+FACE 1, 2
+N: She draws magical paintings on your torso with the blood of a bat.
+WAIT 1
+HOST_GIVE I282
+SOUND FoundItem.wav
+HOST_TAKE I3000
+MOVE 1, 17, 78
+WAIT 2
+FACE 1, 2
+1: Here you go.
+1: May they protect you well.
+END
+
+@painting2
+COMPARE #<painting>, 2
+IF= @painting2.1
+1: Welcome back.
+1: You are experienced enough to allow me to draw new magical paintings.
+1: Bring me some snake blood and I'll do the job.
+SET painting, 2
+END
+
+@painting3
+COMPARE #<painting>, 3
+IF= @painting3.1
+1: Welcome back.
+1: You are experienced enough to allow me to draw new magical paintings.
+1: Bring me some imp blood and I'll do the job.
+SET painting, 3
+END
+
+@painting4
+COMPARE #<painting>, 4
+IF= @painting4.1
+1: Welcome back.
+1: You are experienced enough to allow me to draw new magical paintings.
+1: Bring me some young ent blood and I'll do the job.
+SET painting, 4
+END
+
+@painting5
+COMPARE #<painting>, 5
+IF= @painting5.1
+1: Welcome back.
+1: You are experienced enough to allow me to draw new magical paintings.
+1: Bring me some red newt blood and I'll do the job.
+SET painting, 5
+END
+
+@painting6
+COMPARE #<painting>, 6
+IF= @painting6.1
+1: Welcome back.
+1: You are experienced enough to allow me to draw new magical paintings.
+1: Bring me some baby wyrm blood and I'll do the job.
+SET painting, 6
+END
+
+@painting7
+COMPARE #<painting>, 7
+IF= @painting7.1
+1: Welcome back.
+1: You are experienced enough to allow me to draw new magical paintings.
+1: Bring me some unicorn blood and I'll do the job.
+SET painting, 7
+END
+
+@painting8
+COMPARE #<painting>, 8
+IF= @painting8.1
+1: Welcome back.
+1: You are experienced enough to allow me to draw new magical paintings.
+1: Bring me some giant blood and I'll do the job.
+SET painting, 8
+END
+
+@painting9
+COMPARE #<painting>, 9
+IF= @painting9.1
+1: Welcome back.
+1: You are experienced enough to allow me to draw new magical paintings.
+1: Bring me some titan blood and I'll do the job.
+SET painting, 9
+END
+
+@painting10
+1: Welcome back, %1
+COMPARE #<painting>, 21
+IF= @backdfgdghdfgfggdgg
+COMPARE #<painting>, 10
+IF= @backdfgdghdfg
+1: Your training is almost achieved.
+1: I can draw new paintings, but you won't have to fight a common monster this time.
+1: You will have to defeat Thorn's avatar, the God of War.
+1: Do you accept the challenge?
+WAIT 2
+SOUND sword1.wav
+@menudfhgfhgf
+MENU "Yes I do=@thornfight", "No I don't=@nofghfgh"
+SOUND thud.wav
+GOTO @menudfhgfhgf
+
+@backdfgdghdfgfggdgg
+1: Do you want to try again?
+WAIT 1
+GOTO @menudfhgfhgf
+
+@backdfgdghdfg
+1: To you want to try to defeat Thorn's avatar now?
+WAIT 1
+GOTO @menudfhgfhgf
+
+@nofghfgh
+SOUND sword1.wav
+H: I think I need some more training.
+1: Wise choice.
+1: Come back when you're ready.
+SET painting, 10
+END
+
+@thornfight
+SOUND sword1.wav
+FLAGS 131248
+EJECT C60
+LOCK 1
+1: Keep the faith!
+COLOR 2013
+WEATHER 9013
+FX 5
+WAIT 0.5
+COLOR 2014
+WAIT 1
+N: Mistress Temal summons Thorn's avatar!
+WAIT 1
+COLOR 0
+WEATHER 0
+FX 0
+FIGHT 348
+IF WIN @hgfhsfhsfghsfhsseromp
+1: That's not that important, %1.
+1: You cannot be victorious all the time.
+1: Come back when you think you're ready.
+SET painting, 21
+END
+
+@hgfhsfhsfghsfhsseromp
+1: Congratulations, hero!
+1: You are a master of our order!
+1: Let me draw new paintings on your torso with Thorn's blood
+MOVE 1, #<num.hostX>, #<num.hostY>
+WAIT 8
+FACE 1, 2
+N: She draws magical paintings on your torso with Thorn's blood.
+WAIT 1
+HOST_GIVE I291
+SOUND FoundItem.wav
+MOVE 1, 17, 78
+WAIT 2
+FACE 1, 2
+1: Here you go.
+1: May they protect you well, hero.
+END
+
+@painting2.1
+IF I3001 @painting2.2
+1: Welcome back, %1.
+1: Bring me some snake blood if you want me to draw new symbols.
+END
+
+@painting3.1
+IF I3002 @painting3.2
+1: Welcome back, %1.
+1: Bring me some imp blood if you want me to draw new symbols.
+END
+
+@painting4.1
+IF I3003 @painting4.2
+1: Welcome back, %1.
+1: Bring me some young ent blood if you want me to draw new symbols.
+END
+
+@painting5.1
+IF I3004 @painting5.2
+1: Welcome back, %1.
+1: Bring me some red newt blood if you want me to draw new symbols.
+END
+
+@painting6.1
+IF I3005 @painting6.2
+1: Welcome back, %1.
+1: Bring me some baby wyrm blood if you want me to draw new symbols.
+END
+
+@painting7.1
+IF I3006 @painting7.2
+1: Welcome back, %1.
+1: Bring me some unicorn blood if you want me to draw new symbols.
+END
+
+@painting8.1
+IF I3007 @painting8.2
+1: Welcome back, %1.
+1: Bring me some giant blood if you want me to draw new symbols.
+END
+
+@painting9.1
+IF I3008 @painting9.2
+1: Welcome back, %1.
+1: Bring me some titan blood if you want me to draw new symbols.
+END
+
+@painting10.1
+N: Remind me to implant the label "painting10.1" in this scene please 
+N: If you read that it is because I forgot >.<
+N: Leave a message on Athelias BBS, please (http://athelias.biz/forums - easy, eh!)
+END
+
+@painting2.2
+H: Hello again, Mistress Temal.
+H: I have the blood.
+1: Excellent.
+1: Sit down and wait a while so I can draw magical symbols for you.
+MOVE 1, #<num.hostX>, #<num.hostY>
+WAIT 8
+FACE 1, 2
+N: She draws magical paintings on your torso with the blood of a snake.
+WAIT 1
+HOST_GIVE I283
+SOUND FoundItem.wav
+HOST_TAKE I3001
+MOVE 1, 17, 78
+WAIT 2
+FACE 1, 2
+1: Here you go.
+1: May they protect you well.
+END
+
+@painting3.2
+H: Hello again, Mistress Temal.
+H: I have the blood.
+1: Excellent.
+1: Sit down and wait a while so I can draw magical symbols for you.
+MOVE 1, #<num.hostX>, #<num.hostY>
+WAIT 8
+FACE 1, 2
+N: She draws magical paintings on your torso with the blood of an imp.
+WAIT 1
+HOST_GIVE I284
+SOUND FoundItem.wav
+HOST_TAKE I3002
+MOVE 1, 17, 78
+WAIT 2
+FACE 1, 2
+1: Here you go.
+1: May they protect you well.
+END
+
+@painting4.2
+H: Hello again, Mistress Temal.
+H: I have the blood.
+1: Excellent.
+1: Sit down and wait a while so I can draw magical symbols for you.
+MOVE 1, #<num.hostX>, #<num.hostY>
+WAIT 8
+FACE 1, 2
+N: She draws magical paintings on your torso with the blood of an ent.
+WAIT 1
+HOST_GIVE I285
+SOUND FoundItem.wav
+HOST_TAKE I3003
+MOVE 1, 17, 78
+WAIT 2
+FACE 1, 2
+1: Here you go.
+1: May they protect you well.
+END
+
+@painting5.2
+H: Hello again, Mistress Temal.
+H: I have the blood.
+1: Excellent.
+1: Sit down and wait a while so I can draw magical symbols for you.
+MOVE 1, #<num.hostX>, #<num.hostY>
+WAIT 8
+FACE 1, 2
+N: She draws magical paintings on your torso with the blood of a red newt.
+WAIT 1
+HOST_GIVE I286
+SOUND FoundItem.wav
+HOST_TAKE I3004
+MOVE 1, 17, 78
+WAIT 2
+FACE 1, 2
+1: Here you go.
+1: May they protect you well.
+END
+
+@painting6.2
+H: Hello again, Mistress Temal.
+H: I have the blood.
+1: Excellent.
+1: Sit down and wait a while so I can draw magical symbols for you.
+MOVE 1, #<num.hostX>, #<num.hostY>
+WAIT 8
+FACE 1, 2
+N: She draws magical paintings on your torso with the blood of a baby wyrm.
+WAIT 1
+HOST_GIVE I287
+SOUND FoundItem.wav
+HOST_TAKE I3005
+MOVE 1, 17, 78
+WAIT 2
+FACE 1, 2
+1: Here you go.
+1: May they protect you well.
+END
+
+@painting7.2
+H: Hello again, Mistress Temal.
+H: I have the blood.
+1: Excellent.
+1: Sit down and wait a while so I can draw magical symbols for you.
+MOVE 1, #<num.hostX>, #<num.hostY>
+WAIT 8
+FACE 1, 2
+N: She draws magical paintings on your torso with the blood of an unicorn.
+WAIT 1
+HOST_GIVE I288
+SOUND FoundItem.wav
+HOST_TAKE I3006
+MOVE 1, 17, 78
+WAIT 2
+FACE 1, 2
+1: Here you go.
+1: May they protect you well.
+END
+
+@painting8.2
+H: Hello again, Mistress Temal.
+H: I have the blood.
+1: Excellent.
+1: Sit down and wait a while so I can draw magical symbols for you.
+MOVE 1, #<num.hostX>, #<num.hostY>
+WAIT 8
+FACE 1, 2
+N: She draws magical paintings on your torso with the blood of a giant.
+WAIT 1
+HOST_GIVE I289
+SOUND FoundItem.wav
+HOST_TAKE I3007
+MOVE 1, 17, 78
+WAIT 2
+FACE 1, 2
+1: Here you go.
+1: May they protect you well.
+END
+
+@painting9.2
+H: Hello again, Mistress Temal.
+H: I have the blood.
+1: Excellent.
+1: Sit down and wait a while so I can draw magical symbols for you.
+MOVE 1, #<num.hostX>, #<num.hostY>
+WAIT 8
+FACE 1, 2
+N: She draws magical paintings on your torso with the blood of a titan.
+WAIT 1
+HOST_GIVE I290
+SOUND FoundItem.wav
+HOST_TAKE I3008
+MOVE 1, 17, 78
+WAIT 2
+FACE 1, 2
+1: Here you go.
+1: May they protect you well.
+END
+;
+;-------------------------------------------------------------------------------------------
+;
+SCENE 502, cave1 , SCENE, "Grotto"
+#include include.txt
+COLOR 2002
+COLOR 2013
+COLOR 13
+IF S671 @ddend
+IF T1017 @test1
+IF T1019 @test2
+IF T1021 @test3
+N: The grotto seems to be empty.
+END
+
+@LOSE
+H: Stupid test!
+END
+
+@test3
+HOST_GIVE T4000
+EJECT T4000
+TAKE T4000
+LOCK 1
+H: Let's be careful this time
+FIGHT 72.#<num.hostX>.#<num.hostY>
+IF LOSE @LOSE
+H:Hmm
+HOST_GIVE T1022
+HOST_TAKE T1021
+END
+
+@test2
+HOST_GIVE T4000
+EJECT T4000
+TAKE T4000
+LOCK 1
+H: What's that?!
+FIGHT 71
+IF LOSE @LOSE
+H:Hmm
+HOST_GIVE T1020
+HOST_TAKE T1019
+END
+
+@test1
+H: What's the f***?!
+FIGHT 73
+IF LOSE @LOSE
+HOST_GIVE T1018
+HOST_TAKE T1017
+H:...
+END
+
+@ddend
+COLOR 0
+COLOR 2000
+COLOR 2002
+N: The grotto seems to be empty.
+END
+;
+;----------------------------------------------------------------------------------------------------------------------------------------------
+;
+SCENE 503, mangeas1 , SCENE, "Master Alendil's"
+ACTOR 1, "Master Alendil", elf12, 1, 17, 78
+IF T3993|T3988 @halloweenActors
+GOTO @nextStepAfterHalloweenActors
+
+@halloweenActors
+ACTOR 1, "Master Alendil", #<spEvent.Name>-elf, 12, 17, 78
+@nextStepAfterHalloweenActors
+#include include.txt
+IF C2+T3968-J113 @supernewbquest
+IF -C60 @isnot
+ACTOR 60, "", 3, 0, 95, 15
+IF -T1016 @fitsttime
+IF V30-S661 @spells1
+IF V60-S666 @spells2
+IF V90-S671 @spells3
+1: Welcome, %1.
+1: Feel free to stay and relax.
+END
+
+@supernewbquest
+1: Prepare yourself to die!
+WAIT 2.5
+MOVE 1, 150, 150, 1
+FIGHT 2921.17.78
+END
+
+@isnot
+1: Welcome foreigner.
+1: I am sorry but i cannot help you.
+1: I am not familiar with your art.
+END
+
+@eventActorClick60
+N: Level required for the Death Dancers tests:
+WAIT 1
+N: Level 30, 60, 90.
+END
+
+@fitsttime
+1: Hello, young death dancer.
+1: I am Alendil, master of the battle magic.
+1: I could teach you some secret spells of our order.
+1: but first you need to train yourself.
+1: May the gods help you.
+HOST_GIVE T1016
+END
+
+@spells1
+IF T1018 @spells1rew
+IF T1017 @backish
+1: Hello, %1.
+1: Your power grew up since your last visit.
+1: But a Death Dancer must know how to keep the control of his destiny and keep quiet under any circumstances.
+1: Many hearts were corrupted by the chaos.
+1: We do not want this to happen to the members of our order.
+1: If you think you are enough prepared, you can try and pass our first test.
+1: If you choose so, lead to the grotto, and keep the faith.
+HOST_GIVE T1017
+END
+
+@spells1rew
+1: Congratulations, %1!
+1: You have successfully passed the test.
+1: I can teach you some of the secret spells of the death dancers.
+1: We use to summon the spirits of the ancients to help us in battles.
+1: You will soon be able to summon the spirit of an elder.
+HOST_GIVE S672
+HOST_GIVE S661
+HOST_GIVE S662
+HOST_GIVE S663
+HOST_GIVE S664
+HOST_GIVE S665
+SOUND bell2.wav
+WAIT 1
+N: He teaches you how to summon an elder.
+WAIT 0.5
+N: He teaches you how to summon the spirit of the Gods of Athelias.
+END
+
+@spells2
+IF T1020 @spels2rew
+IF T1019 @backish
+1: Hello, %1.
+1: During all this time spent among us, you never disappointed us.
+1: I will let you pass the second test.
+1: If you can prove your worth, we will be honored to receive you as a veteran of the order.
+1: Lead to the grotto, and keep the faith.
+HOST_GIVE T1019
+END
+
+@spels2rew
+1: Congratulations, %1: you have successfully passed the test.
+1: Remember that all what you have seen there was for you, and only you.
+1: You should meditate on this.
+WAIT 2
+1: You are now ready to learn some more spells of the order.
+1: Listen carefully.
+HOST_GIVE S666
+HOST_GIVE S667
+HOST_GIVE S668
+HOST_GIVE S669
+HOST_GIVE S670
+SOUND bell2.wav
+WAIT 1
+N: He teaches you how to cast a divine curse on your opponents.
+END
+
+@spells3
+IF T1021 @backish
+IF T1022 @spell3rew
+1: Welcome back, %1.
+1: Let me congratulate you.
+1: You are now one of the most valiant and respected member of the order.
+1: I think it is time for you to pass the ultimate test, a test reserved to the mightiest heroes.
+1: Lead to the cave, and remember : keep the faith.
+HOST_GIVE T1021
+END
+
+@spell3rew
+1: Congratulations, %1!
+1: Only the mightiest members of the order successfully passed this test.
+1: You are now one of them.
+1: A hero among the heroes!
+1: Soon, I won't have anything more to teach you.
+1: Although, this spell will probably help you.
+WAIT 1
+HOST_GIVE S671
+SOUND bell2.wav
+HOST_GIVE T4001
+N: He teaches you how to numb the hands of your opponents.
+END
+
+@backish
+1: Welcome back, %1.
+1: I see you didn't pass the test yet.
+1: You are right.
+1: Wait till you feel enough self-confident to go and pass it.
+END
+;
+;-------------------------------------------------------------------------------------------
+;

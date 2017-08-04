@@ -1,0 +1,754 @@
+; ADD the script for MENU and IFs;
+; check the issue with the minus sign in IF commands
+;
+@RunningScript
+N: Script ID?
+ASK #<AHS.pref.ASKduration> 1
+IF Qcancel @madstoolcancel
+SET temp.scriptID, scriptName#<lastAsk>
+SET temp.ID, #<lastAsk>
+SET temp.scriptRow, 0
+@emulatorMain
+ADD temp.scriptRow, 1
+SET temp.scriptLine, madstoolScript.#<temp.ID>.#<temp.scriptRow>
+STRCMP *#<temp.scriptLine>, SAVED
+IF= @RunningScriptOver
+GOTO @emulatingMainBis
+
+@RunningScriptOver
+END
+
+@emulatingMainBis
+SET temp.scriptCom, madstoolCom.#<temp.ID>.#<temp.scriptRow>
+GOTO @2*#<temp.scriptCom>
+
+@emulatorSettingArgs
+SET temp.argThingy, 1
+@emulatorSettingArgsBis
+SET temp.scriptArg#<temp.argThingy>, madstoolArg.#<temp.ID>.#<temp.scriptRow>.#<temp.argThingy>
+COMPARE #<temp.argThingy>, #<arg0>
+IF= @emulatorSettingArgsDone
+ADD temp.argThingy, 1
+GOTO @emulatorSettingArgsBis
+
+@emulatorSettingArgsDone
+RETURN
+;
+; ------------------------------------ COMMANDS -----------------------------
+;
+@SAVED
+END
+
+@2LABEL
+GOTO @emulatorMain
+
+@2ACTOR 
+CALL 1000000@emulatorSettingArgs 8
+ACTOR *#<temp.scriptArg1>, *#<temp.scriptArg2>, *#<temp.scriptArg3>, *#<temp.scriptArg4>, *#<temp.scriptArg5>, *#<temp.scriptArg6>, *#<temp.scriptArg7>, *#<temp.scriptArg8>
+GOTO @emulatorMain
+
+@2ADD
+CALL 1000000@emulatorSettingArgs 2
+ADD *#<temp.scriptArg1>, *#<temp.scriptArg2>
+GOTO @emulatorMain
+
+@2AND 
+CALL 1000000@emulatorSettingArgs 2
+AND *#<temp.scriptArg1>, *#<temp.scriptArg2>
+GOTO @emulatorMain
+
+@2ASK
+CALL 1000000@emulatorSettingArgs 2
+ASK *#<temp.scriptArg1> *#<temp.scriptArg2>
+GOTO @emulatorMain
+
+@2BKGND
+CALL 1000000@emulatorSettingArgs 1
+BKGND *#<temp.scriptArg1>
+GOTO @emulatorMain
+
+@2CALL
+CALL 1000000@emulatorSettingArgs 12
+CALL *#<temp.scriptArg1>@*#<temp.scriptArg2>
+GOTO @emulatorMain
+
+@2COLOR
+CALL 1000000@emulatorSettingArgs 1
+COLOR *#<temp.scriptArg1>
+GOTO @emulatorMain
+
+@2COMPARE
+GOTO @emulatorMain
+
+@2COUNTDOWN
+CALL 1000000@emulatorSettingArgs 1
+COUNTDOWN *#<temp.scriptArg1>
+GOTO @emulatorMain
+
+@2DIV
+CALL 1000000@emulatorSettingArgs 2
+DIV *#<temp.scriptArg1>, *#<temp.scriptArg2>
+GOTO @emulatorMain
+
+@2EJECT
+CALL 1000000@emulatorSettingArgs 1
+EJECT *#<temp.scriptArg1>
+GOTO @emulatorMain
+
+@2END
+END
+
+@2F_ADD
+CALL 1000000@emulatorSettingArgs 2
+F_ADD *#<temp.scriptArg1>, *#<temp.scriptArg2>
+GOTO @emulatorMain
+
+@2F_DIV
+CALL 1000000@emulatorSettingArgs 2
+F_DIV *#<temp.scriptArg1>, *#<temp.scriptArg2>
+GOTO @emulatorMain
+
+@2F_MUL
+CALL 1000000@emulatorSettingArgs 2
+F_MUL *#<temp.scriptArg1>, *#<temp.scriptArg2>
+GOTO @emulatorMain
+
+@2F_SUB
+CALL 1000000@emulatorSettingArgs 2
+F_SUB *#<temp.scriptArg1>, *#<temp.scriptArg2>
+GOTO @emulatorMain
+
+@2FACE
+CALL 1000000@emulatorSettingArgs 2
+FACE *#<temp.scriptArg1>, *#<temp.scriptArg2>
+GOTO @emulatorMain
+
+@2FIGHT
+CALL 1000000@emulatorSettingArgs 32
+FIGHT *#<temp.scriptArg1>, *#<temp.scriptArg2>, *#<temp.scriptArg3>, *#<temp.scriptArg4>, *#<temp.scriptArg5>, *#<temp.scriptArg6>, *#<temp.scriptArg7>, *#<temp.scriptArg8>, *#<temp.scriptArg9>, *#<temp.scriptArg10>, *#<temp.scriptArg11>, *#<temp.scriptArg12>, *#<temp.scriptArg13>, *#<temp.scriptArg14>, *#<temp.scriptArg15>, *#<temp.scriptArg16>, *#<temp.scriptArg17>, *#<temp.scriptArg18>, *#<temp.scriptArg19>, *#<temp.scriptArg20>, *#<temp.scriptArg21>, *#<temp.scriptArg22>, *#<temp.scriptArg23>, *#<temp.scriptArg24>, *#<temp.scriptArg25>, *#<temp.scriptArg26>, *#<temp.scriptArg27>, *#<temp.scriptArg28>, *#<temp.scriptArg29>, *#<temp.scriptArg30>, *#<temp.scriptArg31>, *#<temp.scriptArg32>
+GOTO @emulatorMain
+
+@2FIGHT2
+CALL 1000000@emulatorSettingArgs 32
+FIGHT2 *#<temp.scriptArg1>, *#<temp.scriptArg2>, *#<temp.scriptArg3>, *#<temp.scriptArg4>, *#<temp.scriptArg5>, *#<temp.scriptArg6>, *#<temp.scriptArg7>, *#<temp.scriptArg8>, *#<temp.scriptArg9>, *#<temp.scriptArg10>, *#<temp.scriptArg11>, *#<temp.scriptArg12>, *#<temp.scriptArg13>, *#<temp.scriptArg14>, *#<temp.scriptArg15>, *#<temp.scriptArg16>, *#<temp.scriptArg17>, *#<temp.scriptArg18>, *#<temp.scriptArg19>, *#<temp.scriptArg20>, *#<temp.scriptArg21>, *#<temp.scriptArg22>, *#<temp.scriptArg23>, *#<temp.scriptArg24>, *#<temp.scriptArg25>, *#<temp.scriptArg26>, *#<temp.scriptArg27>, *#<temp.scriptArg28>, *#<temp.scriptArg29>, *#<temp.scriptArg30>, *#<temp.scriptArg31>, *#<temp.scriptArg32>
+GOTO @emulatorMain
+
+@2FLAGS
+CALL 1000000@emulatorSettingArgs 1
+FLAGS *#<temp.scriptArg1>
+GOTO @emulatorMain
+
+@2FX
+CALL 1000000@emulatorSettingArgs 1
+FX *#<temp.scriptArg1>
+GOTO @emulatorMain
+
+@2GAME
+CALL 1000000@emulatorSettingArgs 1
+GAME *#<temp.scriptArg1>
+GOTO @emulatorMain
+
+@2GIVE
+CALL 1000000@emulatorSettingArgs 1
+GIVE *#<temp.scriptArg1>
+GOTO @emulatorMain
+
+@2GOTO 
+CALL 1000000@emulatorSettingArgs 2
+STRSTR *#<temp.scriptArg1>, "1"
+IF> @2GOTOscene
+STRSTR *#<temp.scriptArg1>, "2"
+IF> @2GOTOscene
+STRSTR *#<temp.scriptArg1>, "3"
+IF> @2GOTOscene
+STRSTR *#<temp.scriptArg1>, "4"
+IF> @2GOTOscene
+STRSTR *#<temp.scriptArg1>, "5"
+IF> @2GOTOscene
+STRSTR *#<temp.scriptArg1>, "6"
+IF> @2GOTOscene
+STRSTR *#<temp.scriptArg1>, "7"
+IF> @2GOTOscene
+STRSTR *#<temp.scriptArg1>, "8"
+IF> @2GOTOscene
+STRSTR *#<temp.scriptArg1>, "9"
+IF> @2GOTOscene
+STRSTR *#<temp.scriptArg1>, "0"
+IF> @2GOTOscene
+SET temp.scriptRow2, 0
+@checkScriptLabel2
+ADD temp.scriptRow2, 1
+SET temp.thingy, madstoolScript.#<temp.ID>.#<temp.scriptRow2>
+STRCMP *#<temp.thingy>, "@*#<temp.scriptArg2>"
+IF= @2IFscriptFound
+STRCMP *#<temp.thingy>, "SAVED"
+IF= @2GOTOscriptNotFound
+GOTO @checkScriptLabel2
+
+@2GOTOscriptNotFound
+N: Label not found.
+N: Continuing script.
+GOTO @emulatorMain
+
+@2GOTOscriptFound
+SET temp.scriptRow, #<temp.scriptRow2>
+GOTO @emulatorMain
+
+@2GOTOscene
+GOTO *#<temp.scriptArg1>@*#<temp.scriptArg2>
+GOTO @emulatorMain
+
+@2GOTOEXIT
+GOTO EXIT 
+
+@2GOTOLINK
+CALL 1000000@emulatorSettingArgs 3
+GOTO LINK *#<temp.scriptArg1>, *#<temp.scriptArg2>, *#<temp.scriptArg3>
+
+@2GOTOSCENE
+CALL 1000000@emulatorSettingArgs 1
+GOTO SCENE *#<temp.scriptArg1>
+
+@2HOST_GIVE
+CALL 1000000@emulatorSettingArgs 1
+HOST_GIVE *#<temp.scriptArg1>
+GOTO @emulatorMain
+
+@2HOST_TAKE
+CALL 1000000@emulatorSettingArgs 1
+HOST_TAKE *#<temp.scriptArg1>
+GOTO @emulatorMain
+
+@2HTML
+CALL 1000000@emulatorSettingArgs 1
+HTML *#<temp.scriptArg1>
+GOTO @emulatorMain
+
+@2IF
+CALL 1000000@emulatorSettingArgs 3
+IF *#<temp.scriptArg1> @2IFnextStuff
+GOTO @emulatorMain
+
+@2IFnextStuff
+STRSTR *#<temp.scriptArg2>, "1"
+IF> @2IFscene
+STRSTR *#<temp.scriptArg2>, "2"
+IF> @2IFscene
+STRSTR *#<temp.scriptArg2>, "3"
+IF> @2IFscene
+STRSTR *#<temp.scriptArg2>, "4"
+IF> @2IFscene
+STRSTR *#<temp.scriptArg2>, "5"
+IF> @2IFscene
+STRSTR *#<temp.scriptArg2>, "6"
+IF> @2IFscene
+STRSTR *#<temp.scriptArg2>, "7"
+IF> @2IFscene
+STRSTR *#<temp.scriptArg2>, "8"
+IF> @2IFscene
+STRSTR *#<temp.scriptArg2>, "9"
+IF> @2IFscene
+STRSTR *#<temp.scriptArg2>, "0"
+IF> @2IFscene
+SET temp.scriptRow2, 0
+@checkScriptLabel
+ADD temp.scriptRow2, 1
+SET temp.thingy, madstoolScript.#<temp.ID>.#<temp.scriptRow2>
+STRCMP *#<temp.thingy>, "@*#<temp.scriptArg3>"
+IF= @2IFscriptFound
+STRCMP *#<temp.thingy>, "SAVED"
+IF= @2IFscriptNotFound
+GOTO @checkScriptLabel
+
+@2IFscriptNotFound
+N: Label not found.
+N: Continuing script.
+GOTO @emulatorMain
+
+@2IFscriptFound
+SET temp.scriptRow, #<temp.scriptRow2>
+GOTO @emulatorMain
+
+@2IFscene
+IF *#<temp.scriptArg1> *#<temp.scriptArg2>@*#<temp.scriptArg3>
+GOTO @emulatorMain
+
+@2IF=
+
+GOTO @emulatorMain
+
+@2IF>
+
+GOTO @emulatorMain
+
+@2IF<
+
+GOTO @emulatorMain
+
+@2LOCK
+CALL 1000000@emulatorSettingArgs 1
+LOCK *#<temp.scriptArg1>
+GOTO @emulatorMain
+
+@2MENU
+
+GOTO @emulatorMain
+
+@2MISSION
+CALL 1000000@emulatorSettingArgs 32
+MISSION *#<temp.scriptArg1>, *#<temp.scriptArg2>, *#<temp.scriptArg3>, *#<temp.scriptArg4>, *#<temp.scriptArg5>, *#<temp.scriptArg6>, *#<temp.scriptArg7>, *#<temp.scriptArg8>, *#<temp.scriptArg9>, *#<temp.scriptArg10>, *#<temp.scriptArg11>, *#<temp.scriptArg12>, *#<temp.scriptArg13>, *#<temp.scriptArg14>, *#<temp.scriptArg15>, *#<temp.scriptArg16>, *#<temp.scriptArg17>, *#<temp.scriptArg18>, *#<temp.scriptArg19>, *#<temp.scriptArg20>, *#<temp.scriptArg21>, *#<temp.scriptArg22>, *#<temp.scriptArg23>, *#<temp.scriptArg24>, *#<temp.scriptArg25>, *#<temp.scriptArg26>, *#<temp.scriptArg27>, *#<temp.scriptArg28>, *#<temp.scriptArg29>, *#<temp.scriptArg30>, *#<temp.scriptArg31>, *#<temp.scriptArg32>
+GOTO @emulatorMain
+
+@2MOD
+CALL 1000000@emulatorSettingArgs 2
+MOD *#<temp.scriptArg1>, *#<temp.scriptArg2>
+GOTO @emulatorMain
+
+@2MOVE
+CALL 1000000@emulatorSettingArgs 4
+MOVE *#<temp.scriptArg1>, *#<temp.scriptArg2>, *#<temp.scriptArg3>, *#<temp.scriptArg4>
+GOTO @emulatorMain
+
+@2MUL
+CALL 1000000@emulatorSettingArgs 2
+MUL *#<temp.scriptArg1>, *#<temp.scriptArg2>
+GOTO @emulatorMain
+
+@2MUSIC
+CALL 1000000@emulatorSettingArgs 1
+MUSIC *#<temp.scriptArg1>
+GOTO @emulatorMain
+
+@2NOT
+CALL 1000000@emulatorSettingArgs 2
+NOT *#<temp.scriptArg1>, *#<temp.scriptArg2>
+GOTO @emulatorMain
+
+@2OFFER
+CALL 1000000@emulatorSettingArgs 32
+OFFER *#<temp.scriptArg1>, *#<temp.scriptArg2>, *#<temp.scriptArg3>, *#<temp.scriptArg4>, *#<temp.scriptArg5>, *#<temp.scriptArg6>, *#<temp.scriptArg7>, *#<temp.scriptArg8>, *#<temp.scriptArg9>, *#<temp.scriptArg10>, *#<temp.scriptArg11>, *#<temp.scriptArg12>, *#<temp.scriptArg13>, *#<temp.scriptArg14>, *#<temp.scriptArg15>, *#<temp.scriptArg16>, *#<temp.scriptArg17>, *#<temp.scriptArg18>, *#<temp.scriptArg19>, *#<temp.scriptArg20>, *#<temp.scriptArg21>, *#<temp.scriptArg22>, *#<temp.scriptArg23>, *#<temp.scriptArg24>, *#<temp.scriptArg25>, *#<temp.scriptArg26>, *#<temp.scriptArg27>, *#<temp.scriptArg28>, *#<temp.scriptArg29>, *#<temp.scriptArg30>, *#<temp.scriptArg31>, *#<temp.scriptArg32>
+GOTO @emulatorMain
+
+@2OFFER2
+CALL 1000000@emulatorSettingArgs 32
+OFFER2 *#<temp.scriptArg1>, *#<temp.scriptArg2>, *#<temp.scriptArg3>, *#<temp.scriptArg4>, *#<temp.scriptArg5>, *#<temp.scriptArg6>, *#<temp.scriptArg7>, *#<temp.scriptArg8>, *#<temp.scriptArg9>, *#<temp.scriptArg10>, *#<temp.scriptArg11>, *#<temp.scriptArg12>, *#<temp.scriptArg13>, *#<temp.scriptArg14>, *#<temp.scriptArg15>, *#<temp.scriptArg16>, *#<temp.scriptArg17>, *#<temp.scriptArg18>, *#<temp.scriptArg19>, *#<temp.scriptArg20>, *#<temp.scriptArg21>, *#<temp.scriptArg22>, *#<temp.scriptArg23>, *#<temp.scriptArg24>, *#<temp.scriptArg25>, *#<temp.scriptArg26>, *#<temp.scriptArg27>, *#<temp.scriptArg28>, *#<temp.scriptArg29>, *#<temp.scriptArg30>, *#<temp.scriptArg31>, *#<temp.scriptArg32>
+GOTO @emulatorMain
+
+@2OR
+CALL 1000000@emulatorSettingArgs 2
+OR *#<temp.scriptArg1>, *#<temp.scriptArg2>
+GOTO @emulatorMain
+
+@2PARTY
+CALL 1000000@emulatorSettingArgs 1
+PARTY *#<temp.scriptArg1>
+GOTO @emulatorMain
+
+@2POP
+CALL 1000000@emulatorSettingArgs 2
+POP *#<temp.scriptArg1>, *#<temp.scriptArg1>
+GOTO @emulatorMain
+
+@2POSE
+CALL 1000000@emulatorSettingArgs 3
+POSE *#<temp.scriptArg1>, *#<temp.scriptArg2>, *#<temp.scriptArg3>
+GOTO @emulatorMain
+
+@2PUSH
+CALL 1000000@emulatorSettingArgs 2
+PUSH *#<temp.scriptArg1>, *#<temp.scriptArg2>
+GOTO @emulatorMain
+
+@2SEL
+CALL 1000000@emulatorSettingArgs 1
+SEL *#<temp.scriptArg1>
+GOTO @emulatorMain
+
+@2SET
+CALL 1000000@emulatorSettingArgs 2
+SET *#<temp.scriptArg1>, *#<temp.scriptArg2>
+GOTO @emulatorMain
+
+@2SET_LEN
+CALL 1000000@emulatorSettingArgs 2
+SET_LEN *#<temp.scriptArg1>, *#<temp.scriptArg2>
+GOTO @emulatorMain
+
+@2SET_SUBSTR
+CALL 1000000@emulatorSettingArgs 4
+SET_SUBSTR *#<temp.scriptArg1>, *#<temp.scriptArg2>, *#<temp.scriptArg3>, *#<temp.scriptArg4>
+GOTO @emulatorMain
+
+@2SOUND
+CALL 1000000@emulatorSettingArgs 1
+SOUND *#<temp.scriptArg1>
+GOTO @emulatorMain
+
+@2STRCMP
+GOTO @emulatorMain
+
+@2STRSTR
+GOTO @emulatorMain
+
+@2SUB
+CALL 1000000@emulatorSettingArgs 2
+SUB *#<temp.scriptArg1>, *#<temp.scriptArg2>
+GOTO @emulatorMain
+
+@2TAKE
+CALL 1000000@emulatorSettingArgs 1
+TAKE *#<temp.scriptArg1>
+GOTO @emulatorMain
+
+@2THEME
+CALL 1000000@emulatorSettingArgs 1
+THEME *#<temp.scriptArg1>
+GOTO @emulatorMain
+
+@2WAIT
+CALL 1000000@emulatorSettingArgs 1
+WAIT *#<temp.scriptArg1>
+GOTO @emulatorMain
+
+@2WEATHER
+CALL 1000000@emulatorSettingArgs 1
+WEATHER *#<temp.scriptArg1>
+GOTO @emulatorMain
+
+@2XOR
+CALL 1000000@emulatorSettingArgs 2
+XOR *#<temp.scriptArg1>, *#<temp.scriptArg2>
+GOTO @emulatorMain
+sss;
+; ------------------------------------ DIALOGS -----------------------------
+;
+@2N:
+CALL 1000000@emulatorSettingArgs 1
+N: *#<temp.scriptArg1>
+GOTO @emulatorMain
+
+@2H:
+CALL 1000000@emulatorSettingArgs 1
+H: *#<temp.scriptArg1>
+GOTO @emulatorMain
+
+@20
+CALL 1000000@emulatorSettingArgs 1
+0: *#<temp.scriptArg1>
+GOTO @emulatorMain
+
+@21
+CALL 1000000@emulatorSettingArgs 1
+1: *#<temp.scriptArg1>
+GOTO @emulatorMain
+
+@210
+CALL 1000000@emulatorSettingArgs 1
+10: *#<temp.scriptArg1>
+GOTO @emulatorMain
+
+@211
+CALL 1000000@emulatorSettingArgs 1
+11: *#<temp.scriptArg1>
+GOTO @emulatorMain
+
+@212
+CALL 1000000@emulatorSettingArgs 1
+12: *#<temp.scriptArg1>
+GOTO @emulatorMain
+
+@213
+CALL 1000000@emulatorSettingArgs 1
+13: *#<temp.scriptArg1>
+GOTO @emulatorMain
+
+@214
+CALL 1000000@emulatorSettingArgs 1
+14: *#<temp.scriptArg1>
+GOTO @emulatorMain
+
+@215
+CALL 1000000@emulatorSettingArgs 1
+15: *#<temp.scriptArg1>
+GOTO @emulatorMain
+
+@216
+CALL 1000000@emulatorSettingArgs 1
+16: *#<temp.scriptArg1>
+GOTO @emulatorMain
+
+@217
+CALL 1000000@emulatorSettingArgs 1
+17: *#<temp.scriptArg1>
+GOTO @emulatorMain
+
+@218
+CALL 1000000@emulatorSettingArgs 1
+18: *#<temp.scriptArg1>
+GOTO @emulatorMain
+
+@219
+CALL 1000000@emulatorSettingArgs 1
+19: *#<temp.scriptArg1>
+GOTO @emulatorMain
+
+@22
+CALL 1000000@emulatorSettingArgs 1
+2: *#<temp.scriptArg1>
+GOTO @emulatorMain
+
+@220
+CALL 1000000@emulatorSettingArgs 1
+20: *#<temp.scriptArg1>
+GOTO @emulatorMain
+
+@221
+CALL 1000000@emulatorSettingArgs 1
+21: *#<temp.scriptArg1>
+GOTO @emulatorMain
+
+@222
+CALL 1000000@emulatorSettingArgs 1
+22: *#<temp.scriptArg1>
+GOTO @emulatorMain
+
+@223
+CALL 1000000@emulatorSettingArgs 1
+23: *#<temp.scriptArg1>
+GOTO @emulatorMain
+
+@224
+CALL 1000000@emulatorSettingArgs 1
+24: *#<temp.scriptArg1>
+GOTO @emulatorMain
+
+@225
+CALL 1000000@emulatorSettingArgs 1
+25: *#<temp.scriptArg1>
+GOTO @emulatorMain
+
+@226
+CALL 1000000@emulatorSettingArgs 1
+26: *#<temp.scriptArg1>
+GOTO @emulatorMain
+
+@227
+CALL 1000000@emulatorSettingArgs 1
+27: *#<temp.scriptArg1>
+GOTO @emulatorMain
+
+@228
+CALL 1000000@emulatorSettingArgs 1
+28: *#<temp.scriptArg1>
+GOTO @emulatorMain
+
+@229
+CALL 1000000@emulatorSettingArgs 1
+29: *#<temp.scriptArg1>
+GOTO @emulatorMain
+
+@23
+CALL 1000000@emulatorSettingArgs 1
+3: *#<temp.scriptArg1>
+GOTO @emulatorMain
+
+@230
+CALL 1000000@emulatorSettingArgs 1
+30: *#<temp.scriptArg1>
+GOTO @emulatorMain
+
+@231
+CALL 1000000@emulatorSettingArgs 1
+31: *#<temp.scriptArg1>
+GOTO @emulatorMain
+
+@232
+CALL 1000000@emulatorSettingArgs 1
+32: *#<temp.scriptArg1>
+GOTO @emulatorMain
+
+@233
+CALL 1000000@emulatorSettingArgs 1
+33: *#<temp.scriptArg1>
+GOTO @emulatorMain
+
+@234
+CALL 1000000@emulatorSettingArgs 1
+34: *#<temp.scriptArg1>
+GOTO @emulatorMain
+
+@235
+CALL 1000000@emulatorSettingArgs 1
+35: *#<temp.scriptArg1>
+GOTO @emulatorMain
+
+@236
+CALL 1000000@emulatorSettingArgs 1
+36: *#<temp.scriptArg1>
+GOTO @emulatorMain
+
+@237
+CALL 1000000@emulatorSettingArgs 1
+37: *#<temp.scriptArg1>
+GOTO @emulatorMain
+
+@238
+CALL 1000000@emulatorSettingArgs 1
+38: *#<temp.scriptArg1>
+GOTO @emulatorMain
+
+@239
+CALL 1000000@emulatorSettingArgs 1
+39: *#<temp.scriptArg1>
+GOTO @emulatorMain
+
+@24
+CALL 1000000@emulatorSettingArgs 1
+4: *#<temp.scriptArg1>
+GOTO @emulatorMain
+
+@240
+CALL 1000000@emulatorSettingArgs 1
+40: *#<temp.scriptArg1>
+GOTO @emulatorMain
+
+@241
+CALL 1000000@emulatorSettingArgs 1
+41: *#<temp.scriptArg1>
+GOTO @emulatorMain
+
+@242
+CALL 1000000@emulatorSettingArgs 1
+42: *#<temp.scriptArg1>
+GOTO @emulatorMain
+
+@243
+CALL 1000000@emulatorSettingArgs 1
+43: *#<temp.scriptArg1>
+GOTO @emulatorMain
+
+@244
+CALL 1000000@emulatorSettingArgs 1
+44: *#<temp.scriptArg1>
+GOTO @emulatorMain
+
+@245
+CALL 1000000@emulatorSettingArgs 1
+45: *#<temp.scriptArg1>
+GOTO @emulatorMain
+
+@246
+CALL 1000000@emulatorSettingArgs 1
+46: *#<temp.scriptArg1>
+GOTO @emulatorMain
+
+@247
+CALL 1000000@emulatorSettingArgs 1
+47: *#<temp.scriptArg1>
+GOTO @emulatorMain
+
+@248
+CALL 1000000@emulatorSettingArgs 1
+48: *#<temp.scriptArg1>
+GOTO @emulatorMain
+
+@249
+CALL 1000000@emulatorSettingArgs 1
+49: *#<temp.scriptArg1>
+GOTO @emulatorMain
+
+@25
+CALL 1000000@emulatorSettingArgs 1
+5: *#<temp.scriptArg1>
+GOTO @emulatorMain
+
+@250
+CALL 1000000@emulatorSettingArgs 1
+50: *#<temp.scriptArg1>
+GOTO @emulatorMain
+
+@251
+CALL 1000000@emulatorSettingArgs 1
+51: *#<temp.scriptArg1>
+GOTO @emulatorMain
+
+@252
+CALL 1000000@emulatorSettingArgs 1
+52: *#<temp.scriptArg1>
+GOTO @emulatorMain
+
+@253
+CALL 1000000@emulatorSettingArgs 1
+53: *#<temp.scriptArg1>
+GOTO @emulatorMain
+
+@254
+CALL 1000000@emulatorSettingArgs 1
+54: *#<temp.scriptArg1>
+GOTO @emulatorMain
+
+@255
+CALL 1000000@emulatorSettingArgs 1
+55: *#<temp.scriptArg1>
+GOTO @emulatorMain
+
+@256
+CALL 1000000@emulatorSettingArgs 1
+56: *#<temp.scriptArg1>
+GOTO @emulatorMain
+
+@257
+CALL 1000000@emulatorSettingArgs 1
+57: *#<temp.scriptArg1>
+GOTO @emulatorMain
+
+@258
+CALL 1000000@emulatorSettingArgs 1
+58: *#<temp.scriptArg1>
+GOTO @emulatorMain
+
+@259
+CALL 1000000@emulatorSettingArgs 1
+59: *#<temp.scriptArg1>
+GOTO @emulatorMain
+
+@26
+CALL 1000000@emulatorSettingArgs 1
+6: *#<temp.scriptArg1>
+GOTO @emulatorMain
+
+@260
+CALL 1000000@emulatorSettingArgs 1
+60: *#<temp.scriptArg1>
+GOTO @emulatorMain
+
+@261
+CALL 1000000@emulatorSettingArgs 1
+61: *#<temp.scriptArg1>
+GOTO @emulatorMain
+
+@262
+CALL 1000000@emulatorSettingArgs 1
+62: *#<temp.scriptArg1>
+GOTO @emulatorMain
+
+@263
+CALL 1000000@emulatorSettingArgs 1
+63: *#<temp.scriptArg1>
+GOTO @emulatorMain
+
+@27
+CALL 1000000@emulatorSettingArgs 1
+7: *#<temp.scriptArg1>
+GOTO @emulatorMain
+
+@28
+CALL 1000000@emulatorSettingArgs 1
+8: *#<temp.scriptArg1>
+GOTO @emulatorMain
+
+@29
+CALL 1000000@emulatorSettingArgs 1
+9: *#<temp.scriptArg1>
+GOTO @emulatorMain
+

@@ -1,0 +1,110 @@
+SCENE 8400, desert3, SCENE, "Crossroad"
+#include include.txt
+EJECT T1148
+GOTO LINK 83, 1
+;
+;----------------------------------------------------------------------------------------------------
+;
+SCENE 8401, desert3, SCENE, "Crossroad"
+#include include.txt
+IF T2899 @borninathelias
+IF T3985 @pass
+END
+
+@borninathelias
+IF -T1104 @shouldntbehere
+IF -T1125 @traveldesert
+@pass
+GOTO LINK 85, 0
+
+@traveldesert
+CALL 110025@start
+1: %1, the beasts are thirsty.
+1: So are the men.
+1: We must find water at any cost.
+1: Formerly, there was a well around but I don't know if it is still in use.
+1: We must try our luck.
+H: Alright.
+STRCMP #<arg0>, tripkotor
+IF= @tripkotor
+GOTO @pass
+
+@tripkotor
+RETURN
+END
+
+@shouldntbehere
+N: You shouldn't be here.
+WAIT 1
+N: Return to Tahamanraset and complete the quests there first.
+END
+;
+;----------------------------------------------------------------------------------------------------
+;
+SCENE 8402, desert3, SCENE, "To Sadramand"
+#include include.txt
+IF T3985 @bornoldworld
+IF -T1104 @shouldntbehere
+IF T1123-T1124 @besieged
+@pass
+IF T3998 @illuteleport
+GOTO @nextstepafterilluteleport
+
+@illuteleport
+HOST_GIVE T2914
+@nextstepafterilluteleport
+GOTO LINK 80, 0
+
+@bornoldworld
+IF T1148 @pass
+@besieged
+CALL 110025@start
+H: Lemme go first, guys.
+H: I will clear a path to the city.
+1: Alright.
+1: Good luck!
+MOVE 1, 120, 90
+MOVE 2, 120, 90
+MOVE 3, 120, 90
+MOVE 4, 120, 90
+MOVE 5, 120, 90
+MOVE 6, 120, 90
+MOVE 7, 120, 90
+MOVE 8, 120, 90
+MOVE 10, 120, 90
+WAIT 2
+N: You walk towards the town and watch the camp of a band of beastmen in front of Sadramand.
+WAIT 2
+N: Suddenly, a sentinel glimpses you.
+WAIT 2
+N: The warriors charge!
+FIGHT 382, 368, 368, 368, 576, 576, 576, 576, 576
+IF LOSE @dead
+N: The rest of the band arrive!
+FIGHT 382, 382, 382, 368, 368, 576, 576, 576
+IF LOSE @dead
+N: You defeat the last members of the clan and reach Sadramand's gate.
+IF T3985 @bornoldworldrew
+EJECT T1123
+GIVE T1124
+WAIT 2.5
+GOTO @pass
+
+@bornoldworldrew
+EJECT T1147
+GIVE T1148
+WAIT 2.5
+GOTO @pass
+
+@dead
+N: The members of the Caravan, seeing you defeated, runs back.
+END
+
+@shouldntbehere
+N: You shouldn't be here.
+WAIT 1
+N: Return to Tahamanraset and complete the quests there first.
+END
+;
+;----------------------------------------------------------------------------------------------------
+;

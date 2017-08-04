@@ -1,0 +1,320 @@
+@halloweenspecialevent
+IF -T3993 @GIVET3993
+@nextstepafterGIVET3993
+COMPARE #<halloween.intro>, 1
+IF< @halloween.intro
+COMPARE #<KM.halloween>, 20
+IF= @halloweenspecialeventevent1chat
+@halloweenspecialevent2
+COMPARE #<KM.halloween>, 500
+IF= @halloweenspecialeventevent2chat
+@nextstepafterhalloweenpet
+IF V99 @halloweenspecialevent99
+IF V75 @halloweenspecialevent75
+IF V50 @halloweenspecialevent50
+IF V40 @halloweenspecialevent40
+IF V30 @halloweenspecialevent30
+IF V20 @halloweenspecialevent20
+IF V10 @halloweenspecialevent10
+GOTO @halloweenspecialevent0
+
+@GIVET3993
+GIVE T3993
+SET spEvent.Name, halloween
+SET randomEvent.name, "halloween"
+GOTO @nextstepafterGIVET3993
+
+@halloweenspecialeventevent2chat
+COMPARE #<halloween.pet>, 1
+IF= @nextstepafterhalloweenpet
+ACTOR 1, Lazil, halloween-guard, 2, 25, 90
+1: I've captured one!
+1: I've captured one!
+H: What are you talking about?
+1: A healing pumpkin! I've...
+H: ...captured one, yeah I know.
+H: But what's...
+1: Ah! They come!
+H:...
+SET halloween.pet, 1
+FIGHT 618, 613, 613
+IF LOSE @end
+N: You find the cage that Lazil droped to run away.
+WAIT 2
+HOST_GIVE I1120
+SOUND foundItem.wav
+N: %1 has acquired a pet Healing Pumpkin!
+END
+
+@halloweenspecialeventevent1chat
+COMPARE #<halloween.chat.toful.intro>, 0
+IF> @halloweenspecialevent2
+ACTOR 1, Toful, halloween-humans, 1, 25, 90
+1: Greetings, adventurer!
+1: Have you heard of what's going on?
+H: Whats? The Halloween thingies invading the cities?
+1: Yeah.
+H: Yes I have.
+1: I know a mage in Latsha who can make potions with the stuff they drop.
+H: Let me guess... That's Argoz?
+1: Do you know him?
+H: I heard of him...
+SET halloween.chat.toful.intro, 1
+END
+
+@halloween.intro
+ACTOR 1, Jenny, kid3, 1, 110, 90
+ACTOR 2, Kelly, kid7, 1, 105, 85
+ACTOR 3, Johnny, kid9, 1, 100, 95
+MOVE 1, 80, 90
+MOVE 2, 75, 85
+MOVE 3, 70, 95
+1: Candies!
+2: Candies!
+H: Eh! Calm down!
+3: But... it's Halloween, Sir!
+H: Pardon?
+1: You don't know what Halloween is?!
+H: Errr... no.
+SOUND thunder.wav
+WEATHER 3
+COLOR 13
+COLOR 2013
+WAIT 1
+COLOR 14
+COLOR 2014
+1: Ah!!!
+2: Aaahhh!!!
+MOVE 1, 130, 90, 2
+MOVE 2, 130, 85, 2
+MOVE 3, 130, 95, 2
+H: What's going on?!
+FIGHT 624
+ACTOR 4, "Old Dan", human89, 1, 100, 90
+MOVE 4, 75, 90
+COLOR 0
+COLOR 2000
+FX 0
+WEATHER 0
+WAIT 0.5
+4: My god!
+4: I was right!
+H: Do you know what's going on?!
+4: Oh yes, I know.
+4: The gates to the dimension of Pumpkan are opened again.
+H: Could you make it explicite please?
+4: Pumpkan is an old god of Chaos in rivalry with the major Gods.
+4: He tried to dethrone them but he got defeated and banned to an obscure dimension.
+4: But a few weeks ago, I heard of a sect of Irezar based on an orthodox vision of the teachings of Jeren.
+4: They did open this vortex, and their goal is to seize the temple of the Lost City of Arkhangal to complete the ritual that will open the gate for good.
+4: You must stop it, adventurer, or we're lost!
+WAIT 1
+4: ... and have a great day!
+4: Oh, I forgot!
+MOVE 4, 100, 90
+4: The followers of the other chaos deities will also try to make them fail.
+4: You may have some unexpected allies...
+MOVE 4, 120, 90
+SET halloween.intro, 1
+END
+
+@halloweenspecialevent99
+IF R2 @halloweenspecialeventmoonalisa
+IF R20 @halloweenspecialeventfight99
+@halloweenspecialevent75
+IF R20 @halloweenspecialeventfight75
+@halloweenspecialevent50
+IF R20 @halloweenspecialeventfight50
+@halloweenspecialevent40
+IF R20 @halloweenspecialeventfight40
+@halloweenspecialevent30
+IF R20 @halloweenspecialeventfight30
+@halloweenspecialevent20
+IF R20 @halloweenspecialeventfight20
+@halloweenspecialevent10
+IF R20 @halloweenspecialeventfight10
+@halloweenspecialevent0
+FIGHT 624
+GOTO @reward.txt
+
+@halloweenspecialeventfight99
+IF R1 @halloweenspecialeventfight611
+IF R1 @halloweenspecialeventfight612
+IF R1 @halloweenspecialeventfight613
+IF R1 @halloweenspecialeventfight615
+IF R1 @halloweenspecialeventfight616
+IF R1 @halloweenspecialeventfight619
+IF R1 @halloweenspecialeventfight620
+IF R1 @halloweenspecialeventfight621
+IF R1 @halloweenspecialeventfight623
+GOTO @halloweenspecialeventfight99
+
+@halloweenspecialeventfight611
+FIGHT 611
+GOTO @reward.txt
+
+@halloweenspecialeventfight612
+FIGHT 612
+GOTO @reward.txt
+
+@halloweenspecialeventfight613
+FIGHT 613
+GOTO @reward.txt
+
+@halloweenspecialeventfight615
+FIGHT 615
+GOTO @reward.txt
+
+@halloweenspecialeventfight619
+FIGHT 619
+GOTO @reward.txt
+
+@halloweenspecialeventfight620
+FIGHT 620
+GOTO @reward.txt
+
+@halloweenspecialeventfight621
+FIGHT 621
+GOTO @reward.txt
+
+@halloweenspecialeventfight623
+FIGHT 623
+GOTO @reward.txt
+
+@halloweenspecialeventfight616
+FIGHT 616
+GOTO @reward.txt
+
+@halloweenspecialeventfight75
+IF R50 @halloweenspecialeventfight75bis
+FIGHT 629
+GOTO @reward.txt
+
+@halloweenspecialeventfight75bis
+FIGHT 630
+GOTO @reward.txt
+
+@halloweenspecialeventfight50
+FIGHT 628
+GOTO @reward.txt
+
+@halloweenspecialeventfight40
+FIGHT 627
+GOTO @reward.txt
+
+@halloweenspecialeventfight30
+FIGHT 626
+GOTO @reward.txt
+
+@halloweenspecialeventfight20
+FIGHT 625
+GOTO @reward.txt
+
+@halloweenspecialeventfight10
+FIGHT 624
+GOTO @reward.txt
+
+;
+;------------------------ Moona Lisa ----------------------------
+;
+@halloweenspecialeventmoonalisa
+COMPARE #<halloween.talk.MoonaLisa>, 0
+IF> @halloweenspecialeventmoonalisa2
+ACTOR 1, "Moona Lisa", 184, 1, 0, 75
+POSE 1, 4
+MOVE 1, 25, 75
+WAIT 1.3
+1: Greetings, young adventurer.
+H: Err... hello.
+1: I wonder...
+1: Would you help me? I may have a job for you...
+H: Well, I've been busy killing demons recently and I don't think I have time to spare.
+H: I have a vortex to a chaotic dimension to close - stuff like that.
+1: I see.
+1: But why wouldn't you quit killing those "demons" and join us in our crusade?
+1: You'd be well rewarded, I promiss.
+H: I am sorry, Madam, but I can't.
+H: Killing those halloween demons is now a part of my job, and you have to deal with that.
+1: That's sad.
+1: I guess I now have to kill you...
+H: I beg your pardon?
+WAIT 2
+SET halloween.talk.MoonaLisa, 1
+MOVE 1, -30, 90, 1
+FIGHT 614.25.75
+IF WIN @halloweenspecialeventmoonalisaWin
+END
+
+@halloweenspecialeventmoonalisaWin
+SET halloween.talk.MoonaLisa, 2
+IF R50 @halloweenspecialeventmoonalisaWin2
+@halloweenspecialeventmoonalisaWin3
+H: Strange women...
+END
+
+@halloweenspecialeventmoonalisaWin2
+N: You find some strar dust and add it to your trophy bag.
+GIVE Z366
+SOUND trophyFound.wav
+GOTO @halloweenspecialeventmoonalisaWin3
+
+@halloweenspecialeventmoonalisa2
+COMPARE #<halloween.talk.MoonaLisa>, 1
+IF> @halloweenspecialeventmoonalisa3
+ACTOR 1, "Moona Lisa", 184, 1, 0, 75
+POSE 1, 4
+MOVE 1, 25, 75
+WAIT 1.3
+1: Hey!
+1: #<g.Cmister> I-wanna-kill-demons- but-can't-get-rid-of-an-old-women!
+1: What's up?
+WAIT 1
+MOVE 1, 120, 90, 1
+FIGHT 614.25.75
+IF WIN @halloweenspecialeventmoonalisaWin
+END
+
+@halloweenspecialeventmoonalisa3
+IF I1113 @halloweenspecialevent
+COMPARE #<halloween.talk.MoonaLisa>, 3
+IF= @halloweenspecialeventmoonalisa4
+IF> @halloweenspecialevent
+ACTOR 1, "Moona Lisa", 184, 0, 0, 75
+MOVE 1, 25, 75
+WAIT 0.5
+H: ...
+1: You seem to be surprised to meet me!
+1: Do you really think you can get rid of me?!
+1: Do you really think a blade could kill me?!
+H: Well, from a clinical point of view, you're dead...
+H: Yeah, I know, deads cannot move nor speak, but after all what have seen lately, it doesn't surprise me.
+1: ...
+WAIT 1
+@halloweenspecialeventmoonalisafighgt
+MOVE 1, 120, 90, 1
+FIGHT 622.75.90
+IF WIN+Z366 @halloweenspecialeventmoonalisaWinTrophyHave
+N: You find some star dust and add it to your trophy bag.
+GIVE Z366
+SOUND trophyFound.wav
+END
+
+@halloweenspecialeventmoonalisaWinTrophyHave
+N: You kill her and lay your hands on her ridiculous hat.
+SOUND foundItem.wav
+GIVE I1113
+SET halloween.talk.MoonaLisa, 4
+END
+
+@halloweenspecialeventmoonalisa4
+ACTOR 1, "Moona Lisa", 184, 0, 0, 75
+MOVE 1, 25, 75
+WAIT 1
+1: Eh!
+1: You can kill the old lady, but not her ghost!
+1: I think it's now time for you to pray, kid!
+WAIT 2.3
+GOTO @halloweenspecialeventmoonalisafighgt
+;
+;---------------------------------------------------------------------------------------------------
+;

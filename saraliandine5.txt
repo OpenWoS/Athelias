@@ -1,0 +1,18 @@
+SCENE 13700, forest1, SCENE, "To Obrovac"
+#include include.txt
+IF T3998 @illuteleport
+GOTO @nextstepafterilluteleport
+
+@illuteleport
+HOST_GIVE T2916
+@nextstepafterilluteleport
+GOTO LINK 112, 0
+;
+;------------------------------------------------------------------------------------------------------
+;
+SCENE 13701, forest1, SCENE, "Deeper in the Woods"
+#include include.txt
+GOTO LINK 136, 0
+;
+;------------------------------------------------------------------------------------------------------
+;

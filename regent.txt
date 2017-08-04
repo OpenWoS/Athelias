@@ -1,0 +1,679 @@
+SCENE 800, "palace2", SCENE, "Main Gate"
+#include include.txt
+IF T1158 @assaq3end2
+COMPARE #<assq3relic>, 1
+IF= @assaq3fightend
+@assaq3fightendT1057
+IF T1056-T1057-T1058 @assaq3end
+IF T1057 @assaq3dead
+IF T1054+ALIVE @assafight
+IF T1045 @fighthealer
+IF T1046 @fighthealer
+IF T1038 @priestfight
+IF T1011 @fightjestquest3
+IF T20 @fight
+@pass
+GOTO LINK 7, 5
+
+@assaq3fightend
+IF T1057 @pass
+ACTOR 1, Guard, guard6, 1, 20, 90
+ACTOR 2, Guard, guard6, 1, 80, 90
+MOVE 1, 120, 90, 1
+MOVE 2, 120, 90, 1
+FIGHT 136.20.90, 136.80.90, -682
+IF LOSE @assq3LOSEsvsdv
+N: More guards arrive!
+FIGHT 136, 136, 136, 136
+IF LOSE @assq3LOSEsvsdv
+HOST_GIVE T1058
+N: - Let's go, %1: we've succeeded!
+WAIT 2.8
+GOTO @pass
+
+@assq3LOSEsvsdv
+HOST_GIVE T1057
+H: Hell!
+N: The guards take the relic and go away.
+GOTO @pass
+
+@assaq3end
+ACTOR 1, Rodeur, human37, 1, 75, 90
+1: We must go before a guard arrive, %1!
+1: Let's go to the throne room.
+END
+
+@assaq3end2
+FIGHT 136, 136
+GOTO @pass
+
+@assaq3dead
+ACTOR 1, Guard, guard6, 1, 20, 90
+ACTOR 2, Guard, guard6, 1, 80, 90
+FACE 2, 0
+1: Ah!
+2: What?
+1: I've just seen a ghost!
+2: No shit, Sherlock!
+1: Nevermind
+WAIT 1.5
+GOTO @pass
+
+@assafight
+FIGHT 144
+IF LOSE @assq1lose
+GOTO @pass
+
+@assq1lose
+H: Argh.
+WAIT 1
+GOTO @pass
+
+@fighthealer
+ACTOR 1, Guard, guard6, 1, 30, 90
+1: Halt!
+WAIT 1.2
+MOVE 1, 120, 90
+FIGHT 136
+GOTO @pass
+
+@priestfight
+ACTOR 1, Guard, guard6, 1, 20, 90
+ACTOR 2, Guard, guard6, 1, 80, 90
+FACE 2, 0
+1: %1!
+1: Alarm!
+WAIT 1
+MOVE 1, 120, 90, 1
+MOVE 2, 120, 90, 1
+FIGHT 136.20.90, 136.80.90
+IF LOSE @imprisonnedpriest
+SET priestquest3imprisonned, 0
+H: Bah.
+WAIT 1
+GOTO @pass
+
+@imprisonnedpriest
+SET priestquest3imprisonned, 1
+GIVE L1
+GIVE H2000
+GIVE M2000
+GOTO LINK 6, 4
+
+@fightjestquest3
+ACTOR 2, Makel, human1, 1, 120, 90
+MOVE 2, 80, 90
+FIGHT 136, 136, 136
+IF LOSE @jestdead
+GOTO LINK 7, 5
+
+@jestdead
+ACTOR 1, Guard,  guard6, 1, 20, 90
+1: You cannot escape!
+WAIT 1
+SET c5jesterfssdghdfgh, 1
+HOST_TAKE T1010
+HOST_TAKE T1011
+HOST_GIVE T1009
+GOTO LINK 6, 2, 1
+
+@fight
+BKGND prina1
+ACTOR 1, "Bandit", human39, 2, 35, 90
+1: You're gonna die and this treaty will be forgotten !
+LOCK 1
+HOST_TAKE T20
+FIGHT2 123, 124
+IF LOSE @dead
+LOCK 0
+1: Err...
+MOVE 1, -20, 90, 2
+WAIT 1
+GOTO LINK 7, 5
+
+@dead
+ACTOR 1, "Bandit", human39, 1, 35, 90
+HOST_TAKE I631
+1: I've got the treaty !
+1: Let's go guys!
+HOST_GIVE T21
+GOTO LINK 7, 5
+END
+;
+;-----------------------------------------------------------------------------
+;
+SCENE 801, "palace2", SCENE, "Intendant"
+#include include.txt
+IF T1056 @assafight
+IF T1038 @fightpriest
+ACTOR 1, "Guard", guard6, 1, 25, 90
+IF T1032+C16 @jestquest3
+IF T1012 @jestyfighty
+IF T1008 @jestquest3
+IF T1002 @jesterquest 
+IF I630+C18 @intendant
+IF C18+T21-T3994 @intendant2
+1: Who the blaze are you?
+1: The intendant is busy.
+1: Now, scat!
+END
+
+@assafight
+;FIGHT 136, 136
+END
+
+@fightpriest
+FIGHT 136
+IF LOSE @priestarr
+END
+
+@priestarr
+SET priestquest3imprisonned, 1
+GOTO LINK 6, 4
+
+@jestdead
+MOVE 1, 20, 90
+1: !We have arrested %1!
+1: !We have arrested %1!
+1: your place is in a jail!
+1: You were here to see Makel, eh!
+1: You will!
+WAIT 1
+HOST_TAKE T1008
+HOST_GIVE T1009
+GOTO LINK 6, 2, 1
+
+@jestquest3
+1: !Alarm!
+1:!An intruder!
+MOVE 1, -20, 90, 1
+FIGHT2 136, 136, 136, 136
+IF LOSE+C16 @necrodead
+IF LOSE @jestdead
+H: Well, I should go directly to the jails...
+END
+
+@necrodead
+H: Teamers!
+END
+
+@jesterquest 
+H: I have this stuff to deliver for the show. 
+1: This is the Intendant's office, not a fair.
+1: Scat! 
+END
+
+@intendant
+ACTOR 1, "Guard", guard6, 1, 25, 90
+ACTOR 2, "intendant", human136, 1, -25, 90
+1: What are you doing here?
+H: I have a message for the intendant from the masters of my order.
+1: Wait here please.
+MOVE 1, -25, 90
+WAIT 5
+MOVE 2, 25, 90
+2: So you are bringing the treaty.
+2: I expected it a long time ago.
+2: Hmm
+WAIT 3
+2: In return, could you bring this new treaty to the temple?
+H: I will.
+2: Thank you, %L.
+HOST_TAKE I630
+HOST_GIVE I631
+HOST_GIVE T20
+SOUND FoundItem.wav
+MOVE 2, -25, 90
+MOVE 1, 25, 90
+WAIT 4
+1: The intendant is currently busy.
+1: Go away !
+END
+
+@intendant2
+ACTOR 1, "Intendant", human136, 1, 25, 90
+1: Ah! You are back with another message from the temple, I presume?
+H; err... Actually, no.
+WAIT 1
+H: <cough>
+H: I have been attacked and bandits have the treaty.
+1: What?
+1: You miserable!
+1: You are not even able to fight for the honor of the realm and of your order?!
+H: It was six or seven of them against me...
+1: No matter!
+1: I am going to give you a new copy of the treaty.
+1: I hope you will keep this one and bring it to the temple...
+HOST_GIVE I631
+SOUND FoundItem.wav
+HOST_TAKE T21
+HOST_GIVE T20
+WAIT 1
+1: Now, go away !
+END
+
+@jestyfighty
+1: Alarm!
+1: %1 is here!
+IF R33 @jestyfighty1
+IF R66 @jestyfighty2
+FIGHT2 136, 136
+END
+
+@jestyfighty1
+FIGHT2 136, 136, 136, 136, 136
+END
+
+@jestyfighty2
+FIGHT2 136, 136, 136
+END
+;
+;-----------------------------------------------------------------------------
+;
+SCENE 802, vestibulary, SCENE, "Throne Room"
+#include include.txt
+IF C50+T1057 @assaq3hadbeenkilled
+IF C50+T1056-T1058 @assaq3
+IF C50+T1053-T1054 @assaq2
+IF T1044-T1045+C56 @healerquest3
+IF T1045+C56 @healerfight
+IF T1038 @fightpriest
+IF T1032+C16 @necroquest4bis
+IF T1012 @jestyfighty
+IF T1002 @jesterquest1 
+ACTOR 1, Guard, human1, 1, 25, 90 
+IF T1008 @jestquest3
+1: Visitors are not allowed in the throne room. 
+1: Go away. 
+END 
+
+@assaq3hadbeenkilled
+FIGHT 136, 136
+END
+
+@assaq3
+ACTOR 1, Rodeur, human37, 1, 100, 90
+MOVE 1, 75, 90
+WAIT 1
+1: Damn!
+1: Guards arrive!
+WAIT 2
+1: 
+MOVE 1, 103, 90, 1
+FIGHT 136, 136, -682.75.90
+IF DEAD+LOSE @aasq3dead
+IF DEAD @assq3lose
+@assq4again
+1: More guards arrive!
+1: Hold them back, I'm going to search the throne room for the relic.
+H: Alright.
+GOTO SCENE 110007
+
+@aasq3dead
+HOST_GIVE T1057
+ACTOR 2, Guard, guard6, 1, 0, 90 
+ACTOR 3, Guard, guard6, 1, -5, 95
+MOVE 2, 75, 90
+MOVE 3, 20, 95
+WAIT 1
+2: Those two ones seem to be dead.
+2: We'd better put the corpse somewhere else.
+3: Yeah, the Regent wouldn't like this.
+WAIT 2
+GOTO LINK 7, 5
+
+@assq3lose
+1: Argh!
+1: Let me heal you, %1.
+WAIT 1
+HOST_GIVE L1
+HOST_GIVE H5000
+GOTO @assq4again
+
+@assaq2
+ACTOR 1, Guard, guard6, 1, 20, 90 
+ACTOR 2, Guard, guard6, 1, 80, 90 
+FACE 2, 0
+1: Halt!
+1: You can't pass!
+H: Again...
+H: I need to talk to the regent.
+1: And what makes you think the Regent wants to talk to you?
+2: Scat!
+H: You're going to let me pass.
+2: Who the f*** is this idiot?
+H: Fine. Prepare yourself to die.
+ACTOR 3, Regent, regent, 1, 0, 85
+MOVE 3, 35, 85
+WAIT 1.5
+3: What's going on?
+H: What's going on? We have to talk!
+H: I've been told by a member of the Sanctuary that you deliberately killed a citizen of Prina to take possession of an old relic, the Skull of Jeren.
+H: I don't know what you had in mind when you asked your guards to find the relic but it must return to the Necromancy Academy, where they will know what to do with it.
+3: I won't even bother asking who you are.
+3: GUARDS!
+3: This man is under arrest!
+2: Follow us.
+WAIT 2
+GOTO SCENE 19
+
+@healerquest3
+ACTOR 1, Guard, guard6, 1, 20, 90 
+ACTOR 2, Guard, guard6, 1, 80, 90 
+FACE 2, 0
+1: Halt!
+1: You can't pass!
+H: Again...
+H: Damn humans!
+H: I have a message for the regent from the masters of the Sanctuary of Mangeas.
+2: Do not insist.
+2: You CANNOT pass!
+WAIT 2
+ACTOR 3, Regent, regent, 1, 50, 94
+3: What's going on here?
+1: This elf says he has a message for you.
+3: A message?
+H: About the skull of Jeren.
+H: I am from Mangeas Sanctuary.
+3: Who told you...
+3: Guards, leave us alone!
+1: Yes my lord.
+MOVE 1, -20, 90
+MOVE 2, 120, 90
+WAIT 2
+H: We know that you've got the relic.
+H: You cannot keep it.
+H: Its power would consume you as it consumed its former owner.
+H: The skull must be destroyed.
+3: Who do you think you are to tell me what I have to do?!
+3: Go back to the sanctuary and tell your masters to mind their own business.
+H: I won't leave the palace without the relic.
+3: Oh yeah?!
+3: GUARDS!
+WAIT 1.2
+MOVE 3, -20, 90, 1
+@healerfight
+FIGHT 136, 136
+IF WIN-T1045 @healq3win
+END
+
+@healq3win
+HOST_GIVE T1045
+HOST_GIVE T1034
+H: Fine.
+H: Now I have to find this damn relic.
+END
+
+@fightpriest
+FIGHT 136
+IF LOSE @priestarr
+END
+
+@priestarr
+SET priestquest3imprisonned, 1
+GOTO LINK 6, 4
+
+@necroquest4bis
+1: An intruder!
+1: Alarm!
+GOTO @necroquest4
+
+@jestdead
+MOVE 1, 20, 90
+1: !We have arrested %1!
+1: !We have arrested %1!
+1: your place is in a jail!
+1: You were here to see Makel, eh!
+1: You will!
+WAIT 1
+HOST_TAKE T1008
+HOST_GIVE T1009
+GOTO LINK 6, 2, 1
+
+@jestquest3
+1: !Alarm!
+1:!An intruder!
+MOVE 1, -20, 90, 1
+FIGHT2 136, 136, 136, 136
+IF LOSE @jestdead
+H: Well, I should go directly to the jails...
+END
+
+@jesterquest1 
+ACTOR 1, "Maitre Oudano",  gnome9, 1, 50, 90 
+ACTOR 2, Guard, human1, 1, 25, 90 
+1: Ah, finally! 
+1: Leave the hardware here and wait outside during the show. 
+WAIT 2 
+MOVE 1, -20, 90, 1 
+FACE 2, 0 
+WAIT 0.8 
+FACE 2, 1 
+WAIT 2
+2: They seem to be having fun inside...
+WAIT 1 
+2: And we are here, waiting at the door like two idiots...
+H: Tell me about that!
+H: I organized the attendance all day and I didn't even get a 'thank you'.
+2: I know that. 
+WAIT 1 
+2: My name is Makel. 
+H: %1. 
+H: Nice to meet you. 
+2: You are a part of the Guild, right? 
+H: Yup. 
+H: But I am bored. 
+H: I was expecting something more 'adventurous' when I chose to become a jester. 
+2: So was I.
+2: And I have to stay by this door all day. 
+WAIT 2 
+2: The show seems to be over. 
+WAIT 3 
+MOVE 1, 50, 90, 1 
+1: Ah you are here, %1! 
+1: Take the hardware and bring it back to the Guild. 
+MOVE 1, 120, 90 
+HOST_TAKE T1002 
+HOST_GIVE T1003 
+H: Bye Makel, I have to go. 
+2: See you later, maybe. 
+WAIT 1.5 
+GOTO EXIT
+
+@jestyfighty
+1: %1 is here!
+@necroquest4
+1: Alarm!
+IF R33 @jestyfighty1
+IF R66 @jestyfighty2
+FIGHT2 136, 136
+END
+
+@jestyfighty1
+FIGHT2 136, 136, 136, 136, 136
+END
+
+@jestyfighty2
+FIGHT2 136, 136, 136
+END
+;
+;------------------------------------------------------------------------------------------------------
+;
+SCENE 803, door1, SCENE, "To the Prison"
+#include include.txt
+IF T1038 @fightpriest
+ACTOR 1, Guard, guard6, 1, 20, 90
+IF T1032+C16-T1033-T1035 @necro4
+IF T1012 @jestyfighty
+IF T1008 @jestquest3
+1: Only the guards of the palace are allowed to go to the prison.
+1: You can't pass.
+END 
+
+@fightpriest
+FIGHT 136
+IF LOSE @priestarr
+END
+
+@priestarr
+SET priestquest3imprisonned, 1
+GOTO LINK 6, 4
+
+@necro4
+1: Oh my God!
+GOTO @necro4bis
+
+@jestquest3
+1: Oh my God!
+1: %1!
+@necro4bis
+1:!Alarm!
+MOVE 1, -20, 90, 1
+FIGHT 136.20.90, 136
+IF LOSE+C16 @necrodead
+IF LOSE @jestdeead3
+FIGHT 136.20.90, 136, 136
+IF LOSE+C16 @necrodead
+IF LOSE @jestdeead3
+FIGHT 136, 136, 136, 136
+IF LOSE+C16 @necrodead
+IF LOSE @jestdeead3
+IF C16 @necrowin
+H: And now let's rescue Makel
+@necropass
+WAIT 2
+GOTO LINK 6, 0
+
+@necrowin
+H: Finally!
+H: It's now time to definitely get rid of Derar!
+GOTO @necropass
+
+@necrodead
+H: Grr
+END
+
+@jestdeead3
+MOVE 1, 20, 90
+1: !We have arrested %1!
+1: !We have arrested %1!
+1: your place is in a jail!
+1: You were here to see Makel, eh!
+1: You will!
+WAIT 1
+HOST_TAKE T1008
+HOST_GIVE T1009
+GOTO LINK 6, 2, 1
+
+@jestyfighty
+1: Alarm!
+1: %1 is here!
+IF R33 @jestyfighty1
+IF R66 @jestyfighty2
+FIGHT2 136, 136
+END
+
+@jestyfighty1
+FIGHT2 136, 136, 136, 136, 136
+END
+
+@jestyfighty2
+FIGHT2 136, 136, 136
+END
+;
+;------------------------------------------------------------------------------------------------------
+;
+SCENE 804, palace2, SCENE, "Derar"
+#include include.txt
+ACTOR 1, Derar, human7, 1, 25, 90, 3
+IF C56+T1045-T1046 @healerquest3
+IF T1033 @necrodead
+IF -C16 @end
+H: So you have a new job, eh!
+1: Greetings, %1.
+H: You crossed the line, Derar.
+H: The Academy gave you a second chance but  you didn't change.
+H: It's now the end.
+H: The Masters of the Academy want you dead.
+H: Goodbye Derar!
+1: blablabla
+1: Same speech
+1: All the time
+WAIT 2
+MOVE 1, -20, 90, 1
+FIGHT 384.25.90
+IF WIN @necroquest4derarkilled
+MOVE 1, 25, 90
+WAIT 1.5
+1: That's what I said : always the same speech.
+1: And I am still alive.
+@end
+END
+
+@healerquest3
+SEL 1
+POSE 0
+H: The relic!
+1: Who the hell are you?
+1: Get out!
+H: I don't know who you are but this relic is mine.
+1: Idiot. I am sure you don't even know its power.
+FX 4
+COLOR 13
+COLOR 2013
+WAIT 2
+N: Derar summons several undead!
+FX 0
+WEATHER 0
+WEATHER 2000
+FIGHT 367, 367, 367, 367, 367
+IF LOSE @LOSEhealer
+1: Good job!
+1: Now I have to kill you myself!
+WAIT 2.0
+MOVE 1, -29, 90, 1
+FIGHT 383.25.90
+IF LOSE @LOSEhealer
+HOST_GIVE T1046
+HOST_TAKE T1034
+N: You kill him and take the relic.
+END
+
+@LOSEhealer
+1: Idiot.
+END
+
+@necroquest4derarkilled
+H: This time this is the end.
+H: Let's get out of the palace now.
+HOST_GIVE T1035
+HOST_TAKE T1033
+HOST_TAKE T1034
+END
+
+@necrodead
+ACTOR 2, Guard, guard6, 1, 75, 90, 1
+2: Advisor Derar, this man was looking for you.
+2: He entered the prison and killed several guards.
+1: %1! Greetings!
+1: You, scat. I'll take care of him on my own.
+2: Yes, Sir
+WAIT 0.8
+MOVE 2, 120, 90
+1: You were looking for me, eh!
+1: To try to kill me, maybe?!
+1: Hehe
+1: Feel free to try!
+GIVE L1
+GIVE H500
+GIVE M500
+FIGHT2 384
+IF WIN @necroquest4derarkilled
+MOVE 1, 25, 90
+WAIT 1.5
+1: That's what I said...
+1: Scat, you weak bastard!
+END
+
+
+

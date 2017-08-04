@@ -1,0 +1,32 @@
+SCENE 9300, sewers3, SCENE, "Back to the Surface"
+#include include.txt
+GOTO LINK 7, 29
+;
+;--------------------------------------------------------------------------
+;
+SCENE 9301, sewers3, SCENE, "Weird Place"
+#include include.txt
+IF T601 @end
+WAIT 1
+H: Strange...
+H: All the creatures of the sewers seem to be attracted in this direction.
+WAIT 2
+SOUND growl8.wav
+WAIT 1
+H: Aye, I understand why now.
+FIGHT 99
+IF WIN @win
+H: Argh!
+END
+
+@win
+N: You kill this ridiculous demon and find an Enchanted Spiked Shield  by its sanguineous carcass.
+GIVE I1060
+GIVE T601
+SOUND FoundItem.wav
+END
+
+@end
+N: The corpse of the demon is still here, rotten and half devoured by the rats.
+END
+

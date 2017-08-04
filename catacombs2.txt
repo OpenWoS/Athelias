@@ -1,0 +1,24 @@
+SCENE 5000, souterrain, SCENE, "To the Catacombs, level 1"
+#include include.txt
+GOTO LINK 47, 1
+;
+;-------------------------------------------------------------------------
+;
+SCENE 5001, "souterrain", SCENE, ""
+#include include.txt
+IF I703 @empty
+FIGHT 51
+IF LOSE @empty
+N: You don't find a treasure here but a skeleton.
+WAIT 1
+N: You take its sandals.
+WAIT 1
+N: They look like good quality.
+GIVE I703
+SOUND FoundItem.wav
+END
+
+@empty
+N: There is nothing left here.
+END
+

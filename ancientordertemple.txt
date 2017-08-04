@@ -1,0 +1,219 @@
+SCENE 5100, templeinside7, SCENE, "Gate"
+#include include.txt
+GOTO LINK 12, 1
+;
+;-----------------------------------------------------------------------
+;
+SCENE 5104, templeinside7, SCENE, "Chapel"
+IF T3977 @antigods
+#include include.txt
+IF T3831 @normalscene
+IF -T3988 @normalscene
+COMPARE #<xmasQuestCookie>, 3
+If= @xmasq3
+@normalscene
+ACTOR 1, Priest, gnome11, 1, 50, 100
+IF T3993|T3988 @halloweenActors
+GOTO @nextStepAfterHalloweenActors
+
+@antigods
+FIGHT 818
+IF WIN @antigodswin
+END
+
+@antigodswin
+HOST_TAKE T3977
+HOST_GIVE Z818
+SOUND trophyFound.wav
+END
+
+@halloweenActors
+ACTOR 1, "Priest", #<spEvent.Name>-gnome, 11, 50, 100
+@nextStepAfterHalloweenActors
+IF T1116-T1121 @chaos
+1: Welcome to the temple, adventurer.
+1: You have been healed.
+GIVE L1
+GIVE H5000
+GIVE M5000
+OFFER 37
+END
+
+@chaos
+GIVE L1
+GIVE H5000
+GIVE M5000
+ACTOR 2, Villager, gnome10, 1, 15, 99
+ACTOR 3, Villager, gnome7, 1, 25, 98
+ACTOR 4, Villager, gnome6, 1, 35, 97
+ACTOR 5, Villager, gnome5, 1, 45, 96
+ACTOR 6, Villager, gnome3, 1, 55, 96
+ACTOR 7, Villager, gnome6, 1, 65, 97
+ACTOR 8, Villager, gnome5, 1, 75, 98
+ACTOR 9, Villager, gnome7, 1, 85, 99
+1: Pray for Terendroz's sake, brothers!
+1: Pray and the Gods will save us!
+@end
+END
+
+@xmasq3
+ACTOR 1, Pumpkan, christmas10, 1, 45, 100
+POSE 1, 4
+H: Sir pumpkan, I presume?
+1: Who the hell are you?
+H: Apparently you've been causing havock and stuff and someone wants you dead, so... I'm here.
+1: You're kidding!
+1: I am pumpkan, God among the gods!
+1: I the brave, the wise, the almighty Pumpkan!
+H: The mad one, you mean?
+1: That too!
+1: For i'm everything!
+1: And now, you die.
+WAIT 2
+MOVE 1, 150, 150, 1
+FIGHT 2933.45.100, 2931, 2931, 2931, 2931
+IF LOSE @end
+ACTOR 2, "Miss Tweedy", christmas3, 1, 105, 100
+MOVE 2, 75, 100
+WAIT 3
+2: You've succeeded, %1!
+2: That's amazing!
+H: Yes, I know...
+2: Here is a little something to reward you.
+GIVE I3065
+GIVE T3831
+SOUND foundItem.wav
+END
+;
+;-----------------------------------------------------------------------
+;
+@StoryOfTheStreens
+1: Listen the story of Athelias, young monk, you must know it.
+1: We are the keepers of the ancient secrets.
+1: Athelias is no more than a small island lost in a large world.
+1: You will have to travel a lot if you want to learn everything about this world.
+1: The world was really different before. Most of what you can see now hasn't always existed.
+1: Once upon a time, Gaia was inhabited only by humans: elves, dwarves, gnomes, orcs, none of these races existed.
+1: Their life was more or less harmonious.
+1: One day arrived beings of a new race: the streens.
+1: They were magicians travelling from world to world through the warp.
+1: They helped develop the industry of the men.
+1: Technology improved.
+1: They even taught the humans how to master the mana and use magic.
+1: But the race of the streen was already downhill.
+1: And it slowly passed away.
+1: They disappeared from Gaia.
+1: But the Gates through the warp were still open and other creatures traveled by this way: the Chaos creatures.
+1: The streens could hold back the chaos but after their departure, the passage was wide open.
+1: The world began to change then.
+1: Some humans morphed into new races: elves, dwarves, orcs, goblins...
+1: Monsters appeared.
+1: Trees came alive.
+1: From the deep waters emerged Leviathans and other sea monsters.
+1: The sky dimmed under the flying of the dragons.
+1: Humans were endowed with magical powers that they couldn't dominate.
+1: And the Chaos weltered on Gaia, corrupting everything.
+1: The Warpgates had to be closed.
+1: The most powerful magicians who had been initiated by the streens gathered and began to pronounce incantations for this purpose.
+1: But the Gates couldn't be completely closed.
+1: At least they had succeeded in curbing the influx of the Chaos.
+1: Those mages were the founders of our order.
+1: This age was followed by centuries of struggles between humans, dwarves, elves, and gnomes, and the Chaos creatures.
+1: Some joined the Chaos and fought the members of their own race.
+1: Humans were divided, and the Chaos derived its power from it.
+1: The Age of Union came afterwards.
+1: The union of the four races of Athelias Island, gathered under one banner: the banner of the King of Athelias, King Argoz's banner.
+1: Together, they lead our ancestors to victory.
+1: But King Argoz died during the ultimate battle.
+1: A regent was then appointed, to finish the war.
+1: But the new regent did not believe in the power of his troops, and thought they couldn't defeat an enemy as powerful as the Chaos without the help of Thorn, the God of blood and war.
+1: So Thorn was summoned.
+1: But there was a high tribute to pay.
+1: The regent cursed all his lineage while doing so.
+1: The Chaos was driven away but the spirit of Thorn expanded over all the Island.
+1: Many knights stuck by King Argoz, even after his death, armed against the regent, and succeeded in defeating him.
+1: They were the ancestors of the rodeurs.
+1: But the regency perdured until now.
+WAIT 2
+1: I am tired now.
+1: Come back later.
+1: You've already learnt much today.
+END
+
+@LastKingOfAthelias
+1: A long time ago, when the chaos invaded Athelias, humans united and raised an immense army under King Argoz's banner.
+1: This was the ultimate battle, that sealed the destiny of Athelias.
+1: Men and chaos creatures kept fighting during two whole days.
+1: The soldiers could hardly stand up at the end of the battle.
+1: But victory was theirs.
+1: But when they thought they had defeated their enemy, darkness covered the land. 
+1: A vortex was opened in the sky and the most dreadful major demon came out of the shadows. 
+1: Argoz rushed on the creature and faced it.
+1: Then began a terrible duel.
+1: Argoz was wounded, and died on the battle field.
+1: But while the demon was not ready, he succeeded in putting his sword through its heart. 
+1: The battle was won.
+1: The creature of chaos were pushed back.
+1: But Athelias lost its king.
+1: And the victory was short.
+1: The chaos soon recovered its power.
+1: Men seemed to never be able to win.
+1: A regent was appointed to lead the armies : the King was dead childless.
+1: Facing the threat of chaos, the regent decided to invoke Thorn, God of blood and war.
+1: He knew that by doing that he would curse all of his descendants, but it appeared to be the only solution. 
+1: The sword of Thorn was taken out.
+1: The regent took the holy cup holding the blood of the god, and drank it, so did his most faithful companions.
+1: And together, they leaded the army to the victory.
+1: They were fighting with the soul of Thorn.
+1: But the human heart is too weak to endure such an ordeal.
+1: The regent and his companions needed war, needed blood.
+1: Their government became tyrannical.
+1: The country was absorbed in brutality.
+WAIT 2
+1: Some knights opposed to the regent when he took out  the Sword of Thorn. 
+1: King Argoz always refused to come to that extremity, and his men kept their fidelity towards him, even after his death. 
+1: As they watched the land get ruled by anger and brutality, they decided to kill the regent and his minions. 
+1: They were the worthiest knights of the island, but they had to fight against an avatar of the god of war himself.
+1: The fight took place here. Most of the fighters died during the battle.
+1: At the end, only three knights and the regent remained.
+1: It was as if nothing could stop his shots. 
+1: But he stumbled and one of the knights took advantage of it and hit him on the head. 
+1: The regent felt down.
+1: In a last effort, he took his sword again, and thrust it into the ground. 
+1: Nobody succeeded in taking it out since.
+1: A temple was built around it, and the sword of Thorn is still here.
+1: Rodeurs are the guards of the temple.
+1: They are the descendants of these knights, the companions of King Argoz.
+1: But another king has never been appointed.
+1: The sons of the regent kept ruling over Athelias.
+1: Rodeurs keeps waiting, and watching.
+1: They know that this family was cursed when the sword of Thorn was taken out.
+1: No good may come from them.
+END
+
+@AtheliasUnderground
+1: Centuries ago, the ancient dwarves dug several underground galleries between all the cities of Athelias.
+1: Their art was so subtle that the distances seemed to be shorter.
+1: They were the main roads of the island.
+1: Unfortunately, when the power of the dwarves was fading, the Orcs and goblins invaded and occupied the galleries.
+1: Since, they are lost.
+1: It's told that more terrible monsters than orcs live there nowadays...
+END
+
+@ElementalCrystals
+1: When the Chaos was defeated by the armies of the first regent, after the fist invasion, some of the greatest heroes of the island and made a company that penetrated the Chaos lands to destroy an artifact that was thought to provided to the Chaos all its power.
+1: But the human heart is easily corruptible.
+1: The Chaos succeeded in seizing their minds.
+1: Only the priest of the company, Tenisan, resisted.
+1: But on his own he couldn't defeat all of his former companions.
+1: It is said that he is still alive, imprisoned somewhere in the dungeon of the palace of Irezar.
+1: The greatest runesmiths of Athelias had forged weapons more powerful than any others.
+1: Each race of Athelias, humans, dwarves, elves and gnomes, also enchanted a magical crystal in their favorite element: earth for dwarves, air for elves, fire for humans, and water for gnomes.
+1: They were later called elemental crystals.
+1: Each crystal had been given to one of the four elementalists of the company.
+1: They increased their powers tenfold and made them absolute masters of their element.
+1: But the crystals were lusted for and as powerful as the elementalists were, they did not succeeded in keeping them.
+1: It is said that the air crystal is somewhere in a monastery of Bretonia, in the Old World.
+1: Nobody knows where the three other crystals are.
+1: But it is said that if anyone owns one of the elemental crystals, he could locate any other crystal.
+END

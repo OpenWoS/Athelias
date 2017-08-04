@@ -1,0 +1,479 @@
+SCENE 1800, ruins(temple), SCENE, "Western Gate"
+#include include.txt
+SET c3irezarexit, west
+GOTO LINK 0, 4
+;
+;-------------------------------------------------------------------------------------------------------------------------------------------------------
+;
+SCENE 1801, ruins(temple), SCENE, "Northern Gate"
+#include include.txt
+SET c3irezarexit, north
+GOTO LINK 0, 4
+;
+;-------------------------------------------------------------------------------------------------------------------------------------------------------
+;
+SCENE 1802, ruins(temple), SCENE, Gate
+GOTO LINK 21, 0
+;
+;-------------------------------------------------------------------------------------------------------------------------------------------------------
+;
+SCENE 1803, ruins(temple), SCENE, "Irezar Gate"
+#include include.txt
+GOTO LINK 45, 7
+;
+;-------------------------------------------------------------------------------------------------------------------------------------------------------
+;
+SCENE 1804, weapons, SCENE, "Runesmith", 0, 1
+#include include.txt
+ACTOR 1, Altek, human35, 1, 25, 90
+IF T3993|T3988 @halloweenActors
+GOTO @nextStepAfterHalloweenActors
+
+@halloweenActors
+ACTOR 1, "Altek", #<spEvent.Name>-humans, 35, 25, 90
+@nextStepAfterHalloweenActors
+1: Welcome to my shop, adventurer
+OFFER 545, 546, 547, 548, 549, 550, 551, 552, 553, 554, 555, 556, 557, 558, 559, 560, 561, 562, 563, 564
+END
+;
+;-------------------------------------------------------------------------------------------------------------------------------------------------------
+;
+SCENE 1805, weapons, SCENE, "Staves", 0, 1
+#include include.txt
+ACTOR 1, Durtel, human20, 1, 25, 90
+IF T3993|T3988 @halloweenActors
+GOTO @nextStepAfterHalloweenActors
+
+@halloweenActors
+ACTOR 1, "Durtel", #<spEvent.Name>-humans, 20, 25, 90
+@nextStepAfterHalloweenActors
+1: Hello, adventurer
+1: I have the finest staves of Athelias!
+OFFER 344, 345, 346, 347, 348, 349, 350, 351, 352, 353, 354, 355, 356, 357, 358, 359, 360 ,361, 362, 363
+END
+;
+;-------------------------------------------------------------------------------------------------------------------------------------------------------
+;
+SCENE 1806, "houseinside2", SCENE, "Historian"
+#include include.txt
+ACTOR 1, "Historian", human77, 1, 83, 84
+IF T3993|T3988 @halloweenActors
+GOTO @nextStepAfterHalloweenActors
+
+@halloweenActors
+ACTOR 1, "Historian", #<spEvent.Name>-humans, 77, 83, 84
+@nextStepAfterHalloweenActors
+FACE 1, 1
+IF -V65 @back
+IF T1110 @back
+1: A foreigner?!
+FACE 1, 1
+1: Here?!
+1: I bet you are here to explore the palace!
+FACE 1, 2
+H: What are you talking about?
+FACE 1, 2
+1: No?!
+FACE 1, 2
+1: All the adventurers seem to be willing to explore the palace.
+FACE 1, 2
+1: It was one of the most beautiful buildings in Athelias before the first invasion.
+FACE 1, 2
+1: But now it is like everything in the city : ruins, haunted by the undead.
+FACE 1, 2
+1: You shouldn't go there, I say.
+H: That's very tempting...
+FACE 1, 2
+GIVE T1110
+END
+
+@back
+FACE 1, 1
+IF I1135 @derrarstuffnextr
+COMPARE #<chat.derarstuffHistorianIrezar>, 1
+IF @derarstuffback
+IF Z383 @derarstuff1
+IF Z384 @derarstuff2
+@derrarstuffnextr
+1: Hello.
+1: Do you want a cup of tea?
+FACE 1, 2
+END
+
+@derarstuff1
+1: Hey!
+1: What's that?!
+1: It looks like Derar's glasses!
+1: If you can find his wand as well I could trade them for a talisman.
+1: I don't have the use of it but I know it may be very useful to necromancers.
+SET chat.derarstuffHistorianIrezar, 1
+IF Z384 @derarstuff3
+H: Sounds good.
+END
+
+@derarstuff2
+1: Hey!
+1: What's that?!
+1: It looks like Derar's wand!
+1: If you can find his staff as well I could trade them for a talisman.
+1: I don't have the use of it but I know it may be very useful to necromancers.
+H: Sounds good.
+SET chat.derarstuffHistorianIrezar, 1
+END
+
+@derarstuff3
+H: I've got his wand as well.
+1: Great!
+1: So, do you accept the deal?
+GOTO @derrarstuffask
+
+@derarstuffback
+IF Z383+Z384 @derrarstufmake
+1: Welcome back, adventurer.
+1: Remember that if you can find both Derar's glasses and Derar's wand, I could exchange them for a magical talisman.
+END
+
+@derrarstufmake
+H: Hello.
+H: I've the two items you wanted.
+1: Great!
+1: So, do you want to exchange them for this magical talisman?
+@derrarstuffask
+ASK 30
+IF YES @derrarstuffaskYES
+IF NO @derrarstuffaskNO
+GOTO @derrarstuffask
+
+@derrarstuffaskNO
+1: Alright.
+1: Come back if you change your mind.
+END
+
+@derrarstuffaskYES
+1: Excellent!
+1: Here is the talisman!
+HOST_TAKE Z383
+HOST_TAKE Z384
+HOST_GIVE I1135
+SOUND foundItem.wav
+SET chat.derarstuffHistorianIrezar, ""
+END
+;
+;-------------------------------------------------------------------------------
+;
+SCENE 1807, "ruins(temple)", SCENE, "Temple"
+IF T3976 @antigods
+#include include.txt
+IF T1115 @tenisandead
+IF T1116 @endheal
+IF T1113 @hurry
+IF T1112 @quest
+IF T1111 @priest
+N: The temple seems to be abandoned for ages.
+END
+
+@antigods
+FIGHT 817
+IF WIN @antigodswin
+END
+
+@antigodswin
+HOST_TAKE T3976
+HOST_GIVE Z817
+SOUND trophyFound.wav
+END
+
+@tenisandead
+N: The place is abandoned.
+END
+
+@endheal
+ACTOR 1, Tenisan, human26, 1, 25, 96
+IF T3993|T3988 @halloweenActors
+GOTO @nextStepAfterHalloweenActors
+
+@halloweenActors
+ACTOR 1, "Tenisan", #<spEvent.Name>-humans, 26, 25, 96
+@nextStepAfterHalloweenActors
+GIVE L1
+GIVE H5000
+GIVE M5000
+1: Welcome back, hero.
+END
+
+@priest
+GIVE L1
+GIVE H5000
+GIVE M5000
+ACTOR 1, Tenisan, human26, 1, 25, 96
+1: What are you waiting for?
+1: You must go to Serevan castle and try to stop them!
+END
+
+@quest
+GIVE L1
+GIVE H5000
+GIVE M5000
+ACTOR 1, Tenisan, human26, 1, 25, 96
+IF T3993|T3988 @halloweenActors2
+GOTO @nextStepAfterHalloweenActors2
+
+@halloweenActors2
+ACTOR 1, "Tenisan", #<spEvent.Name>-humans, 26, 25, 96
+@nextStepAfterHalloweenActors2
+1: Did you succeed?
+1: Do you have the book?
+H: Unfortunately, no.
+H: Kondilor succeeded in running away with the book while I was fighting his riders.
+1: So there is no time to waste.
+1: We must go to Arkhangal and try to stop the ritual.
+1: I will come with you.
+1: It is also my struggle.
+GIVE T33
+GIVE T1113
+COUNTDOWN 900
+END
+
+@hurry
+ACTOR 1, Tenisan, human26, 1, 60, 90
+IF T3993|T3988 @halloweenActors3
+GOTO @nextStepAfterHalloweenActors3
+
+@halloweenActors3
+ACTOR 1, "Tenisan", #<spEvent.Name>-humans, 26, 60, 90
+@nextStepAfterHalloweenActors3
+1: Hurry and go to Arkhangal!
+1: We must stop the ritual!
+END
+;
+;------------------------------------------------------------------------------------
+;
+SCENE 1808, ruins(temple), SCENE, "Southern Gate"
+#include include.txt
+SET c3irezarexit, south
+GOTO LINK 0, 4
+;
+;-------------------------------------------------------------------------------------------------------------------------------------------------------
+;
+SCENE 1809, ruins(temple), SCENE, "Eastern Gate"
+#include include.txt
+SET c3irezarexit, east
+GOTO LINK 0, 4
+;
+;-------------------------------------------------------------------------------------------------------------------------------------------------------
+;
+SCENE 1810, weapons2, SCENE, "Smithy"
+#include include.txt
+ACTOR 1, Dermen, human81, 1, 40, 95
+COMPARE #<c5talkedtoblacksmith>, 0
+IF= @firsttimeblacksmith.txt
+1: Hello, adventurer.
+1: Toss me the item you want to upgrade.
+OFFER 132, 134, 135
+END
+
+#include blacksmith.txt
+;
+;-------------------------------------------------------------------------------
+;
+SCENE 1812, weapons, SCENE, "Handicraft", 0, 1
+#include include.txt
+ACTOR 1, Telden, human24, 1, 25, 90
+IF T3993|T3988 @halloweenActors
+GOTO @nextStepAfterHalloweenActors
+
+@halloweenActors
+ACTOR 1, "Telden", #<spEvent.Name>-humans, 24, 25, 90
+@nextStepAfterHalloweenActors
+1: Welcome!
+1: Everything to be ready for the battle!
+OFFER 270, 271, 272, 273, 274, 275, 276, 277, 278, 279, 200, 209, 213, 217, 221, 565, 569, 573, 578, 582
+END
+;
+;---------------------------------------------------------------------------------------------
+;
+SCENE 1813,tavern1 , SCENE, "Tavern"
+#include include.txt
+ACTOR 1, Melany, wom29, 1, 30, 89
+ACTOR 2, Evra, wom4, 1, 91, 85
+FACE 2, 0
+ACTOR 3, Fatia, wom2, 1, 15, 83
+IF T3993|T3988 @halloweenActors
+GOTO @nextStepAfterHalloweenActors
+
+@halloweenActors
+ACTOR 1, "Melany", #<spEvent.Name>-wom, 29, 30, 89
+ACTOR 2, Evra, #<spEvent.Name>-wom, 4, 91, 85
+FACE 2, 0
+ACTOR 3, Fatia, #<spEvent.Name>-wom, 2, 15, 83
+@nextStepAfterHalloweenActors
+1: Hello.
+1: What do you want to drink?
+OFFER 2, 34
+IF V99 @comparemerc.firsttime
+@normalV99
+END
+
+@comparemerc.firsttime
+COMPARE #<merc.firstTime>, 1
+IF= @normalV99
+GOTO @mercfirstime.txt
+
+#include merc-firsttime.txt
+
+@eventActorClick2
+SOUND sword1.wav
+SET temp.currentMerc, 2917
+#include merc-alreadyHired.txt
+@nextstepaftermercalreadyhired2917
+ACTOR 20, , merc2917, 0, 50, 50
+ACTOR 21, , hire, 0, 40, 75
+ACTOR 22, , cancel, 0, 60, 75
+END
+
+@eventActorClick3
+SOUND sword1.wav
+SET temp.currentMerc, 2905
+#include merc-alreadyHired.txt
+@nextstepaftermercalreadyhired2905
+ACTOR 20, , merc2905, 0, 50, 50
+ACTOR 21, , hire, 0, 40, 75
+ACTOR 22, , cancel, 0, 60, 75
+END
+
+#include merc-hire.txt
+;
+;-------------------------------------------------------------------------------
+;
+SCENE 1815, "ruins(temple)", SCENE, "Necromancy Academy"
+#include include.txt
+ACTOR 1, Caretaker, human8, 1, 23, 97
+IF T3993|T3988 @halloweenActors
+GOTO @nextStepAfterHalloweenActors
+
+@halloweenActors
+ACTOR 1, "Caretaker", #<spEvent.Name>-humans, 8, 23, 97
+@nextStepAfterHalloweenActors
+IF T3968-J113 @pass
+IF T4002 @chaos
+IF C16 @canpass
+COMPARE #<illuq1>, 3
+IF= @illupass
+1: Sorry, you cannot pass.
+1: The Academy cannot be visited by strangers.
+END
+
+@illupass
+H: Greetings.
+H: I am %1, from the Illusory Magic Academy.
+H: My masters asked me to come here to get some informations about Lord Jeren.
+1: You should go and ask Mistress Razel, she will probably be able to help you.
+WAIT 2.8
+GOTO @pass
+
+@chaos
+1: Alarm!
+SOUND bell3,wav
+WAIT 1
+SOUND bell3,wav
+WAIT 1
+SOUND bell3,wav
+WAIT 1
+MOVE 1, -25, 90, 1
+FIGHT 2013.23.97, 2013
+IF LOSE @dead
+IF R33 @fight2
+H: Open this bloody door!
+END
+
+@fight2
+FIGHT 2013, 2013, 2013
+IF LOSE @dead
+IF R33 @fight3
+H: Open this bloody door!
+END
+
+@fight3
+FIGHT 2013, 2013, 2013, 2013
+IF LOSE @dead
+H: Open this bloody door!
+END
+
+@dead
+N: And the chaos was defeated....
+WAIT 2
+GOTO EXIT
+
+@canpass
+1: Hello, %1.
+1: Welcome to the Academy
+WAIT 1.3
+@pass
+GOTO LINK 4, 0
+;
+;------------------------------------------------------------------------------------------------------
+;
+SCENE 1816, "houseinside1", SCENE, "Joe's Magical Shop"
+#include include.txt
+ACTOR 1, "Joe", human20, 1, 50,80
+SEL 1
+POSE 1, 2
+IF T3993|T3988 @halloweenActors
+GOTO @nextStepAfterHalloweenActors
+
+@halloweenActors
+ACTOR 1, "Joe", #<spEvent.Name>-humans, 20, 50, 80
+@nextStepAfterHalloweenActors
+IF -V75 @tooyoung
+COMPARE #<timestheplayercamehereeeeeeee>, 0
+IF> @cmp
+1: I have some specific potions for sale.
+1: But unfortunately I'm running out of ingredients to make them.
+1: If you want some, you'll have to bring me what I need to make them.
+1: Actually, I need some major demon blood.
+SET timestheplayercamehereeeeeeee, 1
+HOST_GIVE T88
+END
+
+@tooyoung
+1: Sorry, adventurer but the shop is closed.
+1: I've ran out of raw material.
+END
+
+@cmp
+IF T88 @cmp2
+ADD timestheplayercamehereeeeeeee, 1
+COMPARE #<timestheplayercamehereeeeeeee>, 20
+IF> @ask
+1: Do you want to buy some potions?
+OFFER 728, 729
+END
+
+@ask
+HOST_GIVE T88
+1: I need some more major demon blood again to make new potions.
+1: The shop will be closed until I get some.
+END
+
+@cmp2
+IF Z72 @gotit
+1: I still need some more major demon blood to make new potions.
+1: The shop will be closed until I get some.
+END
+
+@gotit
+H: I've got what you need.
+1: Great!
+HOST_TAKE Z72
+HOST_GIVE I728.3
+HOST_GIVE I729.3
+HOST_TAKE T88
+SET timestheplayercamehereeeeeeee, 1
+1: Let me reward you with some of my potions.
+SOUND FoundItem.wav
+1: Come back if you want more, but then you would have to pay for them.
+END
+;
+;--------------------------------------------------------------------------------------------------------
+;
+

@@ -1,0 +1,741 @@
+
+; tactics_ini.txt
+;
+; copyright 2008 (c) synthetic-reality.com, Dan Samuel, all rights reserved
+;
+; All available tactics maps for your world are defined in this file
+; related assets are found in your world's "tactics" folder. 
+; (omit the .bmp on bitmap names and the .wav on sound effect files)
+;
+; tactics.ini includes the following sections:
+;
+; [general]    - declares the number of maps in the file
+; [tiles]      - declares the appearance and properties of individual map tiles
+; [sounds]     - declares all the possible sound effect files.
+; [soundsets]  - declares sets of similar sound effect files (the game picks a sound at random from the set)
+; [weapons]    - declares available weapons
+; [spells]     - declares available spells
+; [spellSets]  - declares combinations of spells (a magic user is bound to a particular spell set)
+; [pieces]     - declares the available army pieces
+; [mapNN]      - one section per map (numbered from 1 to General/numMaps)
+;
+; ---
+;
+; 'Movement' values are formed by adding together these values:
+;
+;    1 - earth  (normal, can walk on dirt)
+;    2 - air    (can be flown over)
+;    4 - fire   (lava)
+;    8 - water  (water)
+;
+;  so, for example, a movement value of 9 means it can cross earth and water.  15 means it can cross anything.
+;
+; PIECES and TILES both have movement values, and a piece can cross a tile if it has ANY in common.
+; So, generally set the tiles to the sort of thing they are, then give the PIECEs all the bits
+; for all the things they can cross (for example, a flying piece probably gets a movement value
+; of 15 since it can cross earth, air, fire, and water.  (well, maybe not water)
+;
+; WEAPONS also have movement values (some weapons may not cross water, for example)
+;
+; NOTE: ini files do NOT like blank lines in the middle of a section, so if you want
+;       to break up the monotony, be sure to start the line with a comment semicolon
+;
+; NOTE: ini files tend to strip quotes if the value begins or ends with a quote, so add a leading space and a trailing comma where needed
+;       (you can generally imitate this file in that regard) (but it boils down to: if the line has more than one field on it, and the final
+;        field on the line is quoted, then add a comma at the end.  If that same line starts with a quoted argument, add an extra space after
+;        the equal sign.
+;
+
+
+;---------
+; these are the COMMON tiles, which *can be overridden* by individual maps
+;
+; Note the following 'special' tileIds which you must use as described:
+;
+; 0   - not availble, not drawn, not passable, defines 'border' of map
+; 249 - Start location for Red Player (should be a single pixel of this somewhere)
+; 250 - Start location of Green Player
+; 251 - start location of Yellow Player
+; 252 - start location of Blue Player
+
+[Tiles]
+;
+; tileColorIndex = Name,            bitmap,              movement,     flags
+tile247 =         "Slate",        "tiles\tileSlate",        1,          0
+tile114 =         "Forest",       "tiles\tileForest",       1,          0
+tile50  =         "Lava",         "tiles\tileLava",         4,          0
+tile205 =         "Water",        "tiles\tileWater",        8,          0
+; Starting locations MUST use these colorIndices
+tile249 =         "Red Start",    "tiles\tileSlate",        1,          0
+tile250 =         "Green Start",  "tiles\tileSlate",        1,          0
+tile251 =         "Yellow Start", "tiles\tileSlate",        1,          0
+tile252 =         "Blue Start",   "tiles\tileSlate",        1,          0
+
+
+;---------
+; These are the COMMON sounds
+; they must be .wav files (but don't include the extension) and in the tactics folder
+; They will be referred to by number, which should be between 1 and 255
+; the 'name' field is just a reminder to you as to what the sound is for
+;
+; ids 1-24    reserved for future development
+; ids 225-255 reserved for specific engine sounds
+;
+[sounds]
+;           Name                 wave file
+; Heroic Voice
+sound25 =   "select Unit",      "sfx\ready\heroic\at_your_command",
+sound26 =   "select Unit",      "sfx\ready\heroic\for_my_king",
+sound27 =   "select Unit",      "sfx\ready\heroic\i_await_your_command",
+sound28 =   "select Unit",      "sfx\ready\heroic\my_swords_serve_thee",
+sound29 =   "select Unit",      "sfx\ready\heroic\its_all_good",
+;
+sound30 =   "click on dest.",   "sfx\move\heroic\by_your_command",
+sound31 =   "click on dest.",   "sfx\move\heroic\i_go",
+sound32 =   "click on dest.",   "sfx\move\heroic\o_tresspass_sweetly_urged",
+sound33 =   "click on dest.",   "sfx\move\heroic\there_is_no_other_way",
+sound34 =   "click on dest.",   "sfx\move\heroic\where_is_the_beef",
+;
+sound35 =   "click on target",  "sfx\attack\heroic\by_grendels_hammer",
+sound36 =   "click on target",  "sfx\attack\heroic\i_attack",
+sound37 =   "click on target",  "sfx\attack\heroic\i_serve_as_good_as_you",
+sound38 =   "click on target",  "sfx\attack\heroic\sword_from_scabbard6",
+sound39 =   "click on target",  "sfx\attack\heroic\your_end_is_near",
+;
+sound40 =   "unit hurt",        "sfx\pain\heroic\ahh",
+sound41 =   "unit hurt",        "sfx\pain\heroic\i_am_hurt",
+sound42 =   "unit hurt",        "sfx\pain\heroic\oof",
+sound43 =   "unit hurt",        "sfx\pain\heroic\ow2",
+;
+sound45 =   "unit died",        "sfx\death\heroic\i_am_slain",
+sound46 =   "unit died",        "sfx\death\heroic\i_have_fallen_and_i_cannot_rise",
+;
+; Squeaky Voice
+sound100 =   "select Unit",      "sfx\ready\squeaky\awaiting_your_command",
+sound101 =   "select Unit",      "sfx\ready\squeaky\for_the_queen",
+sound102 =   "select Unit",      "sfx\ready\squeaky\i_will_avenge_thee",
+sound103 =   "select Unit",      "sfx\ready\squeaky\yes_my_liege",
+sound104 =   "select Unit",      "sfx\ready\squeaky\one_of_us",
+;
+sound105 =   "Move Unit",        "sfx\move\squeaky\i_obey",
+sound106 =   "Move Unit",        "sfx\move\squeaky\none_shall_pass",
+sound107 =   "Move Unit",        "sfx\move\squeaky\there_will_be_blood",
+sound108 =   "Move Unit",        "sfx\move\squeaky\what_no_better",
+sound109 =   "Move Unit",        "sfx\move\squeaky\youre_standing_on_my_foot",
+;
+sound110 =   "Attack Unit",      "sfx\attack\squeaky\by_the_power_of_grayskull",
+sound111 =   "Attack Unit",      "sfx\attack\squeaky\i_shall_make_an_ashtray_from_your_skull",
+sound112 =   "Attack Unit",      "sfx\attack\squeaky\youre_a_saucy_one",
+sound113 =   "Attack Unit",      "sfx\attack\squeaky\thou_art_slain",
+sound114 =   "Attack Unit",      "sfx\attack\squeaky\youll_shoot_your_eye_out",
+;
+sound115 =   "Unit Pain",        "sfx\pain\squeaky\thats_going_to_leave_a_mark",
+sound116 =   "Unit Pain",        "sfx\pain\squeaky\tis_but_a_scratch",
+;
+sound120 =   "Unit Death",       "sfx\death\squeaky\i_am_no_more",
+sound121 =   "Unit Death",       "sfx\death\squeaky\weve_run_out_of_beans",
+;
+; Rumbly Voice
+sound125 =   "select Unit",      "sfx\ready\rumbly\ready",
+sound126 =   "select Unit",      "sfx\ready\rumbly\for_the_king",
+sound127 =   "select Unit",      "sfx\ready\rumbly\it_is_a_good_day_to_die",
+sound128 =   "select Unit",      "sfx\ready\rumbly\remorse_is_for_weaklings",
+sound129 =   "select Unit",      "sfx\ready\rumbly\excellent",
+;
+sound130 =   "Move Unit",        "sfx\move\rumbly\to_battle",
+sound131 =   "Move Unit",        "sfx\move\rumbly\cry_havoc",
+sound132 =   "Move Unit",        "sfx\move\rumbly\forward",
+sound133 =   "Move Unit",        "sfx\move\rumbly\i_seek_vengeance",
+sound134 =   "Move Unit",        "sfx\move\rumbly\engage",
+;
+sound135 =   "Attack Unit",      "sfx\attack\rumbly\have_at_thee",
+sound136 =   "Attack Unit",      "sfx\attack\rumbly\i_am_rubber_you_are_glue",
+sound137 =   "Attack Unit",      "sfx\attack\rumbly\step_off",
+sound138 =   "Attack Unit",      "sfx\attack\rumbly\your_time_has_come",
+;
+sound140 =   "Unit Pain",        "sfx\pain\rumbly\gargle",
+sound141 =   "Unit Pain",        "sfx\pain\rumbly\i_am_wounded",
+sound142 =   "Unit Pain",        "sfx\pain\rumbly\my_feet_hurt",
+sound143 =   "Unit Pain",        "sfx\pain\rumbly\ow",
+sound144 =   "Unit Pain",        "sfx\pain\rumbly\tis_a_foul_deed",
+;
+sound145 =   "Unit Death",       "sfx\death\rumbly\i_die",
+;
+;
+;
+; Sultry voice
+sound150 =   "select Unit",      "sfx\ready\sultry\i_have_what_you_want",
+sound151 =   "select Unit",      "sfx\ready\sultry\if_i_must",
+sound152 =   "select Unit",      "sfx\ready\sultry\you_want_me_to_do_what",
+sound153 =   "select Unit",      "sfx\ready\sultry\your_place_or_mine",
+sound154 =   "select Unit",      "sfx\ready\sultry\im_ready",
+;
+sound155 =   "Move Unit",        "sfx\move\sultry\does_that_work_for_you",
+sound156 =   "Move Unit",        "sfx\move\sultry\hot_stuff_coming_your_way",
+sound157 =   "Move Unit",        "sfx\move\sultry\mmm",
+sound158 =   "Move Unit",        "sfx\move\sultry\to_battle",
+;
+sound160 =   "Attack Unit",      "sfx\attack\sultry\i_will_polish_my_nails_with_your_blood",
+sound161 =   "Attack Unit",      "sfx\attack\sultry\im_gonna_scratch_your_eyes_out",
+sound162 =   "Attack Unit",      "sfx\attack\sultry\oh_no_you_didnt",
+sound163 =   "Attack Unit",      "sfx\attack\sultry\oh_you_like_it_rough",
+sound164 =   "Attack Unit",      "sfx\attack\sultry\who_let_your_dogs_out",
+;
+sound165 =   "Unit Pain",        "sfx\pain\sultry\uhhh",
+sound166 =   "Unit Pain",        "sfx\pain\sultry\eeeee",
+sound167 =   "Unit Pain",        "sfx\pain\sultry\eww2",
+sound168 =   "Unit Pain",        "sfx\pain\sultry\oh_no",
+sound169 =   "Unit Pain",        "sfx\pain\sultry\ow1",
+;
+sound170 =   "Unit Death",       "sfx\death\sultry\dying_is_easy_comedy_is_hard",
+sound171 =   "Unit Death",       "sfx\death\sultry\im_done_for",
+;
+;
+; animal voice
+sound175 =   "select Unit",      "sfx\ready\animal\meow",
+sound176 =   "select Unit",      "sfx\ready\animal\murloc",
+sound177 =   "select Unit",      "sfx\ready\animal\ruhruh",
+sound178 =   "select Unit",      "sfx\ready\animal\yessssh",
+;
+sound180 =   "Move Unit",        "sfx\move\animal\growl2",
+sound181 =   "Move Unit",        "sfx\move\animal\roar",
+;
+sound185 =   "Attack Unit",      "sfx\attack\animal\growl1",
+sound186 =   "Attack Unit",      "sfx\attack\animal\growl3",
+sound187 =   "Attack Unit",      "sfx\attack\animal\growl4",
+sound188 =   "Attack Unit",      "sfx\attack\animal\growl",
+;
+sound190 =   "Unit Pain",        "sfx\pain\animal\eep",
+sound191 =   "Unit Pain",        "sfx\pain\animal\hiss",
+sound192 =   "Unit Pain",        "sfx\pain\animal\ruhro",
+sound193 =   "Unit Pain",        "sfx\pain\animal\yelp2",
+sound194 =   "Unit Pain",        "sfx\pain\animal\yelp",
+;
+; -- none sound195 =   "Unit Death",       "sfx\death\animal\i am no more",
+;
+;
+;
+; weapons (200-224)
+;
+sound200 =   "sword hit",        "sfx\weapons\danSword3",
+sound201 =   "sword hit",        "sfx\weapons\danSword5",
+sound202 =   "sword hit",        "sfx\weapons\danSword12",
+sound203 =   "sword miss",       "sfx\weapons\swordQuick7",
+sound204 =   "sword crit",       "sfx\weapons\sword2",
+;
+; Miscellaneous (these IDs are 'fixed' so don't change/reuse them -- you can bind them to different WAV files of course)
+; (225 - 255)
+sound245 =   "battle launch",    "sfx\",
+sound246 =   "tile click ",      "sfx\stock\tileClick",
+sound247 =   "button click ",    "sfx\stock\buttonClick",
+sound248 =   "walking sound",    "sfx\stock\footStep",
+sound249 =   "new scene"         "sfx\stock\welcome_my_lord",
+sound250 =   "fanfare"           "sfx\stock\vocal_fanfare",
+sound251 =   "new player"        "sfx\stock\fresh_meat",
+sound252 =   "turn wake-up"      "sfx\stock\have_you_no_orders_my_liege",
+sound253 =   "left scene"        "sfx\stock\thank_you_for_playing_wos_tactics",
+sound254 =   "we lost"           "sfx\stock\we_have_failed_you",
+sound255 =   "we won"            "sfx\stock\we_are_victorious",
+
+
+;----------
+; These are the sound SETs
+; A sound set has an id (1-255)
+; A sound set has up to 10 potential soundIds, from which a sound effect will be randomly selected
+; So, for example, you might have a sound set for "heroic voice beginning attack" and another for "animal voice in pain"
+;
+; Pieces are bound to sound SETs not SOUNDs (though a set is allowed to have a single entry, if that's all you need)
+;
+[SoundSets]
+;               Name (for reminder only)
+soundSet10  =  "Heroic Ready",     25, 26, 27, 28, 29    
+SoundSet20  =  "Heroic Go",        30, 31, 32, 33, 34
+soundSet30  =  "Heroic Attack",    35, 36, 37, 38, 39
+soundSet40  =  "Heroic Pain",      40, 41, 42, 43
+soundSet50  =  "Heroic Death",     45, 46
+;
+soundSet11  =  "Squeaky Ready",    100, 101, 102, 103, 104       
+SoundSet21  =  "Squeaky Go",       105, 106, 107, 108, 109 
+soundSet31  =  "Squeaky Attack",   110, 111, 112, 113, 114
+soundSet41  =  "Squeaky Pain",     115, 116
+soundSet51  =  "Squeaky Death",    120, 121  
+;
+soundSet12  =  "Rumbly Ready",     125, 126, 127, 128, 129
+SoundSet22  =  "Rumbly Go",        130, 131, 132, 133, 134
+soundSet32  =  "Rumbly Attack",    135, 136, 137, 138
+soundSet42  =  "Rumbly Pain",      140, 141, 142, 143, 144
+soundSet52  =  "Rumbly Death",     145
+;     
+soundSet13  =  "Sultry Ready",     150, 151, 152, 153, 154
+SoundSet23  =  "Sultry Go",        155, 156, 157, 158
+soundSet33  =  "Sultry Attack",    160, 161, 162, 163, 164
+soundSet43  =  "Sultry Pain",      165, 166, 167, 168, 169
+soundSet53  =  "Sultry Death",     170, 171
+;
+soundSet14  =  "Animal Ready",     175, 176, 177, 178
+SoundSet24  =  "Animal Go",        180, 181
+soundSet34  =  "Animal Attack",    185, 186, 187
+soundSet44  =  "Animal Pain",      190, 191, 192, 193, 194 
+soundSet54  =  "Animal Death",      
+;
+; weapon sounds
+SoundSet100 =  "Sword Hit",        200, 201, 202
+soundSet101 =  "sword miss",       203
+soundSet102 =  "sword crit",       204
+
+
+
+;---------
+; Weapons
+;
+; Each piece is assigned a weapon (which never changes)
+;
+[Weapons]
+;
+; Name      = keep it super short
+; Class     = the class of this weapon (think 'rock/paper/scissor') more than one weapon can have same class
+; Dominates = id of weapon class which has no defense to this one (Rock Beats Scissors)
+; Damage    = basic hit point damage of weapon
+; Movement  = bitmap of tiles this weapon can cross
+;             add together:
+;               1 - earth  (normal, can walk on dirt)
+;               2 - air    (can be flown over)
+;               4 - fire   (lava)
+;               8 - water  (water)
+; sets      = sound set for hit, miss, or crit with that weapon
+;
+;              0                    1       2         3       4       5       6        7      8
+;              Name                Class Dominates Damage   Movement setHit setMiss setCrit  flags
+weapon1     =  "Holy",              1,      3,        2,     255,     100,    101,   102,     0,
+weapon2     =  "Neutral",             2,      1,        2,     255,     100,    101,   102,     0,
+weapon3     =  "Dark",          3,      2,        2,     255,     100,    101,   102,     0,
+
+
+
+;---------
+; Armor
+;
+[Armor]
+;
+; Maybe never
+
+
+;--------
+; Elements
+;
+[Elements]
+;
+; Maybe never
+;
+
+;---------
+; Spells
+;
+; Some pieces have MP and can cast a limited amount of magic over the course of the battle.
+; These are the individual spell definitions.  Pieces are actually assigned 'spell sets' 
+; which identify the list of spells available to that piece.  Which is never more than, say, three
+;
+[Spells]
+;
+; Coming Soon, maybe
+;
+; Dominates - elementId (pieces are assigned to elements)
+; Damage    - basic hitpoints it takes from target
+; MP        - Mana required to cast
+;
+; Special Actions
+;   - heals
+;   - reduces rest
+;   - reduces MP
+;   - buff/debuff stat? (not sure how to do this reliably, nor for how long)
+;
+; sound sets hit/miss/fizzle
+; sparkles
+;
+;             Name               ButtonBitmap            Dominates  Damage  MP  Flags
+;spell1     = "Fire Scourge",    "buttons/spellFire",      0,        3,     1,   0,
+
+
+
+;---------
+; SpellSets
+;
+; A spell set defines a collection of spells.  Each spell-capable piece is assigned to a single spell set, which
+; gives it the ability to cast a small number of spells.  maybe 3 max.
+;
+[SpellSets]
+;
+; Coming Soon, maybe
+
+
+
+;---------
+; These are the COMMON pieces, which can be overridden by individual maps (I might remove that feature)
+;
+; name   - should be reasonably brief and UPPERCASE (has to fit in info popup)
+; bitmap - should use the three special golden colors for areas which are to be dynamically recolored for team color
+; max#   - most you can have in a single army (0 for no limit, but 9 is hard max anyway)
+; el     - reserved for a future 'element' assignment
+; mov    - the piece's movement bits (what tiles it can cross. add together from this table:)
+;          1 - earth  (normal, can walk on dirt)
+;          2 - air    (can be flown over)
+;          4 - fire   (lava)
+;          8 - water  (water)
+; mob    - mobility (how many steps it can 'walk' in single turn)
+; range  - how far your weapon can shoot (also in 'steps' so a shot NW takes two steps, N then W)
+;        - note: mobility and range have a hard-limit of '6' to prevent excessive recursion depth
+;        - many other attributes are capped around '20' at run time (to prevent divide by zero, oddly enough)
+; minRange - you cannot shoot anything within this distance of yourself.
+;
+; Note those are sound SET ids, not sound ids, in the setXXX columns
+; setRdy - what piece says when you click on it
+; setGo  - what piece says when it starts to walk
+; setAtt - what piece says when it starts attack
+; setPain- what piece says when it gets hurt
+; setDeath- what piece says when it gets killed
+;
+; wpn    - weapon id (from WEAPONS section) also implies weapon class (for rock/paper/scissor effect)
+; armour - reserved for future armor class
+; spellSet - the id of the spellSet which lists which spells are available to this piece (currently none)
+; req    - WoS conditional, like "L3T4" (must be level 3 with token 4 in order to have piece in your army)
+; flags  - reserved for future things like 'NPC only'
+;
+; NOTE: the command /tacticsBalance will print a simple report to help you find over-powered pieces
+;
+[Pieces]
+;           0                   1                    2      3   4    5    6    7    8     9    10     11     12        13      14     15      16        17      18   19      20      21    22
+;           name                bitmap               max#  hp  mp  str  def  agi   el    mov   mob   range  minRange  setRdy  SetGo  SetAtt  SetPain  SetDeath  wpn  armor  spellSet req   flags
+piece1  =   "KING",   	        "skins\josh59t",       1,  11,  0,   5,   5,   3,   1,    1,    4,     2,     0,       10,     20,    30,     40,       50,     3,    0,      0,     "",   0,
+piece2  =   "SWORDSMAN",        "skins\josh1t",        8,   7,  3,   5,   4,   3,   1,    1,    6,     1,     0,       10,     20,    30,     40,       50,     1,    0,      0,     "",   0, 
+piece3  =   "FENCER",           "skins\josh94t",       4,   5,  3,   4,   3,   7,   1,    1,    6,     1,     0,       10,     20,    30,     40,       50,     2,    0,      0,     "",   0, 
+piece4  =   "ARMOURED KNIGHT",  "skins\josh95t",       4,   9,  0,   5,   7,   1,   1,    1,    5,     1,     0,       12,     22,    32,     42,       52,     3,    0,      0,     "",   0, 
+piece5  =   "ARCHER",           "skins\josh92t",       2,   7,  5,   4,   2,   4,   1,    1,    4,     4,     2,       11,     21,    31,     41,       51,     1,    0,      0,     "",   0, 
+piece6  =   "WIZARD",           "skins\josh63t",       2,   6, 13,   1,   3,   2,   1,   13,    3,     4,     0,       10,     20,    30,     40,       50,     2,    0,      0,     "",   0, 
+piece7  =   "HARPY",            "skins\josh52t",       4,   5,  3,   4,   3,   7,   1,    3,    6,     1,     0,       13,     23,    33,     43,       53,     3,    0,      0,     "",   0, 
+piece8  =   "BITEWORM",         "skins\josh83t",       8,   5,  3,   5,   4,   3,   1,    1,    6,     1,     0,       14,     24,    34,     44,       54,     1,    0,      0,     "",   0, 
+piece9  =   "HOPPY",            "skins\josh87t",       4,   5,  0,   2,   3,   3,   1,    1,    6,     5,     0,       11,     21,    31,     41,       51,     2,    0,      0,     "",   0, 
+piece10 =   "JELLY",            "skins\josh2t",        4,   7,  0,   3,   4,   4,   1,    9,    4,     1,     0,       14,     24,    34,     44,       54,     3,    0,      0,     "",   0, 
+piece11 =   "SABRE MAN",        "skins\josh7t",        4,   6,  3,   6,   3,   5,   1,    1,    4,     2,     0,       10,     20,    30,     40,       50,     1,    0,      0,     "",   0, 
+piece12 =   "SLOBBER",          "skins\josh20t",       4,   7,  0,   4,   3,   2,   1,   13,    3,     2,     0,       14,     24,    34,     44,       54,     2,    0,      0,     "",   0, 
+piece13 =   "EYEBRAWL",         "skins\josh23t",       2,   5,  5,   3,   3,   5,   1,    3,    4,     4,     2,       12,     22,    32,     42,       52,     3,    0,      0,     "",   0, 
+piece14 =   "SCARTAIL",         "skins\josh28t",       2,   7,  3,   3,   3,   6,   1,    1,    5,     2,     0,       11,     21,    31,     41,       51,     1,    0,      0,     "",   0, 
+piece15 =   "SEA STING",        "skins\josh45t",       2,   5,  0,   5,   3,   5,   1,    9,    4,     3,     0,       14,     24,    34,     44,       54,     2,    0,      0,     "",   0, 
+piece16 =   "FANG GHOUL",       "skins\josh65t",       2,   6, 13,   4,   3,   3,   1,   15,    1,     5,     0,       12,     22,    32,     42,       52,     3,    0,      0,     "",   0, 
+piece17 =   "PINCER WORM",      "skins\josh67t",       2,   5,  0,   5,   4,   3,   1,    1,    3,     2,     0,       14,     24,    34,     44,       54,     1,    0,      0,     "",   0, 
+piece18 =   "FANG LEAF",        "skins\josh71t",       4,   7,  0,   6,   3,   3,   1,    9,    2,     3,     0,       11,     21,    31,     41,       51,     2,    0,      0,     "",   0, 
+piece19 =   "CAVE IMP",         "skins\josh77t",       4,   7,  0,   3,   4,   4,   1,    9,    4,     1,     0,       12,     22,    32,     42,       52,     3,    0,      0,     "",   0, 
+piece20 =   "MAD BOX",          "skins\josh79t",       2,   8, 10,   3,   3,   3,   1,    1,    4,     2,     0,       10,     20,    30,     40,       50,     1,    0,      0,     "",   0, 
+; Special Pieces 
+: piece21 =   "Bro",               "skins\bro",       9,   255,255,255,255, 255, 255,   15,  255,   255,     0,       10,     20,    30,     40,       50,     1,    0,      0,     "T668",   0, 
+piece22 =   "",          "skins\",       2,   8, 10,   3,   3,   3,   1,    1,    4,     2,     0,       10,     20,    30,     40,       50,     1,    0,      0,     "",   0, 
+piece23 =   "",          "skins\",       2,   8, 10,   3,   3,   3,   1,    1,    4,     2,     0,       10,     20,    30,     40,       50,     1,    0,      0,     "",   0, 
+piece24 =   "",          "skins\",       2,   8, 10,   3,   3,   3,   1,    1,    4,     2,     0,       10,     20,    30,     40,       50,     1,    0,      0,     "",   0, 
+piece25 =   "",          "skins\",       2,   8, 10,   3,   3,   3,   1,    1,    4,     2,     0,       10,     20,    30,     40,       50,     1,    0,      0,     "",   0, 
+;
+; Humans
+;           0                              1                  2      3   4    5    6    7    8     9    10     11     12        13      14     15      16        17      18   19      20      21         22
+;           name                           bitmap             max#  hp  mp  str  def  agi   el    mov   mob   range  minRange  setRdy  SetGo  SetAtt  SetPain  SetDeath  wpn  armor  spellSet req        flags
+piece26 =   "Paladin",                   "skins\human1",        1,   7, 10,   4,   3,   5,   1,    1,    4,     1,     0,       10,     20,    30,     40,       50,     1,    0,      0,     "",   0, 
+piece27 =   "Rogue",                     "skins\human2",        2,   7, 10,   3,   3,   6,   1,    1,    4,     1,     0,       10,     20,    30,     40,       50,     2,    0,      0,     "",   0, 
+piece28 =   "Priest",                    "skins\human3",        2,   7, 15,   2,   3,   5,   1,    1,    4,     2,     0,       10,     20,    30,     40,       50,     1,    0,      0,     "",   0, 
+piece29 =   "Barbarian",                 "skins\human4",        2,   7, 10,   5,   2,   5,   1,    1,    4,     1,     0,       10,     20,    30,     40,       50,     2,    0,      0,     "",   0, 
+piece30 =   "Cutthroat",                 "skins\human5",        2,   7, 10,   4,   2,   6,   1,    1,    4,     1,     0,       10,     20,    30,     40,       50,     3,    0,      0,     "",   0, 
+piece31 =   "Berserker",                 "skins\human6",        2,   6, 10,   5,   3,   4,   1,    1,    4,     1,     0,       10,     20,    30,     40,       50,     3,    0,      0,     "",   0, 
+piece32 =   "Warrior",                   "skins\human7",        5,   7, 10,   3,   3,   5,   1,    1,    4,     1,     0,       10,     20,    30,     40,       50,     2,    0,      0,     "",   0, 
+piece33 =   "Blacksmith",                "skins\human8",        2,   7, 10,   4,   4,   4,   1,    1,    4,     1,     0,       10,     20,    30,     40,       50,     2,    0,      0,     "",   0, 
+piece34 =   "Knight",                    "skins\human9",        5,   7, 10,   3,   3,   5,   1,    1,    4,     1,     0,       10,     20,    30,     40,       50,     1,    0,      0,     "",   0, 
+piece35 =   "Imperial Guard",            "skins\human10",       2,   5, 10,   4,   5,   5,   1,    1,    4,     1,     0,       10,     20,    30,     40,       50,     1,    0,      0,     "",   0, 
+piece36 =   "Mercenary",                 "skins\human11",       5,   7, 10,   3,   3,   5,   1,    1,    4,     1,     0,       10,     20,    30,     40,       50,     3,    0,      0,     "",   0, 
+piece37 =   "Alchemist",                 "skins\human12",       2,   7, 10,   2,   3,   5,   1,    1,    4,     2,     0,       10,     20,    30,     40,       50,     2,    0,      0,     "",   0, 
+piece38 =   "Aldramine Knight",          "skins\human13",       2,   8, 10,   3,   4,   5,   1,    1,    6,     1,     0,       13,     23,    33,     43,       53,     1,    0,      0,     "",   0, 
+piece39 =   "Lord",                      "skins\human14",       1,   12,10,   5,   4,   5,   1,    1,    4,     1,     0,       10,     20,    30,     40,       50,     1,    0,      0,     "",   0, 
+piece40 =   "Elementalist",              "skins\human15",       2,   7, 10,   2,   3,   5,   1,    1,    4,     2,     0,       13,     23,    33,     43,       53,     2,    0,      0,     "",   0, 
+piece41 =   "Archer",                    "skins\human16",       5,   7, 10,   3,   3,   5,   1,    1,    4,     4,     2,       10,     20,    30,     40,       50,     2,    0,      0,     "",   0, 
+piece42 =   "Necromancer",               "skins\human17",       2,   7, 10,   2,   3,   5,   1,    1,    4,     2,     0,       13,     23,    33,     43,       53,     3,    0,      0,     "",   0, 
+piece43 =   "Assassin",                  "skins\human18",       2,   6, 10,   5,   2,   6,   1,    1,    5,     1,     0,       13,     23,    33,     43,       53,     3,    0,      0,     "",   0, 
+piece44 =   "Wizard",                    "skins\human19",       2,   7, 10,   2,   3,   5,   1,    1,    4,     2,     0,       13,     23,    33,     43,       53,     2,    0,      0,     "",   0, 
+piece45 =   "Templar",                   "skins\human20",       1,   7, 10,   4,   4,   4,   1,    1,    4,     1,     0,       13,     23,    33,     43,       53,     1,    0,      0,     "",   0, 
+;
+; Elves
+;           0                   1                  2      3   4    5    6    7    8     9    10     11     12        13      14     15      16        17      18   19      20      21         22
+;           name                bitmap             max#  hp  mp  str  def  agi   el    mov   mob   range  minRange  setRdy  SetGo  SetAtt  SetPain  SetDeath  wpn  armor  spellSet req        flags
+piece46 =   "Fighter",          "skins\elf1",        5,   7, 10,   3,   3,   5,   1,    1,    5,     1,     0,       13,     23,    33,     43,       53,     1,    0,      0,     "T2000",   0, 
+piece47 =   "Wizard",           "skins\elf2",        2,   7, 10,   2,   3,   6,   1,    1,    5,     2,     0,       13,     23,    33,     43,       53,     1,    0,      0,     "T2000",   0, 
+piece48 =   "Shaman",           "skins\elf3",        2,   7, 10,   2,   3,   6,   1,    1,    5,     2,     0,       13,     23,    33,     43,       53,     2,    0,      0,     "T2000",   0, 
+piece49 =   "Knight",           "skins\elf4",        2,   7, 10,   3,   3,   5,   1,    1,    5,     1,     0,       13,     23,    33,     43,       53,     2,    0,      0,     "T2000",   0, 
+; piece50 =   "",          	"skins\elf5",        2,   7, 10,   3,   3,   5,   1,    1,    5,     1,     0,       13,     23,    33,     43,       53,     1,    0,      0,     "T2000",   0, 
+piece51 =   "Frenetic",         "skins\elf6",        1,   7, 10,   5,   1,   5,   1,    1,    5,     1,     0,       13,     23,    33,     43,       53,     1,    0,      0,     "T2000",   0, 
+piece52 =   "Healer",           "skins\elf7",        1,   7, 10,   1,   5,   6,   1,    1,    5,     2,     0,       13,     23,    33,     43,       53,     3,    0,      0,     "T2000",   0, 
+piece53 =   "Scout",            "skins\elf8",        2,   7, 10,   3,   3,   5,   1,    1,    6,     5,     2,       13,     23,    33,     43,       53,     1,    0,      0,     "T2000",   0, 
+piece54 =   "Death Dancer",     "skins\elf9",        1,   7, 10,   4,   2,   7,   1,    1,    5,     1,     0,       13,     23,    33,     43,       53,     2,    0,      0,     "T2000",   0, 
+piece55 =   "Blade Master",     "skins\elf10",       1,   7, 10,   4,   3,   5,   1,    1,    5,     1,     0,       10,     20,    30,     40,       50,     3,    0,      0,     "T2000",   0, 
+piece56 =   "Archer",           "skins\elf11",       5,   7, 10,   3,   3,   5,   1,    1,    5,     4,     2,       10,     20,    30,     40,       50,     2,    0,      0,     "T2000",   0, 
+piece57 =   "Warlord",          "skins\elf12",       1,   11, 10,  5,   4,   4,   1,    1,    5,     1,     0,       10,     20,    30,     40,       50,     1,    0,      0,     "T2000",   0, 
+; piece58 =   "",               "skins\elf13",       2,   7, 10,   3,   3,   5,   1,    1,    5,     2,     0,       13,     23,    33,     43,       53,     1,    0,      0,     "T2000",   0, 
+piece59 =   "Sniper",           "skins\elf14",       1,   7, 10,   3,   3,   5,   1,    1,    5,     6,     3,       13,     23,    33,     43,       53,     3,    0,      0,     "T2000",   0, 
+piece60 =   "Champion",         "skins\elf15",       1,   9, 10,   4,   3,   5,   1,    1,    5,     1,     0,       13,     23,    33,     43,       53,     2,    0,      0,     "T2000",   0, 
+piece61 =   "Priest",           "skins\elf16",       1,   7, 10,   2,   4,   5,   1,    1,    5,     2,     0,       13,     23,    33,     43,       53,     1,    0,      0,     "T2000",   0, 
+piece62 =   "Guard",            "skins\elf17",       3,   7, 10,   3,   3,   5,   1,    1,    5,     1,     0,       13,     23,    33,     43,       53,     3,    0,      0,     "T2000",   0, 
+; piece63 =   "",          	"skins\elf",         2,   7, 10,   3,   3,   5,   1,    1,    5,     1,     0,       13,     23,    33,     43,       53,     1,    0,      0,     "T2000",   0, 
+; piece64 =   "",          	"skins\elf",         2,   7, 10,   3,   3,   5,   1,    1,    5,     1,     0,       13,     23,    33,     43,       53,     1,    0,      0,     "T2000",   0, 
+; piece65 =   "",               "skins\elf",         2,   7, 10,   3,   3,   5,   1,    1,    5,     1,     0,       13,     23,    33,     43,       53,     1,    0,      0,     "T2000",   0, 
+;
+; Dwarves
+;           0                   1               2      3   4    5    6    7    8     9    10     11     12        13      14     15      16        17      18   19      20      21          22
+;           name              bitmap           max#    hp  mp  str  def  agi   el    mov   mob   range  minRange  setRdy  SetGo  SetAtt  SetPain  SetDeath  wpn  armor  spellSet req       flags
+piece66 =   "Lord",          "skins\dwarf1",       1,  10,  5,   4,   5,   4,   1,    1,    3,     1,     0,       10,     20,    30,     40,       50,     1,    0,      0,     "",   0, 
+piece67 =   "Warrior",       "skins\dwarf2",       5,   8,  5,   3,   5,   4,   1,    1,    3,     1,     0,       10,     20,    30,     40,       50,     1,    0,      0,     "",   0, 
+piece68 =   "Knight",        "skins\dwarf3",       5,   8,  5,   3,   5,   4,   1,    1,    3,     1,     0,       10,     20,    30,     40,       50,     2,    0,      0,     "",   0, 
+piece69 =   "Troll Slayer",  "skins\dwarf4",       1,   7,  5,   5,   4,   4,   1,    1,    3,     1,     0,       10,     20,    30,     40,       50,     1,    0,      0,     "",   0, 
+piece70 =   "Dwarf",         "skins\dwarf5",       5,   8,  5,   3,   5,   4,   1,    1,    3,     1,     0,       10,     20,    30,     40,       50,     3,    0,      0,     "",   0, 
+piece71 =   "Cutthroat",     "skins\dwarf6",       2,   8,  5,   4,   4,   4,   1,    1,    3,     1,     0,       10,     20,    30,     40,       50,     2,    0,      0,     "",   0, 
+piece72 =   "Warlord",       "skins\dwarf7",       1,  12,  5,   5,   5,   4,   1,    1,    3,     1,     0,       10,     20,    30,     40,       50,     2,    0,      0,     "",   0, 
+piece73 =   "Minor",         "skins\dwarf8",       3,   8,  5,   3,   5,   4,   1,    1,    3,     1,     0,       10,     20,    30,     40,       50,     3,    0,      0,     "",   0, 
+piece74 =   "Blacksmith",    "skins\dwarf9",       2,   8,  5,   4,   5,   4,   1,    1,    3,     1,     0,       10,     20,    30,     40,       50,     1,    0,      0,     "",   0, 
+piece75 =   "Alchemist",     "skins\dwarf10",      2,   8,  5,   3,   5,   4,   1,    1,    3,     2,     0,       10,     20,    30,     40,       50,     2,    0,      0,     "",   0, 
+piece76 =   "Giant Slayer",  "skins\dwarf11",      1,   7,  5,   5,   4,   4,   1,    1,    3,     1,     0,       10,     20,    30,     40,       50,     3,    0,      0,     "",   0, 
+piece77 =   "Runesmith",     "skins\dwarf12",      2,   8,  5,   3,   5,   4,   1,    1,    3,     2,     0,       10,     20,    30,     40,       50,     3,    0,      0,     "",   0, 
+; piece78 =   "",          "skins\dwarf",       2,   8, 10,   3,   5,   4,   1,    1,    3,     1,     0,       10,     20,    30,     40,       50,     1,    0,      0,     "",   0, 
+; piece79 =   "",          "skins\dwarf",       2,   8, 10,   3,   5,   4,   1,    1,    3,     1,     0,       10,     20,    30,     40,       50,     1,    0,      0,     "",   0, 
+; piece80 =   "",          "skins\dwarf",       2,   8, 10,   3,   5,   4,   1,    1,    3,     1,     0,       10,     20,    30,     40,       50,     1,    0,      0,     "",   0, 
+; piece81 =   "",          "skins\dwarf",       2,   8, 10,   3,   5,   4,   1,    1,    3,     1,     0,       10,     20,    30,     40,       50,     1,    0,      0,     "",   0, 
+; piece82 =   "",          "skins\dwarf",       2,   8, 10,   3,   5,   4,   1,    1,    3,     1,     0,       10,     20,    30,     40,       50,     1,    0,      0,     "",   0, 
+; piece83 =   "",          "skins\dwarf",       2,   8, 10,   3,   5,   4,   1,    1,    3,     1,     0,       10,     20,    30,     40,       50,     1,    0,      0,     "",   0, 
+; piece84 =   "",          "skins\dwarf",       2,   8, 10,   3,   5,   4,   1,    1,    3,     1,     0,       10,     20,    30,     40,       50,     1,    0,      0,     "",   0, 
+; piece85 =   "",          "skins\dwarf",       2,   8, 10,   3,   5,   4,   1,    1,    3,     1,     0,       10,     20,    30,     40,       50,     1,    0,      0,     "",   0, 
+;
+; Gnomes
+;           0                   1                  2      3   4    5    6    7    8     9    10     11     12        13      14     15      16        17      18   19      20      21          22
+;           name                bitmap             max#    hp  mp  str  def  agi   el    mov   mob   range  minRange  setRdy  SetGo  SetAtt  SetPain  SetDeath  wpn  armor  spellSet req       flags
+piece86 =   "Lord",    	        "skins\gnome1",       1,   9,  10,   4,   4,   6,   1,    1,    6,     1,     0,       10,     20,    30,     40,       50,     1,    0,      0,     "T2001",   0, 
+piece87 =   "Knight",           "skins\gnome2",       3,   6,  10,   3,   3,   6,   1,    1,    6,     1,     0,       10,     20,    30,     40,       50,     1,    0,      0,     "T2001",   0, 
+piece88 =   "Thief",            "skins\gnome3",       2,   6,  10,   3,   2,   8,   1,    1,    6,     1,     0,       10,     20,    30,     40,       50,     1,    0,      0,     "T2001",   0, 
+piece89 =   "Warrior",          "skins\gnome4",       3,   6,  10,   3,   3,   6,   1,    1,    6,     1,     0,       10,     20,    30,     40,       50,     2,    0,      0,     "T2001",   0, 
+piece90 =   "Fighter",          "skins\gnome5",       3,   6,  10,   3,   3,   6,   1,    1,    6,     1,     0,       10,     20,    30,     40,       50,     3,    0,      0,     "T2001",   0, 
+piece91 =   "Trickster",        "skins\gnome6",       2,   6,  10,   2,   2,   7,   1,    1,    6,     2,     0,       10,     20,    30,     40,       50,     1,    0,      0,     "T2001",   0, 
+piece92 =   "Brute",            "skins\gnome7",       2,   5,  10,   4,   2,   6,   1,    1,    6,     1,     0,       10,     20,    30,     40,       50,     1,    0,      0,     "T2001",   0, 
+piece93 =   "Rider",            "skins\gnome8",       2,   6,  10,   3,   2,   6,   1,    1,    6,     1,     0,       10,     20,    30,     40,       50,     2,    0,      0,     "T2001",   0, 
+piece94 =   "Ancient",          "skins\gnome9",       1,   11, 10,   3,   3,   6,   1,    1,    5,     2,     0,       10,     20,    30,     40,       50,     2,    0,      0,     "T2001",   0, 
+piece95 =   "Sage",             "skins\gnome10",      1,   6,  20,   2,   2,   7,   1,    1,    6,     2,     0,       10,     20,    30,     40,       50,     2,    0,      0,     "T2001",   0, 
+piece96 =   "Wizard",           "skins\gnome11",      2,   6,  10,   2,   2,   7,   1,    1,    6,     1,     0,       10,     20,    30,     40,       50,     1,    0,      0,     "T2001",   0, 
+piece97 =   "Swordsman",        "skins\gnome12",      2,   6,  10,   3,   2,   6,   1,    1,    6,     1,     0,       10,     20,    30,     40,       50,     3,    0,      0,     "T2001",   0, 
+piece98 =   "Lady",             "skins\gnome13",      2,   6,  10,   3,   2,   6,   1,    1,    6,     1,     0,       13,     23,    33,     43,       53,     1,    0,      0,     "T2001",   0, 
+piece99 =   "Healer",           "skins\gnome14",      2,   6,  10,   2,   2,   6,   1,    1,    6,     2,     0,       13,     23,    33,     43,       53,     3,    0,      0,     "T2001",   0, 
+piece101 =   "Berserker",       "skins\gnome15",      1,   6,  10,   6,   1,   6,   1,    1,    6,     1,     0,       13,     23,    33,     43,       53,     1,    0,      0,     "T2001",   0, 
+piece102 =   "Assassin",        "skins\gnome16",      1,   6,  10,   4,   2,   7,   1,    1,    6,     1,     0,       13,     23,    33,     43,       53,     1,    0,      0,     "T2001",   0, 
+piece103 =   "Champion",        "skins\gnome17",      1,   8,  10,   4,   2,   7,   1,    1,    6,     1,     0,       13,     23,    33,     43,       53,     3,    0,      0,     "T2001",   0, 
+piece104 =   "Priest",          "skins\gnome18",      2,   6,  10,   2,   2,   6,   1,    1,    6,     2,     0,       13,     23,    33,     43,       53,     3,    0,      0,     "T2001",   0, 
+piece105 =   "Trained Attack Chicken","skins\gnome19",3,   5,   0,   3,   1,  10,   1,   15,    6,     1,     0,       14,     24,    34,     44,       54,     3,    0,      0,     "T2001",   0, 
+;
+; Orcs
+;           0                   1                  2      3   4    5    6    7    8     9    10     11     12        13      14     15      16        17      18   19      20      21          22
+;           name                bitmap             max#    hp  mp  str  def  agi   el    mov   mob   range  minRange  setRdy  SetGo  SetAtt  SetPain  SetDeath  wpn  armor  spellSet req       flags
+piece106 =   "Black Orc",         "skins\orc1",       2,   8,  5,   3,   5,   4,   1,    1,    3,     1,     0,       12,     22,    32,     42,       52,     1,    0,      0,     "",   0, 
+piece107 =   "Orc Warlord",       "skins\orc2",       1,   11,10,   5,   4,   5,   1,    1,    4,     1,     0,       12,     22,    32,     42,       52,     2,    0,      0,     "",   0, 
+piece108 =   "Orc Archer",        "skins\orc3",       2,   7, 10,   3,   3,   5,   1,    1,    3,     4,     2,       12,     22,    32,     42,       52,     1,    0,      0,     "",   0, 
+piece109 =   "Orc Lady",          "skins\orc4",       2,   7, 10,   2,   4,   6,   1,    1,    4,     1,     0,       13,     23,    33,     43,       53,     1,    0,      0,     "",   0, 
+piece110 =   "Orc",               "skins\orc5",       3,   7, 10,   3,   3,   5,   1,    1,    4,     1,     0,       12,     22,    32,     42,       52,     2,    0,      0,     "",   0, 
+piece111 =   "Black orc Warrior", "skins\orc6",       2,   8,  5,   3,   5,   4,   1,    1,    3,     1,     0,       12,     22,    32,     42,       52,     2,    0,      0,     "",   0, 
+piece112 =   "Snotling",          "skins\orc7",       4,   4, 10,   3,   1,  10,   1,    1,    6,     1,     0,       11,     21,    31,     41,       51,     3,    0,      0,     "",   0, 
+piece113 =   "Orc Warrior",       "skins\orc8",       3,   7, 10,   3,   3,   5,   1,    1,    4,     1,     0,       12,     22,    32,     42,       52,     1,    0,      0,     "",   0, 
+piece114 =   "Orc Fighter",       "skins\orc9",       3,   7, 10,   3,   3,   5,   1,    1,    4,     1,     0,       12,     22,    32,     42,       52,     3,    0,      0,     "",   0, 
+piece115 =   "Black Orc Champion","skins\orc10",      1,   10, 5,   5,   5,   4,   1,    1,    3,     1,     0,       12,     22,    32,     42,       52,     3,    0,      0,     "",   0, 
+piece116 =   "Orc Brute",         "skins\orc11",      1,   6, 10,   6,   3,   4,   1,    1,    4,     1,     0,       12,     22,    32,     42,       52,     2,    0,      0,     "",   0, 
+piece117 =   "Orc Berserker",     "skins\orc12",      1,   6, 10,   6,   3,   4,   1,    1,    4,     1,     0,       12,     22,    32,     42,       52,     3,    0,      0,     "",   0, 
+piece118 =   "Black Orc Lancer",  "skins\orc13",      2,   8,  5,   3,   4,   4,   1,    1,    3,     2,     0,       12,     22,    32,     42,       52,     3,    0,      0,     "",   0, 
+piece119 =   "Catapult",          "skins\orc14",      1,   7,  0,   8,   5,   3,   1,    1,    1,     6,     3,       12,     22,    32,     42,       52,     2,    0,      0,     "",   0, 
+piece120 =   "Goblin Archer",     "skins\orc15",      3,   6, 10,   3,   3,   6,   1,    1,    5s,     3,     1,       11,     21,    31,     41,       51,     1,    0,      0,     "",   0, 
+piece121 =   "Goblin Doc",        "skins\orc16",      2,   6, 10,   2,   3,   6,   1,    1,    6,     2,     0,       11,     21,    31,     41,       51,     2,    0,      0,     "",   0, 
+piece122 =   "Goblin Warrior",    "skins\orc17",      4,   6, 10,   3,   3,   6,   1,    1,    6,     1,     0,       11,     21,    31,     41,       51,     3,    0,      0,     "",   0, 
+piece123 =   "Goblin Warlord",    "skins\orc18",      1,   8, 10,   4,   4,   6,   1,    1,    6,     1,     0,       11,     21,    31,     41,       51,     2,    0,      0,     "",   0, 
+piece124 =   "Hobgoblin Warrior", "skins\orc19",      3,   7, 10,   3,   3,   5,   1,    1,    5,     1,     0,       10,     20,    30,     40,       50,     1,    0,      0,     "",   0, 
+piece125 =   "Hobgoblin Shaman",  "skins\orc20",      2,   7, 10,   2,   3,   5,   1,    1,    5,     1,     0,       10,     20,    30,     40,       50,     3,    0,      0,     "",   0, 
+;
+; Undeads
+;           0                   1                  2      3   4    5    6    7    8     9    10     11     12        13      14     15      16        17      18   19      20      21          22
+;           name                bitmap             max#    hp  mp  str  def  agi   el    mov   mob   range  minRange  setRdy  SetGo  SetAtt  SetPain  SetDeath  wpn  armor  spellSet req       flags
+piece126 =   "",          "skins\",       2,   8, 10,   3,   3,   3,   1,    1,    4,     2,     0,       10,     20,    30,     40,       50,     1,    0,      0,     "",   0, 
+piece127 =   "",          "skins\",       2,   8, 10,   3,   3,   3,   1,    1,    4,     2,     0,       10,     20,    30,     40,       50,     1,    0,      0,     "",   0, 
+piece128 =   "",          "skins\",       2,   8, 10,   3,   3,   3,   1,    1,    4,     2,     0,       10,     20,    30,     40,       50,     1,    0,      0,     "",   0, 
+piece129 =   "",          "skins\",       2,   8, 10,   3,   3,   3,   1,    1,    4,     2,     0,       10,     20,    30,     40,       50,     1,    0,      0,     "",   0, 
+piece130 =   "",          "skins\",       2,   8, 10,   3,   3,   3,   1,    1,    4,     2,     0,       10,     20,    30,     40,       50,     1,    0,      0,     "",   0, 
+piece131 =   "",          "skins\",       2,   8, 10,   3,   3,   3,   1,    1,    4,     2,     0,       10,     20,    30,     40,       50,     1,    0,      0,     "",   0, 
+piece132 =   "",          "skins\",       2,   8, 10,   3,   3,   3,   1,    1,    4,     2,     0,       10,     20,    30,     40,       50,     1,    0,      0,     "",   0, 
+piece133 =   "",          "skins\",       2,   8, 10,   3,   3,   3,   1,    1,    4,     2,     0,       10,     20,    30,     40,       50,     1,    0,      0,     "",   0, 
+piece134 =   "",          "skins\",       2,   8, 10,   3,   3,   3,   1,    1,    4,     2,     0,       10,     20,    30,     40,       50,     1,    0,      0,     "",   0, 
+piece135 =   "",          "skins\",       2,   8, 10,   3,   3,   3,   1,    1,    4,     2,     0,       10,     20,    30,     40,       50,     1,    0,      0,     "",   0, 
+piece136 =   "",          "skins\",       2,   8, 10,   3,   3,   3,   1,    1,    4,     2,     0,       10,     20,    30,     40,       50,     1,    0,      0,     "",   0, 
+piece137 =   "",          "skins\",       2,   8, 10,   3,   3,   3,   1,    1,    4,     2,     0,       10,     20,    30,     40,       50,     1,    0,      0,     "",   0, 
+piece138 =   "",          "skins\",       2,   8, 10,   3,   3,   3,   1,    1,    4,     2,     0,       10,     20,    30,     40,       50,     1,    0,      0,     "",   0, 
+piece139 =   "",          "skins\",       2,   8, 10,   3,   3,   3,   1,    1,    4,     2,     0,       10,     20,    30,     40,       50,     1,    0,      0,     "",   0, 
+piece140 =   "",          "skins\",       2,   8, 10,   3,   3,   3,   1,    1,    4,     2,     0,       10,     20,    30,     40,       50,     1,    0,      0,     "",   0, 
+piece141 =   "",          "skins\",       2,   8, 10,   3,   3,   3,   1,    1,    4,     2,     0,       10,     20,    30,     40,       50,     1,    0,      0,     "",   0, 
+piece142 =   "",          "skins\",       2,   8, 10,   3,   3,   3,   1,    1,    4,     2,     0,       10,     20,    30,     40,       50,     1,    0,      0,     "",   0, 
+piece143 =   "",          "skins\",       2,   8, 10,   3,   3,   3,   1,    1,    4,     2,     0,       10,     20,    30,     40,       50,     1,    0,      0,     "",   0, 
+piece144 =   "",          "skins\",       2,   8, 10,   3,   3,   3,   1,    1,    4,     2,     0,       10,     20,    30,     40,       50,     1,    0,      0,     "",   0, 
+piece145 =   "",          "skins\",       2,   8, 10,   3,   3,   3,   1,    1,    4,     2,     0,       10,     20,    30,     40,       50,     1,    0,      0,     "",   0, 
+;
+; Chaos
+;           0                   1                  2      3   4    5    6    7    8     9    10     11     12        13      14     15      16        17      18   19      20      21          22
+;           name                bitmap             max#    hp  mp  str  def  agi   el    mov   mob   range  minRange  setRdy  SetGo  SetAtt  SetPain  SetDeath  wpn  armor  spellSet req       flags
+piece146 =   "",          "skins\",       2,   8, 10,   3,   3,   3,   1,    1,    4,     2,     0,       10,     20,    30,     40,       50,     1,    0,      0,     "",   0, 
+piece147 =   "",          "skins\",       2,   8, 10,   3,   3,   3,   1,    1,    4,     2,     0,       10,     20,    30,     40,       50,     1,    0,      0,     "",   0, 
+piece148 =   "",          "skins\",       2,   8, 10,   3,   3,   3,   1,    1,    4,     2,     0,       10,     20,    30,     40,       50,     1,    0,      0,     "",   0, 
+piece149 =   "",          "skins\",       2,   8, 10,   3,   3,   3,   1,    1,    4,     2,     0,       10,     20,    30,     40,       50,     1,    0,      0,     "",   0, 
+piece150 =   "",          "skins\",       2,   8, 10,   3,   3,   3,   1,    1,    4,     2,     0,       10,     20,    30,     40,       50,     1,    0,      0,     "",   0, 
+piece151 =   "",          "skins\",       2,   8, 10,   3,   3,   3,   1,    1,    4,     2,     0,       10,     20,    30,     40,       50,     1,    0,      0,     "",   0, 
+piece152 =   "",          "skins\",       2,   8, 10,   3,   3,   3,   1,    1,    4,     2,     0,       10,     20,    30,     40,       50,     1,    0,      0,     "",   0, 
+piece153 =   "",          "skins\",       2,   8, 10,   3,   3,   3,   1,    1,    4,     2,     0,       10,     20,    30,     40,       50,     1,    0,      0,     "",   0, 
+piece154 =   "",          "skins\",       2,   8, 10,   3,   3,   3,   1,    1,    4,     2,     0,       10,     20,    30,     40,       50,     1,    0,      0,     "",   0, 
+piece155 =   "",          "skins\",       2,   8, 10,   3,   3,   3,   1,    1,    4,     2,     0,       10,     20,    30,     40,       50,     1,    0,      0,     "",   0, 
+piece156 =   "",          "skins\",       2,   8, 10,   3,   3,   3,   1,    1,    4,     2,     0,       10,     20,    30,     40,       50,     1,    0,      0,     "",   0, 
+piece157 =   "",          "skins\",       2,   8, 10,   3,   3,   3,   1,    1,    4,     2,     0,       10,     20,    30,     40,       50,     1,    0,      0,     "",   0, 
+piece158 =   "",          "skins\",       2,   8, 10,   3,   3,   3,   1,    1,    4,     2,     0,       10,     20,    30,     40,       50,     1,    0,      0,     "",   0, 
+piece159 =   "",          "skins\",       2,   8, 10,   3,   3,   3,   1,    1,    4,     2,     0,       10,     20,    30,     40,       50,     1,    0,      0,     "",   0, 
+piece160 =   "",          "skins\",       2,   8, 10,   3,   3,   3,   1,    1,    4,     2,     0,       10,     20,    30,     40,       50,     1,    0,      0,     "",   0, 
+piece161 =   "",          "skins\",       2,   8, 10,   3,   3,   3,   1,    1,    4,     2,     0,       10,     20,    30,     40,       50,     1,    0,      0,     "",   0, 
+piece162 =   "",          "skins\",       2,   8, 10,   3,   3,   3,   1,    1,    4,     2,     0,       10,     20,    30,     40,       50,     1,    0,      0,     "",   0, 
+piece163 =   "",          "skins\",       2,   8, 10,   3,   3,   3,   1,    1,    4,     2,     0,       10,     20,    30,     40,       50,     1,    0,      0,     "",   0, 
+piece164 =   "",          "skins\",       2,   8, 10,   3,   3,   3,   1,    1,    4,     2,     0,       10,     20,    30,     40,       50,     1,    0,      0,     "",   0, 
+piece165 =   "",          "skins\",       2,   8, 10,   3,   3,   3,   1,    1,    4,     2,     0,       10,     20,    30,     40,       50,     1,    0,      0,     "",   0, 
+; 
+piece166 =   ""
+piece167 =   ""
+piece168 =   ""
+piece169 =   ""
+piece170 =   ""
+piece171 =   ""
+piece172 =   ""
+piece173 =   ""
+piece174 =   ""
+piece175 =   ""
+piece176 =   ""
+piece177 =   ""
+piece178 =   ""
+piece179 =   ""
+piece180 =   ""
+piece181 =   ""
+piece182 =   ""
+piece183 =   ""
+piece184 =   ""
+piece185 =   ""
+piece186 =   ""
+piece187 =   ""
+piece188 =   ""
+piece189 =   ""
+piece190 =   ""
+piece191 =   ""
+piece192 =   ""
+piece193 =   ""
+piece194 =   ""
+piece195 =   ""
+piece196 =   ""
+piece197 =   ""
+piece198 =   ""
+piece199 =   ""
+
+
+.---------
+; The Maps
+;
+; * Each map has its own section, beginning with [map1]
+; * Each map has a 256 color (wos palette) 'bitmap' file where each pixel's color specifies a 'tile' id.
+;     several colors are 'reserved' (see [tile] comments), but otherwise have only the meaning you assign them
+;
+; name            - name of map
+; author          - short string descibing YOU (um, really short.  your name.. or less)
+; bitmap          - path and name of map BMP in tactics folder (leave off the .bmp)
+; elevationBitmap - (optional) bitmap with elevation data (taken from red component of color of pixel) 
+;                   must match height/width of map bitmap
+; seed            - (optional) random seed value for 'automatic bumpiness' (assumes no elevation bitmap)
+; roughness       - (optional) controls roughness of auto-bumpiness. (0 is completely flat)
+; requirements    - (optional) WoS conditional ("L3" requires level 3) required for you to HOST map 
+;                   (but anyone can PLAY on any map you host, whether they have requirements or not)
+;
+; Elevation notes:
+;
+; a piece cannot cross from one tile to another if their elevation difference is 32 or more (up or down)
+; a weapon cannot shoot across one tile to another if their elevation difference is 64 or more (up or down)
+; air-crossing pieces (and weapons) are exempt from this restriction
+; You do NOT have to use elevation.  flat maps are fine.
+
+
+[general]
+; be sure to update this when you add maps!
+numMaps = 9
+; be sure to make this a larger number when you make substantial changes
+; legal version numbers are floating point numbers, not strings (1.0A is BAD, 1.03 is OK).  
+; you cannot have more than 4 digits to the right of the decimal point.
+version = 1.0
+
+;
+; Each MAP has its own section, numbered map1 to mapN
+;
+
+[map1]
+name = Tactics Island (flat)
+author = Samsyn
+bitmap = "maps\map1"
+requirements = ""
+seed = 0
+
+[map2]
+name = Tactics Island Two
+author = Samsyn
+bitmap = "maps\map2"
+requirements = ""
+
+[map3]
+name = Tactics Island Three
+author =  Samsyn
+bitmap = "maps\map3"
+requirements = ""
+
+[map4]
+name = The Labyrinth
+author = Samsyn
+bitmap = "maps\map4"
+elevationBitmap = "maps\map4e"
+requirements = ""
+
+[map5]
+name = Small Arena
+author = Samsyn
+bitmap = "maps\map5"
+elevationBitmap = "maps\map5e"
+requirements = ""
+
+[map6]
+name = Tactics Island (bumpy)
+author = Samsyn
+bitmap = "maps\map1"
+requirements = ""
+seed = 123456
+roughness = 64
+
+[map7]
+name = Tactics Island (rough)
+author = Samsyn
+bitmap = "maps\map1"
+requirements = ""
+seed = 25432
+roughness = 255
+
+[map8]
+name = GRRR!
+author = Mad
+bitmap = "maps\map6"
+requirements = ""
+
+[map9]
+name = Carnage
+author = Mad
+bitmap = "maps\map7"
+requirements = ""
+
+
+
+
+
+
+

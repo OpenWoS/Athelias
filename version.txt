@@ -1,0 +1,582 @@
+IF #1 @nextstepafterversion.txt
+;STRCMP #<athelias.race>, ""
+;IF= @atheliasrace1.29fix
+STRCMP #<current.version>, "1.38"
+IF= @nextstepafterversion.txt2
+GOTO @fix#<current.version>
+
+@fix1.37
+SET current.version, "1.38"
+IF C50+T1059+V75-S32 @assassinq3fix1.37
+@assassinq3fix1.37next
+GOTO @nextstepafterversion.txt2
+
+@assassinq3fix1.37
+HOST_GIVE S32
+GOTO @assassinq3fix1.37next
+
+@fix1.36
+SET current.version, "1.37"
+IF C10 @supernewb1
+@supernewb2
+GOTO @fix1.37
+
+@supernewb1
+HOST_GIVE T4001
+GOTO @supernewb2
+
+@fix1.35
+SET current.version, "1.36"
+HOST_TAKE T1336
+HOST_TAKE I3032.100
+GOTO @fix1.36
+
+@fix1.34
+SET current.version, "1.35"
+GOTO @fix1.35
+
+@fix1.33
+SET mhna1, ""
+SET mha1, ""
+SET mhna2, ""
+SET mha2, ""
+SET mhna3, ""
+SET mha3, ""
+SET mhna4, ""
+SET mha4, ""
+SET mhna5, ""
+SET mha5, ""
+HOST_GIVE I131.4
+SET current.version, "1.34"
+GOTO @fix1.34
+
+@fix1.32
+@fix1.31
+@fix1.30
+@fix1.29
+GOTO @fix1.33
+
+@fix1.28
+N: Converting to version 1.29...
+IF #999 @setsomething999
+@setsomething999next
+SET musicthingy, 56
+HOST_GIVE T1143
+HOST_GIVE T1144
+HOST_GIVE T1145
+HOST_GIVE T1146
+HOST_GIVE T1147
+HOST_GIVE T1148
+HOST_GIVE T2899
+HOST_TAKE I11.100
+HOST_TAKE Z181.100
+HOST_TAKE Z182.100
+HOST_TAKE Z186.100
+HOST_TAKE Z190.100
+HOST_TAKE Z191.100
+HOST_TAKE Z195.100
+HOST_TAKE Z196.100
+HOST_TAKE Z197.100
+HOST_TAKE Z199.100
+HOST_TAKE Z200.100
+HOST_TAKE Z530.100
+HOST_TAKE Z531.100
+HOST_TAKE Z433.100
+HOST_TAKE Z534.100
+HOST_TAKE Z535.100
+HOST_TAKE Z536.100
+HOST_TAKE Z537.100
+HOST_TAKE Z538.100
+HOST_TAKE Z539.100
+HOST_TAKE Z540.100
+HOST_TAKE Z542.100
+HOST_TAKE Z543.100
+HOST_TAKE Z545.100
+HOST_TAKE Z546.100
+HOST_TAKE Z549.100
+HOST_TAKE Z551.100
+HOST_TAKE Z552.100
+HOST_TAKE Z553.100
+HOST_TAKE Z554.100
+HOST_TAKE Z555.100
+HOST_TAKE Z556.100
+HOST_TAKE Z557.100
+HOST_TAKE S734
+HOST_TAKE S735
+SET rat, ers
+IF T1116-I1042 @fix9palisweaps1.28
+@fix1.28.1
+SET gdfgd, nst
+IF T125 @fixplaishorsey
+@fix1.28.2
+SET xyws, mo
+;populate Invasion Mon Cookies
+CALL 115000@populateMonCookies
+SET current.version, 1.29
+IF C87 @fixraceend
+@atheliasrace1.29fix
+N: You haven't chosen a race yet or it has been reset.
+GOTO @fixrace#<num.hostClass>
+N: Done.
+@fixraceend
+GOTO @fix1.32
+
+@fixrace3
+CALL 110011@start -h-e-
+GOTO @fixraceend
+
+@fixrace5
+CALL 110011@start -h-e-
+GOTO @fixraceend
+
+@fixrace7
+CALL 110011@start  -h-d-
+GOTO @fixraceend
+
+@fixrace16
+CALL 110011@start  -h-g-e-
+GOTO @fixraceend
+
+@fixrace18
+CALL 110011@start  -h-g-e-d-
+GOTO @fixraceend
+
+@fixrace20
+CALL 110011@start  -g-, jester, ""
+GOTO @fixraceend
+
+@fixrace22
+CALL 110011@start  -h-g-e-d-
+GOTO @fixraceend
+
+@fixrace45
+CALL 110011@start  -h-g-e-d-
+GOTO @fixraceend
+
+@fixrace50
+CALL 110011@start  -h-g-
+GOTO @fixraceend
+
+@fixrace56
+CALL 110011@start -e-, healer, ""
+GOTO @fixraceend
+
+@fixrace60
+CALL 110011@start -e-, "Death Dancer", n
+GOTO @fixraceend
+
+@fixrace80
+CALL 110011@start -h-g-e-
+GOTO @fixraceend
+
+@fixrace80
+CALL 110011@start -h-
+GOTO @fixraceend
+
+@setsomething999
+SET monsters56, 1000
+GOTO @setsomething999next
+
+@fixplaishorsey
+HOST_TAKE I2010
+HOST_GIVE I1010
+GOTO @fix1.28.2
+
+@fix9palisweaps1.28
+HOST_GIVE I1042
+HOST_GIVE I1043
+HOST_GIVE I1044
+HOST_GIVE I1045
+HOST_GIVE I1046
+HOST_GIVE I1047
+HOST_GIVE I1048
+HOST_GIVE I1049
+HOST_GIVE I1050
+HOST_GIVE I1051
+HOST_GIVE I1052
+HOST_TAKE T33
+SOUND FoundItem.wav
+GOTO @fix1.28.1
+
+@fix1.27
+N: Converting from version 1.27 to version 1.28.
+WAIT 1
+IF T3016-C1-C22-C3-C55-C60-C5-C3 @fix1.27T3016TAKE
+@fix1.27.2
+IF C3 @fix1.27templars
+@fix1.27.3
+STRCMP #<str.soul>, "SOUL 2646"
+IF= @fix1.27.3Nero
+@fix1.27.4
+STRCMP #<str.soul>, "SOUL 1886"
+IF= @mdkfix1.27
+@mdkfix1.27next
+SET current.version, "1.28"
+N: Done.
+COMPARE #<temp.unbanlabel>, 1
+IF= @fix1.27gotolinkprina
+SET temp.unbanlabel, ""
+GOTO @fix#<current.version>
+
+@mdkfix1.27
+STRCMP #<str.name>, "mdk"
+IF= @mdkfix1.27nextbis
+GOTO @mdkfix1.27next
+
+@mdkfix1.27nextbis
+HOST_GIVE I1042
+HOST_GIVE I1043
+HOST_GIVE I1044
+HOST_GIVE I1045
+HOST_GIVE I1046
+HOST_GIVE I1047
+HOST_GIVE I1048
+HOST_GIVE I1049
+HOST_GIVE I1050
+HOST_GIVE I1051
+HOST_GIVE I1052
+HOST_GIVE T1116
+HOST_TAKE T33
+HOST_TAKE T1117
+HOST_TAKE T1118
+HOST_TAKE T1119
+HOST_TAKE T1120
+HOST_TAKE T1121
+SET sdshfsfksjhjsvbscksvsvskvqlq, ""
+SET siegeterendrozqsdfs, ""
+SET terendrozsiegefail, ""
+SOUND FoundItem.wav
+GOTO @mdkfix1.27next
+
+@fix1.27.3Nero
+STRCMP #<str.name>, "Nero Angelo"
+IF= @fix1.27.3Nero2
+STRCMP #<str.name>, "NeroAngelo"
+IF= @fix1.27.3Nero2
+GOTO @fix1.27.4
+
+@fix1.27.3Nero2
+IF -V99 @fix1.27.4
+HOST_GIVE T3997
+GOTO @fix1.27.4
+
+@fix1.27templars
+COMPARE #<num.hostEquipId11>, "0"
+IF= @fix1.27templarsalright
+COMPARE  #<num.hostEquipId2>, "0"
+IF= @fix1.27templarsalright
+N: Please, unequip your sword and your shield to complete the update.
+COUNTDOWN 5
+WAIT 5
+GOTO @fix1.27templars
+
+@fix1.27templarsalright
+HOST_TAKE T10
+HOST_GIVE T8
+HOST_GIVE T1
+HOST_GIVE T3046
+HOST_GIVE T3016
+GOTO @fix1.27.3
+
+@fix1.27gotolinkprina
+HOST_GIVE G1000000
+GOTO LINK 0, 0
+
+@fix1.27T3016TAKE
+TAKE T3016
+SET temp.unbanlabel, 1
+GOTO @fix1.27.2
+
+@fix1.26
+N: Converting from version 1.26 to version 1.27.
+WAIT 1
+N: Please, wait.
+HOST_TAKE I72.100
+HOST_TAKE I73.100
+HOST_TAKE I74.100
+HOST_TAKE I75.100
+HOST_TAKE I76.100
+HOST_TAKE I77.100
+HOST_TAKE I78.100
+HOST_TAKE I79.100
+HOST_TAKE I80.100
+HOST_TAKE I81.100
+HOST_TAKE I82.100
+HOST_TAKE I83.100
+HOST_TAKE I84.100
+HOST_TAKE I85.100
+HOST_TAKE I86.100
+HOST_TAKE I87.100
+HOST_TAKE I88.100
+HOST_TAKE I89.100
+HOST_TAKE I90.100
+HOST_TAKE I91.100
+HOST_TAKE I92.100
+HOST_TAKE I93.100
+HOST_TAKE I94.100
+HOST_TAKE I95.100
+HOST_TAKE I96.100
+HOST_TAKE I97.100
+HOST_TAKE I98.100
+HOST_TAKE I99.100
+HOST_TAKE I100.100
+HOST_TAKE I101.100
+HOST_TAKE I102.100
+HOST_TAKE I103.100
+HOST_TAKE I104.100
+HOST_TAKE I105.100
+HOST_TAKE I141.100
+HOST_TAKE I142.100
+HOST_TAKE I143.100
+HOST_TAKE I144.100
+HOST_TAKE I145.100
+HOST_TAKE I146.100
+HOST_TAKE I147.100
+HOST_TAKE I148.100
+HOST_TAKE I149.100
+HOST_TAKE I150.100
+HOST_TAKE I151.100
+HOST_TAKE I152.100
+HOST_TAKE I153.100
+HOST_TAKE I154.100
+HOST_TAKE I155.100
+HOST_TAKE I156.100
+HOST_TAKE I157.100
+HOST_TAKE I158.100
+HOST_TAKE I159.100
+HOST_TAKE I160.100
+HOST_TAKE I161.100
+HOST_TAKE I162.100
+HOST_TAKE I163.100
+HOST_TAKE I164.100
+IF C22+I1094|C18+I1094 @templars1.26fix
+@fix1.26.2
+IF C3 @fix1.26templars
+@fix1.26.3
+SET current.version, "1.27"
+N: Done.
+GOTO @fix1.27
+
+@fix1.26templars
+HOST_GIVE T10
+HOST_TAKE T8
+HOST_TAKE T1
+HOST_GIVE T3046
+GOTO @fix1.26.3
+
+@templars1.26fix
+N: A bug present in 1.26 prevented the members of a team to be turned into a templar after having accomplished the quest.
+WAIT 2
+N: If it was your case, you can now choose to become a templar.
+WAIT 2
+N: Is it what you want (yes/no)?
+ASK 300
+IF YES @fixt1.26templarturn
+GOTO @fix1.26.2
+
+@fixt1.26templarturn
+HOST_TAKE I1094
+N: Then go and visit Sir Artalis in the Templars Castle and you'll be turned into a paladin.
+WAIT 2
+N: Sorry again for the inconvenience.
+GOTO @fix 1.26.2
+
+@fix1.25
+N: Converting the character from version 1.25 to 1.26
+HOST_TAKE S732
+IF C80+T1204 @v1.26illustokenfix
+@fix1.25done
+SET current.version, "1.26"
+N: Done.
+GOTO @fix1.26
+
+@fix1.25done
+HOST_GIVE T3997
+GOTO @fix1.25done
+
+@fix1.23
+@fix1.24
+N: Converting the character from version 1.24 to 1.25
+WAIT 1
+N: Please, wait.
+WAIT 1
+N: The conversion will be longer than usually.
+IF I702-T3016 @six1.24GIVE3016
+@six1.24GIVE30162
+SET hfghfghsssssdgdgdeathfsfaaaaa, 100000
+SET num.TrophyBagHeight, 4
+SET num.TrophyBagWidth, 5
+HOST_GIVE T2899
+HOST_GIVE Z1001
+IF -I10 @fix1.25.1
+HOST_GIVE Z71.#<num.item10>
+SET temp.amount, #<num.item10>
+HOST_TAKE I10.#<temp.amount>
+@fix1.25.1
+IF -I726 @fix1.25.2
+HOST_GIVE Z72.#<num.item726>
+SET temp.amount, #<num.item726>
+HOST_TAKE I726.#<temp.amount>
+@fix1.25.2
+IF -I131 @fix1.25.3
+HOST_GIVE Z1000.#<num.item131>
+SET temp.amount, #<num.item131>
+HOST_TAKE I131.#<temp.amount>
+@fix1.25.3
+IF -I82 @fix1.25.4
+HOST_GIVE Z408.#<num.item82>
+SET temp.amount, #<num.item82>
+HOST_TAKE I82.#<temp.amount>
+@fix1.25.4
+IF -I103 @fix1.25.5
+HOST_GIVE Z432.#<num.item103>
+SET temp.amount, #<num.item103>
+HOST_TAKE I103.#<temp.amount>
+@fix1.25.5
+IF -I65 @fix1.25.6
+HOST_GIVE Z451.#<num.item65>
+SET temp.amount, #<num.item65>
+HOST_TAKE I65.#<temp.amount>
+@fix1.25.6
+IF -I105 @fix1.25.7
+HOST_GIVE Z289.#<num.item105>
+SET temp.amount, #<num.item105>
+HOST_TAKE I105.#<temp.amount>
+@fix1.25.7
+IF -I80 @fix1.25.8
+HOST_GIVE Z398.#<num.item80>
+SET temp.amount, #<num.item80>
+HOST_TAKE I80.#<temp.amount>
+@fix1.25.8
+IF -I84 @fix1.25.9
+HOST_GIVE Z316.#<num.item84>
+SET temp.amount, #<num.item84>
+HOST_TAKE I84.#<temp.amount>
+HOST_TAKE I1024
+HOST_TAKE I1025
+HOST_TAKE I3027
+HOST_TAKE I3032
+HOST_TAKE I3033
+HOST_TAKE I3055
+HOST_TAKE I3056
+HOST_TAKE I3057
+HOST_TAKE I61.100
+HOST_TAKE I63.100
+HOST_TAKE I64.100
+HOST_GIVE I800
+HOST_GIVE I801
+HOST_GIVE I802
+HOST_GIVE I803
+HOST_GIVE I804
+HOST_GIVE I805
+HOST_GIVE I806
+HOST_GIVE I807
+@fix1.25.9
+IF -I632 @fix1.25.10
+HOST_GIVE T3000
+HOST_GIVE T3001
+HOST_GIVE T3002
+HOST_GIVE T3004
+HOST_GIVE T3005
+HOST_GIVE T3006
+HOST_GIVE T3007
+HOST_GIVE T3003
+SET temp.itemID, 66
+@fix1.25.10
+HOST_TAKE I#<temp.itemID>.100
+ADD temp.itemID, 1
+COMPARE #<temp.itemID>, 92
+IF= @fix1.25.11.2
+GOTO @fix1.25.10
+
+@six1.24GIVE3016
+GIVE T3016
+GOTO @six1.24GIVE30162
+
+@fix1.25.11.2
+SET temp.itemID, 94
+@fix1.25.11
+HOST_TAKE I#<temp.itemID>.100
+ADD temp.itemID, 1
+COMPARE #<temp.itemID>, 101
+IF= @fix1.25.12.2
+GOTO @fix1.25.11
+
+@fix1.25.12.2
+SET temp.itemID, 103
+@fix1.25.12
+HOST_TAKE I#<temp.itemID>.100
+ADD temp.itemID, 1
+COMPARE #<temp.itemID>, 131
+IF= @fix1.25.13
+GOTO @fix1.25.12
+
+@fix1.25.13
+SET current.version, "1.25"
+N: End
+WAIT 1
+N: Congratulations, you have acquired your very first trophy bag!
+WAIT 1
+MOVE 1, 120, 90, 1
+SET num.TrophyBagOpen, 1
+GOTO @fix1.25
+
+@fix1.23end
+SET current.version, "1.23"
+N: End
+GOTO @fix1.24
+
+@fix1.20
+@fix1.21
+@fix1.22
+N: Converting the character from version 1.20 to version 1.23
+WAIT 1
+N: Please, wait.
+SET GP.name, "Tomans"
+WAIT 1
+N: You didn't choose a gender.
+WAIT 1
+N: Please, do it now.
+WAIT 1
+@menufixit1.23
+MENU "Male=@fixit1.23male", "Female=@fixit1.23female"
+GOTO @menufixit1.23
+
+@fixit1.23male
+SET gender.name, "male"
+SET gender.name.caps, "Male"
+SET gender.he, "he"
+SET gender.he.caps, "He"
+SET gender.him, "him"
+SET gender.him.caps, "Him"
+SET gender.man, "man"
+SET gender.man.caps, "Man"
+SET gender.boy, "boy"
+SET gender.boy.caps, "Boy"
+SET gender.sir, "Sir"
+SET gender.myLord, "My Lord"
+GOTO @fix1.23end
+
+@fixit1.23female
+SET gender.name, "female"
+SET gender.name.caps, "Female"
+SET gender.he, "she"
+SET gender.he.caps, "She"
+SET gender.him, "him"
+SET gender.him.caps, "Her"
+SET gender.man, "woman"
+SET gender.man.caps, "Woman"
+SET gender.boy, "girl"
+SET gender.boy.caps, "Girl"
+SET gender.sir, "Madam"
+SET gender.myLord, "My Lady"
+GOTO @fix1.23end
+
+
+
+
+
+
+@nextstepafterversion.txt
+#include version3.txt
+@nextstepafterversion.txt2

@@ -1,0 +1,145 @@
+SCENE 12000, taj, SCENE, "Taj Isha's Sepulchre"
+#include include.txt
+SET temp.mapNum, %R10
+ADD temp.mapNum, 99
+GOTO LINK #<temp.mapNum>, #<tajIsha2>
+;
+;------------------------------------------------------------------------------------------------------------
+;
+SCENE 12001, taj, SCENE, "Taj Isha's Sepulchre"
+#include include.txt
+IF T1101 @opened
+IF -T1100 @end
+N: You open Taj Isha's tomb.
+WAIT 3
+SOUND thunder.wav
+WAIT 1.5
+; HTML tombe qui s'ouvre et une momie qui en sort : "Qui ose interrompre mon sommeil?"
+ACTOR 1, "Taj Isha", 113, 1, 25, 100
+SEL 1
+POSE 1, 2
+N: Who dares to interrupt my sleep?
+WAIT 4
+MOVE 1, 120, 90, 1
+FIGHT 85.25.100
+IF WIN @win
+@end
+END
+
+@win
+N: You defeat Taj Isha and take his scepter.
+SOUND FoundItem.wav
+GIVE I1054
+TAKE T1100
+GIVE T1101
+WAIT 3
+GOTO LINK 81, 1
+
+@opened
+N: Taj Isha's tomb is empty.
+END
+;
+;------------------------------------------------------------------------------------------------------------
+;
+SCENE 12002, taj, SCENE, "Taj Isha's Sepulchre"
+#include include.txt
+N: You drink the water of the shrine and have your HP and MP recharged!
+GIVE L1
+GIVE H5000
+GIVE M5000
+END
+;
+;------------------------------------------------------------------------------------------------------------
+;
+SCENE 12003, taj, SCENE, "Taj Isha's Sepulchre"
+#include include.txt
+IF T1101 @pass
+IF -T1100 @end
+N: The door is closed.
+WAIT 1.3
+@menu1
+SOUND sword1.wav
+MENU "Try to open it=@open", "Move away=@end"
+GOTO @menu1
+
+@open
+SOUND sword1.wav
+WAIT 2
+SOUND thunder.wav
+WAIT 2
+; HTML animation : old stony door opening
+ACTOR 1, Guard, 142, 1, 102, 103
+ACTOR 2, Guard, 142, 1, 115, 103
+ACTOR 3, Guard, 142, 1, 128, 103
+ACTOR 4, Guard, 142, 1, 152, 103
+ACTOR 5, Guard, 142, 1, 165, 103
+ACTOR 6, Guard, 142, 1, 178, 103
+MOVE 1, 12, 103
+MOVE 2, 25, 103
+MOVE 3, 38, 103
+MOVE 4, 62, 103
+MOVE 5, 75, 103
+MOVE 6, 88, 103
+SOUND sword1.wav
+WAIT 1
+SOUND sword1.wav
+WAIT 1
+SOUND sword1.wav
+WAIT 1
+SOUND sword1.wav
+WAIT 1
+SOUND sword1.wav
+WAIT 1
+SOUND sword1.wav
+WAIT 1
+SOUND sword1.wav
+WAIT 1
+SOUND sword1.wav
+WAIT 1
+SOUND sword1.wav
+WAIT 1
+SOUND sword1.wav
+WAIT 1
+SOUND sword1.wav
+WAIT 1
+SOUND sword1.wav
+WAIT 2
+SOUND sword2.wav
+FACE 1, 1
+FACE 2, 1
+FACE 3, 1
+N: You awake the guards of the sanctuary!
+WAIT 3.5
+MOVE 1,-20, 90, 1
+MOVE 2,-20, 90, 1
+MOVE 3,-20, 90, 1
+MOVE 4,-20, 90, 1
+MOVE 5,-20, 90, 1
+MOVE 6,-20, 90, 1
+FIGHT 82.12.103, 82.25.103, 82.38.103, 82.62.103, 82.75.103, 82.88.103
+IF WIN @pass
+@end
+END
+
+@end
+SOUND sword1.wav
+END
+
+@pass
+GOTO LINK 121, 3
+;
+;------------------------------------------------------------------------------------------------------------
+;
+SCENE 12004, taj, SCENE, "Taj Isha's Sepulchre"
+#include include.txt
+IF T1101 @pass
+IF -T1100 @end
+FIGHT 82, 82, 82, 83, 84
+IF WIN @pass
+END
+
+@pass
+GOTO LINK 122, 4
+;
+;------------------------------------------------------------------------------------------------------------
+;

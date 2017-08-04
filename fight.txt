@@ -1,0 +1,3835 @@
+SCENE 2
+COMPARE #<num.mapNum>, 1
+IF= @neststeptafterincludeban.txt
+#include include.txt
+@neststeptafterincludeban.txt
+;
+;----------évènements prioritaires---------------------
+;
+IF T133-T134 @barbq2
+IF T1061-T1062 @assaq4fightguards
+@assaq4fightguardsbis
+IF #53+T1207-T1208 @armenisgiants
+@nextstepafterarmenisgiants
+IF T3985 @caravanoldworld
+IF T1123-T1130+#81|T1123-T1130+#82|T1123-T1130+#83|T1123-T1130+#84|T1123-T1130+#85|T1123-T1130+#86|T1123-T1130+#87|T1123-T1130+#95|T1123-T1130+#96|T1123-T1130+#97 @caravanquest
+@caravanoldworld
+IF T2899 @atheliasborncarav
+IF T1142-T1149+#81|T1142-T1149+#82|T1142-T1149+#83|T1142-T1149+#84|T1142-T1149+#85|T1142-T1149+#86|T1142-T1149+#87|T1142-T1149+#95|T1142-T1149+#96|T1142-T1149+#97 @caravanquest
+@atheliasborncarav
+IF -T1104+#124|-T1104+#125 @tahamanplacefightds
+COMPARE #<merc.sfsdfsfsdfsf>, 1
+IF= @mercbackish
+IF T1037+T1038-#6 @priestquest3arrested
+IF T1030+#41 @necroquest3fight
+IF T1117-T1121+#12 @terendrozsiege2sdfsfsf
+IF T1117-T1121+#0 @terendrozsiege2
+@nestafterterendrq
+IF T1116-T1117-T1121+#0 @terendrozsiegestart
+IF T33+XP-#34 @tenisango
+IF T33 @tenisanfight
+IF #21+R40-T1111+V99+T1109|#22+R40-T1111+V99+T1109 @bartucintro
+IF T1028 @necroquestescapesgsdgf
+IF T1006 @banditsjesterquests
+IF #47+R2 @minocatacombs
+@nextstepafterbartucintro
+;
+;----------évènements secondaires------------------------
+;
+COMPARE #<carpetseller>, 0
+IF> @carpetsellerrc7
+IF T120-T122+#2|T120-T122+#64|T120-T122+#65|T120-T122+#66|T1030+#2|T1030+#64|T1030+#65|T1030+#66 @athalantistownhallundeads
+IF #66|#65|#64|#2 @athalantistownhall
+@fight
+STRCMP #<str.serverName>, "Mad's Hospital"
+IF= @specialevents?
+STRCMP #<str.serverName>, "Mad's Hospital "
+IF= @specialevents?
+STRSTR #<str.serverName>, "Mad's Hospital"
+IF> @specialevents?
+@fightDDDD
+@TAKET3997-2
+;#include config\prompt.txt
+IF T3988 @xmas1
+@xmas1next
+IF #1|#2|#4|#7|#8|#9|#10|#11|#12|#13|#14|#16|#18|#19|#20|#35|#36|#37|#38|#40|#41|#42|#44|#48|#49|#51|#54|#63|#64|#65|#66|#68|#80|#88|#124|#139 @randomammiesandrings#<num.mapNum>
+IF R2+R75 @ranomfightanniesrings
+IF T3993 @TAKET3993
+@normalfight
+LOCK 0
+IF #126 @fightlocked
+FIGHT
+CALL 110010@start ; (death thingy)
+@reward.txt
+#include config\rewardz.txt
+STRCMP #<arg0>, "called"
+IF= @reward.txtreturn
+IF T669 @normalfight
+END
+
+@reward.txtreturn
+RETURN
+END
+;
+;-----------labels--------------------------
+;
+@fightlocked
+FIGHT2
+GOTO @reward.txt
+
+@TAKET3993
+TAKE T3993
+GOTO @TAKET3997-2
+;
+;-----------Christmas--------------------------
+;
+@xmas1
+IF R15 @xmas2
+GOTO @xmas1next
+
+@xmas2
+COMPARE #<xmassWellBakedCookie>, 50
+IF= @xmasq1
+@xmasqnext1
+COMPARE #<xmassWellBakedCookie>, 150
+IF= @xmasq2
+@xmasqnext2
+COMPARE #<xmassWellBakedCookie>, 300
+IF= @xmasq3
+@xmasqnext3
+COMPARE #<xmassWellBakedCookie>, 600
+IF= @xmasq4
+@xmasqnext4
+COMPARE #<xmassWellBakedCookie>, 1000
+IF= @xmasq5
+ADD xmassWellBakedCookie, 1
+@xmas2bis
+IF R3 @xmasfight1
+IF R3 @xmasfight2
+IF R3 @xmasfight3
+IF R3 @xmasfight4
+IF R3 @xmasfight5
+GOTO @xmas2bis
+
+@xmasq1
+IF -V99 @xmas2bis
+COMPARE #<xmasQuestCookie>, 1
+If= @xmasqnext1
+IF> @xmasqnext1
+ACTOR 1, "Santa", christmas1, 1, 35, 90
+1: Ho, ho, ho!
+H: Hmm?
+1: You look like a brave, adventurer!
+H: Do I?
+1: I'm kinda embarrassed...
+H: What's going on?
+1: As you may have noticed, fake santas are roaming the world, and spread chaos and despair where there should be friendship and love.
+H: So...?
+1: I need someone to help me get rid of them.
+H: So basically you want me to go and slay them, for the sake of "love", right?
+1: Exactly!
+H: ...
+1: Many of them are gathered in the temple of Prina.
+1: I'll give you a special present if you slay them.
+H: Alright.
+SET xmasQuestCookie, 1
+ADD xmassWellBakedCookie, 1
+END
+
+@xmasq2
+COMPARE #<xmasQuestCookie>, 2
+If= @xmasqnext2
+IF> @xmasqnext2
+IF -T3829 @xmas2bis
+ACTOR 1, "Jack O'Frozen", christmas2, 1, 35, 90
+WEATHER 9
+1: Yo!
+H: What?
+1: This Christmas is messed up, isn't it?
+H: Strangely, I wasn't expecting worst..
+1: It could be worse, indeed.
+1: And it will if we wait too long.
+1: The spirit of Christmas was kidnapped by the fake Santas crew.
+1: We must get it back before it's too late, or this may very well be the last Christmas!
+H: The spirit of Christmas?
+H: What are you talking about?
+1: Quit babbling, adventurer, and head to the townhall of Armenis.
+1: That's where they keep the spirit of Christmas!
+SET xmasQuestCookie, 2
+ADD xmassWellBakedCookie, 1
+END
+
+@xmasq3
+COMPARE #<xmasQuestCookie>, 3
+If= @xmasqnext3
+IF> @xmasqnext3
+If -T3830 @xmas2bis
+ACTOR 1, "Miss Tweedy", christmas3, 1, 35, 90
+1: Help! Help!
+1: We need your help!
+1: We know what's going on now.
+1: Pumpkan is back!
+H: This name sounds familiar...
+1: Of course it does: he's the god of chaos who tried to invade Athelias during Halloween!
+H: ...
+1: Oh well.
+1: He's in the monastry of Terendroz, looking for something.
+H: Do you know what?
+1: An old spell book, probably.
+1: I don't know exactly but it sounds really bad.
+1: You must go and stop him!
+SET xmasQuestCookie, 3
+ADD xmassWellBakedCookie, 1
+END
+
+
+@xmasq4
+COMPARE #<xmasQuestCookie>, 4
+If= @xmasqnext4
+IF> @xmasqnext4
+If -T3831 @xmas2bis
+ACTOR 1, "Sandy", christmas4, 1, 35, 90
+1: I didn't get anything for Christmas!
+1: I wanted a new doll, but the box attacked me when I tried to open it!
+1: I so want a new doll!
+1: Say, would you help me get a new doll?
+1: I'd give you my special candies!
+H: Err...
+1: Great!
+1: Then let's go the coliseum of Prina.
+1: There are many presents there: I'm sure we will find a doll!
+ADD xmassWellBakedCookie, 1
+HOST_GIVE T3834
+SET xmasQuestCookie, 4
+END
+
+@xmasq5
+COMPARE #<xmasQuestCookie>, 5
+If= @xmas2bis
+IF> @xmas2bis
+If -T3832 @xmas2bis
+ACTOR 1, "Mr. Frost", christmas5, 1, 35, 90
+1: Adventurer, you helped us in the past, you must help us again now.
+1: pumpkan is not dead. We know where he is.
+1: We must go and strike him down, once and for all.
+H: Where did I hear that before?
+1: %1, we must waste no more time.
+1: You will find a vortex leading to Pumpkan's chaotic dimension in the temple of the Lost City.
+H: Wait, you've just said chaotic dimension?
+SET xmasQuestCookie, 5
+ADD xmassWellBakedCookie, 1
+END
+
+@xmasfight1
+FIGHT 2929
+GOTO @reward.txt
+
+@xmasfight2
+IF -V80 @xmasfight4
+FIGHT 2930
+GOTO @reward.txt
+
+@xmasfight3
+IF -V99 @xmasfight2
+FIGHT 2931
+GOTO @reward.txt
+
+@xmasfight4
+IF -V60 @xmasfight5
+FIGHT 2932
+GOTO @reward.txt
+
+@xmasfight5
+IF -V40 @xmasfight1
+FIGHT 2934
+GOTO @reward.txt
+
+;
+;-----------Special Events--------------------------
+;
+@specialevents?
+IF -#1-#2-#4-#7-#8-#9-#10-#11-#12-#13-#14-#16-#18-#19-#20-#35-#36-#37-#38-#40-#41-#42-#44-#48-#49-#51-#54-#63-#64-#65-#66-#68-#80-#88-#124-#139 @fightDDDD
+COMPARE #<num.serverTimeMonth>, 10
+IF= @halloween?oct
+COMPARE #<num.serverTimeMonth>, 11
+IF= @halloween?nov
+GOTO @fightDDDD
+
+@halloween?oct
+COMPARE #<num.serverTimeDay>, 31
+IF= @halloweenspecialevent
+GOTO @fightDDDD
+
+@halloween?nov
+COMPARE #<num.serverTimeDay>, 3
+IF< @halloweenspecialevent
+GOTO @fightDDDD
+
+#include sp.events\halloween.fight.txt
+;
+;---------- Barbarians Quests --------------
+;
+@barbq2
+CALL 110018@start
+END
+;
+;---------- Caravan Quest --------------
+;
+@caravanquest
+CALL 110025@start
+N: The caravan is attacked!
+FIGHT
+CALL 110010@start
+END
+;
+;---------- Armenis Giants --------------
+;
+@armenisgiants
+COMPARE #<armenisgiants>, 1
+IF= @nextstepafterarmenisgiants
+N: After a few hours of travel, you find signs of the giants.
+WAIT 2.5
+N: Several trees have been pushed aside in places and the traces lead to the South-East of the island.
+IF C61 @armenisgiants2
+SET armenisgiants, 1
+END
+
+@armenisgiants2
+WAIT 2.5
+N: Your skills of archer make you able to tell that there were three creatures, and that they were definitely giants of some kind.
+END
+;
+;---------- Tahamanraset Palace --------------
+;
+@tahamanplacefightds
+STRCMP #<monsterssulatzspal>, ""
+IF= @normalfight
+COMPARE #<monsterssulatzspal>, 1
+IF< @mondeadsultanpalace2
+FIGHT
+CALL 110010@start
+IF LOSE @endtahaman
+SUB monsterssulatzspal, #<monster.lastFightCount>
+COMPARE #<monsterssulatzspal>, 1
+IF< @mondeadsultanpalace
+N: Remaining monsters : #<monsterssulatzspal>
+@endtahaman
+END
+
+@mondeadsultanpalace2
+N: Lead the way towards the lower reaches.
+GIVE T1105
+END
+
+@mondeadsultanpalace
+N: Remaining monsters : 0
+N: You lead the way towards the lower reaches.
+GIVE T1105
+END
+;
+;-----------assaquest 4 : guards of Prina--------------------------
+;
+@assaq4fightguards
+IF -#0 @assaq4fightguardsbis
+COMPARE #<num.closestLink>, 11
+IF> @assaq4fightguardsbis
+IF< @assaq4fightguardsbis
+COMPARE #<assaq4deadish>, 1
+IF= @assq4dedishback
+H: Two guards!
+H: Let's call Loki!
+WAIT 1
+SOUND horn.wav
+FIGHT 136, 136
+CALL 110010@start
+IF LOSE @assaq4fightguardslose
+H: Loki arrive!
+FIGHT 136, 136, 136, 136, -2903
+CALL 110010@start
+@assq4dedishbackssdsc
+IF LOSE @assaq4fightguardslose
+H: Let's kill the sergeant and we'll be done with them!
+FIGHT 136, 136, 139
+CALL 110010@start
+IF LOSE @assaq4fightguardslose
+H: Alright, let's go back to the castle.
+HOST_GIVE T1062
+END
+
+@assq4dedishback
+H: They're here!
+FIGHT 136,136, 136
+IF LOSE @assaq4fightguardslose
+H: More guards arrive!
+FIGHT 136, 136, 136, 136
+GOTO @assq4dedishbackssdsc
+
+@assaq4fightguardslose
+ACTOR 1, Loki, human22, 1, 100, 90
+MOVE 1, 75, 90
+1: Let's go and heal your wounds, %1.
+1: We must catch them up and kill them before it's too late.
+SET assaq4deadish, 1
+END
+;
+;-----------necroquest 3 : athalantis siege--------------------------
+;
+@necroquest3fight
+IF R10 @necroquest3fight1
+IF R10 @necroquest3fight2
+IF R10 @necroquest3fight3
+IF R10 @necroquest3fight4
+IF R10 @necroquest3fight5
+IF R10 @necroquest3fight6
+IF R10 @necroquest3fight7
+IF R10 @necroquest3fight8
+IF R10 @necroquest3fight9
+IF R10 @necroquest3fight10
+GOTO @necroquest3fight
+
+@necroquest3fight1
+FIGHT 293, 293, 293, 293, 293, 293, 293, 293
+CALL 110010@start
+END
+
+@necroquest3fight2
+FIGHT 297, 297, 297, 297, 297
+CALL 110010@start
+END
+
+@necroquest3fight3
+FIGHT 367, 367, 367, 367
+CALL 110010@start
+END
+
+@necroquest3fight4
+FIGHT 47, 47
+CALL 110010@start
+END
+
+@necroquest3fight5
+FIGHT 48
+CALL 110010@start
+END
+
+@necroquest3fight6
+FIGHT 49
+CALL 110010@start
+END
+
+@necroquest3fight7
+FIGHT 50
+CALL 110010@start
+END
+
+@necroquest3fight8
+FIGHT 51
+CALL 110010@start
+END
+
+@necroquest3fight9
+FIGHT 52
+CALL 110010@start
+END
+
+@necroquest3fight10
+FIGHT 51, 52
+CALL 110010@start
+END
+;
+;-----------Athalantis Townhall--------------------------
+;
+@athalantistownhallundeads
+GOTO @necroquest3fight
+
+@athalantistownhall
+IF R2 @athalantistownhall1
+IF R2 @athalantistownhall2
+IF R2 @athalantistownhall3
+IF R2 @athalantistownhall4
+IF R2 @athalantistownhall5
+IF R2 @athalantistownhall6
+IF R2 @athalantistownhall7
+IF R2 @athalantistownhall8
+IF R2 @athalantistownhall9
+IF R2 @athalantistownhall10
+GOTO @athalantistownhall
+
+@athalantistownhall1
+ACTOR 1, "Miss Mangy", wom67, 1, 25, 95
+ACTOR 2, Isabel, wom5, 1, 60, 95
+FACE 2, 0
+1: Hurry up!
+1: The guests are will be there in one hour and the rooms are not ready!
+2: Yes, Miss Mangy
+WAIT 2
+MOVE 2, 120, 95
+END
+
+@athalantistownhall2
+ACTOR 1, , human102, 1, 110, 97
+MOVE 1, -20, 97
+WAIT 1.8
+1: Pardon, #<g.mylord>.
+1: Lord Ghamyl's dinner
+MOVE 1, -20, 97
+END
+
+@athalantistownhall3
+ACTOR 1, , guard4, 1, 25, 95
+1: Greetings, #<g.sir>.
+END
+
+@athalantistownhall4
+ACTOR 1, , guard4, 1, 60, 95
+ACTOR 2, , guard4, 1, 10, 95
+ACTOR 3, , guard4, 1, 15, 98
+ACTOR 4, , guard4, 1, 19, 96
+ACTOR 5, , guard4, 1, 25, 95
+1: Hurry up, guys, they are already here!
+MOVE 1, 120, 95
+MOVE 2, 120, 95
+MOVE 3, 120, 98
+MOVE 4, 120, 96
+MOVE 5, 120, 95
+END
+
+@athalantistownhall5
+ACTOR 1, , guard4, 1, 25, 95
+ACTOR 2, , guard4, 1, 35, 97
+1: Halt!
+1: Who are you?
+H: #<g.sir2> %1.
+H: I am going to the audience room
+1: Oh! Pardon, #<g.mylord>.
+END
+
+@athalantistownhall6
+ACTOR 1, , wom25, 1, -10, 95
+MOVE 1, 120, 95
+WAIT 1.8
+1: Hello, #<g.sir>.
+MOVE 1, 120, 95
+END
+
+@athalantistownhall7
+ACTOR 1, Alicia, wom4, 1, 25, 95
+ACTOR 2, Theresa, wom10, 1, 36, 96
+FACE 2, 0
+1: My necklace!
+1: Where is my necklace?
+2: I don't know, Madam
+2: I'm going to look in the reception room
+MOVE 1, -20, 95
+MOVE 2, 120, 96
+END
+
+@athalantistownhall8
+ACTOR 1, , human102, 1, 110, 97
+MOVE 1, -20, 97
+WAIT 1.8
+1: Not enough salted!
+1: Bleh
+1: Damn Athalantians, never satisfied
+1: I should go back to Bretonia
+1: There they appreciate good food!
+MOVE 1, -20, 97
+END
+
+@athalantistownhall9
+ACTOR 1, Alicia, wom4, 1, 20, 95
+ACTOR 2, July, kid1, 1, 35, 100
+FACE 2, 0
+1: July, did you play with my necklace?
+2: No, mum, I swear I didn't
+1: Hmm... where could it be?
+END
+
+@athalantistownhall10
+ACTOR 1, , guard4, 1, 20, 95
+MOVE 1, 120, 95
+1: Bleh... she is looking for a necklace now... 
+1: As if I weren't busy...
+END
+;
+;-----------necroquest 2 : travel to Athalantis--------------------------
+;
+@necroquestescapesgsdgf
+ACTOR 1, "Master Derar",human7, 1, 55, 90, 3
+POSE 1, 4
+ACTOR 2, Dalis, human20, 2, 50, 85
+POSE 1, 2
+ACTOR 3, Amel, human3, 1, 60, 92
+POSE 1, 2
+FACE 3, 0
+COMPARE #<c6necroescape>, 1
+IF= @necroquestescapesgsdgf2
+1: You'd better let me go.
+1: The Academy is full of idiots.
+1: But... you can't understand.
+2: Shut up, Derar
+3: Yeah! Calm down!
+1: Who do you think you are, Junior?!
+1: You will regret that!
+@necroquestescapesgsdgf1
+COLOR 2014
+COLOR 13
+WEATHER 3
+FX 4
+WAIT 1
+SOUND thunder.wav
+N: Derar summons an undead!
+FIGHT2 367
+IF LOSE @necroquest2deadsdfsf
+2: Knock Derar out!
+SOUND thunder.wav
+N: Derar summons an undead!
+FIGHT2 367
+IF LOSE @necroquest2deadsdfsf
+MOVE 3, 53, 90
+WAIT 1
+N: Amel knocks Derar out
+COLOR 0
+COLOR 2000
+FX 0
+WEATHER 0
+3: Bastard!
+3: Let's go to Athalantis!
+SET c6necroescape, 1
+END
+
+@necroquest2deadsdfsf
+2: Sorry for you, %1.
+2: Get a rez a lead to Athalantis.
+END
+
+@necroquestescapesgsdgf2
+1: I will kill you!
+GOTO @necroquestescapesgsdgf1
+
+@banditsjesterquests
+GOTO SCENE 75677447
+
+@priest
+FIGHT *, -260
+END
+;
+;----------------------------- Terendroz siege ------------------------------------------------
+;
+@terendrozsiegestart
+ACTOR 1, Gnome, gnome6, 1, -20, 90
+ACTOR 2, Gnome, gnome3, 1, -25, 80
+ACTOR 3, Gnome, gnome5, 1, -15, 85
+MOVE 1, 35, 90
+MOVE 2, 30, 90
+MOVE 3, 40, 90
+WAIT 4
+3: Run away, stranger!
+3: The Chaos Army walks over Athelias Island!
+3: They are besieging Terendroz and are about to head to Prina!
+3: Run if you don't want to die!
+H: Go and hide a few days in Mangeas or Katadyn
+H: Then go back to home
+H: The place will be safe again.
+H: The army won't pass, trust me
+GIVE T1117
+END
+
+@terendrozsiege2sdfsfsf
+COMPARE #<siegeterendrozqsdfs>, 1
+IF= @teresiege3
+ACTOR 1, Guard, gnome4, 1, 20, 80
+ACTOR 2, Towner, gnome7, 1, 37, 90
+ACTOR 3, Towner, gnome7, 1, 50, 75, 3
+2: A foreigner!
+2: How did you manage to enter the city?!
+H: No matter
+H: I am here to help you
+H: I have defeated the nine dark paladins - without its leaders, the army can't do much
+3: You have defeated the dark paladins?!
+1: If you really want to help us, foreigner, head to the Townhall : the Ancient knows what to do.
+SET siegeterendrozqsdfs, 1
+END
+
+@teresiege3
+IF R1 @teresiege8
+IF R1 @teresiege4
+IF R1 @teresiege5
+IF R1 @teresiege6
+IF R1 @teresiege7
+GOTO @teresiege3
+
+@teresiege8
+ACTOR 1, Towner, gnome5, 1, 30, 90
+ACTOR 2, Towner, gnome7, 1, 22, 85 1: We must find a way to go out of here!
+1: We will all die!
+2: The only chance to go out would be to pass by the sewer
+2: Let's go!
+MOVE 1, 120, 90, 2
+MOVE 2, 120, 85, 2
+WAIT 3
+H: Welcome to Terendroz...
+END
+
+
+@teresiege4
+ACTOR 1, Towner, gnome8, 1, 2, 90
+1: My son!
+1: They killed my son!
+H: Don't cry, you will soon have your revenge
+END
+
+@teresiege5
+ACTOR 1, Guard, gnome2, 1, 50, 75
+ACTOR 2, Citizen, gnome3, 1, 20, 80
+ACTOR 3, Citizen, gnome3, 1, 33, 90, 3
+1: Go back home, it is too dangerous here!
+WAIT 1.8
+MOVE 2, 120, 75
+MOVE 3, 120, 80
+MOVE 4, 120, 90
+END
+
+@teresiege6
+ACTOR 1, Guard, gnome2, 1, -20, 90
+ACTOR 2, Guard, gnome2, 1, -40, 90
+ACTOR 3, Guard, gnome2, 1, -15, 85
+ACTOR 4, Guard, gnome2, 1, -25, 85
+ACTOR 4, Guard, gnome2, 1, -32, 85
+MOVE 1, 120, 90
+MOVE 2, 120, 90
+MOVE 3, 120, 85
+MOVE 4, 120, 85
+MOVE 5, 120, 85
+END
+
+@teresiege7
+ACTOR 1, Guard, gnome2, 1, 20, 90
+ACTOR 2, Guard, gnome4, 1, 40, 90
+ACTOR 3, Guard, gnome4, 1, 15, 85
+ACTOR 4, Guard, gnome4, 1, 25, 85
+ACTOR 4, Guard, gnome4, 1, 32, 85
+MOVE 1, 120, 90
+MOVE 2, 120, 90
+MOVE 3, 120, 85
+MOVE 4, 120, 85
+MOVE 5, 120, 85
+1: To the northern gate! Hurry!
+END
+
+@terendrozsiege2
+COMPARE #<num.closestLink>, 8
+IF= @terendrochaosfight
+GOTO @nestafterterendrq
+
+@terendrochaosfight
+SET temp.monster1, 329
+SET temp.monster2, 329
+ADD temp.monster1, %R14
+ADD temp.monster2, %R14
+FIGHT2 #<temp.monster1>, #<temp.monster2>
+H: Hmm
+H: I now have to hurry and find a way to enter the city...
+END
+;
+;----------------------------------- Priests ------------------------------------------
+;
+@priestquest3arrested
+ACTOR 1, Guard, guard6, 1, 25, 90
+ACTOR 2, Guard, guard6, 1, 40, 90
+1: You won't escape, %1!
+1: Follow us!
+WAIT 1.2
+GOTO LINK 6, 4
+;
+;----------------------------------- mercenaries ------------------------------------------
+;
+@mercbackish
+ACTOR 1, Mercenary, human48, 1, -10, 93
+MOVE 1, 25, 93
+WAIT 3
+1: Hey, man!
+1: Sorry but I heard what you said at the Back Horse Tavern.
+1: I may be able to help you and talk to the barman.
+H: Really?!
+H: That's great!
+1: Yeah but first I would need you to do me a small favor.
+H: Err... yeah, what is it?
+1: There is a guy by the coliseum selling weapons.
+1: I'd need a new hand axe but I can't go there... that's a long story.
+1: Buy one for me and I'll go and talk to the barman.
+H: Alright.
+SET merc.sfsdfsfsdfsf, 2
+END
+;
+;----------------------------------- 9 palis ------------------------------------------
+;
+
+@bartucintro
+COMPARE #<c3bartucintro>, 1
+IF= @nextstepafterbartucintro
+ACTOR 1, Erelman, human16, 1, 25, 90
+1: Don't go to the catacombs, #<g.mylord>!
+1: Run out of the palace!
+1: If you are looking for Tenisan's cell, you must know that it is kept by Bartuc, the Jailor
+1: It is not human...
+1: Not anymore!
+1: He killed all my companions, and I cannot believe I am still alive!
+1: Run, my friend, run!
+1: No humans could kill him!
+WAIT 3
+MOVE 1, -20, 90
+END
+
+@tenisango
+ACTOR 1, Tenisan,  human26, 1, 60, 90
+GIVE T1115
+TAKE T33
+1: I cannot stay with you.
+1: I will fight them on my own as you doesn't seem to care.
+1: Good luck, and for Athelias's sake, pray for me to succeed.
+MOVE 1, 120, 90
+END
+
+@tenisanfight
+FIGHT *, -260
+CALL 110010@start
+END
+;
+;-------------------------------- Random fights -----------------------------------------------
+;>>>>>>>>>>>>>> @randombattle4 is reserved for the jungle <<<<<<<<<<<<<<<<<<<<<<<
+;
+@minocatacombs
+IF R20 @minocatacombs2
+FIGHT 474
+END
+
+@minocatacombs2
+IF R20 @minocatacombs3
+FIGHT 474, 474
+END
+
+@minocatacombs3
+FIGHT 474, 474, 474
+END
+
+@ranomfightanniesrings
+GOTO @randomammiesandrings#<num.mapNum>
+
+@randomcitymain
+IF T3988+R33 @xmas2
+IF R4 @randomcitymain2
+SET temp.randomeventnumber, %R20
+IF R10 @randomrobbers
+IF R10 @randmerch#<temp.randomeventnumber>
+GOTO @randomcitymain
+
+@randomcitymain2
+IF R1 @randomcity1
+IF R1 @randomcity2
+IF R1 @randomcity3
+IF R1+#7 @randomprinagaming
+IF R1 @randomcity4
+IF R1 @randomcity5
+IF R1 @randomcity6
+IF R1 @randomcity7
+IF R1 @randomcity8
+IF R1 @randomcity9
+IF R1+#7|R1+#10|R1+#12|R1+#13|R1+#16|R1+#18|R1+#19|R1+#36|R1+#40|R1+#41 @randomcity10
+IF R1-T596+#7|R1-T596+#10|R1-T596+#12|R1-T596+#13|R1-T596+#16|R1-T596+#18|R1-T596+#19|R1-T596+#36|R1-T596+#40|R1-T596+#41 @randomcity11
+IF R1 @randomcity12
+IF R1 @randomcity13
+IF R1 @randomcity14
+IF R1 @randomcity15
+GOTO @randomcitymain2
+
+@randomprinagaming
+ACTOR 1, "Hector", human112, 1, 40, 90
+1: Rich! I am rich!
+H: Grats! What happened?
+1: I won the jackpot in the Black Horse Tavern!
+H: What?
+1: Oh you don't know!
+1: Gaming is illegal but there are slot machines, monsters races, etc. in the Black Horse Tavern.
+1: Maybe the barman will let you bet if you ask.
+H: Thanks for the info!
+HOST_GIVE T597
+END
+
+@randomammiesandrings0
+IF R1 @randombattleQueek
+IF R1 @randombattle1
+IF R1 @randomforest1
+IF R1 @randomforest2
+IF R1+V15 @randombattle2
+IF R1+V25 @randomforest3
+IF R1 @randomforest4
+IF R1 @randomforest5
+IF R1 @randomwhitedragon
+IF R1 @randomforest6
+IF R1 @randomforest7
+IF R1 @randomforest8
+IF R1 @randombattle5
+GOTO @randomammiesandrings0
+
+@randomwhitedragon
+N: A white dragon rushes on you!
+FIGHT 34
+CALL 110010@start
+END
+
+@randomammiesandrings1
+END
+
+@randomammiesandrings2
+GOTO @athalantistownhall
+
+@randomammiesandrings3
+FIGHT 331, 331, 331, 331, 331, 368, 382
+CALL 110010@start
+IF WIN+R60 @randomammiesandrings3ammy
+END
+
+@randomammiesandrings3ammy
+N: You kill them and find an amulet on one of the corpses.
+GIVE I3030
+SOUND FoundItem.wav
+END
+
+@randomammiesandrings4
+; necroac
+END
+
+@randomammiesandrings5
+; dead d
+END
+
+@randomammiesandrings6
+FIGHT 136, 136, 136, 136, 136
+CALL 110010@start
+IF WIN+R50 @randomammiesandrings6ring
+END
+
+@randomammiesandrings6ring
+N: You kill them and find a medal on one of the corpses.
+GIVE I3029
+SOUND FoundItem.wav
+END
+
+@randomammiesandrings7
+GOTO @randomcitymain
+
+@randomammiesandrings8
+IF T3999 @randomammiesandrings8regentdead
+IF -V75 @randomammiesandrings8regentdead
+FIGHT 136
+CALL 110010@start
+END
+
+@randomammiesandrings8regentdead
+IF R1 @randomammiesandrings8regentdead1
+IF R1 @randomammiesandrings8regentdead2
+IF R1 @randomammiesandrings8regentdead3
+IF R1 @randomammiesandrings8regentdead4
+IF R1 @randomammiesandrings8regentdead5
+IF R1 @randomammiesandrings8regentdead6
+IF R1 @randomammiesandrings8regentdead7
+IF R1 @randomammiesandrings8regentdead8
+IF R1 @randomammiesandrings8regentdead9
+IF R1 @randomammiesandrings8regentdead10
+GOTO @randomammiesandrings8regentdead
+
+@randomammiesandrings8regentdead1
+ACTOR 1, Guard, guard6, 1, 0, 90
+ACTOR 2, Guard, guard6, 1, -10, 95
+MOVE 1, 120, 90
+MOVE 2, 120, 95
+1: Hello, #<g.sir>.
+H: Hello.
+END
+
+@randomammiesandrings8regentdead2
+ACTOR 1, Guard, guard6, 1, 0, 90
+ACTOR 2, Guard, guard6, 1, -5, 95
+MOVE 1, 120, 90
+MOVE 2, 120, 95
+ACTOR 3, Guard, guard6, 1, -10, 90
+ACTOR 4, Guard, guard6, 1, -15, 95
+MOVE 3, 120, 90
+MOVE 4, 120, 95
+ACTOR 5, Guard, guard6, 1, -20, 90
+ACTOR 6, Guard, guard6, 1, -25, 95
+MOVE 5, 120, 90
+MOVE 6, 120, 95
+ACTOR 7, Guard, guard6, 1, -30, 90
+ACTOR 8, Guard, guard6, 1, -35, 95
+MOVE 7, 120, 90
+MOVE 8, 120, 95
+WAIT 1
+1: Hurry, soldiers!
+1: We should already be at the Northern gate.
+END
+
+@randomammiesandrings8regentdead3
+ACTOR 1, Felix, human1, 1, 0, 95
+WAIT 0.5
+1: No time to waste with me!
+1: I can't believe it!
+END
+
+@randomammiesandrings8regentdead4
+ACTOR 1, Tiker, human21, 0, 100, 90
+MOVE 1, -20, 90
+WAIT 0.5
+1: I hope this idiot will like what I bring this time!
+END
+
+@randomammiesandrings8regentdead5
+ACTOR 1, Hazor, human27, 2, 25, 90
+1: Welcome to the palace, adventurer.
+1: I am Hazor, official bard.
+1: Can I do something for you?
+H: No, thanks.
+1: Have a nice day.
+END
+
+@randomammiesandrings8regentdead6
+ACTOR 1, Ulrich, human28, 1, 100, 90
+MOVE 1, -20, 90
+WAIT 0.5
+1: He pays me to train him but he always tells me "later".
+1: I can't understand the rich guys.
+END
+
+@randomammiesandrings8regentdead7
+ACTOR 1, "Pr Hebracht", human31, 1, 0, 90
+MOVE 1, 120, 90
+WAIT 0.5
+1: Excuse me, #<g.sir>, I have an interview with the Intendant concerning the Academies of Latsha.
+END
+
+@randomammiesandrings8regentdead8
+ACTOR 1, Albrecht, human82, 1, 25, 90
+1: Welcome to the palace, adventurer.
+1: Don't you want to join the guards of Prina?
+H: I'm not here for that.
+1: You see...
+1: But that's a great opportunity for you!
+1: You'll be fed for free and would have a monthly pay!
+H: I've told you I am not interested.
+H: Goodbye.
+END
+
+@randomammiesandrings8regentdead9
+ACTOR 1, Firoz, human92, 1, 100, 90
+ACTOR 2, Natalia, kid6, 1, 105, 95
+MOVE 1, -20, 90
+MOVE 2, -20, 95
+1: Come with me, Natalia.
+1: I need to explain our situation to the authorities.
+1: We can't live like this.
+END
+
+@randomammiesandrings8regentdead10
+ACTOR 1, Huricht, human64, 1, 25, 90
+1: Grmbl
+H: Pardon?
+WAIT 2
+H: Err... Are you OK?
+END
+
+@randomammiesandrings9
+; guild hall
+END
+
+@randomammiesandrings10
+: Arguazil
+GOTO @randomcitymain
+
+@randomammiesandrings11
+; alchemy ac
+END
+
+@randomammiesandrings12
+; Terendroz
+GOTO @randomcitymain
+
+@randomammiesandrings13
+; Mangeas
+GOTO @randomcitymain
+
+@randomammiesandrings14
+; prina temple
+END
+
+@randomammiesandrings15
+FIGHT 2, 2, 2, 2, 2, 3, 3, 3, 4 
+CALL 110010@start
+IF WIN+R50 @randomammiesandrings15ring
+END
+
+@randomammiesandrings15ring
+N: You kill them and find a ring on one of the corpses.
+GIVE I3031
+SOUND FoundItem.wav
+END
+
+@randomammiesandrings16
+; Latsha
+GOTO @randomcitymain
+
+@randomammiesandrings17
+FIGHT 476, 476, 476, 477, 480, 482, 483
+CALL 110010@start
+IF WIN+R60 @ammy4
+END
+
+@randomammiesandrings18
+; Irezar
+GOTO @randomcitymain
+
+@randomammiesandrings19
+; Kotor
+GOTO @randomcitymain
+
+@randomammiesandrings20
+; assa
+END
+
+@randomammiesandrings21
+@randomammiesandrings22
+FIGHT 47, 47, 47, 47, 47, 560
+CALL 110010@start
+IF WIN+T50 @randomammiesandrings21rew
+END
+
+@randomammiesandrings21rew
+N: You found a Bone Staff.
+GIVE I1081
+SOUND FoundItem.wav
+END
+
+@randomammiesandrings23
+FIGHT 12, 12, 10, 10, 10, 10, 20
+CALL 110010@start
+IF WIN+R50 @randomammiesandrings15ring
+END
+
+@randomammiesandrings25
+@randomammiesandrings24
+FIGHT 332, 332, 332, 332, 332, 334, 336, 338, 338
+CALL 110010@start
+IF WIN+R50 @randomammiesandrings24rew
+END
+
+@randomammiesandrings24rew
+N: You found a Chaotic Axe.
+GIVE I1082
+SOUND FoundItem.wav
+END
+
+;@randomammiesandrings26
+
+
+;@randomammiesandrings27
+
+
+;@randomammiesandrings28
+
+
+;@randomammiesandrings29
+
+
+;@randomammiesandrings30
+
+
+;@randomammiesandrings31
+
+
+;@randomammiesandrings32
+
+
+;@randomammiesandrings33
+
+
+@randomammiesandrings34
+FIGHT 339, 338, 338, 333, 333, 333, 333, 333
+CALL 110010@start
+IF WIN+T50 @randomammiesandrings34rew
+END
+
+@randomammiesandrings34rew
+N: You found Thunder Claws.
+GIVE I1083
+SOUND FoundItem.wav
+END
+
+@randomammiesandrings35
+; flaming
+END
+
+@randomammiesandrings36
+; Katadyn
+GOTO @randomcitymain
+
+@randomammiesandrings37
+; pet arena
+END
+
+@randomammiesandrings38
+; palis
+END
+
+@randomammiesandrings39
+FIGHT 69, 69, 69, 69, 103, 60, 60, 60
+CALL 110010@start
+IF WIN+R50 @randomammiesandrings39rew
+END
+
+@randomammiesandrings39rew
+N: You found Earth Knuckles.
+GIVE I1084
+SOUND FoundItem.wav
+END
+
+@randomammiesandrings40
+; Irkatshk
+GOTO @randomcitymain
+
+@randomammiesandrings41
+; Athalantis
+GOTO @randomcitymain
+
+@randomammiesandrings42
+; Armenis
+GOTO @randomcitymain
+
+@randomammiesandrings43
+FIGHT 205, 205, 205, 205, 205, 209, 209
+CALL 110010@start
+IF WIN @randomammiesandrings43rew
+END
+
+@randomammiesandrings43rew
+N: You found a Staff of Attraction.
+GIVE I1034
+SOUND FoundItem.wav
+END
+
+@randomammiesandrings44
+; coli
+END
+
+@randomammiesandrings45
+; underground
+END
+
+@randomammiesandrings46
+FIGHT 499, 499, 499, 500, 500, 501, 501
+CALL 110010@start
+IF WIN+R60 @ammy5
+END
+
+@randomammiesandrings47
+FIGHT 50, 50, 50, 50, 50, 513
+CALL 110010@start
+IF WIN+R60 @ring6
+END
+
+@randomammiesandrings48
+; rodeurs
+END
+
+@randomammiesandrings49
+; jesters
+END
+
+@randomammiesandrings50
+FIGHT 516, 517, 518, 516, 517, 518
+CALL 110010@start
+IF WIN+R50 @randomammiesandrings50rew
+END
+
+@randomammiesandrings50rew
+N: You found a Staff of the Creeping.
+GIVE I1032
+SOUND FoundItem.wav
+END
+
+@randomammiesandrings51
+; monks
+END
+
+@randomammiesandrings52
+; evergreed
+END
+
+@randomammiesandrings53
+N: You fall in with a band of giants!
+FIGHT 320, 320, 320, 320, 327
+CALL 110010@start
+IF WIN+R50 @randomammiesandrings53rew
+END
+
+@randomammiesandrings53rew
+N: You kill them and take the gold they had gathered.
+WAIT 1
+N: You are now rich! 
+GIVE G750000
+END
+
+@randomammiesandrings54
+; hardos
+END
+
+@randomammiesandrings55
+@randomammiesandrings56
+@randomammiesandrings57
+@randomammiesandrings58
+@randomammiesandrings59
+@randomammiesandrings60
+@randomammiesandrings61
+@randomammiesandrings62
+GOTO @fight
+
+@randomammiesandrings63
+; arena
+END
+
+@randomammiesandrings64
+GOTO @athalantistownhall
+
+@randomammiesandrings65
+GOTO @athalantistownhall
+
+@randomammiesandrings66
+GOTO @athalantistownhall
+
+@randomammiesandrings67
+FX 2
+FIGHT 206, 206, 206, 206, 206, 206, 529
+CALL 110010@start
+IF WIN+R50 @randomammiesandrings67rew
+END
+
+@randomammiesandrings67rew
+N: You found a Seasinger's Conch.
+GIVE I1080
+SOUND FoundItem.wav
+END
+
+@randomammiesandrings68
+; Tahamanraset
+GOTO @randomcitymain
+
+@randomammiesandrings69
+; dream
+
+@randomammiesandrings70
+; dream
+
+@randomammiesandrings71
+; dream
+
+@randomammiesandrings72
+; dream
+
+@randomammiesandrings73
+; dream
+
+@randomammiesandrings74
+; dream
+
+@randomammiesandrings75
+; dream
+
+@randomammiesandrings76
+; dream
+END
+
+@randomammiesandrings77
+FIGHT 455, 455, 455, 293, 293, 293, 293, 293, 293, 293, 293
+CALL 110010@start
+IF WIN+R50 @ammy3
+END
+
+@randomammiesandrings78
+FIGHT 463, 463, 463, 463, 463, 463, 463, 463
+CALL 110010@start
+IF WIN +R60 @ring3
+END
+
+@randomammiesandrings79
+; Illusionists
+END
+
+@randomammiesandrings80
+; Sadramand
+GOTO @randomcitymain
+
+@randomammiesandrings81
+FIGHT 567, 567, 567, 567, 567, 567, 567
+CALL 110010@start
+IF WIN+R50 @randomammiesandrings81rew
+END
+
+@randomammiesandrings81rew
+N: You found a Warpstone!
+GIVE I1085
+GIVE T3992
+SOUND FoundItem.wav
+END
+
+@randomammiesandrings82
+FIGHT 565, 565, 565, 464, 564
+CALL 110010@start
+IF WIN+R50 @randomammiesandrings82rew
+END
+
+@randomammiesandrings82rew
+N: You found a Sultan's Crown
+GIVE I1086
+SOUND FoundItem.wav
+END
+
+@randomammiesandrings83
+FIGHT 589, 589, 589, 589, 589, 589
+CALL 110010@start
+IF LOSE|R50 @end
+N: You find an old bone.
+GIVE I1114
+SOUND FoundItem.wav
+END
+
+@randomammiesandrings84
+FIGHT 382, 382, 381, 381, 368, 368, 331, 331, 331, 331
+CALL 110010@start
+IF LOSE|R50 @end
+GIVE I3030
+N: You kill them and find an Amulet of the Beasts on the corpse of one of the beastmen.
+SOUND FoundItem.wav
+END
+
+@randomammiesandrings85
+@randomammiesandrings86
+N: It's a trap!
+FIGHT 597, 597, 601, 601, 601, 590, 590
+CALL 110010@start
+IF LOSE|R50 @end
+GIVE I1115
+N: You find a Scorpion Tail Amulet
+SOUND FoundItem.wav
+END
+
+@randomammiesandrings87
+FIGHT 600, 600, 600, 600, 600, 600, 600
+CALL 110010@start
+IF LOSE|R50 @end
+GIVE I1116
+N: You find a Nomad's Shield.
+SOUND FoundItem.wav
+END
+
+@randomammiesandrings88
+; healers 
+END
+
+@randomammiesandrings89
+GOTO @randomammiesandrings21
+
+@randomammiesandrings90
+FIGHT 357, 357, 357, 357, 357, 357, 357, 433, 433, 433
+CALL 110010@start
+IF WIN+R60 @ammy2
+END
+
+@randomammiesandrings91
+FIGHT 484, 484, 484, 485, 485, 486, 486, 486
+CALL 110010@start
+IF WIN+R60 @ring4
+END
+
+@randomammiesandrings92
+FIGHT 438, 438, 438, 439, 439, 440, 440, 441
+CALL 110010@start
+IF WIN+R60 @ring2
+END
+
+@randomammiesandrings93
+FIGHT 417, 417, 417, 417, 417, 421, 421, 420, 420, 420
+CALL 110010@start
+IF WIN+R50 @ring1
+END
+
+@randomammiesandrings94
+FIGHT 394, 394, 394, 394, 394, 394, 394, 394, 394, 394
+CALL 110010@start
+IF WIN+R50 @ammy1
+END
+
+@randomammiesandrings95
+@randomammiesandrings96
+@randomammiesandrings145
+FIGHT 584, 584, 584, 584, 584, 584, 584
+CALL 110010@start
+IF LOSE|R50 @end
+N: You find a Stone Heart Amulet.
+GIVE I1117
+SOUND FoundItem.wav
+END
+
+@randomammiesandrings97
+H: Let's be careful here.
+END
+
+@randomammiesandrings98
+;Kotor castle
+END
+
+@randomammiesandrings99
+;templars
+END
+
+@randomammiesandrings100
+IF R50 @tajishafightssdfl2
+FIGHT2 78, 78, 78, 79, 79, 79
+CALL 110010@start
+END
+
+@tajishafightssdfl2
+FIGHT2 80, 80, 80, 81, 81, 81
+CALL 110010@start
+END
+
+@randomammiesandrings101
+@randomammiesandrings102
+@randomammiesandrings103
+@randomammiesandrings104
+@randomammiesandrings105
+@randomammiesandrings106
+@randomammiesandrings107
+@randomammiesandrings108
+@randomammiesandrings109
+@randomammiesandrings120
+@randomammiesandrings121
+@randomammiesandrings122
+GOTO @randomammiesandrings100
+
+@randomammiesandrings111
+; halloween dimension
+GOTO @normalfight
+
+@randomammiesandrings112
+; Obrovac
+GOTO @randomcitymain
+
+@randomammiesandrings113
+; Thanaris
+GOTO @randomcitymain
+
+@randomammiesandrings114
+FIGHT 499, 501, 502, 504, 505, 500, 503, 560, 563
+IF WIN @randomammiesandrings114win
+END
+
+@randomammiesandrings114win
+N: You found a %I17.
+SOUND FoundItem.wav
+GIVE I17
+END
+
+@randomammiesandrings115
+FIGHT 52, 506, 507, 508, 509, 510, 511, 512, 513
+IF WIN @randomammiesandrings115win
+END
+
+@randomammiesandrings115win
+N: You found a %I15.
+SOUND FoundItem.wav
+GIVE I15
+END
+
+@randomammiesandrings116
+FIGHT 52, 506, 507, 508, 509, 510, 511, 512, 513
+IF WIN @randomammiesandrings116win
+END
+
+@randomammiesandrings116win
+N: You found a %I16.
+SOUND FoundItem.wav
+GIVE I16
+END
+
+@randomammiesandrings117
+FIGHT 404, 404, 404, 404, 404, 404, 404, 404, 404, 404
+IF WIN @randomammiesandrings117win
+END
+
+@randomammiesandrings117win
+GOTO @rewardsnormalammyandrings
+
+@randomammiesandrings118
+FIGHT 221, 221, 221, 221, 226, 226, 226
+IF WIN @randomammiesandrings118win
+END
+
+@randomammiesandrings118win
+GOTO @rewardsnormalammyandrings
+
+@randomammiesandrings119
+FIGHT 289, 289, 289, 289, 289, 289, 289, 289, 289
+IF WIN @randomammiesandrings119win
+END
+
+@randomammiesandrings119win
+GOTO @rewardsnormalammyandrings
+
+@randomammiesandrings123
+FIGHT 90, 90, 90, 90,  90, 90
+CALL 110010@start
+END
+
+@randomammiesandrings124
+IF -I1069 @end
+IF R1 @randomtahamanrasepalace1
+IF R1 @randomtahamanrasepalace2
+IF R1 @randomtahamanrasepalace3
+IF R1 @randomtahamanrasepalace4
+IF R1 @randomtahamanrasepalace5
+IF R1 @randomtahamanrasepalace6
+IF R1 @randomtahamanrasepalace7
+IF R1 @randomtahamanrasepalace8
+IF R1 @randomtahamanrasepalace9
+IF R1 @randomtahamanrasepalace10
+GOTO @randomammiesandrings124
+
+@randomammiesandrings125
+GOTO @randomammiesandrings124
+
+@randomammiesandrings126
+STRCMP #<g.name>, "female"
+IF= @randomammiesandrings126female
+FIGHT 94, 94, 94, 94, 94, 94
+CALL 110010@start
+IF WIN+R60 @randomammiesandrings126rew
+END
+
+@randomammiesandrings126female
+FIGHT 93, 93, 93, 93, 93, 93
+CALL 110010@start
+IF WIN+R60 @randomammiesandrings126rew
+END
+
+@randomammiesandrings126rew
+N: You found a Filtre d'Amour.
+GIVE I9
+SOUND FoundItem.wav
+END
+
+@randomammiesandrings127
+@randomammiesandrings128
+@randomammiesandrings129
+@randomammiesandrings130
+@randomammiesandrings131
+@randomammiesandrings132
+GOTO @randomammiesandrings3
+
+@randomammiesandrings133
+N: It's a trap!
+FIGHT 575, 575, 575, 575, 575, 575, 575
+CALL 110010@start
+IF LOSE|R50 @end
+N: You find a magical rice bag.
+WAIT 1.5
+COMPARE #<num.TrophyBagSlots>, 99
+IF> @randomammiesandrings133end
+N: You throw away your old trophy bad and greedily takes it.
+SET num.TrophyBagWidth, 10
+SET num.TrophyBagHeight, 10
+SET num.TrophyBagOpen, 1
+END
+
+@randomammiesandrings133end
+N: You would use it but you realize your trophy bag is larger.
+END
+
+@randomammiesandrings134
+FIGHT 52, 52, 52, 55, 55, 55, 68, 68, 68
+IF WIN @randomammiesandrings134win
+END
+
+@randomammiesandrings134win
+GOTO @rewardsnormalammyandrings
+
+@randomammiesandrings135
+FIGHT 219, 219, 219, 219, 219, 219, 219, 219
+IF WIN @randomammiesandrings135win
+END
+
+@randomammiesandrings135win
+GOTO @rewardsnormalammyandrings
+
+@randomammiesandrings136
+FIGHT 271, 271, 271, 271, 272, 272, 272
+IF WIN @randomammiesandrings136win
+END
+
+@randomammiesandrings136win
+GOTO @rewardsnormalammyandrings
+
+@randomammiesandrings137
+FIGHT 356, 356, 356, 356, 356, 356, 356, 356
+IF WIN @randomammiesandrings137win
+END
+
+@randomammiesandrings137win
+GOTO @rewardsnormalammyandrings
+
+@randomammiesandrings138
+COLOR 13
+COLOR 2013
+FIGHT 520, 520, 520, 520, 520, 520, 520, 520
+CALL 110010@start
+IF LOSE|R50 @end
+N: You find an Illusionist Hat.
+GIVE I1118
+SOUND FoundItem.wav
+END
+
+@randomammiesandrings139
+; Kotor
+GOTO @randomcitymain
+
+@randomammiesandrings140
+; Necro Palace
+GOTO @randomammiesandrings116
+
+@randomammiesandrings141
+FIGHT 337, 337, 337, 337, 339, 339, 337, 339
+IF WIN @randomammiesandrings141win
+END
+
+@randomammiesandrings141win
+N: You found a %I26.
+SOUND foundItem.wav
+GIVE I26
+END
+
+@randomammiesandrings142
+FIGHT 841, 841, 841, 841, 841, 841, 841
+IF WIN @randomammiesandrings142win
+END
+
+@randomammiesandrings142win
+N: You found a %I1175.
+SOUND foundItem.wav
+GIVE I1175
+END
+
+@randomammiesandrings143
+; archers
+END
+
+@randomammiesandrings144
+; Sadr. port
+END
+
+@randomammiesandrings145
+GOTO @randomammiesandrings95
+
+@randomammiesandrings146
+; Jungle
+END
+
+@randomammiesandrings147
+; Wizardry Academy
+GOTO @randomcitymain
+
+@randomammiesandrings148
+; Vending Area
+GOTO @randomcitymain
+
+@ammy1
+N: You found a %I609.
+GIVE I609
+SOUND FoundItem.wav
+END
+
+@ammy2
+N: You found an %I613.
+GIVE I613
+SOUND FoundItem.wav
+END
+
+@ammy3
+N: You found a %I617.
+GIVE I617
+SOUND FoundItem.wav
+END
+
+@ammy4
+N: You found a %I623.
+GIVE I623
+SOUND FoundItem.wav
+END
+
+@ammy5
+N: You found a %I627.
+GIVE I627
+SOUND FoundItem.wav
+END
+
+@ring1
+N: You found an %I588.
+GIVE I588
+SOUND FoundItem.wav
+END
+
+@ring2
+N: You found a %I590.
+GIVE I590
+SOUND FoundItem.wav
+END
+
+@ring3
+N: You found an %I592.
+GIVE I592
+SOUND FoundItem.wav
+END
+
+@ring4
+N: You found a %I594.
+GIVE I594
+SOUND FoundItem.wav
+END
+
+@ring5
+N: You found a %I596.
+GIVE I596
+SOUND FoundItem.wav
+END
+;
+;-------------------------------- Random events ---------------------------------------------
+;
+@randomtahamanrasepalace1
+ACTOR 1, Mehmet, human122, 1, 0, 95
+MOVE 1, 35, 95
+1: #<g.Cmister>! #<g.Cmister>!
+1: I have carpet shop by the palace.
+1: Come and have a look when you're done with what you have to do here.
+H: Maybe.
+END
+
+@randomtahamanrasepalace2
+ACTOR 1, Fethie, oriental4, 1, 0, 95
+ACTOR 2, Larisa, oriental4, 1, -8, 90
+MOVE 1, 110, 95
+MOVE 2, 110, 90
+1: Hello.
+END
+
+@randomtahamanrasepalace3
+ACTOR 1, Babak, oriental2, 1, 0, 90
+MOVE 1, 25, 90
+1: Hello, #<g.sir>.
+1: Nice to see foreigners in this palace again.
+END
+
+@randomtahamanrasepalace4
+ACTOR 1, Aisha, oriental7, 1, 25, 90
+1: Welcome, foreigner.
+1: Did someone offer you some tea?
+H: Err no, why?
+1: What a shame!
+1: Hussein!
+ACTOR 2, Hussein, human102, 1, -5, 90
+MOVE 2, 15, 95
+WAIT 1.8
+2: Efendim?
+1: Bring some tchai to our friend.
+2: Yes, Bayan Aisha.
+WAIT 1.3
+MOVE 2, -20, 90
+END
+
+@randomtahamanrasepalace5
+ACTOR 1, Guard, guard2, 1, 0, 90
+ACTOR 2, Guard, guard2, 1, -5, 95
+MOVE 1, 120, 90
+MOVE 2, 120, 95
+1: Hello, #<g.Cmister>.
+END
+
+@randomtahamanrasepalace6
+ACTOR 1, Beggar, human129, 1, 25, 90
+1: Any toman to spare with a poor old man, #<g.mylord>?
+WAIT 2.2
+@randomtahamanrasepalace6menu
+SOUND sword1.wav
+MENU "Let me see if I have some change=@randomtahamanrasepalace6give", "No, sorry=@randomtahamanrasepalace6no"
+GOTO @randomtahamanrasepalace6menu
+
+@randomtahamanrasepalace6give
+SOUND sword1.wav
+IF -G1 @randomtahamanrasepalace6poor
+H: Take this.
+WAIT 1
+N: You give him one toman.
+WAIT 0.7
+SOUND kaching.wav
+HOST_TAKE G1
+1: Thank you very much, #<g.mylord>.
+END
+
+@randomtahamanrasepalace6poor
+H: I'd like to give you something but I don't have a single toman on me, sorry.
+END
+
+@randomtahamanrasepalace6no
+SOUND sword1.wav
+H: No, sorry.
+END
+
+@randomtahamanrasepalace7
+ACTOR 1, Hussein, human102, 1, 100, 90
+MOVE 1, -20, 90
+WAIT 0.6
+1: Excuse me, #<g.Cmister>.
+1: The narghile of the Sultan.
+END
+
+@randomtahamanrasepalace8
+ACTOR 1, Hussein, human102, 1, 0, 90
+MOVE 1, 120, 90
+WAIT 0.6
+1: Bah, he is never satisfied.
+1: "Orange taste", he wants.
+1: He could have said that earlier...
+END
+
+@randomtahamanrasepalace9
+ACTOR 1, Priest, oriental2, 1, 100,  90
+MOVE 1, -20, 90
+WAIT 1
+1: Excuse me, I have an interview with the Sultan.
+END
+
+@randomtahamanrasepalace10
+ACTOR 1, Kid, kid8, 1, 100, 86
+ACTOR 2, Kid, kid10, 1, 106, 80
+ACTOR 3, Kid, kid9, 1, 115, 90
+MOVE 1, 60, 86
+MOVE 2, 66, 80
+MOVE 3, 75, 90
+1: #<g.Cmister>! #<g.Cmister>!
+2: Money! Money!
+H: Scat!
+3: Candy, #<g.Cmister>, candy!
+H: Damn kids!
+END
+
+@randombattleQueek
+IF I1088 @randomammiesandrings0
+STRCMP #<str.soul, "SOUL 1893"
+IF> @randomammiesandrings0
+IF< @randomammiesandrings0
+ACTOR 1, Mouse, 234, 1, 45, 85
+POSE 1, 4
+ACTOR 2, Mouse, 234, 1, 35, 90
+POSE 1, 4
+ACTOR 3, Mouse, 234, 1, 30, 83
+POSE 1, 4
+1: A mouse killer!
+H: What are thou talking about, ridiculous creature?
+2: A mouse killer!
+3: You're a mouse killer!
+H: Thou are definitely stupid, meh think.
+H: I don't kill mouses, I've even made a world about mouses.
+H: Err... rats.
+H: Err... Sk... Sk... SKAVENS that is!
+1: A mouse killer!
+1: Help guys!
+WAIT 1.2
+MOVE 1, 120, 90, 1
+MOVE 2, 120, 90, 1
+MOVE 3, 120, 90, 1
+FIGHT 393.45.85, 393.35.90, 393.30.83, 393, 393, 393, 393, 393, 393, 393
+CALL 110010@start
+IF WIN @randombattleQueekReward
+H: Not funny that is!
+H: I'll be back, meh say!
+END
+
+@randombattleQueekReward
+H: Stupid little thingies!
+N: You found a Ratapult!
+SOUND foundItem.wav
+HOST_GIVE I1088
+ACTOR 1, Mad, "-  -   Mad", 4, 0, 90
+MOVE 1, 35, 90
+WAIT 2
+1: And my gobo town, bitch!
+ACTOR 2, "Mr Penguin", 183, 1, 100, 85
+POSE 1, 4
+MOVE 2, 25, 85
+WAIT 1
+2: Shut up, da cat!
+1: Fine, Mr Penguin.
+END
+
+@randombattle1
+FIGHT 372, 291, 291, 291, 291, 291, 291, 291, 291, 291, 291, 291, 291, 291, 291, 291, 291, 291, 291
+IF WIN @rewardrandombattle1
+END
+
+@rewardrandombattle1
+IF R50 @rewardrandombattle1ring
+END
+
+@rewardrandombattle1ring
+N: You kill the flies and see them dropping a ring.
+IF R 33 @rewardrandombattle1ring2
+GIVE I588
+SOUND FoundItem.wav
+END
+
+@rewardrandombattle1
+GIVE I590
+SOUND FoundItem.wav
+END
+
+
+@randomcity1
+;balanced fight
+ACTOR 1, Bandit, human16, 1, 45, 90
+1: Hello, traveller
+1: You can choose : your money or your life!
+WAIT 2
+@randomcity1menu
+SOUND sword1.wav
+MENU "Give your purse =@takemoneyrc1", "Refuse =@refuserc1"
+GOTO @randomcity1menu
+
+@refuserc1
+SOUND sword1.wav
+H: Go away, moron!
+1: Fine.
+WAIT 1.2
+MOVE 1, -20, 90, 1
+IF V65 @refuserc11
+IF V50 @refuserc12
+IF V30 @refuserc13
+IF V15 @refuserc14
+FIGHT 373.45.90
+CALL 110010@start
+IF WIN @rewardrc1
+GOTO @LOSErec1
+
+@refuserc11
+FIGHT 374.45.90
+CALL 110010@start
+IF WIN @rewardrc1
+GOTO @LOSErec1
+
+@refuserc12
+FIGHT 375.45.90
+CALL 110010@start
+IF WIN @rewardrc1
+GOTO @LOSErec1
+
+@refuserc13
+FIGHT 376.45.90
+CALL 110010@start
+IF WIN @rewardrc1
+GOTO @LOSErec1
+
+@refuserc14
+FIGHT 135.45.90
+CALL 110010@start
+IF WIN @rewardrc1
+GOTO @LOSErec1
+
+@rewardrc1
+N: You kill him and find 2000 Tomans on his body.
+HOST_GIVE G2000
+END
+
+@takemoneyrc1
+SOUND sword1.wav
+1: Hehe! Wise choice!
+TAKE G1000000
+N: He takes your purse.
+1: Bye, loser!
+MOVE 1, -20, 90
+END
+
+@LOSErec1
+MOVE 1, 20, 90
+1: I told you...
+TAKE G1000000
+N: He takes the gold on your dead body.
+END
+
+
+@randomcity2
+ACTOR 1, Job, human6, 1, 45, 90
+1: I have seen it! I have seen it!
+1: The fly king! I have seen it!
+1: I was told that it drops a rare ring.
+1: But be very careful if you feel like hunting it : it carries lots of flies with it!
+END
+
+
+@randomforest1
+;fight 3 lvl 50
+ACTOR 1, , 605, 1, 28, 83
+SEL 1
+POSE 4, 3
+ACTOR 2, , 605, 1, 30, 98
+SEL 2
+POSE 1, 2
+ACTOR 3, , 605, 1, 42, 85
+FACE 3, 0
+SEL 3, POSE 1, 4
+ACTOR 4, Corpse, human20, 0, 38, 93
+SEL 20
+POSE 0
+1: Hurry guys, someone may come!
+1: We gotta burry this little idiot!
+WAIT 1
+H:hmm?
+H: Err... What are you doing?!
+FACE 3, 1
+3: Who? Us?
+FACE 3, 0
+WAIT 0.5
+FACE 3, 1
+2: <cough>
+1: Kazaaaaa!!!
+WAIT 2.2
+MOVE 1, -35, 90, 1
+MOVE 2, -25, 85, 1
+MOVE 3, -20, 95, 1
+FIGHT2 377.28.83, 377.30.98, 377.42.85
+IF WIN @LOSErf1
+MOVE 1, 25, 90
+MOVE 2, 35, 85
+MOVE 3, 40, 95
+WAIT 2
+3: Bah, that's one more corpse to bury...
+3: Let's hurry up!
+END
+
+@LOSErf1
+N: You kill them and find 5000 #<GP.name> on the corpses.
+GIVE G5000
+END
+
+
+@randomcity3
+SET temp.tavern, "-7X24-7X25-10X11-12X13-18X13-19X6-36X10-40X13-41X3-42X5-"
+STRSTR #<temp.tavern>, "-#<num.mapNum>X#<num.closestLink>-"
+IF> @randomcity3start
+GOTO @randomcity4
+
+@randomcity3start
+ACTOR 1, Boozer, human27, 1, 25, 90
+1: Hello #<g.mylord>!
+1: <hic>
+1: Any gold to spare?
+1: <hic>
+END
+
+
+@randomforest2
+;fight level 35, not mandatory
+ACTOR 1, Archer, human29, 1, 20, 90
+ACTOR 2, Kid, human43, 1, 80, 90
+FACE 2, 0
+1: Hey guy!
+1: Wanna bet that I can stick an arrow on an apple on the head of my kid?
+1: 1000 #<GP.name> that I can do it!
+WAIT 2
+@rf2menu1
+SOUND sword1.wav
+MENU "Bet=@rf21", "Don't bet=@refuserf21"
+GOTO @rf2menu1
+
+@refuserf21
+SOUND sword1.wav
+1: Are you sure?
+WAIT 1.5
+@rf2menu2
+SOUND sword1.wav
+MENU "Yes I am=@refuse2rf2", "I bet=@rf21"
+GOTO @rf2menu2
+
+@refuse2rf2
+SOUND sword1.wav
+1: Bah!
+1: Goodbye
+1: Come, Ted
+MOVE 1, -20, 90
+MOVE 2, -20, 90
+END
+
+@rf21
+SOUND sword1.wav
+IF -G1000 @poorrf2
+SEL 1
+POSE 2
+SOUND bow.wav
+ACTOR 3, , 602, 0, 20, 90
+MOVE 3, 80, 85, 4
+IF R50 @failrf2
+WAIT 1
+MOVE 3, 456, 456, 1
+SEL 2
+POSE 2
+1: Hehe!
+1: I told you!
+2: Bravo Daddy!
+1: My money now!
+WAIT 1.3
+@rf2menu3
+MENU "Give the money=@giverf2", "Don't give it =@keeprf2"
+GOTO @rf2menu3
+
+@giverf2
+HOST_TAKE G1000
+H: OK, here you go.
+SOUND kaching.wav
+1: Thanks.
+1: Let's go, Ted!
+WAIT 0.5
+MOVE 1, -20, 90
+MOVE 2, -20, 90
+END
+
+@keeprf2
+H: In your dreams!
+1: What?!
+1: Ted, go away!
+MOVE 2, 120, 90
+MOVE 1, -20, 90, 1
+FIGHT 378.20.90
+CALL 110010@start
+IF WIN @endrf2
+1: Idiot!
+TAKE G2000
+N: He takes 2000 #<GP.name> on your corpse.
+END
+
+@endrf2
+H: Bah!
+N: You find 1500 #<GP.name> on the corpse of the archer.
+END
+
+@poorrf2
+H: Err wait!
+H: I'd like to but I can't afford it.
+1: So... goodbye!
+END
+
+@failrf2
+MOVE 3, 120, 90, 1
+SEL 2
+POSE 3
+SOUND pain2.wav
+WAIT 1
+SEL 2
+POSE 4
+1: Oh my God!
+MOVE 1, 75, 90
+1: Ted!
+1: My son!
+1: I've killed my son!
+WAIT 1.8
+@menusqdsqrf2
+SOUND sword1.wav
+MENU "Ask for your money=@askrf2", "Don't ask=@dontrf2"
+GOTO @menusqdsqrf2
+
+@askrf2
+SOUND sword1.wav
+H: My money please!
+1: My son!
+1: My son is dead!
+WAIT 1.8
+@menuskqlsdfqrf2
+SOUND sword1.wav
+MENU "Insist=@insistrf2", "Don't insist=@dontrf2"
+GOTO @menuskqlsdfqrf2
+
+@insistrf2
+SOUND sword1.wav
+H: Hey, man, I don't give a f***!
+H: Dead or alive, I want my money! Right now!
+1: My son has just died and you are insulting him!
+1: Bastard!
+WAIT 1
+MOVE 1, -20, 90, 1
+FIGHT2 378.75.90
+IF WIN @insist2rf2
+END
+
+@insist2rf2
+N: You kill him and find 1200 #<GP.name> in his purse.
+SOUND kaching.wav
+HOST_GIVE G1200
+END
+
+@dontrf2
+SOUND sword1.wav
+H: Well I'd better leave him alone.
+WAIT 2.5
+GOTO EXIT
+
+
+@randombattle2
+;balanced fight
+IF V80 @fight1rb2
+IF V50 @fight2rb2
+IF V30 @fight3rb2
+FIGHT 265, 265, 265, 265, 265, 265, 265, 265
+CALL 110010@start
+IF WIN @rewardrb2
+END
+
+@fight1rb2
+FIGHT2 284, 284, 287, 287, 287, 287, 287
+IF WIN @rewardrb2
+END
+
+@fight2rb2
+FIGHT2 287, 287, 265, 265, 265, 265, 265
+IF WIN @rewardrb2
+END
+
+@fight3rb2
+FIGHT2 287, 265, 265, 265, 265
+IF WIN @rewardrb2
+END
+
+@rewardrb2
+N: You kill the wolves and find an amulet
+IF I613+I617+I623+I627+I609 @reward2rb2
+IF I613+I617+I623+I609 @ammy5rb2
+IF I613+I617+I609 @ammy4rb2
+IF I609+I613 @ammy3rb2
+GIVE I609
+SOUND FoundItem.wav
+END
+
+@ammy4rb2
+GIVE I623
+SOUND FoundItem.wav
+END
+
+@ammy5rb2
+GIVE I627
+SOUND FoundItem.wav
+END
+
+@ammy3rb2
+GIVE I613
+SOUND FoundItem.wav
+END
+
+@reward2rb2
+IF R20 @ammy5rb2
+IF R40 @ammy4rb2
+IF R60 @ammy3rb2
+IF R80 @reward2rb2
+GIVE I609
+SOUND FoundItem.wav
+END
+
+
+@randomforest3
+;balanced fight
+IF V80 @fight1rf3
+IF V50 @fight2rf3
+IF V30 @fight3rf3
+FIGHT 272, 272, 272, 272, 272
+CALL 110010@start
+IF WIN @rewardrf3
+END
+
+@fight1rf3
+FIGHT2 272, 272, 272, 272, 272, 272, 272, 272, 272, 272, 272, 272, 272, 272, 272, 272, 272, 272, 272, 272
+IF WIN @rewardrf3
+END
+
+@fight2rf3
+FIGHT2  272, 272, 272, 272, 272, 272, 272, 272, 272, 272, 272, 272, 272, 272, 272
+IF WIN @rewardrf3
+END
+
+@fight3rf3
+FIGHT2 272, 272, 272, 272, 272, 272, 272, 272, 272, 272
+IF WIN @rewardrf3
+END
+
+@rewardrf3
+N: You kill the wolves and find an amulet
+IF I613+I617+I623+I627+I609 @reward2rf3
+IF I613+I617+I623+I609 @ammy5rf3
+IF I613+I617+I609 @ammy4rf3
+IF I609+I613 @ammy3rf3
+GIVE I609
+SOUND FoundItem.wav
+END
+
+@ammy4rf3
+GIVE I623
+SOUND FoundItem.wav
+END
+
+@ammy5rf3
+GIVE I627
+SOUND FoundItem.wav
+END
+
+@ammy3rf3
+GIVE I613
+SOUND FoundItem.wav
+END
+
+@reward2rf3
+IF R20 @ammy5rf3
+IF R40 @ammy4rf3
+IF R60 @ammy3rf3
+IF R80 @reward2rf3
+GIVE I609
+SOUND FoundItem.wav
+END
+
+
+@randomcity4
+ACTOR 1, "Old Jack", human92, 1, 45, 95
+1: I've dropped my glasses and I can't find them again.
+1: Could you help me?
+1: I can't see...
+WAIT 1.6
+@menu1rc4
+SOUND sword1.wav
+MENU "Bring up the glasses=@giverc4", "Ignore him and go away=@gorc4", "Crush the glasses=@fuckrc4"
+GOTO @menu1rc4
+
+@giverc4
+SOUND sword1.wav
+H: Sure.
+H: They are here.
+1: Oh, thank you so much.
+END
+
+@gorc4
+SOUND sword1.wav
+H: Sorry, I am in a hurry.
+WAIT 1.5
+GOTO EXIT
+
+@fuckrc4
+SOUND sword1.wav
+SOUND crash1.wav
+H: F*** off!
+1: My glasses!
+1: Be cursed!
+MOVE 1, -20, 95
+END
+
+
+@randomforest4
+IF -V65 @randomforest5
+ACTOR 1, , human111, 1, 70, 90
+FACE 1, 0
+ACTOR 2, , 90, 1, 50, 99
+SEL 2
+POSE 1, 4, 3
+ACTOR 3, , 90, 1, 45, 95
+SEL 3
+POSE 1, 4, 3
+ACTOR 4, , 90, 1, 40, 90
+SEL 4
+POSE 1, 4, 3
+ACTOR 5, , 90, 1, 35, 92
+SEL 5
+POSE 1, 4, 3
+ACTOR 6, , 90, 1, 38, 97
+SEL 6
+POSE 1, 4, 3
+1: Help! Help!
+WAIT 1
+MOVE 2, -20, 90, 1
+MOVE 3, -20, 90, 1
+MOVE 4, -20, 90, 1
+MOVE 5, -20, 90, 1
+MOVE 6, -20, 90, 1
+MOVE 1, 120, 90
+FIGHT 287.50.99, 287.45.95, 287.40.90, 287.35.92, 287.38.97
+CALL 110010@start
+END
+
+
+@randomforest5
+IF -V50 @randomforest6
+ACTOR 1, , human119, 1,  -20, 90
+MOVE 1, 90, 90, 2
+WAIT 1
+1: Help!
+FIGHT2 362
+FACE 1, 0
+IF WIN @winrf5
+END
+
+@winrf5
+1: Thank you, hero.
+1: I'd be dead if you hadn't arrived.
+END
+
+
+@randomforest6
+IF R60 @fight
+H: What's this?
+H: An alicantoes!
+H: Hehe, I am lucky today!
+HOST_GIVE I102
+SOUND FoundItem.wav
+END
+
+
+@randomcity5
+SET temp.tavern, "-7X24-7X25-10X11-12X13-18X13-19X6-36X10-40X13-41X3-42X5-"
+STRSTR #<temp.tavern>, "-#<num.mapNum>X#<num.closestLink>-"
+IF> @randomcity5start
+GOTO @randomcity6
+
+@randomcity5start
+ACTOR 1, Boozer, human130, 1, 50, 90
+ACTOR 2, , 104, 0, 55, 87
+MOVE 2, 64, 85, 2
+SOUND lowlife.wav
+WAIT O.7
+MOVE 2, 120, 90, 1
+1: Oops
+1: Sorry
+1: hic
+MOVE 1, -20, 90
+WAIT 0.5
+@menu1rc5
+SOUND sword1.wav
+MENU "Let him go=@gorc5", "Kill him=@killrc5"
+GOTO @menu1rc5
+
+@gorc5
+SOUND sword1.wav
+MOVE 1, -20, 90
+H: Idiot!
+SOUND lowlife.wav
+1: burp
+END
+
+@killrc5
+SOUND sword1.wav
+H: Come here, bastard!
+MOVE 1, -20, 90, 1
+FIGHT 137.50.90
+CALL 110010@start
+END
+
+
+@randomforest7
+ACTOR 1, Lumberer, human66, 1, 40, 90
+ACTOR 2, , human66, 0, 25, 90
+1: You've come just at the right time!
+1: Could you help me with carrying those trunks to my house, please?
+WAIT 1.8
+@menu1rf7
+SOUND sword1.wav
+MENU "Sure=@surerf7", "Sorry I am busy=@busyrf7"
+GOTO @menu1rf7
+
+@surerf7
+SOUND sword1.wav
+H: Sure!
+H: Let's go!
+1: Thanks!
+N: You help him and carry and carry the trunks to his house.
+MOVE 1, 20, 90
+WAIT 4
+GOTO SCENE 23473829020475
+
+@busyrf7
+SOUND sword1.wav
+H: Sorry I am busy!
+1: That's all!
+1: Have a good day!
+END
+
+
+@randomcity6
+SET temp.tavern, "-7X24-7X25-10X11-12X13-18X13-19X6-36X10-40X13-41X3-42X5-"
+STRSTR #<temp.tavern>, "-#<num.mapNum>X#<num.closestLink>-"
+IF> @randomcity6start
+GOTO @randomcity7
+@randomcity6start
+ACTOR 1, Boozer, human120, 1, 25, 90
+1: #<g.sir>! #<g.sir>!
+1: Would you offer me a drink?
+WAIT 1.5
+@menu1rc6
+SOUND sword1.wav
+MENU "OK=@okrc6", "Go away=@gorc6"
+GOTO @menu1rc6
+
+@okrc6
+SOUND sword1.wav
+H: Take this coin!
+HOST_TAKE G1
+SOUND kaching.wav
+1: Thank you, #<g.sir>!
+1: <hic>!
+MOVE 1, -20, 90
+END
+
+@gorc6
+SOUND sword1.wav
+H: No.
+H: And you should quit drinking.
+1: Oh please!
+1: Look : I sell you this ring!
+1: It is priceless!
+1: I'll sell it for 10000 #<GP.name>
+1: <hic>
+1: Please!
+WAIT 1
+IF T115 @menu3rc6
+@menu2rc6
+SOUND sword1.wav
+MENU "Sounds good=@goodrc6", "I've said : go away!=@toldrc6"
+GOTO @menu2rc6
+
+@toldrc6
+SOUND sword1.wav
+H: I've said : go away!
+H: Good bye!
+WAIT 2
+GOTO EXIT
+
+@menu3rc6
+SOUND sword1.wav
+MENU "Sounds good=@goodrc6", "Don't waste your time=@dontrc6"
+GOTO @menu3rc6
+
+@dontrc6
+SOUND sword1.wav
+H: Don't waste your time, I know the swindle.
+H: Good bye!
+WAIT 2
+GOTO EXIT
+
+@goodrc6
+SOUND sword1.wav
+IF -G10000 @poorrc6
+H: Sounds good
+H: Here is the money
+HOST_TAKE G10000
+SOUND kaching.wav
+IF R50 @magicrc6
+1: And here is the ring.
+1: <hic>!
+HOST_GIVE I138
+SOUND FoundItem.wav
+HOST_GIVE T115
+1: Thanks, and goodbye!
+1: Hehe1
+MOVE 1, -20, 90, 2
+END
+
+@poorrc6
+H: I'd like to but I can't afford it.
+H: I don't have this money.
+1: Bah!
+1: Goodbye then!
+MOVE 1, -20, 90
+END
+@magicrc6
+1: ...and here is the ring.
+1: <hic>!
+HOST_GIVE I594
+1: Thanks and goodbye!
+MOVE 1, -20, 90
+END
+
+
+@randomforest8
+ACTOR 1, Merchant, human44, 1, 25, 95
+1: Hello, traveller.
+1: Are you going to cross the forest?
+WAIT 1.8
+@menu1rf8
+SOUND sword1.wav
+MENU "Yes, why?=@yesrf8", "I am busy=@busyrf8"
+GOTO @menu1rf8
+
+@busyrf8
+SOUND sword1.wav
+H: I am busy.
+H: Goodbye!
+WAIT 1.2
+GOTO EXIT
+
+@yesrf8
+SOUND sword1.wav
+H: Yes, why?
+1: Maybe we could travel together.
+1: There are highwaymen in these woods.
+1: I'll give you a tip if you escort me.
+1: Sounds good?
+WAIT 1.6
+@menu2rf8
+SOUND sword1.wav
+MENU "OK, let's go=@okrf8", "No, I travel alone=@alonerf8"
+GOTO @menu2rf8
+
+@alonerf8
+SOUND sword1.wav
+H: No, I travel alone.
+H: Bye!
+WAIT 1
+GOTO EXIT
+
+@okrf8
+SOUND sword1.wav
+H: OK, let's go.
+1: Great!
+N: You set off.
+WAIT 2
+GOTO SCENE 48392038575849
+
+@randomcity7 ;--------------------------------------------- only in the DESERT
+IF -#68 @randomcity8
+ACTOR 1, Merchant, oriental6, 1, 45, 90
+1: Efendim! Efendim!
+1: Can I show you my carpets, #<g.Cmister>?
+1: They are cheap!
+WAIT 1
+@menu1rc7
+SOUND sword1.wav
+MENU "Show=@showrc7", "Ignore him=@ignorerc7"
+GOTO @menu1rc7
+
+@ignorerc7
+SOUND sword1.wav
+H: I'm not interested, thanks and goodbye!
+GOTO @againrc7
+
+@showrc7
+SOUND sword1.wav
+1: Look at this one!
+ACTOR 2, , 14, 0, 30, 100
+1: Beautiful, very beautiful!
+1: And very cheap!
+1: Only 50 000 #<GP.name>
+1: And you can pay in zollars, or nevros, or with credit card!
+1: Errrrr...
+1: No, not with a credit card!
+1: -_-;
+1: Do you like it?
+WAIT 1
+@menu2rc7
+SOUND sword1.wav
+MENU "Yes I do=@dorc7", "Your carpets are too expensive=@expensiverc7"
+GOTO @menu2rc7
+
+@dorc7
+SOUND sword1.wav
+IF -G50000 @poorrc7
+H: OK, I buy this one.
+1: Great!
+HOST_TAKE G50000
+SOUND FoundItem.wav
+HOST_GIVE I139
+SET carpetseller, 0
+1: Thank you!
+1: Have a good day!
+END
+
+@poorrc7
+H: I'd like to buy one but I can't afford it.
+H: Sorry, but your carpets are way too expensive for me.
+GOTO @againrc7
+
+@expensiverc7
+SOUND sword1.wav
+H: No way!
+H: Your carpets are too expensive!
+H: Goodbye!
+GOTO @againrc7
+
+@againrc7
+1: Come on, #<g.mister>!
+1: Look, this one is cheap!
+1: Good price for you my friend!
+H: Goodbye!
+SET carpetseller, %R4
+ADD carpetseller, 2
+WAIT 1
+GOTO EXIT
+
+@carpetsellerrc7
+SUB carpetseller, 1
+ACTOR 1, Merchant, oriental6, 1, 25, 90
+1: Come on, #<g.mister>!
+1: My carpets are very cheap!
+1: Only 50 000 #<GP.name>!
+WAIT 1.3
+@menu4rc7
+SOUND sword1.wav
+MENU "Buy a carpet=@dorc7", "Goodbye=@byerc7"
+GOTO @emnu4rc7
+
+@byerc7
+SOUND sword1.wav
+H: Goodbye!
+WAIT 1
+GOTO EXIT
+
+@randomcity8
+ACTOR 1, Jenny, kid6, 1, 45, 95
+1: Hello, #<g.sir>!
+1: Do you have a candy for me?
+1: Or a penny?
+WAIT 1.2
+IF Z588+I140-T620 @menu3rc8
+IF Z588-T620 @menu4rc8
+IF I140 @menu2rc8
+@menu1rc8
+SOUND sword1.wav
+MENU "Toss a penny=@pennygiverc8", "Don't give=@gorc8"
+GOTO @menu1rc8
+
+@pennygiverc8
+SOUND sword1.wav
+HOST_TAKE G1
+SOUND kaching.wav
+1: Oh, thank you so much!
+WAIT 2
+MOVE 1, -20, 99
+END
+
+@gorc8
+SOUND sword1.wav
+H: No I don't!
+WAIT 1.5
+GOTO EXIT
+
+@menu2rc8
+SOUND sword1.wav
+MENU "Toss a candy=@candyrc8", "Toss a penny=@pennygiverc8", "Go away=@gorc8"
+GOTO @menu2rc8
+
+@menu3rc8
+SOUND sword1.wav
+MENU "Give a doll=@dollrc8",  "Toss a candy=@candyrc8", "Toss a penny=@pennygiverc8", "Go away=@gorc8"
+GOTO @menu2rc8
+
+@menu4rc8
+SOUND sword1.wav
+MENU "Give a doll=@dollrc8", "Toss a penny=@pennygiverc8", "Go away=@gorc8"
+GOTO @menu2rc8
+
+@dollrc8
+COMPARE #<fight.jennyRiceBagDoll>, 2
+IF= @ricebagdollrewardrc8
+H: No but I have a doll for you!
+1: Great!
+1: Thanks, #<g.sir>!
+HOST_TAKE Z588
+ADD fight.jennyRiceBagDoll, 1
+MOVE 1, -20, 120
+END
+
+@ricebagdollrewardrc8
+H: No but I have a doll for you!
+1: Thanks, #<g.sir>!
+1: Please, take this candy!
+H: Err... Thanks!
+HOST_GIVE I71
+SOUND FounfItem.wav
+HOST_GIVE T620
+HOST_TAKE Z588
+SET fight.jennyRiceBagDoll, ""
+END
+
+@candyrc8
+SOUND sword1.wav
+H: Yes I do!
+HOST_TAKE I140
+1: Thank you, #<g.sir>!
+WAIT 2
+MOVE 1, -20, 90
+WAIT 1
+H: Ah... Kids!
+END
+
+
+@randomcity9
+ACTOR 1, Knight, human2, 1, 40, 95
+1: Hey, you!
+1: Do you know where I could find a good helmet in this bloody town?
+WAIT 2.5
+@menu1rc9
+SOUND sword1.wav
+MENU "Yes I do=@dorc9", "No I don't=@norc9"
+GOTO @menu1rc9
+
+@dorc9
+SOUND sword1.wav
+H: Yes I do.
+H: There is a good armory off the main street.
+1: Oh, OK.
+1: Thank you, #<g.boy>.
+1: Take this.
+SOUND kaching.wav
+HOST_GIVE G1
+WAIT 1
+MOVE 1, 120, 99
+END
+
+@norc9
+SOUND sword1.wav
+H: No I don't.
+1: grrmmbbl!
+MOE 1, 120, 99
+END
+
+
+@randombattle4
+IF -V20 @randombattle5
+IF -V40 @fight2rb4
+IF -V60 @fight3rb4
+IF -V80 @fight4rb4
+FIGHT2 294, 294, 294, 294, 294, 1013, 304, 304, 398
+IF WIN+R50 @ammyrb4
+END
+
+@fight2rb4
+FIGHT 294, 294, 294, 294
+CALL 110010@start
+IF WIN+R50 @ammyrb4
+END
+
+@fight3rb4
+FIGHT 194, 194, 194, 304
+CALL 110010@start
+IF WIN+R50 @ammyrb4
+END
+
+@fight4rb4
+FIGHT 294, 294, 294, 304, 398
+CALL 110010@start
+IF WIN+R50 @ammyrb4
+END
+
+@ammyrb4
+IF R2 @1ammyrb4	
+IF R2 @2ammyrb4	
+IF R2 @3ammyrb4	
+IF R2 @4ammyrb4	
+IF R2 @5ammyrb4	
+GOTO @ammyrb4
+
+@1ammyrb4
+GIVE I609
+N: You found a %I609.
+SOUND FoundItem.wav
+END
+
+@2ammyrb4
+GIVE I613
+N: You found an %I613.
+SOUND FoundItem.wav
+END
+
+@3ammyrb4
+GIVE I617
+N: You found a %I617.
+SOUND FoundItem.wav
+END
+
+@4ammyrb4
+GIVE I623
+N: You found a %I623.
+SOUND FoundItem.wav
+END
+
+@5ammyrb4
+GIVE I627
+N: You found a %I627.
+SOUND FoundItem.wav
+END
+
+
+@randombattle5
+IF -V40 @randombattle6
+IF -V60 @fight3rb5
+IF -V80 @fight4rb5
+FIGHT 298, 298, 298, 298, 298, 290, 299
+CALL 110010@start
+IF WIN+R50 @ammyrb4
+END
+
+@fight3rb5
+FIGHT 298, 298, 298, 290
+CALL 110010@start
+IF WIN+R50 @ammyrb4
+END
+
+@fight4rb5
+FIGHT 298, 298, 298, 298, 298, 290, 290
+CALL 110010@start
+IF WIN+R50 @ammyrb4
+END
+
+
+@randomcity10
+THEME 23
+ACTOR 1, Storyteller, human52, 1, 47, 80
+IF #10 @dwarfrc10
+IF #12 @gnomerc10
+IF #13 @elfrc10
+ACTOR 2, , human1, 1, 20, 90
+ACTOR 3, , human6, 1, 28, 95
+ACTOR 4, , kid1, 1, 40, 93
+ACTOR 5, , human8, 1, 50, 92
+FACE 5, 0
+ACTOR 6, , human27, 1, 57, 97
+FACE 6, 0
+ACTOR 7, , kid8, 1, 68, 95
+FACE 7, 0
+ACTOR 8, , human28, 1, 80, 99
+FACE 9, 0
+@speachrc10
+1: Oyez! Oyez the story of the nine dark paladins of Athelias!
+1: Athelias was once a peaceful island, prosperous, and trading with the other realms of Gaia.
+1: People were happy and could live and die in peace.
+1: But a rumor started going round from the northern lands.
+1: A new form of life had appeared ; those creatures worshiped gods, unknown until then : Gods of Chaos.
+1: They quickly invaded most of the countries of the continent, raiding the cities and corrupting everything.
+1: Further they were going, and more their number was increasing, for the human heart is weak and easily corrupted.
+1: Many joined the chaos armies.
+1: Athelias isolated itself from the continent.
+1: But that was not enough to save the island.
+1: The chaos forces launched on Athelias the so-called first invasion.
+1: And the cities felt, one by one : Arkhangal, Athalantis, Irezar...
+1: King Argoz united then the many towns and cities and the armies of the four races of Athelias walked together to the battlefield under his banner.
+1: And Argoz's army ended up with gaining the victory.
+1: They only had to take back Arkhangal and the victory would have been total.
+1: The ten greatest heroes of Athelias were then chosen to infiltrate the city and lead the final offensive.
+1: Nobody knows what happened there.
+1: But the Chaos succeeded in corrupting their mind.
+1: Only Tenisan, the priest of the company, knew how to resist.
+1: During several centuries the nine dark paladins terrorized the South of the country.
+1: But their alliance broke and they split up.
+1: It is said that when the nine dark paladins will wake up and gather again, Athelias will be stuck by disaster.
+1: What happened in the days of yore is nothing compared to what would happen if they gathered again, for their power never stopped growing up during the centuries...
+1: May the gods preserve us from such a disaster!
+END
+
+@dwarfrc10
+ACTOR 2, , dwarf3, 1, 20, 90
+ACTOR 3, , dwarf4, 1, 28, 95
+ACTOR 4, , dwarf5, 1, 40, 93
+ACTOR 5, , dwarf6, 1, 50, 92
+ACTOR 6, , dwarf10, 1, 57, 97
+ACTOR 7, , dwarf4, 1, 68, 95
+ACTOR 8, , dwarf6, 1, 80, 99
+GOTO @speachrc10
+
+@gnomerc10
+ACTOR 2, , gnome3, 1, 20, 90
+ACTOR 3, , gnome5, 1, 28, 95
+ACTOR 4, , gnome6, 1, 40, 93
+ACTOR 5, , gnome7, 1, 50, 92
+ACTOR 6, , gnome8, 1, 57, 97
+ACTOR 7, , gnome3, 1, 68, 95
+ACTOR 8, , gnome10, 1, 80, 99
+ACTOR 9, , gnome1, 0, 75, 90
+GOTO @speachrc10
+
+@elfrc10
+ACTOR 2, , elf1, 1, 20, 90
+ACTOR 3, , elf2, 1, 28, 95
+ACTOR 4, , elf3, 1, 40, 93
+ACTOR 5, , elf8, 1, 50, 92
+ACTOR 6, , elf9, 1, 57, 97
+ACTOR 7, , elf10, 1, 68, 95
+ACTOR 8, , elf13, 1, 80, 99
+GOTO @speachrc10
+
+@randomcity11
+ACTOR 1, Fillip, human119, 1, 38, 95
+1: Hello, adventurer!
+1: Have you heard the news?
+H: What happened?
+1: Sir Derangon is dead!
+1: He ventured into the goblins cave to fight the basilic that haunts the place but he failed.
+1: I wonder if someone would dare go there to get back the magical amulet he had...
+GIVE T596
+END
+
+@randomcity12
+GOTO SCENE 21
+
+@randomcity13
+ACTOR 1, Telmak, human77, 1, 35, 95
+1: ...If only someone could find those crystals again...
+H: What are you talking about?
+1: The Warp Crystals.
+H: Pardon?
+1: Centuries ago, humans, elves, dwarves and gnomes forged magical crystals to seal their alliance.
+1: Thanks to their power, their owners could travel through the warp from a city to another.
+1: But the stones are now lost and the passages through the warp can no longer be used.
+H: Interesting story...
+END
+
+@randomcity14
+ACTOR 1, "Blind Jack", human0, 1, 40, 90
+POSE 1, 4
+1: Pardon, #<g.sir>, do you know where the library is?
+H: Err, yes I do but I don't think there is something for... a blind man.
+1: Pfft.
+MOVE 1, -25, 100
+END
+
+@randomcity15
+ACTOR 1, "Blind Jack", human0, 1, 40, 90
+POSE 1, 4
+ACTOR 2, Bandit, human119, 1, 75, 95
+FACE 2, 0
+2: Don't make a fuss, dude.
+2: Give me your money and you'll stay alive.
+1: Birdy, attack!
+WAIT 2
+MOVE 1, 200, 90, 1
+MOVE 2, 200, 90, 1
+FLAGS 1152
+FIGHT -854.40.90, 784.75.95
+FLAGS 0
+H: <Cough>
+END
+
+@randmerch1
+GOTO @randomcitymain
+
+@randmerch2
+GOTO @randomcitymain
+
+@randmerch3
+SET temp.label, 3
+GOTO @randomcitymain
+
+@randmerch4
+GOTO @randomcitymain
+
+@randmerch5
+GOTO @randomcitymain
+
+@randmerch6
+GOTO @randomcitymain
+
+@randmerch7
+GOTO @randomcitymain
+
+@randmerch8
+GOTO @randomcitymain
+
+@randmerch9
+GOTO @randomcitymain
+
+@randmerch10
+GOTO @randomcitymain
+
+@randmerch11
+SET temp.label, 11
+IF #10|#12|#13 @anotherskinreadnqkq
+ACTOR 1, Merchant, human24, 1, 40, 95
+@randmerchaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa11
+1: Have a look, adventurer, you will love my weapons!
+@randomshopping2
+SET temp.shop1, 207
+ADD temp.shop1, %R17
+SET temp.shop2, 249
+ADD temp.shop2, %R336
+SET temp.shop3, 634
+ADD temp.shop3, %R20
+SET temp.shop4, 249
+ADD temp.shop4, %R336
+SET temp.shop5, 249
+ADD temp.shop5, %R336
+SET temp.shop6, 249
+ADD temp.shop6, %R336
+SET temp.shop7, 249
+ADD temp.shop7, %R336
+SET temp.shop8, 249
+ADD temp.shop8, %R336
+SET temp.shop9, 249
+ADD temp.shop9, %R336
+SET temp.shop10, 249
+ADD temp.shop10, %R336
+OFFER #<temp.shop1>, #<temp.shop2>, #<temp.shop3>, #<temp.shop4>, #<temp.shop5>, #<temp.shop6>, #<temp.shop7>, #<temp.shop8>, #<temp.shop9>, #<temp.shop10>
+END
+
+@anotherskinreadnqkq
+IF #10 @anotherskinreadnqkqdwarf
+IF #12 @anotherskinreadnqkqgnome
+IF #13 @anotherskinreadnqkqelf
+END
+
+@anotherskinreadnqkqdwarf
+SET temp.skin2, "%R12"
+SET temp.skin, "dwarf#<temp.skin2>"
+ACTOR 1, Merchant, #<temp.skin>, 1, 40, 95
+GOTO @randmerchaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa#<temp.label>
+
+@anotherskinreadnqkqgnome
+SET temp.skin2, "1"
+ADD temp.skin2, "%R17"
+SET temp.skin, "gnome#<temp.skin2>"
+ACTOR 1, Merchant, #<temp.skin>, 1, 40, 100
+GOTO @randmerchaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa#<temp.label>
+
+@anotherskinreadnqkqelf
+SET temp.skin2, "%R17"
+SET temp.skin, "elf#<temp.skin2>"
+ACTOR 1, Merchant, #<temp.skin>, 1, 40, 95
+GOTO @randmerchaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa#<temp.label>
+
+@randmerch12
+SET temp.label, 12
+IF #10|#12|#13 @anotherskinreadnqkq
+ACTOR 1, Merchant, human40, 1, 40, 95
+@randmerchaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa12
+1: Best weapons in Athelias!
+GOTO @randomshopping2
+
+@randmerch13
+GOTO @randomcitymain
+
+@randmerch14
+GOTO @randomcitymain
+
+@randmerch15
+GOTO @randomcitymain
+
+@randmerch16
+GOTO @randomcitymain
+
+@randmerch17
+GOTO @randomcitymain
+
+@randmerch18
+GOTO @randomcitymain
+
+@randmerch19
+SET temp.label, 19
+IF #10|#12|#13 @anotherskinreadnqkq
+ACTOR 1, Merchant, human44, 1, 40, 95
+@randmerchaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa19
+1: Hello, adventurer.
+GOTO @randomshopping2
+
+@randmerch20
+SET temp.label, 20
+IF #10|#12|#13 @anotherskinreadnqkq
+ACTOR 1, Merchant, human51, 1, 40, 95
+@randmerchaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa20
+1: Greetings, adventurer.
+GOTO @randomshopping2
+
+@randomrobbers
+SET temp.battlenumber, 0
+SET temp.battle1, 0
+SET temp.battle2, 0
+SET temp.battle3, 0
+SET temp.battle4, 0
+SET temp.battle5, 0
+IF -V2 @randomrobbers1
+IF -V3 @randomrobbers2
+IF -V4 @randomrobbers3
+IF -V5 @randomrobbers4
+IF -V6 @randomrobbers5
+IF -V8 @randomrobbers7
+IF -V9 @randomrobbers8
+IF -V11 @randomrobbers10
+IF -V13 @randomrobbers12
+IF -V16 @randomrobbers15
+IF -V19 @randomrobbers18
+IF -V23 @randomrobbers22
+IF -V26 @randomrobbers25
+IF -V31 @randomrobbers30
+IF -V36 @randomrobbers35
+IF -V41 @randomrobbers40
+IF -V46 @randomrobbers45
+IF -V51 @randomrobbers50
+IF -V56 @randomrobbers55
+IF -V61 @randomrobbers60
+IF -V66 @randomrobbers65
+IF -V71 @randomrobbers70
+IF -V81 @randomrobbers80
+GOTO  @randomrobbers90
+
+@randomrobbers1
+SET temp.monsterID, 708
+ADD temp.monsterID, %R5
+FIGHT #<temp.monsterID>
+END
+
+@randomrobbers2
+SET temp.monsterID, 713
+ADD temp.monsterID, %R5
+FIGHT #<temp.monsterID>
+END
+
+@randomrobbers3
+SET temp.monsterID, 718
+ADD temp.monsterID, %R5
+FIGHT #<temp.monsterID>
+END
+
+@randomrobbers4
+SET temp.monsterID, 723
+ADD temp.monsterID, %R5
+FIGHT #<temp.monsterID>
+END
+
+@randomrobbers5
+IF R1 @randomrebbersbattle186
+IF R1 @randomrebbersbattle187
+IF R1 @randomrebbersbattle188
+IF R1 @randomrebbersbattle189
+IF R1 @randomrebbersbattle190
+GOTO @randomrobbers5
+
+@randomrobbers7
+SET temp.monsterID, 728
+ADD temp.monsterID, %R5
+FIGHT #<temp.monsterID>
+END
+
+@randomrobbers8
+SET temp.monsterID, 733
+ADD temp.monsterID, %R5
+FIGHT #<temp.monsterID>
+END
+
+@randomrobbers10
+IF R1 @randomrebbersbattle191
+IF R1 @randomrebbersbattle192
+IF R1 @randomrebbersbattle193
+IF R1 @randomrebbersbattle194
+IF R1 @randomrebbersbattle195
+GOTO @randomrobbers10
+
+@randomrobbers12
+SET temp.monsterID, 738
+ADD temp.monsterID, %R5
+FIGHT #<temp.monsterID>
+END
+
+@randomrobbers15
+IF R1 @randomrebbersbattle196
+IF R1 @randomrebbersbattle197
+IF R1 @randomrebbersbattle198
+IF R1 @randomrebbersbattle199
+IF R1 @randomrebbersbattle200
+GOTO @randomrobbers15
+
+@randomrobbers18
+SET temp.monsterID, 743
+ADD temp.monsterID, %R5
+FIGHT #<temp.monsterID>
+END
+
+@randomrobbers22
+SET temp.monsterID, 748
+ADD temp.monsterID, %R5
+FIGHT #<temp.monsterID>
+END
+
+@randomrobbers25
+IF R1 @randomrebbersbattle530
+IF R1 @randomrebbersbattle531
+IF R1 @randomrebbersbattle532
+IF R1 @randomrebbersbattle533
+IF R1 @randomrebbersbattle534
+GOTO @randomrobbers25
+
+@randomrobbers30
+SET temp.monsterID, 753
+ADD temp.monsterID, %R5
+FIGHT #<temp.monsterID>
+END
+
+@randomrobbers35
+SET temp.monsterID, 758
+ADD temp.monsterID, %R5
+FIGHT #<temp.monsterID>
+END
+
+@randomrobbers40
+IF R1 @randomrebbersbattle535
+IF R1 @randomrebbersbattle536
+IF R1 @randomrebbersbattle537
+IF R1 @randomrebbersbattle538
+IF R1 @randomrebbersbattle539
+GOTO @randomrobbers40
+
+@randomrobbers45
+SET temp.monsterID, 763
+ADD temp.monsterID, %R5
+FIGHT #<temp.monsterID>
+END
+
+@randomrobbers50
+SET temp.monsterID, 768
+ADD temp.monsterID, %R5
+FIGHT #<temp.monsterID>
+END
+
+@randomrobbers55
+SET temp.monsterID, 773
+ADD temp.monsterID, %R5
+FIGHT #<temp.monsterID>
+END
+
+@randomrobbers60
+IF R1 @randomrebbersbattle540
+IF R1 @randomrebbersbattle541
+IF R1 @randomrebbersbattle542
+IF R1 @randomrebbersbattle543
+IF R1 @randomrebbersbattle544
+IF R1 @randomrebbersbattle545
+IF R1 @randomrebbersbattle546
+IF R1 @randomrebbersbattle547
+IF R1 @randomrebbersbattle548
+IF R1 @randomrebbersbattle549
+IF R1 @randomrebbersbattle550
+IF R1 @randomrebbersbattle551
+IF R1 @randomrebbersbattle552
+IF R1 @randomrebbersbattle553
+IF R1 @randomrebbersbattle554
+IF R1 @randomrebbersbattle555
+IF R1 @randomrebbersbattle556
+IF R1 @randomrebbersbattle557
+IF R1 @randomrebbersbattle558
+IF R1 @randomrebbersbattle559
+GOTO @randomrobbers60
+
+@randomrobbers65
+SET temp.monsterID, 778
+ADD temp.monsterID, %R5
+FIGHT #<temp.monsterID>
+END
+
+@randomrobbers70
+SET temp.monsterID, 783
+ADD temp.monsterID, %R5
+FIGHT #<temp.monsterID>
+END
+
+@randomrobbers80
+SET temp.monsterID, 788
+ADD temp.monsterID, %R5
+FIGHT #<temp.monsterID>
+END
+
+@randomrobbers90
+SET temp.monsterID, 793
+ADD temp.monsterID, %R5
+FIGHT #<temp.monsterID>
+END
+
+@randomrebbersbattle181
+ADD temp.battlenumber, 1
+SET temp.battle#<temp.battlenumber>, 181
+IF R10 @randomrobbers
+GOTO @randomrobbersbattle
+
+@randomrebbersbattle182
+ADD temp.battlenumber, 1
+SET temp.battle#<temp.battlenumber>, 182
+IF R10 @randomrobbers
+GOTO @randomrobbersbattle
+
+@randomrebbersbattle183
+ADD temp.battlenumber, 1
+SET temp.battle#<temp.battlenumber>, 183
+IF R10 @randomrobbers
+GOTO @randomrobbersbattle
+
+@randomrebbersbattle184
+ADD temp.battlenumber, 1
+SET temp.battle#<temp.battlenumber>, 184
+IF R10 @randomrobbers
+GOTO @randomrobbersbattle
+
+@randomrebbersbattle185
+ADD temp.battlenumber, 1
+SET temp.battle#<temp.battlenumber>, 185
+IF R10 @randomrobbers
+GOTO @randomrobbersbattle
+
+@randomrebbersbattle186
+ADD temp.battlenumber, 1
+SET temp.battle#<temp.battlenumber>, 186
+IF R10 @randomrobbers
+GOTO @randomrobbersbattle
+
+@randomrebbersbattle187
+ADD temp.battlenumber, 1
+SET temp.battle#<temp.battlenumber>, 187
+IF R10 @randomrobbers
+GOTO @randomrobbersbattle
+
+@randomrebbersbattle188
+ADD temp.battlenumber, 1
+SET temp.battle#<temp.battlenumber>, 188
+IF R10 @randomrobbers
+GOTO @randomrobbersbattle
+
+@randomrebbersbattle189
+ADD temp.battlenumber, 1
+SET temp.battle#<temp.battlenumber>, 189
+IF R10 @randomrobbers
+GOTO @randomrobbersbattle
+
+@randomrebbersbattle190
+ADD temp.battlenumber, 1
+SET temp.battle#<temp.battlenumber>, 190
+IF R10 @randomrobbers
+GOTO @randomrobbersbattle
+
+@randomrebbersbattle191
+ADD temp.battlenumber, 1
+SET temp.battle#<temp.battlenumber>, 191
+IF R10 @randomrobbers
+GOTO @randomrobbersbattle
+
+@randomrebbersbattle192
+ADD temp.battlenumber, 1
+SET temp.battle#<temp.battlenumber>, 192
+IF R10 @randomrobbers
+GOTO @randomrobbersbattle
+
+@randomrebbersbattle193
+ADD temp.battlenumber, 1
+SET temp.battle#<temp.battlenumber>, 193
+IF R10 @randomrobbers
+GOTO @randomrobbersbattle
+
+@randomrebbersbattle194
+ADD temp.battlenumber, 1
+SET temp.battle#<temp.battlenumber>, 194
+IF R10 @randomrobbers
+GOTO @randomrobbersbattle
+
+@randomrebbersbattle195
+ADD temp.battlenumber, 1
+SET temp.battle#<temp.battlenumber>, 195
+IF R10 @randomrobbers
+GOTO @randomrobbersbattle
+
+@randomrebbersbattle196
+ADD temp.battlenumber, 1
+SET temp.battle#<temp.battlenumber>, 196
+IF R10 @randomrobbers
+GOTO @randomrobbersbattle
+
+@randomrebbersbattle197
+ADD temp.battlenumber, 1
+SET temp.battle#<temp.battlenumber>, 197
+IF R10 @randomrobbers
+GOTO @randomrobbersbattle
+
+@randomrebbersbattle198
+ADD temp.battlenumber, 1
+SET temp.battle#<temp.battlenumber>, 198
+IF R10 @randomrobbers
+GOTO @randomrobbersbattle
+
+@randomrebbersbattle199
+ADD temp.battlenumber, 1
+SET temp.battle#<temp.battlenumber>, 199
+IF R10 @randomrobbers
+GOTO @randomrobbersbattle
+
+@randomrebbersbattle200
+ADD temp.battlenumber, 1
+SET temp.battle#<temp.battlenumber>, 200
+IF R10 @randomrobbers
+GOTO @randomrobbersbattle
+
+@randomrebbersbattle530
+ADD temp.battlenumber, 1
+SET temp.battle#<temp.battlenumber>, 530
+IF R10 @randomrobbers
+GOTO @randomrobbersbattle
+
+@randomrebbersbattle531
+ADD temp.battlenumber, 1
+SET temp.battle#<temp.battlenumber>, 531
+IF R10 @randomrobbers
+GOTO @randomrobbersbattle
+
+@randomrebbersbattle532
+ADD temp.battlenumber, 1
+SET temp.battle#<temp.battlenumber>, 532
+IF R10 @randomrobbers
+GOTO @randomrobbersbattle
+
+@randomrebbersbattle533
+ADD temp.battlenumber, 1
+SET temp.battle#<temp.battlenumber>, 533
+IF R10 @randomrobbers
+GOTO @randomrobbersbattle
+
+@randomrebbersbattle534
+ADD temp.battlenumber, 1
+SET temp.battle#<temp.battlenumber>, 534
+IF R10 @randomrobbers
+GOTO @randomrobbersbattle
+
+@randomrebbersbattle535
+ADD temp.battlenumber, 1
+SET temp.battle#<temp.battlenumber>, 535
+IF R10 @randomrobbers
+GOTO @randomrobbersbattle
+
+@randomrebbersbattle536
+ADD temp.battlenumber, 1
+SET temp.battle#<temp.battlenumber>, 536
+IF R10 @randomrobbers
+GOTO @randomrobbersbattle
+
+@randomrebbersbattle537
+ADD temp.battlenumber, 1
+SET temp.battle#<temp.battlenumber>, 537
+IF R10 @randomrobbers
+GOTO @randomrobbersbattle
+
+@randomrebbersbattle538
+ADD temp.battlenumber, 1
+SET temp.battle#<temp.battlenumber>, 538
+IF R10 @randomrobbers
+GOTO @randomrobbersbattle
+
+@randomrebbersbattle539
+ADD temp.battlenumber, 1
+SET temp.battle#<temp.battlenumber>, 539
+IF R10 @randomrobbers
+GOTO @randomrobbersbattle
+
+@randomrebbersbattle540
+ADD temp.battlenumber, 1
+SET temp.battle#<temp.battlenumber>, 540
+IF R10 @randomrobbers
+GOTO @randomrobbersbattle
+
+@randomrebbersbattle541
+ADD temp.battlenumber, 1
+SET temp.battle#<temp.battlenumber>, 541
+IF R10 @randomrobbers
+GOTO @randomrobbersbattle
+
+@randomrebbersbattle542
+ADD temp.battlenumber, 1
+SET temp.battle#<temp.battlenumber>, 542
+IF R10 @randomrobbers
+GOTO @randomrobbersbattle
+
+@randomrebbersbattle543
+ADD temp.battlenumber, 1
+SET temp.battle#<temp.battlenumber>, 543
+IF R10 @randomrobbers
+GOTO @randomrobbersbattle
+
+@randomrebbersbattle544
+ADD temp.battlenumber, 1
+SET temp.battle#<temp.battlenumber>, 544
+IF R10 @randomrobbers
+GOTO @randomrobbersbattle
+
+@randomrebbersbattle545
+ADD temp.battlenumber, 1
+SET temp.battle#<temp.battlenumber>, 545
+IF R10 @randomrobbers
+GOTO @randomrobbersbattle
+
+@randomrebbersbattle546
+ADD temp.battlenumber, 1
+SET temp.battle#<temp.battlenumber>, 546
+IF R10 @randomrobbers
+GOTO @randomrobbersbattle
+
+@randomrebbersbattle547
+ADD temp.battlenumber, 1
+SET temp.battle#<temp.battlenumber>, 547
+IF R10 @randomrobbers
+GOTO @randomrobbersbattle
+
+@randomrebbersbattle548
+ADD temp.battlenumber, 1
+SET temp.battle#<temp.battlenumber>, 548
+IF R10 @randomrobbers
+GOTO @randomrobbersbattle
+
+@randomrebbersbattle549
+ADD temp.battlenumber, 1
+SET temp.battle#<temp.battlenumber>, 549
+IF R10 @randomrobbers
+GOTO @randomrobbersbattle
+
+@randomrebbersbattle550
+ADD temp.battlenumber, 1
+SET temp.battle#<temp.battlenumber>, 550
+IF R10 @randomrobbers
+GOTO @randomrobbersbattle
+
+@randomrebbersbattle551
+ADD temp.battlenumber, 1
+SET temp.battle#<temp.battlenumber>, 551
+IF R10 @randomrobbers
+GOTO @randomrobbersbattle
+
+@randomrebbersbattle552
+ADD temp.battlenumber, 1
+SET temp.battle#<temp.battlenumber>, 552
+IF R10 @randomrobbers
+GOTO @randomrobbersbattle
+
+@randomrebbersbattle553
+ADD temp.battlenumber, 1
+SET temp.battle#<temp.battlenumber>, 553
+IF R10 @randomrobbers
+GOTO @randomrobbersbattle
+
+@randomrebbersbattle554
+ADD temp.battlenumber, 1
+SET temp.battle#<temp.battlenumber>, 554
+IF R10 @randomrobbers
+GOTO @randomrobbersbattle
+
+@randomrebbersbattle555
+ADD temp.battlenumber, 1
+SET temp.battle#<temp.battlenumber>, 555
+IF R10 @randomrobbers
+GOTO @randomrobbersbattle
+
+@randomrebbersbattle556
+ADD temp.battlenumber, 1
+SET temp.battle#<temp.battlenumber>, 556
+IF R10 @randomrobbers
+GOTO @randomrobbersbattle
+
+@randomrebbersbattle557
+ADD temp.battlenumber, 1
+SET temp.battle#<temp.battlenumber>, 557
+IF R10 @randomrobbers
+GOTO @randomrobbersbattle
+
+@randomrebbersbattle558
+ADD temp.battlenumber, 1
+SET temp.battle#<temp.battlenumber>, 558
+IF R10 @randomrobbers
+GOTO @randomrobbersbattle
+
+@randomrebbersbattle559
+ADD temp.battlenumber, 1
+SET temp.battle#<temp.battlenumber>, 559
+IF R10 @randomrobbers
+GOTO @randomrobbersbattle
+
+@randomrobbersbattle
+FIGHT #<temp.battle1>, #<temp.battle2>, #<temp.battle3>, #<temp.battle4>, #<temp.battle5>
+CALL 110010@start
+END
+
+@eventActorClick33
+CALL 110010@eventActorClick33
+
+@rewardsnormalammyandrings
+IF R1 @rewardsnormalammyandrings1
+IF R1 @rewardsnormalammyandrings2
+IF R1 @rewardsnormalammyandrings3
+IF R1 @rewardsnormalammyandrings4
+IF R1 @rewardsnormalammyandrings5
+IF R1 @rewardsnormalammyandrings6
+IF R1 @rewardsnormalammyandrings7
+IF R1 @rewardsnormalammyandrings8
+IF R1 @rewardsnormalammyandrings9
+IF R1 @rewardsnormalammyandrings10
+GOTO @rewardsnormalammyandrings
+
+@rewardsnormalammyandrings1
+N: You found an %I588.
+SOUND FoundItem.wav
+GIVE I588
+END
+
+@rewardsnormalammyandrings2
+N: You found a %I590.
+SOUND FoundItem.wav
+GIVE I590
+END
+
+@rewardsnormalammyandrings3
+N: You found an %I592.
+SOUND FoundItem.wav
+GIVE I592
+END
+
+@rewardsnormalammyandrings4
+N: You found a %I594.
+SOUND FoundItem.wav
+GIVE I594
+END
+
+@rewardsnormalammyandrings5
+N: You found an %I596.
+SOUND FoundItem.wav
+GIVE I596
+END
+
+@rewardsnormalammyandrings6
+N: You found a %I609.
+SOUND FoundItem.wav
+GIVE I609
+END
+
+@rewardsnormalammyandrings7
+N: You found an %I613.
+SOUND FoundItem.wav
+GIVE I613
+END
+
+@rewardsnormalammyandrings8
+N: You found a %I617.
+SOUND FoundItem.wav
+GIVE I617
+END
+
+@rewardsnormalammyandrings9
+N: You found a %I623.
+SOUND FoundItem.wav
+GIVE I623
+END
+
+@rewardsnormalammyandrings10
+N: You found a %I627.
+SOUND FoundItem.wav
+GIVE I627
+END
+

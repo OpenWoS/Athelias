@@ -1,0 +1,132 @@
+SCENE 7700, cave2, SCENE, "To Athelias"
+#include include.txt
+GOTO LINK 0, 33
+;
+;-----------------------------------------------------------------------------
+;
+SCENE 7701, cave2, SCENE, "To the cave, level 2"
+#include include.txt
+GOTO LINK 78, 0
+;
+;-----------------------------------------------------------------------------
+;
+SCENE 7702, cave2, SCENE, "Hermit"
+#include include.txt
+ACTOR 1, Hermit, human113, 1, 16, 95
+IF T3993|T3988 @halloweenActors
+GOTO @nextStepAfterHalloweenActors
+
+@halloweenActors
+ACTOR 1, "Hermit", #<spEvent.Name>-humans, 113, 16, 95
+@nextStepAfterHalloweenActors
+IF I1090 @end
+IF T608 @reward
+IF T607 @back
+1: An adventurer?!
+1: What are you doing here?
+1: Never heard of the Dark Queen?
+H: Pardon?
+1: No?! 
+1: Damn! The so-called Dark Queen is a giant spider living deep in the cave.
+1: Her web is so thin and so strong that it is said that one could make an armor almost indestructible and as light as a pen.
+1: But the only way to get it would be to kill the Dark Queen.
+H: Do you know someone able to make such an armor?
+1: I will if you bring me the web.
+1: But if you feel like hunting the Dark Queen, beware : many adventurers tried their luck before you - they all failed.
+H: I won't.
+1: I hope so...
+GIVE T607
+END
+
+@back
+1: Hello again, adventurer.
+1: Are you still planing to try to kill the Dark Queen?
+H: Yes, just let me some time.
+END
+
+@reward
+WAIT 1
+H: I've got the web.
+1: Really?!
+1: You killed the Dark Queen?!
+1: I can't believe it!
+H: ... but it is true.
+1: That's wonderful!
+1: Let me sew it and make the best armor you'll find in all Athelias!
+WAIT 1.2
+SOUND skeleton1
+WAIT 1.2
+SOUND skeleton1
+WAIT 1.2
+SOUND skeleton1
+WAIT 1.2
+SOUND skeleton1
+WAIT 1.2
+1: Et voila!
+1: May this coat protect you well, adventurer.
+SOUND FoundItem.wav
+HOST_GIVE I1090
+END
+
+@end
+IF Z581 @queenseyes
+@enddarkqeyes
+1: Welcome back, %1.
+H: Hello.
+H: What's up?
+1: Bah, the cave is as quiet as usually.
+END
+
+@queenseyes
+IF I1142 @enddarkqeyes
+COMPARE #<chat.darkqueeneyes>, 1
+IF= @queenseyesback
+H: Greetings.
+H: I forgot to tell you: I found this in the Dark Queen's lair.
+1: Dark Queen's eyes!
+1: That's interesting!
+1: If you can find twenty cave spider chrysalises, I may be able to do something with it.
+SET chat.darkqueeneyes, 1
+IF Z463.20 @alreadyhavequeenseyes
+H: I'll try to.
+END
+
+@alreadyhavequeenseyes
+H: I already have that.
+@queenseyesback3
+1: Wonderful!
+1: Can I have them?
+@queenseyesback4
+ASK 30
+IF YES @queenseyesback4YES
+IF NO @queenseyesback4NO
+1: What?
+GOTO @queenseyesback4
+
+@queenseyesback4YES
+1: Great!
+1: Please, accept this dagger in exchange.
+HOST_TAKE Z463.20
+HOST_TAKE Z581
+HOST_GIVE I1142
+SOUND foundItem.wav
+H: Thanks.
+END
+
+@queenseyesback4NO
+1: Come back if you change your mind.
+1: I would reward you well.
+END
+
+@queenseyesback
+IF Z463.20+Z581 @queenseyesback2
+1: Welcome back, adventurer.
+1: Remember: I'm still looking for %Z581 and twenty %Z463.
+END
+
+@queenseyesback2
+H: Hello.
+H: I have the stuff you wanted.
+GOTO @queenseyesback3
+
+

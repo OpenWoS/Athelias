@@ -1,0 +1,2101 @@
+SCENE 700, castle, SCENE, "Northern Gate"
+#include include.txt
+SET c2prinaexit, north
+GOTO LINK 0, 0
+;
+;-------------------------------------------------------------------------------
+;
+SCENE 701, houseinside1, SCENE, "Charity Work"
+#include include.txt
+ACTOR 1, Elan, wom14, 1, 40, 81
+IF T3993|T3988 @halloweenActors
+GOTO @nextStepAfterHalloweenActors
+
+@halloweenActors
+ACTOR 1, "Elan", #<spEvent.Name>-wom, 14, 48, 81
+@nextStepAfterHalloweenActors
+#include jestersquest.txt 
+CALL 110015@start
+END
+;
+;-------------------------------------------------------------------------------
+;
+SCENE 702, castle, SCENE, "Southern Gate"
+#include include.txt
+SET c2prinaexit, south
+GOTO LINK 0, 0
+;
+;-------------------------------------------------------------------------------
+;
+SCENE 703, castle, SCENE, "Eastern Gate"
+#include include.txt
+SET c2prinaexit, east
+GOTO LINK 0, 0
+;
+;-------------------------------------------------------------------------------
+;
+SCENE 704, castle, SCENE, "Western Gate"
+#include include.txt
+SET c2prinaexit, west
+GOTO LINK 0, 0
+;
+;-------------------------------------------------------------------------------
+;
+SCENE 705, castle, SCENE, "Gate"
+#include include.txt
+ACTOR 1, Guard, guard6, 1, 20, 90 
+ACTOR 2, Guard, guard6, 1, 80, 90 
+FACE 2, 0
+IF T1056-T1058-T1057 @assaq3
+IF T3993|T3988 @halloweenActors
+GOTO @nextStepAfterHalloweenActors
+
+@halloweenActors
+ACTOR 1, "Guard", #<spEvent.Name>-guard, 6, 20, 90
+ACTOR 2, Guard, #<spEvent.Name>-guard, 6, 80, 90
+FACE 2, 0
+@nextStepAfterHalloweenActors
+IF C61+T139-T140 @archersq2
+IF C50+T1055-T1056-T1057 @assaq3
+IF C56+T1044-T1046 @healerquest3
+IF C50+T1053-T1054 @assaq2
+IF T1037+T1038 @priestarrested
+IF T21-T3994 @priestpass
+IF T1008+C20  @jesterquest3
+IF T4002 @chaos 
+IF C18+I630-T3994 @priestpass 
+IF C20+T1002 @jesterpass 
+1: Halt! 
+1: You can't pass. 
+IF C16+V99+T1032-T1035 @necroquest4
+END 
+
+@archersq2
+1: Halt!
+H: I'm the representant of the archers training camp of Katadyn.
+H: I'm here to have an interview with the Regent.
+2: Scat.
+H: Pardon?
+1: You hear him: scat!
+H: I guess you don't get the point...
+2: We get it, but apparently you don't.
+2: You have 30 seconds to leave.
+H: Or what?
+1: You shouldn't have asked....
+WAIT 1.4
+MOVE 1, 140, 80, 1
+MOVE 2, 140, 80, 1
+FIGHT 144.20.90, 144.80.90
+IF WIN @archq2win
+END
+
+@archq2win
+H: And the door remains shut...
+ACTOR 3, "Melinda Abes", wom6, 1, 0, 100
+MOVE 3, 25, 100
+WAIT 0.7
+3: You're crazy!
+3: Run away: more guards are going to come!
+H: Why are you trying to help me?
+3: Listen: you're not the only one who doesn't like the Regent.
+3: But what you're doing is stupid.
+3: To kill guards of the palace won't change anything.
+H: As if I had chosen to fight...
+3: The result is the same: they're dead.
+3: Listen: many people in Prina want to get rid of the Regent.
+3: And we are going to do something, trust me.
+3: But not now.
+3: We're not ready.
+H: How many people are talking about?
+3: A lot.
+H: Interesting...
+H: Very interesting...
+3: Run, now!
+H: Yeah, you're probably right.
+H: I guess we will meet again...
+HOST_GIVE T140
+MOVE 3, -30, 100
+MOVE H, 150, 100
+END
+
+@assaq3
+BKGND vestibulary
+MOVE 1, 120, 90, 1
+MOVE 2, 120, 90, 1
+ACTOR 1, Rodeur, human37, 1, 45, 90
+1: That's here, %1!
+1: Let's go!
+1: We must find the skull as quickly as possible.
+1: Let's search in the throne room first.
+SOUND door1.wav
+WAIT 3
+GOTO LINK 8, 6
+
+@assaq2
+1: Halt!
+H: Let me pass, I need to talk to the Regent.
+1: Yeah, many people do need to talk to the Regent but they cannot pass.
+H: Maybe, but they have not been trained in the Assassin Castle, so if you do not want me to kick your ass, you're going to let me pass right now!
+2: Let him pass.
+1: Are you sure?
+2: Yeah.
+WAIT 1
+GOTO LINK 8, 0
+
+@healerquest3
+H: I have a message for the regent.
+1: Yeah, everybody has an important message for the regent...
+1: Scat!
+H: How dare you...
+H: Listen, I am sent by Mistress Arvalon,  the eldest healer of Mangeas Sanctuary.
+H: I won't let a guard like you insult me!
+2: Let him pass.
+1: Are you sure?
+2: Yeah.
+WAIT 1.3
+GOTO LINK 8, 0
+
+
+@priestarrested
+ACTOR 3, Guard, guard6, 1, 62, 100 
+ACTOR 4, Guard, guard6, 1, 50, 100
+FACE 3, 0
+FACE 4, 0
+3: We are taking this man to the prison. 
+1: Alright, pass.
+WAIT 1.3
+GOTO LINK 6, 4, 1
+
+@necroquest4
+H: Hmm
+H: Let's be straightforward.
+H: I am here to kill one of the prisoners.
+H: I can be smart but if you try to stop me I'll have to raid the palace, so just let me pass, ok?
+GOTO @sgsgfsfhjkqdqdlqdqldqdlqlfjjgd
+
+@jesterquest3
+1: !%1!
+1: !%1 is here!
+H: Just met me pass, ok?
+H: I don't want to be in trouble.
+@sgsgfsfhjkqdqdlqdqldqdlqlfjjgd
+2: !Alarm!
+2: !%2 is here!
+H: Idiot
+MOVE 1, -20, 90, 1
+MOVE 2, -20, 90, 1
+FIGHT 136.20.90, 136.80.90
+IF LOSE @jestdead
+FIGHT 136, 136,136
+IF LOSE @jestdead
+FIGHT 136, 136,136,136,136
+IF LOSE+C16 @necrodead
+IF LOSE @jestdead
+H: And they had been told I didn't want to be in trouble...
+WAIT 2.5
+GOTO LINK 8, 0
+
+@necrodead
+H: Hmm that won't be so easy...
+END
+
+@jestdead
+MOVE 1, 20, 90
+1: !We have arrested %1!
+1: !We have arrested %1!
+1: your place is in a jail!
+1: You were here to see Makel, eh!
+1: You will!
+WAIT 1
+HOST_TAKE T1008
+HOST_GIVE T1009
+GOTO LINK 6, 2, 1
+
+@chaos 
+1: Close the doors! 
+1: A chaos creature! 
+2: Help! 
+MOVE 1, -20, 90, 1
+MOVE 2, 120, 90, 1
+FIGHT 136.20.90, 136.80.90, 136, 136
+IF LOSE @end 
+H: Open these bloody doors! 
+WAIT 1 
+N: The doors remain shut. 
+END 
+
+@end 
+END 
+
+@priestpass 
+H: Hello 
+H: I have a treaty for the intendant from the master of my order. 
+1: OK, you can pass. 
+WAIT 2 
+GOTO LINK 8, 0
+
+@jesterpass 
+H: Hello 
+H: I have this stuff to deliver for the show. 
+1: Ok you can pass. 
+WAIT 2
+GOTO LINK 8, 0
+;
+;-------------------------------------------------------------------------------
+;
+SCENE 706, castle, SCENE, "Gate"
+#include include.txt
+STRCMP #<c2flammingbladeexit>, "west"
+IF= @west
+GOTO LINK 35, 0
+
+@west
+GOTO LINK 35, 1
+;
+;-------------------------------------------------------------------------------
+;
+SCENE 707, templeinside5, SCENE, "Gate"
+#include include.txt
+STRCMP #<str.uniform>, "Anti-Gods" 
+IF= @canpass 
+;STRCMP #<str.uniform>, "[guild supported]" 
+;IF= @canpass 
+;STRCMP #<str.uniform>, "[guild supported]" 
+;IF= @canpass 
+STRCMP #<str.uniform>, "" 
+IF= @cantpass 
+IF T114 @cantpass 
+ACTOR 1, Deizar, human18, 1, 25,90 
+IF T3993|T3988 @halloweenActors
+GOTO @nextStepAfterHalloweenActors
+
+@halloweenActors
+ACTOR 1, "Deizar", #<spEvent.Name>-humans, 18, 25, 90
+@nextStepAfterHalloweenActors
+1: I am sorry but you can't pass. 
+1: Your guild is not supported in Athelias. 
+WAIT 1 .8
+@menu 
+SOUND sword1.wav
+MENU "I want to petition my guild=@petition","Cancel=@end" 
+GOTO @menu 
+
+@end 
+SOUND sword1.wav
+END 
+
+@petition 
+SOUND sword1.wav
+H: Yeah I know but I need to go inside to petition my guild. 
+1: Are you sure? 
+1: You won't be able to pass a second time until the petition has been approved.
+WAIT 2.3
+@menu2 
+SOUND sword1.wav
+MENU "Yes=@pet2", "No=@end" 
+GOTO @menu2 
+
+@pet2 
+SOUND sword1.wav
+1: Alright. 
+HOST_GIVE T114
+WAIT 1 
+@canpass 
+HOST_GIVE T4000 
+EJECT T4000 
+TAKE T4000 
+STRCMP #<c2guildhallexit>, "west"
+IF= @west
+GOTO LINK 9, 1
+
+@west
+GOTO LINK 9, 0
+
+@cantpass 
+ACTOR 1, Deizar, human18, 1, 25,90  
+1: Sorry but you cannot pass. 
+1: The place is reserved for the members of the guilds supported in Athelias. 
+1: If you are a member of one of these guilds, you may need to put on the uniform to pass. 
+END
+;
+;-------------------------------------------------------------------------------
+;
+SCENE 708, "door1", SCENE, "Gate of Prina"
+#include include.txt
+IF T51 @goagain
+IF T50 @goagain
+@first
+ACTOR 1, "Guard", guard6, 1, 25, 90
+IF T3993|T3988 @halloweenActors
+GOTO @nextStepAfterHalloweenActors
+
+@halloweenActors
+ACTOR 1, "Guard", #<spEvent.Name>-guard, 6, 25, 90
+@nextStepAfterHalloweenActors
+1: Hello, adventurer.
+1: I am the guard of the underground galleries of Prina.
+1: Centuries ago, the ancient dwarves dug several underground galleries between all the cities of Athelias.
+1: Their art was so subtle that the distances seemed to be shorter.
+1: They were the main roads of the island.
+1: Unfortunately, when the power of the dwarves was fading, the Orcs and goblins invaded and occupied the galleries.
+1: Since, they are lost.
+1: It's told that more terrible monsters than Orcs live there nowadays...
+WAIT 3
+MOVE 1, 30, 85
+1: Nobody dares to go there nowadays.
+1: Only the greatest heroes may have a chance to stay alive in that place.
+IF V99+T1121 @ask
+END
+
+@ask
+1: Do you still want to pass?
+ASK 90
+IF YES @go
+IF NO @no
+1: Sorry? I haven't understood.
+GOTO @ask
+
+@no
+1: Wise choice.
+END
+
+@go
+1: May the Gods help you.
+1: You will have to kill the monsters haunting the galleries.
+1: Just camp : they will come.
+HOST_GIVE T50
+SET galleries, "25"
+WAIT 1
+GOTO LINK 45,0
+
+@goagain
+GOTO LINK 45,0
+;
+;-------------------------------------------------------------------------------
+;
+SCENE 709, temple6, SCENE, "Gate"
+#include include.txt
+GOTO LINK 14,0
+;
+;-------------------------------------------------------------------------------
+;
+SCENE 710, Castle, SCENE, "Gate"
+#include include.txt
+ACTOR 1, Deniz, human12, 1, 40, 90
+IF T3993|T3988 @halloweenActors
+GOTO @nextStepAfterHalloweenActors
+
+@halloweenActors
+ACTOR 1, "Deniz", #<spEvent.Name>-humans, 12, 40, 90
+@nextStepAfterHalloweenActors
+1: Greetings.
+WAIT 1
+SOUND sword1.wav
+MENU "Skip the introduction=@pass2", "Don't skip it=@next2"
+GOTO @next
+
+@pass2
+SOUND sword1.wav
+GOTO @pass
+
+@next2
+SOUND sword1.wav
+GOTO @next
+
+@next
+1: You are about to enter the arena of Prina.
+1: Here are the rules: no protection from PKers, no healing, no tickets.
+1: Enjoy...
+WAIT 1.5
+@pass
+GOTO LINK 44, 0
+;
+;-------------------------------------------------------------------------------
+;
+SCENE 711, street6, SCENE, "Gate"
+#include include.txt
+IF V90+T1007 @jestersquest3
+IF V50+T1004-T1005+C20 @jesterquest2 
+IF -C20 @closeddoors 
+IF T1003 @laisselematosla 
+GOTO LINK 49, 0
+
+@jestersquest3
+ACTOR 1, Jester, gnome2, 1, 25, 90 
+1: Hello, %1.
+1: Master Oudano was looking for you earlier.
+1: He is in his office.
+WAIT 1.5
+GOTO LINK 49, 0
+
+@jesterquest2 
+ACTOR 1, Jester, gnome2, 1, 25, 90 
+1: Hello, %1.
+1: Somebody asked for you. 
+H: Who? 
+1: I don't know... A guard of the palace I think. 
+1: He is inside, at Maitre Oudano's office. 
+WAIT 2
+GOTO LINK 49, 0
+
+@laisselematosla 
+ACTOR 1, Jester, gnome2, 1, 25, 90 
+1: You can leave the hardware here. 
+1: Maitre Oudano is waiting for you inside. 
+WAIT 2
+GOTO LINK 49, 0
+
+@closeddoors 
+N: The door is closed. 
+END
+;
+;-------------------------------------------------------------------------------
+;
+SCENE 712, houseinside1, SCENE, "Alchemist"
+#include include.txt
+ACTOR 1, Guerar, human6, 1, 50, 75
+IF T3993|T3988 @halloweenActors
+GOTO @nextStepAfterHalloweenActors
+
+@halloweenActors
+ACTOR 1, "Guerar", #<spEvent.Name>-humans, 6, 50, 75
+@nextStepAfterHalloweenActors
+#include jestersquest.txt 
+OFFER 8, 20, 21, 22, 23, 24, 25
+1: Welcome adventurer.
+1: I have some very special potions for sale, but if you want them, you will have to pay the price...
+END
+;
+;-------------------------------------------------------------------------------
+;
+SCENE 713, castle, SCENE, "Gate"
+#include include.txt
+GOTO SCENE 5500
+;
+;-------------------------------------------------------------------------------
+;
+SCENE 714, weapons, SCENE, "Weapons", 0, 1
+#include include.txt
+ACTOR 1, "Joshua", human118, 1, 25, 90
+IF T3993|T3988 @halloweenActors
+GOTO @nextStepAfterHalloweenActors
+
+@halloweenActors
+ACTOR 1, "Joshua", #<spEvent.Name>-humans, 118, 25, 90
+@nextStepAfterHalloweenActors
+#include jestersquest.txt 
+OFFER 304, 308, 312, 316, 320, 364, 368, 372, 376, 380, 405, 409, 413, 417, 421
+SET c3prinashop, "20-22-45-"
+STRSTR #<c3prinashop>, "#<num.hostClass>-"
+IF> @welcome
+1: Hello, adventurer.
+CALL 110012@start %C
+1: I don't know if I have something that #<arg0> %C may need, but you can have a look...
+END
+
+@welcome
+CALL 110012@start %C
+1: Hehe, #<arg0> %C!
+1: Welcome to my shop!
+END
+;
+;-------------------------------------------------------------------------------
+;
+SCENE 715, houseinside1, SCENE, "Iniz's Magical Shop"
+#include include.txt
+ACTOR 1, Iniz, human123, 1, 50, 75
+IF T3993|T3988 @halloweenActors
+GOTO @nextStepAfterHalloweenActors
+
+@halloweenActors
+ACTOR 1, "Iniz", #<spEvent.Name>-humans, 123, 50, 75
+@nextStepAfterHalloweenActors
+#include jestersquest.txt 
+OFFER 1, 3, 4, 7, 12, 13, 30, 31, 32, 33,  35, 36, 38, 39, 270, 271, 272, 273, 274, 275, 276, 277, 278, 279
+IF T7 @welcome
+1: Hello
+1: I mainly have items for mages but maybe you want to buy a potion?
+END
+
+@welcome
+1: Everything for the well-dressed mage!
+END
+;
+;-------------------------------------------------------------------------------
+;
+SCENE 716, houseinside1, SCENE, Runesmith
+#include include.txt
+ACTOR 1, Tekirdag, human59, 1, 50, 80
+IF T3993|T3988 @halloweenActors
+GOTO @nextStepAfterHalloweenActors
+
+@halloweenActors
+ACTOR 1, "Tekirdag", #<spEvent.Name>-humans, 59, 50, 90
+@nextStepAfterHalloweenActors
+#include jestersquest.txt 
+OFFER 545, 546, 547, 548, 549, 550, 551, 552, 553, 554, 555, 556, 557, 558, 559, 560, 561, 562, 563, 564
+IF -T2 @cant
+1: Welcome to the paradise for mages!
+1: What are you looking for?
+END
+
+@cant
+1: Hello.
+1: I didn't know that %Cs used runes...
+END
+;
+;-------------------------------------------------------------------------------
+;
+SCENE 717, "prina1", SCENE, "Beggar"
+#include include.txt
+IF T123 @end
+ACTOR 1, "Beggar", human129, 1, 50, 95
+IF T3993|T3988 @halloweenActors
+GOTO @nextStepAfterHalloweenActors
+
+@halloweenActors
+ACTOR 1, "Beggar", #<spEvent.Name>-humans, 129, 50, 95
+@nextStepAfterHalloweenActors
+IF -T99 @set
+STRCMP #<str.soul>, "SOUL 2465"
+IF= @ask2
+GOTO @ask
+
+@end
+N: The corpse of the beggar is not here anymore.
+WAIT 1
+N: Is it what you are looking for?!
+END
+
+@ask2
+1: Any gold to spare, #<g.mylord>? 
+N: Kill the beggar if you don't like the wonderful space before the interrogation point.
+END
+
+@set
+SET gold, "0"
+HOST_GIVE T99
+GOTO @ask
+
+@ask
+1: Any gold to spare, #<g.mylord>? 
+END
+
+@eventActorAttack1
+SEL 1
+POSE 3
+1: Argh
+1: That's not gold!
+WAIT 1.8
+MOVE 1, -24, 90, 1
+HOST_GIVE T123
+N: You kill the beggar.
+WAIT 1
+H: Oops.
+END
+
+@eventActorGive1
+ADD gold, "#<item.goldgiven>"
+COMPARE #<item.goldgiven>, "0"
+IF> @thanks
+END
+
+@thanks
+1: Thank you for the #<item.goldgiven> gold !
+COMPARE #<gold>, "599999"
+IF> @reward
+END
+
+@reward
+IF -T22 @reward2
+END
+
+@reward2
+1: You were so generous to me...
+1: Please, accept this present.
+1: I found this flask years ago, but I never dared to open it.
+HOST_GIVE I8
+HOST_GIVE T22
+SOUND FoundItem.wav
+END
+;
+;-------------------------------------------------------------------------------
+;
+SCENE 718, "houseinside1", SCENE, "Elder"
+#include include.txt
+#include elders\prina.elder.txt
+;
+;-------------------------------------------------------------------------------
+;
+SCENE 719, "houseinside1", SCENE, "Sculptor"
+#include include.txt
+ACTOR 1, "Sculptor", human51, 1, 45, 80
+IF T3993|T3988 @halloweenActors
+GOTO @nextStepAfterHalloweenActors
+
+@halloweenActors
+ACTOR 1, "Sculptor", #<spEvent.Name>-humans, 51, 45, 80
+@nextStepAfterHalloweenActors
+1: Nobody wants to buy my sculptures...
+1: I'm going to try to find another job.
+1: Why not a soldier?
+WAIT 3
+1: Do you want to buy the clay I have left?
+OFFER 655
+END
+;
+;-------------------------------------------------------------------------------
+;
+SCENE 720, "houseinside1", SCENE, "Musician"
+#include include.txt
+ACTOR 1, "Musician", human27, 2, 50, 80
+IF T3993|T3988 @halloweenActors
+GOTO @nextStepAfterHalloweenActors
+
+@halloweenActors
+ACTOR 1, "Musician", #<spEvent.Name>-humans, 27, 50, 80
+@nextStepAfterHalloweenActors
+1: Life is cruel with musicians...
+1: I didn't eat for 2 days.
+WAIT 2
+1: <sigh>
+1: Any chance you will buy my trumpet? 
+1: Pure brass...
+OFFER 657
+END
+;
+;-------------------------------------------------------------------------------
+;
+SCENE 721, alchemy, SCENE, "Alchemist"
+#include include.txt
+ACTOR 1, Alberic, human97, 1, 25, 95
+IF T3993|T3988 @halloweenActors
+GOTO @nextStepAfterHalloweenActors
+
+@halloweenActors
+ACTOR 1, "Alberic", #<spEvent.Name>-humans, 97, 25, 95
+@nextStepAfterHalloweenActors
+#include jestersquest.txt 
+OFFER 1, 3, 4, 7, 12, 13, 29, 30, 31, 32, 33, 36, 38, 39
+@random
+IF R10 @sentence1
+IF R10 @sentence2
+IF R10 @sentence3
+IF R10 @sentence4
+IF R10 @sentence5
+GOTO @random
+
+@sentence1
+1: Welcome, adventurer!
+END
+
+@sentence2
+1: Please, enter adventurer.
+1: You're gonna love my potions!
+END
+
+@sentence3
+1: Welcome, adventurer.
+1: I have any potion you can think of.
+1: Enjoy!
+END
+
+@sentence4
+1: Hello, adventurer.
+1: Do you need something to heal your wounds?
+END
+
+@sentence5
+1: Hello adventurer.
+1: What kind of potion are you looking for?
+END
+;
+;-------------------------------------------------------------------------------
+;
+SCENE 722,  weapons, SCENE, Armory, 0, 1
+#include include.txt
+ACTOR 1, "Tedgel", human81, 1, 25, 90
+IF T3993|T3988 @halloweenActors
+GOTO @nextStepAfterHalloweenActors
+
+@halloweenActors
+ACTOR 1, "Tedgel", #<spEvent.Name>-humans, 81, 25, 90
+@nextStepAfterHalloweenActors
+#include jestersquest.txt 
+OFFER 200, 209, 213, 217, 221, 250, 254, 258, 262, 266, 635, 639, 643, 647, 651, 565, 569, 573, 578, 582
+IF T1 @welcome
+IF T4 @welcome
+1: Hey!
+CALL 110012@start %C
+1: It is the first time that I see #<arg0> %C looking for an armor!
+1: I mean... I don't care, but...
+END
+
+@welcome
+1: Welcome, %C
+END
+;
+;-------------------------------------------------------------------------------
+;
+SCENE 723, weapons2, SCENE, "Smithy"
+#include include.txt
+ACTOR 1, Goralden, human81, 1, 42, 95
+IF T3993|T3988 @halloweenActors
+GOTO @nextStepAfterHalloweenActors
+
+@halloweenActors
+ACTOR 1, "Goralden", #<spEvent.Name>-humans, 81, 42, 95
+@nextStepAfterHalloweenActors
+#include jestersquest.txt 
+OFFER 132, 134, 135
+IF I1141 @nextstepaftergeneralmedal
+COMPARE #<chat.paldrakemedal>, 1
+IF= @paldrakemedalback
+IF Z665 @generalmedal1
+@nextstepaftergeneralmedal
+COMPARE #<c5talkedtoblacksmith>, 0
+IF= @firsttimeblacksmith.txt
+1: Hello, adventurer.
+1: Toss me the item you want to upgrade.
+END
+
+@paldrakemedalback
+IF Z136.10+Z665 @generalmedalbis2
+1: Welcome back, adventurer.
+1: Remember: if you can bring me a General Medal and ten Prina Guards Helmets, I'll reward you well.
+1: But maybe you want me to upgrade your equipment now?
+END
+
+@generalmedal1
+1: Hey!
+1: Where did you get that?!
+H: What?
+1: This medal!
+H: Well... I had troubles because of some idiots and...
+1: ... you killed a general as I can see!
+H: That was not my fault...
+1: I'm not blaming you!
+1: Actually, if you can find tem Prina guards helmets as well, I'll exchange the whole for this pair of boots.
+1: That's the best ones I have!
+SET chat.paldrakemedal, 1
+IF Z136.10 @generalmedalbis
+H: Alright, I'll try to find that.
+END
+
+@generalmedalbis2
+H: Hey!
+H: I've got what you was looking for!
+1: Fantastic!
+1: So, do you accept the deal?
+1: Do you want to exchange that for Infantry Boots?
+GOTO @generalmedalbisask
+
+@generalmedalbis
+H: I've got that!
+1: You're surprising, adventurer!
+1: Do you accept the deal?
+@generalmedalbisask
+ASK 60
+IF YES @generalmedalbisaskYES
+IF NO @generalmedalbisaskNO
+1: What?
+GOTO @generalmedalbisask
+
+@generalmedalbisaskNO
+1: You disappoint me.
+1: Come back if you change your mind.
+END
+
+@generalmedalbisaskYES
+1: Great!
+1: Here are the boots.
+SOUND foundItem.wav
+HOST_GIVE I1141
+HOST_TAKE Z136.10
+HOST_TAKE Z665
+H: Thanks!
+SET chat.paldrakemedal, ""
+END
+
+
+
+#include blacksmith.txt
+;
+;-------------------------------------------------------------------------------
+;
+SCENE 724, tavern1, SCENE, "Tavern"
+#include include.txt
+ACTOR 1, Moe, human61, 1, 30, 89
+ACTOR 2, "Friar Andree", human58, 1, 91, 90
+FACE 2, 0
+ACTOR 3, Gurdoz, human94, 1, 55, 85
+FACE 3, 0
+IF T3993|T3988 @halloweenActors
+GOTO @nextStepAfterHalloweenActors
+
+@halloweenActors
+ACTOR 1, "Moe", #<spEvent.Name>-humans, 61, 30, 89
+ACTOR 2, "Friar Andree", #<spEvent.Name>-humans, 58, 91, 90
+FACE 2, 0
+ACTOR 3, Gurdoz, #<spEvent.Name>-humans, 94, 55, 85
+FACE 3, 0
+@nextStepAfterHalloweenActors
+IF C56+T1041-T1042 @healerquest1
+IF T116 @knightquest1
+IF T1001+C20 @jesterquest1 
+IF C50-T44 @assastart
+@starting
+OFFER 2, 34
+1: Hello
+1: What do you want to drink?
+IF V99 @comparemerc.firsttime
+@normalV99
+END
+
+@comparemerc.firsttime
+COMPARE #<merc.firstTime>, 1
+IF= @normalV99
+GOTO @mercfirstime.txt
+
+#include merc-firsttime.txt
+
+@eventActorClick2
+SOUND sword1.wav
+SET temp.currentMerc, 2913
+#include merc-alreadyHired.txt
+@nextstepaftermercalreadyhired2913
+ACTOR 20, , merc2913, 0, 50, 50
+ACTOR 21, , hire, 0, 40, 75
+ACTOR 22, , cancel, 0, 60, 75
+END
+
+@eventActorClick3
+SOUND sword1.wav
+SET temp.currentMerc, 2914
+#include merc-alreadyHired.txt
+@nextstepaftermercalreadyhired2914
+ACTOR 20, , merc2914, 0, 50, 50
+ACTOR 21, , hire, 0, 40, 75
+ACTOR 22, , cancel, 0, 60, 75
+END
+
+#include merc-hire.txt
+
+@assastart
+MOVE 3, -20, 90, 1
+MOVE 2, 120, 90, 1
+MOVE 4, 120, 90, 1
+ACTOR 5, Adanar, human34, 3, 10, 100
+1: Hello.
+1: What do you want to drink?
+H: A beer, please.
+1: OK.
+WAIT 2
+MOVE 1, -10, 75
+5: Adventurer!
+H: Yes?
+H: What happened to you? You seem to be in a bad condition...
+5: I've been attacked by the guards of Prina... that's a long story.
+5: My name is Adanar.
+5: I am a member of the secret order of the assassins.
+H: Assassins?
+5: Our order was created soon after the First Invasion of the Chaos to fight the corrupted souls.
+5: The mission of the assassins was to infiltrate places were an army couldn't go in order to get rid of the chaos mages - the dissidents who chose to leave the schools of magic to join the Chaos's struggle.
+5: The institution still exists nowadays and unfortunately, it has no reason to disappear...
+H: And what are you doing here?
+5: I went to Prina for a mission.
+5: I had to get back an old evil relic and bring it to the Assassins Castle.
+5: But something went wrong.
+5: I've been attacked by several guards of the regent and I am too weak to go back to the castle.
+5: I think Prina will be my resting place...
+5: But I need to ask you a favour.
+H: Yes?
+5: Please, take this relic and bring it to the Assassins Castle, on the southern part of the island.
+5: The place is secret but I could give you a map showing the exact location.
+5: Please, do it for a man about to die...
+H: I will.
+5: Thank you.
+HOST_GIVE T1048
+HOST_GIVE T4
+HOST_GIVE T109
+HOST_GIVE T9
+HOST_GIVE T11
+HOST_GIVE T3005
+HOST_GIVE T3013
+HOST_GIVE T3006
+HOST_GIVE T3014
+HOST_GIVE T3007
+HOST_GIVE T3015
+HOST_GIVE T3022
+
+HOST_GIVE T44
+END
+
+@healerquest1
+COMPARE #<healerquest1>, 0
+IF> @healerq1inq
+GOTO @starting
+
+@healerq1inq
+1: What do you wanna drink?
+H: A beer, please.
+WAIT 2
+H: Do you know a guy called Aden?
+2: Yes, I do, why?
+H: I came from Mangeas Forest to give him some potions and I wondered if you knew something about the origin of his troubles.
+2: Not sure...
+2: He became strange just after he acquired an old relic.
+H: What relic?
+2: I don't know but I heard that some people from the necromancy academy would like to lay their hands on it.
+3: The necromancy academy?! The palace you mean!
+H: Hmm
+H: Ok , thanks.
+HOST_GIVE T1042
+END
+
+@knightquest1
+COMPARE #<knightsdfsdfsf>, 1
+IF= @starting
+ACTOR 5, "Sir Gerzel", human36, 1, 90, 98
+FACE 5, 0
+H: Sir Gerzel!
+H: What are you doing here?!
+H: The tournament will start in one hour!
+5: Leave me alone, kid.
+5: I don't want to participate.
+H: OK
+H: 1. I am not a kid.
+H: 2. I am not scared as you are.
+H: Look at you!
+H: You're drinking and getting drunk just to try to forget your cowardice.
+5: Shut up! You don't know what it is!
+H: What?!
+H: To be afraid to lose?!
+
+H: Come on!
+
+H: Do you want to remain the loser you are at the moment?
+H: Everybody is waiting for you, and you are hiding.
+H: Go to the Brotherhood, now!
+H: You cannot lose if you participate.
+H: You may be beaten but you won't lose.
+H: The only way to lose for you is to stay here and drink like all these boozers!
+H: <to the others> Sorry guys.
+H: So now you're going to come with me!
+5: You're probably right.
+5: Let's go.
+SET knightsdfsdfsf, 1
+END
+
+@jesterquest1 
+COMPARE #<tavjesterquest1>, 2 
+IF= @poorjesterbackquest1 
+COMPARE #<tavjesterquest1>, 1 
+IF= @jesterquest1backish 
+H: Hello 
+H: I am looking for a wagon. 
+H: does anybody here have one to rent? 
+3: I could rent mine 
+3: How about 1000 #<GP.name> a day? 
+WAIT 1 
+@menu1 
+SOUND sword1.wav
+MENU "Alright=@rent","No, it's too expensive=@tooexpensive" 
+GOTO @menu1 
+
+@tooexpensive 
+SOUND sword1.wav
+H: No, it's too expensive for me. 
+3: I could hardly make it cheaper. 
+3: That's the price. 
+3: You still don't want it? 
+WAIT 1 
+@menu2 
+SOUND sword1.wav
+MENU "Yes=@rent","No=@nojester" 
+GOTO @menu2 
+
+@poorjesterbackquest1 
+3: Ah you are back! 
+3: Do you have the money? 
+WAIT 1 
+GOTO @menu2 
+
+@nojester 
+SOUND sword1.wav
+H: No way, sorry.
+3: That's all... 
+SET tavjesterquest1, 1 
+END 
+
+@jesterquest1backish 
+3: Ah you are back! 
+3: Maybe you changed your mind? 
+WAIT 1 
+GOTO @menu2 
+
+@rent 
+SOUND sword1.wav
+3: Fine! 
+IF -G1000 @poorjester 
+HOST_TAKE T1001 
+HOST_TAKE G1000 
+HOST_GIVE T1002 
+3: Follow me, it's outside 
+WAIT 2 
+MOVE 1, -20, 90, 1 
+MOVE 2, -20, 90, 1 
+BKGND prina1 
+ACTOR 4, wagon, gnome4, 0, 30, 90
+3: It's here. 
+H: Err that's pretty small!
+3: Nah it is in your mind.
+H: Ah.
+END 
+
+@poorjester 
+3: Oh! You don't have the money! 
+3: Save 1000 #<GP.name> and come back. 
+3: I used to spend most of the days here. 
+SET tavjesterquest1, 2 
+3: hic 
+END
+;
+;-------------------------------------------------------------------------------
+;
+SCENE 725, "Prina1", SCENE, "Black Horse Tavern"
+#include include.txt
+SET blackHorse, 0
+COMPARE #<num.timeHour>, "8"
+IF< @open
+COMPARE #<num.timeHour>, "18"
+IF> @open
+IF R20 @closed
+@closed1
+N: The tavern seems to be closed.
+END
+
+@closed
+ACTOR 1, "Old Man", human129, 1, 50, 90
+1: The tavern is closed, young man.
+1: It opens only at night.
+1: You should come back at 7.
+@end2
+END
+
+@eventActorClick1
+IF T597 @gaminggggg
+END
+
+@gaminggggg
+COMPARE #<blackHorse>, 0
+IF= @end2
+COMPARE #<chat.gamingAtBlackHorseTavern>, 1
+IF= @gamingbackk
+H: Excuse me!
+H: I heard that one could bet here?
+1: Who told you about that?
+H: A friend of mine who uses to come here.
+1: Hmm... What do you want to play?
+WAIT 1.5
+SET chat.gamingAtBlackHorseTavern, 1
+@menugamingblackhorse
+SOUND sword1.wav
+MENU "Slot Machine=@gamingblackhorse1", "Monster Racer=@gamingblackhorse2", "Blackjack=@gamingblackhorse3"
+GOTO @menugamingblackhorse
+
+@gamingblackhorse1
+SOUND sword1.wav
+1: Alright.
+GAME 1
+END
+
+@gamingblackhorse2
+SOUND sword1.wav
+1: Alright.
+GAME 2
+END
+
+@gamingblackhorse3
+SOUND sword1.wav
+1: Alright.
+GAME 4
+END
+
+@gamingbackk
+1: Welcome back, %1.
+1: What do you want to play?
+GOTO @menugamingblackhorse
+
+@open
+BKGND "tavern1"
+SET blackHorse, 1
+ACTOR 1, "Barman", human65, 1, 20, 80
+ACTOR 2, "Darenzen", human96, 1, 40, 99
+ACTOR 3, "Lorien", wom55, 1, 89, 72
+FACE 3, 0
+IF T3993|T3988 @halloweenActors
+GOTO @nextStepAfterHalloweenActors
+
+@halloweenActors
+ACTOR 1, "Barman", #<spEvent.Name>-humans, 65, 20, 80
+ACTOR 2, Darenzen, #<spEvent.Name>-humans, 96, 40, 99
+ACTOR 3, Lorien, #<spEvent.Name>-wom, 55, 89, 72
+FACE 3, 0
+@nextStepAfterHalloweenActors
+IF C10-T3826 @supernewbcastle
+IF C56+T1041-T1042 @healerquest1
+IF T1035+C18 @priestquest2
+IF T1011 @jestquest3
+IF T1001+C20 @jesterquest1 
+IF C45 @merc
+@drink
+1: What do you wanna drink?
+OFFER 2, 34
+WAIT 2
+IF R33 @robbed
+IF V99 @comparemerc.firsttime
+@normalV99
+END
+
+@supernewbcastle
+COMPARE #<blackHorse.novicestalk>, 1
+IF= @supernewbcastleback
+1: Eh! A Super Novice!
+1: Maybe you'd be interested in buying equipment made specially for... your kind?
+H: Hmm?
+1: People are not supposed to sell that, yet I know someone who does.
+H: And where can I find him?
+1: In the Novices Castle.
+H: Nobody can return there...
+1: There is a secret gate.
+1: I may show for a little something.
+H: I see. 
+H: How much?
+1: 2000 tomans.
+H: Ouch!
+SET blackHorse.novicestalk, 1
+IF G2000 @supernewbcastleask
+END
+
+@supernewbcastleask
+1: So... does it sound good?
+@supernewbcastleask2
+ASK 300
+IF YES @supernewbcastleaskyes
+IF NO @supernewbcastleaskno
+1: What?
+GOTO @supernewbcastleask2
+
+@supernewbcastleaskyes
+SOUND kaching.wav
+HOST_TAKE G2000
+HOST_GIVE T3826
+1: Fine!
+1: Go to the first level of the training ground then, you can't miss it!
+END
+
+@supernewbcastleback
+1: Ah, you're back!
+1: So what about 2000 tomans for the hidden entrance of the novice castle?
+IF -G2000 @supernewbcastlepoor
+GOTO @supernewbcastleask2
+
+@supernewbcastlepoor
+H: I don't have that much money!
+@supernewbcastleaskno
+1: Pfft!
+END
+
+@comparemerc.firsttime
+COMPARE #<merc.firstTime>, 1
+IF= @normalV99
+GOTO @mercfirstime.txt
+
+#include merc-firsttime.txt
+
+@eventActorClick2
+SOUND sword1.wav
+SET temp.currentMerc, 2904
+#include merc-alreadyHired.txt
+@nextstepaftermercalreadyhired2904
+ACTOR 20, , merc2904, 0, 50, 50
+ACTOR 21, , hire, 0, 40, 75
+ACTOR 22, , cancel, 0, 60, 75
+END
+
+@eventActorClick3
+SOUND sword1.wav
+SET temp.currentMerc, 2900
+#include merc-alreadyHired.txt
+@nextstepaftermercalreadyhired2900
+ACTOR 20, , merc2900, 0, 50, 50
+ACTOR 21, , hire, 0, 40, 75
+ACTOR 22, , cancel, 0, 60, 75
+END
+
+#include merc-hire.txt
+
+@healerquest1
+COMPARE #<healerquest1>, 0
+IF> @healerq1inq
+GOTO @drink
+
+@healerq1inq
+1: What do you wanna drink?
+H: A beer, please.
+WAIT 2
+H: Do you know a guy called Aden?
+2: Yes, I do, why?
+H: I came from Mangeas Forest to give him some potions and I wondered if you knew something about the origin of his troubles.
+2: Not sure...
+2: He became strange just after he acquired an old relic.
+H: What relic?
+2: I don't know but I heard that some people from the necromancy academy would like to lay hand on it.
+3: The necromancy academy?! The palace you mean!
+H: Hmm
+H: Ok , thanks.
+HOST_GIVE T1042
+END
+
+@robbed
+SET temp.level, #<num.hostLevel>
+MUL temp.level, 100
+HOST_TAKE G#<temp.level>
+N: You suddenly realize there are #<temp.level> #<GP.name> missing in your purse.
+END
+
+@priestquest2
+COMPARE #<priest.blackHorse>, 1
+IF= @priestquest2again
+1: Hello, parson.
+1: Are you here to get drunk?
+H: I'm not here to joke.
+H: I need some information.
+1: Did you notice that it's not a tourist office here but a tavern?!
+1: I can't help you.
+H: I am sure you can, but you don't know it yet.
+H: 1000 #<GP.name> could possibly refresh your memory.
+1: Hmm
+1: What would you like to know?
+H: What can you tell me about three mercenaries who were hired here to lay their hands on a treaty between the temple and the regent? 
+H: They are dead now.
+1: Yeah, I might know them.
+1: But that was a long time ago...
+1: I would need 10000 #<GP.name> to remember.
+1: I need some motivation...
+WAIT 1.5
+IF -G7500 @nomoneypriestquest2
+@menu1priest
+SOUND sword1.wav
+MENU "Alright =@10000GPpriest2", "I don't have the money =@nomoneypriestquest2", "5000 Tomans, not 10000 =@ask5000priest"
+GOTO @menu1priest
+
+@nomoneypriestquest2
+SOUND sword1.wav
+H: I can't afford it.
+H: Even 8000 #<GP.name> would be too expensive for me.
+1: So go and get some!
+1: Don't waste my time!
+SET priest.blackHorse, 1
+END
+
+@poorpriest2
+H: I'd like to, but...
+GOTO @nomoneypriestquest2
+
+@10000GPpriest2
+SOUND sword1.wav
+IF -G10000 @poorpriest2
+H: OK
+1: Good.
+1: I want the money first.
+H: Alright.
+SOUND kaching.wav
+HOST_TAKE G10000
+GOTO @priestquest2answer
+
+@priestquest2answer
+1: Good.
+1: I don't know much about them.
+1: A guy came here, asked for mercenaries - I presented them to him and got a commission. That's all.
+H: What did he look like?
+1: Like anyone... Dark hair, brown eyes... He had a long black coat.
+H: Hmm.
+H: Do you know where the mercenaries lived?
+1: Yeah, they had a house by the coliseum, off the main street.
+H: Ok, thanks.
+HOST_GIVE T1036
+HOST_TAKE T1035
+END
+
+@ask5000priest
+SOUND sword1.wav
+H: No way.
+H: It's too expensive.
+H: I'll give you 5000 #<GP.name> if you tell me what I asked for.
+1: 9000 #<GP.name>
+H: 6000
+1: 8000
+H: 7000
+1: 7500
+H: Alright, 7500 #<GP.name>.
+WAIT 1
+SOUND kaching.wav
+HOST_TAKE G7500
+GOTO @priestquest2answer
+
+@priestquest2again
+1: Ah, you are back!
+1: So: 10000 #<GP.name> for the information, ok?
+WAIT 2
+GOTO @menu1priest
+
+@jestquest3
+ACTOR 6, Makel, human1, 1, 25, 90
+6: I think I owe you an explanation, %1.
+WAIT 1
+6: The bandits were right.
+6: Both the intendant and the regent are completely corrupted.
+6: The realm gets poor.
+6: And they abduct the money intended for the army while a new invasion of the chaos is coming very close!
+6: It must stop.
+6: I will now be in exile until we get strong enough to overthrow his tyranny.
+6: We'll probably meet again, %1.
+6: I will never forget what you did for me.
+HOST_TAKE T1011
+HOST_GIVE T1012
+HOST_GIVE T4001
+WAIT 2
+MOVE 6, 125, 90
+END
+
+@eventActorClick60
+N: Level required for the class quests:
+WAIT 1
+N: Level 20, 50, 75, 90.
+END
+
+@merc
+ACTOR 60, "", 3, 0, 95, 15
+COMPARE #<merc.sfsdfsfsdfsf>, 2
+IF> @mercintro
+COMPARE #<merc.sfsdfsfsdfsf>, 1
+IF= @mercbackish
+1: Hello.
+1: What do you want to drink?
+H: Err nothing, thanks.
+H: I am here because I was told that you may have contracts for mercenaries.
+1: What are you talking about?!
+1: There's nothing illegal here!
+1: Get out now!
+SET merc.sfsdfsfsdfsf, 1
+1: ' Does this kid really think he can be a mercenary?!
+2: ROFL!
+END
+
+@mercintro
+COMPARE #<merc.sfsdfsfsdfsf>, 4
+IF= @mercmain
+COMPARE #<merc.sfsdfsfsdfsf>, 3
+IF< @mercbackish
+1: So there's a new mercenary in Prina...
+1: Yeah someone told me about you.
+1: The Black Horse Tavern is the headquarters of the mercenaries of Athelias.
+1: I may help you find some contracts.
+1: I would take a small fee though.
+1: 5000 #<GP.name> a contract.
+1: We also have a bank account for mercenaries.
+1: We can keep up to 2 000 000 #<GP.name> here for you.
+1: Welcome among the mercenaries of Athelias!
+2: Welcome, bro!
+3: Welcome.
+1: Come back later, I may have something for you.
+SET hfghsgqfkjD%Lksdf, 0
+SET hqfdhgqdgfqreyhrhfghbdsdqdqdqegrhqqq, 137
+SET merc.sfsdfsfsdfsf, 4
+END
+
+@mercbackish
+1: I told you to scat!
+1: There is nothing for you here, kid!
+2: Yeah, get out!
+3: Do you want me to make him understand?
+1: Nah, that's ok.
+1: He's going to leave, right?!
+END
+
+@lastspeachmerc
+COMPARE #<mercqdgggqgqqgqedgq>, 1
+IF= @mercmain2
+1: Thank you for the last time, %1.
+1: The knight was one of the minions of the regent.
+1: We supported the rebellion against him and now the regent wants to see us all die.
+H: The rebellion?
+H: What was wrong with the regent?
+1: I think you'll soon discover it on your own...
+SET mercqdgggqgqqgqedgq, 1
+END
+
+@mercbooze
+SOUND sword1.wav
+H: A beer please.
+1: Alright.
+OFFER 2, 34
+END
+
+@pardon?2
+1: Pardon?
+GOTO @withask1
+
+@mercwithdraw
+SOUND sword1.wav
+H: I'd like to withdraw some cash.
+1: Alright
+SUB hqfdhgqdgfqreyhrhfghbdsdqdqdqegrhqqq, 137
+DIV hqfdhgqdgfqreyhrhfghbdsdqdqdqegrhqqq, 2
+COMPARE #<hfghsgqfkjD%Lksdf>, #<hqfdhgqdgfqreyhrhfghbdsdqdqdqegrhqqq>
+IF< @ban1
+IF> @ban1
+1: You have #<hfghsgqfkjD%Lksdf> #<GP.name> on your account at the moment.
+MUL hqfdhgqdgfqreyhrhfghbdsdqdqdqegrhqqq, 2
+ADD hqfdhgqdgfqreyhrhfghbdsdqdqdqegrhqqq, 137
+@withask1
+1: How much do you want?
+ASK 30
+IF Qnothing @withend
+IF Qforget^it @withend
+IF Qfuck^off @withend
+COMPARE #<lastAsk>, #<hfghsgqfkjD%Lksdf>
+IF> @toomuchwd
+COMPARE #<lastAsk>, 1
+IF< @pardon?2
+HOST_GIVE G#<lastAsk>
+SUB hqfdhgqdgfqreyhrhfghbdsdqdqdqegrhqqq, 137
+DIV hqfdhgqdgfqreyhrhfghbdsdqdqdqegrhqqq, 2
+SUB hfghsgqfkjD%Lksdf, #<lastAsk>
+SUB hqfdhgqdgfqreyhrhfghbdsdqdqdqegrhqqq, #<lastAsk>
+MUL hqfdhgqdgfqreyhrhfghbdsdqdqdqegrhqqq, 2
+ADD hqfdhgqdgfqreyhrhfghbdsdqdqdqegrhqqq, 137
+1: Alright.
+SOUND kaching.wav
+END
+
+@withend
+1: Alright.
+END
+
+@toomuchwd
+1: Sorry but as I told you, don't have enough money in your account.
+1: So
+GOTO @withask1
+
+@mercdeposit
+SOUND sword1.wav
+SUB hqfdhgqdgfqreyhrhfghbdsdqdqdqegrhqqq, 137
+DIV hqfdhgqdgfqreyhrhfghbdsdqdqdqegrhqqq, 2
+COMPARE #<hfghsgqfkjD%Lksdf>, #<hqfdhgqdgfqreyhrhfghbdsdqdqdqegrhqqq>
+IF< @ban1
+IF> @ban1
+1: You have #<hfghsgqfkjD%Lksdf> #<GP.name> in your account at the moment.
+MUL hqfdhgqdgfqreyhrhfghbdsdqdqdqegrhqqq, 2
+ADD hqfdhgqdgfqreyhrhfghbdsdqdqdqegrhqqq, 137
+@withask2
+1: How much do you want to deposit?
+ASK 30
+IF Qnothing @withend
+IF Qforget^it @withend
+IF Qfuck^off @withend
+SET hfghsgqfkjD%Lksdf2, #<hfghsgqfkjD%Lksdf>
+ADD hfghsgqfkjD%Lksdf2, #<lastAsk>
+IF -G#<lastAsk> @notenoughdep
+COMPARE #<hfghsgqfkjD%Lksdf2>, 2000000
+IF> @toomuchdep
+COMPARE #<lastAsk>, 1
+IF< @pardon?
+HOST_TAKE G#<lastAsk>
+ADD hfghsgqfkjD%Lksdf, #<lastAsk>
+SUB hqfdhgqdgfqreyhrhfghbdsdqdqdqegrhqqq, 137
+DIV hqfdhgqdgfqreyhrhfghbdsdqdqdqegrhqqq, 2
+ADD hqfdhgqdgfqreyhrhfghbdsdqdqdqegrhqqq, #<lastAsk>
+MUL hqfdhgqdgfqreyhrhfghbdsdqdqdqegrhqqq, 2
+ADD hqfdhgqdgfqreyhrhfghbdsdqdqdqegrhqqq, 137
+1: Alright.
+SOUND kaching.wav
+END
+
+@notenoughdep
+H: Err...
+H: Forget it : I don't have the cash on me.
+END
+
+@pardon?
+1: Pardon?
+GOTO @withask2
+
+@toomuchdep
+1: Sorry but I can only keep 2 000 000 #<GP.name> for you.
+SET temp.account, #<lastAsk>
+SUB hfghsgqfkjD%Lksdf2, 2000000
+1: Take #<hfghsgqfkjD%Lksdf2> #<GP.name> back.
+SOUND kaching.wav
+SUB temp.account, #<hfghsgqfkjD%Lksdf2>
+HOST_TAKE G#<temp.account>
+SET hqfdhgqdgfqreyhrhfghbdsdqdqdqegrhqqq, 2000000
+SET hfghsgqfkjD%Lksdf, 2000000
+MUL hqfdhgqdgfqreyhrhfghbdsdqdqdqegrhqqq, 2
+ADD hqfdhgqdgfqreyhrhfghbdsdqdqdqegrhqqq, 137
+END
+
+@contracts
+SOUND sword1.wav
+H: Do you have any new contracts for me?
+1: Not yet.
+1: You should come back in a couple of days.
+END
+
+@sry
+GOTO @mercmain
+
+@poor
+1: I have a contract but I see you can't pay my fee.
+1: Come back when you have 5000 #<GP.name> in your purse.
+1: I don't work for free.
+END
+
+@cmp1
+IF T57 @reward1
+IF T56 @hurry1
+IF -G5000 @poor
+1: Hello, %1.
+1: I have something for you.
+1: Someone called Denis has a debt towards a client of ours.
+1: Go and get the money back.
+1: He lives in Irkatshk.
+HOST_TAKE G5000
+HOST_GIVE T56
+END
+
+@hurry1
+1: What are you doing here?
+1: You must go and look for Denis!
+END
+
+@reward1
+H: Hey!
+H: I found Denis but the guy didn't have a penny.
+H: And he can't pay you back anymore from where he is now...
+1: You killed him?!
+H: Yeah, he attacked me, so...
+H: But I found two horses, as he has not use of them anymore, I took them.
+1: Good job.
+1: I guess one of the horses will pay the debt.
+1: You can keep the other one.
+HOST_GIVE I1010
+HOST_GIVE T53
+SOUND FoundItem.wav
+END
+
+@cmp2
+IF T54 @mercmain2
+IF T58 @reward2
+IF T59 @hurry2
+IF -G5000 @poor
+1: I have a new contract for you.
+1: You can have a better horse if you accept it.
+1: You have to rescue a young boy kidnapped by the goblins.
+1: I think he's a prisoner in their cave.
+1: His parents will reward you. 
+H: Uh?!
+H: Why would goblins kidnap a kid?
+H: Usually they just kill...
+1: Yeah that's strange but you're not paid to ask questions but to do the job...
+H: Hmm you're probably right.
+HOST_TAKE G5000
+HOST_GIVE T59
+END
+
+@reward2
+A: Welcome back, %1.
+1: The parents of the kid told me you succeeded.
+1: They are glad.
+1: This horse is for you.
+H: Thanks.
+HOST_GIVE I1011
+HOST_GIVE T54
+SOUND FoundItem.wav
+END
+
+@hurry2
+1: What are you waiting for?
+1: Hurry!
+1: If the kid is killed, you won't be paid!
+END
+
+@cmp3
+IF T61 @mercmain2
+IF -G5000 @poor
+1: Hello, %1
+1: I have a new contract for you, and trust me, you want this one.
+1: There's no gold to earn, but the client is a wizard and he can teach you a lot of things.
+1: He needs a baby dragon wing - don't ask me why.
+1: Just bring him the wing : he lives in Latsha.
+1: His name his Marlyn.
+HOST_TAKE G5000
+GIVE T61
+END
+
+@cmp4
+MOVE 1, 75, 95, 1
+FACE 1, 0
+MOVE 2, -25, 25, 1
+MOVE 3, -25, 25, 1
+MOVE 4, -25, 25, 1
+ACTOR 5, , human3, 1, 25, 90, 12
+FACE 3, 0
+5: ... come now, bastard!
+5: The regent wants you in jail!
+WAIT 2
+FACE 1, 2
+1: %1!
+1: Please! Help me!
+WAIT 1.3
+MOVE 1, 115, 90, 2
+MOVE 5, 120, 120, 1
+@loopmerc
+FIGHT 120.25.90
+IF WIN @reward4
+HOST_GIVE T60
+END
+
+@fightknight
+MOVE 1, 120, 90, 1
+MOVE 2, 120, 90, 1
+MOVE 3, 120, 90, 1
+GOTO @loopmerc
+
+@reward4
+N: You look for the barman but he ran away.
+H: Bah.
+H: I guess I can have a beer for free...
+HOST_GIVE I2
+SOUND FoundItem.wav
+WAIT 1
+N: You see the horse of the knight in front of the tavern and decide to take it.
+HOST_GIVE I1012
+HOST_TAKE T60
+HOST_GIVE T4001
+SOUND FoundItem.wav
+END
+
+@mercmain
+IF T4001 @lastspeachmerc
+IF T60 @fightknight
+IF V90+S200 @cmp4
+IF V75+T54 @cmp3
+IF V50+T53 @cmp2
+IF V20-T53 @cmp1
+@mercmain2
+1: Hello, %1
+1: What can I do for you?
+WAIT 2
+@menudgdfsfsqfsgdfg
+SOUND sword1.wav
+MENU "I want to withdraw money=@mercwithdraw", "I'd like to deposit money on my account=@mercdeposit", "Any contract?=@contracts", "I want a booze=@mercbooze"
+GOTO @menudgdfsfsqfsgdfg
+
+@jesterquest1 
+COMPARE #<nojesterquest>, 2 
+IF= @jesterquest1back2 
+COMPARE #<nojesterquest>, 1 
+IF= @jesterquest1back 
+H: Hey! 
+H: I am looking for a wagon. 
+H: Would someone here have one to rent? 
+1: A wagon, eh! 
+1: I think I can find that. 
+1: Gimme 5 minutes. 
+MOVE 1, -20, 90
+WAIT 5 
+MOVE 1, 30, 55 
+1: OK, I have one to rent for 2000 #<GP.name> a day. 
+1: Sound good? 
+WAIT 1 
+@menu1 
+SOUND sword1.wav
+MENU "Yes=@yesjesterquest","No=@nojesterquest" 
+GOTO @menu1 
+
+@yesjesterquest 
+SOUND sword1.wav
+1: Fine! 
+IF -G2000 @poorjester 
+HOST_TAKE G2000 
+HOST_TAKE T1001 
+HOST_GIVE T1002 
+1: Follow me, it's outside. 
+WAIT 2 
+MOVE 3, -20, 90, 1 
+MOVE 2, -20, 90, 1 
+SET blackHorse, 0
+BKGND prina1 
+ACTOR 4, Wagon, gnome4, 0, 30, 90
+BKGND prina1 
+1: It's here.
+H: Err that's pretty small!
+1: Nah it is in your mind...
+H: Ah
+END 
+
+@poorjester 
+1: Bah, you don't have the money. 
+1: Don't make me waste my time again. 
+SET nojesterquest, 2 
+
+@jesterquest1back2 
+1: Ah, it's you! 
+1: Do you have the money this time? 
+GOTO @menu1 
+
+@nojesterquest 
+SOUND sword1.wav
+1: Bah. 
+1: I doubt you could find a cheaper one.
+1: Feel free to come back if you change your mind. 
+SET nojesterquest, 1 
+END 
+
+@jesterquest1back 
+1: Ah you are back! 
+1: Did you change your mind? 
+WAIT 1 
+GOTO @menu1
+;
+;-------------------------------------------------------------------------------
+;
+SCENE 726, "houseinside1", SCENE, "John's"
+#include include.txt
+IF T1013 @reward?
+IF T1014 @backish
+@nobody
+N: The house is empty
+END
+
+@reward?
+COMPARE #<fretheguydfghjghk>, 1
+IF= @reward!
+GOTO @nobody
+
+@reward!
+ACTOR 1, John, human121, 1, 45, 75
+IF T3993|T3988 @halloweenActors
+GOTO @nextStepAfterHalloweenActors
+
+@halloweenActors
+ACTOR 1, "John", #<spEvent.Name>-humans, 121, 45, 75
+@nextStepAfterHalloweenActors
+1: Ah, %1!
+1: Thanks again for rescuing me!
+1: I had been caught with Makel during the revolt.
+1: I am born in Katadyn but I now I live in Prina.
+1: I tamed several beasts there and I still take care of them.
+1: Let me offer you this bear as a reward for having rescued me.
+H: Oh, thanks!
+1: If you want I could teach you how to tame monsters as well.
+1: It is not that hard.
+H: That's great!
+1: So have a seat please...
+WAIT 1
+N: He teaches you how to tame monsters
+HOST_GIVE S74
+SOUND bell2.wav
+HOST_GIVE T1014
+HOST_TAKE T1013
+HOST_GIVE I1041
+SOUND FoundItem.wav
+WAIT 1
+1: Here you go.
+1: I don't think I have anything left to teach you.
+1: May the gods help you in your journey, my friend.
+END
+
+@backish
+N: John doesn't seem to be home.
+END
+;
+;-------------------------------------------------------------------------------
+;
+SCENE 727, "houseinside1", SCENE, "Aden's"
+#include include.txt
+IF T1053 @assaempty
+IF C50-T1051 @assaempty
+ACTOR 1, Aden, aden, 1, 48, 77, 9
+IF C56 @healer
+COMPARE #<c5aden>, 0
+IF> @welcomenecro
+IF T1024 @necroquest1
+@grrrrrr
+IF T3993|T3988 @halloweenActors
+GOTO @nextStepAfterHalloweenActors
+
+@halloweenActors
+ACTOR 1, "Aden", aden, 2, 48, 77
+H: Nice disguise!
+1: What are you talking about?!
+H: Errr.... Excuse me I need to go!
+END
+
+@nextStepAfterHalloweenActors
+1: What are you doing here?
+1: This is my house, you know?!
+1: Go away!
+END
+
+@assaempty
+N: The place seems to be abandoned.
+END
+
+@healer
+IF T1043 @healerend
+IF V50+T1041 @healerq2
+IF V25+T1041 @healerquest1
+GOTO @grrrrrr
+
+@healerend
+MOVE 1, 120, 50, 1
+N: Aden is dead, the house is empty.
+END
+
+@necroquest2bis
+SEL 1
+POSE 1, 4, 2
+H: Hello, Aden.
+H: May I enter?
+1: Ah, welcome, %1!
+1: Please, have a seat!
+H: Thanks.
+H: We have to talk.
+H: We discovered the cause of your trouble. 
+H: You own an ancient relic whose power consumes you.
+H: You must give me the relic.
+H: It's your only chance...
+1: WHAT?!
+SEL 1
+POSE 1, 2, 3
+1: NEVER!
+WAIT 1
+SOUND thief3.wav
+1: What's that again?
+WAIT 1.5
+ACTOR 2, Guard, guard6, 1, 105, 85
+ACTOR 3, Guard, guard6, 1, 108, 80
+ACTOR 4, Guard, guard6, 1, 115, 92
+MOVE 2, 70, 80
+WAIT 2
+2: Guys! He's here!
+MOVE 3, 75, 85
+MOVE 4, 83, 92
+1: Who the hell are you?
+2: Calm down, Aden.
+2: We are the guards of the regent.
+MOVE 4, 40, 80
+2: We know that you own an old relic.
+2: In the name of the regent, I command you to hand it over now!
+H: You too?
+1: Never!
+4: The relic is here!
+1: Give me my relic back, right now!
+N: The guard runs away with the relic!
+MOVE 4, 120, 90
+MOVE 1, 120, 90, 1
+MOVE 2, 120, 90, 1
+MOVE 3, 120, 90, 1
+FLAGS 6
+FIGHT 143.70.80, 143.75.85, -366.48.77
+IF LOSE @healerq2LOSE
+H: Damn, he has left with the skull!
+H: Arvalon won't like this...
+HOST_GIVE T1043
+END
+
+@healerq2LOSE
+H: Damn, dead!
+H: And he's gone with the skull.
+H: Arvalon won't like this...
+HOST_GIVE T1043
+END
+
+@healerq2
+COMPARE #<healerq2>, 1
+IF= @necroquest2bis
+@healerquest1
+COMPARE #<healerquest1>, 0
+IF> @healerquest1again
+H: Mister Aden?
+1: Yes 
+1: <cough>
+H: I'm here at Mistress Avalon's request, from Mangeas Forest.
+H: She charged me to bring you those herbs and potions.
+1: Oh, thank you.
+SEL 1
+POSE 2
+H: Err
+SEL 1
+POSE 1, 1, 2
+H: What's wrong?
+1: What are you talking about?
+H: You are...
+H: Forget it.
+H: Take care.
+SET healerquest1, 1
+H: Whoa... I need a booze.
+END
+
+@healerquest1again
+SEL 1
+POSE 1, 2
+1: Ah! Welcome back, healer!
+1: Thanks for the medicines, I feel better.
+H: Really?
+H: You still seem to be a bit... ummm...
+H: Well, I must go.
+H: Goodbye.
+1: Bye.
+WAIT 1.5
+GOTO EXIT
+
+@necroquest1
+H: Hello.
+H: You are Aden, right?
+1: Yes, who are you?
+H: My name is %1.
+H: I am from the necromancy academy.
+H: Mistress Razel asked me to bring you this old book of spells for the relic you have.
+1: Oh, she finally accepted the deal!
+1: Show me the book.
+MOVE 1, #<num.hostX>, #<num.hostY>
+WAIT 5
+1: Splendid!
+1: Give me a minute.
+1: I'll bring the relic.
+MOVE 1, -20, 90
+WAIT 10
+MOVE 1, #<num.hostX>, #<num.hostY>
+1: Ah, here it is!
+1: Here you go!
+HOST_TAKE T1024
+HOST_GIVE T1025
+SET c5aden, 1
+END
+
+@welcomenecro
+1: Oh, %1!
+1: Welcome back, my young friend.
+1: How are you?
+WAIT 1
+@menu1
+SOUND sword1.wav
+MENU "I am fine, and you?=@finenecro", "I had a bad day=@badnecro"
+GOTO @menu1
+
+@badnecro
+SOUND sword1.wav
+H: I had a bad day.
+1: Have a seat, you'll feel better after a cup of tea.
+H: Thanks.
+END
+
+@finenecro
+SOUND sword1.wav
+H: I am fine, thanks.
+H: And you?
+1: As fine as an old man can be.
+1: Do you want a cup of tea?
+WAIT 1
+@menu2
+SOUND sword1.wav
+MENU "Yes, thanks=@yeanecro", "No, thanks=@nonecro"
+GOTO @menu2
+
+@yeanecro
+SOUND sword1.wav
+h: Yes, thank you.
+1: Please, have a seat.
+END
+
+@nonecro
+SOUND sword1.wav
+h: No, thanks.
+END
+;
+;-------------------------------------------------------------------------------
+;
+SCENE 728, houseinside1, SCENE, "Bandits"
+#include include.txt
+N: The house seems to be abandoned.
+IF T1036 @priestq2
+END
+
+@priestq2
+WAIT 1
+N: You search in the papers on the desk and find a bank note issued by the intendant of the palace.
+SET priestquest2, 1
+HOST_TAKE T1036
+WAIT 1
+N: You decide to go back to the temple to show it to Friar John.
+END
+;
+;-------------------------------------------------------------------------------
+;
+SCENE 729, prina1, SCENE, "To the Sewers"
+#include include.txt
+IF V20-T600 @quest
+IF T600-T601 @back
+@pass
+GOTO LINK 93, 0
+
+@quest
+ACTOR 1, Guard, guard6, 1, 45, 90
+IF T3993|T3988 @halloweenActors
+GOTO @nextStepAfterHalloweenActors
+
+@halloweenActors
+ACTOR 1, "Guard", #<spEvent.Name>-guard, 6, 45, 90
+@nextStepAfterHalloweenActors
+1: Halt! 
+1: What are you doing here?!
+H: I'm going to train my martial skills on some bugs, why?
+1: The sewers are closed, you cannot pass!
+H: Why?!
+1: The Regent decided to close the access since people saw a demon haunting the place.
+H: A demon, eh! Don't tell me that the Regent is scared by a little demon!
+1: Bah, if you think you are strong enough, you can pass after all!
+H: It's as if your demon was already dead!
+WAIT 2.3
+GIVE T600
+GOTO @pass
+
+@back
+ACTOR 1, Guard, guard6, 1, 45, 90
+1: Oh! This is the proud and strong adventurer who is not-scared-by -a-little-demon-but-cannot-kill-it!
+1: Do you want to go again to the sewers?
+H: Shut up and let me pass, I'll kill your demon this time!
+WAIT 2.5
+GOTO @pass
+;
+;-------------------------------------------------------------------------------
+;
+SCENE 731, weapons, SCENE, "Handicraft"
+#include include.txt
+ACTOR 1, Anais, wom18, 1, 45, 85
+1: Greetings, adventurer!
+CALL 110014@start
+END
+;
+;-------------------------------------------------------------------------------
+;
+SCENE 732, prina1, SCENE, "To the Vending Area"
+#include include.txt
+GOTO LINK 148, 9
+
+

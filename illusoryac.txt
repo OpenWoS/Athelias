@@ -1,0 +1,307 @@
+SCENE 7900, templeinside, SCENE, "Illusory Magic Academy"
+#include include.txt
+GOTO LINK 16, 13
+;
+;--------------------------------------------------------------------------------------------------
+;
+SCENE 7901, templeinside, SCENE, "Marleen"
+#include include.txt
+ACTOR 1, Marleen, wom46, 1, 40, 90
+IF T3993|T3988 @halloweenActors
+GOTO @nextStepAfterHalloweenActors
+
+@halloweenActors
+ACTOR 1, "Marleen", #<spEvent.Name>-wom, 46, 40, 90
+@nextStepAfterHalloweenActors
+IF C2+T3968-J113 @supernewbquest
+IF I104 @nextstepaftermistcoat
+IF Z76+T4001+V99 @mistcoat1
+IF Z77+T4001+V99 @mistcoat2
+@nextstepaftermistcoat
+IF -C80 @foreign
+ACTOR 60, "", 3, 0, 95, 15
+IF V90+T1203 @illuq3
+IF T1202 @illuq2something
+IF V65+T1201 @illuq2
+IF T1200 @illuq1
+COMPARE #<chat.illuac>, 1
+IF= @back
+1: Welcome to the Academy, %1.
+1: I am Marleen, director of the institute.
+1: I can teach you the basics of illusory magic, but you'll have to learn most of the skills we use on your own.1: Experience is primordial for illusionists.
+1: You should return in a while.
+1: I can't help you more : you need to train a bit first.
+SET chat.illuac, 1
+END
+
+@supernewbquest
+1: So no, you're not just an illusion.
+1: You really want to challenge me...
+WAIT 2.8
+MOVE 1, 150, 150, 1
+FIGHT 2926.40.90
+END
+
+@eventActorClick60
+N: Level required for the class quests:
+WAIT 1
+N: Level 40, 65, 90.
+END
+
+@mistcoat1
+COMPARE #<chat.mistCoatIlluAc>, 1
+IF= @mistcoat5
+1: Woo-hoo! An %Z76!
+1: Very interesting!
+1: I may make good use of it!
+1: If you can bring me an %Z77 as well I will reward you well.
+GOTO @mistcoat3
+
+@mistcoat2
+1: Woo-hoo! An %Z77!
+1: Very interesting!
+1: I may make good use of it!
+1: If you can bring me an %Z76 as well I will reward you well.
+SET chat.mistCoatIlluAc, 1
+@mistcoat3
+IF Z77+Z76 @mistcoat4
+H: I'll try to find one.
+END
+
+@mistcoat4
+1: Amazing!
+1: Do you want to exchange them for this magical coat?
+@mistcoat4ask
+ASK 60
+IF YES @mistcoat4YES
+IF NO @mistcoat4NO
+1: Pardon?
+GOTO @mistcoat4ask
+
+@mistcoat4YES
+1: Great!
+1: Here is the coat!
+SOUND foundItem.wav
+HOST_GIVE I104
+HOST_TAKE Z76
+HOST_TAKE Z77
+END
+
+@mistcoat4NO
+1: I guess I can't force you...
+1: Come back if you change your mind.
+END
+
+@mistcoat5
+IF Z77+Z76 @mistcoat6
+1: Welcome back.
+H: Hello.
+H: I'm still looking for the trophies.
+1: Good.
+1: As I told you, I would make good use of an %Z76 and an %Z77.
+END
+
+@mistcoat6
+H: Hello.
+H: I've found an %Z76 and an %Z77.
+GOTO @mistcoat4
+
+@illuq3back
+1: Hello, %1.
+1: You can take your time to find some mercenaries, but you shouldn't wait too long before going there.
+1: We don't know what could happen.
+END
+
+@illuq3rew
+H: The vortex is closed. 
+H: The major demon is dead.
+1: I knew you would succeed, %1.
+1: I am proud of you.
+1: You are now as mighty as most of the masters of the Academy.
+1: I think it's now time for me to teach you a powerful spell that only a few illusionists know: how to make the illusions real.
+1: Have a seat, and listen.
+WAIT 1.5
+N: She teaches you how to summon an illusion.
+HOST_GIVE S266
+HOST_GIVE T4001
+SOUND bell2.wav
+WAIT 2
+1: You can go now, %1, and find your own way.
+1: I guess we will never hear of Jeren again...
+END
+
+@illuq3end
+1: Welcome back, %1.
+1: There is nothing more I can teach you: you've already learnt all what an illusionist should know.
+1: You now have to count only on yourself to train your skills.
+1: May the gods help you in your journey, illusionist.
+END
+
+@illuq3
+IF T1205+S266 @illuq3end
+IF T1205-S266 @illuq3rew
+IF T1204 @illuq3back
+1: Hello, %1.
+1: After having studied the warpstone during some weeks, I figured it was a very powerful piece.
+1: My guess is that it could open a vortex to a chaotic dimension.
+1: If we let this happen, it could be a second invasion of the Chaos.
+1: We must try and prevent this at all costs. 
+1: My instinct says that someone planed to open a link from Jeren's tomb.
+1: You should return to the Crypt and use the stone there so you can reach the chaotic dimension and kill the demonic lord of the place.
+1: This is the only way to stop them.
+1: This is probably what Jeren had in mind when he contacted you.
+1: But beware: the place will probably be more dangerous than anywhere else on the world.
+1: You should try to find some crazed mercenaries to go with you.
+HOST_GIVE I1075
+HOST_GIVE T3997
+HOST_GIVE T1204
+SOUND FoundItem.wav
+END
+
+@illuq2someback
+1: What are you waiting for, %1?
+1: You must go to Irezar and find this warpstone.
+END
+
+@illuq2warps
+H: Hello, Mistress Marleen.
+H: I have the warpstone.
+1: Really? 
+1: Give it to me, I need to study its power before we can make a decision.
+H: It is here.
+1: Ok, please leave me alone now, I need some calm.
+HOST_TAKE I1073
+END
+
+@illuq2backzfz
+1: Welcome back, %1.
+1: I am still studying the power of the warpstone.
+1: You should come back in a while ; I'll probably know what to do with it then.
+END
+
+@illuq2something
+IF I1073 @illuq2warps
+IF T1203 @illuq2backzfz
+COMPARE #<illuq2>, 2
+IF= @illuq2someback
+1: Let me guess : you've seen the ghost again?
+H: Yes : he told me something about a stone somewhere in Irezar, in a crypt I think.
+1: A stone?
+H: A warpstone. He told me about a gate that had to be closed as well.
+1: Warpstones are powerful items. There were used to create a passage through the warp to a chaotic dimension.
+1: That's a very long time I heard of one of them.
+1: There are only a few warpstones left in the world.
+1: If there is one in Irezar, you must go and find it.
+1: Maybe we'll figure out what the ghost is expecting you to do with it then.
+SET illuq2, 2
+END
+
+@illuq2
+COMPARE #<illuq2>, 1
+IF= @back
+1: Welcome back, %1.
+1: I have some news concerning Jeren.
+1: The Necromancy Academy contacted me and told me a strange story.
+1: Jeren had a formation in illusory magic.
+1: Nobody had ever heard about necromancy before the first invasion.
+1: Jeren seemed to have been fascinated by the death and what's next.
+1: You know that the difference between illusion and reality is thin, very thin. 
+1: He used to summon illusory undead, and its power growing up, he figured out how to make them real, and raise creatures from the death.
+1: But you need to be well prepared to become a necromancer, or your heart will dim.
+1: And Jeren wasn't.
+1: You know what happened next.
+H: Interesting. But what is he looking for now?
+1: I think he just want to do penance for his sins and rest in peace.
+H: Yes, but that still doesn't explain why he seems to need the help of an illusionist.
+1: No, indeed.
+SET illuq2, 1
+END
+
+@illuq1back
+1: Welcome back, %1.
+1: Have you seen any other ghost?
+H: I feel some irony in your voice...
+END
+
+@quest1rew
+IF T1201 @back
+1: Welcome back, %1.
+H: I went to the Necromancy Academy.
+1: What did they say?
+H: They told me something about an old relic, the Skull of Jeren, that appeared again.
+H: They succeeded in getting it back, but the member of the Academy who got it to study it got corrupted by its evil power and became crazy.
+H: He summoned an army of undead and besieged Athalantis, but he got defeated and he's now in a jail in Prina.
+H: The skull seems to be now in the palace of the Regent.
+1: Interesting.
+1: But I still don't know why Jeren - if it was his ghost - chose to contact an illusionist and not a necromancer.
+1: Very strange.
+HOST_GIVE T1201
+END
+
+@quest1.3
+1: Welcome back, %1.
+1: Did you go to the Necromancy Academy?
+H: Not yet.
+END
+
+@illuq1.2
+COMPARE #<illuq1>, 4
+IF= @quest1rew
+COMPARE #<illuq1>, 3
+IF= @quest1.3
+H: I saw him again.
+1: The ghost?
+H: Yes, the ghost.
+H: He told me something about an ancient curse on Irezar and a grave opened.
+WAIT 2
+1: I wonder...
+1: Have you ever heard of Lord Jeren?
+H: No.
+1: He was the governor of Irezar province before the first invasion.
+1: He was also one of the most powerful magician of yore: he is the founder of the Necromancy Academy.
+1: But the Chaos corrupted his heart and he allied with our enemies during the first invasion. 
+1: Maybe there is a relation with your ghost...
+1: You should go to the Necromancy Academy of Irezar to ask if strange things happened there as well.
+SET illuq1, 3
+END
+
+@illuq1
+COMPARE #<illuq1>, 1
+IF= @illuq1back
+IF> @illuq1.2
+1: Hello, %1.
+1: What can I do for you?
+H: I think I am really tired.
+1: What?
+H: I saw what seemed to be a ghost.
+1: A ghost or an illusion?
+H: He seemed to be real. As real as an illusion can be.
+1: Did he say something?
+H: Yes, but that was not clear... Something about deads coming back to life and an old curse.
+1: Does your ghost have a name?
+H: I don't know it.
+1: Very strange.
+1: Return to me if such things happen again.
+SET illuq1, 1
+END
+
+@back
+1: Welcome back, %1.
+1: Is there something I can do for you?
+END
+
+@mistcoatforeignback
+1: Welcome back, adventurer.
+1: How do you like the magical coat?
+H: I think I've been cheated...
+H: I can't use it!
+1: Well, of course you need to be an illusionist to use it, but I'm sure you could trade it to your advantage.
+H: Hmm...
+END
+
+@foreign
+IF I104 @mistcoatforeignback
+1: Welcome, foreigner.
+1: The masters of the Academy can't do much for you.
+1: You should go and seek masters somewhere else.
+END

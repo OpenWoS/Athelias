@@ -1,0 +1,154 @@
+   0, "Athelias2.jpg", "Athelias", "Athelias", 48, 21
+   1, "rodeurs.jpg", "Castle", "Castle", 48
+   2, "palace3.jpg", "Athalantis Townhall", "Athalantis Townhall", 48
+   3, "Terendrozinva.jpg", "Battlefield", "Battlefield", 48, 22
+   4, "necroac.jpg", "Necromancy Academy","Necromancy Academy",48
+   5, "deathdancers.jpg", "Death Dancers Brotherhood", "Death Dancers Brotherhood", 48
+   6, "dungeon.jpg", "Prison", "Prina Prison", 48, 27
+   7, "prina.jpg", "Prina", "Prina", 48, 28
+   8, "regent.jpg", "Palace of the Regent", "Palace of the Regent", 48, 28
+   9, "guild.jpg", "Guild Hall", "Guild Hall",  680
+   10, "arguazil.jpg", "Arguazil - The dwarven Kingdom", "Arguazil", 48, 28
+   11, "alchemist.jpg", "Alchemy Academy", "Alchemist Academy", 48, 28
+   12, "terendroz.jpg", "Terendroz - The gnomish Kingdom", "Terendroz", 48, 28
+   13, "mangeas.jpg", "Forest of Mangeas - The elven Kingdom", "Forest of Mangeas", 48, 28
+   14, "prinatemple.jpg", "Prina Temple", "Prina Temple", 48
+   15, "oasiscave1.jpg", "Goblins Cave", "Goblins Cave", 48
+   16, "latsha.jpg", "Latsha", "Latsha", 48, 28
+   17, "serevan.jpg", "Severan Castle", "Serevan Castle", 48, 27
+   18, "irezar.jpg", "Ruins of Irezar", "Ruins of Irezar", 48, 28
+   19, "kotor.jpg", "Kotor", "Benadrim", 48, 28
+   20, "assassins.jpg", "Assassins hidden Castle", "Assassins Hidden Castle", 48, 28
+   21, "necromancer.jpg", "Palace of the evil necromancer", "Irezar Palace", 48, 27
+   22, "dungeon.jpg",  "Dungeon", "Dungeon", 48, 27
+   23, "wormcave.jpg", "Goblin Cave, lvl 2", "Goblin Cave, lvl 2", 48
+   24, "dungeonlvl1.jpg", "Dungeon, lvl 1", "Dungeon, lvl 1", 48, 27
+   25, "dungeonlvl2.jpg", "Dungeon, lvl 2", "Dungeon, lvl 2", 48, 27
+;   26, "tower.jpg", "Tower 1, lvl 1", "Tower 1, lvl 1", 48
+;   27, "tower.jpg", "Tower 1, lvl 2", "Tower 1, lvl 2", 48
+;   28, "tower.jpg", "Tower 2, lvl 1", "Tower 2, lvl 1", 48
+;   29, "tower.jpg", "Tower 2, lvl 2", "Tower 2, lvl 2", 48
+;   30, "tower.jpg", "Tower 3, lvl 1", "Tower 3, lvl 1", 48
+;   31, "tower.jpg", "Tower 3, lvl 2", "Tower 3, lvl 2", 48
+;   32, "tower.jpg", "Tower 4, lvl 1", "Tower 4, lvl 1", 48
+;   33, "tower.jpg", "Tower 4, lvl 2", "Tower 4, lvl 2", 48
+   34, "lostcity.jpg", "Lost City", "Lost City", 48, 23
+   35, "guild.jpg", "Brotherhood of the Flamming Blade", "Flaming Blade Brotherhood", 48, 28
+   36, "katadyn.jpg", "Forest of Katadyn", "Forest of Katadyn", 48, 28
+   37, "petarena.jpg", "Pet Arena", "Pet Arena", 55, 28
+   38, "paladins.jpg", "Castle of the Paladins", "Castle of the Paladins", 48, 28
+   39, "Oasiscave1.jpg", "Mine", "Mine", 48, 27
+   40, "irkatshk.jpg", "Irkatshk", "Irkatshk", 48, 28
+   41, "athalantis.jpg", "Athalantis Port", "Athalantis Port", 48, 28
+   42, "armeniscity.jpg", "Armenis", "Armenis", 48, 28
+   43, "illusionist.jpg", "Palace of the Illusions", "Palace of the Illusions", 48, 27
+   44, "arena2.jpg", "Coliseum", "Coliseum", 12340, 28
+   45, "underground.jpg", "Undergroung Galleries", "Underground Galleries", 16384, 21
+   46, "varanas.jpg", "Varanas Castle", "Varanas Castle", 48, 27
+   47, "varanascat.jpg", "Catacombs", "Catacombs", 48, 27
+   48, "rodeurs.jpg", "Rodeurs hidden Temple", "Rodeurs hidden Temple", 48, 28
+   49, "jester.jpg", "Jesters Place", "Jesters Guild", 48, 28
+   50, "Oasiscave1.jpg", "Catacombs, lvl 2", "Catacombs, lvl 2", 48, 27
+   51, "prinatemple.jpg", "Temple of the Ancient Order", "Temple of the Ancient Order", 48, 28
+;   52, "Evergreen.jpg", "Evergreed", "Evergreed", 48, 21
+   53, "armenis.jpg", "Armenis Island", "Armenis Island", 48, 21
+   54, "hardcores.jpg", "Barbarians Training Ground", "Barbarians Training Ground", 110772, 27
+   55, "tg1.jpg", "Training Ground, lvl 1","Training Ground, lvl 1", 32, 21
+   56, "tg8.jpg", "Training Ground, lvl 2","Training Ground, lvl 2", 32, 21
+   57, "tg1.jpg", "Training Ground, lvl 3","Training Ground, lvl 3", 32, 21
+   58, "tg8.jpg", "Training Ground, lvl 4","Training Ground, lvl 4", 32, 21
+   59, "tg5.jpg", "Training Ground, lvl 5","Training Ground, lvl 5", 32, 21
+   60, "tg8.jpg", "Training Ground, lvl 6","Training Ground, lvl 6", 32, 21
+   61, "tg1.jpg", "Training Ground, lvl 7","Training Ground, lvl 7", 32, 21
+   62, "tg8.jpg", "Training Ground, lvl 8","Training Ground, lvl 8", 32, 21
+   63, "tg8.jpg", "Arena","Arena", 8228, 21
+   64, "palace3.jpg", "Athalantis Townhall 2", "Athalantis Townhall", 48, 28
+   65, "palace3.jpg", "Athalantis Townhall 3", "Athalantis Townhall", 48, 28
+   66, "palace3.jpg", "Athalantis Townhall 4", "Athalantis Townhall", 48, 28
+   67, "illusionistisland.jpg", "Karsheek Island", "Karsheek Island", 48, 21
+   68, "desert.jpg", "Desert", "Tahamanraset", 48, 25
+   69, "dream1.jpg", "Dreamlands, level 1", "Dreamlands, level 1",
+   70, "dream2.jpg", "Dreamlands, level 2", "Dreamlands, level 2",
+   71, "dream3.jpg", "Dreamlands, level 3", "Dreamlands, level 3",
+   72, "dream4.jpg", "Dreamlands, level 4", "Dreamlands, level 4",
+   73, "dream5.jpg", "Dreamlands, level 5", "Dreamlands, level 5",
+   74, "dream6.jpg", "Dreamlands, level 6", "Dreamlands, level 6",
+   75, "dream7.jpg", "Dreamlands, level 7", "Dreamlands, level 7",
+   76, "dream8.jpg", "Dreamlands, level 8", "Dreamlands, level 8",
+   77, "atheliascave1.jpg", "Athelias Cave #1", "The Cave, level 1", 48, 21
+   78, "atheliascave2.jpg", "Athelias Cave #2", "The Cave, level 2", 48, 21
+   79, "necroac.jpg", "Illusory Magic Academy", "Illusory Magic Academy", 48, 28
+   80, "desert8.jpg", "Sadarmand", "Sadramand", 48, 25
+   81,"desert1.jpg","Desert 1","Desert", 48, 25
+   82,"desert2.jpg","Desert 2","Around Aralshek's Sepulchre", 48, 25
+   83,"desert3.jpg","Desert 3","The Long Way", 48, 24
+   84,"desert4.jpg","Desert 4","By Sadramand", 48, 24
+   85,"desert5.jpg","Desert 5","Sand Hell", 48, 24
+   86,"desert6.jpg","Desert 6","Sand Worm Lair", 48, 26
+   87,"desert7.jpg","Desert 7","The Light", 48, 24
+   88,"healers.jpg", "Healers Sanctuary", "Healers Sanctuary", 40, 28
+   89,"dungeonlvl1.jpg","Crypt","The Crypt", 16432, 27
+   90,"darkwoods.jpg","Dark Woods","Dark Woods", 48, 21
+   91,"swamp.jpg","Swamps","Southern Swamps", 48, 21
+   92,"alarian.jpg","alarian","Alarian Valley", 48, 21
+   93,"sewers.jpg","sewers","Prina Sewers", 48, 21
+   94,"creek.jpg","creek","Thesarian Creek", 48, 21
+   95,"desertcave2.jpg","desertcave1","Corridor of Talween", 48, 25
+   96,"desertcave1.jpg","desertcave2","Corridor of Talween", 48, 25
+   97,"wormcave2.jpg","Sand Worm Lair","Sand Worm Lair", 48, 25
+   98,"kotorcastle.jpg","Kotor Castle","Castle", 48, 28
+   99,"templars.jpg","Templars Castle","Templars Castle", 48, 25
+   100, taj1.jpg, "taj1.1", "Taj Isha's Mausoleum, level 1", 48, 26
+   101, taj1.jpg, "taj1.2", "Taj Isha's Mausoleum, level 1", 48, 26  
+   102, taj1.jpg,  "taj1.3", "Taj Isha's Mausoleum, level 1",  48, 26
+   103, taj1.jpg,  "taj1.4", "Taj Isha's Mausoleum, level 1",  48, 26
+   104, taj1.jpg,  "taj1.5", "Taj Isha's Mausoleum, level 1",  48, 26
+   105, taj1.jpg,  "taj1.6", "Taj Isha's Mausoleum, level 1",  48, 26
+   106, taj1.jpg,  "taj1.7", "Taj Isha's Mausoleum, level 1",  48, 26 
+   107, taj1.jpg,  "taj1.8", "Taj Isha's Mausoleum, level 1",  48, 26
+   108, taj1.jpg,  "taj1.9", "Taj Isha's Mausoleum, level 1",  48, 26
+   109, taj1.jpg,  "taj1.10", "Taj Isha's Mausoleum, level 1",  48, 26
+   110, necroac.jpg, "Templars Castle Dungeon", "Templars Castle Dungeon", 48, 28
+   111, halloween.jpg, "Halloween Chaotic Dimension", "Halloween Chaotic Dimension", 48, 22
+   112, lostcity.jpg, Obrovac, Obrovac, 48, 28
+   113, arguazil.jpg, Thanaris, Thanaris, 48, 28
+   114, DV.jpg, "Deads Valley",  "Deads Valley", 48, 21
+   115, OW1.jpg, "Towards the Necromancer Palace", "Towards the Necromancers Palace", 48, 21
+   116, "necromancer.jpg", "NP", "Necromancers Palace", 48, 21
+   117, "darkwoods.jpg", "Forest of Saraliandine", "Forest of Saraliandine", 48, 21
+   118, "katadyn.jpg", "Dark Areas of Saraliandine", "Dark Areas of Saraliandine", 48, 21
+   119, "darkwoods.jpg", "Saraliandine 6", "Saraliandine", 48, 21
+   120, taj3.jpg,  "taj3", "Taj Isha's Mausoleum, level 3",  48, 26
+   121, taj3.jpg,  "taj3.2", "Taj Isha's Mausoleum, level 3",  48, 26
+   122, taj3.jpg,  "taj3.3", "Taj Isha's Mausoleum, level 3",  48, 26
+   123, aralshek.jpg, "Aralshek", "Aralshek's Sepulchre", 48, 26
+   124, 22.jpg, "tahamanraset palace", "Palace", 8240, 26
+   125, harem.jpg, "Tahamanraset harem", "Harem", 48, 26
+   126, atheliascave2.jpg, "Desert Galleries", "Underground Galleries", 16432, 26
+   127, "Terendrozinva.jpg", "Battlefield2", "Battlefield", 48, 22
+   128, "Terendrozinva.jpg", "Battlefield3", "Battlefield", 48, 22
+   129, "Terendrozinva.jpg", "Battlefield4", "Battlefield", 48, 22
+   130, "Terendrozinva.jpg", "Battlefield5", "Battlefield", 48, 22
+   131, "Terendrozinva.jpg", "Battlefield6", "Battlefield", 48, 22
+   132, "Terendrozinva.jpg", "Battlefield7", "Battlefield", 48, 22
+   133, "necroac.jpg", "Abandoned Tower", "Abandoned Tower", 48, 28
+   134, "katadyn.jpg", "Saraliandine 2", "Saraliandine", 48, 21
+   135, "darkwoods.jpg", "Saraliandine 3", "Saraliandine", 48, 21
+   136, "katadyn.jpg", "Saraliandine 4", "Saraliandine", 48, 21
+   137, "darkwoods.jpg", "Saraliandine 5", "Saraliandine", 48, 21
+   138, ban.jpg, "Chaotic 1", "Warp", 48, 27
+   139, kotor2.jpg, Kotor2, Kotor, 48, 28
+   140, necromancer.JPG, "NP2", "Necromancers Palace", 48
+   141, atheliascave2.jpg, "Thanaris Galleries", "Underground Galleries", 48, 29
+   142, "submarine.jpg", "submarine", "Submarine Kingdom", 48, 28
+   143, "katadyn.jpg", "Archers Training Camp", "Archers Training Camp", 48, 28
+   144, "PortofSaraliandine.jpg", "Port of Saraliandine", "Port of Saraliandine", 48, 21
+   145, "desertcave1.jpg","desertcave3","Corridor of Talween", 48, 25
+;   146, jungle
+   147, "necroac.jpg", "Wizardry Academy", "Wizardry Academy", 48, 28
+   148, vending.jpg, "vending", "Vending Area", 48, 28
+
+;
+998, ban.jpg, guildban, "Hall of Sins", 23732
+999, ban.jpg, ban, "Nightmare Lands", 23732
+

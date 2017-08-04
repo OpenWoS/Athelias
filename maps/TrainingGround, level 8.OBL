@@ -1,0 +1,344 @@
+SCENE 110004
+@start
+IF I225-C50|I226-C50|I227-C50|I228-C50|I229-C50|I230-C50|I231-C50|I232-C50|I233-C50|I234-C50 @sinWeaponsTake
+@sinWeaponsTakeNext
+COMPARE #<num.hostCookieFaults>, 0
+IF> @cookiesmodded
+@nextstepaftercookiesmodded
+IF #999|#998 @ergenhfjhjtffsqqtyh
+STRSTR %1, "racist"
+IF> @ban2.21
+STRSTR %1, "hitler"
+IF> @ban2.21
+STRSTR %1, "nigger"
+IF> @ban2.21
+STRSTR %1, "dickhead"
+IF> @ban2.21
+; unbanned: SOUL 2079
+;STRSTR "", "-#<str.soul>-"
+;IF> @ban3.1
+; unbanned: Dark Lotus
+;STRSTR "", "-#<str.uniform>-"
+;IF> @ban1guild.2
+STRCMP #<str.soul>, "SOUL 2949"
+IF= @jane
+@janenext
+STRCMP #<str.soul>, "SOUL 2006"
+;IF= @ergenhfjhjtffsqqtyh1
+IF= @banmad
+STRCMP #<str.soul>, "SOUL 3171"
+;IF= @ergenhfjhjtffsqqtyh1
+IF= @banmad
+STRCMP #<str.soul>, "SOUL 2465"
+IF= @ergenhfjhjtffsqqtyhfelty
+COMPARE #<num.hostHP>, #<num.hostMaxHP>
+IF> @ban2.3
+IF C1-V99|T668 @ban3.4
+IF M2|M0 @ban2.5
+COMPARE #<num.hostBirthYear>, 2005
+IF< @ban2.6
+IF> @nextpartafterbirthyearscriptban
+COMPARE #<num.hostBirthMonth>, 5
+IF< @ban2.6
+IF> @nextpartafterbirthyearscriptban
+COMPARE #<num.hostBirthDay>, 3
+IF< @ban2.6
+@nextpartafterbirthyearscriptban
+IF I5|I6 @ban1.7
+IF C87|S714|S715|S716|S717|S718|S719|S720|S721|S722|S660|I3010|I3011|I3012|I3013|I3014|I3015|I3016|I3017|I3018|I3019|I3020|I3021|I3022|I3023|S758 @ban3.8
+@ergenhfjhjtffsqqtyhfelty
+IF S767|S768|S769|S770|S771|S772|S773|S774|S714|S715|S716|S717|S718|S719|S720|S721|S722|S723|S765|S762|S763|S764|S766 @takereservedspellsdgffds
+@madprotectionover2
+IF C87+#999 @ergenhfjhjtffsqqtyh
+IF C87+#998 @ergenhfjhjtffsqqtyh
+;IF GS @ban.txt1
+;COMPARE #<num.hostAge>, #<num.hostTotalAge>
+;IF> @ban2
+@ban.txt1
+COMPARE #<num.hostPetLevel>, 99
+IF> @ban2.9
+IF C88-#999 @ban1.10
+IF S661-C60|S662-C60|S663-C60|S664-C60|S665-C60|S666-C60|S667-C60|S668-C60|S669-C60|S670-C60|S671-C60|S672-C60|S654|S655|S656|S657|S658|S659|S673|S674|S675|S266-C80 @ban2.11
+IF C87 @banweapoverfsfqqqq
+IF T3828-C10 @bansupernewbroo
+@bansupernewbroo2
+IF T3987-T3828 @bansupernewbroo3
+@bansupernewbroo4
+IF C10 @nextaftersupernewbs
+IF T3827 @ban1.20
+; puppets	      ; shields			; runes				; rosary		; armor				; paintings	 ; tunics		; robes			; 2-handed swords	; bow
+IF T3023-C20|T1-C1-C11-C15-C20-C22-C45-C55-C87-C3|T2-C7-C16-C25-C30-C35-C40-C43-C56-C70-C80|T3-C18-C15-C3|T4-C1-C11-C20-C22-C3-C45-C50-C55-C61-C87|T5-C60|T6-C5-C3|T7-C7-C15-C16-C3-C18-C25-C30-C35-C40-C43-C70-C80-C56|T10-C5-C3|T3020-C61 @ban1.12
+IF T2999 @banweapoverfsfqqqq
+;
+;----------------------- Tokens pouvant être donnés comme récompense ------------------------
+;
+; 2nd sword   ; 2nd dagger    ; sword                                                   ; staff                                                                                   ; fetishes           ; knuckles          ; axe             ; daggers
+IF T8-C60-C3|T9-C20-C50|T3016-C1-C22-C3-C55-C60-C5-C3|T3017-C16-C25-C30-C35-C40-C43-C56-C70-C80|T3018-C18-C3|T3019-C11-C7|T3021-C45|T3022-C61-C20-C50-C56 @ban1.13
+;
+;------------------------------------------------------------------------------------------------------------------------------
+;
+@nextaftersupernewbs
+@banweapoverfsfqqqq
+GOTO @ban.txtswitch#<switchcookie>
+
+@sinWeaponsTake
+HOST_TAKE I225.100 
+HOST_TAKE I226.100 
+HOST_TAKE I227.100 
+HOST_TAKE I228.100 
+HOST_TAKE I229.100 
+HOST_TAKE I230.100 
+HOST_TAKE I231.100 
+HOST_TAKE I232.100 
+HOST_TAKE I233.100 
+HOST_TAKE I234.100
+N: You can't use throwing weapons!
+GOTO @sinWeaponsTakeNext
+
+@bansupernewbroo
+HOST_TAKE T3828
+GOTO @bansupernewbroo2
+
+@bansupernewbroo3
+HOST_TAKE T3987
+GOTO @bansupernewbroo4
+
+@takereservedspellsdgffds
+HOST_TAKE S767
+HOST_TAKE S768
+HOST_TAKE S769
+HOST_TAKE S770
+HOST_TAKE S771
+HOST_TAKE S772
+HOST_TAKE S773
+HOST_TAKE S774
+HOST_TAKE S714
+HOST_TAKE S715
+HOST_TAKE S716
+HOST_TAKE S717
+HOST_TAKE S718
+HOST_TAKE S719
+HOST_TAKE S720
+HOST_TAKE S721
+HOST_TAKE S722
+HOST_TAKE S723
+HOST_TAKE S762
+HOST_TAKE S763
+HOST_TAKE S764
+HOST_TAKE S765
+HOST_TAKE S766
+GOTO @madprotectionover2
+
+@cookiesmodded
+COMPARE #<cookiesmodded>, #<num.hostCookieFaults>
+IF= @nextstepaftercookiesmodded
+HOST_TAKE H10000
+HOST_TAKE G1000000
+N: It appears that you have changed the value of some of the cookies stored on this char.
+WAIT 2
+N: If that's false, please let know the world developper and send him a mail (mad@athelias.biz).
+WAIT 2
+SET cookiesmodded, #<num.hostCookieFaults>
+GOTO @nextstepaftercookiesmodded
+
+@ban.txtswitch
+@ban.txtswitch0
+SET ban.nd1, #<num.hostDeaths>
+SET ban.ah1, #<num.hostAge>
+SET ban.pp1, #<num.hostPP>
+SET ban.nx1, #<num.hostXP>
+SET switchcookie, 2
+GOTO @394902012ban
+
+@ban.txtswitch1
+SET ban.nd1, #<num.hostDeaths>
+SET ban.ah1, #<num.hostAge>
+SET ban.pp1, #<num.hostPP>
+SET ban.nx1, #<num.hostXP>
+SUB ban.nd2, #<ban.nd1>
+COMPARE #<ban.nd2>, 1
+IF> @ban2.14
+SUB ban.ah1, #<ban.ah2>
+SUB ban.pp1, #<ban.pp2>
+SUB ban.nx1, #<ban.nx2>
+COMPARE #<ban.ah1>, 1200
+IF> @ban1.15
+COMPARE #<ban.pp1>, 250000
+IF> @ban1.16
+IF V99 @skipnxpart
+COMPARE #<ban.nx1>, 8000000
+IF> @ban1
+@skipnxpart
+ADD ban.ah1, #<ban.ah2>
+ADD ban.pp1, #<ban.pp2>
+ADD ban.nx1, #<ban.nx2>
+SET switchcookie, 2
+GOTO @394902012ban
+
+@ban.txtswitch2
+SET ban.nd2, #<num.hostDeaths>
+SET ban.ah2, #<num.hostAge>
+SET ban.pp2, #<num.hostPP>
+SET ban.nx2, #<num.hostXP>
+SUB ban.nd1, #<ban.nd2>
+COMPARE #<ban.nd1>, 1
+IF> @ban2.14
+SUB ban.ah2, #<ban.ah1>
+SUB ban.pp2, #<ban.pp1>
+SUB ban.nx2, #<ban.nx1>
+COMPARE #<ban.ah2>, 1200
+IF> @ban1.15
+COMPARE #<ban.pp2>, 250000
+IF> @ban1.16
+COMPARE #<ban.nx2>, 8000000
+IF> @ban1.17
+ADD ban.ah2, #<ban.ah1>
+ADD ban.pp2, #<ban.pp1>
+ADD ban.nx2, #<ban.nx1>
+SET switchcookie, 1
+GOTO @394902012ban
+
+@394902012ban
+COMPARE #<num.hostAge>, 120000
+IF> @ban1.18
+@394902012ban
+IF V101|-V1 @ban2.19
+GOTO @ergenhfjhjtffsqqtyh
+
+@madprotectionover
+STRSTR "-Saturday Night Fever-Morpheus-"-#<str.name>-"
+IF> @ergenhfjhjtffsqqtyh
+STRSTR "#<str.name>", "Test" 
+IF> @ergenhfjhjtffsqqtyh
+STRSTR "#<str.name>", "Beta" 
+IF> @ergenhfjhjtffsqqtyh
+GOTO @madprotectionover2
+
+@jane
+STRCMP %1, "Templar Jane"
+IF= @ban2.3
+GOTO @janenext
+
+@ban3
+;Don't make me implant @ban3, you wouldn't like this
+@ban2
+SET num.hostClass, 88
+@ban1
+HOST_GIVE T4000
+EJECT T4000
+TAKE T4000
+HOST_TAKE G1000000
+GOTO LINK 999, 0
+
+@ergenhfjhjtffsqqtyh1
+HOST_GIVE T668
+GOTO @madprotectionover
+
+@ban3guild
+@ban2guild
+SET num.hostClass, 88
+@ban1guild
+HOST_GIVE T4000
+EJECT T4000
+TAKE T4000
+HOST_TAKE G1000000
+GOTO LINK 998, 0
+
+@ban3.1
+SET monsters56, 1
+GOTO @ban3
+
+@ban1guild.2
+SET monsters56, 2
+GOTO @ban1guild
+
+@ban2.3
+SET monsters56, 3
+GOTO @ban2
+
+@ban3.4
+SET monsters56, 4
+GOTO @ban3
+
+@ban2.5
+SET monsters56, 5
+GOTO @ban2
+
+@ban2.6
+SET monsters56, 6
+GOTO @ban2
+
+@ban1.7
+SET monsters56, 7
+GOTO @ban1
+
+@ban3.8
+SET monsters56, 8
+GOTO @ban3
+
+@ban2.9
+SET monsters56, 9
+GOTO @ban2
+
+@ban1.10
+SET monsters56, 10
+GOTO @ban1
+
+@ban2.11
+SET monsters56, 11
+GOTO @ban2
+
+@ban1.12
+SET monsters56, 12
+GOTO @ban1
+
+@ban1.13
+SET monsters56, 13
+GOTO @ban1
+
+@ban2.14
+SET monsters56, 14
+GOTO @ban2
+
+@ban1.15
+SET monsters56, 15
+GOTO @ban1
+
+@ban1.16
+SET monsters56, 16
+GOTO @ban1
+
+@ban1.17
+SET monsters56, 17
+GOTO @ban1
+
+@ban1.18
+SET monsters56, 18
+GOTO @ban1
+
+@ban2.19
+SET monsters56, 19
+GOTO @ban2
+
+@ban1.20
+SET monsters56, 20
+GOTO @ban1
+
+@ban2.21
+SET monsters56, 21
+GOTO @ban2
+
+;@ban2.21
+;used (banned by Mad)
+
+@banmad
+SET num.hostClass, 88
+@ban1
+HOST_GIVE T4000
+EJECT T4000
+TAKE T4000
+HOST_TAKE G1000000
+GOTO LINK 999, 0
+
+@ergenhfjhjtffsqqtyh
+RETURN

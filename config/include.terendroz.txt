@@ -1,0 +1,15 @@
+GOTO @nexttereninc
+
+@eventActorSpell57
+@eventActorAttack57
+GOTO 110005@eventActorSpell57
+
+@eventActorSpell58
+@eventActorAttack58
+GOTO 110005@eventActorSpell58
+
+@eventActorSpell59
+@eventActorAttack59
+GOTO 110005@eventActorSpell59
+
+@nexttereninc

@@ -1,0 +1,60 @@
+SCENE 3900, "cave1", SCENE, "Exit"
+#include include.txt
+GOTO LINK 10, 2
+;
+;--------------------------------------------------------------------------------
+;
+SCENE 3901, "cave1", SCENE, "Dragon Lair"
+#include include.txt
+IF -T42 @fight
+END
+
+@fight
+FIGHT 31
+IF LOSE @LOSE
+GIVE T42
+END
+
+@LOSE
+END
+;
+;--------------------------------------------------------------------------------
+;
+SCENE 3902, "mine", SCENE, "Minor"
+#include include.txt
+ACTOR 1, "Minor", dwarf8, 1, 30, 85
+IF -T43 @fight
+IT T43 @shop
+END
+
+@fight
+1: Platinum!
+1: I have found platinum!
+WAIT 2
+MOVE 1, 29, 85
+WAIT 2
+MOVE 1, 30, 85
+WAIT 1
+1: What's that noise?
+WAIT 1
+1: Ah!
+1: Please, help me!
+FIGHT 103, 69, 69
+IF WIN @reward
+END
+
+@reward
+1: Thanks!
+1: Please, accept this platinum as a reward. 
+SOUND FoundItem.wav
+GIVE I663
+GIVE T43
+END
+
+@shop
+1: Do you need more platinum?
+OFFER I663
+END
+;
+;-------------------------------------------------------------------------------------
+;

@@ -1,0 +1,156 @@
+SCENE 6600, serevaninside, SCENE, "Main Gate"
+#include include.txt
+GOTO LINK 65, 1
+;
+;----------------------------------------------------------------------------------------------
+;
+SCENE 6601, serevaninside, SCENE, "Audience Room"
+#include include.txt
+IF T120-T122 @knightquest4
+IF T122 @necroquestend
+IF I1053 @necroquestend
+IF T1030+T1031 @fight
+ACTOR 1, Ghamyl, lord8, 1, 45, 80
+1: Hello, traveller.
+1: How can I help you?
+END
+
+@knightquest4
+ACTOR 1, "Master Derar",human7, 3, 25, 95, 3
+ACTOR 2, "", human17, 2, 40, 95
+FACE 2, 0
+ACTOR 4, Knight, human10, 1, 120, 90, 7
+ACTOR 5, Knight, human10, 1, 120, 100, 7
+ACTOR 6, Knight, human10, 1, 120, 96, 7
+MOVE 6, 80, 96
+MOVE 4, 85, 90
+MOVE 5, 90, 100
+1: Stop!
+2: Derar, unsummon your creatures or I swear you'll die!
+1: Ok! Ok!
+WAIT 1
+COLOR 13
+COLOR 2013
+FX 4
+WAIT 2
+COLOR 0
+COLOR 2000
+FX 0
+WAIT 1
+ACTOR 3, "Lord Ghamyl", lord8, 1, 120, 90
+MOVE 3, 75, 100
+WAIT 1
+3: Finally!
+3: Victory is ours!
+3: Good job, Necromancer.
+3: Derar, your reign is over.
+3: Your place is now in Athalantis's Jails.
+3: Soldiers, bring him out!
+4: Yes, my lord
+SEL 1
+POSE 1
+MOVE 4, -20, 95
+MOVE 5, -20, 90
+MOVE 6, -20, 88
+WAIT 4
+MOVE 1, -20, 88
+WAIT 3
+FACE 2, 1
+3: Necromancer, you saved the province.
+3: The masters of the Academy should be proud to have you.
+3: Go and tell them that for me this story is over.
+2: Thank you my Lord.
+WAIT 2
+FACE 3, 2
+3: Thank you too, brave knight.
+3: We would have never succeeded without the support of the Brotherhood.
+3: Let me reward you.
+3: We breed the best horses of Gaia in the region.
+3: Please, accept one of them.
+3: It is an Azgueral, the race of the fathers of horses.
+H: Thank you, my Lord.
+HOST_GIVE I1012
+HOST_GIVE T122
+SOUND FoundItem.wav
+END
+
+@fight
+ACTOR 1, "Master Derar",human7, 1, 45, 90, 3
+H: Finally, we meet again!
+H: Prepare to die, Derar!
+1: Ah! Ah! Ah!
+1: Welcome, %1!
+WAIT 2
+MOVE 1, -20, 90, 1
+FIGHT 383.45.90
+IF LOSE @LOSE
+SEL 1
+POSE 3
+MOVE 1, 25, 90, 1
+1: Stop!
+H: Derar, unsummon your creatures or I swear you'll die!
+1: Ok! Ok!
+WAIT 1
+COLOR 13
+COLOR 2013
+FX 4
+WAIT 2
+COLOR 0
+COLOR 2000
+FX 0
+WAIT 1
+ACTOR 2, "Lord Ghamyl", lord8, 1, 120, 90
+ACTOR 3, Citizen, human7, 1, 120, 90
+ACTOR 4, Citizen, human34, 1, 120, 90
+ACTOR 5, Citizen, human35, 1, 120, 90
+MOVE 2, 70, 90
+WAIT 1
+2: He's here!
+MOVE 3, 80, 95
+MOVE 4, 85, 90
+MOVE 5, 90, 88
+2: Good job, %1.
+2: Derar, your reign is over.
+2: Your place is now in Athalantis's Jails.
+2: Soldiers, bring him out!
+3: Yes, my lord
+MOVE 3, -20, 95
+MOVE 4, -20, 90
+MOVE 5, -20, 88
+WAIT 2
+MOVE 1, -20, 88
+WAIT 3
+2: %1, you saved the province.
+2: The masters of the Academy should be proud to have you.
+2: Go and tell them that for me this story is over.
+2: And to show you my gratitude, I'm going to make you Knight of the Shores, the ancient order of the protectors of the city.
+2: Bend over, and repeat after me:
+2: I, %1
+H: I, %1
+2: swear to protect the people of Athalantis 
+H: swear to protect the people of Athalantis
+2: to serve the good and fight the evil
+H: to serve the good and fight the evil
+2: to live and die as a man of honor
+H: to live and die as a man of honor
+2: for the sake of Athalantis and the Knights of the Shores.
+H: for the sake of Athalantis and the Knights of the Shores.
+2: Congratulations, %1, you are now a guard of the city.
+2: Please, wear this medal, symbol of our order.
+HOST_GIVE I1053
+HOST_TAKE T1030
+HOST_TAKE T1031
+SOUND FoundItem.wav
+END
+
+@LOSE
+END
+
+@necroquestend
+ACTOR 1, Ghamyl, lord8, 1, 45, 80
+1: Welcome, #<g.sir2> %1.
+1: Is there something that I can do for you?
+END
+;
+;----------------------------------------------------------------------------------------------
+;

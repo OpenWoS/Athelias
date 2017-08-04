@@ -1,0 +1,13 @@
+SCENE 11700, forest1, SCENE, "Towards Kotor"
+#include include.txt
+GOTO LINK 87, 3
+;
+;------------------------------------------------------------------------------
+;
+SCENE 11701, forest1, SCENE, "Further in the Woods"
+#include include.txt
+GOTO LINK 118, 0
+;
+;------------------------------------------------------------------------------
+;
+

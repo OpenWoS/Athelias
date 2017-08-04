@@ -1,0 +1,19 @@
+SCENE 99800, chaos1, SCENE, "Hell Gate"
+STRCMP #<str.soul>, "SOUL 2006" 
+IF= @mads
+STRCMP #<str.soul>, "SOUL 3171" 
+IF= @mads
+STRCMP #<str.soul>, "SOUL 2465"
+IF= @felty
+GOTO LINK 998, 0
+
+@felty
+IF #998 @night
+GOTO LINK 998, 0
+
+@mads
+IF #998 @night
+GOTO LINK 998, 0
+
+@night
+GOTO LINK 0, 0

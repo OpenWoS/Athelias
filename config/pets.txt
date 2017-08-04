@@ -1,0 +1,1339 @@
+;>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+;>>>>>>>>>>>>>>>>>>>                   Pets                <<<<<<<<<<<<<<<<<<<<<<<<<
+;<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+;
+@eventActorClick16
+STRCMP #<str.actorName16>, ""
+IF> @nothing
+IF< @nothing
+STRCMP #<buttonsHere>, no
+IF= @nothing
+STRCMP #<temp.buttonThingy>, "x"
+IF= @eventClick16bis
+COMPARE #<temp.buttonThingy>, 1
+IF> @end222
+@eventClick16bis
+SET temp.buttonThingy, 1
+SOUND sword1.wav
+IF -I748 @noincubator
+STRCMP #<temp.incubatorCurrentThingy>, "setfree"
+IF= @disincub.stfree
+STRCMP #<temp.incubatorCurrentThingy>, "incubate"
+IF= @incubator.menu2
+STRCMP #<temp.incubatorCurrentThingy>, "disincubate"
+IF= @incubator.menu2
+@incubator.menu1
+MENU "Incubate an egg=@incubator.incubate33X", "Disincubate a pet=@incubator.disincubate", "Cancel=@incubator.end"
+SET temp.buttonThingy, "x"
+END
+
+@noeggtoincubate
+MENU "No egg to incubate=@end"
+SET temp.buttonThingy, "x"
+END
+
+@incubator.menu2
+MENU "Cancel=@incubatorCancelXXX"
+SET temp.buttonThingy, "x"
+END
+
+@incubate.giveend
+HOST_TAKE I748
+GOTO @incubate.giveend2
+
+@incubatorCancelXXX
+SOUND sword1.wav
+@incubate.giveend2
+SET temp.incubatorCurrentThingy, ""
+MOVE 1, 120, 90, 1
+MOVE 2, 120, 90, 1
+MOVE 3, 120, 90, 1
+MOVE 4, 120, 90, 1
+MOVE 5, 120, 90, 1
+MOVE 6, 120, 90, 1
+MOVE 7, 120, 90, 1
+MOVE 8, 120, 90, 1
+MOVE 9, 120, 90, 1
+MOVE 10, 120, 90, 1
+MOVE 11, 120, 90, 1
+MOVE 12, 120, 90, 1
+MOVE 13, 120, 90, 1
+MOVE 15, 120, 90, 1
+SET temp.buttonThingy, "x"
+END
+
+@incubate.calculusBis
+ADD temp.number2, 1
+SET temp.number1, 0
+GOTO @incubate.calculusTer
+
+@incubator.incubate33X
+IF -Z37-Z38-Z39-Z40-Z41-Z42-Z43-Z44-Z45-Z46-Z87-Z99-Z133-Z134-Z346-Z347-Z1002-Z1003-Z1004-Z1005-Z1006-Z1007-Z1008-Z1009-Z1010-Z1011-Z1012-Z1013-Z1014-Z1015-Z1016-Z1017-Z2001-Z2002-Z2003-Z2004-Z2005-Z2006-Z2007-Z2010-Z2011-Z2012-Z1020-Z635 @noeggtoincubate
+N: Select the egg you want to incubate.
+@incubator.incubate
+SET temp.incubatorCurrentThingy, "incubate"
+SET temp.currentActor, 0
+SET temp.currentPage, 1
+SET temp.pageNumber, 1
+SET current.coordX, 25
+SET current.coordY, 40
+SOUND sword1.wav
+MOVE 15, 120, 90, 1
+MOVE 13, 120, 90, 1
+@incubate.calculus
+SET temp.number1, 0
+SET temp.number2, 1
+@incubate.calculusTer
+SET temp.currentActor.#<temp.number1>.#<temp.number2>, ""
+COMPARE #<temp.number2>, 4
+IF> @incubate.calculusEnd
+COMPARE #<temp.number1>, 12
+IF> @incubate.calculusBis
+ADD temp.number1, 1
+GOTO @incubate.calculusTer
+
+@incubate.calculusEnd
+SET temp.petActors.coordsX1, 35
+SET temp.petActors.coordsY1, 40
+SET temp.petActors.coordsX2, 45
+SET temp.petActors.coordsY2, 40
+SET temp.petActors.coordsX3, 55
+SET temp.petActors.coordsY3, 40
+SET temp.petActors.coordsX4, 65
+SET temp.petActors.coordsY4, 40
+SET temp.petActors.coordsX5, 35
+SET temp.petActors.coordsY5, 62
+SET temp.petActors.coordsX6, 45
+SET temp.petActors.coordsY6, 62
+SET temp.petActors.coordsX7, 55
+SET temp.petActors.coordsY7, 62
+SET temp.petActors.coordsX8, 65
+SET temp.petActors.coordsY8, 62
+SET temp.petActors.coordsX9, 35
+SET temp.petActors.coordsY9, 84
+SET temp.petActors.coordsX10, 45
+SET temp.petActors.coordsY10, 84
+SET temp.petActors.coordsX11, 55
+SET temp.petActors.coordsY11, 84
+SET temp.petActors.coordsX12, 65
+SET temp.petActors.coordsY12, 84
+SET pet.pose1, 0
+SET pet.pose2, 1
+SET pet.pose3, 2
+SET pet.pose4, 3
+SET pet.pose5, 4
+SET pet.pose6, 5
+SET pet.pose7, 6
+SET pet.pose8, 7
+SET pet.pose9, 8
+SET pet.pose10, 9
+SET pet.pose11, 10
+SET pet.pose12, 11
+SET pet.pose13, 12
+SET pet.pose14, 13
+SET pet.pose15, 14
+SET pet.pose16, 15
+SET pet.pose17, 16
+SET pet.pose18, 17
+SET pet.pose19, 18
+SET pet.pose20, 19
+SET pet.pose21, 20
+SET pet.pose22, 21
+SET pet.pose23, 22
+SET pet.pose24, 23
+SET pet.pose25, 24
+SET pet.pose26, 25
+SET pet.pose27, 26
+SET pet.pose28, 27
+SET pet.pose29, 28
+SET pet.pose30, 29
+SET pet.pose31, 30
+SET pet.pose32, 31
+SET pet.pose33, 32
+SET pet.pose34, 33
+SET pet.pose35, 34
+SET pet.pose36, 35
+SET pet.pose37, 39
+SET pet.pose38, 40
+SET pet.pose39, 41
+SET pet.pose40, 42
+SET pet.pose41, 36
+SET pet.pose42, 37
+SET pet.pose43, 38
+SET pet.pose44, 43
+@incubator.incubate1
+SET temp.currentLabel, 1
+SET temp.currentActor, 1
+IF -Z37 @incubator.incubbbee
+GOTO @incubator.incubbb
+
+@incubator.incubate2
+IF -Z38 @incubator.incubbbee
+GOTO @incubator.incubbb
+
+@incubator.incubate3
+IF -Z39 @incubator.incubbbee
+GOTO @incubator.incubbb
+
+@incubator.incubate4
+IF -Z40 @incubator.incubbbee
+GOTO @incubator.incubbb
+
+@incubator.incubate5
+IF -Z41 @incubator.incubbbee
+GOTO @incubator.incubbb
+
+@incubator.incubate6
+IF -Z42 @incubator.incubbbee
+GOTO @incubator.incubbb
+
+@incubator.incubate7
+IF -Z43 @incubator.incubbbee
+GOTO @incubator.incubbb
+
+@incubator.incubate8
+IF -Z44 @incubator.incubbbee
+GOTO @incubator.incubbb
+
+@incubator.incubate9
+IF -Z45 @incubator.incubbbee
+GOTO @incubator.incubbb
+
+@incubator.incubate10
+IF -Z46 @incubator.incubbbee
+GOTO @incubator.incubbb
+
+@incubator.incubate11
+IF -Z87 @incubator.incubbbee
+GOTO @incubator.incubbb
+
+@incubator.incubate12
+IF -Z99 @incubator.incubbbee
+GOTO @incubator.incubbb
+
+@incubator.incubate13
+IF -Z133 @incubator.incubbbee
+GOTO @incubator.incubbb
+
+@incubator.incubate14
+IF -Z134 @incubator.incubbbee
+GOTO @incubator.incubbb
+
+@incubator.incubate15
+IF -Z346 @incubator.incubbbee
+GOTO @incubator.incubbb
+
+@incubator.incubate16
+IF -Z347 @incubator.incubbbee
+GOTO @incubator.incubbb
+
+@incubator.incubate17
+IF -Z1002 @incubator.incubbbee
+GOTO @incubator.incubbb
+
+@incubator.incubate18
+IF -Z1003 @incubator.incubbbee
+GOTO @incubator.incubbb
+
+@incubator.incubate19
+IF -Z1004 @incubator.incubbbee
+GOTO @incubator.incubbb
+
+@incubator.incubate20
+IF -Z1005 @incubator.incubbbee
+GOTO @incubator.incubbb
+
+@incubator.incubate21
+IF -Z1006 @incubator.incubbbee
+GOTO @incubator.incubbb
+
+@incubator.incubate22
+IF -Z1007 @incubator.incubbbee
+GOTO @incubator.incubbb
+
+@incubator.incubate23
+IF -Z1008 @incubator.incubbbee
+GOTO @incubator.incubbb
+
+@incubator.incubate24
+IF -Z1009 @incubator.incubbbee
+GOTO @incubator.incubbb
+
+@incubator.incubate25
+IF -Z1010 @incubator.incubbbee
+GOTO @incubator.incubbb
+
+@incubator.incubate26
+IF -Z1011 @incubator.incubbbee
+GOTO @incubator.incubbb
+
+@incubator.incubate27
+IF -Z1012 @incubator.incubbbee
+GOTO @incubator.incubbb
+
+@incubator.incubate28
+IF -Z1013 @incubator.incubbbee
+GOTO @incubator.incubbb
+
+@incubator.incubate29
+IF -Z1014 @incubator.incubbbee
+GOTO @incubator.incubbb
+
+@incubator.incubate30
+IF -Z1015 @incubator.incubbbee
+GOTO @incubator.incubbb
+
+@incubator.incubate31
+IF -Z1016 @incubator.incubbbee
+GOTO @incubator.incubbb
+
+@incubator.incubate32
+IF -Z1017 @incubator.incubbbee
+GOTO @incubator.incubbb
+
+@incubator.incubate33
+IF -Z2001 @incubator.incubbbee
+GOTO @incubator.incubbb
+
+@incubator.incubate34
+IF -Z2002 @incubator.incubbbee
+GOTO @incubator.incubbb
+
+@incubator.incubate35
+IF -Z2003 @incubator.incubbbee
+GOTO @incubator.incubbb
+
+@incubator.incubate36
+IF -Z2004 @incubator.incubbbee
+GOTO @incubator.incubbb
+
+@incubator.incubate37
+IF -Z2010 @incubator.incubbbee
+GOTO @incubator.incubbb
+
+@incubator.incubate38
+IF -Z2011 @incubator.incubbbee
+GOTO @incubator.incubbb
+
+@incubator.incubate39
+IF -Z2012 @incubator.incubbbee
+GOTO @incubator.incubbb
+
+@incubator.incubate40
+IF -Z1020 @incubator.incubbbee
+GOTO @incubator.incubbb
+
+@incubator.incubate40
+IF -Z1020 @incubator.incubbbee
+GOTO @incubator.incubbb
+
+@incubator.incubate41
+IF -Z2005 @incubator.incubbbee
+GOTO @incubator.incubbb
+
+@incubator.incubate42
+IF -Z2006 @incubator.incubbbee
+GOTO @incubator.incubbb
+
+@incubator.incubate43
+IF -Z2007 @incubator.incubbbee
+GOTO @incubator.incubbb
+
+@incubator.incubate44
+IF -Z635 @incubator.incubbbee
+GOTO @incubator.incubbb
+
+@incubator.incubate45
+COMPARE #<temp.pageNumber>, 1
+IF> @incubator.poseThe-Next-Button
+END
+
+@incubator.incubbb
+COMPARE #<temp.pageNumber>, 1
+IF> @incubator.incubatebnewpage
+SET pet.poseZZ, pet.pose#<temp.currentLabel>
+SET temp.petActorsCoordsXX, temp.petActors.coordsX#<temp.currentActor>
+SET temp.petActorsCoordsYY, temp.petActors.coordsY#<temp.currentActor>
+ACTOR #<temp.currentActor>, , pets, *#<pet.poseZZ>, *#<temp.petActorsCoordsXX>, *#<temp.petActorsCoordsYY>
+SET temp.currentActor.#<temp.currentActor>.#<temp.pageNumber>, *#<pet.poseZZ>
+ADD temp.currentActor, 1
+COMPARE #<temp.currentActor>, 13
+IF= @incubator.page2
+@incubator.incubbbee
+ADD temp.currentLabel, 1
+GOTO @incubator.incubate#<temp.currentLabel>
+
+@incubator.page2
+ADD temp.pageNumber, 1
+SET temp.currentActor, 1
+GOTO @incubator.incubbbee
+
+@incubator.incubatebnewpage
+SET pet.poseZZ, pet.pose#<temp.currentLabel>
+SET temp.petActorsCoordsXX, temp.petActors.coordsX#<temp.currentActor>
+SET temp.petActorsCoordsYY, temp.petActors.coordsY#<temp.currentActor>
+SET temp.currentActor.#<temp.currentActor>.#<temp.pageNumber>, *#<pet.poseZZ>
+ADD temp.currentActor, 1
+COMPARE #<temp.currentActor>, 13
+IF= @incubator.page2
+GOTO @incubator.incubbbee
+
+@incubator.poseThe-Next-Button
+SET temp.pageNumber2, #<temp.pageNumber>
+SUB temp.pageNumber2, 1
+COMPARE #<temp.pageNumber2>, #<temp.currentPage>
+IF= @incubator.poseThe-Next-Button2??2
+GOTO @incubator.poseThe-Next-Button2??233
+
+@incubator.poseThe-Next-Button2??2
+SET temp.stuff, temp.currentActor.1.#<temp.pageNumber>
+STRCMP *#<temp.stuff>, ""
+IF= @incubator.poseThe-Next-Button2??
+@incubator.poseThe-Next-Button2??233
+ACTOR 13, , next, 0, 50, 96
+SET temp.actor13Status, 0
+@incubator.poseThe-Next-Button2??
+STRCMP *#<temp.stuff>,""
+IF= @posepreviousbutton?
+COMPARE #<temp.currentPage>, 1
+IF> @incubator.poseThe-Previous-Button
+END
+
+@posepreviousbutton?
+COMPARE #<temp.currentPage>, 1
+IF> @incubator.poseThe-Previous-Button2
+END
+
+@eventActorClick13
+STRCMP #<str.actorName13>, ""
+IF> @nothing
+IF< @nothing
+STRCMP #<buttonsHere>, no
+IF= @nothing
+SOUND sword1.wav
+MOVE 1, 120, 90, 1
+MOVE 2, 120, 90, 1
+MOVE 3, 120, 90, 1
+MOVE 4, 120, 90, 1
+MOVE 5, 120, 90, 1
+MOVE 6, 120, 90, 1
+MOVE 7, 120, 90, 1
+MOVE 8, 120, 90, 1
+MOVE 9, 120, 90, 1
+MOVE 10, 120, 90, 1
+MOVE 11, 120, 90, 1
+MOVE 12, 120, 90, 1
+MOVE 13, 120, 90, 1
+MOVE 15, 50, 96, 1
+ADD temp.currentPage, 1
+@incubate.setThingies
+SET temp.actor13config, temp.currentActor.1.#<temp.currentPage>
+ACTOR 1, , pets, *#<temp.actor13config>, 35, 40
+SET temp.actor13config, temp.currentActor.2.#<temp.currentPage>
+STRCMP *#<temp.actor13config>, ""
+IF= @endincarnateeee
+ACTOR 2, , pets, *#<temp.actor13config>, 45, 40
+SET temp.actor13config, temp.currentActor.3.#<temp.currentPage>
+STRCMP *#<temp.actor13config>, ""
+IF= @endincarnateeee
+ACTOR 3, , pets, *#<temp.actor13config>, 55, 40
+SET temp.actor13config, temp.currentActor.4.#<temp.currentPage>
+STRCMP *#<temp.actor13config>, ""
+IF= @endincarnateeee
+ACTOR 4, , pets, *#<temp.actor13config>, 65, 40
+SET temp.actor13config, temp.currentActor.5.#<temp.currentPage>
+STRCMP *#<temp.actor13config>, ""
+IF= @endincarnateeee
+ACTOR 5, , pets, *#<temp.actor13config>, 35, 62
+SET temp.actor13config, temp.currentActor.6.#<temp.currentPage>
+STRCMP *#<temp.actor13config>, ""
+IF= @endincarnateeee
+ACTOR 6, , pets, *#<temp.actor13config>, 45, 62
+SET temp.actor13config, temp.currentActor.7.#<temp.currentPage>
+STRCMP *#<temp.actor13config>, ""
+IF= @endincarnateeee
+ACTOR 7, , pets, *#<temp.actor13config>, 55, 62
+SET temp.actor13config, temp.currentActor.8.#<temp.currentPage>
+STRCMP *#<temp.actor13config>, ""
+IF= @endincarnateeee
+ACTOR 8, , pets, *#<temp.actor13config>, 65, 62
+SET temp.actor13config, temp.currentActor.9.#<temp.currentPage>
+STRCMP *#<temp.actor13config>, ""
+IF= @endincarnateeee
+ACTOR 9, , pets, *#<temp.actor13config>, 35, 84
+SET temp.actor13config, temp.currentActor.10.#<temp.currentPage>
+STRCMP *#<temp.actor13config>, ""
+IF= @endincarnateeee
+ACTOR 10, , pets, *#<temp.actor13config>, 45, 84
+SET temp.actor13config, temp.currentActor.11.#<temp.currentPage>
+STRCMP *#<temp.actor13config>, ""
+IF= @endincarnateeee
+ACTOR 11, , pets, *#<temp.actor13config>, 55, 84
+SET temp.actor13config, temp.currentActor.12.#<temp.currentPage>
+STRCMP *#<temp.actor13config>, ""
+IF= @endincarnateeee
+ACTOR 12, , pets, *#<temp.actor13config>, 65, 84
+@endincarnateeee
+COMPARE #<temp.currentPage>, #<temp.pageNumber>
+IF< @incubator.poseThe-Next-Button
+GOTO @posepreviousbutton?
+
+@incubator.poseThe-Previous-Button
+MOVE 13, 60, 96, 1
+ACTOR 15, , previous, 0, 40, 96
+SET temp.actor13Status, 0
+END
+
+@incubator.poseThe-Previous-Button2
+ACTOR 15, , previous, 0, 50, 96
+SET temp.actor13Status, 0
+END
+
+@eventActorClick15
+STRCMP #<str.actorName15>, ""
+IF> @nothing
+IF< @nothing
+STRCMP #<buttonsHere>, no
+IF= @nothing
+SOUND sword1.wav
+SUB temp.currentPage, 1
+COMPARE #<temp.currentPage>, 1
+IF= @incubator.incubate
+GOTO @incubate.setThingies
+
+@eventActorClick1
+STRCMP #<str.actorName1>, ""
+IF> @nothing
+IF< @nothing
+STRCMP #<buttonsHere>, no
+IF= @nothing
+IF -I748 @noincubator2
+SET temp.currentActorClicked, 1
+GOTO @incubate.eventActorClicked
+
+@eventActorClick2
+STRCMP #<str.actorName2>, ""
+IF> @nothing
+IF< @nothing
+STRCMP #<buttonsHere>, no
+IF= @nothing
+IF -I748 @noincubator2
+SET temp.currentActorClicked, 2
+GOTO @incubate.eventActorClicked
+
+@eventActorClick3
+STRCMP #<str.actorName3>, ""
+IF> @nothing
+IF< @nothing
+STRCMP #<buttonsHere>, no
+IF= @nothing
+IF -I748 @noincubator2
+SET temp.currentActorClicked, 3
+GOTO @incubate.eventActorClicked
+
+@eventActorClick4
+STRCMP #<str.actorName4>, ""
+IF> @nothing
+IF< @nothing
+STRCMP #<buttonsHere>, no
+IF= @nothing
+IF -I748 @noincubator2
+SET temp.currentActorClicked, 4
+GOTO @incubate.eventActorClicked
+
+@eventActorClick5
+STRCMP #<str.actorName5>, ""
+IF> @nothing
+IF< @nothing
+STRCMP #<buttonsHere>, no
+IF= @nothing
+IF -I748 @noincubator2
+SET temp.currentActorClicked, 5
+GOTO @incubate.eventActorClicked
+
+@eventActorClick6
+STRCMP #<str.actorName6>, ""
+IF> @nothing
+IF< @nothing
+STRCMP #<buttonsHere>, no
+IF= @nothing
+IF -I748 @noincubator2
+SET temp.currentActorClicked, 6
+GOTO @incubate.eventActorClicked
+
+@eventActorClick7
+STRCMP #<str.actorName7>, ""
+IF> @nothing
+IF< @nothing
+STRCMP #<buttonsHere>, no
+IF= @nothing
+IF -I748 @noincubator2
+SET temp.currentActorClicked, 7
+GOTO @incubate.eventActorClicked
+
+@eventActorClick8
+STRCMP #<str.actorName8>, ""
+IF> @nothing
+IF< @nothing
+STRCMP #<buttonsHere>, no
+IF= @nothing
+IF -I748 @noincubator2
+SET temp.currentActorClicked, 8
+GOTO @incubate.eventActorClicked
+
+@eventActorClick9
+STRCMP #<str.actorName9>, ""
+IF> @nothing
+IF< @nothing
+STRCMP #<buttonsHere>, no
+IF= @nothing
+IF -I748 @noincubator2
+SET temp.currentActorClicked, 9
+GOTO @incubate.eventActorClicked
+
+@eventActorClick10
+STRCMP #<str.actorName10>, ""
+IF> @nothing
+IF< @nothing
+STRCMP #<buttonsHere>, no
+IF= @nothing
+IF -I748 @noincubator2
+SET temp.currentActorClicked, 10
+GOTO @incubate.eventActorClicked
+
+@eventActorClick11
+STRCMP #<str.actorName11>, ""
+IF> @nothing
+IF< @nothing
+STRCMP #<buttonsHere>, no
+IF= @nothing
+IF -I748 @noincubator2
+SET temp.currentActorClicked, 11
+GOTO @incubate.eventActorClicked
+
+@eventActorClick12
+STRCMP #<str.actorName12>, ""
+IF> @nothing
+IF< @nothing
+STRCMP #<buttonsHere>, no
+IF= @nothing
+IF -I748 @noincubator2
+SET temp.currentActorClicked, 12
+GOTO @incubate.eventActorClicked
+
+@incubate.eventActorClicked
+SOUND sword1.wav
+SET pet.poseZZ, pet.pose#<temp.currentActorClicked>
+GOTO @incubate.give#<temp.currentActorClicked>.#<temp.currentPage>
+
+@incubate.give
+SET temp.something, temp.currentActor.#<temp.currentActorClicked>.#<temp.currentPage>
+GOTO @incubate.give*#<temp.something>
+
+@incubate.give0
+HOST_TAKE Z37
+HOST_GIVE I1099
+SOUND FoundItem.wav
+GOTO @incubate.giveend
+
+@incubate.give1
+HOST_TAKE Z38
+HOST_GIVE I1100
+SOUND FoundItem.wav
+GOTO @incubate.giveend
+
+@incubate.give2
+HOST_TAKE Z39
+HOST_GIVE I1101
+SOUND FoundItem.wav
+GOTO @incubate.giveend
+
+@incubate.give3
+HOST_TAKE Z40
+HOST_GIVE I1102
+SOUND FoundItem.wav
+GOTO @incubate.giveend
+
+@incubate.give4
+HOST_TAKE Z41
+HOST_GIVE I1103
+SOUND FoundItem.wav
+GOTO @incubate.giveend
+
+@incubate.give5
+HOST_TAKE Z42
+HOST_GIVE I1104
+SOUND FoundItem.wav
+GOTO @incubate.giveend
+
+@incubate.give6
+HOST_TAKE Z43
+HOST_GIVE I1105
+SOUND FoundItem.wav
+GOTO @incubate.giveend
+
+@incubate.give7
+HOST_TAKE Z44
+HOST_GIVE I1106
+SOUND FoundItem.wav
+GOTO @incubate.giveend
+
+@incubate.give8
+HOST_TAKE Z45
+HOST_GIVE I1107
+SOUND FoundItem.wav
+GOTO @incubate.giveend
+
+@incubate.give9
+HOST_TAKE Z46
+HOST_GIVE I1108
+SOUND FoundItem.wav
+GOTO @incubate.giveend
+
+@incubate.give10
+HOST_TAKE Z87
+HOST_GIVE I1109
+SOUND FoundItem.wav
+GOTO @incubate.giveend
+
+@incubate.give11
+HOST_TAKE Z99
+HOST_GIVE I1110
+SOUND FoundItem.wav
+GOTO @incubate.giveend
+
+@incubate.give12
+HOST_TAKE Z133
+HOST_GIVE I1111
+SOUND FoundItem.wav
+GOTO @incubate.giveend
+
+@incubate.give13
+HOST_TAKE Z134
+HOST_GIVE I1112
+SOUND FoundItem.wav
+GOTO @incubate.giveend
+
+@incubate.give14
+HOST_TAKE Z346
+HOST_GIVE I1000
+SOUND FoundItem.wav
+GOTO @incubate.giveend
+
+@incubate.give15
+HOST_TAKE Z347
+HOST_GIVE I1001
+SOUND FoundItem.wav
+GOTO @incubate.giveend
+
+@incubate.give16
+HOST_TAKE Z1002
+HOST_GIVE I1002
+SOUND FoundItem.wav
+GOTO @incubate.giveend
+
+@incubate.give17
+HOST_TAKE Z1003
+HOST_GIVE I1003
+SOUND FoundItem.wav
+GOTO @incubate.giveend
+
+@incubate.give18
+HOST_TAKE Z1004
+HOST_GIVE I1004
+SOUND FoundItem.wav
+GOTO @incubate.giveend
+
+@incubate.give19
+HOST_TAKE Z1005
+HOST_GIVE I1005
+SOUND FoundItem.wav
+GOTO @incubate.giveend
+
+@incubate.give20
+HOST_TAKE Z1006
+HOST_GIVE I1096
+SOUND FoundItem.wav
+GOTO @incubate.giveend
+
+@incubate.give21
+HOST_TAKE Z1007
+HOST_GIVE I1097
+SOUND FoundItem.wav
+GOTO @incubate.giveend
+
+@incubate.give22
+HOST_TAKE Z1008
+HOST_GIVE I1098
+SOUND FoundItem.wav
+GOTO @incubate.giveend
+
+@incubate.give23
+HOST_TAKE Z1009
+HOST_GIVE I1006
+SOUND FoundItem.wav
+GOTO @incubate.giveend
+
+@incubate.give24
+HOST_TAKE Z1010
+HOST_GIVE I1007
+SOUND FoundItem.wav
+GOTO @incubate.giveend
+
+@incubate.give25
+HOST_TAKE Z1011
+HOST_GIVE I1008
+SOUND FoundItem.wav
+GOTO @incubate.giveend
+
+@incubate.give26
+HOST_TAKE Z1012
+HOST_GIVE I1039
+SOUND FoundItem.wav
+GOTO @incubate.giveend
+
+@incubate.give27
+HOST_TAKE Z1013
+HOST_GIVE I1040
+SOUND FoundItem.wav
+GOTO @incubate.giveend
+
+@incubate.give28
+HOST_TAKE Z1014
+HOST_GIVE I1041
+SOUND FoundItem.wav
+GOTO @incubate.giveend
+
+@incubate.give29
+HOST_TAKE Z1015
+HOST_GIVE I3024
+SOUND FoundItem.wav
+GOTO @incubate.giveend
+
+@incubate.give30
+HOST_TAKE Z1016
+HOST_GIVE I3025
+SOUND FoundItem.wav
+GOTO @incubate.giveend
+
+@incubate.give31
+HOST_TAKE Z1017
+HOST_GIVE I3026
+SOUND FoundItem.wav
+GOTO @incubate.giveend
+
+@incubate.give32
+HOST_TAKE Z2001
+HOST_GIVE I1021
+SOUND FoundItem.wav
+GOTO @incubate.giveend
+
+@incubate.give33
+HOST_TAKE Z2002
+HOST_GIVE I1022
+SOUND FoundItem.wav
+GOTO @incubate.giveend
+
+@incubate.give34
+HOST_TAKE Z2003
+HOST_GIVE I1023
+SOUND FoundItem.wav
+GOTO @incubate.giveend
+
+@incubate.give35
+HOST_TAKE Z2004
+HOST_GIVE I1009
+SOUND FoundItem.wav
+GOTO @incubate.giveend
+
+@incubate.give36
+HOST_TAKE Z2005
+HOST_GIVE I2005
+SOUND FoundItem.wav
+GOTO @incubate.giveend
+
+@incubate.give37
+HOST_TAKE Z2006
+HOST_GIVE I2006
+SOUND FoundItem.wav
+GOTO @incubate.giveend
+
+@incubate.give38
+HOST_TAKE Z2007
+HOST_GIVE I2007
+SOUND FoundItem.wav
+GOTO @incubate.giveend
+
+@incubate.give39
+HOST_TAKE Z2010
+HOST_GIVE I1010
+SOUND FoundItem.wav
+GOTO @incubate.giveend
+
+@incubate.give40
+HOST_TAKE Z2011
+HOST_GIVE I1011
+SOUND FoundItem.wav
+GOTO @incubate.giveend
+
+@incubate.give41
+HOST_TAKE Z2012
+HOST_GIVE I1012
+SOUND FoundItem.wav
+GOTO @incubate.giveend
+
+@incubate.give42
+HOST_TAKE Z1020
+HOST_GIVE I1120
+SOUND FoundItem.wav
+GOTO @incubate.giveend
+
+@incubate.give43
+HOST_TAKE Z635
+HOST_GIVE I1138
+SOUND FoundItem.wav
+GOTO @incubate.giveend
+
+
+
+@incubator.disincubate
+SOUND sword1.wav
+@incubator.disincubateddddddd
+IF -I748 @noincubator
+COMPARE #<num.hostPets>, 0
+IF= @disincub.menurrr
+SET temp.incubatorCurrentThingy, "disincubate"
+N: Name of the pet you want to disincubate (or "cancel" to cancel)?
+ASK 60
+IF Qcancel @disincCancel
+STRCMP "Thesarian Shell", #<lastAsk>
+IF= @disincubPet1
+IF Qcancel @disincCancel
+STRCMP "Thesarian Crab", #<lastAsk>
+IF= @disincubPet2
+IF Qcancel @disincCancel
+STRCMP "Fongy", #<lastAsk>
+IF= @disincubPet3
+IF Qcancel @disincCancel
+STRCMP "Sage Worm", #<lastAsk>
+IF= @disincubPet4
+IF Qcancel @disincCancel
+STRCMP "Toad", #<lastAsk>
+IF= @disincubPet5
+IF Qcancel @disincCancel
+STRCMP "Poison Spore", #<lastAsk>
+IF= @disincubPet6
+IF Qcancel @disincCancel
+STRCMP "Tiky", #<lastAsk>
+IF= @disincubPet7
+IF Qcancel @disincCancel
+STRCMP "Aralian Harpy", #<lastAsk>
+IF= @disincubPet8
+IF Qcancel @disincCancel
+STRCMP "Black Ant", #<lastAsk>
+IF= @disincubPet9
+IF Qcancel @disincCancel
+STRCMP "Young Ent", #<lastAsk>
+IF= @disincubPet10
+IF Qcancel @disincCancel
+STRCMP "Erzog Bear", #<lastAsk>
+IF= @disincubPet11
+IF Qcancel @disincCancel
+STRCMP "Gorgona", #<lastAsk>
+IF= @disincubPet12
+IF Qcancel @disincCancel
+STRCMP "Minotaur", #<lastAsk>
+IF= @disincubPet13
+IF Qcancel @disincCancel
+STRCMP "Kamikaze Bumblebee", #<lastAsk>
+IF= @disincubPet14
+IF Qcancel @disincCancel
+STRCMP "Cherub", #<lastAsk>
+IF= @disincubPet15
+IF Qcancel @disincCancel
+STRCMP "Guardian Angel", #<lastAsk>
+IF= @disincubPet16
+IF Qcancel @disincCancel
+STRCMP "Archangel", #<lastAsk>
+IF= @disincubPet17
+IF Qcancel @disincCancel
+STRCMP "Baby Wolf", #<lastAsk>
+IF= @disincubPet18
+IF Qcancel @disincCancel
+STRCMP "Wolf", #<lastAsk>
+IF= @disincubPet19
+IF Qcancel @disincCancel
+STRCMP "Grand Wolf", #<lastAsk>
+IF= @disincubPet20
+IF Qcancel @disincCancel
+STRCMP "Cobra", #<lastAsk>
+IF= @disincubPet21
+IF Qcancel @disincCancel
+STRCMP "Tarantula", #<lastAsk>
+IF= @disincubPet22
+IF Qcancel @disincCancel
+STRCMP "Black Scorpion", #<lastAsk>
+IF= @disincubPet23
+IF Qcancel @disincCancel
+STRCMP "Savage Dog", #<lastAsk>
+IF= @disincubPet24
+IF Qcancel @disincCancel
+STRCMP "Leopard", #<lastAsk>
+IF= @disincubPet25
+IF Qcancel @disincCancel
+STRCMP "Brown Bear", #<lastAsk>
+IF= @disincubPet26
+IF Qcancel @disincCancel
+STRCMP "Circus Cat", #<lastAsk>
+IF= @disincubPet27
+IF Qcancel @disincCancel
+STRCMP "Performing Monkey", #<lastAsk>
+IF= @disincubPet28
+IF Qcancel @disincCancel
+STRCMP "Bear", #<lastAsk>
+IF= @disincubPet29
+IF Qcancel @disincCancel
+STRCMP "Mangeas Fae", #<lastAsk>
+IF= @disincubPet30
+IF Qcancel @disincCancel
+STRCMP "Benevolent Fae", #<lastAsk>
+IF= @disincubPet31
+IF Qcancel @disincCancel
+STRCMP "Healing Fae", #<lastAsk>
+IF= @disincubPet32
+IF Qcancel @disincCancel
+STRCMP "Baby Fae", #<lastAsk>
+IF= @disincubPet33
+IF Qcancel @disincCancel
+STRCMP "Life Will-o'-the-wisp", #<lastAsk>
+IF= @disincubPet34
+IF Qcancel @disincCancel
+STRCMP "Benevolent Imp", #<lastAsk>
+IF= @disincubPet35
+IF Qcancel @disincCancel
+STRCMP "Spirit of the Mirror", #<lastAsk>
+IF= @disincubPet36
+IF Qcancel @disincCancel
+STRCMP "Horse", #<lastAsk>
+IF= @disincubPet37
+IF Qcancel @disincCancel
+STRCMP "Destrier", #<lastAsk>
+IF= @disincubPet38
+IF Qcancel @disincCancel
+STRCMP "Azgueral", #<lastAsk>
+IF= @disincubPet39
+STRCMP "Healing Pumpkin", #<lastAsk>
+IF= @disincubPet40
+STRCMP "Rider", #<lastAsk>
+IF= @disincubPet41
+STRCMP "Poisoner", #<lastAsk>
+IF= @disincubPet42
+STRCMP "Dove", #<lastAsk>
+IF= @disincubPet43
+STRCMP "Life Stealer", #<lastAsk>
+IF= @disincubPet44
+SET temp.incubatorCurrentThingy, ""
+N: This pet doesn't seem to exist or was tamed in the wild and cannot be reincubated.
+WAIT 2
+N: If not, check for typos.
+WAIT 2
+N: Do you want to disincubate another pet?
+ASK 30
+IF YES @incubator.disincubateddddddd
+SET temp.buttonThingy, "x"
+END
+
+@disincubPet1
+SET temp.currentTrophy, 37
+SET temp.currentPet, 394
+GOTO @disincubPetGive
+
+@disincubPet2
+SET temp.currentTrophy, 38
+SET temp.currentPet, 410
+GOTO @disincubPetGive
+
+@disincubPet3
+SET temp.currentTrophy, 39
+SET temp.currentPet, 357
+GOTO @disincubPetGive
+
+@disincubPet4
+SET temp.currentTrophy, 40
+SET temp.currentPet, 424
+GOTO @disincubPetGive
+
+@disincubPet5
+SET temp.currentTrophy, 41
+SET temp.currentPet, 359
+GOTO @disincubPetGive
+
+@disincubPet6
+SET temp.currentTrophy, 42
+SET temp.currentPet, 433
+GOTO @disincubPetGive
+
+@disincubPet7
+SET temp.currentTrophy, 43
+SET temp.currentPet, 294
+GOTO @disincubPetGive
+
+@disincubPet8
+SET temp.currentTrophy, 44
+SET temp.currentPet, 442
+GOTO @disincubPetGive
+
+@disincubPet9
+SET temp.currentTrophy, 45
+SET temp.currentPet, 443
+GOTO @disincubPetGive
+
+@disincubPet10
+SET temp.currentTrophy, 46
+SET temp.currentPet, 298
+GOTO @disincubPetGive
+
+@disincubPet11
+SET temp.currentTrophy, 87
+SET temp.currentPet, 456
+GOTO @disincubPetGive
+
+@disincubPet12
+SET temp.currentTrophy, 99
+SET temp.currentPet, 307
+GOTO @disincubPetGive
+
+@disincubPet13
+SET temp.currentTrophy, 133
+SET temp.currentPet, 474
+GOTO @disincubPetGive
+
+@disincubPet14
+SET temp.currentTrophy, 134
+SET temp.currentPet, 498
+GOTO @disincubPetGive
+
+@disincubPet15
+SET temp.currentTrophy, 346
+SET temp.currentPet, 1000
+GOTO @disincubPetGive
+
+@disincubPet16
+SET temp.currentTrophy, 347
+SET temp.currentPet, 1001
+GOTO @disincubPetGive
+
+@disincubPet17
+SET temp.currentTrophy, 1002
+SET temp.currentPet, 1002
+GOTO @disincubPetGive
+
+@disincubPet18
+SET temp.currentTrophy, 1003
+SET temp.currentPet, 1003
+GOTO @disincubPetGive
+
+@disincubPet19
+SET temp.currentTrophy, 1004
+SET temp.currentPet, 1004
+GOTO @disincubPetGive
+
+@disincubPet20
+SET temp.currentTrophy, 1005
+SET temp.currentPet, 1005
+GOTO @disincubPetGive
+
+@disincubPet21
+SET temp.currentTrophy, 1006
+SET temp.currentPet, 1006
+GOTO @disincubPetGive
+
+@disincubPet22
+SET temp.currentTrophy, 1007
+SET temp.currentPet, 1007
+GOTO @disincubPetGive
+
+@disincubPet23
+SET temp.currentTrophy, 1008
+SET temp.currentPet, 1008
+GOTO @disincubPetGive
+
+@disincubPet24
+SET temp.currentTrophy, 1009
+SET temp.currentPet, 1009
+GOTO @disincubPetGive
+
+@disincubPet25
+SET temp.currentTrophy, 1010
+SET temp.currentPet, 1010
+GOTO @disincubPetGive
+
+@disincubPet26
+SET temp.currentTrophy, 1011
+SET temp.currentPet, 1011
+GOTO @disincubPetGive
+
+@disincubPet27
+SET temp.currentTrophy, 1012
+SET temp.currentPet, 1012
+GOTO @disincubPetGive
+
+@disincubPet28
+SET temp.currentTrophy, 1013
+SET temp.currentPet, 1013
+GOTO @disincubPetGive
+
+@disincubPet29
+SET temp.currentTrophy, 1014
+SET temp.currentPet, 1014
+GOTO @disincubPetGive
+
+@disincubPet30
+SET temp.currentTrophy, 1015
+SET temp.currentPet, 1015
+GOTO @disincubPetGive
+
+@disincubPet31
+SET temp.currentTrophy, 1016
+SET temp.currentPet, 1016
+GOTO @disincubPetGive
+
+@disincubPet32
+SET temp.currentTrophy, 1017
+SET temp.currentPet, 1017
+GOTO @disincubPetGive
+
+@disincubPet33
+SET temp.currentTrophy, 2001
+SET temp.currentPet, 2001
+GOTO @disincubPetGive
+
+@disincubPet34
+SET temp.currentTrophy, 2002
+SET temp.currentPet, 2002
+GOTO @disincubPetGive
+
+@disincubPet35
+SET temp.currentTrophy, 2003
+SET temp.currentPet, 2003
+GOTO @disincubPetGive
+
+@disincubPet36
+SET temp.currentTrophy, 2004
+SET temp.currentPet, 2004
+GOTO @disincubPetGive
+
+@disincubPet37
+SET temp.currentTrophy, 2010
+SET temp.currentPet, 2010
+GOTO @disincubPetGive
+
+@disincubPet38
+SET temp.currentTrophy, 2011
+SET temp.currentPet, 2011
+GOTO @disincubPetGive
+
+@disincubPet39
+SET temp.currentTrophy, 2012
+SET temp.currentPet, 2012
+GOTO @disincubPetGive
+
+@disincubPet40
+SET temp.currentTrophy, 1020
+SET temp.currentPet, 1020
+GOTO @disincubPetGive
+
+@disincubPet41
+SET temp.currentTrophy, 635
+SET temp.currentPet, 1020
+GOTO @disincubPetGive
+
+@disincubPet42
+SET temp.currentTrophy, 2006
+SET temp.currentPet, 2006
+GOTO @disincubPetGive
+
+@disincubPet43
+SET temp.currentTrophy, 2007
+SET temp.currentPet, 2007
+GOTO @disincubPetGive
+
+@disincubPet44
+SET temp.currentTrophy, 2005
+SET temp.currentPet, 2005
+GOTO @disincubPetGive
+
+@disincubPetGive
+SET temp.incubatorCurrentThingy, "setfree"
+SET temp.thingy, num.hostHasPet#<temp.currentPet>
+SET temp.numCurrentPet, *#<temp.thingy>
+N: Release the pet to the wild and then press this button again.
+END
+
+@disincub.stfree
+SET temp.thingy, num.hostHasPet#<temp.currentPet>
+COMPARE #<temp.numCurrentPet>, *#<temp.thingy>
+IF= @disincubHaventReleased
+SET temp.incubatorCurrentThingy, ""
+SOUND petDead.wav
+FIGHT -4000
+COMPARE #<num.TrophyBagEmptySlots>, 0
+IF= @disincTrophyBagFull
+@disincub.stfree22
+HOST_GIVE Z#<temp.currentTrophy>
+HOST_TAKE I748
+N: %1 has acquired  a new egg!
+SET temp.buttonThingy, "x"
+END
+
+@disincTrophyBagFull
+N: Your trophy bag is full.
+WAIT 1
+N: You have 10 seconds to make room in your trophy bag if you don't want to lose the egg.
+COUNTDOWN 10
+WAIT 10
+GOTO @disincub.stfree22
+
+@disincubHaventReleased
+N: How weird, you still seem to have the pet in your pen.
+WAIT 1.5
+N: Set it free and press this button again.
+END
+
+@disincCancel
+SET temp.incubatorCurrentThingy, ""
+SET temp.buttonThingy, "x"
+END
+
+@disincub.menurrr
+MENU "No pet in the pen=@end"
+SET temp.buttonThingy, "x"
+END
+
+@incubator.end
+SOUND sword1.wav
+MOVE 1, 120, 90, 1
+MOVE 2, 120, 90, 1
+MOVE 3, 120, 90, 1
+MOVE 4, 120, 90, 1
+MOVE 5, 120, 90, 1
+MOVE 6, 120, 90, 1
+MOVE 7, 120, 90, 1
+MOVE 8, 120, 90, 1
+MOVE 9, 120, 90, 1
+MOVE 10, 120, 90, 1
+MOVE 11, 120, 90, 1
+MOVE 12, 120, 90, 1
+MOVE 13, 120, 90, 1
+SET temp.buttonThingy, "x"
+END
+
+@noincubator2
+N: You need to purchase another incubator first.
+SET temp.buttonThingy, "x"
+END
+
+@noincubator
+MENU "You need to purchase an incubator first=@end"
+SET temp.buttonThingy, "x"
+END

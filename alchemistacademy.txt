@@ -1,0 +1,1122 @@
+SCENE 1100, dungeon1, SCENE, "Main Gate"
+#include include.txt
+GOTO LINK 10, 1
+;
+;-------------------------------------------------------------------------------------------------------------
+;
+SCENE 1101, "room2", SCENE, "Alchemy Academy"
+#include include.txt
+ACTOR 1, "Arazom", dwarf12, 1, 25, 90
+IF T3993|T3988 @halloweenActors
+GOTO @nextStepAfterHalloweenActors
+
+@halloweenActors
+ACTOR 1, "Arazom", #<spEvent.Name>-dwarf, 12, 25, 90
+@nextStepAfterHalloweenActors
+IF C2+T3968-J113 @supernewbquest
+IF I1134 @normalalchemist
+IF Z233+V99+T4001 @aliancering1
+IF Z238+V99+T4001 @aliancering2
+IF Z241+V99+T4001 @aliancering3
+IF Z242+V99+T4001 @aliancering4
+IF Z243+V99+T4001 @aliancering5
+IF Z255+V99+T4001 @aliancering6
+IF Z256+V99+T4001 @aliancering7
+IF Z257+V99+T4001 @aliancering8
+IF Z258+V99+T4001 @aliancering9
+IF Z259+V99+T4001 @aliancering11
+@normalalchemist
+IF C7 @start
+1: Hello.
+1: I can't help you, adventurer.
+1: You must be part of the Academy to take a lesson.
+END
+
+@supernewbquest
+1: Don't make me laugh!
+1: You can't kill me!
+WAIT 2.3
+MOVE 1, 150, 150, 1
+FIGHT 2923.25.90
+END
+
+@aliancering1
+SET temp.currenTrophyAlianceRing, 233
+GOTO @aliancering10
+
+@aliancering2
+SET temp.currenTrophyAlianceRing, 238
+GOTO @aliancering10
+
+@aliancering3
+SET temp.currenTrophyAlianceRing, 241
+GOTO @aliancering10
+
+@aliancering4
+SET temp.currenTrophyAlianceRing, 242
+GOTO @aliancering10
+
+@aliancering5
+SET temp.currenTrophyAlianceRing, 243
+GOTO @aliancering10
+
+@aliancering6
+SET temp.currenTrophyAlianceRing, 255
+GOTO @aliancering10
+
+@aliancering7
+SET temp.currenTrophyAlianceRing, 256
+GOTO @aliancering10
+
+@aliancering8
+SET temp.currenTrophyAlianceRing, 257
+GOTO @aliancering10
+
+@aliancering11
+SET temp.currenTrophyAlianceRing, 259
+GOTO @aliancering10
+
+@aliancering9
+COMPARE #<chat.allianceringAlchemy>, 1
+IF= @allianceringcanmke
+SET temp.currenTrophyAlianceRing, 258
+@aliancering10
+1: Incredible! %Z#<temp.currenTrophyAlianceRing>!
+1: That is definitely something I could use!
+1: If you can bring be %Z233, %Z238, %Z241, %Z242, %Z243, %Z255, %Z256, %Z257, %Z258, and %Z259 I'll be able to use their magical energy to forge a unique ring!
+SET temp.currenTrophyAlianceRing, ""
+IF Z233+Z238+Z241+Z242+Z243+Z255+Z256+Z257+Z258+Z259 @allianceringcanalreadymake
+H: That sounds good.
+H: I'll try to get them.
+1: Great!
+SET chat.allianceringAlchemy, 1
+END
+
+@allianceringcanalreadymake
+H: I have everything you need.
+1: Really?!
+1: That's fantastic!
+1: Do you want me to make a magical ring using their energy now?
+GOTO @allianceingask
+
+@allianceringcanmke
+IF Z233+Z238+Z241+Z242+Z243+Z255+Z256+Z257+Z258+Z259 @allianceringcanmke2
+1: Welcome back, %1.
+H: Err, can I have the list of what you need to make the ring again?
+1: Yeah, I need: %Z233, %Z238, %Z241, %Z242, %Z243, %Z255, %Z256, %Z257, %Z258, and %Z259.
+H: Alright.
+H: I'll be back with all those scalps - hopefully.
+END
+
+@allianceringcanmke2
+H: I have all the scalps you've asked for.
+1: Great!
+1: Do you want me to make a magical ring in using their energy now?
+@allianceingask
+ASK 30
+IF YES @allianceingaskYES
+IF NO @allianceingaskNO
+1: Hmm?
+GOTO @allianceingask
+
+@allianceingaskNO
+1: That's fine.
+1: Comeback if you change your mind...
+H: Farewell.
+1: Farewell.
+END
+
+@allianceingaskYES
+1: Alright.
+1: Wait a minute please.
+WAIT 1.5
+SOUND bubble.wav
+WAIT 2
+SOUND sword2
+WAIT 0.4
+SOUND sword2
+WAIT 0.4
+SOUND sword2
+WAIT 1
+HOST_GIVE I1134
+HOST_TAKE Z233
+HOST_TAKE Z238
+HOST_TAKE Z241
+HOST_TAKE Z242
+HOST_TAKE Z243
+HOST_TAKE Z255
+HOST_TAKE Z256
+HOST_TAKE Z257
+HOST_TAKE Z258
+HOST_TAKE Z259
+1: Here you go: this Alliance Ring is for you!
+SOUND foundItem.wav
+H: Thanks!
+END
+
+@start
+ACTOR 60, "", 3, 0, 95, 15
+COMPARE #<c5cookiealch>, 1
+IF< @cookiealche1
+IF V10 @cmp2
+@cookiealche1
+SET c5cookiealch, 1
+1: Hello, apprentice.
+1: I am Arazom.
+1: I can teach you what any alchemist need to know : how to make golems.
+1: Although, I do not accept people who are too young in my course.
+1: I want mature people.
+1: Train your skills, and come back when you're a bit older.
+1: Then we will start your training.
+END
+
+@end
+1: Welcome back, student.
+1: You should come back later for the next lesson.
+END
+
+@cmp2
+IF T3036 @cmp3
+COMPARE #<c5cookiealch>, 3
+IF< @cookiealche2
+@cookiealche2
+SET c5cookiealch, 2
+COMPARE #<chat.alcheacmakinggolemsinhredients2>, 1
+IF= @cmp2.1
+GOTO @cmp2.3
+
+@cmp2.1
+IF I655 @goly1
+@cmp2.3
+1: Hello, %1.
+1: I can teach you how to make a golem but you will have to find the material needed on your own.
+1: I need some clay for the first lesson.
+1: Come back when you will have some.
+SET chat.alcheacmakinggolemsinhredients2, 1
+END
+
+@cmp3
+IF T3037 @cmp4
+IF -V20 @end
+COMPARE #<c5cookiealch>, 4
+IF< @cookiealche3
+@cookiealche3
+SET c5cookiealch, 3
+COMPARE #<chat.alcheacmakinggolemsinhredients3>, 1
+IF= @cmp3.1
+GOTO @cmp3.3
+
+@cmp3.1
+IF I656 @goly2
+@cmp3.3
+1: Welcome back, student.
+1: I think you are ready for another lesson.
+1: Bring me a black stone and I'll show you how to make a stronger golem.
+SET chat.alcheacmakinggolemsinhredients3, 1
+END
+
+@cmp4
+IF T3038 @cmp5
+IF -V30 @end
+COMPARE #<c5cookiealch>, 5
+IF< @cookiealche4
+@cookiealche4
+SET c5cookiealch, 4
+COMPARE #<chat.alcheacmakinggolemsinhredients4>, 1
+IF= @cmp4.1
+GOTO @cmp4.3
+
+@cmp4.1
+IF I657 @goly3
+@cmp4.3
+1: Welcome back, student.
+1: It's time for a new lesson.
+1: Bring me brass if you want me to show you how to make a stronger golem.
+SET chat.alcheacmakinggolemsinhredients4, 1
+END
+
+@cmp5
+IF T3039 @cmp6
+IF -V40 @end
+COMPARE #<c5cookiealch>, 6
+IF< @cookiealche5
+@cookiealche5
+SET c5cookiealch, 5
+COMPARE #<chat.alcheacmakinggolemsinhredients5>, 1
+IF= @cmp5.1
+GOTO @cmp5.3
+
+@cmp5.1
+IF I658 @goly4
+@cmp5.3
+1: Hello, %1.
+1: I need some %I658 for the next lesson.
+1: Please, bring me some.
+SET chat.alcheacmakinggolemsinhredients5, 1
+END
+
+@cmp6
+IF T3040 @cmp7
+IF -V50 @end
+COMPARE #<c5cookiealch>, 7
+IF< @cookiealche6
+@cookiealche6
+SET c5cookiealch, 6
+COMPARE #<chat.alcheacmakinggolemsinhredients6>, 1
+IF= @cmp6.1
+GOTO @cmp6.3
+
+@cmp6.1
+IF I659 @goly5
+@cmp6.3
+1: Welcome back, student.
+1: Bring me some %I659 if you want me to teach you how to make a stronger golem.
+SET chat.alcheacmakinggolemsinhredients6, 1
+END
+
+@cmp7
+IF T3041 @cmp8
+IF -V60 @end
+COMPARE #<c5cookiealch>, 8
+IF< @cookiealche7
+@cookiealche7
+SET c5cookiealch, 7
+COMPARE #<chat.alcheacmakinggolemsinhredients7>, 1
+IF= @cmp7.1
+GOTO @cmp7.3
+
+@cmp7.1
+IF I660 @goly6
+@cmp7.3
+1: Hello, %1.
+1: I need some %I660 for the next lesson.
+1: Please, bring me some.
+SET chat.alcheacmakinggolemsinhredients7, 1
+END
+
+@cmp8
+IF T3042 @cmp9
+IF -V70 @end
+COMPARE #<c5cookiealch>, 9
+IF< @cookiealche8
+@cookiealche8
+SET c5cookiealch, 8
+COMPARE #<chat.alcheacmakinggolemsinhredients8>, 1
+IF= @cmp8.1
+GOTO @cmp8.3
+
+@cmp8.1
+IF I662 @goly7
+@cmp8.3
+1: Welcome back, student.
+1: Bring me some %I662 and I'll show you how to make a stronger golem.
+SET chat.alcheacmakinggolemsinhredients8, 1
+END
+
+@cmp9
+IF T3043 @cmp10
+IF -V80 @end
+COMPARE #<c5cookiealch>, 10
+IF< @cookiealche9
+@cookiealche9
+SET c5cookiealch, 9
+COMPARE #<chat.alcheacmakinggolemsinhredients9>, 1
+IF= @cmp9.1
+GOTO @cmp9.3
+
+@cmp9.1
+IF I664 @goly8
+@cmp9.3
+1: Welcome back, student.
+1: Bring me a %I664 and I'll show you how to make a stronger golem.
+SET chat.alcheacmakinggolemsinhredients9, 1
+END
+
+@cmp10
+IF T3044 @cmp11
+IF -V90 @end
+COMPARE #<c5cookiealch>, 11
+IF< @cookiealche10
+@cookiealche10
+SET c5cookiealch, 10
+COMPARE #<chat.alcheacmakinggolemsinhredients10>, 1
+IF= @cmp10.1
+GOTO @cmp10.3
+
+@cmp10.1
+IF I661 @goly9
+@cmp10.3
+1: Hello, %1.
+1: I guess you are ready for the next lesson.
+1: Bring me a %I661 and I'll show you how to make a stronger golem.
+SET chat.alcheacmakinggolemsinhredients10, 1
+END
+
+@cmp11
+IF T3045 @enddd
+IF -V99 @end
+COMPARE #<c5cookiealch>, 
+IF< @cookiealche
+@cookiealche11
+SET c5cookiealch, 11
+COMPARE #<chat.alcheacmakinggolemsinhredients11>, 1
+IF= @cmp11.1
+GOTO @cmp11.3
+
+@cmp11.1
+IF I663 @goly10
+@cmp11.3
+1: Hello, %1.
+1: You are almost ready for the next lesson.
+1: Bring me some platinum and I'll show you how to make a stronger golem.
+SET chat.alcheacmakinggolemsinhredients11, 1
+END
+
+@enddd
+1: There's nothing more I can teach you, %L.
+1: May my lessons be useful for you.
+END
+
+@goly1
+H: Hello, Master Arazom
+H: I have what you asked for.
+1: Oh great.
+1: And now listen : here is the secret of making golems.
+WAIT 1
+N: The master Alchemist teaches you how to make a golem.
+HOST_GIVE T3036
+HOST_GIVE S268
+SOUND bell2.wav
+HOST_TAKE I655
+END
+
+@goly2
+H: Hello, Master Arazom
+H: I have what you asked for.
+1: Oh great.
+1: And now let me teach you how to summon a stronger golem.
+WAIT 1
+N: The master Alchemist teaches you how to make a stone golem.
+HOST_GIVE T3037
+HOST_GIVE S269
+SOUND bell2.wav
+HOST_TAKE I656
+END
+
+@goly3
+1: Hello, %1
+1: Did you find brass?
+H: Err I have a trumpet...
+1: -.-;
+H: That's brass...
+WAIT 1
+1: Aiight.
+1: I think I could teach you how to summon a stronger golem though...
+WAIT 1
+N: The master Alchemist teaches you how to make a brace golem.
+HOST_GIVE T3038
+HOST_GIVE S270
+SOUND bell2.wav
+HOST_TAKE I657
+END
+
+@goly4
+1: Hello, %1
+H: Hello
+H: I have what you asked for.
+1: Oh great.
+1: And now let me teach you how to summon a stronger golem.
+WAIT 1
+N: The master Alchemist teaches you how to make an iron golem.
+HOST_GIVE T3039
+HOST_GIVE S271
+SOUND bell2.wav
+HOST_TAKE I658
+END
+
+@goly5
+H: Hello, Master Arazom
+H: I have what you asked for.
+1: Oh great.
+1: And now let me teach you how to summon a stronger golem.
+WAIT 1
+N: The master Alchemist teaches you how to make a turquoise golem.
+HOST_GIVE T3040
+HOST_GIVE S272
+SOUND bell2.wav
+HOST_TAKE I659
+END
+
+@goly6
+H: Hello, master Arazom.
+H: I have what you asked for.
+1: Oh great.
+1: And now let me teach you how to summon a stronger golem.
+WAIT 1
+N: The master Alchemist teaches you how to make a crystal golem.
+HOST_GIVE T3041
+HOST_GIVE S273
+SOUND bell2.wav
+HOST_TAKE I660
+END
+
+@goly7
+1: Welcome back, %1
+H: I have what you asked for.
+1: Oh great.
+1: And now let me teach you how to summon a stronger golem.
+WAIT 1
+N: The master Alchemist teaches you how to make a gold golem.
+HOST_GIVE T3042
+HOST_GIVE S274
+SOUND bell2.wav
+HOST_TAKE I662
+END
+
+@goly8
+1: Welcome back, %1
+H: I have what you asked for.
+1: Oh great.
+1: And now let me teach you how to summon a stronger golem.
+WAIT 1
+N: The master Alchemist teaches you how to make a diamond golem.
+HOST_GIVE T3043
+HOST_GIVE S275
+SOUND bell2.wav
+HOST_TAKE I664
+END
+
+@goly9
+1: Welcome back, %1
+H: I have what you asked for.
+1: Oh great.
+1: And now let me teach you how to summon a stronger golem.
+WAIT 1
+N: The master Alchemist teaches you how to make a ruby golem.
+HOST_GIVE T3044
+HOST_TAKE I661
+HOST_GIVE S276
+SOUND bell2.wav
+END
+
+@eventActorClick60
+N: Level required for the lessons about golems:
+WAIT 1
+N: Every 10 levels, from level 1 to level 99.
+END
+
+@goly10
+H: Hello, Master Arazom.
+H: I have what you asked for.
+1: Oh great.
+1: And now let me teach you how to summon a stronger golem.
+WAIT 1
+N: The master Alchemist teaches you how to make a platinum golem.
+HOST_GIVE T3045
+HOST_TAKE I663
+HOST_GIVE S277
+SOUND bell2.wav
+HOST_GIVE T4001
+END
+;
+;-------------------------------------------------------------------------------------------------------------
+;
+SCENE 1102, "room2", SCENE, "Alchemy Academy"
+#include include.txt
+ACTOR 1, "Master Alchemist", dwarf11, 1, 25, 90
+IF T3993|T3988 @halloweenActors
+GOTO @nextStepAfterHalloweenActors
+
+@halloweenActors
+ACTOR 1, "Master Alchemist", #<spEvent.Name>-dwarf, 11, 25, 90
+@nextStepAfterHalloweenActors
+IF C7 @start
+1: Hello.
+CALL 110012@start %C
+1: I don't know what you are looking for, but here is not the place for #<arg0> %C.
+1: Only the members of the Academy can have a lesson.
+END
+
+@start
+ACTOR 60, "", 3, 0, 95, 15
+IF T77 @cmp1
+1: Hello young apprentice.
+1: I am a master alchemist.
+1: If you are patient enough, I can teach you to make potions, far more effective than those you can buy in shops.
+1: Come back in a while.
+1: Then we will start your formation.
+HOST_GIVE T77
+END
+
+@eventActorClick60
+N: Level required for the lessons about elixirs:
+WAIT 1
+N: Level 10, 30, 50, 70, 80, 90, 99.
+END
+
+@later
+1: Hello, %L.
+1: Do you want the list of the items needed again?
+1: Or maybe you want to make some potions?
+WAIT 1.5
+@menu33
+SOUND sword1.wav
+MENU "I want the list of the items needed=@list", "I want to make some potions=@ask2"
+GOTO @menu33
+
+@ask2
+SOUND sword1.wav
+H: I would like to make some potions.
+1: Which kind?
+WAIT 1
+IF T86 @men7
+IF T85 @men6
+IF T84 @men5
+IF T83 @men4
+IF T82 @men3
+IF T81 @men2
+IF T80 @men1
+END
+
+@noidont
+H: No I am fine.
+1: Alright.
+1: See you, %1
+END
+
+@ask
+ASK 30 1
+IF NO @noidont
+IF YES @yesIdo
+A: I beg your pardon?
+GOTO @ask
+
+@yesIdo
+H: Yes I do.
+1: Which kind?
+WAIT 1
+IF T86 @men7
+IF T85 @men6
+IF T84 @men5
+IF T83 @men4
+IF T82 @men3
+IF T81 @men2
+IF T80 @men1
+END
+
+@dude
+1: You need to have all the ingredients to make a potion...
+1: Do you want to make another elixir?
+GOTO @ask
+
+@men1
+SOUND sword1.wav
+MENU "Elixir of healing=@41", "Elixir of concentration=@42", "Elixir of well-being=@43"
+GOTO @men1
+
+@men2
+SOUND sword1.wav
+MENU "Elixir of healing=@41", "Elixir of concentration=@42", "Elixir of well-being=@43", "Elixir of strength=@44", "Elixir of the faes=@45", "White Elixir=@46"
+GOTO @men2
+
+@men3
+SOUND sword1.wav
+MENU "Elixir of healing=@41", "Elixir of concentration=@42", "Elixir of well-being=@43", "Elixir of strength=@44", "Elixir of the faes=@45", "White Elixir=@46", "Elixir of life=@47", "Red elixir=@48", "Black elixir=@49", "Cancel=@end"
+GOTO @men3
+
+@men4
+SOUND sword1.wav
+MENU "Elixir of healing=@41", "Elixir of concentration=@42", "Elixir of well-being=@43", "Elixir of strength=@44", "Elixir of the faes=@45", "White Elixir=@46", "Elixir of life=@47", "Red elixir=@48", "Black elixir=@49", "Elixir of bravery=@50", "Elixir of wisdom=@51", "Elixir of the heroes=@52", "Cancel=@end"
+GOTO @men4
+
+@men5
+SOUND sword1.wav
+MENU "Elixir of healing=@41", "Elixir of concentration=@42", "Elixir of well-being=@43", "Elixir of strength=@44", "Elixir of the faes=@45", "White Elixir=@46", "Elixir of life=@47", "Red elixir=@48", "Black elixir=@49", "Elixir of bravery=@50", "Elixir of wisdom=@51", "Elixir of the heroes=@52", "Elixir of power=@53", "Elixir of knowledge=@54", "Elixir of Yore=@55", "Cancel=@end"
+GOTO @men5
+
+@men6
+SOUND sword1.wav
+MENU "Elixir of healing=@41", "Elixir of concentration=@42", "Elixir of well-being=@43", "Elixir of strength=@44", "Elixir of the faes=@45", "White Elixir=@46", "Elixir of life=@47", "Red elixir=@48", "Black elixir=@49", "Elixir of bravery=@50", "Elixir of wisdom=@51", "Elixir of the heroes=@52", "Elixir of power=@53", "Elixir of knowledge=@54", "Elixir of Yore=@55", "Alpha elixir=@56", "Beta elixir=@57", "Gamma elixir=@58", "Cancel=@end"
+GOTO @men6
+
+@men7
+SOUND sword1.wav
+MENU "Elixir of healing=@41", "Elixir of concentration=@42", "Elixir of well-being=@43", "Elixir of strength=@44", "Elixir of the faes=@45", "White Elixir=@46", "Elixir of life=@47", "Red elixir=@48", "Black elixir=@49", "Elixir of bravery=@50", "Elixir of wisdom=@51", "Elixir of the heroes=@52", "Elixir of power=@53", "Elixir of knowledge=@54", "Elixir of the Old=@55", "Alpha elixir=@56", "Beta elixir=@57", "Gamma elixir=@58", "Delta elixir=@59", "Cancel=@end" 
+GOTO @men7
+
+@end
+SOUND sword1.wav
+END
+
+@cmp1
+IF T80 @cmp2
+IF -V10 @later
+1: I can teach you how to make elixirs of healing, elixirs concentration, and elixirs well-being.
+HOST_GIVE T80
+1: First, the list of the ingredients.
+1: To make a %I41, you need a %I12 and some %Z408
+1: To make a %I42, you need a %I13 and some %Z408
+1: To make a %I43, you need a %I12 and some %Z408
+1: Now, listen carefully... 
+WAIT .3
+N: He teaches you how to make some new elixirs.
+END
+
+@cmp2
+IF T81 @cmp3
+IF -V30 @later
+HOST_GIVE T81
+1: I can teach you how to make elixirs of strength, elixirs of the faeries, and white elixirs.
+1: First, the list of the ingredients.
+1: To make a %I44, you need a %I12 and a %Z432
+1: To make a %I45, you need a %I13 and a %Z432
+1: To make a %I46, you need a %I12 and a %Z432
+1: Now, listen carefully... 
+WAIT .3
+N: He teaches you how to make some new elixirs.
+END
+
+@cmp3
+IF T82 @cmp4
+IF -V50 @later
+HOST_GIVE T82
+1: I can teach you how to make elixirs of life, red elixirs, and black elixirs.
+1: First, the list of the ingredients.
+1: To make a %I47, you need a %I12 and a %Z451
+1: To make a %I48, you need a %I13 and a %Z451
+1: To make a %I49, you need a %I12 and a %Z451
+1: Now, listen carefully... 
+WAIT .3
+N: He teaches you how to make some new elixirs.
+END
+
+@cmp4
+IF T83 @cmp5
+IF -V70 @later
+HOST_GIVE T83
+1: I can teach you how to make elixirs of bravery, elixirs of wisdom, elixirs and of the heroes.
+1: First, the list of the ingredients.
+1: To make a %I50, you need a %I12 and a %Z289
+1: To make a %I51, you need a %I13 and a %Z289
+1: To make a %I52, you need a %I12 and a %Z289
+1: Now, listen carefully... 
+WAIT .3
+N: He teaches you how to make some new elixirs.
+END
+
+@cmp5
+IF T84 @cmp6
+IF -V80 @later
+HOST_GIVE T84
+1: I can teach you how to make elixirs of power, elixirs of knowledge, and elixirs of yore.
+1: First, the list of the ingredients.
+1: To make a %I53, you need a %I12 and a %I108
+1: To make a %I54, you need a %I13 and a %I108
+1: To make a %I55, you need a %I12 and a %I108
+1: Now, listen carefully... 
+WAIT .3
+N: He teaches you how to make some new elixirs.
+END
+
+@cmp6
+IF T85 @cmp7
+IF -V90 @later
+HOST_GIVE T85
+1: I can teach you how to make alpha elixirs, beta elixirs, and gamma elixirs.
+1: First, the list of the ingredients.
+1: To make a %I56, you need a %I12 and a %Z498
+1: To make a %I57, you need a %I13 and a %Z498
+1: To make a %I58, you need a %I12 and a %Z498
+1: Now, listen carefully... 
+WAIT .3
+N: He teaches you how to make some new elixirs.
+END
+
+@cmp7
+IF T86 @later
+IF -V99 @later
+HOST_GIVE T86
+1: I can teach you how to make delta elixirs.
+1: First, the list of the ingredients.
+1: To make a %I59, you need a %I12 and a %Z316
+1: Now, listen carefully... 
+WAIT .3
+N: He teaches you how to make a new elixir.
+END
+
+@list
+SOUND sword1.wav
+H: I would like to have the list of the items needed
+1: Alright.
+1: To make a %I41, you need a %I12 and some %Z408
+1: To make a %I42, you need a %I13 and some %Z408
+1: To make a %I43, you need a %I12 and some %Z408
+1: To make a %I44, you need a %I12 and a %Z432
+1: To make a %I45, you need a %I13 and a %Z432
+1: To make a %I46, you need a %I12 and a %Z432
+1: To make a %I47, you need a %I12 and a %Z451
+1: To make a %I48, you need a %I13 and a %Z451
+1: To make a %I49, you need a %I12 and a %Z451
+1: To make a %I50, you need a %I12 and a %Z289
+1: To make a %I51, you need a %I13 and a %Z289
+1: To make a %I52, you need a %I12 and a %Z289
+1: To make a %I53, you need a %I12 and a %I108
+1: To make a %I54, you need a %I13 and a %I108
+1: To make a %I55, you need a %I12 and a %I108
+1: To make a %I56, you need a %I12 and a %Z498
+1: To make a %I57, you need a %I13 and a %Z498
+1: To make a %I58, you need a %I12 and a %Z498
+1: To make a %I59, you need a %I12 and a %Z316
+1: Do you want to make some elixirs?
+GOTO @ask
+
+@41
+SOUND sword1.wav
+SET currentItem, 12
+SET currentTrophy, 408
+SET currentElixir, 41
+GOTO @elixircheck
+
+@42
+SOUND sword1.wav
+SET currentItem, 13
+SET currentTrophy, 408
+SET currentElixir, 42
+GOTO @elixircheck
+
+@43
+SOUND sword1.wav
+SET currentItem, 12
+SET currentTrophy, 408
+SET currentElixir, 43
+GOTO @elixircheck
+
+@44
+SOUND sword1.wav
+SET currentItem, 12
+SET currentTrophy, 432
+SET currentElixir, 44
+GOTO @elixircheck
+
+@45
+SOUND sword1.wav
+SET currentItem, 13
+SET currentTrophy, 432
+SET currentElixir, 45
+GOTO @elixircheck
+
+@46
+SOUND sword1.wav
+SET currentItem, 12
+SET currentTrophy, 432
+SET currentElixir, 46
+GOTO @elixircheck
+
+@47
+SOUND sword1.wav
+SET currentItem, 12
+SET currentTrophy, 451
+SET currentElixir, 47
+GOTO @elixircheck
+
+@48
+SOUND sword1.wav
+SET currentItem, 13
+SET currentTrophy, 451
+SET currentElixir, 48
+GOTO @elixircheck
+
+@49
+SOUND sword1.wav
+SET currentItem, 12
+SET currentTrophy, 451
+SET currentElixir, 49
+GOTO @elixircheck
+
+@50
+SOUND sword1.wav
+SET currentItem, 12
+SET currentTrophy, 289
+SET currentElixir, 50
+GOTO @elixircheck
+
+@51
+SOUND sword1.wav
+SET currentItem, 13
+SET currentTrophy, 289
+SET currentElixir, 51
+GOTO @elixircheck
+
+@52
+SOUND sword1.wav
+SET currentItem, 12
+SET currentTrophy, 289
+SET currentElixir, 52
+GOTO @elixircheck
+
+@53
+SOUND sword1.wav
+SET currentItem, 12
+SET currentTrophy, 108
+SET currentElixir, 53
+GOTO @elixircheck
+
+@54
+SOUND sword1.wav
+SET currentItem, 13
+SET currentTrophy, 108
+SET currentElixir, 54
+GOTO @elixircheck
+
+@55
+SOUND sword1.wav
+SET currentItem, 12
+SET currentTrophy, 108
+SET currentElixir, 55
+GOTO @elixircheck
+
+@56
+SOUND sword1.wav
+SET currentItem, 12
+SET currentTrophy, 498
+SET currentElixir, 56
+GOTO @elixircheck
+
+@57
+SOUND sword1.wav
+SET currentItem, 13
+SET currentTrophy, 498
+SET currentElixir, 57
+GOTO @elixircheck
+
+@58
+SOUND sword1.wav
+SET currentItem, 12
+SET currentTrophy, 498
+SET currentElixir, 58
+GOTO @elixircheck
+
+@59
+SOUND sword1.wav
+SET currentItem, 12
+SET currentTrophy, 316
+SET currentElixir, 59
+GOTO @elixircheck
+
+@elixircheck
+IF -I#<currentItem>|-Z#<currentTrophy> @dude
+SET temp.A, num.item#<currentItem>
+SET temp.B, num.trophy#<currentTrophy>
+COMPARE *#<temp.A>, *#<temp.B>
+IF> @trophymore
+SET temp.amount, *#<temp.A>
+GOTO @askseveralpotions?
+
+@trophymore
+SET temp.amount, *#<temp.B>
+@askseveralpotions?
+1: Apparently, you have enough ingredients to make several elixirs.
+1: Do you want to make several ones?
+ASK 30
+IF YES @potionmul
+GOTO @makeone
+
+@potionmulmax
+SET temp.maxAmount, 100
+GOTO @potionmul2
+
+@potionmul
+IF V99 @potionmulmax
+SET temp.maxAmount, #<num.hostLevel>
+ADD temp.maxAmount, 1
+@potionmul2
+SET temp.C, num.item#<currentElixir>
+SUB temp.maxAmount, *#<temp.C>
+COMPARE #<temp.maxAmount>, 1
+IF< @noroomformoreelixirs
+COMPARE #<temp.maxAmount>, #<temp.amount>
+IF< @potionmultoomuch
+@potionmul3
+N: You make #<temp.amount> %I#<currentElixir>.
+HOST_TAKE I#<currentItem>.#<temp.amount>
+HOST_TAKE Z#<currentTrophy>.#<temp.amount>
+HOST_GIVE I#<currentElixir>.#<temp.amount>
+SOUND bubble.wav
+WAIT 3
+SOUND FoundItem.wav
+1: Do you want to make another elixir?
+GOTO @ask
+
+@noroomformoreelixirs
+H: Wait, forget it!
+H: I can't carry more #<currentElixir>s.
+1: As you wish...
+1: Do you want to make another elixir?
+GOTO @ask
+
+@potionmultoomuch
+SET temp.amount, #<temp.maxAmount>
+GOTO @potionmul3
+
+@makeone
+N: You make a %I#<currentElixir>.
+HOST_TAKE I#<currentItem>
+HOST_TAKE Z#<currentTrophy>
+HOST_GIVE I#<currentElixir>
+SOUND bubble.wav
+WAIT 3
+SOUND FoundItem.wav
+1: Do you want to make another elixir?
+GOTO @ask
+;
+;-------------------------------------------------------------------------------------------------------------
+;
+SCENE 1103, "room2", SCENE, "Alchemy Academy"
+#include include.txt
+ACTOR 1, "Benderar", dwarf4, 1, 25, 90
+IF T3993|T3988 @halloweenActors
+GOTO @nextStepAfterHalloweenActors
+
+@halloweenActors
+ACTOR 1, "Benderar", #<spEvent.Name>-dwarf, 4, 25, 90
+@nextStepAfterHalloweenActors
+IF C7+99 @alchy99
+IF C7 @alchy
+1: What are you looking for?
+1: I'm a master alchemist, a scientist!
+1: I cannot help a brute like you!
+1: What do you know about chemistry or elixirs anyway?
+END
+
+@alchy
+1: Yo, young fellow!
+1: I'm working on a new kind of potions ut it may take a long time before I succeed.
+END
+
+@alchy99
+COMPARE #<concentratedElixirsTalk>, 1
+IF= @alchy99back
+1: I made it!
+1: I found a way to make concentrated elixirs!
+H: And the point is...?
+1: Why do people always ask this question?
+1: Anyway.
+1: It's hard to explain, but concentrated potions can be used on you team mates as well, so you can actually heal them and restore them mana.
+1: The bad news is... I'm running out of raw material.
+1: I need more elixirs for my experimentations.
+1: If you bring me one of every elixir, I will teach you how to use concentrated elixirs.
+SET concentratedElixirsTalk, 1
+END
+
+@alchy99back
+COMPARE #<concentratedElixirsTalk>, 2
+IF= @alchy99make
+IF I41+I42+I43+I44+I45+I46+I47+I48+I49+I50+I51+I52+I53+I54+I55+I56+I57+I58+I59 @alchy99items
+1: Ah, you're back!
+1: Do you have the elixirs I need for my experimentations?
+1: Remember: I need one of each.
+END
+
+@alchy99items
+1: You've got the elixirs!
+1: That's great!
+1: Listen now, I'm going to teach you the spells needed to use concentrated potions.
+HOST_TAKE I41
+HOST_TAKE I42
+HOST_TAKE I43
+HOST_TAKE I44
+HOST_TAKE I45
+HOST_TAKE I46
+HOST_TAKE I47
+HOST_TAKE I48
+HOST_TAKE I49
+HOST_TAKE I50
+HOST_TAKE I51
+HOST_TAKE I52
+HOST_TAKE I53
+HOST_TAKE I54
+HOST_TAKE I55
+HOST_TAKE I56
+HOST_TAKE I57
+HOST_TAKE I58
+HOST_TAKE I59
+HOST_GIVE S357
+HOST_GIVE S358
+HOST_GIVE S359
+HOST_GIVE S360
+HOST_GIVE S361
+HOST_GIVE S362
+HOST_GIVE S363
+SET concentratedElixirsTalk, 2
+SOUND foundItem.wav
+1: Here you go: you now use them.
+1: Come back if you need concentrated elixirs: I can make them off regular elixirs.
+END
+
+@alchy99make
+1: Welcome back, %1.
+1: Toss me the elixirs you want to turn into concentrated potions.
+END
+
+@eventActorGive1
+COMPARE #<item.id>, 43
+IF= @elixirMake1
+COMPARE #<item.id>, 46
+IF= @elixirMake2
+COMPARE #<item.id>, 49
+IF= @elixirMake3
+COMPARE #<item.id>, 52
+IF= @elixirMake4
+COMPARE #<item.id>, 55
+IF= @elixirMake5
+COMPARE #<item.id>, 58
+IF= @elixirMake6
+COMPARE #<item.id>, 59
+IF= @elixirMake7
+HOST_GIVE I#<item.id>
+1: Sorry I cannot use that.
+1: Take it back.
+END
+
+@elixirMake1
+HOST_GIVE Z3894
+SOUND bubble.wav
+N: You have acquired a %Z3894.
+END
+
+@elixirMake2
+HOST_GIVE Z3895
+SOUND bubble.wav
+N: You have acquired a %Z3895.
+END
+
+@elixirMake3
+HOST_GIVE Z3896
+SOUND bubble.wav
+N: You have acquired a %Z3896.
+END
+
+@elixirMake4
+HOST_GIVE Z3897
+SOUND bubble.wav
+N: You have acquired a %Z3897.
+END
+
+@elixirMake5
+HOST_GIVE Z3898
+SOUND bubble.wav
+N: You have acquired a %Z3898.
+END
+
+@elixirMake6
+HOST_GIVE Z3899
+SOUND bubble.wav
+N: You have acquired a %Z3899.
+END
+
+@elixirMake7
+HOST_GIVE Z3900
+SOUND bubble.wav
+N: You have acquired a %Z3900.
+END
+

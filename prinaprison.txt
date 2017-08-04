@@ -1,0 +1,281 @@
+SCENE 600, dungeon1, SCENE "To the palace"
+#include include.txt
+IF T1038 @priestfight
+IF T1011 @fightjesterquest3
+IF T1010 @end
+IF T1009 @end
+@pass
+GOTO LINK 8, 3
+
+@end
+END
+
+@priestfight
+ACTOR 1, Guard,  guard6, 1, 20, 90
+1: What are you doing out of your cell?!
+1: You won't escape!
+WAIT 1.7
+MOVE 1, 120, 90, 1
+FIGHT 136.20.90
+IF WIN @pass
+SET priestquest3imprisonned, 1
+GOTO LINK 6, 4
+
+@fightjesterquest3
+ACTOR 2, Makel, human1, 1, 125, 90
+MOVE 2, 75, 90
+FIGHT 136, 136, 136
+IF LOSE @jestdead
+2: Let's go, %1!
+2: See you at the Black Horse Tavern.
+WAIT 2
+GOTO LINK 7, 5
+
+@jestdead
+ACTOR 1, Guard,  guard6, 1, 20, 90
+1: You cannot escape!
+WAIT 1
+SET c5jesterfssdghdfgh, 1
+HOST_TAKE T1010
+HOST_TAKE T1011
+HOST_GIVE T1009
+GOTO LINK 6, 2, 1
+;
+;------------------------------------------------------------------------------------------------
+;
+SCENE 601, door1, SCENE, "John's Cell"
+#include include.txt
+COMPARE #<fretheguydfghjghk>, 1
+IF= @next
+IF C20+T1013 @free
+@next
+N: The cell is empty.
+END
+
+@free
+ACTOR 1, "John Beaster", human121, 1, 25, 90
+H: You can go now.
+H: You are free.
+1: Oh, thank you, #<g.mylord>!
+1: Meet me at my house in Prina and I will show you how grateful I am.
+SET fretheguydfghjghk, 1
+WAIT 2
+MOVE 1, -25, 90
+END
+;
+;------------------------------------------------------------------------------------------------
+;
+SCENE 602, door1, SCENE, "Makel's Jail"
+#include include.txt
+IF -T1009-T1008 @noone
+IF T1009 @imprisonned
+IF T1008 @free
+END
+
+@noone
+N: The cell is empty.
+END
+
+@imprisonned
+GIVE L1
+GIVE H5000
+ACTOR 2, Makel, human1, 1, 45, 95
+COMPARE #<c5jesterfssdghdfgh>, 1
+IF= @imprisonnedbis
+2: %1!
+H: Hello, Makel
+H: I tried to rescue you but...
+H: Well let's find a way to get out of here.
+2: The only way would be to kill the jailor...
+2: But of course I have no weapon and cannot fight.
+H: I still have my puppet
+H: Don't care, I will soon be out.
+2: Hopefully...
+HOST_TAKE T1009
+HOST_GIVE T1010
+@imprisonnedter
+ACTOR 1, Guard, guard6, 1, 25, 90
+1: Halt!
+WAIT 1
+MOVE 1, -20, 90, 1
+FIGHT 136.25.90
+IF LOSE @jestdead
+HOST_GIVE T1011
+GOTO @exitjkjkl
+
+@imprisonnedbis
+2: Again...
+H: Hmm
+H: Let's try again
+GOTO @imprisonnedter
+
+@free
+ACTOR 1, Guard, guard6, 1, 25, 90
+1: Halt!
+WAIT 1
+MOVE 1, -20, 90, 1
+FIGHT 136.25.90
+IF LOSE @jestdead
+WAIT 2
+ACTOR 2, Makel, human1, 1, 25, 90
+H: Come on, Makel, you are free now!
+2: %1!
+HOST_TAKE T1008
+HOST_GIVE T1011
+h: Let's go!
+WAIT 1.5
+GOTO @exitjkjkl
+
+@exitjkjkl
+IF -T1013 @freejohn
+GOTO EXIT
+
+@freejohn
+2: Oh! A friend of mine is imprisoned here as well.
+2: Let's go and rescue him!
+HOST_GIVE T1013
+WAIT 2
+GOTO EXIT
+
+@jestdead
+ACTOR 1, Guard,  guard6, 1, 20, 90
+1: You cannot escape!
+WAIT 1
+SET c5jesterfssdghdfgh, 1
+HOST_TAKE T1010
+HOST_TAKE T1011
+HOST_GIVE T1009
+GOTO LINK 6, 2, 1
+;
+;------------------------------------------------------------------------------------------------
+;
+SCENE 603, door1, SCENE, "Jail"
+#include include.txt
+IF C16+T1032-T303 @fightnecro
+IF C16+T1032-T304 @fightnecro
+N: The cell is empty.
+END
+
+@fightnecro
+ACTOR 1, Guard, guard6, 1, 20, 90
+1: Halt!
+1: What are you doing here?
+H: Where is Derar?
+1: Derar?
+1: Advisor Derar?
+H: Advisor?! Uh?
+1: Enough said
+1: Follow me!
+H: Sorry I don't have time to play with you.
+H: You should let me go, trust me.
+1: Yeah?!
+1: We'll see
+WAIT 1.4
+MOVE 1, -20, 90, 1
+FIGHT2 136.20.90
+HOST_GIVE T1034
+IF LOSE @necroquestdead
+H: Rather strange.
+H: If what the guard has said is right, I won't find Derar here, in the prison...
+END
+
+@necroquestdead
+HOST_GIVE T1033
+1: You wanted to meet Derar, eh!
+1: Alright, let's go!
+1: Ah! Ah! Ah!
+WAIT 2
+GOTO LINK 8, 4, 1
+;
+;------------------------------------------------------------------------------------------------
+;
+SCENE 604, door1, SCENE, "Jail"
+#include include.txt
+COMPARE #<priestquest3imprisonned>, 1
+IF= @escattempt2
+IF T1038-T1037 @priesxt3escape
+IF T1038+T1037 @priestq3
+N: The cell is empty.
+END
+
+@escattempt2
+H: <cough>
+H: Again.
+H: Let's get out of here.
+H: !GUARD!
+ACTOR 1, Guard, guard6, 1, -20, 85
+MOVE 1, 20, 85
+WAIT 4
+1: What?
+H: Nothing. I just would like to kill you so I can escape again.
+WAIT 2
+MOVE 1, -20, 90, 1
+FIGHT 136.20.85
+IF LOSE @dead
+H: God bless you.
+WAIT 1.5
+GOTO LINK 6, 5
+
+@dead
+GIVE L1
+GIVE H2000
+GIVE M2000
+GOTO LINK 6, 4
+
+@priestq3
+WAIT 2
+H: OK, what now?
+WAIT 4
+N: After a few hours, you see the door opening.
+SOUND door.wav
+WAIT 1
+ACTOR 1, "Friar John", human126, 1, 10, 85
+1: Hello, %1.
+H: Friar John!
+MOVE 1, 25,90
+H: Do you know what's going on?
+1: The guards of the regent went to the temple and discovered some documents in your cell.
+1: They now accuse you of being a spy.
+H: What?!
+1: Of course, we don't believe it.
+1: In my mind, the intendant tries to discredit you in order to hide his crimes.
+1: I met the regent but he doesn't believe me and wants you in prison.
+1: And I don't think we will succeed in making him change his mind.
+1: But of course, you could try to escape...
+1: I stole the key to your cell: take it.
+1: Yes, I know: stealing is a sin - however, under certain circumstances...
+1: I can also teach you a new spell that may help you.
+1: Listen carefully.
+WAIT 2
+N: %1 has learnt a new spell : %S236.
+HOST_TAKE T1037
+HOST_GIVE S236
+SOUND bell2.wav
+WAIT 1.5
+1: I must go now.
+1: Good luck, %1.
+MOVE 1, 10, 85
+WAIT 2.5
+MOVE 1, 120, 90, 1
+WAIT 2
+N: You unlock the door and open it.
+WAIT 2
+GOTO LINK 6, 5
+
+@priesxt3escape
+WAIT 1
+N: You unlock the door and open it.
+WAIT 2
+GOTO LINK 6, 5
+;
+;------------------------------------------------------------------------------------------------
+;
+
+
+
+
+
+
+
+
+

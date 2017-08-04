@@ -1,0 +1,35 @@
+; insérer APRES version.txt
+
+SCENE 110006
+@start
+STRCMP #<str.serverName>, "Mad"s Hospital"
+IF> @nextstepafterautomatedpatching
+IF< @nextstepafterautomatedpatching
+IF M2|M0|M4 @nextstepafterautomatedpatching
+GET_SERVER_VAR max.version, Config, version
+STRCMP #<temp.current.version>, #<max.version>
+IF< @automatedpatchingneed
+IF> @automatedpatchingset
+GOTO @nextstepafterautomatedpatching
+
+@automatedpatchingset
+SET_SERVER_VAR Config, version, #<temp.current.version>
+GOTO @nextstepafterautomatedpatching
+
+@automatedpatchingneed
+ACTOR 10, Mad, "-  -   Mad", 4, 25, 90
+SEL 10
+' Greetings, fellow player.
+' A new patch seems to be available.
+' There are two options for you to get it.
+' Either check on-line for new worlds and click on "Athelias" and let the patcher do everything - that's the easy way.
+' Or visit the Athelias download page on http://athelias.biz/dlathelias.html and extract the patch you need in WoS\worlds\Athelias (overwrite everything).
+' If you are more than version behind, you will need to download all the patches published since the last time you've updated.
+' You are currently playing the version #<current.version>.
+' You should leave and reenter the server after having updated your files.
+' The update of your characters may be easier off-line as well.
+WAIT 5
+@nextstepafterautomatedpatching
+RETURN
+END
+

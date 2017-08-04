@@ -1,0 +1,72 @@
+IF T1030 @necroquest3fdghjklkvc
+IF T120-T122 @necroquest3fdghjklkvc
+GOTO @nextstepafterthisinterludealacon
+
+@necroquest3fdghjklkvc
+MOVE 2, -20, 90, 1
+MOVE 3, -20, 90, 1
+MOVE 4, -20, 90, 1
+MOVE 5, -20, 90, 1
+IF R10 @necroquest3closed1
+IF R10 @necroquest3closed2
+IF R10 @necroquest3closed3
+IF R10 @necroquest3closed4
+IF R10 @necroquest3closed5
+IF R10 @necroquest3closed6
+IF R10 @necroquest3closed7
+IF R10 @necroquest3closed8
+IF R10 @necroquest3closed9
+GOTO @necroquest3fdghjklkvc
+
+@necroquest3closed1
+1: The shop is closed.
+1: Go away!
+WAIT 1.2
+GOTO EXIT
+
+@necroquest3closed2
+1: There is nothing for you here!
+1: Go away!
+WAIT 1.2
+GOTO EXIT
+
+@necroquest3closed3
+1: It's closed
+WAIT 1.2
+GOTO EXIT
+
+@necroquest3closed4
+1: Go away, foreigner
+1: The shop is closed
+WAIT 1.5
+GOTO EXIT
+
+@necroquest3closed5
+1: The is nothing for sale here!
+1: Go somewhere else!
+WAIT 1.5
+GOTO EXIT
+
+@necroquest3closed6
+1: Who are you?
+1: Go away!
+WAIT 1.3
+GOTO EXIT
+
+@necroquest3closed7
+1: Sorry, foreigner, I have nothing left for sale.
+END
+
+@necroquest3closed8
+1: Go away, traveller
+1: There is nothing for you in this city
+END
+
+@necroquest3closed9
+1: >.>
+1: <.<
+WAIT 0.5
+GOTO EXIT
+
+@nextstepafterthisinterludealacon
+

@@ -1,0 +1,21 @@
+SCENE 11600, sanctuary, SCENE, "Gate"
+#include include.txt
+GOTO LINK 115, 1
+;
+;-------------------------------------------------------------------------------------
+;
+SCENE 11601, sanctuary, SCENE, "Gate"
+#include include.txt
+IF T1134 @fight
+END
+
+@fight
+H: Argh!
+H: More of them!
+FIGHT 228, 228, 228, 227, 227, 227
+IF WIN @pass
+END
+
+@pass
+GIVE T1135
+GOTO LINK 140, 1

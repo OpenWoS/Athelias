@@ -1,0 +1,972 @@
+SCENE 1600, castle, SCENE, "Western Gate"
+#include include.txt
+SET c2latshaexit, west
+GOTO LINK 0, 3
+;
+;------------------------------------------------------------------------------------------------------------------
+;
+SCENE 1601, castle, SCENE, "Eastern Gate"
+#include include.txt
+SET c2latshaexit, east
+GOTO LINK 0, 3
+;
+;------------------------------------------------------------------------------------------------------------------
+;
+SCENE 1602, castle, SCENE, Gate
+#include include.txt
+GOTO LINK 45, 4
+;
+;------------------------------------------------------------------------------------------------------------------
+;
+SCENE 1603, weapons, SCENE, "Weapons", 0, 1
+#include include.txt
+ACTOR 1, Izior, human15, 1, 25, 90
+IF T3993|T3988 @halloweenActors
+GOTO @nextStepAfterHalloweenActors
+
+@halloweenActors
+ACTOR 1, "Izior", #<spEvent.Name>-humans, 15, 25, 90
+@nextStepAfterHalloweenActors
+#include illuq2.txt
+IF -T3017 @cant
+CALL 110012@start %C
+1: Hey, #<arg0> %C!
+1: Welcome!
+1: I have everything you may need!
+@sell
+OFFER 344, 345, 346, 347, 348, 349, 350, 351, 352, 353, 354, 355, 356, 357, 358, 359, 360 ,361, 362, 363
+END
+
+@cant
+1: Welcome, Sir.
+1: Are you looking for a staff?
+GOTO @sell
+;
+;------------------------------------------------------------------------------------------------------------------
+;
+SCENE 1604, weapons, SCENE, "Runesmith", 0, 1
+#include include.txt
+ACTOR 1, Rezan, human19, 1, 25, 90
+IF T3993|T3988 @halloweenActors
+GOTO @nextStepAfterHalloweenActors
+
+@halloweenActors
+ACTOR 1, "Rezan", #<spEvent.Name>-humans, 19, 25, 90
+@nextStepAfterHalloweenActors
+#include illuq2.txt
+IF T2 @welcome
+1: Hello
+1: Are you looking for runes?
+@sell
+OFFER 545, 546, 547, 548, 549, 550, 551, 552, 553, 554, 555, 556, 557, 558, 559, 560, 561, 562, 563, 564
+END
+
+@welcome
+1: Hello, dear %C.
+1: If you are looking for a rune, you've just found it!
+1: I have everything you may need!
+GOTO @sell
+;
+;------------------------------------------------------------------------------------------------------------------
+;
+SCENE 1605, weapons2, SCENE, "Smithy"
+#include include.txt
+ACTOR 1, Elezas, human81, 1, 40, 95
+IF T3993|T3988 @halloweenActors
+GOTO @nextStepAfterHalloweenActors
+
+@halloweenActors
+ACTOR 1, "Elezas", #<spEvent.Name>-humans, 81, 40, 95
+@nextStepAfterHalloweenActors
+#include illuq2.txt
+COMPARE #<c5talkedtoblacksmith>, 0
+IF= @firsttimeblacksmith.txt
+1: Hello, adventurer.
+1: Toss me the item you want to upgrade.
+OFFER 132, 134, 135
+END
+
+#include blacksmith.txt
+;
+;-------------------------------------------------------------------------------
+;
+SCENE 1606, alchemy, SCENE, "Alchemist"
+#include include.txt
+ACTOR 1, Deziral, human31, 1, 25, 98
+IF T3993|T3988 @halloweenActors
+GOTO @nextStepAfterHalloweenActors
+
+@halloweenActors
+ACTOR 1, "Deziral", #<spEvent.Name>-humans, 31, 25, 98
+@nextStepAfterHalloweenActors
+#include illuq2.txt
+1: Hello, foreigner
+OFFER 1, 3, 4, 7, 13, 29, 30, 31, 32, 33, 36, 38, 39, 12
+END 
+;
+;-------------------------------------------------------------------------------
+;
+SCENE 1607, houseinside1, SCENE, Handicraft
+#include include.txt
+ACTOR 1, Bernez, human17, 1, 45, 80
+IF T3993|T3988 @halloweenActors
+GOTO @nextStepAfterHalloweenActors
+
+@halloweenActors
+ACTOR 1, "Bernez", #<spEvent.Name>-humans, 17, 45, 80
+@nextStepAfterHalloweenActors
+#include illuq2.txt
+1: Hello, stranger.
+OFFER 270, 271, 272, 273, 274, 275, 276, 277, 278, 279, 200, 209, 213, 217, 221, 565, 569, 573, 578, 582
+END
+;
+;---------------------------------------------------------------------------
+;
+SCENE 1608, tavern1 , SCENE, "Tavern"
+#include include.txt
+ACTOR 1, Melinda, wom7, 1, 30, 89
+ACTOR 2, Taruldelek, human80, 1, 91, 85
+FACE 2, 0
+ACTOR 3, Ilimandire, wom46, 1, 15, 83
+IF T3993|T3988 @halloweenActors
+GOTO @nextStepAfterHalloweenActors
+
+@halloweenActors
+ACTOR 1, "Melindra", #<spEvent.Name>-wom, 7, 30, 89
+ACTOR 2, Tarudelek, #<spEvent.Name>-humans, 80, 91, 85
+FACE 2, 0
+ACTOR 3, Ilimandire, #<spEvent.Name>-wom, 46, 15, 83
+@nextStepAfterHalloweenActors
+1: Hello.
+1: What do you want to drink?
+OFFER 2, 34
+IF V99 @comparemerc.firsttime
+@normalV99
+END
+
+@comparemerc.firsttime
+COMPARE #<merc.firstTime>, 1
+IF= @normalV99
+GOTO @mercfirstime.txt
+
+#include merc-firsttime.txt
+
+@eventActorClick2
+SOUND sword1.wav
+SET temp.currentMerc, 2906
+#include merc-alreadyHired.txt
+@nextstepaftermercalreadyhired2906
+ACTOR 20, , merc2906, 0, 50, 50
+ACTOR 21, , hire, 0, 40, 75
+ACTOR 22, , cancel, 0, 60, 75
+END
+
+@eventActorClick3
+SOUND sword1.wav
+SET temp.currentMerc, 2911
+#include merc-alreadyHired.txt
+@nextstepaftermercalreadyhired2911
+ACTOR 20, , merc2911, 0, 50, 50
+ACTOR 21, , hire, 0, 40, 75
+ACTOR 22, , cancel, 0, 60, 75
+END
+
+#include merc-hire.txt
+;
+;-------------------------------------------------------------------------------
+;
+SCENE 1610, "alchemy", SCENE, "Marlyn's"
+#include include.txt
+ACTOR 1, "Marlyn", human23, 1, 25, 90
+IF T3993|T3988 @halloweenActors
+GOTO @nextStepAfterHalloweenActors
+
+@halloweenActors
+ACTOR 1, "Marlyn", #<spEvent.Name>-humans, 23, 25, 90
+@nextStepAfterHalloweenActors
+IF S200 @thx
+IF T124 @paliquest1
+IF S185 @thx
+IF C45 @merc
+IF C22 @knight
+1: What are you doing in my lab, weirdo?
+1: I am sorry but I cannot work when someone is watching me.
+1: Get out, please.
+END
+
+@paliquest1
+H: Marlyn?
+1: Yes. Who are you?
+H: %1, from Benadrim.
+H: The master paladins told me you had some books on the Skull of Jeren for us.
+1: Oh, yes!
+1: One moment.
+WAIT 1.3
+MOVE 1, -5, 90
+WAIT 1.5
+ACTOR 2, Guard, guard6, 1, 110, 90
+ACTOR 3, Guard, guard6, 1, 115, 95
+MOVE 2, 75, 90
+MOVE 3, 80, 95
+WAIT 3
+FACE 1, 1
+MOVE 1, 25, 90
+2: Marlyn, in the name of the Regent, I order you to follow us to the Palace.
+2: Your skills are needed there.
+1: I am sorry, Sir, but I have to tell you that it is impossible.
+1: I am too busy here to go now to Prina.
+1: If the Regent needs my *skills* as you said, then he should send me an invitation a few weeks before.
+3: Sorry but we're not here to hear you whining.
+MOVE 3, 23, 90
+MOVE 2, 28, 90
+WAIT 7
+2: Follow us now!
+MOVE 1, 95, 90
+MOVE 2, 90, 90
+MOVE 3, 95, 90
+1: What are you doing?
+1: Let me go!
+H: Hey, you hear him, let him go!
+2: Shut up!
+H: Fine!
+WAIT 1
+FACE 1, 1
+MOVE 2, 120, 90, 1
+MOVE 3, 120, 90, 1
+FIGHT 145.90.90, 145.95.90
+IF WIN @givetokenpalis
+END
+
+@givetokenpalis
+1: Thank you, paladin.
+H: That's my job.
+1: Take the books and return to the paladins castle.
+1: My guess is that the guards of Prina will be looking for you here and in the capital.
+1: Be careful there.
+WAIT 1
+N: You take one of the horses of the guards once outside.
+HOST_GIVE I1010
+HOST_GIVE T125
+SOUND FoundItem.wav
+END
+
+@merc
+IF Z27 @spell
+1: I guess you have been told I need a baby dragon wing.
+1: Bring me one, and I'll reward you.
+1: What about a spell I can teach you for example?
+END
+
+@knight
+IF Z27 @spell
+1: I guess you have been told I need a baby dragon wing.
+1: Bring me one, and I'll reward you.
+1: What about a spell I can teach you for example?
+END
+
+@spell
+HOST_TAKE Z27
+H: Hello, Marlyn.
+H: I have the baby dragon wing you've asked for.
+1: Oh thanks!
+1: I really need it.
+1: I have no money but here is a spell I can teach you as a reward.
+IF C45 @mercspell
+IF C22 @knightspell
+END
+
+@mercspell
+HOST_GIVE S200
+SOUND bell2.wav
+N: %1 has learnt a new spell : %S200.
+END
+
+@knightspell
+HOST_GIVE S185
+SOUND bell2.wav
+N: %1 has learnt a new spell : %S185.
+END
+
+@thx
+1: Thanks again for the wing, brave %L.
+END
+;
+;------------------------------------------------------------------------------------------------------------------
+;
+SCENE 1611, "room2", SCENE, "Argoz's"
+#include include.txt
+IF V50 @argoz
+N: The house seems to be empty.
+END
+
+@argoz
+ACTOR 1, "Argoz", human31, 1, 25, 90
+@xmas
+IF T3993|T3988 @halloweenActors
+IF T64 @ever
+IF -T65 @start
+IF Z34+Z48+Z107+Z268.20 @reward
+H: Hello, Argoz
+H: I'm still looking for what you need but...
+H: Could I have the list again, please?
+1: Sure, I need a fire gem, some spirit substance, a white dragon horn, and twenty will-o'-the-wisp carcasses.
+END
+
+@halloweenActors
+ACTOR 1, "Argoz", #<spEvent.Name>-humans, 31, 25, 90
+IF T3988 @xmas
+COMPARE #<halloween.chat.argoz>, 1
+IF= @halloweenActors2
+1: Greetings, adventurer!
+1: Have you heard of what's going on?
+H: What? The invasion of halloween demons?
+1: Yes.
+H: Yeah, I've already slain some of them.
+1: Great!
+1: Some of them drop magical items, if you bring me some of them, I'll make magical potions for you.
+1: I need twenty of each to make a potion.
+SET halloween.chat.argoz, 1
+END
+
+@halloweenActors2
+1: Greetings, adventurer!
+1: Do you have halloween trophies for me?
+IF Z260.20|Z261.20|Z349.20|Z351.20|Z352.20|Z353.20|Z373.20|Z374.20|Z375.20|Z376.20|Z354.20|Z354.20 @halloweenPotions
+H: Not enough to make potions yet.
+1: Feel free to come back later, and good hunt!
+END
+
+@halloweenPotions
+H: Yep.
+1: What kind of potion do you want to make?
+WAIT 2
+@menu-halloween
+SOUND sword1.wav
+MENU "Magical Candy=@halloween1", "Healing Candy Cane=@halloween2", "Swiss Chocolate=@halloween3", "Chocolate Power Drink=@halloween4", "Magical Ice Cream=@halloween5", "Power Cookie=@halloween6", "Medinal Pumpkin=@halloween7", "Swiss White Chocolate=@halloween8", "Magical Rice Cake=@halloween9", "Piece of Healing Cake=@halloween10", "Birthday Cake=@halloween11", "Cancel=@endcancel"
+GOTO @menu-halloween
+
+@endcancel
+SOUND sword1.wav
+@end
+END
+
+@halloween1
+SOUND sword1.wav
+IF Z260.20 @halloweenMake1
+N: You need 20 %Z260 to ma a %I60.
+WAIT 2
+1: Do you want me to make another potion?
+WAIT 2
+GOTO @menu-halloween
+
+@halloween2
+SOUND sword1.wav
+IF Z261.20 @halloweenMake2
+N: You need 20 %Z261 to ma a %I.61.
+WAIT 2
+1: Do you want me to make another potion?
+WAIT 2
+GOTO @menu-halloween
+
+@halloween3
+SOUND sword1.wav
+IF Z349.20 @halloweenMake3
+N: You need 20 %Z349 to ma a %I62.
+WAIT 2
+1: Do you want me to make another potion?
+WAIT 2
+GOTO @menu-halloween
+
+@halloween4
+SOUND sword1.wav
+IF Z351.20 @halloweenMake4
+N: You need 20 %Z351 to ma a %I63.
+WAIT 2
+1: Do you want me to make another potion?
+WAIT 2
+GOTO @menu-halloween
+
+@halloween5
+SOUND sword1.wav
+IF Z352.20 @halloweenMake5
+N: You need 20 %Z352 to ma a %I64.
+WAIT 2
+1: Do you want me to make another potion?
+WAIT 2
+GOTO @menu-halloween
+
+@halloween6
+SOUND sword1.wav
+IF Z353.20 @halloweenMake6
+N: You need 20 %Z353 to ma a %I65.
+WAIT 2
+1: Do you want me to make another potion?
+WAIT 2
+GOTO @menu-halloween
+
+@halloween7
+SOUND sword1.wav
+IF Z354.20 @halloweenMake7
+N: You need 20 %Z354 to ma a %I66.
+WAIT 2
+1: Do you want me to make another potion?
+WAIT 2
+GOTO @menu-halloween
+
+@halloween8
+SOUND sword1.wav
+IF Z373.20 @halloweenMake8
+N: You need 20 %Z373 to ma a %I67.
+WAIT 2
+1: Do you want me to make another potion?
+WAIT 2
+GOTO @menu-halloween
+
+@halloween9
+SOUND sword1.wav
+IF Z374.20 @halloweenMake9
+N: You need 20 %Z374 to ma a %I68.
+WAIT 2
+1: Do you want me to make another potion?
+WAIT 2
+GOTO @menu-halloween
+
+@halloween10
+SOUND sword1.wav
+IF Z375.20 @halloweenMake10
+N: You need 20 %Z375 to ma a %I69.
+WAIT 2
+1: Do you want me to make another potion?
+WAIT 2
+GOTO @menu-halloween
+
+@halloween11
+SOUND sword1.wav
+IF Z376.20 @halloweenMake11
+N: You need 20 %Z376 to ma a %I70.
+WAIT 2
+1: Do you want me to make another potion?
+WAIT 2
+GOTO @menu-halloween
+
+@halloweenMake1
+1: Alright.
+SOUND bubble.wav
+1: Here you go
+HOST_TAKE Z260.20
+HOST_GIVE I60
+SOUND FoundItem.wav
+1: Do you want me to make another potion?
+WAIT 2
+GOTO @menu-halloween
+
+@halloweenMake2
+1: Alright.
+SOUND bubble.wav
+1: Here you go
+HOST_TAKE Z261.20
+HOST_GIVE I61
+SOUND FoundItem.wav
+1: Do you want me to make another potion?
+WAIT 2
+GOTO @menu-halloween
+
+@halloweenMake3
+1: Alright.
+SOUND bubble.wav
+1: Here you go
+HOST_TAKE Z349.20
+HOST_GIVE I62
+SOUND FoundItem.wav
+1: Do you want me to make another potion?
+WAIT 2
+GOTO @menu-halloween
+
+@halloweenMake4
+1: Alright.
+SOUND bubble.wav
+1: Here you go
+HOST_TAKE Z351.20
+HOST_GIVE I63
+SOUND FoundItem.wav
+1: Do you want me to make another potion?
+WAIT 2
+GOTO @menu-halloween
+
+@halloweenMake5
+1: Alright.
+SOUND bubble.wav
+1: Here you go
+HOST_TAKE Z352.20
+HOST_GIVE I64
+SOUND FoundItem.wav
+1: Do you want me to make another potion?
+WAIT 2
+GOTO @menu-halloween
+
+@halloweenMake6
+1: Alright.
+SOUND bubble.wav
+1: Here you go
+HOST_TAKE Z353.20
+HOST_GIVE I65
+SOUND FoundItem.wav
+1: Do you want me to make another potion?
+WAIT 2
+GOTO @menu-halloween
+
+@halloweenMake7
+1: Alright.
+SOUND bubble.wav
+1: Here you go
+HOST_TAKE Z354.20
+HOST_GIVE I66
+SOUND FoundItem.wav
+1: Do you want me to make another potion?
+WAIT 2
+GOTO @menu-halloween
+
+@halloweenMake8
+1: Alright.
+SOUND bubble.wav
+1: Here you go
+HOST_TAKE Z373.20
+HOST_GIVE I67
+SOUND FoundItem.wav
+1: Do you want me to make another potion?
+WAIT 2
+GOTO @menu-halloween
+
+@halloweenMake9
+1: Alright.
+SOUND bubble.wav
+1: Here you go
+HOST_TAKE Z374.20
+HOST_GIVE I68
+SOUND FoundItem.wav
+1: Do you want me to make another potion?
+WAIT 2
+GOTO @menu-halloween
+
+@halloweenMake10
+1: Alright.
+SOUND bubble.wav
+1: Here you go
+HOST_TAKE Z375.20
+HOST_GIVE I69
+SOUND FoundItem.wav
+1: Do you want me to make another potion?
+WAIT 2
+GOTO @menu-halloween
+
+@halloweenMake11
+1: Alright.
+SOUND bubble.wav
+1: Here you go
+HOST_TAKE Z376.20
+HOST_GIVE I70
+SOUND FoundItem.wav
+1: Do you want me to make another potion?
+WAIT 2
+GOTO @menu-halloween
+
+@start
+1: Welcome, brave adventurer.
+1: I am Argoz, magician, and master of life and death.
+1: I need some items for an incantation.
+1: Perhaps you will help me with finding them.
+1: You would receive a good reward.
+H: Why not?
+1: Great! 
+1: So listen : I need a fire gem, some spirit substance, a white dragon horn, and twenty will-o'-the-wisp carcasses.
+HOST_GIVE T65
+IF Z34+Z48+Z107+Z268.20 @rewardbis
+END
+
+@rewardbis
+H: Eh! You're lucky : I think I have all what you need!
+1: Oh great!
+GOTO @rewardter
+
+@reward
+H: I have all the items.
+1: Oh thanks!
+@rewardter
+1: And now, your reward.
+1: What about a healing pet?
+1: It may need training though.
+HOST_TAKE Z34
+HOST_TAKE Z48
+HOST_TAKE Z107
+HOST_TAKE Z268.20
+HOST_GIVE I1022
+HOST_GIVE T64
+SOUND FoundItem.wav
+END
+
+@ever
+COMPARE #<num.hostHasPet644>, 0
+IF> @ever2
+COMPARE #<chat.argoz.trophypet>, 1
+IF= @comebacktrophypet
+IF Z235 @riderpet1
+IF Z236 @riderpet2
+IF Z237 @riderpet3
+@ever2
+1: Welcome back, adventurer.
+END
+
+@comebacktrophypet
+IF Z235.5+Z236.5+Z237.5 @trophypetmake
+1: Welcome back, adventurer.
+1: Remember: if you want I could create a pet for you, but I'd need five %Z235, five %Z236, and five %Z237 for that.
+END
+
+@trophypetmake
+H: Hello, Argoz.
+H: I have all the items you needed to create a pet.
+1: Great!
+1: Wait a moment please.
+WAIT 2
+SOUND bubble.wav
+WAIT 3
+SOUND thunder.wav
+1: Alive!
+1: It's alive!
+1: Hmm...
+1: Sorry.
+1: Well, here is your pet.
+H: Thanks!
+HOST_GIVE I1138
+HOST_TAKE Z235.5
+HOST_TAKE Z236.5
+HOST_TAKE Z237.5
+SOUND foundItem.wav
+END
+
+@riderpet1
+1: Oh! A %Z235!
+@riderpet4
+1: Incredible!
+1: I could use the magical power of this item to create an unique pet if you want!
+1: However, I would need some other items.
+1: I'd need five %Z235, five %Z236, and five %Z237.
+1: You should come back when you have found everything.
+H: I'll try to.
+SET chat.argoz.trophypet, 1
+END
+
+@riderpet2
+1: Oh! A %Z235!
+GOTO @riderpet4
+
+@riderpet3
+1: Oh! A %Z235!
+GOTO @riderpet4
+;
+;--------------------------------------------------------------------------------------------------------------------
+;
+SCENE 1612, "houseinside1", SCENE, "Wizardry Academy"
+#include include.txt
+GOTO LINK 147, 0
+;
+;--------------------------------------------------------------------------------------------------------------
+;
+SCENE 1613, "room2", SCENE, "Palace of the Illusions"
+#include include.txt
+GOTO LINK 79, 0
+;
+;--------------------------------------------------------------------------
+;
+SCENE 1614, "houseinside1", SCENE, "Master of the elements"
+#include include.txt
+IF -V90 @noone
+ACTOR 1, "Master of the Elements", human26, 1, 45, 75
+IF T3993|T3988 @halloweenActors
+GOTO @nextStepAfterHalloweenActors
+
+@halloweenActors
+ACTOR 1, "Master of the Elements", #<spEvent.Name>-humans, 26, 45, 75
+@nextStepAfterHalloweenActors
+COMPARE #<montsoftheelemntriningdfg>, "6"
+IF= @end
+1: Do you think you are stronger than the elements?
+@askqsqsd
+ASK 30
+IF YES @brebre
+IF NO @wise
+1: Pardon?
+GOTO @askqsqsd
+
+@noone
+N: There is no-one here - yet!
+END
+
+@wise
+1: That's the answer that I was expecting.
+1: Go, now.
+END
+
+@brebre
+1: So prove it!
+MOVE 1, 45, 70
+COMPARE #<montsoftheelemntriningdfg>, "5"
+IF= @fight6
+COMPARE #<montsoftheelemntriningdfg>, "4"
+IF= @fight5
+COMPARE #<montsoftheelemntriningdfg>, "3"
+IF= @fight4
+COMPARE #<montsoftheelemntriningdfg>, "2"
+IF= @fight3
+COMPARE #<montsoftheelemntriningdfg>, "1"
+IF= @fight2
+SET montsoftheelemntriningdfg, "0"
+FIGHT 59, 60, 61, 62
+IF LOSE @LOSE
+ADD montsoftheelemntriningdfg, "1"
+GOTO @fight2
+
+@LOSE
+1: You need more training my young friend.
+1: Feel free to come back later.
+END
+
+@fight2
+FIGHT 63, 64, 65, 66
+IF LOSE @LOSE
+ADD montsoftheelemntriningdfg, "1"
+GOTO @fight3
+
+@fight3
+FIGHT 67, 68, 69, 70
+IF LOSE @LOSE
+ADD montsoftheelemntriningdfg, "1"
+GOTO @fight4
+
+@fight4
+FIGHT 100, 101, 103, 104
+IF LOSE @LOSE
+ADD montsoftheelemntriningdfg, "1"
+GOTO @fight5
+
+@fight5
+FIGHT 105, 106, 107, 108
+IF LOSE @LOSE
+ADD montsoftheelemntriningdfg, "1"
+GOTO @fight6
+
+@fight6
+FIGHT 109
+IF LOSE @LOSE
+FIGHT 110
+IF LOSE @LOSE
+FIGHT 111
+IF LOSE @LOSE
+FIGHT 112
+IF LOSE @LOSE
+1: Congratulations!
+1: You are the first one to pass the test for a very long time.
+1: I wasn't expecting you to succeed, I must confess.
+1: I have little to offer but maybe this very special potion will help you in your journey.
+GIVE I8
+SOUND FoundItem.wav
+GIVE T89
+ADD montsoftheelemntriningdfg, "1"
+1: Any elementalist should now visit the elder elementalist.
+1: May your journey be safe.
+END
+
+@end
+1: Welcome back, hero.
+1: You have already defeated all the elementals.
+1: I can't help you.
+END
+;
+;------------------------------------------------------------------------------
+;
+SCENE 1615, "houseinside1", SCENE, "Elder Elementalist"
+#include include.txt
+IF C25 @elem
+IF C30 @elem
+IF C35 @elem
+IF C40 @elem
+IF I1026 @end
+IF I1027 @end
+IF I1028 @end
+IF I1029 @end
+END
+
+@elem
+ACTOR 1, "Elder Elementalist", human4, 1, 45, 75
+IF T3993|T3988 @halloweenActors
+GOTO @nextStepAfterHalloweenActors
+
+@halloweenActors
+ACTOR 1, "Elder Elementalist", #<spEvent.Name>-humans, 4, 45, 75
+@nextStepAfterHalloweenActors
+1: My disciple, the master of the elements, told me you passed his tests.
+1: Excellent.
+1: But an elementalist must be able to defeat any monster, not only elementals.
+1: I have studied elemental magic during centuries and I am now able to summon any monster.
+1: If you can kill all my creatures, you'll deserve to wear the Master Elementalist Robe.
+1: Now, show me your power !
+WEATHER 8
+FX 5
+COLOR 2021
+COLOR 1021
+WAIT 2
+N: The Elder Elementalist summons a Platinum Golem!
+MOVE 1, 50, 50
+FIGHT 46
+IF LOSE @LOSE
+WEATHER 8
+FX 5
+COLOR 2021
+COLOR 1021
+WAIT 2
+N: The Elder Elementalist summons a Gnomish Grand Priest!
+FIGHT 204
+IF LOSE @LOSE
+WEATHER 8
+FX 5
+COLOR 2021
+COLOR 1021
+WAIT 2
+N: The Elder Elementalist summons a Dwarven Lord!
+FIGHT 171
+IF LOSE @LOSE
+WEATHER 8
+FX 5
+COLOR 2021
+COLOR 1021
+WAIT 2
+N: The Elder Elementalist summons a Lord Beastmaster!
+FIGHT 163
+IF LOSE @LOSE
+WEATHER 8
+FX 5
+COLOR 2021
+COLOR 1021
+WAIT 2
+N: The Elder Elementalist summons a Griffon!
+FIGHT 329
+IF LOSE @LOSE
+WEATHER 8
+FX 5
+COLOR 2021
+COLOR 1021
+WAIT 2
+N: The Elder Elementalist summons a Spectre!
+FIGHT 55
+IF LOSE @LOSE
+WEATHER 8
+FX 5
+COLOR 2021
+COLOR 1021
+WAIT 2
+N: The Elder Elementalist summons a Knight of the 2nd Circle!
+FIGHT 119
+IF LOSE @LOSE
+WEATHER 8
+FX 5
+COLOR 2021
+COLOR 1021
+WAIT 2
+N: The Elder Elementalist summons a Phoenix!
+FIGHT 288
+IF LOSE @LOSE
+WEATHER 8
+FX 5
+COLOR 2021
+COLOR 1021
+WAIT 2
+N: The Elder Elementalist summons a Major Demon!
+FIGHT 339
+IF LOSE @LOSE
+WEATHER 8
+FX 5
+COLOR 2021
+COLOR 1021
+WAIT 2
+N: The Elder Elementalist summons a Troll!
+FIGHT 23
+IF LOSE @LOSE
+WEATHER 8
+FX 5
+COLOR 2021
+COLOR 1021
+WAIT 2
+N: The Elder Elementalist summons a Black Dragon!
+FIGHT 35
+IF LOSE @LOSE
+FX 0
+WEATHER 0
+COLOR 0
+1: Congratulations!
+1: You are now a master elementalist.
+1: You can now wear the Mater Elementalist Robe.
+IF C25 @fire
+IF C30 @water
+IF C35 @earth 
+IF C40 @air
+END
+
+@fire
+HOST_GIVE I1026
+SOUND FoundItem.wav
+END
+
+@air
+HOST_GIVE I1027
+SOUND FoundItem.wav
+END
+
+@earth
+HOST_GIVE I1029
+SOUND FoundItem.wav
+END
+
+@water
+HOST_GIVE I1028
+SOUND FoundItem.wav
+END 
+
+@end
+END
+;
+;-------------------------------------------------------------------------------------
+;
+SCENE 1616, templeinside7, SCENE,  "Temple"
+IF T3974 @antigods
+#include include.txt
+GIVE L1
+GIVE H5000
+GIVE M5000
+OFFER 37
+ACTOR 1, Alekzar, human5, 1, 25, 102
+IF T3993|T3988 @halloweenActors
+GOTO @nextStepAfterHalloweenActors
+
+@antigods
+FIGHT 815
+IF WIN @antigodswin
+END
+
+@antigodswin
+HOST_TAKE T3974
+HOST_GIVE Z815
+SOUND trophyFound.wav
+END
+
+@halloweenActors
+ACTOR 1, "Alekzar", #<spEvent.Name>-humans, 5, 25, 102
+@nextStepAfterHalloweenActors
+1: Welcome, adventurer.
+1: You have been healed.
+END
+;
+;-------------------------------------------------------------------------------
+;
+
+
+

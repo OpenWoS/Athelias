@@ -1,0 +1,104 @@
+SCENE 1000000
+@st
+SET madstool.scene.id, #<arg0>
+@soulIDchecker
+; Replace "SOUL 2006" by your soul ID.
+; If you want to give access to AHS to more than one person, you can add more IDs such as: "-SOUL 2006-SOUL 1-SOUL3045" (don't forget to separate them with the "-" symbol)
+STRCMP "Soul 2006", #<str.soul>
+IF= @madstoolmadstoolworlddev
+STRCMP "Soul 3171", #<str.soul>
+IF= @madstoolmadstoolworlddev
+STRCMP #<arg0>, "checking"
+IF= @returneventactorthingyfalse
+GOTO @nextstepaftermadstool.txt
+
+@madstoollevel 
+FIGHT 666 
+; Change this monster ID only if it is already used in your world.
+GOTO @madstoollevel 
+
+@madstoollvl99eqipevery
+; Replace the following IDs by the IDs of the main level 99 equip in your world (delete the extra GIVEs or add some if you have more stuff).
+GIVE I1042
+GIVE I1043
+GIVE I1044
+GIVE I1045
+GIVE I1046
+GIVE I1047
+GIVE I1048
+GIVE I1049
+GIVE I1050
+GIVE I1051
+GIVE I1052
+GIVE I1053
+GIVE I1054
+GIVE I1055
+GIVE I1056
+GIVE I1057
+GIVE I1058
+GIVE I1059
+GIVE I291
+GIVE I303
+GIVE I1091
+GIVE I1092
+END
+
+@madstoollvl99eqiphost
+; Replace the following IDs by the IDs of the main level 99 equip in your world (delete the extra HOST_GIVEs or add some if you have more stuff).
+HOST_GIVE I1091
+HOST_GIVE I1092
+HOST_GIVE I1042
+HOST_GIVE I1043
+HOST_GIVE I1044
+HOST_GIVE I1045
+HOST_GIVE I1046
+HOST_GIVE I1047
+HOST_GIVE I1048
+HOST_GIVE I1049
+HOST_GIVE I1050
+HOST_GIVE I1051
+HOST_GIVE I1052
+HOST_GIVE I1053
+HOST_GIVE I1054
+HOST_GIVE I1055
+HOST_GIVE I1056
+HOST_GIVE I1057
+HOST_GIVE I1058
+HOST_GIVE I1059
+HOST_GIVE I291
+HOST_GIVE I303
+END
+
+@madstoolreservedspells
+; Replace the following spells IDs by the ID of your reserved spells.
+HOST_GIVE S748
+HOST_GIVE S660
+HOST_GIVE S713
+HOST_GIVE S714
+HOST_GIVE S715
+HOST_GIVE S716
+HOST_GIVE S717
+HOST_GIVE S718
+HOST_GIVE S719
+HOST_GIVE S720
+HOST_GIVE S721
+HOST_GIVE S722
+END
+
+@madstollpotionshealhost
+; Replace the following ID by the ID of the most powerful potion in your world (replace "839" only, not the ".100" part).
+HOST_GIVE I40.100
+END
+
+@madstollpotionshealevery
+; Replace the following ID by the ID of the most powerful potion in your world (replace "839" only, not the ".100" part).
+GIVE I40.100
+END
+
+;>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+;>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+;>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>         Nothing to change below this line       >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+;>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+;>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+#include AHS3.txt

@@ -1,0 +1,117 @@
+@prompt1
+IF -#7|-#10|-#12|-#13|-#16|-#18|-#19|-#36|-#40|-#41 @nextstepafterprompt.txt
+ACTOR 1, Manfred, human5, 1, 35, 90
+COMPARE #<num.prompt>, 0
+IF> @prompt2
+1: Hello, adventurer!
+H: Nice necklace.
+1: Thanks.
+1: It has been magically enchanted by a strange old woman.
+H: Any chance you want to sell it?
+1: No way, but maybe you can try to find the woman who made it.
+1: Usually, she is in Thessarian Creek.
+H: Where is that?
+1: On the north of Prina.
+H: Alright, thanks!
+SET num.prompt, 1
+END
+
+@prompt2
+IF -V20|T600 @prompt3
+COMPARE #<num.prompt>, 1
+IF> @prompt3
+ACTOR 1, Heinrich, human137, 1, 45, 90
+1: Have you heard the news?
+H: What news?
+1: The access to the sewers of Prina is closed.
+1: The Regent doesn't want to say why.
+1: It is said that they have been invaded by demoniac creatures.
+H: Sweet...
+SET num.prompt, 2
+END
+
+@prompt3
+IF -V30|T604 @prompt4
+COMPARE #<num.prompt>, 2
+IF> @prompt4
+ACTOR 1, Trish, human21, 0, 35, 90
+1: I can't believe it!
+H: What?
+1: Two ents attacked me in the Dark Woods.
+H: Ents?!
+H: I believed that was a legend for kids!
+1: Everybody does!
+1: But I've met two of them.
+1: There are strange things going on in those woods...
+SET num.prompt, 3
+END
+
+@prompt4
+IF -V40|T602 @prompt5
+COMPARE #<num.prompt>, 3
+IF> @prompt5
+ACTOR 1, Marina, wom64, 1, 35, 90
+1: He is crazy!
+H: Who?
+1: Farlot, a hermit living in Aralian Valley.
+1: He thinks there is a magical crystal somewhere in the valley.
+1: All that he'll get will be getting killed by the Aralian guards!
+SET num.prompt, 4
+END
+
+@prompt5
+IF -V50|T607 @prompt6
+COMPARE #<num.prompt>, 4
+IF> @prompt6
+ACTOR 1, Helen, wom49, 1, 35, 90
+1: I hate spiders!
+1: I swear this one won't last long!
+H: Hmm?
+1: The Dark Queen!
+1: The spider queen of the cave!
+H: Ah.
+H: Good luck then.
+SET num.prompt, 5
+END
+
+@prompt6
+IF -V85|T72 @prompt7
+COMPARE #<num.prompt>, 5
+IF> @prompt7
+ACTOR 1, Alberic, human133, 1, 35, 90
+1: This guy is crazy!
+1: No way I will risk my life for him!
+H: Who?
+1: A "Professor" in Varanas Castle who claims to have located a treasure somewhere in the dungeon.
+1: But the guy is too much of a coward to go and get it himself so he's looking for adventurers to get it for him!
+SET num.prompt, 6
+END
+
+@prompt7
+IF -V90|T618 @prompt8
+COMPARE #<num.prompt>, 6
+IF> @prompt8
+ACTOR 1, Filip, human97, 1, 35, 90
+1: Don't go to the Southern Swamps, adventurer!
+H: Why?
+1: It's full of ghosts!
+1: Don't go there, trust me.
+1: It's not a place for living creatures.
+SET num.prompt, 7
+END
+
+@prompt8
+IF -V99|T1109 @nextstepafterprompt.txt
+COMPARE #<num.prompt>, 7
+IF> @nextstepafterprompt.txt
+ACTOR 1, Rohan, human35, 1, 35, 90
+1: Run, adventurer, run!
+1: The Dark Paladins have awaken!
+1: I've heard the Grand Priest of Prina telling the monks about that!
+1: Save your life!
+1: Run away from Prina!
+SET num.prompt, 8
+END
+
+@nextstepafterprompt.txt
+

@@ -1,0 +1,4 @@
+SCENE 2500, "cave1", SCENE, "Level 1"
+#include include.txt
+GOTO LINK 24, 1
+

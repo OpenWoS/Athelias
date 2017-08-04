@@ -1,0 +1,41 @@
+@LOSE
+SET terendrozsiegefail, 1
+TAKE T1117
+COUNTDOWN 0
+TAKE T1118
+TAKE T1119
+TAKE T1120
+SET sdshfsfksjhjsvbscksvsvskvqlq, 0
+SET siegeterendrozqsdfs, ""
+SET terendrozsiegefail, ""
+COLOR 2014
+COLOR 14
+ACTOR 1, Demon, 602, 1, -60, 90
+ACTOR 2, Demon, 599, 1, -70, 90
+ACTOR 3, Demon, 602, 1, -50, 90
+ACTOR 4, Demon, 598, 1, -40, 90
+ACTOR 5, Demon, 598, 1, -20, 90
+ACTOR 6, Demon, 598, 1, -30, 90
+MOVE 1, 20, 80
+MOVE 2, 10, 90
+MOVE 3, 30, 85
+MOVE 4, 40, 90
+MOVE 5, 60, 75
+MOVE 6, 50, 80
+SEL 6
+POSE 1, 4
+SEL 5
+POSE 1, 4
+SEL 4
+POSE 1, 4
+SEL 3
+POSE 1, 4
+SEL 2
+POSE 1, 4
+SEL 1
+POSE 1, 4
+N: You failed.
+WAIT 1
+N: The army succeeded in seizing the city.
+END
+

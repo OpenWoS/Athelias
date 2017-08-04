@@ -1,0 +1,12 @@
+SCENE 4700, souterrain, SCENE, "To Varanas Castle"
+#include include.txt
+GOTO LINK 46, 1
+;
+;-------------------------------------------------------------
+;
+SCENE 4701, souterrain, SCENE, "To the Catacombs, level 2"
+#include include.txt
+GOTO LINK 50, 0
+;
+;-------------------------------------------------------------
+;

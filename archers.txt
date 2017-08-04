@@ -1,0 +1,321 @@
+SCENE 14300, forest1, SCENE, "To Katadyn"
+#include include.txt
+GOTO LINK 36, 1
+;
+;--------------------------------------------------------------------------------------------------------------------
+;
+SCENE 14301, forest1, SCENE, "Lady Armel"
+#include include.txt
+ACTOR 1, "Lady Armel", wom12, 1, 35, 85
+IF C2+T3968-J113 @supernewbquest
+IF C61 @archer
+1: Greetings, adventurer.
+1: I'm afraid I can't help you much.
+1: I don't know the way of your profession.
+END
+
+@supernewbquest
+1: You're defying me?!
+1: Fine, let's fight then!
+WAIT 2.5
+MOVE 1, 150, 150, 1
+FIGHT 2925.35.85
+END
+
+@archquestsend
+1: Welcome back, %1.
+1: Be prepared: the archers will strike again soon.
+1: And this time we with overthrow him.
+END
+
+@archq3end
+COMPARE #<archq3endchat>, 1
+IF= @archquestsend
+1: So the rebellion has failed...
+1: That's was expected actually.
+1: But we will have new allies next time.
+1: The rodeurs are gathering and will strike soon.
+1: And we will be here to help them.
+SET archq3endchat, 1
+HOST_GIVE T4001
+END
+
+@archq3back
+IF T142 @archq3end
+1: You must go to Prina, %1!
+1: The archers support the rebellion.
+END
+
+@archq3start
+IF T141 @archq3back
+1: Welcome back, %1.
+1: Something is on the move in Prina.
+1: The rebellion will start tomorrow.
+1: The archers will support it.
+1: It's time to do something against the regent.
+1: I would like you to go to Prina and do your best to help the rebels.
+1: I guess the rebellion will have already started when you arrive in Prina.
+1: Good luck, %1.
+1: Several archers are already there, and will eventually fight with you.
+HOST_GIVE T141
+END
+
+@archq2endbis
+IF V75 @archq3start
+1: Welcome back, %1.
+1: I've sent several archers to Prina to inquire about the "conspiracy" you told me about.
+1: Apparently, there's something going on.
+1: The archers must get ready.
+1: I have the feeling we may have a part to play in an eventual rebellion...
+END
+
+@archq2end
+COMPARE #<chat.archq2end>, 1
+IF= @archq2endbis
+H: Hello, Lady Armel.
+H: I went to Prina, and as expected, they ignored me.
+H: They didn't let me enter the palace.
+1: Did you insist?
+H: If killing two guards means insisting, yes.
+1: What?!
+H: I had no alternative...
+H: But apparently we're not alone...
+1: What do you mean?
+H: I met someone who seems to be a part of some kind of conspiracy in Prina against the regime.
+1: Interesting...
+SET chat.archq2end, 1
+END
+
+@archq2back
+IF T140 @archq2end
+1: %1, I really need you to go to Prina.
+1: We need to know what we can expect from the Regent.
+END
+
+@archerq2
+IF T139 @archq2back
+1: Hello, %1.
+1: I would like you to go to Prina and try to convince the Regent to go back over his decision.
+H: I can try but I don't think he will listen...
+1: I know but it's worth a try...
+HOST_GIVE T139
+END
+
+@archq1end
+IF V50 @archerq2
+1: Welcome back, %1.
+1: You should come back later.
+1: I'm wasting all my time trying to convince the Regent to chill out.
+END
+
+@archerq1back
+COMPARE #<chat.archq1>, 1
+IF= @archq1end
+1: Hello, %1.
+1: I don't know what's going to happen after the tournament...
+1: The Regent is mad.
+H: He has been badly humiliated...
+1: Yeah, and I'm afraid of the reprisals now...
+SET chat.archq1, 1
+END
+
+@archerq1bis
+IF T138 @archerq1back
+ACTOR 59, , "-  -   Mad", 0, 90, 100, , sword11
+FACE 59, 0
+ACTOR 2, "Elise Everton", wom3, 1, 9, 75
+ACTOR 3, "Arctus Feral", human9, 1, 19, 70
+ACTOR 4, "Charles Guizar", human47, 1, 26, 73
+ACTOR 5, "Claire Lasor", wom65, 1, 34, 73
+ACTOR 6, "Sid Carol", wom24, 1, 41, 77
+ACTOR 7, "Effret Roland", human119, 1, 50, 72
+FACE 7, 0
+ACTOR 8, "Daz Ligerard", human111, 1, 58, 76
+FACE 8, 0
+ACTOR 9, "Emarc Skilent", human90, 1, 66, 80
+FACE 9, 0
+ACTOR 10, "Peter Afalmoon", human85, 1, 72, 75
+FACE 10, 0
+ACTOR 11, "Brent Huiter", human55, 1, 77, 78
+FACE 11, 0
+ACTOR 12, "Lars Deaboon", human29, 1, 84, 82
+FACE 12, 0
+H: What's going on?
+SEL 11
+' There is a tournament.
+' The Regent is going to be a part of it.
+1: Arctus Feral, it's now your turn.
+WAIT 1
+MOVE 3, 10, 95
+WAIT 4.5
+FACE 3, 1
+SEL 3
+POSE 2
+WAIT 1
+SOUND bow.wav
+ACTOR 59, , "gnome5", 0, 90, 100, , sword11
+FACE 59, 0
+5: Congrats, Arctus!
+SEL 3
+POSE 1
+7: Yeah, congratulations!
+3: Thanks.
+ACTOR 59, , "-  -   Mad", 0, 90, 100, , sword11
+FACE 59, 0
+MOVE 3, 19, 70
+WAIT 3
+1: This is now Sir Effis Trenderike's turn, Regent of Athelias.
+ACTOR 13, Regent, regent, 1, -5, 85
+ACTOR 14, Guard, guard6, 1, -10, 90
+ACTOR 15, Guard, guard6, 1, -15, 95
+MOVE 13, 10, 95
+MOVE 14, 15, 85
+MOVE 15, 5, 95
+SEL 14
+' Stay away!
+WAIT 2
+1: Sir Trenderike, when you are ready...
+SEL 15
+' Yeah, we know.
+SEL 13
+POSE 0
+SOUND bow.wav
+WAIT 1.5
+SOUND pain1.wav
+SEL 12
+POSE 0
+SEL 11
+' My God!
+SEL 7
+' ROFL!
+1: Err...
+FACE 1, 0
+SEL 13
+' It's a shame!
+' Who has decided to organize a tournament with this wind?
+SEL 5
+' Yeah of course, that's because of the wind...
+SEL 14
+' Eh, calm down, all right?!
+1: Sir Trendelike, you should cool down.
+1: It's not that important - it's just a tournament after all.
+SEL 10
+' "Not that important"!
+' Tell that to the dead guy!
+SEL 6
+' LMAO!
+SEL 15
+' Who said that?!
+SEL 14
+' Majesty, I think it's time to leave.
+SEL 13
+' Yes.
+' But before I have something to say that won't make you laugh this time, I guess.
+' I forbid any new tournament until further notice.
+1: Sir Trendelike, you can't...
+SEL 13
+' Enough!
+MOVE 13, -60, 90
+MOVE 14, -60, 85
+MOVE 15, -60, 95
+WAIT 3.5
+6: What a dumbass!
+1: We all agree with that but he is the Regent...
+FACE 1, 1
+SEL 9
+' What are we going to do now?
+1: We're going to do what he has just said, and cancel all the tournaments until he chills out.
+SEL 6
+' And if he doesn't?
+1: Then we'll have to think of a new "plan"...
+HOST_GIVE T138
+END
+
+@archerq1
+IF V25 @archerq1bis
+1: Welcome back, %1.
+1: You should keep training and come back later.
+END
+
+@archer
+ACTOR 60, "", 3, 0, 95, 15
+COMPARE #<chat.archerIntro>, 1
+IF= @archerback
+1: Welcome among us, %1.
+1: The archers are the protectors of the forest of Katadyn.
+1: We live with the nature, and watch over the woods of Athelias.
+1: If you want to train and live among us, be welcome.
+1: But your training won't be easy.
+1: Return to me later, and I will help you improve your skills.
+SET chat.archerIntro, 1
+END
+
+@archerback
+IF V25 @archerq1
+1: Welcome back, %1.
+1: You should keep training and come back later.
+END
+
+@eventActorClick60
+N: Level required for the class quests:
+WAIT 1
+N: Level 25, 50, 75.
+END
+;
+;--------------------------------------------------------------------------------------------------------------------
+;
+SCENE 14302, forest1, SCENE, "Nedo Baravi"
+#include include.txt
+ACTOR 2, "Nedo Baravi", human76, 1, 35, 85
+COMPARE #<chat.arrowSeller>, 1
+IF= @archerback
+IF -T113 @noarhcer
+HOST_GIVE Z200.100
+COMPARE #<arrowseller.chat>, 1
+IF= @arrowbuyerback
+2: Welcome, adventurer.
+2: I am the arrow seller of Katadyn.
+2: Make sure you have enough arrows in stock before you leave the town: you won't be able to use your bow if you run out of arrows.
+2: I only have basic arrows for sale at the moment, but I may have better arrows later.
+SET arrowseller.chat, 1
+@arrowbuyerback2
+ACTOR 61, , "gnome9", 0, 80, 50
+COMPARE #<arrowseller.chat>, 1
+IF= @end
+2: Right-click the icon if you want to buy some.
+@end
+END
+
+@arrowbuyerback
+1: Welcome back, adventurer.
+GOTO @arrowbuyerback2
+
+@noarhcer
+2: Sorry, adventurer, but I only sell arrows.
+2: I guess you won't have a use for them.
+END
+
+@archerback
+ACTOR 61, , "gnome9", 0, 80, 50
+2: Do you need some arrows?
+END
+
+@eventActorClick61
+IF -G100 @poor
+SOUND sword1.wav
+HOST_TAKE G100
+HOST_GIVE Z200.100
+WAIT 0.5
+SOUND trophyFound.wav
+END
+
+@poor
+SOUND thud.wav
+N: Not enough gold!
+END
+;
+;--------------------------------------------------------------------------------------------------------------------
+;
+
+
+

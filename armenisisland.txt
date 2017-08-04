@@ -1,0 +1,27 @@
+SCENE 5300, castle, SCENE, "Gate"
+#include include.txt
+IF T3998 @illuteleport
+GOTO @nextstepafterilluteleport
+
+@illuteleport
+HOST_GIVE T2912
+GOTO @nextstepafterilluteleport
+
+@nextstepafterilluteleport
+GOTO LINK 42, 0
+;
+;------------------------------------------------------------------------
+;
+SCENE 5301, ruins(temple), SCENE, "Abandoned Tower"
+#include include.txt
+IF T1209 @end
+N: You enter what was once the keep's kitchen judging from presence of a large, rusty cook stove.
+WAIT 2.5
+GOTO LINK 133, 0
+
+@end
+N: There is nothing left in the ruins.
+END
+;
+;------------------------------------------------------------------------
+;

@@ -1,0 +1,300 @@
+SCENE 5500, "castle", SCENE, "Gate"
+#include include.txt
+STRCMP #<skinguardtrainingground>, ""
+IF= @firsttime
+IF #99 @templars
+IF #7 @prina
+IF #10 @arghazil
+IF #12 @terendroz
+IF #13 @mangeas
+ACTOR 1, Guard, #<skinguardtrainingground>, #<poseguardtrainingground>, 25, 90
+IF #55 @training
+@bannish?
+1: You shouldn't use a cheat code to come here...
+1: Well...
+1: I should ban you but I am too lazy to add the line GOTO @ban - I need to get some sleep.
+1: You are lucky!
+END
+
+@firsttime
+IF #55 @trainingfirsttime
+IF #7 @prinafirsttime
+IF #10 @arghazilfirsttime
+IF #12 @terendrozfirsttime
+IF #13 @mangeasfirsttime
+IF #99 @templarsfirsttime
+GOTO @bannish?
+
+@trainingfirsttime
+GOTO LINK 7, 13
+
+@prinafirsttime
+SET skinguardtrainingground, "human94"
+SET poseguardtrainingground, "1"
+ACTOR 1, Guard, #<skinguardtrainingground>, #<poseguardtrainingground>, 25, 90
+GOTO @firsttime2
+
+@templarsfirsttime
+SET skinguardtrainingground, "human140"
+SET poseguardtrainingground, "1"
+ACTOR 1, Guard, #<skinguardtrainingground>, #<poseguardtrainingground>, 25, 90
+GOTO @firsttime2
+
+@arghazilfirsttime
+SET skinguardtrainingground, "dwarf6"
+SET poseguardtrainingground, "1"
+ACTOR 1, Guard, #<skinguardtrainingground>, #<poseguardtrainingground>, 25, 90
+GOTO @firsttime2
+
+@terendrozfirsttime
+SET skinguardtrainingground, "gnome7"
+SET poseguardtrainingground, "1"
+ACTOR 1, Guard, #<skinguardtrainingground>, #<poseguardtrainingground>, 25, 90
+GOTO @firsttime2
+
+@mangeasfirsttime
+SET skinguardtrainingground, "elf5"
+SET poseguardtrainingground, "1"
+ACTOR 1, Guard, #<skinguardtrainingground>, #<poseguardtrainingground>, 25, 90
+GOTO @firsttime2
+
+@templars
+SET skinguardtrainingground, "human140"
+SET poseguardtrainingground, "1"
+ACTOR 1, Guard, #<skinguardtrainingground>, #<poseguardtrainingground>, 25, 90
+GOTO @enter
+
+@prina
+SET skinguardtrainingground, "human94"
+SET poseguardtrainingground, "1"
+ACTOR 1, Guard, #<skinguardtrainingground>, #<poseguardtrainingground>, 25, 90
+GOTO @enter
+
+@arghazil
+SET skinguardtrainingground, "dwarf6"
+SET poseguardtrainingground, "1"
+ACTOR 1, Guard, #<skinguardtrainingground>, #<poseguardtrainingground>, 25, 90
+GOTO @enter
+
+@terendroz
+SET skinguardtrainingground, "gnome7"
+SET poseguardtrainingground, "1"
+ACTOR 1, Guard, #<skinguardtrainingground>, #<poseguardtrainingground>, 25, 90
+GOTO @enter
+
+@mangeas
+SET skinguardtrainingground, "elf5"
+SET poseguardtrainingground, "1"
+ACTOR 1, Guard, #<skinguardtrainingground>, #<poseguardtrainingground>, 25, 90
+GOTO @enter
+
+@firsttime2
+1: Hello, young adventurer.
+1: Welcome to the training ground.
+1: Such places were created all around Athelias to allow our heroes to train their skills.
+1: Gaia is a dangerous place, chaotic - you should be very careful when you venture there.
+1: Here it is different.
+1: The training ground is divided into height levels, plus a PK arena. 
+1: The monsters get stronger from one level to the next. 
+1: Each monster is located near one of the gates you'll see inside. 
+1: So if you want to fight a specific monster, find which gate it is nearby, and hunt there. 
+1: If you are in trouble, you will find a healer at the first level who will cure your wounds. 
+1: When you have reached level 100, you'll possibly feel like training your PK skill. 
+1: The arena of the training ground is made for that. 
+1: The rules are the same as anywhere else, but your rating will not decrease here if you are killed. 
+1: One more thing. 
+1: The training ground is probably the best place to level up, but remember that there are no random events here, and no quests to do. 
+1: Good luck, my young friend!
+WAIT 1
+GOTO LINK 55, 0
+
+
+@training
+IF DEAD @deadexit
+IF R5 @training1
+IF R5 @training2
+IF R5 @training3
+IF R5 @training4
+IF R5 @training5
+GOTO @training
+
+@training5
+1: See you soon, adventurer!
+GOTO @trainingexit
+
+@training1
+1: Good job, adventurer
+1: You seem to be still alive...
+GOTO @trainingexit
+
+@training2
+1: Have a good day, adventurer!
+GOTO @trainingexit
+
+@training3
+1: See you soon, %C!
+GOTO @trainingexit
+
+@training4
+1: Bye!
+GOTO @trainingexit
+
+@deadexit
+1: Ouch!
+1: I won't ask you how your training was...
+GOTO @trainingexit
+
+@enter
+IF R5 @enter1
+IF R5 @enter2
+IF R5 @enter3
+IF R5 @enter4
+IF R5 @enter5
+GOTO @enter
+
+@enter5
+1: Hello adventurer, and good luck!
+WAIT 1
+GOTO LINK 55, 0
+
+@enter1
+1: Welcome back, %C.
+WAIT 1
+GOTO LINK 55, 0
+
+@enter2
+1: Welcome to the training ground!
+WAIT 1
+GOTO LINK 55, 0
+
+@enter3
+1: Welcome, %1
+1: How are you today?
+WAIT 1
+GOTO LINK 55, 0
+
+@enter4
+1: Hello, %C.
+1: Please, enter!
+WAIT 1
+GOTO LINK 55, 0
+
+@trainingexit
+WAIT 2.7
+STRCMP #<skinguardtrainingground>, "human140"
+IF= @trainingexit5
+STRCMP #<skinguardtrainingground>, "human94"
+IF= @trainingexit1
+STRCMP #<skinguardtrainingground>, "elf5"
+IF= @trainingexit2
+STRCMP #<skinguardtrainingground>, "gnome7"
+IF= @trainingexit3
+STRCMP #<skinguardtrainingground>, "dwarf6"
+IF= @trainingexit4
+END
+
+@trainingexit1
+EJECT T2899
+GOTO LINK 7, 13
+
+@trainingexit2
+EJECT T2899
+GOTO LINK 13, 4
+
+@trainingexit3
+EJECT T2899
+GOTO LINK 12, 3
+
+@trainingexit4
+EJECT T2899
+GOTO LINK 10, 4
+
+@trainingexit5
+EJECT T1121
+GOTO LINK 99, 3
+;
+;-----------------------------------------------------------------------------------------------------------------
+;
+SCENE 5502, "dungeon1", SCENE, "Gate"
+#include include.txt
+IF R66 @pass
+ACTOR 1, "Furious Novice", gnome12, 1, 25, 90
+1: It's a PK !
+1: I'm going to pwn you, noob!
+WAIT 2.7
+MOVE 1, 150, 150, 1
+FIGHT2 2928.25.90
+IF WIN @pass
+END
+
+@pass
+GOTO LINK 1, 0
+;
+;-----------------------------------------------------------------------------------------------------------------
+;
+SCENE 5509, "room2", SCENE, "Healer"
+#include include.txt
+ACTOR 1, Healer, human5, 1, 25, 90
+IF T3993|T3988 @halloweenActors
+GOTO @nextStepAfterHalloweenActors
+
+@halloweenActors
+ACTOR 1, "Healer", #<spEvent.Name>-humans, 5, 25, 90
+@nextStepAfterHalloweenActors
+IF DEAD @deadone
+1: Welcome my friend.
+; Idea stolen from Felty
+COMPARE #<num.hostHP>, #<num.hostMaxHP>
+IF= @fine
+SET temp.HP, #<num.hostMaxHP>
+DIV temp.HP, #<num.hostHP>
+COMPARE #<temp.HP>, 2
+IF< @heal4
+COMPARE #<temp.HP>, 2
+IF= @heal3
+COMPARE #<temp.HP>, 3
+IF= @heal2
+COMPARE #<temp.HP>, 3
+IF> @heal1
+@heal
+1: Would you like me to heal your wounds?
+H: That's the idea, yeah.
+GIVE H5000
+GIVE M5000
+1: Alright.
+H: Thanks.
+END
+
+@deadone
+1: Ouch! An emergency!
+1: Let me bring you back to life.
+GIVE L1
+GIVE H5000
+GIVE M5000
+H: Thanks.
+1: No problem. That's my job.
+END
+
+@fine
+1: Nice to see you're fine today!
+GIVE H5000
+GIVE M5000
+END
+
+@heal1
+1: I see you have lots of deep cuts and very nasty wounds and need to be healed immediately.
+GOTO @heal
+
+@heal2
+1: I see you have some nasty looking scratches.
+GOTO @heal
+
+@heal3
+1: I see you have a broken bone.
+GOTO @heal
+
+@heal4
+1: I see you have some nasty wounds.
+GOTO @heal
+
+

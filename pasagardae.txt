@@ -1,0 +1,195 @@
+SCENE 22, , SCENE, "Pasagardae Travel Service"
+GOTO @actor#<num.mapNum>
+@actornext
+IF T3995 @arrival
+#include include.txt  ; do not move up this line for lag issues with the mercenaries.
+IF -V99 @notyet
+1: Welcome to Pasagardae Travel Service!
+IF I1123 @forumsdiscount
+1: The price for an instant teleportation to anywhere on Gaia is 50,000 Tomans.
+@nextstep afterdiscount
+1: Where would you like to go?
+COMPARE #<chat.pasagardaeintro>, 1
+IF= @skip
+1: You can only travel to a place you've ever visited.
+SET chat.pasagardaeintro, 1
+@skip
+IF T2899 @prina
+SET pasagardae.travelCityVisited2, 0
+@prina2
+IF T1121 @tahamanraset
+SET pasagardae.travelCityVisited8, 0
+@tahamanraset2
+IF T1130 @kotor
+SET pasagardae.travelCityVisited3, 0
+@kotor2
+SET pasagardae.travelCityVisited4, 0
+SET pasagardae.travelCityVisited5, 0
+SET pasagardae.travelCityVisited6, 0
+SET pasagardae.travelCityVisited7, 0
+SET pasagardae.travelCityVisited9, 0
+SET pasagardae.travelCityVisited10, 0
+SET pasagardae.travelCityVisited11, 0
+ACTOR 2, , travel#<pasagardae.travelCityVisited2>, 4, 5, 15
+ACTOR 3, , travel#<pasagardae.travelCityVisited3>, 0, 5,  30
+ACTOR 4, , travel#<pasagardae.travelCityVisited4>, 2, 5, 45
+ACTOR 5, , travel#<pasagardae.travelCityVisited5>, 1, 5, 60
+ACTOR 6, , travel#<pasagardae.travelCityVisited6>, 7, 5, 75
+ACTOR 7, , travel#<pasagardae.travelCityVisited7>, 3, 15, 15
+ACTOR 8, , travel#<pasagardae.travelCityVisited8>, 5, 15, 30
+ACTOR 9, , travel#<pasagardae.travelCityVisited9>, 6, 15, 45
+ACTOR 10, , travel#<pasagardae.travelCityVisited10>, 8, 15, 60
+ACTOR 11, , travel#<pasagardae.travelCityVisited11>, 10, 15, 75
+END
+
+@forumsdiscount
+1: We now offer discounts to the holders of a valid member card of athelias.com forum.
+1: For you, the price for an instant teleportation to anywhere on Gaia will be 40,000 Tomans instead of 50,000!
+GOTO @nextstep afterdiscount
+
+@actor7
+BKGND prina1
+ACTOR 1, "Pasagardae Travels Maid", wom44, 1, 37, 91
+GOTO @actornext
+
+@actor68
+BKGND athalantis1
+ACTOR 1, "Pasagardae Travels Maid", wom47, 1, 37, 91
+GOTO @actornext
+
+@actor139
+BKGND temple7
+ACTOR 1, "Pasagardae Travels Maid", wom43, 1, 37, 91
+GOTO @actornext
+
+; autres IDs disponibles : wom54 (chaos), wom51 (Konigenmark), wom50 (Bretonia), wom52 (Albion), wom42 (Lusitania)
+
+@notyet
+1: Welcome to Pasagardae Travel Service, adventurer!
+1: Pasagardae Travel is a new service for the explorers.
+1: We can teleport you to anywhere on Gaia for only 50,000 Tomans!
+1: For legal reasons, we need you to have already visited our office in the destination city to fill some administrative forms.
+END
+
+@poor
+H: I'd like to go to #<temp.pasagardaeDestinationName> but I don't have enough cash on me.
+IF G40000+R10 @bargain1
+1: Sorry I can't help you.
+1: See you again maybe.
+END
+
+@bargain1
+1: Do you have 45,000 Tomans?
+IF -G45000 @poor2
+H: Yes.
+1: OK, you can go, but next time, have all the money!
+H: Thanks!
+WAIT 1
+GOTO @travel2
+
+@poor2
+H: No, sorry, I only have #<num.hostGP> Tomans.
+IF G40000+R50 @bargain2
+1: I can't make it cheaper, sorry.
+1: See you again, maybe.
+END
+
+@bargain2
+1: 40,000?
+H: Yes, I do.
+1: OK, you can go but next time, bring all the money!
+H: Thanks!
+WAIT 1
+GOTO @travel4
+
+@prina
+SET pasagardae.travelCityVisited2, 1
+GOTO @prina2
+
+@tahamanraset
+SET pasagardae.travelCityVisited8, 1
+GOTO @tahamanraset2
+
+@kotor
+SET pasagardae.travelCityVisited3, 1
+GOTO @kotor2
+
+@arrival
+HOST_TAKE T3995
+1: Welcome to #<str.mapName> city!
+1: I hope you enjoyed the trip.
+@end
+END
+
+@travel4
+EJECT T#<temp.pasgardaeTokenNeeded>
+EJECT G40000
+TAKE G40000
+GOTO @travel3
+
+@travel2
+EJECT T#<temp.pasgardaeTokenNeeded>
+EJECT G45000
+TAKE G45000
+GOTO @travel3
+
+@poorwithdiscount
+1: Sorry, we can't offer additional discounts.
+1: Come back later.
+END
+
+@travel
+IF I1123-G40000 @poorwithdiscount
+IF I1123 @gowithdiscount
+IF -G50000 @poor
+@gowithdiscount
+1: OK, let's teleport you to #<temp.pasagardaeDestinationName>.
+WAIT 2.5
+EJECT T#<temp.pasgardaeTokenNeeded>
+IF I1123 @takegoldwithdiscount
+@takegoldwithdiscount2
+EJECT G50000
+TAKE G50000
+@travel3
+SOUND magic4.wav
+HOST_GIVE T3995
+GOTO LINK #<temp.pasagardaeMap>, #<temp.pasagardaeScene>, 1
+
+@takegoldwithdiscount
+EJECT G40000
+TAKE G40000
+GOTO @takegoldwithdiscount2
+
+@eventActorClick2 ; Prina
+SOUND sword1.wav
+SET temp.pasgardaeTokenNeeded, 2899
+IF -T#<temp.pasgardaeTokenNeeded> @end
+SET temp.pasagardaeDestinationName, Prina
+SET temp.pasagardaeMap, 7
+SET temp.pasagardaeScene, 30
+COMPARE #<temp.pasagardaeMap>, #<num.mapNum>
+IF= @end
+GOTO @travel
+
+@eventActorClick3 ; Kotor
+SOUND sword1.wav
+SET temp.pasgardaeTokenNeeded, 1130
+IF -T#<temp.pasgardaeTokenNeeded> @end
+SET temp.pasagardaeDestinationName, Kotor
+SET temp.pasagardaeMap, 139
+SET temp.pasagardaeScene, 5
+COMPARE #<temp.pasagardaeMap>, #<num.mapNum>
+IF= @end
+GOTO @travel
+
+@eventActorClick8 ; Tahamanraset
+SOUND sword1.wav
+SET temp.pasgardaeTokenNeeded, 1121
+IF -T#<temp.pasgardaeTokenNeeded> @end
+SET temp.pasagardaeDestinationName, Tahamanraset
+SET temp.pasagardaeMap, 68
+SET temp.pasagardaeScene, 9
+COMPARE #<temp.pasagardaeMap>, #<num.mapNum>
+IF= @end
+GOTO @travel
+

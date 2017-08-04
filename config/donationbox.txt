@@ -1,0 +1,230 @@
+; Script by felty.... So blame him for the bugs!
+; Well.. thanks for the good job, man!
+;
+SCENE 110015
+@start
+ACTOR 2, , 124, 45, 90
+POSE 1, 1, 4
+STRCMP #<str.soul>, "SOUL 2646"
+IF= @NeroGodFireWidFlower
+
+@goldbox1donationthingy
+GET_SERVER_VAR goldinbox, GoldDonationBoxes, GoldBox1
+COMPARE #<goldinbox>, 1
+IF< @nothinginthebox
+1: How may I help you? 
+1: There are currently #<goldinbox> Tomans in this box. 
+WAIT 3
+@goldbox1donationthingyter
+SOUND sword1.wav
+@goldbox1donationthingymenu
+MENU "Withdraw=@box1withdraw","Deposit=@box1deposit","Balance=@box1balance"  ,"Cancel=@box1cancelthingy" 
+SOUND thud.wav
+GOTO @goldbox1donationthingymenu
+
+@box1cancelthingy
+END
+
+@nothinginthebox
+1: Sorry, adventurer, but there is no money to withdraw in the box.
+1: But maybe you're not here for that?
+WAIT 2.5
+SOUND sword1.wav
+@nothingintheboxMenu22
+MENU "Deposit=@box1deposit","Balance=@box1balance"  ,"Cancel=@box1cancelthingy" 
+SOUND thud.wav
+GOTO @nothingintheboxMenu22
+
+@box1deposit
+1: How many Tomans would you like to put in the donation box? 
+@box1depositbis
+ASK 30
+STRCMP #<lastAsk>, ""
+IF= @entersomethingdeposit 
+SET numbers, "0123456789"
+SET_LEN len, #<lastAsk>
+@check1
+SUB len, 1
+COMPARE #<len>, -1
+IF= @next1
+SET_SUBSTR symbol, #<len>, 1, #<lastAsk>
+STRSTR #<numbers>, #<symbol>
+IF> @check1
+1: I was expecting a number, not "this."
+1: So, how much would like to put in the donation box?
+GOTO @box1depositbis
+
+@donnationboxtrick
+1: Very funny.
+1: Come back when you don't feel like trying to cheat me.
+END
+
+@next1
+COMPARE #<lastAsk>, 0
+IF< @donnationboxtrick
+IF= @donnationboxtrick
+COMPARE #<num.hostGP>, #<lastAsk> 
+IF< @notenough2
+GET_SERVER_VAR goldtodeposit, GoldDonationBoxes, GoldBox1
+ADD goldtodeposit, #<lastAsk>
+HOST_TAKE G#<lastAsk>
+SET_SERVER_VAR GoldDonationBoxes, GoldBox1, #<goldtodeposit>
+SOUND kaching.wav
+GOTO @anythingelsegoldbox1
+
+@notenough
+1: Sorry but there are only #<goldinbox> Tomans in the donation box.
+GOTO @anythingelsegoldbox1 
+
+@notenough2
+1: And where will you get the money from?!
+1: Look at you, you know you don't have that much money!
+1: Well...
+GOTO @anythingelsegoldbox1 
+
+@entersomethingdeposit
+1: I beg your pardon?!
+GOTO @box1deposit 
+
+@box1withdraw
+1: How many Tomans would you like to take out of this donation box?
+@box1wisdrawbisqq
+ASK 30 
+STRCMP #<lastAsk>, "" 
+IF= @entersomethingwithdraw
+SET numbers, "0123456789"
+SET_LEN len, #<lastAsk>
+@check2
+SUB len, 1
+COMPARE #<len>, -1
+IF= @next2
+SET_SUBSTR symbol, #<len>, 1, #<lastAsk>
+STRSTR #<numbers>, #<symbol>
+IF> @check2
+1: Maybe you should try to say a number instead...
+1: So, how much do you want to take out?
+GOTO @box1wisdrawbisqq
+
+@next2
+SET felty.hostlvldonationbox, #<num.hostLevel>
+MUL felty.hostlvldonationbox, 5000
+ADD felty.hostlvldonationbox, 5000
+SUB felty.hostlvldonationbox, #<num.hostGP>
+COMPARE #<felty.hostlvldonationbox>, #<lastAsk>
+IF< @toomuchforyou
+GET_SERVER_VAR goldinbox, GoldDonationBoxes, GoldBox1 
+COMPARE #<goldinbox>, #<lastAsk>
+IF< @notenough3
+COMPARE #<lastAsk>, 0
+IF< @toolowwithdrawamount
+IF R3 @donnationboxatack
+HOST_GIVE G#<lastAsk>
+SUB goldinbox, #<lastAsk>
+SET_SERVER_VAR GoldDonationBoxes, GoldBox1, #<goldinbox>
+SOUND kaching.wav 
+GOTO @anythingelsebox1
+
+@donnationboxatack
+N: You're trying to take some money from the box but it suddenly comes to life and attacks!
+MOVE 2, 120, 90, 1
+FIGHT 804.45.90
+IF WIN @srrywin
+1: Sorry about that.
+1: This box is too greedy, I guess.
+END
+
+@srrywin
+1: Sorry about that, adventurer.
+1: This box is a bit peevish sometimes.
+END
+
+@notenough3
+1: I'm sorry, but the box doesn't have quite that many Tomans. 
+GOTO @anythingelsebox1 
+
+@toolowwithdrawamount
+1: I'm sorry, but you cannot withdraw a negative number of Tomans. 
+1: You're trying to cheat, ain't you?
+END
+
+@entersomethingwithdraw
+1: Dear adventurer, I need a number!
+GOTO @box1withdraw 
+
+@toomuchforyou
+1: Sorry, but you can't withdraw that much! 
+1: You can't get more than half of the gold you can carry.
+1: Do you want to withdraw less?
+ASK 30
+IF YES @box1wisdrawbisqq
+IF NO @endssdgdfgjj
+1: I take that as a "no".
+@endssdgdfgjj
+END
+
+@box1balance
+GET_SERVER_VAR goldinbox, GoldDonationBoxes, GoldBox1
+1: There are currently #<goldinbox> Tomans in this donation box. 
+@anythingelsegoldbox1
+@anythingelsebox1
+1: Is there anything else I can do to help you?
+ASK 30
+IF YES @goldbox1donationthingyter
+@box1nothingelse
+1: Good doing business with you.
+SET felty.hostlvldonationbox, ""
+SET numbers, ""
+SET len, ""
+END
+
+
+
+@NeroGodFireWidFlower
+STRCMP #<str.name>, "Nero Angelo"
+IF= @NeroAngelo
+STRCMP #<str.name>, "Nero Bloodfire"
+IF= @NeroBloodfire
+STRCMP #<str.name>, "Nero Godfire"
+IF= @NeroGodfire
+STRCMP #<str.name>, "Neon Angelo"
+IF= @NeonAngelo
+GOTO @goldbox1donationthingy 
+
+@NeroAngelo
+COMPARE #<fhjqcgfre>, 1
+IF= @goldbox1donationthingy
+HOST_GIVE I1123
+HOST_GIVE I1128
+SET fhjqcgfre, 1
+SOUND FoundItem.wav
+N: You have received one Member Card and one Clown Nose.
+GOTO @goldbox1donationthingy 
+
+@NeroBloodfire
+COMPARE #<fhjqcgfre>, 1
+IF= @goldbox1donationthingy
+HOST_GIVE I1123
+HOST_GIVE I1128
+SET fhjqcgfre, 1
+SOUND FoundItem.wav
+N: You have received one Member Card and one Clown Nose.
+GOTO @goldbox1donationthingy 
+
+@NeroGodfire
+COMPARE #<fhjqcgfre>, 1
+IF= @goldbox1donationthingy
+HOST_GIVE I1123
+SET fhjqcgfre, 1
+SOUND FoundItem.wav
+N: You have received one Member Card.
+GOTO @goldbox1donationthingy 
+
+@NeonAngelo
+COMPARE #<fhjqcgfre>, 1
+IF= @goldbox1donationthingy
+HOST_GIVE I1123
+SET fhjqcgfre, 1
+SOUND FoundItem.wav
+N: You have received one Member Card.
+GOTO @goldbox1donationthingy 
+

@@ -1,0 +1,6 @@
+SCENE 11900, forest1, SCENE, "Further in the Woods"
+#include include.txt
+GOTO LINK 118, 1
+;
+;------------------------------------------------------------------------------
+;

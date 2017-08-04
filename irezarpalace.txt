@@ -1,0 +1,24 @@
+SCENE 2100, "door1", SCENE, "Gate"
+#include include.txt
+GOTO LINK 18, 2
+;
+;---------------------------------------------------------------------------
+;
+SCENE 2101, "door1", SCENE, ""
+#include include.txt
+IF T1111 @pass
+FIGHT 57
+IF WIN @pass
+END
+
+@pass
+TAKE T25
+GOTO LINK 22, 0
+END
+;
+;---------------------------------------------------------------------------
+;
+SCENE 2102, "templeoutside2", SCENE, ""
+#include include.txt
+GOTO LINK 89, 0
+

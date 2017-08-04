@@ -1,0 +1,409 @@
+SCENE 300, street3, SCENE, "Terendroz Gate"
+#include include.txt
+IF T1121-I1061 @reward
+IF T1121+I1061 @pass
+IF DEAD @LOSE
+N: Do you really want to retreat?
+WAIT 0.8
+N: If you do, the army will succeed in entering the city. 
+WAIT 0.8
+N: The battle will be lost!
+WAIT 0.8
+N: Is it still what you want?
+WAIT 0.8
+@menu1
+SOUND sword1.wav
+MENU "Yes I want to retreat=@LOSE2", "No I don't=@end"
+GOTO @menu1
+
+@LOSE2
+SOUND sword1.wav
+GOTO @LOSE
+
+@end
+SOUND sword1.wav
+N: So go and fight!
+WAIT 1.5
+GOTO EXIT
+
+@reward
+ACTOR 1, "Guzelim Merkez", gnome9, 1, 120, 99, 
+ACTOR 2, Guard, gnome2, 1, 35, 99, 
+ACTOR 3, Guard, gnome4, 1, 40, 97, 
+ACTOR 4, Guard, gnome8, 1, 44, 95, 
+ACTOR 5, Guard, gnome2, 1, 48, 99, 
+ACTOR 6, Guard, gnome2, 1, 52, 97, 
+ACTOR 7, Guard, gnome4, 1, 56, 95, 
+ACTOR 8, Guard, gnome8, 1, 61, 97, 
+ACTOR 9, Guard, gnome4, 1, 65, 99, 
+ACTOR 10, Towner, gnome3, 1, -30, 99, 
+ACTOR 11, Towner, gnome5, 1, -25, 95, 
+ACTOR 12, Towner, gnome6, 1, -35, 97, 
+ACTOR 13, Towner, gnome7, 1, -45, 93, 
+ACTOR 14, Towner, gnome10, 1, -40, 99, 
+ACTOR 15, Towner, gnome11, 1, -20, 95, 
+ACTOR 16, Towner, gnome5, 1, 120, 97, 
+ACTOR 17, Towner, gnome3, 1, 132, 93, 
+ACTOR 18, Towner, gnome6, 1, 124, 99, 
+ACTOR 19, Towner, gnome7, 1, 128, 95, 
+ACTOR 20, Towner, gnome6, 1, 138, 97, 
+ACTOR 21, Towner, gnome3, 1, 142, 93, 
+ACTOR 22, Towner, gnome7, 1, 146, 99, 
+2: Victory is ours!
+2: The chaos army is defeated!
+WAIT 2
+MOVE 10, 20, 99
+MOVE 11, 25, 95
+MOVE 12, 15, 97
+MOVE 13, 5, 93
+MOVE 14, 10, 99
+MOVE 15, 30, 95
+MOVE 16, 70, 97
+MOVE 17, 82, 93
+MOVE 18, 74, 99
+MOVE 19, 78, 95
+MOVE 20, 88, 97
+MOVE 21, 92, 93
+MOVE 22, 96, 99
+WAIT 2
+SEL 10
+' I can't believe it!
+SEL 16
+' Free! We are free!
+SEL 19
+' Hurrah!
+WAIT 2.4
+MOVE 1, 60, 99
+WAIT 3
+1: You were right, foreigner.
+1: You lead us to the victory!
+1: The people of Terendroz will forever be grateful towards you.
+1: Several centuries ago, the master blacksmiths of Terendroz forged those magical weapons.
+1: They were used by the gnomish rangers who kept watching the woods around the city.
+1: But they disappeared a long time ago, and their skills are now forgotten.
+1: I guess you will know how to use them
+1: God bless you, hero.
+GIVE I1061
+GIVE I1062
+GIVE I1063
+GIVE I1064
+GIVE I1065
+GIVE I1066
+GIVE I1067
+GIVE I1068
+SOUND FoundItem.wav
+WAIT 2
+GOTO LINK 12, 10
+
+@LOSE
+SET terendrozsiegefail, 1
+COLOR 2014
+COLOR 14
+ACTOR 1, Demon, 602, 1, -60, 90
+ACTOR 2, Demon, 599, 1, -70, 90
+ACTOR 3, Demon, 602, 1, -50, 90
+ACTOR 4, Demon, 598, 1, -40, 90
+ACTOR 5, Demon, 598, 1, -20, 90
+ACTOR 6, Demon, 598, 1, -30, 90
+MOVE 1, 20, 80
+MOVE 2, 10, 90
+MOVE 3, 30, 85
+MOVE 4, 40, 90
+MOVE 5, 60, 75
+MOVE 6, 50, 80
+N: You failed
+WAIT 1
+N: The army succeeded in seizing the city
+TAKE T1118
+TAKE T1119
+TAKE T1120
+SET sdshfsfksjhjsvbscksvsvskvqlq, 0
+SET terendrozsiegefail, 0
+@pass
+HOST_GIVE T4000
+EJECT T4000
+TAKE T4000
+GOTO LINK 12, 10
+;
+;____________________________________________________________________
+;
+SCENE 301, forest4, SCENE, "Battlefield"
+#include include.txt
+IF T1121 @pass
+FX 2
+FIGHT2 337, 337, 337, 337, 337, 335, 335
+IF LOSE @LOSE
+N: You kill them and watch the gnomish soldiers breaching the enemy lines.
+WAIT 2
+@pass
+SOUND magic1.wav
+GOTO LINK 128, 1
+
+#include battlefieldllose.txt
+;
+;____________________________________________________________________
+;
+SCENE 302, forest4, SCENE, "Battlefield"
+#include include.txt
+IF T1121 @pass
+FX 2
+FIGHT2 379, 379, 379, 379, 379, 380, 380
+IF LOSE @LOSE
+N: You kill them and watch the gnomish soldiers breaching the enemy lines.
+WAIT 2
+@pass
+SOUND magic1.wav
+GOTO LINK 127, 2
+
+#include battlefieldllose.txt
+;
+;____________________________________________________________________
+;
+SCENE 303, forest4, SCENE, "Battlefield"
+#include include.txt
+IF T1121 @pass
+FX 2
+FIGHT2 381, 381, 382, 368, 331, 331, 331, 331, 331, 331, 331, 331, 331, 331
+IF LOSE @LOSE
+N: You kill them and watch the gnomish soldiers breaching the enemy lines.
+WAIT 2
+@pass
+SOUND magic1.wav
+GOTO LINK 128, 3
+
+#include battlefieldllose.txt
+;
+;____________________________________________________________________
+;
+SCENE 304, forest4, SCENE, "Battlefield"
+#include include.txt
+IF T1121 @pass
+FX 2
+FIGHT2 379, 379, 379, 379, 379, 380, 380
+IF LOSE @LOSE
+N: You kill them and watch the gnomish soldiers breaching the enemy lines.
+WAIT 2
+@pass
+SOUND magic1.wav
+GOTO LINK 127, 4
+
+#include battlefieldllose.txt
+;
+;____________________________________________________________________
+;
+SCENE 305, forest4, SCENE, "Battlefield"
+#include include.txt
+IF T1121 @pass
+FX 2
+FIGHT2 339
+IF LOSE @LOSE
+N: You kill it and watch the gnomish soldiers breaching the enemy lines.
+WAIT 2
+@pass
+SOUND magic1.wav
+GOTO LINK 128, 5
+
+#include battlefieldllose.txt
+;
+;____________________________________________________________________
+;
+SCENE 306, forest4, SCENE, "Battlefield"
+#include include.txt
+IF T1121 @pass
+FX 2
+FIGHT2 35
+IF LOSE @LOSE
+N: You kill it and watch the gnomish soldiers breaching the enemy lines.
+WAIT 2
+@pass
+SOUND magic1.wav
+GOTO LINK 130, 6
+
+#include battlefieldllose.txt
+;
+;____________________________________________________________________
+;
+SCENE 307, forest4, SCENE, "Battlefield"
+#include include.txt
+IF T1121 @pass
+FX 2
+FIGHT2 35
+IF LOSE @LOSE
+N: You kill it and watch the gnomish soldiers breaching the enemy lines.
+WAIT 2
+@pass
+SOUND magic1.wav
+GOTO LINK 129, 7
+
+#include battlefieldllose.txt
+;
+;____________________________________________________________________
+;
+SCENE 308, forest4, SCENE, "Battlefield"
+#include include.txt
+IF T1121 @pass
+FX 2
+FIGHT2 30
+IF LOSE @LOSE
+N: You kill it and watch the gnomish soldiers breaching the enemy lines.
+WAIT 2
+@pass
+SOUND magic1.wav
+GOTO LINK 130, 8
+
+#include battlefieldllose.txt
+;
+;____________________________________________________________________
+;
+SCENE 309, forest4, SCENE, "Battlefield"
+#include include.txt
+IF T1121 @pass
+FX 2
+FIGHT2 30
+IF LOSE @LOSE
+N: You kill it and watch the gnomish soldiers breaching the enemy lines.
+WAIT 2
+@pass
+SOUND magic1.wav
+GOTO LINK 130, 9
+
+#include battlefieldllose.txt
+;
+;____________________________________________________________________
+;
+SCENE 310, forest4, SCENE, "Battlefield"
+#include include.txt
+IF T1121 @pass
+FX 2
+FIGHT2 30
+IF LOSE @LOSE
+N: You kill it and watch the gnomish soldiers breaching the enemy lines.
+WAIT 2
+@pass
+SOUND magic1.wav
+GOTO LINK 131, 10
+
+#include battlefieldllose.txt
+;
+;____________________________________________________________________
+;
+SCENE 311, forest4, SCENE, "Battlefield"
+#include include.txt
+IF T1121 @pass
+FX 2
+FIGHT2 323
+IF LOSE @LOSE
+N: You kill it and watch the gnomish soldiers breaching the enemy lines.
+WAIT 2
+@pass
+SOUND magic1.wav
+GOTO LINK 131, 11
+
+#include battlefieldllose.txt
+;
+;____________________________________________________________________
+;
+SCENE 312, forest4, SCENE, "Battlefield"
+#include include.txt
+IF T1121 @pass
+FX 2
+FIGHT2 323
+IF LOSE @LOSE
+N: You kill it and watch the gnomish soldiers breaching the enemy lines.
+WAIT 2
+@pass
+SOUND magic1.wav
+GOTO LINK 132, 12
+
+#include battlefieldllose.txt
+;
+;____________________________________________________________________
+;
+SCENE 313, forest4, SCENE, "Battlefield"
+#include include.txt
+IF T1121 @pass
+FX 2
+FIGHT2 323
+IF LOSE @LOSE
+N: You kill it and watch the gnomish soldiers breaching the enemy lines.
+WAIT 2
+@pass
+SOUND magic1.wav
+GOTO LINK 132, 13
+
+#include battlefieldllose.txt
+;
+;____________________________________________________________________
+;
+SCENE 314, forest4, SCENE, "Battlefield"
+#include include.txt
+IF T1121 @pass
+FX 2
+FIGHT2 323
+IF LOSE @LOSE
+N: You kill it and watch the gnomish soldiers breaching the enemy lines.
+WAIT 2
+@pass
+SOUND magic1.wav
+GOTO LINK 130, 14
+
+#include battlefieldllose.txt
+;
+;____________________________________________________________________
+;
+SCENE 315, forest4, SCENE, "Battlefield"
+#include include.txt
+IF T1121 @pass
+FX 2
+FIGHT2 379, 379, 379, 379, 379, 380, 380
+IF LOSE @LOSE
+N: You kill them and watch the gnomish soldiers breaching the enemy lines.
+WAIT 2
+@pass
+SOUND magic1.wav
+GOTO LINK 129, 15
+
+#include battlefieldllose.txt
+;
+;____________________________________________________________________
+;
+SCENE 316, forest4, SCENE, "Battlefield"
+#include include.txt
+IF T1121 @pass
+FX 2
+FIGHT2 337, 337, 337, 337, 335
+IF LOSE @LOSE
+N: You kill them and watch the gnomish soldiers breaching the enemy lines.
+WAIT 2
+@pass
+SOUND magic1.wav
+GOTO LINK 131, 16
+
+#include battlefieldllose.txt
+;
+;____________________________________________________________________
+;
+SCENE 333, forest4, "Battlefield"
+#include include.txt
+IF T1121 @endfrsfsfsfds
+FX 2
+COLOR 13
+COLOR 2013
+N: You reach the demon that leads the army
+WAIT 0.8
+N: Fight for Terendroz's sake!
+FIGHT2 74, 371, 371, 371
+IF LOSE @LOSE
+GIVE T1121
+N: The vortex closes itself while you kill the demon
+WAIT 0.8
+N: The chaos warriors, seeing the death of their leader, run away!
+WAIT 0.8
+N: Victory is yours!
+END
+
+@endfrsfsfsfds
+N: There is nothing left here.
+END
+
+#include battlefieldllose.txt

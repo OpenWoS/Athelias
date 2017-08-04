@@ -1,0 +1,68 @@
+SCENE 110024
+@start
+IF T1028+C16 @necroquest2hdfhgdfghqd
+GOTO @nextstep afternecroatha.txt
+
+@necroquest2hdfhgdfghqd
+COMPARE #<num.closestLink>, 13
+IF= @athalantisnecroquest2
+ACTOR 1, "Master Derar",human7, 1, 55, 90, 3,
+ACTOR 2, Dalis, human20, 2, 50, 85
+ACTOR 3, Amel, human3, 1, 60, 92
+FACE 2, 0
+3: Hurry!
+2: Yeah, lead us to Athalantis Port, %1!
+END
+
+@athalantisnecroquest2
+ACTOR 1, "Master Derar",human7, 1, 55, 90, 3,
+ACTOR 2, Dalis, human20, 2, 50, 85
+ACTOR 3, Amel, human3, 1, 60, 92
+FACE 2, 0
+2: Open the doors!
+WAIT 1
+COLOR 2014
+COLOR 14
+WEATHER 3
+FX 4
+WAIT 0.5
+MOVE 1, -20, 90, 2
+2: What the...?!
+3: Derar is trying to escape!
+3: Stop him!
+WAIT 1
+N: Derar summons several undead!
+2: Shit!
+2: %1, get rid of the undead, we're going to try to catch Derar again.
+MOVE 2, -20, 90, 2
+MOVE 3, -20, 90, 2
+FIGHT 367, 367, 367
+IF LOSE @nzefszfLOSE
+COLOR 0
+COLOR 2000
+FX 0
+WEATHER 0
+@necroquest2final
+WAIT 3
+MOVE 2, 40, 85
+MOVE 3, 25, 90
+3: He succeeded in running away.
+3: Razel will kill us for that.
+3: Let's go back to Irezar.
+HOST_TAKE T1028
+HOST_GIVE T1029
+IF DEAD @alreadydeadfdsqf
+END
+
+@alreadydeadfdsqf
+H: I am already dead anyway...
+END
+
+@nzefszfLOSE
+2: Ouch!
+2: Sorry about that, %1.
+2: We haven't had any luck either.
+GOTO @necroquest2final
+
+@nextstep afternecroatha.txt
+RETURN

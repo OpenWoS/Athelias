@@ -1,0 +1,57 @@
+SCENE 11500, forest4, SCENE, "To Thanaris", 2
+#include include.txt
+IF T3998 @illuteleport
+GOTO @nextstepafterilluteleport
+
+@illuteleport
+HOST_GIVE T2917
+@nextstepafterilluteleport
+GOTO LINK 113, 5
+;
+;--------------------------------------------------------------------------------
+;
+SCENE 11501, sanctuary, SCENE, "To the Necromancers Palace"
+#include include.txt
+EJECT T1133|T1134|T1135|T1136
+IF T1135 @pass2
+IF T1134 @pass
+ACTOR 1, Ghoul, 264, 1, 25, 90, 3
+POSE 1, 4
+ACTOR 2, Ghoul, 264, 1, 35, 85, 3
+POSE 1, 4
+ACTOR 3, Ghoul, 264, 1, 15, 80, 3
+POSE 1, 4
+ACTOR 4, Ghoul, 264, 1, 40, 96, 3
+POSE 1, 4
+ACTOR 5, Ghoul, 264, 1, 30, 82, 3
+POSE 1, 4
+COMPARE #<num.peopleInScene>, 1
+IF> @more
+H: Let me pass.
+@common
+1:Grbafg!
+H: Well, since I don't speak ghoulish...
+MOVE 1, 130, 90, 1
+MOVE 2, 130, 90, 1
+MOVE 3, 130, 90, 1
+MOVE 4, 130, 90, 1
+MOVE 5, 130, 90, 1
+FIGHT 227.25.90, 227.35.85, 227.15.80, 227.40.96, 227.30.82
+IF WIN @prepass
+END
+
+@more
+H: Let us pass.
+GOTO @common
+
+@prepass
+GIVE T1134
+@pass2
+EJECT T1135
+GOTO LINK 140, 0
+
+@pass
+GOTO LINK 116, 0
+;
+;--------------------------------------------------------------------------------
+;

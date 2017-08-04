@@ -1,0 +1,95 @@
+SCENE 2200"dungeon1", SCENE, "Gate"
+#include include.txt
+GOTO LINK 21, 1
+;
+;------------------------------------------------------------------------------------
+;
+SCENE 2201, "cell", SCENE, "Cell"
+#include include.txt
+IF -T1111 @Tenisan
+N: The cell is empty.
+END
+
+@Tenisan
+ACTOR 1, Tenisan, human26, 1, 39, 75, 22
+N: You find Tenisan's cell
+WAIT 1
+FIGHT 238, 48, 48, 48, 49, 49, 51
+IF WIN @tenisan2
+END
+
+@tenisan2
+N: You find a shining stone on the Bartuc's corpse and take it.
+GIVE I632
+SOUND FoundItem.wav
+GIVE T3000
+GIVE T3001
+GIVE T3002
+GIVE T3004
+GIVE T3005
+GIVE T3006
+GIVE T3007
+GIVE T3003
+WAIT 0.1
+WEATHER 9
+COLOR 13
+COLOR 2013
+FX 1
+WAIT 1
+SOUND thunder
+N: You awake Tenisan!
+WAIT 1
+COLOR 1014
+COLOR 2014
+WAIT 1
+COLOR 1015
+COLOR 2015
+WAIT 1
+MOVE 1, -20, 90, 1
+COLOR 0
+COLOR 1000
+COLOR 2000
+FX 0
+WEATHER 0
+ACTOR 1, Tenisan, human26, 1, 39, 75
+1: Free!
+1: After so many centuries in the dreamlands, I am free again!
+1: Thank you for rescuing me, adventurers.
+1: But...
+1: I feel a familiar presence...
+1: Tell me what's going on!
+H: The nine dark paladins have also awaken and they are about to walk over Athelias.
+H: They prepare an old ritual and we came here in order to ask you to help us stop them.
+1: The nine dark paladins, hmm?!
+1: So that's how they are called nowadays, eh!
+1: Let me tell you their -our- story.
+1: When the Chaos invaded Athelias, the Elders met here and succeeded in uniting the Lords of the Island in the fight.
+1: The greatest army of this time raised and we succeeded in pushing away the army of the Chaos.
+1: But our victory couldn't be complete.
+1: We still had to destroy the demonic artifact that was the source of the power of our enemies.
+1: It was kept by their most powerful creatures, hidden in Arkhangal, the first city they invaded.
+1: So the greatest heroes of the realm started what should have been the ultimate crusade.
+1: The company consisted of a paladin, a knight, a wizard, an illusionist, four elementalists, a death dancer, and a priest.
+1: Myself.
+1: The Master Blacksmiths of the past ages forged weapons and armours to help us in our quest.
+1: Every elementalist also received a magical crystal that multiplied their powers.
+1: We fought, and defeated the guardians of the artifact.
+1: But the victory was not ours.
+1: Our enemy succeeded in taking possession of the spirits of my former companions while we were about to destroy the demonic artifact.
+1: I resisted but the soul of my companions was already lost in the realms of the Chaos.
+1: I don't know what happened then.
+1: I felt unconscious.
+1: When I woke up, I was imprisoned here.
+1: Bartuc, the jailor, was the rider of paladin of the company.
+1: I bet my former companions will gather in Serevan Castle.
+1: If I am right they would need an old book of spells hidden in the castle.
+1: The castle was Kashgar's, the paladin of the company.
+1: You must go and try to stop them there.
+1: May this item help you in your journey.
+GIVE I633
+SOUND FoundItem.wav
+GIVE T1111
+END
+;
+;------------------------------------------------------------------------------------
+;

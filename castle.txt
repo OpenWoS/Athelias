@@ -1,0 +1,1218 @@
+SCENE 100, "vestibulary", SCENE, "Gatekeeper"
+#include AHS.txt
+SET newbCastle.classesCheck, 0
+SET class.interface, 1
+SET xyws, mo
+GIVE I800
+GIVE I801
+GIVE I802
+GIVE I803
+GIVE I804
+GIVE I805
+GIVE I806
+GIVE I807
+SET gdfgd, nst
+IF C10 @supernewbtrip
+IF -C2 @travel
+COMPARE #<num.TrophyBagWidth>, 0
+IF> @skptrophybag
+SET num.TrophyBagWidth, 5
+SET num.TrophyBagHeight, 4
+@skptrophybag
+SET rat, ers
+ACTOR 1, Gatekeeper, human31, 1, 30, 98
+SET WARNING, "You shouldn't try to change these values if you do not feel like being banned" 
+SET GP.name, "Tomans"
+@continuenormalclass
+1: Hello.
+1: I am the gatekeeper of the castle.
+1: I can help you choose a class and reach Gaia.
+1: But you should really go to the other courses first, if you haven't.
+1: What do you want?
+SET musicthingy, 56
+WAIT 1
+@menu1
+SOUND sword1.wav
+MENU "To sign for the course about classes.=@classes", "To skip it and pick a class.=@class", "I'll be back later, thanks.=@later"
+GOTO @menu1
+
+@pickaclassinterface
+SET class.interface, 1
+SOUND sword1.wav
+MOVE 24, 200, 200, 1
+ACTOR 10, , misc2, 0, 35, 40
+ACTOR 11, , misc2, 1, 45, 40
+ACTOR 12, , misc2, 2, 55, 40
+ACTOR 13, , misc2, 3, 65, 40
+ACTOR 14, , misc2, 4, 35, 62
+ACTOR 15, , misc2, 15, 45, 62, 23
+ACTOR 16, , misc2, 5, 55, 62
+ACTOR 17, , misc2, 6, 65, 62
+ACTOR 18, , misc2, 7, 35, 84
+ACTOR 19, , misc2, 8, 45, 84
+ACTOR 20, , misc2, 9, 55, 84
+ACTOR 21, , misc2, 14, 65, 84, 23
+ACTOR 22, , next, 0, 40, 96
+ACTOR 23, , cancel2, 0, 60, 96
+@end
+END
+
+@pickaclassinterface2
+SET class.interface, 2
+SOUND sword1.wav
+MOVE 22, 200, 200, 1
+ACTOR 10, , misc2, 10, 35, 40
+ACTOR 11, , misc2, 11, 45, 40
+ACTOR 12, , misc2, 17, 55, 40
+ACTOR 13, , misc2, 16, 65, 40, 23
+ACTOR 14, , misc2, 13, 35, 62, 23
+ACTOR 15, , misc2, 12, 45, 62
+MOVE 16, 200, 200, 1
+MOVE 17, 200, 200, 1
+MOVE 18, 200, 200, 1
+MOVE 19, 200, 200, 1
+MOVE 20, 200, 200, 1
+MOVE 21, 200, 200, 1
+;ACTOR 16, , misc2, , 55, 62
+;ACTOR 17, , misc2, , 65, 62
+;ACTOR 18, , misc2, , 35, 84
+;ACTOR 19, , misc2, , 45, 84
+;ACTOR 20, , misc2, , 55, 84
+;ACTOR 21, , misc2, , 65, 84
+ACTOR 23, , cancel2, 0, 60, 96
+ACTOR 24, , previous, 0, 40, 96
+END
+
+@eventActorClick23
+SOUND sword1.wav
+@moveout
+MOVE 10, 200, 200, 1
+MOVE 11, 200, 200, 1
+MOVE 12, 200, 200, 1
+MOVE 13, 200, 200, 1
+MOVE 14, 200, 200, 1
+MOVE 15, 200, 200, 1
+MOVE 16, 200, 200, 1
+MOVE 17, 200, 200, 1
+MOVE 18, 200, 200, 1
+MOVE 19, 200, 200, 1
+MOVE 20, 200, 200, 1
+MOVE 21, 200, 200, 1
+MOVE 22, 200, 200, 1
+MOVE 23, 200, 200, 1
+MOVE 24, 200, 200, 1
+RETURN
+END
+
+@eventActorClick22
+GOTO @pickaclassinterface2
+
+@eventActorClick24
+GOTO @pickaclassinterface
+
+@supernewbtrip
+GOTO LINK 55, 2
+
+@eventActorClick10
+CALL 100@moveout
+COMPARE #<class.interface>, 2
+IF= @eventActorClickbis10
+COMPARE #<newbCastle.classesCheck>, 1
+IF= @eventActorClickter10
+GOTO @alche2
+
+@eventActorClickter10
+GOTO @alche
+
+@eventActorClickbis10
+COMPARE #<newbCastle.classesCheck>, 1
+IF= @eventActorClickter10b
+GOTO @necro2
+
+@eventActorClickter10b
+GOTO @necro
+
+@eventActorClick11
+CALL 100@moveout
+COMPARE #<class.interface>, 2
+IF= @eventActorClickbis11
+COMPARE #<newbCastle.classesCheck>, 1
+IF= @eventActorClickter11
+GOTO @archer2
+
+@eventActorClickter11
+GOTO @archer
+
+@eventActorClickbis11
+COMPARE #<newbCastle.classesCheck>, 1
+IF= @eventActorClickter11b
+GOTO @paladin2
+
+@eventActorClickter11b
+GOTO @paladin
+
+@eventActorClick12
+CALL 100@moveout
+COMPARE #<class.interface>, 2
+IF= @eventActorClickbis12
+COMPARE #<newbCastle.classesCheck>, 1
+IF= @eventActorClickter12
+GOTO @assa2
+
+@eventActorClickter12
+GOTO @assa
+
+@eventActorClickbis12
+COMPARE #<newbCastle.classesCheck>, 1
+IF= @eventActorClickter12b
+GOTO @priest2
+
+@eventActorClickter12b
+GOTO @priest
+
+@eventActorClick13
+CALL 100@moveout
+COMPARE #<class.interface>, 2
+IF= @eventActorClickbis13
+COMPARE #<newbCastle.classesCheck>, 1
+IF= @eventActorClickter13
+GOTO @hardc2
+
+@eventActorClickter13
+GOTO @hardc
+
+@eventActorClickbis13
+COMPARE #<newbCastle.classesCheck>, 1
+IF= @eventActorClickter13b
+END
+;GOTO @rodeur2
+
+@eventActorClickter13b
+GOTO @rodeur
+
+@eventActorClick14
+CALL 100@moveout
+COMPARE #<class.interface>, 2
+IF= @eventActorClickbis14
+COMPARE #<newbCastle.classesCheck>, 1
+IF= @eventActorClickter14
+GOTO @deathd2
+
+@eventActorClickter14
+GOTO @deathd
+
+@eventActorClickbis14
+COMPARE #<newbCastle.classesCheck>, 1
+IF= @eventActorClickter14b
+END
+;GOTO @werewolf2
+
+@eventActorClickter14b
+; GOTO @werewolf
+END
+
+@eventActorClick15
+CALL 100@moveout
+COMPARE #<class.interface>, 2
+IF= @eventActorClickbis15
+COMPARE #<newbCastle.classesCheck>, 1
+IF= @eventActorClickter15
+END
+; Not implanted yet
+; GOTO @elem2
+
+@eventActorClickter15
+GOTO @elem
+
+@eventActorClickbis15
+COMPARE #<newbCastle.classesCheck>, 1
+IF= @eventActorClickter15b
+GOTO @wizard2
+
+@eventActorClickter15b
+GOTO @wizard
+
+@eventActorClick16
+CALL 100@moveout
+COMPARE #<class.interface>, 2
+IF= @eventActorClickbis16
+COMPARE #<newbCastle.classesCheck>, 1
+IF= @eventActorClickter16
+GOTO @healer2
+
+@eventActorClickter16
+GOTO @healer
+
+@eventActorClickbis16
+; No class here.
+COMPARE #<newbCastle.classesCheck>, 1
+IF= @eventActorClickter16b
+END 
+
+@eventActorClick17
+CALL 100@moveout
+COMPARE #<class.interface>, 2
+IF= @eventActorClickbis17
+COMPARE #<newbCastle.classesCheck>, 1
+IF= @eventActorClickter17
+GOTO @illu2
+
+@eventActorClickter17
+GOTO @illu
+
+@eventActorClickbis17
+; No class here.
+COMPARE #<newbCastle.classesCheck>, 1
+IF= @eventActorClickter17b
+END 
+
+@eventActorClick18
+CALL 100@moveout
+COMPARE #<class.interface>, 2
+IF= @eventActorClickbis18
+COMPARE #<newbCastle.classesCheck>, 1
+IF= @eventActorClickter18
+GOTO @jester2
+
+@eventActorClickter18
+GOTO @jester
+
+@eventActorClickbis18
+; No class here.
+COMPARE #<newbCastle.classesCheck>, 1
+IF= @eventActorClickter18b
+END 
+
+@eventActorClick19
+CALL 100@moveout
+COMPARE #<class.interface>, 2
+IF= @eventActorClickbis19
+COMPARE #<newbCastle.classesCheck>, 1
+IF= @eventActorClickter19
+GOTO @knight2
+
+@eventActorClickter19
+GOTO @knight
+
+@eventActorClickbis19
+; No class here.
+COMPARE #<newbCastle.classesCheck>, 1
+IF= @eventActorClickter19b
+END 
+
+@eventActorClick20
+CALL 100@moveout
+COMPARE #<class.interface>, 2
+IF= @eventActorClickbis20
+COMPARE #<newbCastle.classesCheck>, 1
+IF= @eventActorClickter20
+GOTO @mercen2
+
+@eventActorClickter20
+GOTO @mercen
+
+@eventActorClickbis20
+; No class here.
+COMPARE #<newbCastle.classesCheck>, 1
+IF= @eventActorClickter20b
+END 
+
+@eventActorClick21
+CALL 100@moveout
+COMPARE #<class.interface>, 2
+IF= @eventActorClickbis21
+COMPARE #<newbCastle.classesCheck>, 1
+IF= @eventActorClickter21
+END
+;GOTO @monksanci2
+
+@eventActorClickter21
+GOTO @monksanci
+
+@eventActorClickbis21
+; No class here.
+COMPARE #<newbCastle.classesCheck>, 1
+IF= @eventActorClickter21
+END 
+
+@later
+SOUND sword1.wav
+H: I will be back later, thanks.
+H: I first need to sign for the other courses.
+1: Wise choice.
+1: See you later!
+COMPARE #<felty.bronzekey>, 1
+IF= @endthisscene
+COMPARE #<felty.educated>, 5
+IF= @setkeylocation
+@endthisscene
+END
+
+@setkeylocation
+WAIT 3
+COMPARE #<num.hostX>, 5
+IF< @checkycoord
+GOTO @setkeylocation
+@checkycoord
+COMPARE 90, #<num.hostY>, 
+IF< @givekey
+GOTO @setkeylocation
+@givekey
+N: You found a bronze key.
+SET felty.bronzekey, 1
+GIVE T3456
+END
+
+@class
+SOUND sword1.wav
+1: Are you sure?
+WAIT 1
+@menu2
+SOUND sword1.wav
+MENU "Yes I am.=@pick2", "No I want to have a lesson about classes.=@classes"
+GOTO @menu2
+
+@classes
+SOUND sword1.wav
+SET c1jdgjdfs, 0
+1: Do you want to focus on a specific class?
+WAIT 1
+@menu3
+SOUND sword1.wav
+MENU "Yes I do.=@speclass", "No I want a complete overview.=@overview"
+GOTO @menu3
+
+@overview
+SOUND sword1.wav
+1: Fine.
+SET c1jdgjdfs, 1
+GOTO @paladin
+
+@again
+1: Do you want informations about another class?
+MOVE 9, 200, 200, 1
+WAIT 1
+@menu6
+SOUND sword1.wav
+MENU "No thanks, I want to pick a class.=@pick2","Yes please.=@speclass"
+GOTO @menu6
+
+@speclass
+SOUND sword1.wav
+1: So select a class!
+WAIT 1
+;@menu4
+SOUND sword1.wav
+SET newbCastle.classesCheck, 1
+GOTO @pickaclassinterface
+;MENU "Alchemist=@alche", "Archer=@archer", "Assassin=@assa", "Barbarian=@hardc", "Death Dancer=@deathd", "Elementalist=@elem", "Healer=@healer", "Illusionist=@illu", "Jester=@jester", "Knight=@knight", "Mercenary=@mercen", "Monk of the Ancient Order=@monksanci",  "Necromancer=@necro", "Paladin=@paladin", "Priest=@priest", "Rodeur=@rodeur", "Wizard=@wizard", "Cancel=@end"
+;GOTO @menu4
+
+@travel
+GOTO LINK 0, 0
+
+@werewolf
+N: No description available
+GOTO @again
+
+@illu
+1: Illusionists:
+SOUND sword1.wav
+ACTOR 9, , misc2, 6, 90, 30
+N: Magic Ratio : 90%% - Hand Ratio : 10%%
+1: Illusionists are so powerful with illusion magic that they can make the illusions real. 
+1: They can charm /all, confuse /all, stun, and summon illusion monsters.
+COMPARE #<c1jdgjdfs>, 1
+IF= @nomoreclas
+GOTO @again
+
+@wizard
+1: Wizards
+SOUND sword1.wav
+ACTOR 9, , misc2, 12, 90, 30
+N: Magic Ratio : 100%% - Hand Ratio : 5%%
+1: Basic mages, they have access to most of the elements. 
+1: They have no speciality as the other mages. 
+1: They probably have the best summoning spells - the most chaotic ones too...
+COMPARE #<c1jdgjdfs>, 1
+IF= @illu
+GOTO @again
+
+@archer
+1: Archers:
+SOUND sword1.wav
+ACTOR 9, , misc2, 1, 90, 30
+N: Magic Ratio : 55%% - Hand Ratio : 80%%
+1: Wild people, born in the woods, they are able to tame beasts. 
+1: They get an eagle during their training and can have up to 2 pets in battle.
+COMPARE #<c1jdgjdfs>, 1
+IF= @wizard
+GOTO @again
+
+@deathd
+1: Death dancers:
+SOUND sword1.wav
+ACTOR 9, , misc2, 4, 90, 30
+N: Magic Ratio : 50%% - Hand Ratio : 90%%
+1: Death Dancers spend their time in the forest of Mangeas, in the elven kingdom to study the art of war. 
+1: They fight with two swords and are the masters of the battle magic. 
+1: They also can summon the spirits of their ancestors to help and buff them or debuff their opponents.
+COMPARE #<c1jdgjdfs>, 1
+IF= @archer
+GOTO @again
+
+@healer
+1: Healers:
+SOUND sword1.wav
+ACTOR 9, , misc2, 5, 90, 30
+N: Magic Ratio : 60%% - Hand Ratio : 50%%
+1: Healers are mainly a supportive class, but quests could be hardly completed without them. 
+1: They can heal and cure almost anything. 
+1: They hold the ancient secrets of the elven kingdom. 
+COMPARE #<c1jdgjdfs>, 1
+IF= @deathd
+GOTO @again
+
+@rodeur
+1: Rodeurs:
+SOUND sword1.wav
+ACTOR 9, , misc2, 16, 90, 30
+N: Magic Ratio : 20%% - Hand Ratio : 80%%
+1: Descendants of the companions of the last king of Athelias, they wait and watch the regent and his minions. 
+1: They live on the road, travelling from place to place, and no-one really know what they seek.
+COMPARE #<c1jdgjdfs>, 1
+IF= @healer
+GOTO @again
+
+@assa
+1: Assassins:
+SOUND sword1.wav
+ACTOR 9, , misc2, 2, 90, 30
+N: Magic Ratio : 25%% - Hand Ratio : 90%%
+1: Assassins use 2 daggers and are the masters of the art of poisoning. 
+1: They can use throwing weapons as well and deal much more damages with poison than the other classes on tough monsters.
+COMPARE #<c1jdgjdfs>, 1
+IF= @rodeur
+GOTO @again
+
+@mercen
+1: Mercenaries:
+SOUND sword1.wav
+ACTOR 9, , misc2, 9, 90, 30
+N: Magic Ratio : 10%% - Hand Ratio : 90%%
+1: Good warriors, they don't know s*** about good and evil. 
+1: They just fight, and get money off that. 
+1: They have the sinister Black Horse Tavern as headquarters ; don't pick this class if you can't play at night : the tavern only opens from dusk to dawn. 
+1: They can have up to 3M #<GP.name> - gold that is.
+COMPARE #<c1jdgjdfs>, 1
+IF= @assa
+GOTO @again
+
+@elem
+1: Elementalists:
+SOUND sword1.wav
+ACTOR 9, , misc2, 15, 90, 30
+N: Magic Ratio : 90%% - Hand Ratio : 10%%
+1: These mages pick one of the elements (air, water, fire, earth) as a speciality.
+1: They can summon elementals to help them in battles. 
+COMPARE #<c1jdgjdfs>, 1
+IF= @mercen
+GOTO @again
+
+@knight
+1: Knights:
+SOUND sword1.wav
+ACTOR 9, , misc2, 8, 90, 30
+N: Magic Ratio : 10%% - Hand Ratio : 90%%
+1: Basic fighters, they will one day be allowed to choose an order and a king to serve.
+1: The strongest can organize tournaments.
+COMPARE #<c1jdgjdfs>, 1
+IF= @elem
+GOTO @again
+
+@jester
+1: Jesters:
+SOUND sword1.wav
+ACTOR 9, , misc2, 7, 90, 30
+N: Magic Ratio : 45%% - Hand Ratio : 45%%
+1: Here is a class you shouldn't pick if you are a novice.
+1: They do not use any weapon. 
+1: They have puppets instead. 
+1: But their skills in the illusionary magic are so developped they can make them real, and make them fight for them.
+COMPARE #<c1jdgjdfs>, 1
+IF= @knight
+GOTO @again
+
+@priest
+1: Priests:
+SOUND sword1.wav
+ACTOR 9, , misc2, 17, 90, 30
+N: Magic Ratio : 60%% - Hand Ratio : 60%%
+1: Masters of healing, decent fighters, they are respected in all the kingdom for their knowledge and their wisdom.
+1: They will soon be allowed to choose a deity they will serve, and get new special powers.
+COMPARE #<c1jdgjdfs>, 1
+IF= @jester
+GOTO @again
+
+@necro
+1: Necromancers:
+SOUND sword1.wav
+ACTOR 9, , misc2, 10, 90, 30
+N: Magic Ratio : 90%% - Hand Ratio : 10%%
+1: Necromancers have access to a bunch of nasty spells, and are feared for that : they can mum /all, resurrect, summon an undead...
+1: They also have specific spells, allowing to take on their life or mana to regenerate the stats of the other players in the team.
+COMPARE #<c1jdgjdfs>, 1
+IF= @priest
+GOTO @again
+
+@monksanci
+1: Monks of the ancient order:
+SOUND sword1.wav
+ACTOR 9, , misc2, 14, 90, 30
+N: Magic Ratio : 60%% - Hand Ratio : 15%%
+1: These gnomes are the holders of Athelias knowledge. 
+1: They keep the memory of the past ages, even before the invasion of the Chaos.
+1: They don't use any weapon but have access to ALL the spells, but some class-specific spells. 
+1: They master every element at level 9.
+COMPARE #<c1jdgjdfs>, 1
+IF= @necro
+GOTO @again
+
+@hardc
+1: Barbarians:
+SOUND sword1.wav
+ACTOR 9, , misc2, 3, 90, 30
+N: Magic Ratio : 25%% - Hand Ratio : 90%%
+1: Born in the dwarven kingdom, trained in the barbaric city of Irkatshk, they have no fear and fight till death.
+COMPARE #<c1jdgjdfs>, 1
+IF= @monksanci
+GOTO @again
+
+@alche
+1: Alchemists:
+SOUND sword1.wav
+ACTOR 9, , misc2, 0, 90, 30
+N: Magic Ratio : 60%% - Hand Ratio : 50%%
+1: Alchemists are mages specilazied in earth magic. 
+1: They can make potions more powerful than those that can be bought in shops and create golems to help them.
+COMPARE #<c1jdgjdfs>, 1
+IF= @hardc
+GOTO @again
+
+@paladin
+1: Paladins:
+SOUND sword1.wav
+ACTOR 9, , misc2, 11, 90, 30
+N: Magic Ratio : 20%% - Hand Ratio : 80%%
+1: Heroes of the island, they have a secret training in their castle and proudly hold their sword to face the Chaos and the evil creatures of Athelias. 
+1: They use 2-handed swords and no shield.
+COMPARE #<c1jdgjdfs>, 1
+IF= @alche
+GOTO @again
+
+@nomoreclas
+1: That was the last class.
+MOVE 9, 200, 200, 1
+1: It is now time for you to pick one of those classes.
+COMPARE #<felty.learnclasses>, 1
+IF= @endclassescourse
+SET felty.learnclasses, 1
+ADD felty.educated, 1
+@endclassescourse
+GOTO @pick
+
+@pick2
+SOUND sword1.wav
+@pick
+1: Which class do you want to pick?
+WAIT 1.5
+GOTO @pickaclassinterface
+;@menu5
+;SOUND sword1.wav
+;MENU "Alchemist=@alche2", "Archer=@archer2", "Assassin=@assa2", "Barbarian=@hardc2", "Death Dancer=@deathd2", "Healer=@healer2", "Illusionist=@illu2", "Jester=@jester2", "Knight=@knight2", "Mercenary=@mercen2",  "Necromancer=@necro2", "Paladin=@paladin2",  "Priest=@priest2", "Wizard=@wizard2", "Cancel=@end"
+;, "Werewolf=@werewolf2", "Monk of the Ancient Order=@monksanci2", "Elementalist=@elem2", "Rodeur=@rodeur2"
+;GOTO @menu5
+
+@werewolf2
+SOUND sword1.wav
+CALL 110011@start -h-
+HOST_GIVE T4000
+EJECT T4000
+TAKE T4000
+1: Here you go!
+WAIT 3
+SET num.hostClass, 8
+#include version2.txt
+HOST_GIVE T3985
+HOST_GIVE T3989
+GOTO LINK 112, 2
+
+@illu2
+SOUND sword1.wav
+CALL 110011@start -h-g-e-
+HOST_GIVE T4000
+EJECT T4000
+TAKE T4000
+1: Here you go!
+1: Remember to go and visit the elder once in Athelias.
+WAIT 3
+HOST_GIVE T2899
+SET num.hostClass, 80
+#include version2.txt
+HOST_GIVE T92
+SET hfghfghsssssdgdgdeathfsfaaaaa, 100000
+GOTO LINK 7,18
+
+@wizard2
+SOUND sword1.wav
+CALL 110011@start -h-g-e-
+HOST_GIVE T4000
+EJECT T4000
+TAKE T4000
+1: Here you go!
+1: Remember to go and visit the elder once in Athelias.
+WAIT 3
+#include version2.txt
+SET num.hostClass, 70
+HOST_GIVE T2899
+HOST_GIVE T91
+SET hfghfghsssssdgdgdeathfsfaaaaa, 100000
+GOTO LINK 7,18
+
+@archer2
+SOUND sword1.wav
+CALL 110011@start -h-e-
+HOST_GIVE T4000
+EJECT T4000
+TAKE T4000
+1: Here you go!
+1: Remember to go and visit the elder once in Athelias.
+WAIT 3
+#include version2.txt
+SET num.hostClass, 61
+HOST_GIVE T113
+HOST_GIVE T2899
+SET hfghfghsssssdgdgdeathfsfaaaaa, 100016
+GOTO LINK 13,2
+
+@eventActorClick1
+CALL 110010@gharl
+END
+
+@deathd2
+SOUND sword1.wav
+CALL 110011@start -e-, "Death Dancer", n
+HOST_GIVE T4000
+EJECT T4000
+TAKE T4000
+1: Here you go!
+1: Remember to go and visit the elder once in Athelias.
+WAIT 3
+#include version2.txt
+SET num.hostClass, 60
+HOST_GIVE T112
+HOST_GIVE T2899
+SET hfghfghsssssdgdgdeathfsfaaaaa, 100016
+GOTO LINK 13,2
+
+@healer2
+SOUND sword1.wav
+CALL 110011@start -e-, healer, ""
+HOST_GIVE T4000
+EJECT T4000
+TAKE T4000
+1: Here you go!
+1: Remember to go and visit the elder once in Athelias.
+WAIT 3
+#include version2.txt
+SET num.hostClass, 56
+HOST_GIVE T111
+HOST_GIVE T2899
+SET hfghfghsssssdgdgdeathfsfaaaaa, 100016
+GOTO LINK 13,2
+
+@rodeur2
+SOUND sword1.wav
+CALL 110011@start -h-, rodeur, ""
+HOST_GIVE T4000
+EJECT T4000
+TAKE T4000
+1: Here you go!
+1: Remember to go and visit the elder once in Athelias.
+WAIT 3
+#include version2.txt
+SET num.hostClass, 55
+HOST_GIVE T110
+HOST_GIVE T2899
+SET hfghfghsssssdgdgdeathfsfaaaaa, 100000
+GOTO LINK 7,18
+
+@assa2
+SOUND sword1.wav
+CALL 110011@start -h-g-
+HOST_GIVE T4000
+EJECT T4000
+TAKE T4000
+1: Here you go!
+WAIT 3
+#include version2.txt
+SET num.hostClass, 50
+HOST_GIVE T109
+HOST_GIVE T2899
+SET hfghfghsssssdgdgdeathfsfaaaaa, 100000
+GOTO LINK 7, 24, 1
+
+@mercen2
+SOUND sword1.wav
+CALL 110011@start -h-g-e-d-
+HOST_GIVE T4000
+EJECT T4000
+TAKE T4000
+1: Here you go!
+1: Remember to go and visit the elder once in Athelias.
+WAIT 3
+#include version2.txt
+SET num.hostClass, 45
+HOST_GIVE T108
+HOST_GIVE T2899
+SET hfghfghsssssdgdgdeathfsfaaaaa, 100000
+GOTO LINK 7,18
+
+@elem2
+SOUND sword1.wav
+CALL 110011@start -h-g-e-
+HOST_GIVE T4000
+EJECT T4000
+TAKE T4000
+1: Here you go!
+1: Remember to go and visit the elder once in Athelias.
+WAIT 3
+#include version2.txt
+SET num.hostClass, 43
+HOST_GIVE T107
+HOST_GIVE T2899
+SET hfghfghsssssdgdgdeathfsfaaaaa, 100000
+GOTO LINK 7,18
+
+@knight2
+SOUND sword1.wav
+CALL 110011@start -h-g-e-d-
+HOST_GIVE T4000
+EJECT T4000
+TAKE T4000
+1: Here you go!
+1: Remember to go and visit the elder once in Athelias.
+WAIT 3
+#include version2.txt
+SET num.hostClass, 22
+HOST_GIVE T2899
+HOST_GIVE T106
+SET hfghfghsssssdgdgdeathfsfaaaaa, 100000
+GOTO LINK 7,18
+
+@jester2
+SOUND sword1.wav
+CALL 110011@start -g-, jester, ""
+HOST_GIVE T4000
+EJECT T4000
+TAKE T4000
+1: Here you go!
+1: Remember to go and visit the elder once in Athelias.
+WAIT 3
+#include version2.txt
+SET num.hostClass, 20
+HOST_GIVE T2899
+HOST_GIVE T105
+SET hfghfghsssssdgdgdeathfsfaaaaa, 100008
+GOTO LINK 12,6
+
+@priest2
+SOUND sword1.wav
+CALL 110011@start -h-g-e-d-
+HOST_GIVE T4000
+EJECT T4000
+TAKE T4000
+1: Here you go!
+1: Remember to go and visit the elder once in Athelias.
+WAIT 3
+#include version2.txt
+SET num.hostClass, 18
+HOST_GIVE T2899
+HOST_GIVE T104
+SET hfghfghsssssdgdgdeathfsfaaaaa, 100000
+GOTO LINK 7,18
+
+@necro2
+SOUND sword1.wav
+CALL 110011@start -h-g-e-
+HOST_GIVE T4000
+EJECT T4000
+TAKE T4000
+1: Here you go!
+1: Remember to go and visit the elder once in Athelias.
+WAIT 3
+#include version2.txt
+SET num.hostClass, 16
+HOST_GIVE T2899
+HOST_GIVE T97
+SET hfghfghsssssdgdgdeathfsfaaaaa, 100000
+GOTO LINK 7,18
+
+@monksanci2
+SOUND sword1.wav
+CALL 110011@start -g-, gnome, ""
+HOST_GIVE T4000
+EJECT T4000
+TAKE T4000
+1: Here you go!
+1: Remember to go and visit the elder once in Athelias.
+WAIT 3
+#include version2.txt
+SET num.hostClass, 15
+HOST_GIVE T2899
+HOST_GIVE T103
+SET hfghfghsssssdgdgdeathfsfaaaaa, 100008
+GOTO LINK 12,6
+
+@hardc2
+SOUND sword1.wav
+CALL 110011@start -h-d-
+HOST_GIVE T4000
+EJECT T4000
+TAKE T4000
+1: Here you go!
+1: Remember to go and visit the elder once in Athelias.
+WAIT 3
+#include version2.txt
+SET num.hostClass, 11
+HOST_GIVE T2899
+HOST_GIVE T102
+SET hfghfghsssssdgdgdeathfsfaaaaa, 100009
+GOTO LINK 10, 10
+
+@alche2
+SOUND sword1.wav
+CALL 110011@start -h-d-
+HOST_GIVE T4000
+EJECT T4000
+TAKE T4000
+1: Here you go!
+1: Remember to go and visit the elder once in Athelias.
+WAIT 3
+#include version2.txt
+SET num.hostClass, 7
+HOST_GIVE T101
+HOST_GIVE T2899
+SET hfghfghsssssdgdgdeathfsfaaaaa, 100009
+GOTO LINK 10, 10
+
+@paladin2
+SOUND sword1.wav
+CALL 110011@start -h-e-
+HOST_GIVE T4000
+EJECT T4000
+TAKE T4000
+1: Here you go!
+1: Remember to go and visit the elder once in Athelias.
+WAIT 3
+#include version2.txt
+SET num.hostClass, 5
+HOST_GIVE T100
+HOST_GIVE T2899
+SET hfghfghsssssdgdgdeathfsfaaaaa, 100000
+GOTO LINK 7, 18
+;
+;-----------------------------------------------------------------
+;
+SCENE 101, "vestibulary", SCENE, "Fight course"
+#include AHS.txt
+ACTOR 1, Teacher, human28, 1, 30, 98
+IF C10 @supernewb
+1: Welcome, young soul.
+1: I can teach you all you need to know about fights and equipment in Athelias.
+1: Please, have a seat.
+1: Each class in Athelias uses an unique weapon.
+1: There are several combinations of equipment.
+1: Knights would use a sword and a shield for example, while paladin would only use a two-handed sword.
+1: And it's also true for the body gear : mages use robes, paladins tunics, and knights armors.
+1: But my fellow teacher will explain you the differences between the classes of Athelias better than I could.
+1: Another particularity of Athelias is that most of the weapons or armors cannot be bought in shops.
+1: You can have up to 20 different weapons till level 100, every 5 levels, but you can only buy 5 of them : level 1, 20, 40, 60, and 80.
+1: Although, you can upgrade these weapons and make them stronger if you go to a blacksmith.
+1: Of course, the service will not be free, and you will also have to bring them the metal they need to upgrade the weapon.
+1: But beware if you try to upgrade a weapon too often : there is a small chance that the blacksmith breaks it.
+1: Note that you can upgrade a weapon only three times.
+1: You'll have to buy another one after.
+1: Some kinds of equipment cannot be upgraded : 
+1: some weapons such as staves and puppets ; some kinds of body gear : tunics, robes, magical paintings.
+1: All of them can be bought in shops or are offered as a reward.
+1: You cannot buy rings and amulets neither.
+1: You can only find them.
+1: Some high level equipment you'll get will be a part of a set.
+1: You will get a special skill if you have the whole set equipped.
+1: You will find informations about these legendary armors in the libraries of the cities.
+1: You will notice it in a short while, most of the monsters do not drop gold.
+1: You have to gather the items you get after the battle and sell them at a shop in a city to make money.
+1: You can also try to get the equipment you need in fighting humanoid monsters that use the weapon or armor you need.
+1: For example, if you need a level 20 sword, you can try to get one in fighting knights from level 20 to 39.
+
+1: Or you can just buy it... it's up to you.
+1: That's all that I can teach you at the moment.
+1: Good luck, adventurer.
+COMPARE #<felty.learnfight>, 1
+IF= @setfightcoursetimer
+SET felty.learnfight, 1
+ADD felty.educated, 1
+@setfightcoursetimer
+TIMER 1, 60
+END
+
+@supernewb
+1: A super-novice!
+1: Come here, I have something that may interest you.
+OFFER 2986, 2987, 2988, 2989, 2990, 2991, 2992
+1: But don't repeat it: the gatekeeper will kill me if he discovers I sell that to novices!
+END
+
+@eventTimer1
+SET gharl, 1
+END
+;
+;----------------------------------------------------------------------
+;
+SCENE 102, "vestibulary", SCENE, "Magic course"
+#include AHS.txt
+ACTOR 1, Teacher, human84, 1, 30, 98
+1: Hello, young soul.
+1: Welcome to the skills and magic course.
+1: The classes of Athelias do not have access to all the spells.
+1: Their level in every element is limited.
+1: And every class get at least one special spell, that no-one else can use.
+1: There are class-specific skills as well, but you can also get more skills with quest items or if you wear a full armor set.
+1: If you have at least one available skill, a small icon will appear, like this :
+WAIT 0.5
+ACTOR 15, "", "MAD", 1, 95, 15
+1: You can activate the skill in right-clicking on it.
+1: You can try!
+END
+
+@eventActorClick1
+COMPARE #<gharl>, 1
+IF= @gharl
+END
+
+@gharl
+SET gharl, 2
+END
+
+@eventActorClick15
+MOVE 15, -20, -20, 1
+FIGHT -12
+1: This is just an example of the skills you get.
+1: This one allows you to summon a %M12.
+1: Some skills can only be used in camps, some in fights too.
+1: Some can be used several times, other can't.
+1: If you activate a single-use skill, the icon will simply disappear and you won't be able to use it again in the same scene.
+1: You will find a description of most of the skills in the libraries of the cities.
+1: Oh, and by the way, you may have noticed that all the classes of Athelias can train the skill of any element up to level 3, but can't use the spells.
+1: You will understand why later - you just need to know that if your class normally can't use the spells of an element, don't waste your PPs in training it: you won't have access to the spells, even with the level required.
+1: I guess I have nothing left to teach you.
+1: You should now go to the pokegatchi course, if you didn't go before.
+COMPARE #<felty.learnmagic>, 1
+IF= @endmagiccourse
+SET felty.learnmagic, 1
+ADD felty.educated, 1
+@endmagiccourse
+END
+;
+;-------------------------------------------------------------------
+;
+SCENE 103, "vestibulary", SCENE, "Pokegatchi course"
+#include AHS.txt
+SET supernovpettraining, 0
+ACTOR 1, Teacher, human29, 1, 30, 98
+IF C10 @supernovice
+1: Welcome to the pokegatchi course, my young friend.
+1: Only two classes have a taming spell in Athelias : archers and monks.
+1: And as you cannot buy pets (actually healers and death dancers can, but that's exceptions), there are only two ways to get one:
+1: Getting it as a reward for a quest, or incubating an egg.
+1: Eggs are trophies randomly dropped after a fight that you can incubate to get a pet.
+1: As of version 1.25, the following monsters may drop an egg: Thesarian Shell, Thesarian Crab, Fongy, Sage Worm, Toad, Poison Spore, Ticky, Aralian Harpy, Black Ant, Young Ent, Erzog Bear, Gorgona, Minotaur, and Kamikaze Bumblebee. 
+1: To incubate it, you'll first need to acquire an incubator from a merchant, like this one.
+ACTOR 2, , 2, 0, 38, 95
+1: You should head to the tamer of Mangeas or Irkatshk if you're looking for one.
+1: Once you have an egg and an incubator, camp, and click on the "Incubator" icon.
+ACTOR 3, , buttons, 8, 95, 15
+1: Select, "Incubate an egg"; a list of the monsters corresponding to the eggs you have will appear.
+1: Right-click on the one you want to incubate, and you're done.
+1: But you can also "disincubate" a pet that you don't use but want to keep with an incubator.
+1: You can do that from your camp as well.
+1: Click on the icon, select the appropriate option, pick a pet, set it free, click again on the icon, and you'll get an egg.
+1: Unfortunately, its statistics will be reset if you incubate it again, and it will have the stats it had the first time you got it.
+1: Right-click me if you need explanations about the GS pet commands.
+END
+
+@supernovice
+SET supernovpettraining, 1
+IF J112 @superend
+IF T3969 @superback
+1: Psst, over here!
+1: You're a super-novice, right?
+1: I need the help of someone who can get out of here.
+1: The stupid gatekeeper doesn't want to let me out.
+1: There are too many novices needing my help, he says.
+H: So what can I do for you?
+1: Strange creatures can sometimes be found in this castle.
+1: Some kind of imps I had never seen before.
+1: I think I could tame them but I need a few items to make it work.
+1: Will you help me find them?
+MISSION 112
+END
+
+@superend
+OFFER 748
+1: Welcome back, %1.
+1: How's your pet?
+END
+
+@superback
+1: Welcome back, %1.
+1: Remember?
+1: I still need a few items to tame the imps of the castle.
+MISSION 112
+END
+
+@eventActorClick1
+COMPARE #<supernovpettraining>, 1
+IF= @end
+MOVE 2, 120, 90, 1
+MOVE 3, 120, 90, 1
+1: Golden Souls can *talk* to their pets, and give them orders.
+1: First, you will need to christen your pet.
+1: If you say the name of one of your pet, it will come, like this:
+1: Bob!
+ACTOR 4, "Teacher's pet Demon", 146, 1, 0, 100
+POSE 1, 4
+MOVE 4, 60, 100
+WAIT 2
+1: If you tell him to run, it will obey as well.
+1: Remember to always start the sentence by the name of your pet if you want to give him an order.
+1: Bob, run!
+SOUND petPoke.wav
+MOVE 4, -20, 100
+1: You can also ask it to use a specific spell: "Rex, use Bane of the Living" for example.
+1: To make it use hands only, just say: "Rex, bite".
+1: Another cool thing you can do is to tell it which monster to attack: "Rex, bite #2" (notice the numbers following the monsters you fight: that's what they are used for).
+1: Of course, you can also say: "Rex, use Tempest on #2".
+1: You can also tell it to attack the strongest monster, or the weakest: "Rex, bite the strongest/weakest", or to cast a spell on self: "Rex, use heal on self".
+1: If you want it to cast a spell on you, just say "Rex, use sanctuary on 'me".
+1: Finally, if you want your pet to stay in scene but don't want it to attack, just say "Rex, heel".
+1: Have fun with the GS commands!
+COMPARE #<felty.learnpoke>, 1
+IF= @endpokecourse
+SET felty.learnpoke, 1
+ADD felty.educated, 1
+@endpokecourse
+END
+;
+;-------------------------------------------------------------------
+;
+SCENE 104, "vestibulary", SCENE, "PK course"
+#include AHS.txt
+ACTOR 1, Teacher, human25, 1, 30, 98
+IF C10 @supernovice
+1: Welcome, young soul.
+1: I am the PK master of the castle.
+1: The rules here are different than Evergreen's ones.
+1: You may or may not know this but there are other traditions.
+1: The rules in Athelias are basically the same ones than Aerianell's.
+1: aka : no pet, no items, no nasty spells, and NO DOUBLES!
+1: Pussy rules, you could say.
+1: Maybe. But what about all-connection PK-rules, hmm?
+1: These rules make the PKs way more strategic.
+1: And this is what we're expecying in a world where guild wars and other negative energies are not welcome AT ALL.
+1: On the other hand, there are several PK arenas in Athelias.
+1: They all have different rules.
+1: I let you go to each and discover them.
+1: The best PKers are able to fight and win in any arena, although, remember that the different rules may radically change the result of the fight.
+1: If you are not sure of your PK skills, you can still go to the training ground and fight in the arena where the ladder system is not implanted.
+1: Your rating will not decrease if you lose and die in a fight there.
+1: Have fun!
+COMPARE #<felty.learnpk>, 1
+IF= @endpkcourse
+SET felty.learnpk, 1
+ADD felty.educated, 1
+@endpkcourse
+END
+
+@supernovice
+1: Oh, a super novice!
+1: I'm not supposed to sell that but I have a bunch of PK proofs here.
+1: Maybe you would like to buy some?
+1: That's 10.000 Tomans each.
+ACTOR 2, , gnome12, 0, 80, 50
+1: Right-click on the icon if you want to buy some.
+END
+
+@eventActorClick2
+SOUND sword1.wav
+IF -G10000 @poorsn
+HOST_TAKE G10000
+HOST_GIVE Z4000
+END
+
+@poorsn
+N: Not enough money!
+END
+;
+;-------------------------------------------------------------------
+;
+SCENE 105, "vestibulary", SCENE, "Hiddden Gate"
+#include AHS.txt
+N: You hear a click as you turn the key and the gate swings open.
+GOTO LINK 1, 6
+END
+;
+;-------------------------------------------------------------------
+;
+SCENE 106, "vestibulary", SCENE, "Hiddden Gate"
+#include AHS.txt
+N: You hear a click as you turn the key and the gate swings open.
+GOTO LINK 1, 5
+END
+;
+;-------------------------------------------------------------------
+;
+SCENE 107, "vestibulary", SCENE, "Hidden Castle Exit"
+#include AHS.txt
+IF C10 @pass
+ACTOR 1, "Gatekeeper of the Hidden Gate", human31, 1, 30, 98
+1: Welcome to this hidden exit from the castle, Novice %1.
+1: This exit is a secret that only a select few know about.
+1: In fact, not even the Gatekeeper of the other gate himself knows about it!
+1: After all, having a bunch of Novices running around just wouldn't do, now would it?
+1: However, before you may leave...
+GIVE T2899
+CALL 110011@start -h-g-e-d-
+STRCMP #<athelias.race>, human
+IF= @humanstartprina
+STRCMP #<athelias.race>, elf
+IF= @elfstartmangeas
+STRCMP #<athelias.race>, gnome
+IF= @gnomestartterendroz
+STRCMP #<athelias.race>, dwarf
+IF= @dwarfstartarguazil
+END
+@humanstartprina
+GOTO LINK 7,18
+@elfstartmangeas
+GOTO LINK 13,2
+@gnomestartterendroz
+GOTO LINK 12,6
+@dwarfstartarguazil
+GOTO LINK 10,10
+END
+
+@pass
+GOTO LINK 55, 2
+

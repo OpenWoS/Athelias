@@ -1,0 +1,74 @@
+;SCENE 110003
+@mercfightsstart
+IF -V99|DEAD @mercfightsmercnaries-merc-fights0
+COMPARE #<merc.scat>, 1
+IF= @mercfightsmercnaries-merc-fights0
+
+COMPARE #<scene.id>, 2
+IF= @mercfightsfightmercenariessfsdfsfqqqqdffdgfhjkj
+COMPARE #<scene.id>, 1
+IF= @mercfightscampmercenariessfsdfsfqqqqdffdgfhjkj
+IF C45+V90+S200-T4001 @mercfightsmerc-fightsone
+@mercfightsmerc-fightstwo
+STRSTR #<num.closestLinkStyle>, 1
+IF> @mercfightsmercnaries-merc-fights0
+@mercfightsnormalmercenariessgdgdvgnnn
+SET temp.mercNumber, 6
+SUB temp.mercNumber, #<num.peopleInScene>
+COMPARE #<temp.mercNumber>, 1
+IF< @mercfightsmercnaries-merc-fights0
+STRSTR -#<mhna1>-#<mhna2>-#<mhna3>-#<mhna4>-#<mhna5>-, -2901-
+IF> @mercfightsneststepafterthejesterssdfgdh3
+SET temp.puppet1, ""
+@mercfightsneststepafterthejesterssdfgdh1
+STRSTR -#<mhna1>-#<mhna2>-#<mhna3>-#<mhna4>-#<mhna5>-, -2902-
+IF> @mercfightsneststepafterthejesterssdfgdh4
+SET temp.puppet2, ""
+@mercfightsneststepafterthejesterssdfgdh2
+LOCK 1
+GOTO @mercfightsmercnaries-merc-fights#<temp.mercNumber>
+
+@mercfightsmerc-fightsone
+COMPARE #<scene.id>, 725
+IF= @mercfightsnormalmercenariessgdgdvgnnn
+GOTO @mercfightsmerc-fightstwo
+
+@mercfightsneststepafterthejesterssdfgdh3
+SET temp.puppet1, 1018
+GOTO @mercfightsneststepafterthejesterssdfgdh1
+
+@mercfightsneststepafterthejesterssdfgdh4
+SET temp.puppet2, 1019
+GOTO @mercfightsneststepafterthejesterssdfgdh2
+
+@mercfightscampmercenariessfsdfsfqqqqdffdgfhjkj
+COMPARE #<mercInCampScenes>, 1
+IF= @mercfightsnormalmercenariessgdgdvgnnn
+GOTO @mercfightsmercnaries-merc-fights0
+
+@mercfightsfightmercenariessfsdfsfqqqqdffdgfhjkj
+COMPARE #<mercInFightScenes>, 1
+IF= @mercfightsnormalmercenariessgdgdvgnnn
+GOTO @mercfightsmercnaries-merc-fights0
+
+@mercfightsmercnaries-merc-fights5
+FIGHT -#<mhna1>, -#<mhna2>, -#<mhna3>, -#<mhna4>, -#<mhna5>, -#<temp.puppet1>, -#<temp.puppet2> 
+GOTO @mercfightsmercnaries-merc-fights0
+
+@mercfightsmercnaries-merc-fights4
+FIGHT -#<mhna1>, -#<mhna2>, -#<mhna3>, -#<mhna4>, -#<temp.puppet1>, -#<temp.puppet2>
+GOTO @mercfightsmercnaries-merc-fights0
+
+@mercfightsmercnaries-merc-fights3
+FIGHT -#<mhna1>, -#<mhna2>, -#<mhna3>, -#<temp.puppet1>, -#<temp.puppet2>
+GOTO @mercfightsmercnaries-merc-fights0
+
+@mercfightsmercnaries-merc-fights2
+FIGHT -#<mhna1>, -#<mhna2>, -#<temp.puppet1>, -#<temp.puppet2>
+GOTO @mercfightsmercnaries-merc-fights0
+
+@mercfightsmercnaries-merc-fights1
+FIGHT -#<mhna1>, -#<temp.puppet1>, -#<temp.puppet2>
+@mercfightsmercnaries-merc-fights0
+
+

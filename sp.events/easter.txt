@@ -1,0 +1,62 @@
+SCENE 110026
+@start
+
+
+
+COMPARE #<>
+IF= @easter
+
+
+
+@return
+RETURN
+@end
+END
+
+@easter
+STRCMP #<str.serverName>, "Solo Channel"
+IF= @return
+COMPARE #<scene.id>, 2
+IF= @fight
+COMPARE #<scene.id>, 1
+IF= @camp
+GOTO @return
+
+@camp
+SET temp.easter, chat.easter#<num.hostYear>
+COMPARE *#<temp.easter>, 1
+IF= @return
+H: What's...
+FIGHT 
+IF LOSE @end
+ACTOR 1, "Pr Bunnar", human72, 1, 0, 90
+MOVE 1, 25, 90
+N: The following quest was NOT stolen from the Monty Pythons.
+WAIT 1
+N: That's pure invention, coming from the brilliant brain of the creator of this world.
+WAIT 1
+N: Give me a break now :S
+H: What's going on?!
+1: Apparently, the dark rabbit has awaken.
+H: Pardon?
+1: The dark rabbit - an avatar of a chaotic god.
+1: He seems to wake up once a year.
+1: Someone must find the general who leads the rabbits troops and stop him.
+H: And I guess this "someone" is me...
+1: Bah! Are you a hero or not?
+H: Who said that?
+H: Alright, I'll find and slay your "general".
+H: Do you know where he's hidding?
+1: No, but if you're looking for a rabbit, find the Alice who's running after him.
+H: What?
+N: Nothing stolen from Lewis Caroll either.
+WAIT 1
+N: I told you to give me a break, damn!
+1: Umm.
+1: Just find the girl, and follow her.
+H: I think the wold's gone crazy...
+SET chat.easter#<num.hostYear>, 1
+END
+
+@fight
+

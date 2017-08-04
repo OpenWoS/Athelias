@@ -1,0 +1,21 @@
+SCENE 11400, mountain5, SCENE, "To Thanaris", 2
+#include include.txt
+IF T3998 @illuteleport
+GOTO @nextstepafterilluteleport
+
+@illuteleport
+HOST_GIVE T2917
+@nextstepafterilluteleport
+GOTO LINK 113, 0
+;
+;--------------------------------------------------------------------------------------
+;
+SCENE 11401, mountain5, SCENE, "To Obrovac", 2
+#include include.txt
+GOTO LINK 112, 1
+;
+;--------------------------------------------------------------------------------------
+;
+
+
+

@@ -1,0 +1,8 @@
+MENU "Check the reason of a ban=@pluginBanned", "Cancel=@madstoolcancel"
+GOTO @madtoolplugins
+
+@pluginBanned
+CALL 99901@check AHScheck
+END
+
+

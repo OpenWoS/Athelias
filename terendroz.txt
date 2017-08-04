@@ -1,0 +1,882 @@
+SCENE 1200, street6, SCENE, "Northern Gate"
+#include include.txt
+#include config\include.terendroz.txt
+IF T1121 @pass
+IF T1117-T1118 @siege
+IF T1117-T1121|T1118-T1121|T1119-T1121|T1120-T1121 @fightchaos
+@pass
+SET c2terendrozexit, north
+GOTO LINK 0, 8
+
+@cantpass
+ACTOR 1, Guard, gnome4, 1, 20, 99
+ACTOR 2, Guard, gnome4, 1, 80, 99
+IF T3993|T3988 @halloweenActors
+GOTO @nextStepAfterHalloweenActors
+
+@halloweenActors
+ACTOR 1, "Guard", #<spEvent.Name>-gnome, 4, 20, 99
+ACTOR 2, Guard, #<spEvent.Name>-gnome, 4, 80, 99
+@nextStepAfterHalloweenActors
+1: You can't pass, foreigner
+1: All the gates have been closed since the beginning of the siege.
+END
+
+@tokentake
+TAKE T1117
+COUNTDOWN 0
+TAKE T1118
+TAKE T1119
+TAKE T1120
+SET sdshfsfksjhjsvbscksvsvskvqlq, 0
+SET siegeterendrozqsdfs, ""
+SET terendrozsiegefail, ""
+SET sdshfsfksjhjsvbscksvsvskvqlq, 0
+GOTO @pass
+
+@fightchaos
+FIGHT 331, 331, 331, 331, 331, 331, 331, 368, 368, 369
+END
+
+@siege
+COMPARE #<terendrozsiegefail>, 1
+IF= @tokentake
+IF XP @siege2lost
+ACTOR 1, Guard, gnome2, 1, 60, 80
+ACTOR 2, Guard, gnome2, 1, 75, 90
+1: Help!
+WAIT 1
+MOVE 1, 120, 80, 1
+MOVE 2, 120, 90, 1
+FIGHT2 -179.60.80, -179.75.90, 331, 331, 331, 331, 331, 368, 369
+IF LOSE @siege2lost
+FIGHT2 370, 371, 332, 332, 332, 336, 336
+IF LOSE @siege2lost
+FIGHT2 370, 371, 371, 371, 333, 333, 338
+IF LOSE @siege2lost
+IF XP @siege2lost
+ACTOR 1, Guard, gnome2, 1, 120, 95
+MOVE 1, 75, 80
+WAIT 3
+1: Alert!
+1: Their offensive here was just a diversion!
+1: They succeeded in entering the city by the western gate!
+1: We must go and stop them!
+GIVE T1118
+COUNTDOWN 60
+END
+
+@siege2lost
+SET terendrozsiegefail, 1
+TAKE T1117
+COUNTDOWN 0
+TAKE T1118
+TAKE T1119
+TAKE T1120
+SET sdshfsfksjhjsvbscksvsvskvqlq, 0
+SET siegeterendrozqsdfs, ""
+COLOR 2014
+COLOR 14
+ACTOR 1, Demon, 602, 1, -60, 90
+ACTOR 2, Demon, 599, 1, -70, 90
+ACTOR 3, Demon, 602, 1, -50, 90
+ACTOR 4, Demon, 598, 1, -40, 90
+ACTOR 5, Demon, 598, 1, -20, 90
+ACTOR 6, Demon, 598, 1, -30, 90
+SEL 6
+POSE 1, 4
+SEL 5
+POSE 1, 4
+SEL 4
+POSE 1, 4
+SEL 3
+POSE 1, 4
+SEL 2
+POSE 1, 4
+SEL 1
+POSE 1, 4
+MOVE 1, 20, 80
+MOVE 2, 10, 90
+MOVE 3, 30, 85
+MOVE 4, 40, 90
+MOVE 5, 60, 75
+MOVE 6, 50, 80
+N: You failed
+WAIT 1
+N: The army succeeded in seizing the city
+SET terendrozsiegefail, 0
+END
+;
+;------------------------------------------------------------------------------------
+;
+SCENE 1201, street6, SCENE, " Gate"
+#include include.txt
+#include config\include.terendroz.txt
+COMPARE #<terendrozsiegefail>, 1
+IF= @tokentake
+@pass
+GOTO LINK 51, 0
+
+@tokentake
+SET terendrozsiegefail, 1
+TAKE T1117
+COUNTDOWN 0
+TAKE T1118
+TAKE T1119
+TAKE T1120
+SET sdshfsfksjhjsvbscksvsvskvqlq, 0
+SET siegeterendrozqsdfs, ""
+SET terendrozsiegefail, ""
+GOTO @pass
+;
+;------------------------------------------------------------------------------------
+;
+SCENE 1202, street6, SCENE, " Gate"
+#include include.txt
+#include config\include.terendroz.txt
+COMPARE #<terendrozsiegefail>, 1
+IF= @tokentake
+@pass
+GOTO LINK 45, 5
+
+@tokentake
+SET terendrozsiegefail, 1
+TAKE T1117
+COUNTDOWN 0
+TAKE T1118
+TAKE T1119
+TAKE T1120
+SET sdshfsfksjhjsvbscksvsvskvqlq, 0
+SET siegeterendrozqsdfs, ""
+SET terendrozsiegefail, ""
+GOTO @pass
+;
+;------------------------------------------------------------------------------------
+;
+SCENE 1204, terendrozinside3, SCENE, "Runesmith"
+#include include.txt
+#include config\include.terendroz.txt
+ACTOR 1, Broder, gnome3, 1, 25, 90
+IF T3993|T3988 @halloweenActors
+GOTO @nextStepAfterHalloweenActors
+
+@halloweenActors
+ACTOR 1, "Broder", #<spEvent.Name>-gnome, 3, 25, 90
+@nextStepAfterHalloweenActors
+IF T1117-T1121|T1118-T1121|T1119-T1121|T1120-T1121 @cantpass
+1: Welcome to my shop.
+1: What are your needs?
+OFFER 545, 546, 547, 548, 549, 550, 551, 552, 553, 554, 555, 556, 557, 558, 559, 560, 561, 562, 563, 564
+END
+
+@cantpass
+1: Go away, foreigner!
+1: The shop is closed!
+END
+;
+;------------------------------------------------------------------------------------
+;
+SCENE 1205, terendrozinside3, SCENE, "Handicraft"
+#include include.txt
+#include config\include.terendroz.txt
+ACTOR 1, Derniz, gnome5, 1, 25, 90
+IF T3993|T3988 @halloweenActors
+GOTO @nextStepAfterHalloweenActors
+
+@halloweenActors
+ACTOR 1, "Derniz", #<spEvent.Name>-gnome, 5, 25, 90
+@nextStepAfterHalloweenActors
+IF T1117-T1121|T1118-T1121|T1119-T1121|T1120-T1121 @cantpass
+1: Maybe I have something you need, Sir?!
+OFFER 270, 271, 272, 273, 274, 275, 276, 277, 278, 279, 200, 209, 213, 217, 221, 565, 569, 573, 578, 582
+END
+
+@cantpass
+1: There is nothing for you here!
+1: Go away!
+END
+;
+;-----------------------------------------------------------------------------------
+;
+SCENE 1206, "terendrozinside1", SCENE, "Elder"
+#include config\include.terendroz.txt
+; NO : #include include.txt
+ACTOR 1, "Elder", gnome10, 1, 57, 95
+IF T3993|T3988 @halloweenActors
+GOTO @nextStepAfterHalloweenActors
+
+@halloweenActors
+ACTOR 1, "Elder", #<spEvent.Name>-gnome, 10, 57, 95
+@nextStepAfterHalloweenActors
+IF T1117-T1121|T1118-T1121|T1119-T1121|T1120-T1121 @cantpass
+IF T73 @wb
+IF -T73 @welcome
+END
+
+@cantpass
+1: Dark are the present days
+1: Pray for Terendoz's sake, adventurer
+1: Only Gods could save us.
+END
+
+@wb
+1: Welcome back.
+1: I hope you have found a master to teach you what you need to know.
+END
+
+@welcome
+1: Hello, young adventurer
+IF C15 @monk
+IF C20 @jester
+END
+
+@jester
+HOST_GIVE T4
+HOST_GIVE T1
+HOST_GIVE T105
+HOST_GIVE T9
+HOST_GIVE T13
+HOST_GIVE T3006
+HOST_GIVE T3014
+HOST_GIVE T3007
+HOST_GIVE T3015
+HOST_GIVE T3023
+HOST_GIVE T3022
+1: So you have chosen to become a jester. 
+1: Good.
+1: You must go to Prina to find the masters.
+1: Our brothers gnomes have a guild there.
+1: You will soon be a master of illusion if you work hard.
+1: May the Gods be with you.
+HOST_GIVE T73
+GOTO @trainingground
+
+@monk
+HOST_GIVE T3
+HOST_GIVE T103
+HOST_GIVE T7
+HOST_GIVE T13
+HOST_GIVE T3000
+HOST_GIVE T3001
+HOST_GIVE T3002
+HOST_GIVE T3003
+HOST_GIVE T3004
+HOST_GIVE T3005
+HOST_GIVE T3006
+HOST_GIVE T3007
+HOST_GIVE T3008
+HOST_GIVE T3009
+HOST_GIVE T3010
+HOST_GIVE T3011
+HOST_GIVE T3012
+HOST_GIVE T3013
+HOST_GIVE T3014
+HOST_GIVE T3015
+1: A monk!
+1: Be welcome.
+1: Nice to see that some young people are still attracted by the ancient faith...
+1: You should go to the temple and seek a master.
+1: The monks there can teach you the secrets of Athelias.
+1: They are the holders of the memory of the island.
+1: Soon, you will be one of them.
+1: May god be with you.
+HOST_GIVE T73
+GOTO @trainingground
+
+@trainingground
+END
+;
+;-----------------------------------------------------------------------------------
+;
+SCENE 1207, "terendrozinside2", SCENE, "Jewellery"
+#include include.txt
+#include config\include.terendroz.txt
+ACTOR 1, "Jeweller", gnome7, 1, 35, 90
+IF T3993|T3988 @halloweenActors
+GOTO @nextStepAfterHalloweenActors
+
+@halloweenActors
+ACTOR 1, "Jeweller", #<spEvent.Name>-gnome, 7, 35, 90
+@nextStepAfterHalloweenActors
+IF T1117-T1121|T1118-T1121|T1119-T1121|T1120-T1121 @cantpass
+IF V30+I659-T40-T38 @crystal
+IF -V30 @turquoise
+IF -I659-T38 @turquoise
+IF T40 @reward
+IF T38 @end
+END
+
+@cantpass
+1: The shop is closed
+1: Go away!
+END
+
+@turquoise
+1: Do you want to buy some turquoises?
+1: I could quote a price...
+OFFER 659
+END
+
+@crystal
+1: Bloody robbers!
+1: I have three crystals stolen
+1: <sigh>
+1: I have an offer for you.
+1: I know where the thieves live
+1: Bring my crystals back and I'll give you one.
+1: Sounds good?
+GIVE T39
+END
+
+@reward
+1: My crystals !
+1: You have my crystals !
+1: Thanks, brave adventurer.
+1: As I said, you can keep one.
+H: Thanks!
+1: See you soon. 
+GIVE I660
+SOUND FoundItem.wav
+TAKE T40
+GIVE T38
+END
+
+@end
+1: Thanks again, hero.
+1: I have new items for sale by the way...
+OFFER 659, 664, 661
+END
+;
+;---------------------------------------------------------------------
+;
+SCENE 1208, "street3", SCENE, "Thievery"
+#include config\include.terendroz.txt
+#include include.txt
+IF T38 @end
+IF T40 @end
+IF T39 @fight
+N: The door is closed
+END
+
+@fight
+BKGND terendrozinside3
+ACTOR 1, "Thief", gnome3, 1, 25, 90
+ACTOR 2, "Thief", gnome3, 1, 40, 75
+ACTOR 3, "Thief", gnome3, 1, 65, 83 
+1: Who the hell are you?
+2: Yes, who are you?
+3: Answer !
+1: Do you really need to repeat all what I say?
+2: ...
+MOVE 3, 64, 80
+3: Answer !
+MOVE 2, 39, 70
+2: And you, who do you think you are?
+2: The boss?
+3: He is not the boss.
+1: So who is the boss?
+H: err... 
+H: Hello?!
+1: Yeah?
+1: WHAT DO YOU WANT?
+H: <cough>
+H: The jeweller wants is crystals back
+2: His crystals?
+2: Did we rob crystals?
+3: I don't remember...
+2: Mike! Did you rob crystals?
+WAIT 1.5
+1: <.<
+1: >.>
+1: Oh look !
+1: He has a weapon!
+1: He wanna kill us!
+2: Yeah you're right, let's kill him first, but don't expect me to forget these crystals!
+3: Guys ! Come and help us!
+WAIT 3
+MOVE 1, -25, 90, 1
+MOVE 2, -25, 90, 1
+MOVE 3, -25, 90, 1
+FIGHT 173.25.90, 173.40.75, 173.65.83, 173, 173, 173, 173, 173
+IF WIN @reward
+END
+
+@end
+N: The door is closed
+END
+
+@reward
+N: You kill the thieves and find the crystals hidden in a chest.
+GIVE T40
+END
+;
+;----------------------------------------------------------------------
+;
+SCENE 1209, street6, SCENE, "Southern Gate"
+#include include.txt
+#include config\include.terendroz.txt
+COMPARE #<terendrozsiegefail>, 1
+IF= @tokentake
+IF T1121 @pass
+IF T1117-T1121 @fightchaos
+IF T1118-T1121|T1119-T1121|T1120-T1121 @cantpass
+@pass
+SET c2terendrozexit, south
+GOTO LINK 0, 8
+
+@cantpass
+ACTOR 1, Guard, gnome4, 1, 20, 99
+ACTOR 2, Guard, gnome4, 1, 80, 99
+FACE 2, 0
+IF T3993|T3988 @halloweenActors
+GOTO @nextStepAfterHalloweenActors
+
+@halloweenActors
+ACTOR 1, "Guard", #<spEvent.Name>-gnome, 4, 20, 99
+ACTOR 2, Guard, #<spEvent.Name>-gnome, 4, 80, 99
+FACE 2, 0
+@nextStepAfterHalloweenActors
+1: You can't pass, foreigner
+1: All the gates have been closed since the beginning of the siege.
+END
+
+@fightchaos
+FIGHT 331, 331, 331, 331, 331, 331, 331, 368, 368, 369
+END
+
+@tokentake
+SET terendrozsiegefail, 1
+TAKE T1117
+COUNTDOWN 0
+TAKE T1118
+TAKE T1119
+TAKE T1120
+SET sdshfsfksjhjsvbscksvsvskvqlq, 0
+SET siegeterendrozqsdfs, ""
+SET terendrozsiegefail, ""
+GOTO @pass
+;
+;------------------------------------------------------------------------------------
+;
+SCENE 1210, street6, SCENE, "Western Gate"
+#include include.txt
+#include config\include.terendroz.txt
+COMPARE #<terendrozsiegefail>, 1
+IF= @tokentake
+IF T1121 @pass
+IF T1118-T1119+XP @toolateguys
+IF T1118-T1119 @siegevillagers
+IF T1117-T1121 @fightchaos
+IF T1119-T1121|T1120-T1121 @cantpass
+@pass
+SET c2terendrozexit, west
+GOTO LINK 0, 8
+
+@cantpass
+ACTOR 1, Guard, gnome4, 1, 20, 99
+ACTOR 2, Guard, gnome4, 1, 80, 99
+FACE 2, 0
+IF T3993|T3988 @halloweenActors
+GOTO @nextStepAfterHalloweenActors
+
+@halloweenActors
+ACTOR 1, "Guard", #<spEvent.Name>-gnome, 4, 20, 99
+ACTOR 2, Guard, #<spEvent.Name>-gnome, 4, 80, 99
+FACE 2, 0
+@nextStepAfterHalloweenActors
+1: You can't pass, foreigner
+1: All the gates have been closed since the beginning of the siege.
+END
+
+@fightchaos
+FIGHT 331, 331, 331, 331, 331, 331, 331, 368, 368, 369
+END
+
+@tokentake
+SET terendrozsiegefail, 1
+TAKE T1117
+COUNTDOWN 0
+TAKE T1118
+TAKE T1119
+TAKE T1120
+SET sdshfsfksjhjsvbscksvsvskvqlq, 0
+SET siegeterendrozqsdfs, ""
+SET terendrozsiegefail, ""
+GOTO @pass
+
+@siegevillagers
+ACTOR 1, Guard, gnome2, 1, 60, 95
+FACE 1, 0
+ACTOR 2, Guard, gnome2, 1, 75, 75
+FACE 2, 0
+ACTOR 3, Citizen, gnome3, 1, 65, 90
+ACTOR 4, Citizen, gnome3, 1, 80, 80
+ACTOR 5, Citizen, gnome3, 1, 90, 85
+ACTOR 6, Citizen, gnome3, 1, 85, 77
+ACTOR 7, Citizen, gnome3, 1, 95, 88
+ACTOR 8, Citizen, gnome3, 1, 70, 93
+5: Help!
+3: Help!
+1: You won't pass, minions of the chaos!
+WAIT 3
+MOVE 1, 120, 90, 1
+MOVE 2, 120, 90, 1
+MOVE 3, 120, 90, 1
+MOVE 4, 120, 90, 1
+MOVE 5, 120, 90, 1
+MOVE 6, 120, 90, 1
+MOVE 7, 120, 90, 1
+MOVE 8, 120, 90, 1
+N: Fight and keep the villagers alive!
+FIGHT -179.60.95, -179.75.75, -180.65.90, -180.80.80, -180.90.85, -180.85.77, -180.95.88, -180.70.93, 370, 339, 335, 335, 338, 338, 338
+IF LOSE @villagerLOSE
+FIGHT -4000
+; This part is taken off till Dan implant or mod the command I need
+;COMPARE #<monster.lastFightCount>, 7
+;IF< @villagerLOSE
+MOVE 1, 75,90
+1: We have breached an enemy line!
+1: It's now or never : we must kill the demon that leads the troops!
+WAIT 3
+N: Cross the battlefield and kill the major demon
+GIVE T1119
+GIVE T1120
+WAIT 1
+GOTO LINK 3, 0
+
+@villagerLOSE
+SET terendrozsiegefail, 1
+TAKE T1117
+COUNTDOWN 0
+TAKE T1118
+TAKE T1119
+TAKE T1120
+SET sdshfsfksjhjsvbscksvsvskvqlq, 0
+SET siegeterendrozqsdfs, ""
+SET terendrozsiegefail, ""
+END
+
+@toolateguys
+SET terendrozsiegefail, 1
+TAKE T1117
+COUNTDOWN 0
+TAKE T1118
+TAKE T1119
+TAKE T1120
+SET sdshfsfksjhjsvbscksvsvskvqlq, 0
+SET siegeterendrozqsdfs, ""
+SET terendrozsiegefail, ""
+COLOR 13
+COLOR 2013
+WAIT 0.5
+COLOR 14
+COLOR 2014
+N: You arrive too late!
+N: The citizens have been killed by the chaos knights
+N: and the army succeeded in entering the city!
+SET terendrozsiegefail, 0
+END
+;
+;------------------------------------------------------------------------------------
+;
+SCENE 1211, terendrozinside2, SCENE, "Smithy"
+#include include.txt
+#include config\include.terendroz.txt
+ACTOR 1, Frodroz, gnome7, 1, 25, 90
+IF T3993|T3988 @halloweenActors
+GOTO @nextStepAfterHalloweenActors
+
+@halloweenActors
+ACTOR 1, "Frodoz", #<spEvent.Name>-gnome, 7, 25, 90
+@nextStepAfterHalloweenActors
+COMPARE #<c5talkedtoblacksmith>, 0
+IF= @firsttimeblacksmith.txt
+1: Hello, adventurer.
+1: Toss me the item you want to upgrade.
+OFFER 132, 134, 135
+END
+
+#include blacksmith.txt
+;
+;-------------------------------------------------------------------------------
+;
+SCENE 1212, alchemy, SCENE, "Alchemist"
+#include include.txt
+#include config\include.terendroz.txt
+ACTOR 1, Bilbor, gnome6, 1, 25, 90
+IF T3993|T3988 @halloweenActors
+GOTO @nextStepAfterHalloweenActors
+
+@halloweenActors
+ACTOR 1, "Bilbor", #<spEvent.Name>-gnome, 6, 25, 90
+@nextStepAfterHalloweenActors
+1: Greetings, adventurer
+OFFER 1, 3, 4, 7, 13, 29, 30, 31, 32, 33, 36, 38, 39, 12
+END 
+;
+;-------------------------------------------------------------------------------
+;
+SCENE 1213,tavern1 , SCENE, "Tavern"
+#include include.txt
+#include config\include.terendroz.txt
+ACTOR 1, Malcel, gnome5, 1, 30, 89
+IF T3993|T3988 @halloweenActors
+GOTO @nextStepAfterHalloweenActors
+
+@halloweenActors
+ACTOR 1, "Malcel", #<spEvent.Name>-gnome, 5, 30, 89
+@nextStepAfterHalloweenActors
+IF T1117-T1121|T1118-T1121|T1119-T1121|T1120-T1121 @cantpass
+ACTOR 2, Tifeloz, human27, 1, 91, 85
+FACE 2, 0
+ACTOR 3, Freneden, human52, 1, 15, 83
+1: Greetings, me lord!
+1: What d'you want to drink?
+OFFER 2, 34
+IF V99 @comparemerc.firsttime
+@normalV99
+END
+
+@comparemerc.firsttime
+COMPARE #<merc.firstTime>, 1
+IF= @normalV99
+GOTO @mercfirstime.txt
+
+#include merc-firsttime.txt
+
+@eventActorClick2
+SOUND sword1.wav
+SET temp.currentMerc, 2901
+#include merc-alreadyHired.txt
+@nextstepaftermercalreadyhired2901
+ACTOR 20, , merc2901, 0, 50, 50
+ACTOR 21, , hire, 0, 40, 75
+ACTOR 22, , cancel, 0, 60, 75
+END
+
+@eventActorClick3
+SOUND sword1.wav
+SET temp.currentMerc, 2902
+#include merc-alreadyHired.txt
+@nextstepaftermercalreadyhired2902
+ACTOR 20, , merc2902, 0, 50, 50
+ACTOR 21, , hire, 0, 40, 75
+ACTOR 22, , cancel, 0, 60, 75
+END
+
+#include merc-hire.txt
+
+@cantpass
+1: We're going to die!
+1: We are all going to die!
+END
+;
+;-------------------------------------------------------------------------------
+;
+SCENE 1214, templeinside10, SCENE, "Townhall"
+#include config\include.terendroz.txt
+#include include.txt
+ACTOR 1, Ancient, gnome9, 1, 35, 96
+SEL 1
+POSE 1, 2
+IF T3993|T3988 @halloweenActors
+GOTO @nextStepAfterHalloweenActors
+
+@halloweenActors
+ACTOR 1, "Ancient", #<spEvent.Name>-gnome, 9, 35, 96
+@nextStepAfterHalloweenActors
+IF T1121 @wbheroes
+IF T1117-T1118 @siege
+IF C15 @gnome
+IF C20 @gnome
+IF T3993|T3988 @halloween1
+1: A foreigner!
+1: I am glad to see you in my city
+1: Please, sit down and relax
+1: How can I help you?
+END
+
+@xmas
+1: What did you say it is, again?
+1: Helloween?
+H: That's Halloween, Grandpa, and that was 2 months ago.
+H: Now this is Christmas.
+1: ...
+H: ...
+END
+
+@halloween1
+IF T3988 @xmas
+1: Grettings, adventurer, and merry Christmas!
+H: Uh?!
+H: That's not Christmas, Grandpa, that's Halloween!
+1: Halloween, what's that again?
+H: ...
+END
+
+@wbheroes
+IF T3993|T3988 @halloween1
+1: Welcome, hero.
+1: I don't know what our town would look like if you didn't help us defeat the chaos army...
+END
+
+@siege2lost
+SET terendrozsiegefail, 1
+TAKE T1117
+COUNTDOWN 0
+TAKE T1118
+TAKE T1119
+TAKE T1120
+SET sdshfsfksjhjsvbscksvsvskvqlq, 0
+SET siegeterendrozqsdfs, ""
+SET terendrozsiegefail, ""
+COLOR 2014
+COLOR 14
+ACTOR 1, Demon, 602, 1, -60, 90
+ACTOR 2, Demon, 599, 1, -70, 90
+ACTOR 3, Demon, 330, 1, -50, 90
+ACTOR 4, Demon, 598, 1, -40, 90
+ACTOR 5, Demon, 598, 1, -20, 90
+ACTOR 6, Demon, 598, 1, -30, 90
+SEL 6
+POSE 1, 4
+SEL 5
+POSE 1, 4
+SEL 4
+POSE 1, 4
+SEL 3
+POSE 1, 4
+SEL 2
+POSE 1, 4
+SEL 1
+POSE 1, 4
+MOVE 1, 20, 80
+MOVE 2, 10, 90
+MOVE 3, 30, 85
+MOVE 4, 40, 90
+MOVE 5, 60, 75
+MOVE 6, 50, 80
+N: You failed
+WAIT 1
+N: The army succeeded in seizing the city
+END
+
+@siege2
+IF XP @siege2lost
+1: If you really want to help the city, hurry and go to the northern gate
+1: You have no time to waste!
+END
+
+@gnome
+1: Welcome, fellow Terendrozi
+1: Please, have a seat and relax
+1: How can I help you?
+END
+
+@siege
+COMPARE #<sdshfsfksjhjsvbscksvsvskvqlq>, 1
+IF< @siegebis
+IF XP @siege2lost
+GOTO @siege2
+
+@siegebis
+1: A foreigner!
+1: How did you get there?!
+H: I am here to help you and the citizens of Terendroz.
+H: I have defeated the nine dark paladins and now I am here to get rid of their army.
+1: Many are the Terendrosis who died during the siege, my young friend.
+1: I hope you tell me the truth - too much blood was shed .
+1: The major demon that leads the troops opened a vortex to a chaotic dimension.
+1: The number of our enemies keeps increasing while our soldiers die.
+1: We cannot win as long as this vortex remains opened.
+1: And the only way to close it would be to clear a path through the troops of the chaos army and kill the demon...
+ACTOR 2, Guard, gnome2, 1, 120, 90
+MOVE 2, 75, 100
+2: Ancient!
+2: The army is conducting an offensive at the northern gate!
+2: They are almost in the city!
+1: If you really wants to help the city, foreigner, go and help the guards with defending the gate
+1: If they succeed in entering the city, we are lost!
+WAIT 1
+SET sdshfsfksjhjsvbscksvsvskvqlq, 1
+COUNTDOWN 600
+N: Hurry and head to the northern gate!
+END
+;
+;--------------------------------------------------------------------------------------
+;
+SCENE 1215, houseinside1, SCENE, "Library"
+#include config\include.terendroz.txt
+#include include.txt
+ACTOR 1, "Librarian", gnome18, 2, 47, 80
+IF T3993|T3988 @halloweenActors
+GOTO @nextStepAfterHalloweenActors
+
+@halloweenActors
+ACTOR 1, "Librarian", #<spEvent.Name>-gnome, 18, 47, 80
+@nextStepAfterHalloweenActors
+#include library.txt
+1: Welcome to the Library of Terendroz!
+END
+;
+;--------------------------------------------------------------------------------------
+;
+SCENE 1216, houseinside1, SCENE, "Library"
+#include config\include.terendroz.txt
+#include include.txt
+ACTOR 1, "Bag Maker", gnome17, 1, 47, 80
+IF T3993|T3988 @halloweenActors
+GOTO @nextStepAfterHalloweenActors
+
+@halloweenActors
+ACTOR 1, "Bag Maker", #<spEvent.Name>-gnome, 17, 47, 80
+@nextStepAfterHalloweenActors
+COMPARE #<num.TrophyBagSlots>, 30
+IF= @cant
+IF> @cant2
+1: Hello, adventurer.
+1: I guess you may be interested with a new bag...
+1: I have some for sale.
+1: 5000 Tomans for a 30 litters bag.
+1: Are you interested?
+IF -G5000 @poor
+@ask
+ASK 30
+IF YES @yes
+IF NO @no
+1: Pardon?
+GOTO @ask
+
+@no
+1: Maybe later...
+END
+
+@yes
+1: Great!
+1: Here you go.
+SOUND trophyBagOpen.wav
+SET num.TrophyBagWidth, 6
+SET num.TrophyBagHeight, 5
+SET num.TrophyBagOpen, 1
+TAKE G5000
+END
+
+@poor
+H: Later, maybe.
+H: I don't have the cash on me.
+END
+
+@cant
+1: Sorry, adventurer: I have some bags for sale but I see you don't need them.
+1: Yours is larger than what I can make.
+END
+
+@cant2
+1: I see you still have my bag, adventurer.
+1: I don't have anything larger but I know someone who may.
+1: One of the merchants of the market of Benadrim master some secrets of the ancient bag makers.
+1: However I don't know if he still makes bags, nor where you'll find him.
+1: Hang around the market sometimes, maybe you'll find him.
+END
+
+

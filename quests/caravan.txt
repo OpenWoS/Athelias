@@ -1,0 +1,24 @@
+SCENE 110025
+@start
+SET temp.flags, #<num.mapFlags>
+ADD temp.flags, 8192
+FLAGS #<temp.flags>
+ACTOR 1, Firoz, oriental2, 1, 60, 90
+FACE 1, 0
+ACTOR 2, Ahmet, oriental5, 1, 65, 85
+FACE 2, 0
+ACTOR 3, Shoukri, oriental6, 1, 63, 80
+FACE 3, 0
+ACTOR 4, Deniz, oriental3, 1, 73, 93
+FACE 4, 0
+ACTOR 5, Camel, human54, 0, 95, 90
+FACE 5, 0
+ACTOR 6, Camel, human54, 0, 90, 85
+FACE 6, 0
+ACTOR 7, Camel, human54, 0, 85, 95
+FACE 7, 0
+ACTOR 8, Camel, human54, 0, 82, 87
+FACE 8, 0
+ACTOR 10, Camel, human54, 0, 78, 93
+FACE 10, 0
+RETURN

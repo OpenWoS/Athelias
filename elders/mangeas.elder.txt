@@ -1,0 +1,72 @@
+@wb
+1: Welcome back.
+1: I hope you have found a master to teach you what you need to know.
+END
+
+@welcome
+1: Hello, young adventurer.
+IF C56 @healer
+IF C60 @deathdancer
+IF C61 @archer
+END
+
+@healer
+HOST_GIVE T2
+HOST_GIVE T111
+HOST_GIVE T7
+HOST_GIVE T14
+HOST_GIVE T3004
+HOST_GIVE T3012
+HOST_GIVE T3007
+HOST_GIVE T3015
+HOST_GIVE T3022
+1: So you have decided to be a healer.
+1: Good.
+1: The members of the sanctuary are the elven priests of Isindra, the goddess of life and healing.
+1: They are the keepers of the secrets of the ancient priests of Athelias.
+1: No-one else can master the secrets of life as they do.
+1: Mangeas is the best place to learn the art of healing.
+1: Stay among the elves and seek a master in the sanctuary.
+1: May the Gods be with you.
+HOST_GIVE T74
+GOTO @trainingground
+
+@deathdancer
+HOST_GIVE T8
+HOST_GIVE T5
+HOST_GIVE T14
+HOST_GIVE T15
+HOST_GIVE T3006
+HOST_GIVE T3014
+HOST_GIVE T3016
+1: So you have decided to devote your life to the art of war. 
+1: Only the elves can teach you the way of the death dancer.
+1: Stay among your brothers and learn.
+1: May you have enough bravery to face the dangers of this world.
+HOST_GIVE T74
+GOTO @trainingground
+
+@archer
+HOST_GIVE T4
+HOST_GIVE T14
+HOST_GIVE T3000
+HOST_GIVE T3008
+HOST_GIVE T3004
+HOST_GIVE T3012
+HOST_GIVE T3006
+HOST_GIVE T3014
+HOST_GIVE T3007
+HOST_GIVE T3015
+HOST_GIVE T3020
+HOST_GIVE T3022
+HOST_GIVE T113
+1: So you have chosen to become an archer. 
+1: Back in the days, Mangeas housed the most famous archer training camps.
+1: But the power of the elves has faded away, and the most skilled archers are now found in the forest of Katadyn.
+1: You should go to Katadyn to find master in that art.
+1: May your travel be safe.
+HOST_GIVE T74
+GOTO @trainingground
+
+@trainingground
+END

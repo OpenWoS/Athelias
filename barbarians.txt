@@ -1,0 +1,351 @@
+SCENE 5400, "cityoutside1", SCENE, "To Irkatshk"
+#include include.txt
+GOTO LINK 40, 15
+;
+;-------------------------------------------------------------------------------------
+;
+SCENE 5401, "cityoutside1", SCENE, "Felix Bracasse"
+#include include.txt
+ACTOR 1, "Felix Bracasse", human64, 1, 25, 95
+IF T3993|T3988 @halloweenActors
+GOTO @nextStepAfterHalloweenActors
+
+@halloweenActors
+ACTOR 1, "Felix Bracasse", #<spEvent.Name>-humans, 64, 25, 95
+@nextStepAfterHalloweenActors
+IF C2+T3968-J113 @supernewbquest
+IF C11 @barbariansstart
+IF DEAD @dead
+COMPARE #<paliq3>, 1
+IF= @paliq3
+1: Greetings, foreigner.
+1: You should be very careful here, my friend.
+1: The barbarians training grounds are also the arena of Irkatshk.
+1: The rules are simple: no spells but offensive spells, no heal, no ticket, no protection from PKers.
+1: Hit and kill - or die.
+1: Enjoy...
+END
+
+@supernewbquest
+1: Finally someone fool enough to fight me!
+1: I'm gonna enjoy it, my friend!
+WAIT 2.5
+MOVE 1, 150, 150, 1
+FIGHT 2924.25.95
+END
+
+@eventActorClick60
+N: Level required for the class quests:
+WAIT 1
+N: Level 25, 50, 75, 90.
+END
+
+; Barb quests:
+;
+; Q1: The "friendly" fights have been forbidden by the Regent. He doesn't wanna listen the requests of the barbs against this new law.
+; The barbs have decided to break off with the central government of Prina. The char is in charge of the preparations for the defense of the town.
+;
+; Q2: The char has to spy the army of the Regent and report its progress.
+;
+; Q3: Battle against the Regent's army near Irkatshk. The Barbarians win, a peace agreement is signed.
+;
+; Q4: Help the paladins to defeat the army of the regent in Benadrim.
+;
+
+@barbariansstart
+ACTOR 60, "", 3, 0, 95, 15
+IF V25 @barbq1
+COMPARE #<chat.felixBracasseBarbs>, 1
+IF= @laterbarb0
+1: Eh, a new recruit, I see!
+1: Welcome among the barbarians of Irkatshk!
+H: Thanks.
+1: Since you're new here, I guess you don't know a lot about the history of the Barbarians.
+1: Once upon a time, the town of Irkatshk was a dwarven outpost in the mountains.
+1: The objective of the fighters was to protect the city of Arguazil from the threat of the Chaos minions, and the hoards of orcs and goblins roaming the mountains around.
+1: Many were the outposts of this kind then, but all felt during the First Invasion but this one.
+1: The dwarven warriors had developed their own war and survival tactics.
+1: As time goes by, humans came here in order to learn their skills, and settled down.
+1: The Barbarians of Irkatshk never gave up since the creation of the town.
+1: We proudly protect the western lands of Athelias from the threat of the evil creatures coming from the mountains.
+1: You'll have to train hard if you want to survive your charge.
+1: Come back when you think your training make you able to face the dangers a Barbarian has to be confronted with.
+1: Farewell, brother.
+SET chat.felixBracasseBarbs, 1
+END
+
+@final
+1: Welcome back, %1.
+END
+
+@barbq4end
+1: I am proud of you, %1.
+1: You are now a war master.
+1: Our brothers have not much left to teach you.
+1: But you training is not over.
+1: It's now time for you to go and travel around the world.
+1: There, maybe, you will find new masters.
+1: Farewell, brother.
+HOST_GIVE T4001
+END
+
+@barbq4suite
+IF T137-T4001 @barbq4end
+IF T4001 @final
+1: Get ready, %1.
+1: We'll leave soon.
+1: See you at the northern gate.
+END
+
+@barbq4
+IF T136 @barbq4suite
+1: Welcome, %1.
+1: We have to talk.
+1: The paladins of Benadrim are asking for our help.
+1: They are in trouble with the Regent.
+1: He sent his army against them as he did against us.
+1: They ask the barbarians to help them defeat the Regent.
+1: And the barbarians will help them.
+H: But we have signed a peace treaty with Prina!
+H: What will happen to Irkatshk if we help them?
+1: And what will happen if nobody dares face the Regent?
+1: Sooner or later the Regent will attack us again.
+1: I think he got the lesson: next time, he will have gathered a real army before, and will send twice more men.
+1: We have to strike now, before it's too late!
+H: I see...
+1: I need you to come with me.
+1: We leave to Prina tomorrow.
+1: Go and get ready.
+1: See you at Irkatshk's northern gate.
+HOST_GIVE T136
+END
+
+@laterbarb0
+1: Welcome back, %1.
+1: I hope your training is progressing well.
+END
+
+@quest2start
+IF T133 @quest2back
+1: Welcome back, %1.
+1: I've just received a message from a brother sent in mission near Latsha.
+1: The army of the Regent is marching towards Irkatshk.
+1: I would need you to find and spy it to know where it is exactly, and when it will be here.
+1: Apparently, it's going to be in Latsha in a few days.
+1: If you hurry, you'll find it there.
+1: We need to know how many soldiers the Regent sent as well, and who leads the troops.
+H: I'll do my best.
+1: Thank you, %1.
+1: Take this new horse: I'm sure you'll have the use of it.
+SOUND foundItem.wav
+HOST_GIVE I1011
+HOST_GIVE T133
+H: Thanks.
+END
+
+@quest2back
+IF T134 @quest2end
+1: Hurry and find the army of the Regent, %1.
+1: We really need to know what's going on before it's too late!
+END
+
+@quest2end
+COMPARE #<barb.quest2chat>, 1
+IF= @quest2end2
+H: I found the army of the Regent.
+H: General Bloodtider leads the troops.
+H: They are planning to cross the mountains and attack the eastern gate.
+H: They'll be here within a week.
+1: Good job, %1.
+1: They'll get a pleasant welcome...
+SET barb.quest2chat, 1
+END
+
+@quest2end2
+IF V75 @barbq3start
+1: Get ready for the battle, %1.
+1: The Barbarians will never surrender!
+END
+
+@quest3end
+IF S185 @quest3end2
+1: I have great news, %1.
+1: The Regent has sent an ambassador and a peace treaty has been signed.
+1: The town of Irkatshk is now officially free - at least until the Regent changes his mind...
+1: You did a great job during the battle.
+1: Let me teach you this spell to reward you.
+HOST_GIVE S185
+SOUND bell2.wav
+END
+
+@quest3end2
+IF V90 @barbq4
+1: Welcome back, %1.
+END
+
+@barbq3start
+IF T135 @quest3end
+ACTOR 2, "Karl Ermein", human38, 1, 100, 90
+MOVE 2, 75, 90
+WAIT 0.5
+2: Felix!
+2: The army of the Regent is here!
+1: Everybody at the eastern gate!
+1: %1, come as well!
+1: We're now at war!
+MOVE H, 150, 90
+MOVE 1, 150, 90
+MOVE 2, 150, 90
+WAIT 3
+GOTO SCENE 110022
+
+@quest2notyet
+IF V50 @quest2start
+1: Welcome back, %1.
+1: We're still watching for the army of the Regent.
+1: Be prepared for the battle.
+END
+
+@barbq1end
+COMPARE #<chat.barbariansernstsharaz>, 1
+IF= @quest2notyet
+H: I've found Ernst Sharaz.
+H: He and his men are on the way back.
+H: You can count on them.
+1: Great news.
+1: Thank you, %1.
+SET chat.barbariansernstsharaz, 1
+END
+
+@barbq1
+IF T132 @barbq1end
+IF T131 @barbq1back
+1: Welcome back, %1.
+1: I may have a task for you.
+H: Really?
+1: A few weeks ago, the Regent decided to forbid by law any kind of fighting or training that is not overseen by an officer of Prina, which means that we must either quit training or accept the presence of someone watching over us.
+1: Of course, we can't accept that.
+1: Prina has no right to tell us what to do, nor to spy us.
+H: But why did he "vote" such a law?
+H: He is crazy!
+1: I guess he wants to keep the control over any man able to fight.
+1: The Regent has always been paranoid, but it's getting worse - especially after the attempts of rebellion in Prina.
+1: We sent an ambassador to Prina, but the Regent refuses to listen to the requests of the Barbarians against the new law.
+1: We have no choice: we have decided to break off with the central government of Prina.
+1: Irkatshk is now a self-governing town.
+H: How did the Regent take it?
+1: We have had no feedback yet, but I guess he will just send his army and besiege Irkatshk.
+H: ...
+1: I would like you to help organize the defence of the town.
+1: We must gather our warriors together and find enough supplies to resist the siege of the town.
+1: I need you to go to the goblins' cave and find Ernst Sharak, who is on a mission there.
+1: We need him and his men.
+1: Go and tell him to abandon his mission immediately and return to Irkatshk as soon as possible.
+H: For Irkatshk's sake, I will find him.
+1: Thank you, %1.
+1: Take this horse, it will probably help you.
+HOST_GIVE I1010
+SOUND FoundItem.wav
+HOST_GIVE T131
+END
+
+@barbq1back
+1: Hurry and go to the goblins cave, %1.
+1: I really need Ernst Sharak and his men return to Irkatshk to help defend the town!
+END
+
+@paliq3
+IF T128 @paliq3end
+H: Greetings, Sir.
+1: Hello.
+H: Let me introduce myself: I am %1, paladin from Benadrim.
+H: I am here to seek your help.
+1: My help?
+H: The barbarians' help.
+1: Could you be a little bit more explicit?
+H: Alright, I'm going to be straightforward. 
+H: The Regent threatens the city of Benadrim.
+H: He is planning to besiege it.
+H: We can't defend it alone against the whole army of the Regent.
+H: We need the help of the barbarians to save it!
+1: Well, we've never been fond of the Regent but what you're asking...
+1: Waging war on him....
+ACTOR 2, Guard, guard6, 1, 100, 90
+ACTOR 3, Guard, guard6, 1, 105, 95
+MOVE 2, 75, 90
+MOVE 3, 80, 95
+WAIT 1
+2: %1! Here!
+3: What a surprise!
+2: We came here in order to talk to the leaders of the barbarians to make sure that they wouldn't betray us, as they did before...
+3: Now we know what's going on!
+H: You should leave now, minions of the Regent!
+1: %1...
+1: That's a band of a*******, I agree, but try to be polite, please.
+H: ...
+2: ...
+WAIT 1
+MOVE 2, 120, 90, 1
+MOVE 3, 120, 90, 1
+FIGHT 136.80.95, 136.75.90
+IF LOSE @palisq3lose
+1: Well... I guess we will help you, %1.
+1: Go and tell your master that he can counts on us!
+H: Thanks, Felix.
+H: The new alliance won't fail.
+HOST_GIVE T128
+END
+
+@palisq3lose
+1: <cough>
+1: I think he was supposed to win this fight...
+END
+
+@paliq3end
+IF T130 @paliq3end2
+1: Welcome back, %1.
+1: We are gathering our forces and will be ready for the battle.
+1: You can count on us!
+END
+
+@paliq3end2
+1: Welcome back, %1.
+1: Be careful in this arena.
+1: You have to get read to fight if you want to stay here.
+1: However, a valiant fighter like you is more than welcome...
+END
+
+@dead
+1: Hehe
+1: I told you to be careful.
+1: I wasn't joking...
+1: Let me heal you.
+GIVE L1
+GIVE H5000
+GIVE M5000
+END
+;
+;-------------------------------------------------------------------------------------
+;
+SCENE 5402, "wallofshame", SCENE, "Wall of Shame"
+#include include.txt
+ACTOR 1, "Tafel", human66, 1, 25, 95
+IF T3993|T3988 @halloweenActors
+GOTO @nextStepAfterHalloweenActors
+
+@halloweenActors
+ACTOR 1, "Tafel", #<spEvent.Name>-humans, 66, 25, 95
+@nextStepAfterHalloweenActors
+1: Hello, foreigner.
+1: You are here at the Wall of Shame.
+1: You see the name of the worst creatures that you can find on Athelias.
+1: You don't want to have your name here, so don't be a snert.
+1: If you meet one of those guys, track him down and kill him: the admin won't ban you, and -who knows- you may even receive a reward if there is a world dev around...
+WAIT 2
+ACTOR 2, Mad, "-  -   Mad", 1, 50, 90
+2: No name yet.
+2: Don't make me change that, please.
+END
+;
+;-------------------------------------------------------------------------------------
+;

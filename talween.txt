@@ -1,0 +1,193 @@
+;
+;<<<<<<<<<<<<<<< SCENES 95s >>>>>>>>>>>>>>>>>
+;
+SCENE 9500, cave1, SCENE, "To the Desert"
+#include include.txt
+IF T3985 @bornoldworld
+IF T1128-T1129 @wrongway
+IF -T1127 @outahere
+IF T1127-T1128 @findanexit
+@pass
+GOTO LINK 86, 1
+
+@bornoldworld
+IF T1144 @pass
+IF T1143-T1144 @wrongway
+END
+
+@findanexit
+CALL 110025@start
+IF DEAD @dead
+1: We must reach the Old World from the Corridor of Talween, %1.
+1: It is the only way.
+1: We can't return to the desert.
+END
+
+@outahere
+CALL 110025@start
+N: You shouldn't be here.
+WAIT 1
+N: Get out and restart the quest.
+WAIT 1
+GOTO @pass
+
+@bornoldworlddeadwrongway
+IF DEAD @dead
+IF XP @XP
+HOST_GIVE T1144
+GOTO @pass
+
+@wrongway
+IF T3985 @bornoldworlddeadwrongway
+CALL 110025@start
+IF DEAD @dead
+IF XP @XP
+N: The passage is blocked!
+WAIT 1
+1: Hurry, %1!
+1: We gotta find another exit or we're all going to die here!
+END
+
+@XP
+N: The gallery collapses!
+WAIT 1
+N: All the ways out are blocked!
+WAIT 1
+N: You are buried under the rocks.
+WAIT 1
+FX 4
+SOUND thunder.wav
+COLOR 13
+COLOR 2013
+TAKE H10000
+TAKE M10000
+IF T3985 @bornoldworlddead
+GOTO @dead
+
+@dead
+IF T3985 @bornoldworlddead
+TAKE T1128
+GOTO @pass
+
+@bornoldworlddead
+TAKE T1143
+END
+;
+;------------------------------------------------------------------------------------
+;
+SCENE 9501, cave1, SCENE, "Mysterious Shrine"
+#include include.txt
+IF T3985 @bornoldworld
+IF T2899 @atheliasborn
+END
+
+@bornoldworld
+IF T1142-T1143 @fight
+IF T1143 @hurry
+END
+
+@atheliasborn
+IF -T1127 @nothing
+IF T1128-T1129+#95 @wrongplace
+IF T1128-T1129 @hurry
+IF -T1128 @fight
+END
+
+@hurry
+CALL 110025@start
+IF DEAD @dead
+IF XP @XP
+1: Hurry, %1!
+1: We must get out of here!
+1: We're gonna die otherwise!
+END
+
+@dead
+@XP
+END
+
+@fight
+CALL 110025@start
+ACTOR 12, "Talween Lord", 36, 0, 25, 90
+ACTOR 13, "Talween Elemental", 42, 1, 40, 95
+ACTOR 14, "Talween Elemental", 42, 1, 45, 90
+ACTOR 15, "Talween Elemental", 42, 1, 38, 88
+SEL 13
+POSE 1, 4
+SEL 14
+POSE 1, 4
+SEL 15
+POSE 1, 4
+SEL 12
+' What are you doing here, human?
+' Your fellow beings are not allowed to pass.
+' This is the realm of Earth.
+' We can't tolerate that you profane our lands.
+WAIT 2.8
+MOVE 12, 120, 90, 1
+MOVE 13, 120, 90, 1
+MOVE 14, 120, 90, 1
+MOVE 15, 120, 90, 1
+FIGHT2 585.25.90, 584.40.95, 584.45.90, 584.38.88
+IF WIN @won
+END
+
+@bornoldworldwon
+EJECT T1142
+GIVE T1143
+GOTO @wrongplace
+
+@won
+IF T3985 @bornoldworldwon
+EJECT T1127
+GIVE T1128
+@wrongplace
+FX 4
+SOUND thunder.wav
+COLOR 13
+COLOR 2013
+1: Attention, %1!
+1: The gallery is collapsing!
+1: We must get out of here as soon as possible!
+WAIT 2
+COUNTDOWN 20
+GOTO LINK 96, 2
+
+@nothing
+N: There is nothing here.
+WAIT 1
+N: Actually, you shouldn't be here.
+END
+;
+;<<<<<<<<<<<<<<< SCENES 96s >>>>>>>>>>>>>>>>>
+;
+SCENE 9601, cave1, SCENE, "To the Old World"
+#include include.txt
+IF T3985 @passxxx
+IF T1129 @pass
+IF -T1128 @cantbehere
+CALL 110025@start
+IF XP @toolate
+N: You get out of the gallery and watch the passage collapsing behind you.
+COUNTDOWN 0
+EJECT T1128
+GIVE T1129
+@pass
+GOTO LINK 87, 0
+
+@passxxx
+CALL 9500@wrongway
+END
+
+@toolate
+N: You arrive too late!
+WAIT 1
+N: The passage is blocked!
+END
+
+@cantbehere
+N: You shouldn't be here.
+WAIT 1
+N: Go back to the desert and start the quest again.
+WAIT 2
+GOTO LINK 86, 1

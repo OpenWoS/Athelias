@@ -1,0 +1,115 @@
+SCENE 8000, athalantis2, SCENE, "Sadramand's Gate"
+#include include.txt
+GOTO LINK 84, 2
+;
+;-----------------------------------------------------------------------------
+;
+SCENE 8001, "athalantis1", SCENE, "Fountain"
+#include include.txt
+N: You drink the water of the fountain and have your health and mana points recharged!
+GIVE L1
+GIVE H5000
+GIVE M5000
+END
+;
+;-----------------------------------------------------------------------------
+;
+SCENE 8002, room2, SCENE, "Alchemist"
+#include include.txt
+ACTOR 1, Farida, oriental7, 1, 25, 90
+OFFER 8, 20, 21, 22, 23, 24, 25, 1, 3, 4, 7, 13, 29, 30, 31, 32, 33, 36, 38, 39
+1: Thanks again for having defeated this band of beastmen, adventurer.
+1: I hadn't had a customer for months...
+END
+;
+;-----------------------------------------------------------------------------
+;
+SCENE 8003, room2, SCENE, "Shop"
+#include include.txt
+ACTOR 1, Karina, oriental3, 1, 25, 90, 3
+OFFER 32, 33, 132, 134, 102
+IF I1137 @strahatend
+COMPARE #<chat.strawhatShopSadramand>, 1
+IF= @strawhatget2
+IF Z577 @strawhat1
+IF Z579 @strawhat2
+IF Z585 @strawhat3
+1: Welcome to my shop, adventurer!
+END
+
+@strahatend
+1: Welcome back, adventurer!
+IF E1137 @strahatend2
+END
+
+@strahatend2
+1: I can see you like this hat, eh!
+1: I told you: you can't find better protection against the sun of the desert.
+END
+
+@strawhat1
+1: A %Z577!
+1: Incredible!
+1: I have a deal for you: if you can find a %Z579 and a %Z585 as well, I'll exchange them for a Sadramandian Hat.
+GOTO @strawhat4
+
+@strawhat2
+1: A %Z579!
+1: Incredible!
+1: I have a deal for you: if you can find a %Z577 and a %Z585 as well, I'll exchange them for a Sadramandian Hat.
+GOTO @strawhat4
+
+@strawhat3
+1: A %Z585!
+1: Incredible!
+1: I have a deal for you: if you can find a %Z579 and a %Z577 as well, I'll exchange them for a Sadramandian Hat.
+@strawhat4
+1: You can't find a better protection to venture into the desert.
+IF Z577+Z579+Z585 @strawhatget
+SET chat.strawhatShopSadramand, 1
+END
+
+@strawhatget
+H: I've got what you need.
+1: Great!
+1: Do you accept the deal?
+GOTO @strawhatgetask
+
+@strawhatget2
+IF Z577+Z579+Z585 @strawhatget3
+1: Welcome back, adventurer.
+1: Remember: I'm still looking for a %Z579 and a %Z577 and a %Z585.
+1: But maybe you want to buy something now?
+END
+
+@strawhatget3
+H: Greetings.
+H: I've found what you've asked for.
+1: Great!
+1: Do you want to trade them for a Sadramandian Hat?
+@strawhatgetask
+ASK 30
+IF YES @strawhatgetaskYES
+IF NO @strawhatgetaskNO
+1: What?
+GOTO @strawhatgetask
+
+@strawhatgetaskNO
+1: Fine.
+1: Come back if you change your mind.
+1: That was a good deal, I think...
+END
+
+@strawhatgetaskYES
+1: Fantastic!
+1: Here is the hat.
+SOUND foundItem.wav
+HOST_TAKE Z577
+HOST_TAKE Z579
+HOST_TAKE Z585
+HOST_GIVE I1137
+SET chat.strawhatShopSadramand, ""
+END
+;
+;-----------------------------------------------------------------------------
+;

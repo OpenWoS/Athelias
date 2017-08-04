@@ -1,0 +1,1161 @@
+SCENE 1
+STRCMP #<str.soul>, "SOUL 2006"
+IF= @banmad
+STRCMP #<str.soul>, "SOUL 3171"
+IF= @banmad
+SET buttonsHere, "no"
+SET temp.buttonThingy, "x"
+SET temp.incubatorCurrentThingy, ""
+STRCMP #<str.serverName>, "Solo Channel"
+IF> @donnationboxtoken
+IF< @donnationboxtoken
+@donnationboxtokennextstep
+#include version.txt
+#include include.txt
+; CALL 110006@start ; removed: automated patching
+LOCK 0
+IF C2-T2899|C10-T2899 @supernonogivetokenborninAth
+@supernonogivetokenborninAth2
+COMPARE #<num.TrophyBagWidth>, 0
+IF= @settropphybaggggggg
+@height
+IF C2-#1-T3828|C10-#1-T3828 @novicetokengive
+@novicetokengivenext
+IF DEAD @qdqddeadveuxturetournerenevillemoneporte
+SET dontasktotravelwhendeadssd, 0
+@qdqddeadveuxturetournerenevillemoneporte2
+@nextsteppyaftertedeadguyssfsfs
+COMPARE #<num.isPKAttack>, 1
+IF= @pk
+COMPARE #<num.isPKAttack>, 2
+IF= @pk	
+;
+;----- Maintenant, les évènements spéciaux ------
+;
+IF T136-T137 @barbq4
+IF T133-T134 @barbq2
+IF T1037+T1038-#6 @priestquest3arrested
+COMPARE #<armenisgiants>, 1
+IF= @armenisgiants
+@nextstepafterarmenisgiants
+COMPARE #<illuq1>, 1
+IF= @illuq1.2
+IF C80+V40-T1200 @illuq40
+@zero
+COMPARE #<merc.sfsdfsfsdfsf>, 0
+IF> @mercbackish
+@nextaftermercbackish
+IF T1117-T1121+#12 @terendrozsiege2
+IF T1116-T1117-T1121+#0 @terendrozsiegestart
+IF T33+XP-#34 @tenisango
+IF T33 @tenisanfight
+@two
+IF T50 @galleries
+@three
+COMPARE #<num.hostHuntSkill>, "11"
+IF> @givehunt
+@four
+;IF I632 @manacrystal
+@five
+;IF I702 @mysticalcrystal
+@six
+IF T999 @makelran
+IF T1005 @makel
+IF T1006 @fermiergeneral
+@seven
+IF I666 @locked
+@one
+SET merclist, 0
+@normalbuttons
+ACTOR 21, , "buttons", 5, 65, 15
+ACTOR 14, , "buttons", 6, 75, 15
+ACTOR 16, , "buttons", 8, 85, 15
+ACTOR 18, "", "buttons", 7, 95, 15
+SET buttonsHere, yes
+IF T3985 @caravanoldworld
+IF T1123-T1130+#80|T1123-T1130+#81|T1123-T1130+#82|T1123-T1130+#83|T1123-T1130+#84|T1123-T1130+#85|T1123-T1130+#86|T1123-T1130+#87|T1123-T1130+#95|T1123-T1130+#96|T1123-T1130+#97|T1123-T1130+#139|T1123-T1130+#98 @tahamanrasetcaravan
+@caravanoldworld
+IF T2899 @atheliasborncarav
+IF T1142-T1149+#81|T1142-T1149+#82|T1142-T1149+#83|T1142-T1149+#84|T1142-T1149+#85|T1142-T1149+#86|T1142-T1149+#87|T1142-T1149+#95|T1142-T1149+#96|T1142-T1149+#97 @caravanquest
+@atheliasborncarav
+END
+
+@banmad
+N: Kid, you're a moron!
+GOTO @banmad
+
+@nothing
+END
+
+#include config\pets.txt
+#include config\mercenaries.txt
+#include config\dead.txt
+
+@supernonogivetokenborninAth
+HOST_GIVE T2899
+GOTO @supernonogivetokenborninAth2
+
+@novicetokengive
+HOST_GIVE T3828
+GOTO @novicetokengivenext
+
+@donnationboxtoken
+IF T3991 @donnationboxtokennextstep
+HOST_GIVE T3991
+GOTO @donnationboxtokennextstep
+;
+;>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+;>>>>>>>>>>>>>>>>>>>>  Barbarians Quests  <<<<<<<<<<<<<<<<<<<<<<<<<
+;<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+;
+@barbq4
+CALL 110022@barbactors barq4
+1: Let's go, %1.
+1: Lead the way to Benadrim.
+1: We must be there before the army of the Regent.
+END
+
+@barbq2
+CALL 110018 @start
+END
+;
+;>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+;>>>>>>>>>>>>>>>>>>>  Desert Travel Quest  <<<<<<<<<<<<<<<<<<<<<<<<<
+;<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+;
+@tahamanrasetcaravan
+CALL 110025@start
+IF T1124 @tahamanrasetcaravan2
+1: Let's go, %1.
+1: We should try to reach the oasis of Sadramand before the night.
+1: The men and the beasts are thirsty.
+END
+
+@tahamanrasetcaravan2
+IF #98 @tahamanrasetcaravan9
+IF #139 @tahamanrasetcaravan8
+IF #87 @tahamanrasetcaravan7
+IF #96 @tahamanrasetcaravan6
+IF #95 @tahamanrasetcaravan5
+IF #97 @tahamanrasetcaravan4
+IF #80 @tahamanrasetcaravan3
+1: Let's go, %1.
+1: We are all tired but we must go on.
+1: ... or die.
+1: Such is the rule in the Great Desert.
+END
+
+@tahamanrasetcaravan3
+1: Let's buy some food and water and let's continue our trip.
+1: We cannot afford to stay a long time here.
+1: We must reach the Old World as soon as possible.
+END
+
+@tahamanrasetcaravan4
+1: Let's find a way to get out of here, %1.
+END
+
+@tahamanrasetcaravan5
+1: Let's be very careful, %1.
+1: No one really knows what kind of demoniac creatures live in the Corridor of Talween.
+END
+
+@tahamanrasetcaravan6
+1: Hurry, %1!
+1: Everything is collapsing!
+1: We must get out of here!
+END
+
+@tahamanrasetcaravan7
+1: Let's go, %1.
+1: Kotor is close now.
+END
+
+@tahamanrasetcaravan8
+1: Kotor!
+1: We are arrived!
+1: Let's go to the palace, %1!
+END
+
+@tahamanrasetcaravan9
+MOVE 5, 120, 90, 1
+MOVE 6, 120, 90, 1
+MOVE 7, 120, 90, 1
+MOVE 8, 120, 90, 1
+1: Let's go to the throne room, %1.
+END
+;
+;>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+;>>>>>>>>>>>>>>>>>>>           Armenis Giants          <<<<<<<<<<<<<<<<<<<<
+;<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+;
+@armenisgiants
+IF -#53 @nextstepafterarmenisgiants
+COMPARE #<num.closestLink>, 1
+IF< @nextstepafterarmenisgiants
+IF> @nextstepafterarmenisgiants
+IF -T1207|T1208 @nextstepafterarmenisgiants
+N: You find several giants around the ruins of an old tower, pushing down the trees and clearing the area around.
+WAIT 2.5
+N: They are making so much noise in their excavation effort that they do not hear you approaching.
+WAIT 2.5
+N: You get close enough to see, and find a large group of hill giants clearing away bushes and debris from the ruins. 
+WAIT 2.5
+N: Upon the top of it is an old woman who occasionally yells instructions to the giants working below. 
+WAIT 2.5
+N: Suddenly, she notice your presence and order the giants to attack!
+FIGHT 570, 570, 570, 570, 571, 572, 573
+IF WIN @armenisgiantswin
+END
+
+@armenisgiantswin
+N: The old women, seeing the death of the giants, rushes on you.
+FIGHT 574
+IF WIN @armenisgiantswin2
+END
+
+@armenisgiantswin2
+GIVE T1208
+GIVE I1087
+N: You find a map of this general area, and a sketch of a castle floor plan.
+SOUND FoundItem.wav
+WAIT 2.5
+N: You realize that the tower is the only element left of a castle built there.
+WAIT 2.5
+N: You also find a page out of an old diary and read it.
+WAIT 2.5
+HTML armenisgiants.html
+N: You understand it is about a treasure hidden in the castle.
+END
+;
+;------------------------------Jesters----------------------------------------
+;
+@makelran
+ACTOR 1, "Makel", human1, 1, 75, 90
+IF DEAD @makelran2
+1: Why have you flown?
+1: Let's go back to the cave
+WAIT 1
+GOTO SCENE 77688727
+
+@makelran2
+1: Hurry and get a rez!
+1: We must kill them!
+END
+
+@fermiergeneral
+ACTOR 1, "Tax collector", human62, 1, 65, 90 
+ACTOR 2, "Makel", human1, 1, 75, 90
+FACE 2, 0
+IF R25 @fermiergeneral1
+IF R50 @fermiergeneral2
+IF R75 @fermiergeneral3
+1: Hurry, guys.
+GOTO @seven
+
+@fermiergeneral1
+1: What are you waiting?
+1: Lead the way to Prina.
+GOTO @seven
+
+@fermiergeneral2
+1: Hurry.
+1: I am busy.
+1: I have no time to waste.
+1: Lead the way to Prina.
+GOTO @seven
+
+@fermiergeneral3
+1: Hurry...
+1: It is such a pain to travel with you.
+2: Do you prefer being attacked by bandits?
+1: I wonder...
+GOTO @seven
+
+@makel
+ACTOR 1, Makel, human1, 1, 65, 90
+1: We must go to Benadrim.
+1: Hurry and lead the way.
+GOTO @seven
+;
+;------------- Illusionists --------------------------------------------------------
+;
+@illuq40
+ACTOR 1, Jeren, human138, 1, 0, 95
+SEL 1
+POSE 1, 1, 4
+MOVE 1, 35, 95
+WAIT 2
+1: ... An ancient curse...
+1: ... Old memory vanished...
+1: ... Corrupted life...
+1: ... Deads back to life...
+1: ... Forgotten past returning...
+HOST_GIVE T1200
+WAIT 3
+MOVE 1, -20, 95
+END
+
+@illuq1.2
+ACTOR 1, Jeren, human138, 1, 0, 95
+SEL 1
+POSE 1, 1, 4
+MOVE 1, 35, 95
+WAIT 2
+1: ... Curse on Irezar...
+1: ... Grave opened...
+1: ... Return of the Chaos...
+WAIT 4
+MOVE 1, -20, 95
+WAIT 2
+H: Again...
+H: I should go back to the Academy and let Mistress Marleen know.
+SET illuq1, 2
+END
+;
+;------------- Priests --------------------------------------------------------
+;
+@priestquest3arrested
+ACTOR 1, Guard, guard6, 1, 25, 90
+ACTOR 2, Guard, guard6, 1, 40, 90
+1: You won't escape, %1!
+1: Follow us!
+WAIT 1.2
+GOTO LINK 6, 4
+;
+;------------- Mercenaries --------------------------------------------------------
+;
+@mercbackish
+COMPARE #<merc.sfsdfsfsdfsf>, 2
+IF> @nextaftermercbackish
+ACTOR 1, Mercenary, human48, 1, -10, 93
+COMPARE #<merc.sfsdfsfsdfsf>, 2
+IF= @mercbackish2
+MOVE 1, 25, 93
+WAIT 3
+1: Hey, man!
+1: Sorry but I heard what you said at the Back Horse Tavern.
+1: I may be able to help you and talk to the barman.
+H: Really?!
+H: That's great!
+1: Yeah but first I would need you to do me a small favor.
+H: Err... yeah, what is it?
+1: There is a guy by the coliseum selling weapons.
+1: I'd need a new hand axe but I can't go there... that's a long story.
+1: Buy one for me and I'll go and talk to the barman.
+H: Alright.
+SET merc.sfsdfsfsdfsf, 2
+END
+
+@mercbackish2
+MOVE 1, 25, 93
+WAIT 3
+IF I409 @mercbackish3
+IF I410 @mercbackish4.1
+IF I411 @mercbackish4.2
+IF I412 @mercbackish4.3
+1: Have you bought the weapon?
+H: Not yet.
+1: So HURRY if you want me to help you!
+END
+
+@mercbackish3
+H: I have your weapon.
+1: Great, thanks.
+HOST_TAKE I409
+1: I will talk to the barman.
+SET merc.sfsdfsfsdfsf, 3
+END
+
+@mercbackish4.1
+H: I have your weapon.
+H: Actually, I even have a hardened hand axe for you.
+1: Oh that's great, thanks.
+1: You'll be a good mercenary, trust me!
+HOST_TAKE I410
+1: I will talk to the barman.
+SET merc.sfsdfsfsdfsf, 3
+END
+
+@mercbackish4.2
+H: I have your weapon.
+H: Actually, I even have a hardened hand axe for you.
+1: Oh that's great, thanks.
+1: You'll be a good mercenary, trust me!
+HOST_TAKE I411
+1: I will talk to the barman.
+SET merc.sfsdfsfsdfsf, 3
+END
+
+@mercbackish4.3
+H: I have your weapon.
+H: Actually, I even have a hardened hand axe for you.
+1: Oh that's great, thanks.
+1: You'll be a good mercenary, trust me!
+HOST_TAKE I412
+1: I will talk to the barman.
+SET merc.sfsdfsfsdfsf, 3
+END
+;
+;------------------------------------------------------------------------------------------
+;
+@manacrystal
+HOST_GIVE T3000
+HOST_GIVE T3001
+HOST_GIVE T3002
+HOST_GIVE T3004
+HOST_GIVE T3005
+HOST_GIVE T3006
+HOST_GIVE T3007
+HOST_GIVE T3003
+GOTO @five
+
+@mysticalcrystal
+HOST_GIVE T3008
+HOST_GIVE T3009
+HOST_GIVE T3010
+HOST_GIVE T3011
+HOST_GIVE T3012
+HOST_GIVE T3013
+HOST_GIVE T3014
+HOST_GIVE T3015
+GOTO @six
+
+@givehunt
+HOST_GIVE I669
+GOTO @four
+
+@settropphybaggggggg
+SET num.TrophyBagWidth, 5
+SET num.TrophyBagHeight, 4
+GOTO @height
+;
+;----------------------------Underground-----------------------------------------
+;
+@galleries
+IF #45-T51 @cmp
+GOTO @three
+
+@cmp
+COMPARE #<galleries>, "25"
+IF= @f1
+IF< @cmp1
+END
+
+@cmp1
+COMPARE #<galleries>, "24"
+IF= @f2
+IF< @cmp2
+
+@cmp2
+COMPARE #<galleries>, "23"
+IF= @f3
+IF< @cmp3
+END
+
+@cmp3
+COMPARE #<galleries>, "22"
+IF= @f4
+IF< @cmp4
+END
+
+@cmp4
+COMPARE #<galleries>, "21"
+IF= @f5
+IF< @cmp5
+END
+
+@cmp5
+COMPARE #<galleries>, "20"
+IF= @f6
+IF< @cmp6
+END
+
+@cmp6
+COMPARE #<galleries>, "19"
+IF= @f7
+IF< @cmp7
+END
+
+@cmp7
+COMPARE #<galleries>, "18"
+IF= @f8
+IF< @cmp8
+END
+
+@cmp8
+COMPARE #<galleries>, "17"
+IF= @f9
+IF< @cmp9
+END
+
+@cmp9
+COMPARE #<galleries>, "16"
+IF= @f10
+IF< @cmp10
+END
+
+@cmp10
+COMPARE #<galleries>, "15"
+IF= @f11
+IF< @cmp11
+END
+
+@cmp11
+COMPARE #<galleries>, "14"
+IF= @f12
+IF< @cmp12
+END
+
+@cmp12
+COMPARE #<galleries>, "13"
+IF= @f13
+IF< @cmp13
+END
+
+@cmp13
+COMPARE #<galleries>, "12"
+IF= @f14
+IF< @cmp14
+END
+
+@cmp14
+COMPARE #<galleries>, "11"
+IF= @f15
+IF< @cmp15
+END
+
+@cmp15
+COMPARE #<galleries>, "10"
+IF= @f16
+IF< @cmp16
+END
+
+@cmp16
+COMPARE #<galleries>, "9"
+IF= @f17
+IF< @cmp17
+END
+
+@cmp17
+COMPARE #<galleries>, "8"
+IF= @f18
+IF< @cmp18
+END
+
+@cmp18
+COMPARE #<galleries>, "7"
+IF= @f19
+IF< @cmp19
+END
+
+@cmp19
+COMPARE #<galleries>, "6"
+IF= @f20
+IF< @cmp20
+END
+
+@cmp20
+COMPARE #<galleries>, "5"
+IF= @f21
+IF< @cmp21
+END
+
+@cmp21
+COMPARE #<galleries>, "4"
+IF= @f22
+IF< @cmp22
+END
+
+@cmp22
+COMPARE #<galleries>, "3"
+IF= @f23
+IF< @cmp23
+END
+
+@cmp23
+COMPARE #<galleries>, "2"
+IF= @f24
+IF< @cmp24
+END
+
+@cmp24
+COMPARE #<galleries>, "1"
+IF= @f25
+IF< @cmp25
+END
+
+@cmp25
+COMPARE #<galleries>, "0"
+IF= @nomonsterleft
+END
+
+@nomonsterleft
+TAKE T50
+GIVE T51
+END
+
+@f1
+FIGHT 2, 2, 2, 3, 3, 3, 11
+IF WIN @subgalleries
+END
+
+@f2
+FIGHT 5, 5, 5, 2, 4, 3, 13
+IF WIN @subgalleries
+END
+
+@f3
+FIGHT 5, 5, 5, 6, 6, 6, 13, 15
+IF WIN @subgalleries
+END
+
+@f4
+FIGHT 8, 8, 8, 7, 7, 7, 18
+IF WIN @subgalleries
+END
+
+@f5
+FIGHT 9, 9, 9, 7, 7, 7, 15, 14
+IF WIN @subgalleries
+END
+
+@f6
+FIGHT 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1
+IF WIN @subgalleries
+END
+
+@f7
+FIGHT 12, 12, 12, 11, 15, 19
+IF WIN @subgalleries
+END
+
+@f8
+FIGHT 5, 5, 5, 14, 18
+IF WIN @subgalleries
+END
+
+@f9
+FIGHT 9, 9, 9, 14, 15, 20
+IF WIN @subgalleries
+END
+
+@f10
+FIGHT 15, 15, 1516, 19
+IF WIN @subgalleries
+END
+
+@f11
+FIGHT 19, 19, 19, 21
+IF WIN @subgalleries
+END
+
+@f12
+FIGHT 19, 19, 19, 21, 22
+IF WIN @subgalleries
+END
+
+@f13
+FIGHT 23
+IF WIN @subgalleries
+END
+
+@f14
+FIGHT 14, 14, 14, 23
+IF WIN @subgalleries
+END
+
+@f15
+FIGHT 24, 25, 25, 25
+IF WIN @subgalleries
+END
+
+@f16
+FIGHT 25, 25, 25, 328
+IF WIN @subgalleries
+END
+
+@f17
+FIGHT 331, 331, 331, 331, 331, 331
+IF WIN @subgalleries
+END
+
+@f18
+FIGHT 331, 331, 331, 331, 331, 332, 332
+IF WIN @subgalleries
+END
+
+@f19
+FIGHT 333, 333, 333, 333, 338
+IF WIN @subgalleries
+END
+
+@f20
+FIGHT 335, 335, 335, 335, 335
+IF WIN @subgalleries
+END
+
+@f21
+FIGHT 332, 332, 332, 332, 332, 332
+IF WIN @subgalleries
+END
+
+@f22
+FIGHT 332, 332, 332, 332, 332, 332, 334
+IF WIN @subgalleries
+END
+
+@f23
+FIGHT 332, 332, 332, 332, 332, 332, 334, 337
+IF WIN @subgalleries
+END
+
+@f24
+FIGHT 331, 331, 332, 332, 336, 337, 337
+IF WIN @subgalleries
+END
+
+@f25
+FIGHT 331, 331, 332, 332, 336, 337, 337, 339
+IF WIN @subgalleries
+END
+
+@subgalleries
+SUB galleries, "1"
+GOTO @galleries
+END
+;
+;------------------------------------ PK attack ----------------------------
+;
+@eventActorClick18
+STRCMP #<str.actorName18>, ""
+IF> @nothing
+IF< @nothing
+STRCMP #<buttonsHere>, no
+IF= @nothing
+SOUND sword1.wav
+MENU "PK-friendly camp=@actor18clicked"
+SET temp.buttonThingy, "x"
+END
+
+@actor18clicked
+STRCMP #<buttonsHere>, no
+IF= @nothing
+SOUND sword1.wav
+FLAGS 144
+MOVE 1, 200, 90, 1
+MOVE 2, 200, 90, 1
+MOVE 3, 200, 90, 1
+MOVE 4, 200, 90, 1
+MOVE 5, 200, 90, 1
+MOVE 6, 200, 90, 1
+MOVE 7, 200, 90, 1
+MOVE 8, 200, 90, 1
+MOVE 9, 200, 90, 1
+MOVE 10, 200, 90, 1
+MOVE 11, 200, 90, 1
+MOVE 12, 200, 90, 1
+MOVE 13, 200, 90, 1
+MOVE 14, 200, 90, 1
+MOVE 15, 200, 90, 1
+MOVE 16, 200, 90, 1
+MOVE 17, 200, 90, 1
+MOVE 18, 200, 90, 1
+MOVE 19, 200, 90, 1
+MOVE 20, 200, 90, 1
+MOVE 21, 200, 90, 1
+MOVE 22, 200, 90, 1
+MOVE 23, 200, 90, 1
+MOVE 24, 200, 90, 1
+MOVE 25, 200, 90, 1
+MOVE 26, 200, 90, 1
+MOVE 27, 200, 90, 1
+MOVE 28, 200, 90, 1
+MOVE 29, 200, 90, 1
+MOVE 30, 200, 90, 1
+MOVE 31, 200, 90, 1
+MOVE 32, 200, 90, 1
+END
+
+@pk
+FLAGS 45056
+N: PK Attack, my friend! 
+N: You know the rules
+N: Kill or be killed
+END
+
+@eventPkAttackDone
+FLAGS 0
+END
+;
+;---------------------------- Lock ------------------------------------
+;
+@locked
+SET sceneLock, 0
+ACTOR 26, , buttons, 9, 55, 15
+GOTO @one
+
+@eventActorClick26
+STRCMP #<str.actorName26>, ""
+IF> @nothing
+IF< @nothing
+STRCMP #<buttonsHere>, no
+IF= @nothing
+SOUND sword1.wav
+COMPARE #<sceneLock>, 0
+IF= @lockScene
+LOCK 0
+SET sceneLock, 0
+SEL 26
+POSE 9
+WAIT 0.1
+END
+
+@lockScene
+LOCK 1
+SET sceneLock, 1
+SEL 26
+POSE 10
+WAIT 0.1
+END
+;
+;---------------------------------- 9 palis -----------------------------------------------
+;
+@priest
+FIGHT -260
+GOTO @two
+END
+
+@tenisango
+ACTOR 1, Tenisan,  human26, 1, 60, 90
+GIVE T1115
+TAKE T33
+1: I cannot stay with you.
+1: I will fight them on my own as you doesn't seem to care.
+1: Good luck, and for Athelias's sake, pray for me to succeed.
+MOVE 1, 120, 90
+END
+
+@tenisanfight
+ACTOR 1, Tenisan, human26, 1, 60, 90
+1: Hurry!
+1: We have no time to waste!
+1: Athelias's fate is in our hands!
+END
+;
+;----------------------------- Terendroz siege ------------------------------------------------
+;
+@terendrozsiegestart
+ACTOR 1, Gnome, gnome6, 1, -20, 90
+ACTOR 2, Gnome, gnome3, 1, -25, 80
+ACTOR 3, Gnome, gnome5, 1, -15, 85
+MOVE 1, 35, 90
+MOVE 2, 30, 90
+MOVE 3, 40, 90
+WAIT 4
+3: Run away, stranger!
+3: The Chaos Army walks over Athelias Island!
+3: They are besieging Terendroz and are about to head to Prina!
+3: Run if you don't want to die!
+H: Go and hide a few days in Mangeas or Katadyn.
+H: Then go back to home.
+H: The place will be safe again.
+H: The army won't pass, trust me.
+GIVE T1117
+END
+
+@terendrozsiege2
+COMPARE #<siegeterendrozqsdfs>, 1
+IF= @teresiege3
+ACTOR 1, Guard, gnome4, 1, 20, 80
+ACTOR 2, Towner, gnome7, 1, 37, 90
+ACTOR 3, Towner, gnome7, 1, 50, 75, 3
+2: Foreigners!
+2: How did you manage to enter the city?!
+H: No matter
+H: We are here to help you
+H: We have defeated the nine dark paladins - without its leaders, the army can't do much
+3: You have defeated the dark paladins?!
+1: If you really want to help us, foreigners, head to the Townhall : the Ancient knows what to do
+SET siegeterendrozqsdfs, 1
+END
+
+@teresiege3
+IF R20 @teresiege4
+IF R40 @teresiege5
+IF R60 @teresiege6
+IF R80 @teresiege7
+ACTOR 1, Towner, gnome5, 1, 30, 90
+ACTOR 2, Towner, gnome7, 1, 22, 851: We must find a way to go out of here!
+1: We will all die!
+2: The only chance to go out would be to pass by the sewer
+2: Let's go!
+MOVE 1, 120, 90, 2
+MOVE 2, 120, 85, 2
+WAIT 3
+H: Welcome to Terendroz...
+END
+
+
+@teresiege4
+ACTOR 1, Towner, gnome8, 1, 2, 90
+1: My son!
+1: They killed my son!
+H: Don't cry, you will soon have your revenge
+END
+
+@teresiege5
+ACTOR 1, Guard, gnome2, 1, 50, 75
+ACTOR 2, Citizen, gnome3, 1, 20, 80
+ACTOR 3, Citizen, gnome3, 1, 33, 90, 3
+1: Go back home, it is too dangerous here!
+WAIT 1.8
+MOVE 2, 120, 75
+MOVE 3, 120, 80
+MOVE 4, 120, 90
+END
+
+@teresiege6
+ACTOR 1, Guard, gnome2, 1, -20, 90
+ACTOR 2, Guard, gnome2, 1, -40, 90
+ACTOR 3, Guard, gnome2, 1, -15, 85
+ACTOR 4, Guard, gnome2, 1, -25, 85
+ACTOR 4, Guard, gnome2, 1, -32, 85
+MOVE 1, 120, 90
+MOVE 2, 120, 90
+MOVE 3, 120, 85
+MOVE 4, 120, 85
+MOVE 5, 120, 85
+END
+
+@teresiege7
+ACTOR 1, Guard, gnome2, 1, 20, 90
+ACTOR 2, Guard, gnome4, 1, 40, 90
+ACTOR 3, Guard, gnome4, 1, 15, 85
+ACTOR 4, Guard, gnome4, 1, 25, 85
+ACTOR 4, Guard, gnome4, 1, 32, 85
+MOVE 1, 120, 90
+MOVE 2, 120, 90
+MOVE 3, 120, 85
+MOVE 4, 120, 85
+MOVE 5, 120, 85
+1: To the northern gate! Hurry!
+END
+;
+;--------------------------- Skills ------------------------------
+;
+@fireskills.txt
+GOTO @campskillsover
+
+@necroskills.txt
+GOTO @campskillsover
+
+@eventActorClick14
+STRCMP #<str.actorName14>, ""
+IF> @nothing
+IF< @nothing
+STRCMP #<buttonsHere>, no
+IF= @nothing
+SOUND sword1.wav
+IF T2898 @bonearmorskillsfornonnecros
+IF C16+T3024+T3025+T3026-DEAD @necromenu3skills.txt
+IF C16+T3024+T3025-DEAD @necromenu2skills.txt
+IF C16+T3025-DEAD @necromenu1skills.txt
+IF C25+T3032-DEAD @holyfireskills.txt
+MENU "No skill available=@end"
+WAIT 2
+@end
+SET temp.buttonThingy, "x"
+END
+
+@bonearmorskillsfornonnecros
+MENU "Resurrection=@resurrectskills.txt"
+WAIT 2
+END
+
+@necromenu3skills.txt
+MENU "Vampire Bite=@vampirebiteskills.txt", "Vampire Kiss=@vampirekissskills.txt", "Resurrection=@resurrectskills.txt"
+WAIT 2
+END
+
+@necromenu2skills.txt
+MENU "Vampire Bite=@vampirebiteskills.txt", "Vampire Kiss=@vampirekissskills.txt"
+WAIT 2
+END
+
+@necromenu1skills.txt
+MENU "Vampire Kiss=@vampirekissskills.txt"
+WAIT 2
+END
+
+@vampirekissskills.txt
+SOUND sword1.wav
+N: %1 casts Vampire Kiss on self.
+HOST_TAKE H200
+GIVE M500
+WAIT 2
+END
+
+@vampirebiteskills.txt
+SOUND sword1.wav
+N: %1 casts Vampire Bite on self.
+HOST_TAKE H900
+GIVE L1
+GIVE H500
+WAIT 2
+END
+
+@resurrectskills.txt
+SOUND sword1.wav
+COMPARE #<num.hostMP>, "1000"
+IF< @notenoughmpskills.txt
+GIVE L1
+HOST_TAKE M1000
+N: %1 resurrects his companions.
+WAIT 2
+END
+
+@holyfireskills.txt
+MENU "Holy Fire=@holyfzrzerskills.txt"
+WAIT 2
+END
+
+@holyfzrzerskills.txt
+SOUND sword1.wav
+COMPARE #<num.hostMP>, "450"
+IF< @notenoughmpskills.txt
+N: %1 casts Holy Fire on self.
+HOST_TAKE M450
+GIVE M200
+WAIT 1
+END
+
+@notenoughmpskills.txt
+N: Not enough MP!
+MOVE 15, -25, -90, 1
+COMPARE #<scene.id>, 1
+IF> @campskillsover
+END
+
+
+;@SpecialButton123
+;ACTOR 34, , "AHS", 4, 35, 15
+;GOTO @normalbuttons
+;@eventActorClick34
+;MENU "Invasions=@invasioncontrolsverify", "Mad/Queek/felty=@verifyaccessextras"
+;END
+;@invasioncontrolsverify
+;Mad
+;STRCMP #<str.soul>, "Soul 2006"
+;IF= @invasioncontrols
+;STRCMP #<str.soul>, "Soul 3171"
+;IF= @invasioncontrols
+;felty
+;STRCMP #<str.soul>, "Soul 2465"
+;IF= @invasioncontrols
+;Queek
+;STRCMP #<str.soul>, "Soul 1893"
+;IF= @invasioncontrols
+;levelvator
+;STRCMP #<str.soul>, "48CF06B1"
+;IF= @invasioncontrols
+;Galadriel
+;STRCMP #<str.soul>, "7D17EE70"
+;IF= @invasioncontrols
+;Gaijin
+;STRCMP #<str.soul>, "Soul 2932"
+;IF= @invasioncontrols
+;N: You are not allowed to do this!
+;END
+;@invasioncontrols
+;MENU "Start Invasion=@startinvasion", "Stop Invasion=@stopinvasion"
+;END
+;@verifyaccessextras
+;Mad
+;STRCMP #<str.soul>, "Soul 2006"
+;IF= @specialfuncts
+;STRCMP #<str.soul>, "Soul 3171"
+;IF= @specialfuncts
+;felty
+;STRCMP #<str.soul>, "Soul 2465"
+;IF= @specialfuncts
+;Queek
+;STRCMP #<str.soul>, "Soul 1893"
+;IF= @specialfuncts
+;N: You are not allowed to do this!
+;END
+;@specialfuncts
+;MENU "Get Server Var=@getservervarvalue", "Set Server Var=@setservervarvalue", "Go To Map=@gotomapandsavetrappedsouls"
+;END
+;@getservervarvalue
+;N: Enter a categoryName:
+;ASK 90
+;SET felty.categoryname, #<lastAsk>
+;N: Enter a variableName:
+;ASK 90
+;SET felty.variablename, #<lastAsk>
+;GET_SERVER_VAR felty.fetchedvar, #<felty.categoryname>, #<felty.variablename>
+;N: The value of that server var is: #<felty.fetchedvar>
+;END
+;@setservervarvalue
+;N: Enter a categoryName:
+;ASK 90
+;SET felty.categoryname, #<lastAsk>
+;N: Enter a variableName:
+;ASK 90
+;SET felty.variablename, #<lastAsk>
+;N: Enter a value:
+;ASK 90
+;SET felty.ssvvaluetoset, #<lastAsk>
+;SET_SERVER_VAR #<felty.categoryname>, #<felty.variablename>, #<felty.ssvvaluetoset>
+;N: Value set to: #<felty.ssvvaluetoset>
+;END
+;@gotomapandsavetrappedsouls
+;N: Enter a map number:
+;ASK 90
+;SET felty.mapnum, #<lastAsk>
+;N: Enter a link number:
+;ASK 90
+;SET felty.linknum, #<lastAsk>
+;N: Enter a dropin code:
+;ASK 90
+;SET felty.dropincodenum, #<lastAsk>
+;GOTO LINK #<felty.mapnum>, #<felty.linknum>, #<felty.dropincodenum>
+;END
+;@startinvasion
+;MENU "Prina=@startprina", "Athalantis=@startathalantis", "Latsha=@startlatsha", "Arguazil=@startarguazil", "Mangeas=@startmangeas"
+;END
+;@stopinvasion
+;MENU "Prina=@stopprina", "Athalantis=@stopathalantis", "Latsha=@stoplatsha", "Arguazil=@stoparguazil", "Mangeas=@stopmangeas"
+;END
+;@startprina
+;SET_SERVER_VAR Invasions, InvasionMap7, -+----+-+-+++-++++++++++++++++++
+;END
+;@stopprina
+;SET_SERVER_VAR Invasions, InvasionMap7, -------------------------------
+;END
+;@startathalantis
+;SET_SERVER_VAR Invasions, InvasionMap41, -++++++-++
+;END
+;@stopathalantis
+;SET_SERVER_VAR Invasions, InvasionMap41, ----------
+;END
+;@startlatsha
+;SET_SERVER_VAR Invasions, InvasionMap16, --+++++++-++++++-
+;END
+;@stoplatsha
+;SET_SERVER_VAR Invasions, InvasionMap16, -----------------
+;END
+;@startarguazil
+;SET_SERVER_VAR Invasions, InvasionMap10, -+++-+++-++++++-
+;END
+;@stoparguazil
+;SET_SERVER_VAR Invasions, InvasionMap10, ----------------
+;END
+;@startmangeas
+;SET_SERVER_VAR Invasions, InvasionMap13, --++-+++++-++-+-++
+;END
+;@stopmangeas
+;SET_SERVER_VAR Invasions, InvasionMap13, ------------------
+;END
+;

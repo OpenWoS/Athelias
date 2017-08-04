@@ -1,0 +1,62 @@
+SCENE 14000, sanctuary, SCENE, "Gate"
+#include include.txt
+GOTO LINK 115, 1
+;
+;-------------------------------------------------------------------------------------
+;
+SCENE 14002, sanctuary, SCENE, "Necromancers"
+#include include.txt
+IF T1136 @end
+IF T1135 @fight
+END
+
+@fight
+ACTOR 1, Krvac, 280, 1, 25, 90, 
+POSE 1, 4
+ACTOR 2, Fyramir, 281, 1, 32, 95, 
+POSE 1, 4
+ACTOR 3, Saraloc, 282, 1, 37, 88, 
+POSE 1, 4
+ACTOR 4, Svilitch, 283, 1, 40, 92, 
+POSE 1, 4
+H: Finally!
+1: Finally what?!
+1: I guess you're sent by the stupid "governor" of Thanaris?!
+H: Well, I can't say he is the most clever person I've met, but...
+2: That's cute...
+COMPARE #<num.peopleInScene>, 1
+IF= @several
+2: We'll have #<num.peopleInScene> more dead fighters to join our cause, soon!
+H: Just give us the artifact - that will be easier for everybody.
+3: <sight>
+3: They are really stupid this time...
+@common
+WAIT 2.6
+MOVE 1, 130, 90, 1
+MOVE 2, 130, 90, 1
+MOVE 3, 130, 90, 1
+MOVE 4, 130, 90, 1
+FIGHT 229.40.92, 230.37.88, 231.32.95, 232.25.90
+IF WIN @win
+END
+
+@win
+N: You find a magical helm on the corpse of Fyramir and take it.
+GIVE I1147
+SOUND FoundItem.wav
+WAIT 1.8
+N: You grab the stone and walk back to Thanaris.
+GIVE T1136
+END
+
+@several
+2: We'll have one more dead fighter to join our cause, soon!
+H: Just give me the artifact - that will be easier for everybody.
+3: <sight>
+3: He is really stupid this time...
+GOTO @common
+
+@end
+H: Argh, it still smells rotten flesh here!
+END
+

@@ -1,0 +1,369 @@
+SCENE 3600, castle, SCENE, "Northern Gate"
+#include include.txt
+SET c2katadynexit, north
+GOTO LINK 0, 15
+;
+;--------------------------------------------------------------------------------------------------------------------------
+;
+SCENE 3601, castle, SCENE, "To the Archers Training Camp"
+#include include.txt
+GOTO LINK 143, 0
+;
+;--------------------------------------------------------------------------------------------------------------------------
+;
+SCENE 3602, castle, SCENE, "Eastern Gate"
+#include include.txt
+SET c2katadynexit, east
+GOTO LINK 0, 15
+;
+;--------------------------------------------------------------------------------------------------------------------------
+;
+SCENE 3603, castle, SCENE, "Southern Gate"
+#include include.txt
+SET c2katadynexit, south
+GOTO LINK 0, 15
+;
+;--------------------------------------------------------------------------------------------------------------------------
+;
+SCENE 3604, forest1, SCENE, "Pet Arena"
+#include include.txt
+ACTOR 1, Beastmaster, human48, 1, 25, 95
+IF T3993|T3988 @halloweenActors
+GOTO @nextStepAfterHalloweenActors
+
+@halloweenActors
+ACTOR 1, "Beastmaster", #<spEvent.Name>-humans, 48, 25, 95
+@nextStepAfterHalloweenActors
+1: Welcome, adventurer.
+WAIT 1.4
+@menu1
+SOUND sword1.wav
+MENU "Enter now=@pass", "Listen the intro=@intro"
+GOTO @menu1
+
+@intro
+SOUND sword1.wav
+1: You are about to enter the arena of Katadyn1: Pets can fight and hurt humans.
+1: All the spells are allowed.
+
+1: Have fun!
+WAIT 1.5
+@pass
+SOUND sword1.wav
+GOTO LINK 37, 0
+;
+;--------------------------------------------------------------------------------------------------------------------------
+;
+SCENE 3606, katadyn1, SCENE, Armory
+#include include.txt
+ACTOR 1, Eflidh, human29, 1, 25, 90
+IF T3993|T3988 @halloweenActors
+GOTO @nextStepAfterHalloweenActors
+
+@halloweenActors
+ACTOR 1, "Eflidh", #<spEvent.Name>-humans, 29, 25, 90
+@nextStepAfterHalloweenActors
+1: Everything for the well-dressed adventurer!
+OFFER 250, 254, 258, 262, 266, 200, 209, 213, 217, 221, 565, 569, 573, 578, 582
+END
+;
+;--------------------------------------------------------------------------------------------------------------------------
+;
+SCENE 3607, katadyn1, SCENE, Weapons
+#include include.txt
+ACTOR 1, Sifflinn, human30, 1, 25, 90
+IF T3993|T3988 @halloweenActors
+GOTO @nextStepAfterHalloweenActors
+
+@halloweenActors
+ACTOR 1, "Sifflinn", #<spEvent.Name>-humans, 30, 25, 90
+@nextStepAfterHalloweenActors
+OFFER 384, 389, 393, 397, 401
+IF Z580+Z290.20 @tempestbow1
+1: The best bows in all Athelias!
+END
+
+@tempestbow1
+1: Woo!
+1: A witch's hat!
+1: Listen, adventurer: I'll exchange it and the twenty trunks you have for this magical Tempest Bow.
+1: Sounds good?
+@tempestbow1ask
+ASK 30
+IF YES @tempestbow1YES
+IF NO @tempestbow1NO
+1: Sorry?
+GOTO @tempestbow1ask
+
+@tempestbow1NO
+1: Come back if you change your mind...
+END
+
+@tempestbow1YES
+1: Great!
+1: Here is the bow.
+SOUND foundItem.wav
+HOST_TAKE Z580
+HOST_TAKE Z290.20
+HOST_GIVE I1143
+END
+;
+;--------------------------------------------------------------------------------------------------------------------------
+;
+SCENE 3608, katadyn1, SCENE, "Temple"
+IF T3971 @antigods
+#include include.txt
+ACTOR 1, Merdenaz, human19, 1, 25, 90
+IF T3993|T3988 @halloweenActors
+GOTO @nextStepAfterHalloweenActors
+
+@antigods
+FIGHT 812
+IF WIN @antigodswin
+END
+
+@antigodswin
+HOST_TAKE T3971
+HOST_GIVE Z812
+SOUND trophyFound.wav
+END
+
+@halloweenActors
+ACTOR 1, "Merdenaz", #<spEvent.Name>-humans, 19, 25, 90
+@nextStepAfterHalloweenActors
+OFFER 37
+GIVE L1
+GIVE H5000
+GIVE M5000
+1: Welcome to the temple, adventurer.
+1: Please, stay and relax.
+END
+;
+;--------------------------------------------------------------------------------------------------------------------------
+;
+SCENE 3609, "forest1", SCENE, "Master Archer"
+#include include.txt
+ACTOR 1, "Master Archer", human30, 1, 25, 90
+IF T3993|T3988 @halloweenActors
+GOTO @nextStepAfterHalloweenActors
+
+@halloweenActors
+ACTOR 1, "Master Archer", #<spEvent.Name>-humans, 30, 25, 90
+@nextStepAfterHalloweenActors
+IF C61 @start
+1: Hello, %L.
+END
+
+@start
+IF -S73 @spellzzz
+IF -S74 @spellzzz
+COMPARE #<num.hostLevel>, "24"
+IF> @cmp1
+GOTO @spellzzz
+
+@spellzzz
+1: You should come back when you're more advanced in training.
+1: There are some things I'll teach you then.
+1: Although, I can ever teach you some spells that any archer should know.
+WAIT 2
+HOST_GIVE S73
+HOST_GIVE S74
+SOUND bell2.wav
+1: Here you go.
+1: May your journey be safe
+END
+
+@cmp1
+IF -T53 @pet1
+COMPARE #<num.hostLevel>, "49"
+IF> @cmp2
+1: You should come back when you're more advanced in training.
+END
+
+@cmp2
+IF -T54 @pet2
+COMPARE #<num.hostLevel>, "74"
+IF> @cmp3
+1: You should come back when you're more advanced in training.
+END
+
+@cmp3
+IF S264 @spell
+COMPARE #<num.hostLevel>, "89"
+IF> @cmp4
+1: You should come back when you're more advanced in training.
+END
+
+@cmp4
+IF -T55 @pet3
+1: Welcome back, %L.
+1: I am sorry but there's nothing more I can teach you.
+1: May your journey be safe, hero.
+END
+
+@pet1
+IF Z271 @reward1
+IF T76 @hurry
+1: If you want to prove me your worth, bring me a %Z271.
+HOST_GIVE T76
+END
+
+@reward1
+H: I have the %271.
+1: Good.
+1: You deserve a good pet to help you.
+1: Here is a wolf for you.
+HOST_GIVE I1003
+HOST_GIVE T53
+HOST_TAKE Z271
+SOUND FoundItem.wav
+END
+
+@hurry
+1: You should hurry and find a %Z271.
+END
+
+@hurrybis
+1: You should hurry and find a %Z298.
+END
+
+@hurry2
+1: You should hurry and find an %Z282.
+END
+
+@hurry3
+1: You should hurry and find %Z493.
+END
+
+@pet2
+IF Z298 @reward2
+IF T76 @hurrybis
+1: If you want to prove me your worth, bring me an %Z298.
+HOST_GIVE T76
+END
+
+@reward2
+H: I have the %Z298.
+1: Good.
+1: You deserve a good pet to help you.
+1: Here is a wolf for you.
+HOST_GIVE I1004
+HOST_GIVE T54
+HOST_TAKE T76
+HOST_TAKE Z298
+SOUND FoundItem.wav
+END
+
+@pet3
+IF Z493 @reward4
+IF T76 @hurry3
+1: If you want to prove me your worth, bring me %Z493.
+HOST_GIVE T76
+END
+
+@reward3
+H: I have the %Z282.
+1: Good.
+1: Here is a new spell for you.
+1: You can now summon an eagle to help you during battles.
+HOST_GIVE S264
+HOST_TAKE I704
+HOST_TAKE T76
+END
+
+@spell
+IF I704 @reward3
+IF T76 @hurry
+1: If you want to prove me your worth, bring me an %Z282.
+HOST_GIVE T76
+END
+
+@reward4
+H: I have the %Z493.
+1: Good.
+1: You deserve a good pet to help you.
+1: Here is a wolf for you.
+HOST_GIVE I1005
+HOST_TAKE T76
+HOST_GIVE T55
+HOST_TAKE Z493
+SOUND FoundItem.wav
+END
+;
+;----------------------------------------------------------------------------------------------------
+;
+SCENE 3610,tavern1 , SCENE, "Tavern"
+#include include.txt
+ACTOR 1, Massil, wom10, 1, 30, 89
+ACTOR 2, Soltunie, elf14, 1, 85, 85
+FACE 2, 0
+IF T3993|T3988 @halloweenActors
+GOTO @nextStepAfterHalloweenActors
+
+@halloweenActors
+ACTOR 1, "Massil", #<spEvent.Name>-wom, 10, 30, 89
+ACTOR 2, Soltunie, #<spEvent.Name>-elf, 14, 85, 85
+@nextStepAfterHalloweenActors
+1: Hello.
+1: What do you want to drink?
+OFFER 2, 34
+IF V99 @comparemerc.firsttime
+@normalV99
+END
+
+@comparemerc.firsttime
+COMPARE #<merc.firstTime>, 1
+IF= @normalV99
+GOTO @mercfirstime.txt
+
+#include merc-firsttime.txt
+
+@eventActorClick2
+SOUND sword1.wav
+SET temp.currentMerc, 2912
+#include merc-alreadyHired.txt
+@nextstepaftermercalreadyhired2912
+ACTOR 20, , merc2912, 0, 50, 50
+ACTOR 21, , hire, 0, 40, 75
+ACTOR 22, , cancel, 0, 60, 75
+END
+
+#include merc-hire.txt
+;
+;-------------------------------------------------------------------------------
+;
+SCENE 3651, weapons2, SCENE, "Smithy"
+#include include.txt
+ACTOR 1, Filuz, human81, 1, 40, 95
+IF T3993|T3988 @halloweenActors
+GOTO @nextStepAfterHalloweenActors
+
+@halloweenActors
+ACTOR 1, "Filuz", #<spEvent.Name>-humans, 81, 40, 95
+@nextStepAfterHalloweenActors
+COMPARE #<c5talkedtoblacksmith>, 0
+IF= @firsttimeblacksmith.txt
+1: Hello, adventurer.
+1: Toss me the item you want to upgrade.
+OFFER 132, 134, 135
+END
+
+#include blacksmith.txt
+;
+;-------------------------------------------------------------------------------
+;
+SCENE 3653, alchemy, SCENE, "Alchemist"
+#include include.txt
+ACTOR 1, Ghareth, human116, 1, 25, 90
+IF T3993|T3988 @halloweenActors
+GOTO @nextStepAfterHalloweenActors
+
+@halloweenActors
+ACTOR 1, "Gareth", #<spEvent.Name>-humans, 116, 25, 90
+@nextStepAfterHalloweenActors
+1: Welcome.
+OFFER 1, 3, 4, 7, 13, 29, 30, 31, 32, 33, 36, 38, 39, 12
+END 
+;
+;-------------------------------------------------------------------------------
+;

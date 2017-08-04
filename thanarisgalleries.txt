@@ -1,0 +1,67 @@
+SCENE 14100, dungeon1, SCENE, "To Thanaris"
+#include include.txt
+GOTO LINK 113, 6
+;
+;---------------------------------------------------------------
+;
+SCENE 14101, ancienthall, SCENE, "Crypt"
+#include include.txt
+IF T1141 @armorend
+IF T1140 @fightstone
+IF T1137 @start
+N: You should be banned for being here...
+END
+
+@fightstone
+ACTOR 1, Tharanel, 285, 0, 35, 90
+H: Here we go!
+H: This time you won't win, demon!
+H: For this time, we have the power of the Dead Stone with us!
+H: You will remember it, won't you?
+WAIT 1.5
+SOUND growl8.wav
+MOVE 1, 140, 90, 1
+FIGHT 403.35.90
+IF WIN @fightstonewin
+H: Alright, so apparently even the stone is not enough...
+H: Next time I should bring a bazooka or something...
+END
+
+@fightstonewin
+N: You kill the avatar and finally find the full plate.
+GIVE I1056
+GIVE I1057
+GIVE I1058
+GIVE I1059
+GIVE T1141
+END
+
+@armorend
+N: The place is empty.
+WAIT 1.5
+N: You can still feel the demoniac presence of the avatar.
+END
+
+@start
+H: Any chance the plate is here?
+H: What's...
+TIMER 1,60
+FIGHT 402
+IF DEAD @dead
+END
+
+@dead
+H: What the hell was THAT?!
+H: Let's go out of here, I have to talk to this dumb governor!
+GIVE T1138
+WAIT 2
+GOTO LINK 113, 6
+
+@eventTimer1
+H: What the hell is THAT?!
+H: Let's run out of here.
+H: I'll have to talk to this dumb governor!
+GIVE T1138
+WAIT 2
+GOTO LINK 113, 6
+

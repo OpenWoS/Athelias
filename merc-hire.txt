@@ -1,0 +1,115 @@
+@eventActorClick21
+SOUND sword1.wav
+IF -V99 @mercenarytropjeunepourhire
+MOVE 20, 200, 90, 1
+MOVE 21, 200, 90, 1
+MOVE 22, 200, 90, 1
+IF -G200000-I131 @mercHirePoor
+COMPARE #<mhna5>, 0
+IF> @mercHireTooMuch
+COMPARE #<mha5>, 0
+IF> @mercHireTooMuch
+@merchiredmessageend
+N: Hire this mercenary? (YES/NO)
+ASK 30
+IF YES @merchiredmessageendyes
+IF NO @merchiredmessageendno
+N: We take this as "No".
+END
+
+@mercenarytropjeunepourhire
+N: You must be level 99 to hire a mercenary!
+END
+
+@merchiredmessageendno
+END
+
+@merchiredmessageendyes
+N: You have hired a new mecenary!
+WAIT 1
+SET monster.id, #<temp.currentMerc>
+N: #<monster.name> will now fight by your side!
+COMPARE #<mha1>, 0
+IF= @mercHire1
+@merc.hire?????????????2
+COMPARE #<mha2>, 0
+IF= @mercHire2
+@merc.hire?????????????3
+COMPARE #<mha3>, 0
+IF= @mercHire3
+@merc.hire?????????????4
+COMPARE #<mha4>, 0
+IF= @mercHire4
+@merc.hire?????????????5
+GOTO @mercHire5
+
+@mercHirePoor
+N: That's 200,000 Tomans to hire a mercenary.
+WAIT 1
+N: Try again when you'll have the money.
+END
+
+@mercHireTooMuch
+N: You've already hired 5 mercenaries.
+WAIT 1
+N: Dismiss one and try again.
+END
+
+@mercHire5
+CALL #<scene.id>@freecoupon 5
+HOST_TAKE G200000
+@mercHire5return
+SET mhna5, #<temp.currentMerc>
+END
+
+@mercHire4
+COMPARE #<mhna4>, 0
+IF> @merc.hire?????????????5
+CALL #<scene.id>@freecoupon 4
+HOST_TAKE G200000
+@mercHire4return
+SET mhna4, #<temp.currentMerc>
+END
+
+@mercHire3
+COMPARE #<mhna3>, 0
+IF> @merc.hire?????????????4
+CALL #<scene.id>@freecoupon 3
+HOST_TAKE G200000
+@mercHire3return
+SET mhna3, #<temp.currentMerc>
+END
+
+@mercHire2
+COMPARE #<mhna2>, 0
+IF> @merc.hire?????????????3
+CALL #<scene.id>@freecoupon 2
+HOST_TAKE G200000
+@mercHire2return
+SET mhna2, #<temp.currentMerc>
+END
+
+@mercHire1
+COMPARE #<mhna1>, 0
+IF> @merc.hire?????????????2
+CALL #<scene.id>@freecoupon 1
+HOST_TAKE G200000
+@mercHire1return
+SET mhna1, #<temp.currentMerc>
+END
+
+@dfgfhdgdfgrtfhjtujty
+RETURN
+
+@freecoupon
+IF -I131 @dfgfhdgdfgrtfhjtujty
+HOST_TAKE I131
+GOTO @mercHire#<arg0>return
+
+
+@eventActorClick22
+SOUND sword1.wav
+MOVE 20, 200, 90, 1
+MOVE 21, 200, 90, 1
+MOVE 22, 200, 90, 1
+END

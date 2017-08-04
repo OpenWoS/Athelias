@@ -1,0 +1,808 @@
+;SCENE 110000: used
+;SCENE 110001: used
+;SCENE 110002: used
+;SCENE 110003: used
+;SCENE 110004: used
+;SCENE 110005: used
+;SCENE 110006; used
+;SCENE 110007; used
+;SCENE 110008; used
+;SCENE 110009; used
+;SCENE 110010; used
+;SCENE 110011; used
+;SCENE 110012; used
+;SCENE 110013; used
+;SCENE 110014; used
+;SCENE 110015; used
+;SCENE 110016; used
+;SCENE 110017; used
+;SCENE 110018; used
+;SCENE 110019; used
+;SCENE 110020; used
+;SCENE 110021; used
+;SCENE 110022; used
+;SCENE 110023; used
+;SCENE 110024; used
+;SCENE 110025; used
+;SCENE 110026; used
+;SCENE 110027; used
+;SCENE 110028; used
+;SCENE 110029; used
+
+
+;
+;-----------------------------------------------------------------------------------------------------------------------
+;
+SCENE 110000, castle.100.70, SCENE
+ACTOR 0, "Master Alric", human10, 1, 50, 70
+ACTOR 1, "Felix Bracasse", human64, 1, 58, 75
+FACE 1, 0
+ACTOR 2, Barbarian, human16, 1, 60, 80
+FACE 2, 0
+ACTOR 3, Barbarian, human39, 1, 65, 85
+FACE 3, 0
+ACTOR 4, Barbarian, human66, 1, 70, 80
+FACE 4, 0
+ACTOR 5, Barbarian, human65, 1, 75, 90
+FACE 5, 0
+ACTOR 6, Barbarian, human81, 1, 80, 85
+FACE 6, 0
+ACTOR 7, Barbarian, human82, 1, 85, 80
+ACTOR 8, Barbarian, human104, 1, 90, 97
+FACE 8, 0
+ACTOR 9, Barbarian, human67, 1, 95, 88
+FACE 9, 0
+ACTOR 10, Barbarian, wom24, 1, 45, 90
+ACTOR 11, Paladin, human145, 1, 40, 85
+ACTOR 12, Paladin, human146, 1, 35, 72
+ACTOR 13, Paladin, human147, 1, 30, 76
+ACTOR 14, Paladin, human148, 1, 25, 80
+ACTOR 15, Paladin, human149, 1, 20, 90
+ACTOR 16, Paladin, human150, 1, 15, 87
+ACTOR 17, Paladin, human3, 1, 10, 80
+ACTOR 18, Paladin, wom77, 1, 5, 83
+ACTOR 19, Paladin, wom78, 1, 13, 78
+ACTOR 20, Templar, human28, 1, 37, 87
+ACTOR 21, Templar, human139, 1, 68, 94
+FACE 21, 0
+ACTOR 22, Templar, human140, 1, 73, 90
+FACE 22, 0
+ACTOR 23, Templar, human141, 1, 83, 90
+FACE 23, 0
+ACTOR 24, Templar, human143, 1, 28, 90
+ACTOR 25, Templar, human144, 1, 43, 85
+ACTOR 26, Templar, wom26, 1, 32, 87
+ACTOR 27, Templar, wom74, 1, 23, 86
+ACTOR 28, Templar, wom75, 1, 78, 79
+FACE 28, 0
+ACTOR 29, Templar, wom76, 1, 88, 80
+FACE 29, 0
+ACTOR 30, Paladin, wom79, 1, 92, 85
+FACE 30, 0
+SEL 0
+' Congratulations to everybody: we have defeated the army of the Regent.
+' General Bracasse, the help of the Barbarians was priceless.
+' We know that Irkatshk is also in trouble with Prina.
+' A new alliance is born with this battle.
+' You can now count on the support of the Paladins under any circumstances.
+' And you, Templars, were the key to the victory.
+' I am glad that the several hundred years old quarrel between Benadrim and our brothers from the Desertic Lands is now over.
+' It is now time to unite our forces to fight together against our common enemy:  the threat of the Chaos armies.
+' This battle is won, but the war is not over.
+WAIT 2
+' I would like to thank %1 as well.
+' Since the beginning of this nasty business, he has displayed courage and determination.
+' He is one the heroes of this battle.
+IF C11 @barb
+' I am proud to announce today that the council of the Paladins of Benadrim has decided to raise him to the rank of Master Paladin.
+' Please, %1, accept this tunic and wear it as the symbol of your new rank.
+SOUND foundItem.wav
+H: Thank you, Master.
+1: In the name of the Barbarians of Irkatshk, I would like you to accept this horse as well.
+1: Most of my fighters have been impressed by your skills of warrior.
+1: You do deserve it.
+H: Thank you, General Bracasse.
+H: I'll make good use of it.
+SOUND foundItem.wav
+HOST_GIVE I1012
+HOST_GIVE I303
+HOST_GIVE T130
+END
+
+@barb
+' Please, %1, accept this horse - that's an Azgueral, the race of the fathers of horses.
+SOUND foundItem.wav
+H: Thank you, Master.
+HOST_GIVE I1012
+HOST_GIVE T137
+END
+;
+;-----------------------------------------------------------------------------------------------------------------------
+;
+SCENE 110007
+@start
+FIGHT 136, 136
+IF LOSE @assaq4lose
+ACTOR 1, Rodeur, human37, 1, 100, 90
+MOVE 1, 75, 90
+1: I've got the relic!
+H: great! let's go out of here!
+SET assq3relic, 1
+END
+
+@assaq4lose
+N: You hear the voice of the rodeur killed in the throne room.
+HOST_GIVE T1057
+END
+;
+;-----------------------------------------------------------------------------------------------------------------------
+;
+SCENE 110008, forest1, CUT, 
+ACTOR 1, Guard, guard6, 1, 45, 85
+ACTOR 2, Guard, guard6, 1, 55, 90
+ACTOR 3, Guard, guard6, 1, 58, 85
+ACTOR 4, Guard, guard6, 1, 60, 87
+ACTOR 5, Guard, guard6, 1, 63, 90
+ACTOR 6, Guard, guard6, 1, 66, 85
+ACTOR 7, Guard, guard6, 1, 70, 80
+ACTOR 8, Guard, guard6, 1, 73, 83
+1: It's close, I'm sure.
+2: There is nothing here.
+1: The map of our informer is precise.
+1: It *should* be here.
+3: Yeah, but again, there is nothing.
+4: I'm sure he's right: the entrance is probably somewhere around here.
+5: Damn assassins! 
+5: They won't escape!
+HOST_GIVE T1059
+END
+;
+;-----------------------------------------------------------------------------------------------------------------------
+;
+SCENE 110010
+@start
+IF T2897 @necrothingy
+@return
+RETURN
+END
+
+@gharl
+COMPARE #<gharl>, 2
+IF= @travelgharl
+END
+
+@travelgharl
+H: Actually I think I'm going to leave now...
+1: Eh, no!
+1: You can't do that!
+H: Why?
+MOVE H, 120, 90
+1: Eh! Wait!
+1: Wait!
+WAIT 1
+GOTO LINK 0, 0
+
+@necroend
+SET temp.num.monster, ""
+SET temp.monsterID, ""
+GOTO @return
+
+@necrothingy
+SET temp.num.monster, #<monster.lastFightCount>
+@necrothingy1
+SET temp.monsterID, monster.lastFightId#<temp.num.monster>
+SET monster.id, *#<temp.monsterID>
+STRSTR #<monster.alignment>, -1-
+IF> @necrorevive
+SUB temp.num.monster, 1
+COMPARE #<temp.num.monster>, 0
+IF= @necroend
+GOTO @necrothingy1
+
+@necrorevive
+ACTOR 33, , buttons, 12, 15, 15
+GOTO @return
+
+@end
+END
+
+@cant
+MENU "Dismiss a mercenary first=@end"
+END
+
+@eventActorClick33
+SOUND sword1.wav
+COMPARE #<mha5>, 0
+IF> @cant
+COMPARE #<mhna5>, 0
+IF> @cant
+STRSTR #<monster.alignment>, -2-
+IF> @menu2
+STRSTR #<monster.alignment>, -3-
+IF> @menu3
+MENU "Revive the monster as a ghoul=@reviveghoul", "Revive the monster as a skeleton=@reviveskel"
+END
+
+@menu2
+MENU "Revive the monster as a skeleton=@reviveskel"
+END
+
+@menu3
+MENU "Revive the monster as a ghoul=@reviveghoul"
+END
+
+@reviveskelcheck
+SET temp.level, #<monster.level>
+DIV temp.level, 10
+COMPARE #<temp.level>, 12
+IF> @reviveghoulcheck12
+GOTO @reviveskelcheck#<temp.level>
+
+@reviveskelcheck0
+SET temp.necromercnum, 683
+GOTO @reviveendsfsf
+
+@reviveskelcheck1
+SET temp.necromercnum, 684
+GOTO @reviveendsfsf
+
+@reviveskelcheck2
+SET temp.necromercnum, 685
+GOTO @reviveendsfsf
+
+@reviveskelcheck3
+SET temp.necromercnum, 686
+GOTO @reviveendsfsf
+
+@reviveskelcheck4
+SET temp.necromercnum, 687
+GOTO @reviveendsfsf
+
+@reviveskelcheck5
+SET temp.necromercnum, 688
+GOTO @reviveendsfsf
+
+@reviveskelcheck6
+SET temp.necromercnum, 689
+GOTO @reviveendsfsf
+
+@reviveskelcheck7
+SET temp.necromercnum, 690
+GOTO @reviveendsfsf
+
+@reviveskelcheck8
+SET temp.necromercnum, 691
+GOTO @reviveendsfsf
+
+@reviveskelcheck9
+SET temp.necromercnum, 692
+GOTO @reviveendsfsf
+
+@reviveskelcheck10
+SET temp.necromercnum, 693
+GOTO @reviveendsfsf
+
+@reviveskelcheck11
+SET temp.necromercnum, 694
+GOTO @reviveendsfsf
+
+@reviveskelcheck12
+SET temp.necromercnum, 695
+GOTO @reviveendsfsf
+
+@reviveghoulcheck
+SET temp.level, #<monster.level>
+DIV temp.level, 10
+COMPARE #<temp.level>, 12
+IF> @reviveghoulcheck12
+GOTO @reviveghoulcheck#<temp.level>
+
+@reviveghoulcheck0
+SET temp.necromercnum, 696
+GOTO @reviveendsfsf
+
+@reviveghoulcheck1
+SET temp.necromercnum, 697
+GOTO @reviveendsfsf
+
+@reviveghoulcheck2
+SET temp.necromercnum, 698
+GOTO @reviveendsfsf
+
+@reviveghoulcheck3
+SET temp.necromercnum, 699
+GOTO @reviveendsfsf
+
+@reviveghoulcheck4
+SET temp.necromercnum, 700
+GOTO @reviveendsfsf
+
+@reviveghoulcheck5
+SET temp.necromercnum, 701
+GOTO @reviveendsfsf
+
+@reviveghoulcheck6
+SET temp.necromercnum, 702
+GOTO @reviveendsfsf
+
+@reviveghoulcheck7
+SET temp.necromercnum, 703
+GOTO @reviveendsfsf
+
+@reviveghoulcheck8
+SET temp.necromercnum, 704
+GOTO @reviveendsfsf
+
+@reviveghoulcheck9
+SET temp.necromercnum, 705
+GOTO @reviveendsfsf
+
+@reviveghoulcheck10
+SET temp.necromercnum, 706
+GOTO @reviveendsfsf
+
+@reviveghoulcheck11
+SET temp.necromercnum, 707
+GOTO @reviveendsfsf
+
+@reviveghoulcheck12
+SET temp.necromercnum, 708
+GOTO @reviveendsfsf
+
+@reviveendsfsf
+SET mhna#<temp.slot>, #<temp.necromercnum>
+N: A new undead will now fight by your side!
+END
+
+@reviveskel
+SOUND sword1.wav
+MOVE 33, 130, 90, 1
+COMPARE #<mha1>, 0
+IF> @reviveskel2
+COMPARE #<mhna1>, 0
+IF> @reviveskel2
+SET temp.slot, 1
+GOTO @reviveskelcheck
+
+@reviveskel2
+COMPARE #<mha2>, 0
+IF> @reviveskel3
+COMPARE #<mhna2>, 0
+IF> @reviveskel3
+SET temp.slot, 2
+GOTO @reviveskelcheck
+
+@reviveskel3
+COMPARE #<mha3>, 0
+IF> @reviveskel4
+COMPARE #<mhna3>, 0
+IF> @reviveskel4
+SET temp.slot, 3
+GOTO @reviveskelcheck
+
+@reviveskel4
+COMPARE #<mha4>, 0
+IF> @reviveskel5
+COMPARE #<mhna4>, 0
+IF> @reviveskel5
+SET temp.slot, 4
+GOTO @reviveskelcheck
+
+@reviveskel5
+SET temp.slot, 5
+GOTO @reviveskelcheck
+
+@reviveghoul
+SOUND sword1.wav
+MOVE 33, 130, 90, 1
+COMPARE #<mha1>, 0
+IF> @reviveghoul2
+COMPARE #<mhna1>, 0
+IF> @reviveghoul2
+SET temp.slot, 1
+GOTO @reviveghoulcheck
+
+@reviveghoul2
+COMPARE #<mha2>, 0
+IF> @reviveghoul3
+COMPARE #<mhna2>, 0
+IF> @reviveghoul3
+SET temp.slot, 2
+GOTO @reviveghoulcheck
+
+@reviveghoul3
+COMPARE #<mha3>, 0
+IF> @reviveghoul4
+COMPARE #<mhna3>, 0
+IF> @reviveghoul4
+SET temp.slot, 3
+GOTO @reviveghoulcheck
+
+@reviveghoul4
+COMPARE #<mha4>, 0
+IF> @reviveghoul5
+COMPARE #<mhna4>, 0
+IF> @reviveghoul5
+SET temp.slot, 4
+GOTO @reviveghoulcheck
+
+@reviveghoul5
+SET temp.slot, 5
+GOTO @reviveghoulcheck
+;
+;-----------------------------------------------------------------------------------------------------------------------
+;
+SCENE 110011
+@start
+SET_LEN temp.len, #<arg0>
+COMPARE #<temp.len>, 3
+IF= @onlyonerace
+1: You also need to choose a race.
+WAIT 2
+SOUND sword1.wav
+STRCMP #<arg0>, -h-g-e-
+IF= @menu1
+STRCMP #<arg0>, -h-g-
+IF= @menu2
+STRCMP #<arg0>, -h-g-e-d-
+IF= @menu3
+STRCMP #<arg0>, -h-d-
+IF= @menu4
+STRCMP #<arg0>, -h-e-
+IF= @menu5
+N: Apparently, there is a problem with this script.
+N: Please, report it on athelias.com BBs.
+N: http://athelias.biz/forums.
+RETURN
+
+@menu1
+MENU "Human=@human", "Gnome=@gnome", "Elf=@elf"
+SOUND thud.wav
+GOTO @menu
+
+@menu2
+MENU "Human=@human", "Gnome=@gnome"
+SOUND thud.wav
+GOTO @menu
+
+@menu3
+MENU "Human=@human", "Gnome=@gnome", "Elf=@elf", "Dwarf=@dwarf"
+SOUND thud.wav
+GOTO @menu
+
+@menu4
+MENU "Human=@human", "Dwarf=@dwarf"
+SOUND thud.wav
+GOTO @menu
+
+@menu5
+MENU "Human=@human", "Elf=@elf"
+SOUND thud.wav
+GOTO @menu
+
+@human
+SOUND sword1.wav
+SET athelias.race, human
+N: You race is now: #<athelias.race>.
+RETURN
+
+@dwarf
+SOUND sword1.wav
+SET athelias.race, dwarf
+N: You race is now: #<athelias.race>.
+RETURN
+
+@elf
+SOUND sword1.wav
+SET athelias.race, elf
+N: You race is now: #<athelias.race>.
+RETURN
+
+@gnome
+SOUND sword1.wav
+SET athelias.race, gnome
+N: You race is now: #<athelias.race>.
+RETURN
+
+@onlyonerace
+STRCMP #<arg0>, -h-
+IF= @onlyoneracehum
+STRCMP #<arg0>, -e-
+IF= @onlyoneraceelf
+STRCMP #<arg0>, -g-
+IF= @onlyoneracegno
+1: Only dwarves can become a#<arg2> #<arg1>.
+1: You'll be born as a dwarf.
+RETURN
+
+@onlyoneracehum
+1: Only humans can become a#<arg2> #<arg1>.
+1: You'll be born as a human.
+RETURN
+
+@onlyoneraceelf
+1: Only elves can become a#<arg2> #<arg1>.
+1: You'll be born as an elf.
+RETURN
+
+@onlyoneracegno
+1: Only gnomes can become a#<arg2> #<arg1>.
+1: You'll be born as a gnome.
+RETURN
+;
+;-----------------------------------------------------------------------------------------------------------------------
+;
+; CALL 110012@start %C or %L (or whatever)
+SCENE 110012
+@start
+SET_SUBSTR temp.grammar, 0, 1, #<arg0>
+STRSTR aeiouy, #<temp.grammar>
+IF> @voyel
+RETURN "a"
+
+@voyel
+RETURN "an"
+;
+;-----------------------------------------------------------------------------------------------------------------------
+;
+SCENE 48392038575849, , SCENE, Street
+#include include.txt
+ACTOR 1, Merchant, human44, 1, 100, 95
+MOVE 1, 75, 95
+IF R50 @gotorf8
+N: You cross the wood.
+WAIT 0.7
+N: Everything has been all .
+1: Thanks, we are arrived.
+1: Please, accept this gold.
+HOST_GIVE G2000
+SOUND kaching.wav
+1: Goodbye!
+MOVE 1, -20, 95
+END
+
+@gotorf8
+WAIT 1
+N: You hear a noise.
+WAIT 0.5
+N: It's a trap!
+1: Ah!
+MOVE 1, 120, 95, 2
+IF -V20 @fight1
+IF -V40 @fight2
+IF -V60 @fight3
+IF -V80 @fight4
+FIGHT2 151, 151, 153
+IF WIN @reward
+END
+
+@fight1
+FIGHT2 124
+IF WIN @reward
+END
+
+@fight2
+FIGHT2 122, 123, 124
+IF WIN @reward
+END
+
+@fight3
+FIGHT2 125, 127, 131
+IF WIN @reward
+END
+
+@fight4
+FIGHT2 151, 151
+IF WIN @reward
+END
+
+@reward
+MOVE 1, 75, 95
+FACE 1, 3
+1: Thanks, I'd be dead if I had crossed this wood alone.
+1: Please, take this gold.
+SOUND kaching.wav
+HOST_GIVE G5000
+1: I think I can now continue alone.
+1: The bandits are...
+1: Well, they can't attack me anymore.
+1: Goodbye!
+MOVE 1, -20, 95
+END
+;
+;-----------------------------------------------------------------------------
+;
+SCENE 23473829020475, irkatshk2, SCENE, Woods
+#include include.txt
+ACTOR 1, Lumberer, human66, 1, 100, 90
+ACTOR 2, , human66, 0, 90, 90
+MOVE 1, 43, 85
+WAIT 2
+1: That's here.
+1: Thanks again!
+1: How could I thank you?
+1: Oh, I know!
+1: One second.
+MOVE 1, 42, 73
+WAIT 0.9
+MOVE 1, -20, 90, 1
+WAIT 3
+MOVE 1, 43, 81, 1
+FACE 1, 3
+1: Take these furs.
+1: Maybe you'll get a good price for this in a city...
+COMPARE #<num.TrophyBagRoom428>, 15
+IF< @noroom
+@givefurs
+SOUND trophyFound.wav
+HOST_GIVE Z428.15
+END
+
+@noroom
+N: There is no room for all the furs in your trophy bag.
+WAIT 1
+N: You have 5 seconds to discard some trophies if you want to get them.
+COUNTDOWN 5
+WAIT 5
+GOTO @givefurs
+;
+;-----------------------------------------------------------------------------
+;
+SCENE 75677447, , CUT
+; No : #include include.txt
+THEME
+ACTOR 1, "Tax Collector", human62, 1, 75, 90 
+FACE 1, 0
+ACTOR 2, Bandit, 47, 1, 15, 90 
+ACTOR 3, Bandit, human11, 1, 25, 85 
+ACTOR 4, Bandit, human16, 1, 35, 80 
+2: Hehe! 
+3: Hello! 
+2: Don't rock the boat! 
+2: Give us the case right now! 
+1: Eh! Wait! 
+4: He said : "Don't rock the boat" 
+4: So give us the money right now! 
+1: Ok, ok! Calm down! 
+1: There. 
+2: Take the chest, Kile. 
+2: Let's go. 
+MOVE 3, 65, 90 
+4: Let's go, guys. 
+MOVE 3, -20, 90 
+MOVE 2, -20, 90 
+MOVE 4, -20, 80 
+FACE 1, 1 
+1: They are gone. 
+ACTOR 5, Makel, human1, 1, 120, 85 
+MOVE 5, 88, 85 
+5: OK, let's follow them, %1. 
+WAIT 2
+MOVE 5, 120, 85, 1 
+MOVE 1, 120, 90, 1 
+MOVE 2, 120, 90, 1 
+MOVE 3, 120, 90, 1 
+MOVE 4, 120, 90, 1 
+MOVE 2, 75, 85 
+MOVE 3, 80, 90 
+MOVE 4, 85, 90 
+2: That was easy. 
+3: Yup, very easy. 
+3: Let's hurry to the grotto though. 
+4: Yeah we are never over-cautious. 
+MOVE 2, -20, 85 
+MOVE 3, -20, 90 
+MOVE 4, -20, 90 
+WAIT 2 
+BKGND cave1 
+MOVE 2, 120, 90, 1 
+MOVE 3, 120, 80, 1 
+MOVE 4, 120, 85, 1 
+ACTOR 6, Bandit, human22, 1, -20, 90 
+MOVE 2, 50, 90, 
+MOVE 3, 65, 80, 
+MOVE 4, 80, 85, 
+ACTOR 7, Chest,91, 0, 25, 85 
+2: Here we go. 
+MOVE 6, 20, 90 
+6: Ah, you are back! 
+2: Yup, and we have the receipts. 
+6: Great! 
+6: Let's open the chest. 
+6: Bring it here. 
+MOVE 3, 35, 85 
+MOVE 4, 42, 80 
+WAIT 1 
+ACTOR 7, Chest,105, 0, 25, 85 
+6: Is it a joke?! 
+6: Stones! 
+6: It is full of stones! 
+2: What does it mean?! 
+5: Let's go, %1!
+MOVE 5, 75, 90 
+5: It means that you are done! 
+WAIT 1 
+GOTO SCENE 77688727
+;
+;--------------------------------------------------------------------------------------------------------------
+;
+SCENE 77688727, cave1, SCENE, Cave
+#include include.txt
+ACTOR 1, Chest,105, 0, 25, 85 
+ACTOR 2, Bandit, 47, 1, 50, 90, 
+ACTOR 3, Bandit, human11, 1, 35, 85 
+ACTOR 4, Bandit, human16, 1, 42, 80 
+ACTOR 5, Makel, human1, 1, 75, 90 
+FACE 5, 0
+ACTOR 6, Bandit, human22, 1, 20, 90 
+IF T999 @T999
+H: Surprise! 
+5: Don't move! 
+5: In the name of the Regent, I arrest you! 
+6: In the name of the Regent?! 
+6: LMAO! 
+2: Do a prayer, Junior! 
+2: That will be the last one! 
+@T999
+MOVE 2, 120, 90, 1
+MOVE 3, 120, 90, 1
+MOVE 4, 120, 90, 1
+HOST_GIVE T999
+FIGHT 133.50.90, 134.35.85, 135.42.80
+IF LOSE @playerdead
+6: Wait! Wait!
+6: Don't kill me!
+6: You don't know the whole story!
+5: What are you talking about?!
+6: You told me that the regent asked you to discover who we are and arrest us, right?!
+6: But the regent knows everything.
+6: We work for the intendant!
+5: Bullshits!
+6: You don't believe me, do you?
+6: But who are you, guys?
+6: Do you think he would ask this to a guard of the palace and a jester?!
+6: Come on...
+6: He asked you because he had to do something to make the citizens believe that he did struggle against us.
+6: But he was expecting us to kill you.
+H: How could we believe you?
+H: You've just tried to kill us!
+6: Some people know in the city.
+6: Ask around.
+6: I know that they are suspicious at the temple.
+WAIT 1
+6: Now, if you excuse me...
+MOVE 6, -20, 90
+H: Eh! Wait!
+5: Let him go, %1.
+H: Do you think that what he said was right?
+5: Possibly...
+5: I will inquire.
+WAIT 2
+5: Let's see what's in this cave.
+MOVE 5, 50, 70
+WAIT 4
+5: Some gold...
+SOUND kaching.wav
+GIVE G10000
+MOVE 5, 20, 90
+5: What's this?!
+5: A monkey in a cage!
+5: Do you want it?
+h: Why not?!
+h: I may train it.
+HOST_GIVE I1040
+HOST_TAKE T999
+HOST_TAKE T1006
+HOST_GIVE T1007
+SOUND FoundItem.wav
+5: OK, let's go now
+5: There's nothing left here.
+END
+
+@playerdead
+5: Err... Are you ok, %1?
+5: Oh shit!
+MOVE 5, 120, 90, 2
+6: Ah! Ah! Ah!
+END
+

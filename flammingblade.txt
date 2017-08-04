@@ -1,0 +1,590 @@
+SCENE 3500, "templeinside10", SCENE, "Eastern Gate"
+#include include.txt
+SET c2flammingbladeexit, east
+GOTO LINK 7, 6
+;
+;----------------------------------------------------------------------------------------------------
+;
+SCENE 3501, "templeinside10", SCENE, "Western Gate"
+#include include.txt
+SET c2flammingbladeexit, west
+GOTO LINK 7, 6
+;
+;----------------------------------------------------------------------------------------------------
+;
+SCENE 3502, "templeinside10", SCENE, "Training Ground"
+#include include.txt
+ACTOR 1, Knight, human2, 1, 78, 82
+IF T3993|T3988 @halloweenActors
+GOTO @nextStepAfterHalloweenActors
+
+@halloweenActors
+ACTOR 1, "Knight", #<spEvent.Name>-humans, 2, 78, 82
+@nextStepAfterHalloweenActors
+IF T68 @end
+COMPARE #<monstersofthetrainingground>, 0
+IF> @backish
+1: Hello, adventurer.
+IF -V50 @later
+1: If you want to have fun with some monsters, this is the right place.
+1: There is no reward for you.
+1: It's just to train your skills - or because you're definitely bored.
+1: Do you want to fight my monsters?
+@ask1
+ASK 30
+IF YES @fight
+IF NO @sayno
+1: Sorry?
+GOTO @ask1
+
+@later
+1: Hmm I don't think you are strong enough to face the creatures I have here.
+1: You should come back later.
+END
+
+@backish
+1: Welcome back, adventurer.
+1: Do you want to fight some more monsters?
+@ask2
+ASK 30
+IF YES @fight2
+IF NO @sayno
+1: Sorry?
+GOTO @ask2
+
+@sayno
+1: Come back if you change your mind.
+END
+
+@fight2
+1: Here you go.
+FACE 1, 0
+GOTO @fightbis
+
+@fight
+SET monstersofthetrainingground, "30"
+1: Here you go.
+FACE 1, 0
+@fightbis
+GOTO @fight30#<monstersofthetrainingground>
+
+@fight30
+SET monstersofthetrainingground, 30
+FIGHT 262
+IF WIN @sub
+IF LOSE @LOSE
+END
+
+@sub
+SUB monstersofthetrainingground, 1
+GOTO @fightbis
+
+@end
+IF -T68 @fight30
+1: You defeated all the monsters I had.
+1: I think you don't need training anymore.
+1: Of course, you can fight them again though.
+1: Is this what you want?
+ASK 30
+IF YES @again
+1: May your journeys be safe, hero.
+END
+
+@again
+1: Here you go.
+HOST_TAKE T68
+SET monstersofthetrainingground, 30
+GOTO @fightbis
+
+@LOSE
+1: You are dead...
+1: I am sorry but you can't fight anymore.
+1: Come back when you're more... alive.
+END
+
+@fight29
+FIGHT 263
+IF WIN @sub
+IF LOSE @LOSE
+END
+
+@fight28
+FIGHT 266
+IF WIN @sub
+IF LOSE @LOSE
+END
+
+@fight27
+FIGHT 264
+IF WIN @sub
+IF LOSE @LOSE
+END
+
+@fight26
+FIGHT 265
+IF WIN @sub
+IF LOSE @LOSE
+END
+
+@fight25
+FIGHT 266
+IF WIN @sub
+IF LOSE @LOSE
+END
+
+@fight24
+FIGHT 269
+IF WIN @sub
+IF LOSE @LOSE
+END
+
+@fight23
+FIGHT 272
+IF WIN @sub
+IF LOSE @LOSE
+END
+
+@fight22
+FIGHT  275
+IF WIN @sub
+IF LOSE @LOSE
+END
+
+@fight21
+FIGHT 276
+IF WIN @sub
+IF LOSE @LOSE
+END
+
+@fight20
+FIGHT 278
+IF WIN @sub
+IF LOSE @LOSE
+END
+
+@fight19
+FIGHT 282
+IF WIN @sub
+IF LOSE @LOSE
+END
+
+@fight18
+FIGHT 285
+IF WIN @sub
+IF LOSE @LOSE
+END
+
+@fight17
+FIGHT 286
+IF WIN @sub
+IF LOSE @LOSE
+END
+
+@fight16
+FIGHT 285, 286
+IF WIN @sub
+IF LOSE @LOSE
+END
+
+@fight15
+FIGHT 285, 285
+IF WIN @sub
+IF LOSE @LOSE
+END
+
+@fight14
+FIGHT 285, 286, 290
+IF WIN @sub
+IF LOSE @LOSE
+END
+
+@fight13
+FIGHT 307, 307, 307, 307, 307
+IF WIN @sub
+IF LOSE @LOSE
+END
+
+@fight12
+FIGHT 314, 315
+IF WIN @sub
+IF LOSE @LOSE
+END
+
+@fight11
+FIGHT 314, 314, 315, 315
+IF WIN @sub
+IF LOSE @LOSE
+END
+
+@fight10
+FIGHT 317, 317, 317
+IF WIN @sub
+IF LOSE @LOSE
+END
+
+@fight9
+FIGHT 325, 325
+IF WIN @sub
+IF LOSE @LOSE
+END
+
+@fight8
+FIGHT 321, 328
+IF WIN @sub
+IF LOSE @LOSE
+END
+
+@fight7
+FIGHT 297, 297, 297, 297, 297, 297, 297, 297, 297, 297, 297, 297, 297, 297, 297, 297, 297, 297, 297, 297
+IF WIN @sub
+IF LOSE @LOSE
+END
+
+@fight6
+FIGHT 323, 297, 297, 297
+IF WIN @sub
+IF LOSE @LOSE
+END
+
+@fight5
+FIGHT 328, 321, 321
+IF WIN @sub
+IF LOSE @LOSE
+END
+
+@fight4
+FIGHT 329, 329
+IF WIN @sub
+IF LOSE @LOSE
+END
+
+@fight3
+FIGHT 119
+IF WIN @sub
+IF LOSE @LOSE
+END
+
+@fight2
+FIGHT 120
+IF WIN @sub
+IF LOSE @LOSE
+END
+
+@fight1
+FIGHT 120, 211, 211
+IF WIN @sub
+IF LOSE @LOSE
+END
+
+@fight0
+@win
+IF T68 @end
+1: Congratulations!
+1: Nobody has ever been so far.
+1: Your strength deserves respect, #<g.mylord>.
+1: Please, accept this present.
+GIVE I8
+GIVE T68 
+SOUND FoundItem.wav
+IF R5 @reward2
+END
+
+@reward2
+GIVE I695
+END
+;
+;----------------------------------------------------------------------------------------------------------------------------------------
+;
+SCENE 3503, "templeinside10", SCENE, "Sword Master"
+#include include.txt
+ACTOR 1, "Sword Master", human33, 1, 25, 98
+IF T3993|T3988 @halloweenActors
+GOTO @nextStepAfterHalloweenActors
+
+@halloweenActors
+ACTOR 1, "Sword Master", #<spEvent.Name>-humans, 33, 25, 98
+@nextStepAfterHalloweenActors
+IF C2+T3968-J113 @supernewbquest
+IF C22 @knight
+1: Hello adventurer.
+1: I am sorry but you are not a knight.
+1: I can't help you.
+END
+
+@supernewbquest
+1: A fight?
+1: It sounds good to me...
+WAIT 2.2
+MOVE 1, 150, 150, 1
+FIGHT 2927.25.98
+END
+
+@knight
+ACTOR 60, "", 3, 0, 95, 15
+IF T122 @kightqend
+IF T63 @blablabla
+IF V90+T118 @cmp4
+IF V50+T117 @cmp2
+IF V20 @cmp1
+1: Hello worshipper.
+1: Glad to know that the Brotherhood has a new member.
+1: I can help and train you.
+1: Come back when you're a bit more experienced.
+END
+
+@eventActorClick60
+N: Level required for the class quests:
+WAIT 1
+N: Level 20, 50, 75, 90.
+END
+
+@cmp1
+IF T116 @hurryquest1
+1: Ah! %1!
+1: I need your help!
+H: Yeah?
+1: As you know, a tournament will start in one hour, and one of the competitors is missing!
+H: Who?
+1: Sir Gerzel
+H: Is that so important?
+1: Of course it is!
+1: All the lords of the realm will be present, and he is one of the worthiest knights of the realm.
+1: They all want to see him in the arena!
+H: And what can I do?!
+1: To go and find him of course!
+1: Hurry!
+HOST_GIVE T116
+END
+
+@hurryquest1
+IF T117 @sry
+COMPARE #<knightsdfsdfsf>, 1
+IF= @endquest1
+1: Hurry up, %1!
+1: We really need Gerzel to participate!
+END
+
+@endquest1
+ACTOR 2, "Sir Gerzel", human36, 1, 85, 98
+FACE 2, 0
+2: I m here and  ready to fight!
+1: Sir Gerzel!
+2: Yep, that's me.
+2: Now excuse me: I need to get ready.
+WAIT 2
+MOVE 2, 120, 98
+1: Very good job, %1!
+1: I don't know what you told him, but that's great!
+1: Let me reward you.
+1: Every knight needs a good horse.
+1: This one is for you.
+H: Oh thanks!
+HOST_GIVE T117
+HOST_GIVE I1010
+SOUND FoundItem.wav
+END
+
+@LOSE
+1: You fought and died with honor.
+1: I am proud of you.
+1: But you should try not to die though...
+1: Come back when you think you could stay alive...
+END
+
+@bgfggfbqdgqgf
+COMPARE #<dial.sfgsdgfdspppz>, 1
+IF= @sry
+1: Thanks again for the last time, %1.
+1: We all hate the regent here but after this story we can expect to be seriously in trouble with the palace if someone discover that we killed those guards.
+1: We should be very careful now.
+
+SET dial.sfgsdgfdspppz, 1
+END
+
+@cmp2
+IF T119 @bgfggfbqdgqgf
+IF T118 @sry
+ACTOR 1, "Sword Master", human33, 1, 58, 95
+ACTOR 2, , human1, 1, 25, 95
+ACTOR 3, , human2, 1, 33, 98
+ACTOR 4, , human39, 1, 18, 100
+ACTOR 5, , human34, 1, 40, 97
+1: Ah! %1!
+1: A tournament is going to take place in the Brotherhood.
+1: I think you should participate.
+1: That's just a private tournament to train our skills but we toss away a good horse as a reward for the winner.
+1: Do you want to sign for the tournament?
+ASK 30
+IF NO @bah
+WAIT 1
+MOVE 1, 77, 85
+MOVE 3, 60, 90
+MOVE 4, 70, 91
+MOVE 5, 78, 93
+1: So FIGHT!
+1: Round 1.
+WAIT 2
+FACE 1, 0
+FACE 5, 0
+FACE 3, 0
+FACE 4, 0
+1: Ready?
+WAIT 2
+FACE 1, 0
+FACE 5, 0
+FACE 3, 0
+FACE 4, 0
+1: GO!
+FACE 1, 0
+FACE 5, 0
+FACE 3, 0
+FACE 4, 0
+MOVE 2, -20, 99, 1
+FIGHT 114
+IF LOSE @LOSE
+1: Victory belongs to %1!
+GIVE H5000
+GIVE M5000
+WAIT 1
+MOVE 3, 20, 99
+1: Round 2.
+WAIT 2
+1: Ready?
+WAIT 2
+1: GO!
+MOVE 3, -20, 99, 1
+FIGHT 115
+IF LOSE @LOSE
+1: Victory belongs to %1!
+GIVE H5000
+GIVE M5000
+WAIT 1
+MOVE 4, 20, 99
+1: Round 3.
+WAIT 2
+1: Ready?
+WAIT 2
+1: GO!
+MOVE 4, -20, 99, 1
+FIGHT 130
+IF LOSE @LOSE
+1: Victory belongs to %1!
+GIVE H5000
+GIVE M5000
+WAIT 1
+MOVE 5, 20, 99
+1: Round 4.
+WAIT 2
+1: Ready?
+WAIT 2
+1: GO!
+MOVE 5, -20, 99, 1
+FIGHT 131
+IF LOSE @LOSE
+1: Victory belongs to %1!
+FACE 1, 2
+1: Congratulations, %1, you have defeated all your opponents.
+1: Here is your prize : a new horse!
+HOST_GIVE I1011
+SOUND FoundItem.wav
+HOST_GIVE T118
+MOVE 2, 25, 95
+WAIT 0.2
+MOVE 3, 33, 98
+WAIT 0.1
+MOVE 4, 43, 100
+WAIT 0.3
+MOVE 5, 40, 97
+WAIT 2
+2: Congratulations!
+3: Yeah, grats.
+WAIT 5
+ACTOR 6, Guard, guard6, 1, -8, 99
+ACTOR 7, Guard, guard6, 1, -5, 99
+MOVE 6, 20, 99
+MOVE 7, 15, 99
+FACE 1, 0
+FACE 3, 0
+FACE 4, 0
+6: What's that?!
+FACE 5, 0
+1: What?
+FACE 2, 0
+7: You know that you must have the agreement of the regent to organize a tournament!
+1: A tournament?
+1: We are just training!
+6: Call me an idiot!
+6: Follow us now, you're going to explain that to a judge!
+2: Hey! Who do you think you are?!
+3: Yeah he says that we are training, so scat now!
+3: The minions of the regent are not welcome here!
+7: How can you dare...
+WAIT 2
+MOVE 1, -20, 99, 1
+MOVE 2, -20, 99, 1
+MOVE 3, -20, 99, 1
+MOVE 4, -20, 99, 1
+MOVE 5, -20, 99, 1
+MOVE 6, -20, 99, 1
+MOVE 7, -20, 99, 1
+FIGHT 136, 136, -114, -115, -130, -131, -138
+N: You find 10000 #<GP.name> on the corpse of the guard.
+WAIT 1
+N: Probably some money extorted from the traders of the city...
+GIVE G10000
+H: Damn guards of the palace!
+HOST_GIVE T119
+END
+
+@bah
+1: You can come back later.
+1: Maybe there will be another tourney.
+END
+
+@cmp3
+IF T61 @sry
+1: Welcome back, %1.
+1: Can I ask you for a favor?
+H: Shout.
+1: Marlyn, a friend living in Latsha needs a baby dragon wing for some incantations or potions or... whatever.
+1: He is looking for someone to get one for him.
+1: I'd like to go and get one for him but I am busy and have to stay here.
+H: Yes I can try to find one. Why not?
+1: Thanks. Maybe he will reward you...
+HOST_GIVE T61
+END
+
+@cmp4
+IF T4001 @sry2
+1: Please, enter, %1.
+1: You must prepare yourself for the battle.
+H: The battle?!
+1: Yes.
+1: Athalantis is besieged.
+1: Lord Ghamyl asked the brotherhood to help him defeat the army of undead that walks over the region.
+1: The Necromancy Academy sent someone to get rid of the necromancer who summoned them but they need us to clear a path to him.
+1: You must go to Athalantis and find Lord Ghamyl.
+1: He will tell you what to do then.
+1: Some of the worthiest knights of the brotherhood are already there.
+HOST_GIVE T120
+END
+
+@kightqend
+IF T4001 @sry2
+1: I heard you succeeded in defeating the undead army.
+H: Yes.
+1: I am proud of you, %1.
+1: Now, we can count on the support of Lord Ghamyl.
+1: We will need it if our relationship with the regent doesn't get better.
+HOST_GIVE T4001
+END
+
+@sry
+IF V75+T118-T61 @cmp3
+1: Sorry, I can't help you more for now.
+1: Come back when you're more advanced in training.
+END
+
+@sry2
+1: Welcome back, Master.
+END

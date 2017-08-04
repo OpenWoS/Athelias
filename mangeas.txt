@@ -1,0 +1,380 @@
+SCENE 1300, mangeas3, SCENE, "Northern Gate"
+#include include.txt
+SET c2mangeasexit, north
+GOTO LINK 0, 16
+;
+;---------------------------------------------------------------------------------
+;
+SCENE 1301, mangeas3, SCENE, "Southern Gate"
+#include include.txt
+SET c2mangeasexit, south
+GOTO LINK 0, 16
+;
+;---------------------------------------------------------------------------------
+;
+SCENE 1302, "mangeas3", SCENE, "Elder"
+#include include.txt
+ACTOR 1, "Elder", elf3, 1, 25, 90
+IF T3993|T3988 @halloweenActors
+GOTO @nextStepAfterHalloweenActors
+
+@halloweenActors
+ACTOR 1, "Elder", #<spEvent.Name>-elf, 3, 25, 90
+@nextStepAfterHalloweenActors
+IF T74 @wb
+IF -T74 @welcome
+END
+
+#include elders\mangeas.elder.txt
+;
+;---------------------------------------------------------------------------------
+;
+SCENE 1303, mangeas3, SCENE, "Weapons"
+#include include.txt
+ACTOR 1, Ezel, elf10, 1, 25, 90
+IF T3993|T3988 @halloweenActors
+GOTO @nextStepAfterHalloweenActors
+
+@halloweenActors
+ACTOR 1, "Ezel", #<spEvent.Name>-elf, 10, 25, 90
+@nextStepAfterHalloweenActors
+1: Finest weapons!
+OFFER 304, 308, 312, 316, 320, 344, 345, 346, 347, 348, 349, 350, 351, 352, 353, 354, 355, 356, 357, 358, 359, 360 ,361, 362, 363, 465, 469, 473, 477, 481
+END
+;
+;---------------------------------------------------------------------------
+;
+SCENE 1305, mangeas3, SCENE, "Armory"
+#include include.txt
+ACTOR 1, Derfil, elf2, 1, 25, 90
+IF T3993|T3988 @halloweenActors
+GOTO @nextStepAfterHalloweenActors
+
+@halloweenActors
+ACTOR 1, "Derfil", #<spEvent.Name>-elf, 2, 25, 90
+@nextStepAfterHalloweenActors
+1: Welcome!
+1: What do you need?
+OFFER 200, 209, 213, 217, 221, 270, 271, 272, 273, 274, 275, 276, 277, 278, 279, 565, 569, 573,  578, 582
+END
+;
+;---------------------------------------------------------------------------
+;
+SCENE 1306, templeinside4, SCENE, "Runesmith"
+#include include.txt
+ACTOR 1, Tanael, elf4, 1, 18, 80
+IF T3993|T3988 @halloweenActors
+GOTO @nextStepAfterHalloweenActors
+
+@halloweenActors
+ACTOR 1, "Tanael", #<spEvent.Name>-elf, 4, 18, 80
+@nextStepAfterHalloweenActors
+IF I1136 @thornbladenext
+IF Z348 @thornblade
+@thornbladenext
+1: Welcome!
+1: Runes forged by the ancient elven blacksmiths!
+OFFER 545, 546, 547, 548, 549, 550, 551, 552, 553, 554, 555, 556, 557, 558, 559, 560, 561, 562, 563, 564
+END
+
+@thornblade
+COMPARE #<chat.thornbladeRunesmithMangeas>, 1
+IF= @thornbladeback
+1: Can I see what you have here?
+1: It looks like the fragment of Thorn's Blade!
+1: That's amazing!
+H: Really?
+1: Listen: if you bring three fragments I think I'll have enough materials to forge a new blade.
+SET chat.thornbladeRunesmithMangeas, 1
+IF Z348.3 @thornblademake
+END
+
+@thornbladeback
+IF Z348.3 @thornblademake2
+H: Hello, Tanael.
+H: I'm still looking for the fragments.
+1: Very well.
+1: Maybe you want to buy some runes now?
+END
+
+@thornblademake2
+H: Hello, Tanael.
+H: I found the fragments you needed.
+GOTO @thornblademake3
+
+@thornblademake
+H: I think I have all what you need.
+@thornblademake3
+1: Great!
+1: Do you want me to forge the weapon now?
+@thornblademakeask
+ASK 30
+IF YES @thornblademakeaskYES
+IF NO @thornblademakeaskNO
+1: I beg your pardon?
+GOTO @thornblademakeask
+
+@thornblademakeaskNO
+1: You choose...
+END
+
+@thornblademakeaskYES
+1: Alright.
+1: Just a minute please.
+WAIT 1.5
+SOUND harvestgolem1
+WAIT 1
+SOUND sword2
+WAIT 0.4
+SOUND sword2
+WAIT 0.4
+SOUND sword2
+WAIT 1
+HOST_GIVE I1136
+HOST_TAKE Z348.3
+1: There.
+1: Make good use of this blade!
+H: I will!
+SET chat.thornbladeRunesmithMangeas, ""
+END
+;
+;---------------------------------------------------------------------------
+;
+SCENE 1307, mangeas3, SCENE, "Smithy"
+#include include.txt
+ACTOR 1, Alamnel, elf1, 1, 25, 90
+IF T3993|T3988 @halloweenActors
+GOTO @nextStepAfterHalloweenActors
+
+@halloweenActors
+ACTOR 1, "Alamnel", #<spEvent.Name>-elf, 1, 25, 90
+@nextStepAfterHalloweenActors
+COMPARE #<c5talkedtoblacksmith>, 0
+IF= @firsttimeblacksmith.txt
+1: Hello, adventurer.
+1: Toss me the item you want to upgrade.
+OFFER 132, 134, 135
+END
+
+#include blacksmith.txt
+;
+;-------------------------------------------------------------------------------
+;
+SCENE 1308, mangeas1, SCENE, "Gate"
+#include include.txt
+GOTO LINK 45, 11
+;
+;---------------------------------------------------------------------------
+;
+SCENE 1309, houseinside1, SCENE, "Library"
+#include include.txt
+ACTOR 1, "Librarian", elf16, 2, 47, 80
+SEL 1
+POSE 2, 1
+IF T3993|T3988 @halloweenActors
+GOTO @nextStepAfterHalloweenActors
+
+@halloweenActors
+ACTOR 1, "Librarian", #<spEvent.Name>-elf, 6, 47, 80
+@nextStepAfterHalloweenActors
+#include library.txt
+1: Welcome to Mangeas library!
+END
+;
+;--------------------------------------------------------------------------------------
+;
+SCENE 1310, templeinside6, SCENE,  "Temple"
+IF T3979 @antigods
+#include include.txt
+GIVE L1
+GIVE H5000
+GIVE M5000
+OFFER 37
+ACTOR 1, Falendel, elf5, 1, 25, 90
+IF T3993|T3988 @halloweenActors
+GOTO @nextStepAfterHalloweenActors
+
+@antigods
+FIGHT 8120
+IF WIN @antigodswin
+END
+
+@antigodswin
+HOST_TAKE T3979
+HOST_GIVE Z820
+SOUND trophyFound.wav
+END
+
+@halloweenActors
+ACTOR 1, "Falendel", #<spEvent.Name>-elf, 5, 25, 90
+@nextStepAfterHalloweenActors
+1: Welcome to the temple, adventurer.
+1: Feel free to stay here and relax.
+END
+;
+;-------------------------------------------------------------------------------
+;
+SCENE 1311, alchemy, SCENE, "Alchemist"
+#include include.txt
+ACTOR 1, Faled, elf3, 1, 25, 98
+IF T3993|T3988 @halloweenActors
+GOTO @nextStepAfterHalloweenActors
+
+@halloweenActors
+ACTOR 1, "Faled", #<spEvent.Name>-elf, 3, 25, 98
+@nextStepAfterHalloweenActors
+1: Be welcome, foreigner
+OFFER 1, 3, 4, 7, 13, 29, 30, 31, 32, 33, 36, 38, 39, 12
+END 
+;
+;-------------------------------------------------------------------------------
+;
+SCENE 1312, mangeas1, SCENE, "Gate"
+#include include.txt
+GOTO LINK 5, 0
+;
+;-------------------------------------------------------------------------------
+;
+SCENE 1314, tavern1, SCENE, "Gate"
+#include include.txt
+ACTOR 1, Melinel, elf15, 1, 35, 85
+ACTOR 2, Lassira, elf7, 1, 57, 100
+ACTOR 3, Firdental, elf12, 1, 20, 96
+FACE 2, 0
+IF T3993|T3988 @halloweenActors
+GOTO @nextStepAfterHalloweenActors
+
+@halloweenActors
+ACTOR 1, "Melinel", #<spEvent.Name>-elf, 15, 35, 85
+ACTOR 2, Lassira, #<spEvent.Name>-elf, 7, 57, 100
+FACE 2, 0
+ACTOR 3, Firdental, #<spEvent.Name>-elf, 12, 20, 96
+@nextStepAfterHalloweenActors
+OFFER 2, 34 
+1: Welcome to Mangeas Inn, adventurer.
+IF V99 @comparemerc.firsttime
+@normalV99
+END
+
+@comparemerc.firsttime
+COMPARE #<merc.firstTime>, 1
+IF= @normalV99
+GOTO @mercfirstime.txt
+
+#include merc-firsttime.txt
+
+@eventActorClick2
+SOUND sword1.wav
+SET temp.currentMerc, 2907
+#include merc-alreadyHired.txt
+@nextstepaftermercalreadyhired2907
+ACTOR 20, , merc2907, 0, 50, 50
+ACTOR 21, , hire, 0, 40, 75
+ACTOR 22, , cancel, 0, 60, 75
+END
+
+@eventActorClick3
+SOUND sword1.wav
+SET temp.currentMerc, 2908
+#include merc-alreadyHired.txt
+@nextstepaftermercalreadyhired2908
+ACTOR 20, , merc2908, 0, 50, 50
+ACTOR 21, , hire, 0, 40, 75
+ACTOR 22, , cancel, 0, 60, 75
+END
+
+#include merc-hire.txt
+;
+;-------------------------------------------------------------------------------
+;
+SCENE 1316, mangeas3, SCENE, "Tamer"
+#include include.txt
+ACTOR 1, Edilal,elf3, 1,  25, 90
+IF T3993|T3988 @halloweenActors
+GOTO @nextStepAfterHalloweenActors
+
+@halloweenActors
+ACTOR 1, "Edilal", #<spEvent.Name>-elf, 3, 25, 90
+@nextStepAfterHalloweenActors
+OFFER 748
+IF V99+C56+T1047 @healer4
+IF C56+T1043 @healer2
+IF C56+T1042 @healer1
+IF C60+V90 @shop3
+IF C60+V50 @shop2
+IF C60+V25 @shop1
+@nothing
+1: Hello.
+1: I am sorry but I don't have any pet for sale anymore.
+1: I only have a few pets and they are reserved.
+1: I'll possibly have some later.
+1: But maybe you want to buy an incubator.
+END
+
+@healer2bis
+EJECT C56
+OFFER 3024, 3025, 748
+1: Hello
+1: I have some new pets for sale
+1: Maybe you'll find one you want...
+END
+
+@healer2
+COMPARE #<healerq2>, 2
+IF= @healer2bis
+@healer1
+COMPARE #<healerquest1>, 3
+IF< @nothing
+EJECT C56
+OFFER 3024, 748
+1: Welcome, healer.
+1: If you are looking for a pet I have one for sale.
+END
+
+@healer4
+IF T4001 @nothing
+COMPARE #<healerquest4>, 2
+IF< @healer2
+1: %1! 
+1: Be welcome!
+1: I have a pet for you: you'll love it!
+H: How much do you want?
+1: Don't talk of money : it's free!
+HOST_GIVE I3026
+HOST_GIVE T4001
+SOUND FoundItem.wav
+H: Oh, thanks!
+1: Thank the masters of the sanctuary, not me...
+END
+
+@shop1
+EJECT C60
+OFFER 1006, 748
+1: Welcome, death dancer.
+1: If you are looking for a pet I have one for sale.
+END
+
+@shop2
+EJECT C60
+1: Hello
+1: I have some new pets for sale
+1: Maybe you'll find one you want...
+OFFER 1006, 1007
+END
+
+@shop3
+EJECT C60
+1: Welcome to my shop.
+1: I have some new pets for sale.
+1: You won't get them for cheap but that's good pets.
+OFFER 1006, 1007, 1008
+END
+;
+;-------------------------------------------------------------------------------
+;
+SCENE 1317, mangeas3, SCENE, "To the Sanctuary"
+#include include.txt
+GOTO LINK 88, 0
+;
+;-------------------------------------------------------------------------------
+;

@@ -1,0 +1,11 @@
+@firsttimeblacksmith.txt
+CALL 110019@firsttimeblacksmith.txt
+END
+
+@eventActorGive1
+CALL 110019@eventActorGive1
+END
+
+@eventActorClick1
+CALL 110019@eventActorClick1
+END

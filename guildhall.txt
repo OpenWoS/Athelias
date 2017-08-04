@@ -1,0 +1,279 @@
+SCENE 900,  templeinside5, SCENE, Gate
+SET c2guildhallexit, "west"
+#include include.txt
+GOTO LINK 7, 7
+;
+;-------------------------------------------------------------------
+;
+SCENE 901,  templeinside5, SCENE, Gate
+#include include.txt
+SET c2guildhallexit, "east"
+GOTO LINK 7, 7
+;
+;-------------------------------------------------------------------
+;
+SCENE 902, templeinside5, SCENE, "Application Desk"
+#include include.txt
+ACTOR 1, Tezalef, wom67, 1, 25, 90 
+IF T3993 @halloweenActors
+GOTO @nextStepAfterHalloweenActors
+
+@halloweenActors
+ACTOR 1, "Tezalef", #<spEvent.Name>-wom, 67, 25, 90
+@nextStepAfterHalloweenActors
+STRCMP #<str.uniform>, "Anti-Gods" 
+IF= @canpass 
+STRCMP #<str.uniform>, "TGT" 
+IF= @canpass 
+;STRCMP #<str.uniform>, "[guild supported]" 
+;IF= @canpass 
+STRCMP #<str.uniform>, "" 
+IF= @cantpass 
+1: So you want to petition your guild? 
+WAIT 2
+@menu 
+SOUND sword1.wav
+MENU "Yes I do=@yes","No I don't=@no" 
+GOTO @menu 
+
+@no 
+SOUND sword1.wav
+1: So what are you doing here? 
+1: Scat, I have no time to waste. 
+END 
+
+@yes 
+SOUND sword1.wav
+1: Your guild is at least six months old in Athelias and has several active members, right? 
+WAIT 2.5
+@menu2 
+SOUND sword1.wav
+MENU "Yes=@yes2","no=@no" 
+GOTO @menu2 
+
+@yes2 
+SOUND sword1.wav
+1: Fine. 
+1: There are some forms to fill out. 
+1: Do it now. 
+WAIT 1 
+HTML http://www.athelias.biz/forums/viewforum.php?f=2 
+1: Good, now all you have to do is wait. 
+1: Most of the petitions are not accepted, so don't expect too much. 
+END 
+
+@canpass 
+1: Hello. 
+1: I see you are a member of #<str.uniform> 
+1: You have nothing to do here. 
+1: You petition is already accepted. 
+1: There is a specific desk for your guild. 
+END 
+
+@cantpass 
+1: What are you doing here?! 
+1: Scat, this hall is reserved to the members of a guild! 
+END
+;
+;-------------------------------------------------------------------
+;
+SCENE 903, templeinside5, SCENE, "Anti Gods Hall"
+; Note: this is a shared scene
+; no : #include include.txt (not to have mercenaries)
+ACTOR 1, "Nero Bloodfire", human146, 1, 27, 90
+STRCMP #<str.uniform>, "Anti-Gods"
+IF= @antigods
+1: This place is reserved for the members of the guild Anti Gods.
+1: If you want to join the guild, please contact one of the members.
+1: There is nothing for you here.
+1: Well, actually, you should even not be here...
+WAIT 2
+GOTO EXIT
+
+@antigods
+IF T3983 @member
+IF -T3970-T3971-T3972-T3973-T3974-T3975-T3976-T3977-T3978-T3979-T3980 @initiation
+IF J100+J101+J102+J103+J104+J105+J106+J107+J108+J109+J110 @lastbattle
+MISSION 100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110
+1: %1, hurry up!
+1: Go and defeat the fake gods!
+END
+
+@member
+1: Welcome, fellow anti gods.
+END
+
+@initiation
+1: Welcome, worshipper.
+1: So you think your good enough to join my guild? 
+H: Yeah 
+1: I like you so lets fight to train... 
+H: Uh... ok... 
+1: Ready? 
+@neroask1
+ASK 5
+IF YES @neroask1yes
+IF NO @neroask1no
+1: Are you ready or not?
+GOTO @neroask1
+
+@neroask1no
+1: Fine.
+1: Come back later if you want to become a real member of the guild.
+END
+
+@neroask1yes
+1: Let's go then.
+WAIT 2
+HOST_GIVE T4000
+EJECT T4000
+HOST_TAKE T4000
+LOCK 1
+MOVE 1, 225, 90, 1
+FIGHT 806.27.90
+IF WIN @trainingwin
+H: I guess I'll come back later...
+END
+
+@trainingwin
+MOVE 1, -10, 90, 1
+MOVE 1, 27, 90
+WAIT 4
+1: Wow, that was one great training match. 
+WAIT 2
+ACTOR 2, Felty, human4, 1, 0, 95, 3
+MOVE 2, 20, 95
+WAIT 2
+2: Nero we have a problem... 
+1: What now? 
+2: Uh... the fake gods are waking up. 
+1: WHAT!?!?!? 
+2: The fake gods are waking up and are causing havok again. 
+1: Grab our Godslayer equipment. 
+MOVE 2, -50, 90
+H: What can I do?? 
+1: Go and defeat the fake gods in the temples of Athelias.
+1: We need time to discover who has awaken them.
+1: Take this as a test.
+1: If you succeed, you'll be allowed to wield the weapons of the guild.
+1: But if you fail... I'd rather not think about it - for everybody's sake.
+HOST_GIVE T3982
+SOUND missionOffer.wav
+MISSION 100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110
+END
+
+@lastbattle
+ACTOR 2, Felty, human4, 1, 20, 95, 3
+1: %1, you must come with us.
+1: We've discovered who has awaken the fake gods.
+1: Soleran, the chaos god of magic used his power to cause havok again.
+1: He sent three avatars to Tahamanraset - we have to defeat them.
+1: The priest of Tahamanraset told us they have been seen near the towers of silence.
+1: We must go there and get rid of them.
+1: We cannot afford to fail.
+1: You've shown you're worthy enough to wear the godslayer equipment of the guild.
+1: Use it to defeat Soleram: that's our only chance.
+SOUND missionOffer.wav
+MISSION 111
+IF I1152 @end
+IF T4 @armr
+@armr2
+IF T1 @shiled
+@shiled2
+HOST_GIVE I1152
+HOST_GIVE I1153
+IF T7 @robe
+@robe2
+IF T6 @tunic
+@tunic2
+IF T5 @paini
+@paini2
+IF T2 @rune
+@rune2
+IF T9 @dagg
+@dagg2
+IF T3 @rosary
+@rosary2
+IF T8 @sword
+@sword2
+SOUND foundItem.wav
+@end
+END
+
+@sword
+HOST_GIVE I1158
+GOTO @sword2
+
+@armr
+HOST_GIVE I1150
+GOTO @armr2
+
+@shiled
+HOST_GIVE I1151
+GOTO @shiled2
+
+@robe
+HOST_GIVE I1154
+GOTO @robe2
+
+@tunic
+HOST_GIVE I1155
+GOTO @tunic2
+
+@paini
+HOST_GIVE I1156
+GOTO @paini2
+
+@rune
+HOST_GIVE I1157
+GOTO @rune2
+
+@dagg
+HOST_GIVE I1159
+GOTO @dagg2
+
+@rosary
+HOST_GIVE I1160
+GOTO @rosary2
+;
+;-------------------------------------------------------------------
+;
+SCENE 904, templeinside5, SCENE, "The Grey Tower Hall"
+; Note: this is a shared scene
+; no : #include include.txt (not to have mercenaries)
+ACTOR 1, "felty", human146, 1, 27, 90
+STRCMP #<str.uniform>, "TGT"
+IF= @tgt
+1: This place is reserved for the members of the guild TGT.
+1: If you want to join the guild, please contact one of the members.
+1: There is nothing for you here.
+1: Actually, you shouldn't really even be here...
+WAIT 2
+GOTO EXIT
+
+@tgt
+;initiation=find someone with elven silk for making guild robes
+;fullmember=acquire a bar of gold and visit the schools of magic to
+;acquire the pieces of an angreal allowing the usage of
+;Incinerate(strong lvl 1 fire spell, slightly stronger than current
+;lvl 9 spell), as well as Ring
+;member=once everything done
+GOTO @member
+
+@member
+;make so welcome is rank dependent, unless not done w/ last quest
+;in which case Accepted. Also base on gender.
+Welcome, initiate of the Tower.
+END
+
+@initiation
+;check what level is, to name appropriately, unless already 99/100
+;in which case, call Accepted, until complete robe quest, and ring quest
+END
+
+@fullmember
+;lvl 99/100 to start, w/ first quest done
+;once returns with stuff, give ring to start
+END
+
+
