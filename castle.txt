@@ -45,13 +45,15 @@ ACTOR 11, , misc2, 1, 45, 40
 ACTOR 12, , misc2, 2, 55, 40
 ACTOR 13, , misc2, 3, 65, 40
 ACTOR 14, , misc2, 4, 35, 62
-ACTOR 15, , misc2, 15, 45, 62, 23
+ACTOR 15, , misc2, 15, 45, 62
+;15 Is the elementalist, and may be bugged
 ACTOR 16, , misc2, 5, 55, 62
 ACTOR 17, , misc2, 6, 65, 62
 ACTOR 18, , misc2, 7, 35, 84
 ACTOR 19, , misc2, 8, 45, 84
 ACTOR 20, , misc2, 9, 55, 84
-ACTOR 21, , misc2, 14, 65, 84, 23
+ACTOR 21, , misc2, 14, 65, 84
+;21 Is the monk, and may be bugged
 ACTOR 22, , next, 0, 40, 96
 ACTOR 23, , cancel2, 0, 60, 96
 @end
@@ -64,8 +66,10 @@ MOVE 22, 200, 200, 1
 ACTOR 10, , misc2, 10, 35, 40
 ACTOR 11, , misc2, 11, 45, 40
 ACTOR 12, , misc2, 17, 55, 40
-ACTOR 13, , misc2, 16, 65, 40, 23
-ACTOR 14, , misc2, 13, 35, 62, 23
+ACTOR 13, , misc2, 16, 65, 40
+;13 is the Rodeur, and may be bugged
+ACTOR 14, , misc2, 13, 35, 62
+;14 is the Werewolf, and may be bugged
 ACTOR 15, , misc2, 12, 45, 62
 MOVE 16, 200, 200, 1
 MOVE 17, 200, 200, 1
@@ -184,8 +188,8 @@ GOTO @hardc
 @eventActorClickbis13
 COMPARE #<newbCastle.classesCheck>, 1
 IF= @eventActorClickter13b
+GOTO @rodeur2
 END
-;GOTO @rodeur2
 
 @eventActorClickter13b
 GOTO @rodeur
@@ -204,11 +208,11 @@ GOTO @deathd
 @eventActorClickbis14
 COMPARE #<newbCastle.classesCheck>, 1
 IF= @eventActorClickter14b
+GOTO @werewolf2
 END
-;GOTO @werewolf2
 
 @eventActorClickter14b
-; GOTO @werewolf
+GOTO @werewolf
 END
 
 @eventActorClick15
@@ -217,9 +221,9 @@ COMPARE #<class.interface>, 2
 IF= @eventActorClickbis15
 COMPARE #<newbCastle.classesCheck>, 1
 IF= @eventActorClickter15
-END
 ; Not implanted yet
-; GOTO @elem2
+GOTO @elem2
+END
 
 @eventActorClickter15
 GOTO @elem
@@ -323,8 +327,8 @@ COMPARE #<class.interface>, 2
 IF= @eventActorClickbis21
 COMPARE #<newbCastle.classesCheck>, 1
 IF= @eventActorClickter21
+GOTO @monksanci2
 END
-;GOTO @monksanci2
 
 @eventActorClickter21
 GOTO @monksanci
@@ -412,7 +416,7 @@ GOTO @pickaclassinterface
 GOTO LINK 0, 0
 
 @werewolf
-N: No description available
+N: This class has been enabled for testing. It may or may not be complete, use at your own risk!
 GOTO @again
 
 @illu
@@ -515,6 +519,7 @@ ACTOR 9, , misc2, 15, 90, 30
 N: Magic Ratio : 90%% - Hand Ratio : 10%%
 1: These mages pick one of the elements (air, water, fire, earth) as a speciality.
 1: They can summon elementals to help them in battles. 
+1: This is an experimental class, and may be bugged! Pick at your own risk!
 COMPARE #<c1jdgjdfs>, 1
 IF= @mercen
 GOTO @again

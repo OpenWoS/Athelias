@@ -8,6 +8,8 @@ STRCMP "Soul 2006", #<str.soul>
 IF= @madstoolmadstoolworlddev
 STRCMP "Soul 3171", #<str.soul>
 IF= @madstoolmadstoolworlddev
+STRCMP "Soul 2949", #<str.soul>
+IF= @madstoolmadstoolworlddev
 STRCMP #<arg0>, "checking"
 IF= @returneventactorthingyfalse
 GOTO @nextstepaftermadstool.txt

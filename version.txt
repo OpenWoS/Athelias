@@ -1,12 +1,12 @@
 IF #1 @nextstepafterversion.txt
 ;STRCMP #<athelias.race>, ""
 ;IF= @atheliasrace1.29fix
-STRCMP #<current.version>, "1.38"
+STRCMP #<current.version>, "1.3810"
 IF= @nextstepafterversion.txt2
 GOTO @fix#<current.version>
 
 @fix1.37
-SET current.version, "1.38"
+SET current.version, "1.3810"
 IF C50+T1059+V75-S32 @assassinq3fix1.37
 @assassinq3fix1.37next
 GOTO @nextstepafterversion.txt2

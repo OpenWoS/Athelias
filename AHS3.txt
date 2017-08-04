@@ -116,7 +116,7 @@ MENU "Information about monsters=@madstoolinfo11", "Information about items=@mad
 GOTO @madstoolinfo10 
 
 @madstoolfun 
-MENU "Kill everybody in scene=@madstoolkill", "Kill everybody but you=@madstoolkill2", "Kill everyone who is not in the party=@killeveryonenorinparrty", "Make the HP of everybody but you drop to 1=@madstoolHPdrop", "Morph into another class=@madstoolmorph", "Change your gender=@madstoolgender", "New trophy bag size=@madsoolnewtrophynagsize", "Give a candy=@madstoolcandy", "Type a 'N' message=@madstoolmessageN", "Type a 'N' message (looped)=@madstoolmessageNLooped", "Cancel=@madstoolcancel" 
+MENU "Kill everybody in scene=@madstoolkill", "Kill everybody but you=@madstoolkill2", "Kill everyone who is not in the party=@killeveryonenorinparrty", "Make the HP of everybody but you drop to 1=@madstoolHPdrop","Give avatar spells=@madstoolAvatars", "Morph into another class=@madstoolmorph", "Change your gender=@madstoolgender", "New trophy bag size=@madsoolnewtrophynagsize", "Give a candy=@madstoolcandy", "Type a 'N' message=@madstoolmessageN", "Type a 'N' message (looped)=@madstoolmessageNLooped", "Cancel=@madstoolcancel" 
 GOTO @madstoolfun 
 
 @madstoolgender 
@@ -1073,6 +1073,16 @@ GIVE L1
 HOST_GIVE H10000 
 HOST_GIVE M10000 
 END 
+
+@madstoolAvatars
+HOST_GIVE S769
+HOST_GIVE S736
+HOST_GIVE S737
+HOST_GIVE S738
+HOST_GIVE S739
+HOST_GIVE S740
+HOST_GIVE S741
+END
 
 @madstoolkill 
 TAKE H10000 

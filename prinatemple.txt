@@ -428,7 +428,7 @@ GOTO @offer
 @skiplargeare
 1: Thank you, %1.
 1: I may have something for you.
-GOTO @@skiplargeare2
+GOTO @skiplargeare2
 
 ;
 ;--------------------------------------------------------------------------------------
