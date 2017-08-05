@@ -602,7 +602,7 @@ END
 
 @thanks
 1: Thank you for the #<item.goldgiven> gold !
-COMPARE #<gold>, "599999"
+COMPARE #<gold>, "59999"
 IF> @reward
 END
 
