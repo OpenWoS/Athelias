@@ -1,74 +1,74 @@
 SCENE 4500, SCENE, "undergroundgalleries", SCENE, "Prina Gate"
-#include iclude.txt
+#include include.txt
 GOTO LINK 7, 8
 ;
 ;------------------------------------------------------------------------------------
 ;
 SCENE 4501, SCENE, "undergroundgalleries", SCENE, "Arguazil Gate"
-#include iclude.txt
+#include include.txt
 EJECT T1121
 GOTO LINK 10, 3
 ;
 ;------------------------------------------------------------------------------------
 ;
 SCENE 4502, SCENE, "undergroundgalleries", SCENE, "Irkatshk Gate"
-#include iclude.txt
+#include include.txt
 EJECT T1121
 GOTO LINK 40, 4
 ;
 ;------------------------------------------------------------------------------------
 ;
 SCENE 4503, SCENE, "undergroundgalleries", SCENE, "Athalantis Gate"
-#include iclude.txt
+#include include.txt
 EJECT T1121
 GOTO LINK 41, 2
 ;
 ;------------------------------------------------------------------------------------
 ;
 SCENE 4504, SCENE, "undergroundgalleries", SCENE, "Latsha Gate"
-#include iclude.txt
+#include include.txt
 EJECT T1121
 GOTO LINK 16, 2
 ;
 ;------------------------------------------------------------------------------------
 ;
 SCENE 4505, SCENE, "undergroundgalleries", SCENE, "Terendroz Gate"
-#include iclude.txt
+#include include.txt
 EJECT T1121
 GOTO LINK 12, 2
 ;
 ;------------------------------------------------------------------------------------
 ;
 SCENE 4506, SCENE, "undergroundgalleries", SCENE, "Lost City Gate"
-#include iclude.txt
+#include include.txt
 EJECT T1121
 GOTO LINK 34, 65
 ;
 ;------------------------------------------------------------------------------------
 ;
 SCENE 4507, SCENE, "undergroundgalleries", SCENE, "Irezar Gate"
-#include iclude.txt
+#include include.txt
 EJECT T1121
 GOTO LINK 18, 3
 ;
 ;------------------------------------------------------------------------------------
 ;
 SCENE 4508, SCENE, "undergroundgalleries", SCENE, "Benadrim Gate"
-#include iclude.txt
+#include include.txt
 EJECT T1121
 GOTO LINK 19, 3
 ;
 ;------------------------------------------------------------------------------------
 ;
 SCENE 4509, SCENE, "undergroundgalleries", SCENE, "Varanas Gate"
-#include iclude.txt
+#include include.txt
 EJECT T1121
 GOTO LINK 46, 2
 ;
 ;------------------------------------------------------------------------------------
 ;
 SCENE 4510, "cave1", SCENE, ""
-#include iclude.txt
+#include include.txt
 IF -I667 @fight
 N: Sorry but the purchase proof is valid only one time.
 END
@@ -87,7 +87,7 @@ END
 ;------------------------------------------------------------------------------------
 ;
 SCENE 4511, SCENE, "undergroundgalleries", SCENE, "Mangeas Gate"
-#include iclude.txt
+#include include.txt
 EJECT T1121
 GOTO LINK 13, 8
 ;

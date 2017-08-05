@@ -43,6 +43,9 @@ H: Maybe.
 1: If you bring it here, I could use its power to forge a magical piece of equipment for you.
 H: Deal!
 GIVE T602
+1: Before you go, take this! It's an enchanted ring that will make you lighter, allowing you to traverse the mountain.
+1: The only person that was able to summit the mountain before and live to tell the tale was the legendary Dave...
+GIVE I3031
 END
 
 @back
