@@ -407,7 +407,7 @@ END
 ;
 SCENE 11310, streetatnight, SCENE, "Healing Thnigy"
 #include include.txt
-N: Tou walk under the light and feel... kinda fine.
+N: You walk under the light and feel... kinda fine.
 WAIT 2
 GIVE L1
 GIVE H6000

@@ -472,7 +472,7 @@ END
 1: Welcome, adventurer.
 1: I have a deal for you.
 H: What?
-1: I studied runic magic when I was younger, and I could forge a great magical helmet for you if you bring me a pair of widget kobold wings.
+1: I studied runic magic when I was younger, and I could forge a great magical helmet for you if you bring me a pair of Winged kobold wings.
 1: Of course, I wouldn't do that for free : that will be 10,000 tomans.
 H: Sounds interesting.
 H: I'll try to find what you need.
