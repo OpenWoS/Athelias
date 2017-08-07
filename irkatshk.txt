@@ -112,7 +112,7 @@ HOST_TAKE Z290.#<temp.trunknulb>
 HOST_GIVE I727.#<temp.trunknulb>
 1: Here you go : #<temp.trunknulb> sap cures.
 SOUND FoundItem.wav
-1: Come back with more blood if you need other antidotes.
+1: Come back with more trunks if you need other antidotes.
 1: I'll make you other potions.
 END
 ;
