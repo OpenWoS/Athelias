@@ -123,7 +123,7 @@ GOTO @nextStepAfterHalloweenActors
 @halloweenActors
 ACTOR 1, "Tarik", #<spEvent.Name>-humans, 143, 25, 80
 @nextStepAfterHalloweenActors
-OFFER 200, 209, 213, 217, 221, 565, 569, 573, 578, 582, 485, 489, 493, 497, 501, 292, 293, 294, 295, 296, 297, 298, 299, 300, 301, 302
+OFFER 200, 209, 213, 217, 221, 565, 569, 573, 578, 582, 304, 308, 312, 316, 320, 292, 293, 294, 295, 296, 297, 298, 299, 300, 301, 302
 1: Welcome, brother.
 1: I have some of the best armors of the desertic lands!
 END
