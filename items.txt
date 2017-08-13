@@ -368,7 +368,7 @@
 	338,"Reinforced Chain Gloves",16,	10,	4000,	70.3019,0,	0,	0,	153,0,	0,	0,	0,	,						,				1,				
 	339,"Reinforced Chain Gloves",16,	10,	6000,	75.3019,0,	0,	0,	171,0,	0,	0,	0,	,						,				3,				
 	340,"Chain Gauntlets",		16,	2,	7500,	80.3019,0,	0,	0,	162,0,	0,	0,	0,	,						,				6,				
-	341,"Reinforced Chain Gauntlets",		16,	2,	9000,	85.3019,0,	0,	0,	280,0,	0,	0,	0,	,						,		1,				
+	341,"Reinforced Chain Gauntlets",		16,	2,	9000,	85.3019,0,	0,	0,	180,0,	0,	0,	0,	,						,		1,				
 	342,"Reinforced Chain Gauntlets",		16,	2,	9500,	90.3019,0,	0,	0,	198,0,	0,	0,	0,	,						,		4,				
 	343,"Reinforced Chain Gauntlets",		16,	2,	10000,	95.3019,0,	0,	0,	216,0,	0,	0,	0,	,						,		6,				
 	
